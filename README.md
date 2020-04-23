@@ -45,6 +45,6 @@ App in source org needs to be converted into a template and packaged first
 3. Go to Setup --> Manage Packages and create a new package with the Einstein Analytics assets. No need to upload. 
 
 #### Retrieve the source
-1. Run `./scripts/retriecveTemplate.sh -s [SOURCE ORG ALIAS] -p [PACKAGE NAME]
+1. Run `./scripts/retriecveTemplate.sh -s [SOURCE ORG ALIAS] -p [PACKAGE NAME]`
 2. Once the script completes, the source for the selected packaged template will be available in the sfdx_temp folder. You will then have to manually move these folders into the `force-app/main/default` folder.
 3. Spin up a scratch org push into an non-scratch org to validate.
