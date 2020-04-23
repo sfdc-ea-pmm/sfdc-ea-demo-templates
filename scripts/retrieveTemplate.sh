@@ -16,7 +16,6 @@ NC='\033[0m' # No Color
 #variables
 SOURCE_ORG_ALIAS='' # Alias of authenticated Source Org to pull template from
 PACKAGE_NAME='' # Name of package to retrieve
-TEMPLATE_API_NAME='' # Template to edit
 
 # Argument Usage
 print_usage() {

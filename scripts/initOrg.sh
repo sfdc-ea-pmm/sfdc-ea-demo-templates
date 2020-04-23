@@ -26,14 +26,6 @@ print_usage() {
   printf "Usage: ..."
 }
 
-# check for valid arguments
-if [ "$#" -eq  "0" ]
-then
-    echo "${MSG}$(date "+%Y-%m-%d %H:%M:%S")|[INFO] No arguments specified${NC}"
-    print_usage
-    exit 1;
-fi
-
 while getopts 'd::t:' flag; do
   case "${flag}" in
     d) ORG_DURATION="${OPTARG}" ;;
