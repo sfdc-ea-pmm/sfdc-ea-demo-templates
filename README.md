@@ -19,6 +19,9 @@ Before trying the steps detailed here, you need the following:
 2. Open a terminal and install the Analytics plugin by running the command `sfdx plugins:install @salesforce/analytics`
 3. Authorize a dev hub `sfdx force:auth:web:login -d -a [ALIAS]`
     1. Login to a dev hub and you can close the window
+4. Authorize any additional orgs with `sfdx force:auth:web:login -a [ALIAS]`
+    1. Login to org and you can close the window
+5. Check your authorized orgs by running `sfdx force:org:list`
 
 ## Usage
 1. Clone this repo
@@ -45,6 +48,6 @@ App in source org needs to be converted into a template and packaged first
 3. Go to Setup --> Manage Packages and create a new package with the Einstein Analytics assets. No need to upload. 
 
 #### Retrieve the source
-1. Run `./scripts/retriecveTemplate.sh -s [SOURCE ORG ALIAS] -p [PACKAGE NAME]`
+1. Run `./scripts/retrieveTemplate.sh -s [SOURCE ORG ALIAS] -p [PACKAGE NAME]`
 2. Once the script completes, the source for the selected packaged template will be available in the sfdx_temp folder. You will then have to manually move these folders into the `force-app/main/default` folder.
 3. Spin up a scratch org push into an non-scratch org to validate.
