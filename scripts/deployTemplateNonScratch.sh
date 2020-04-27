@@ -79,7 +79,7 @@ shift $((OPTIND-1))
 echo "${MSG}$(date "+%Y-%m-%d %H:%M:%S")|[INFO] Deploying source...${NC}"
 sfdx force:source:deploy -u $TARGET_ORG_ALIAS -p $PATH_TO_SOURCE/$TEMPLATE_API_NAME
 
-if [ $CREATE_APP == true ]
+if [ $CREATE_APP = true ]
 then
     # get template ID to create app
     TEMPLATE_ID="$(sfdx analytics:template:list -u $TARGET_ORG_ALIAS | grep $TEMPLATE_API_NAME | sed 's/ \{1,\}/,/g' | cut -d ',' -f2)"
