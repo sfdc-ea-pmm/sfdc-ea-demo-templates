@@ -1,3 +1,4 @@
+#!/bin/zsh
 ##################################################################################################################
 # Script to spin up Scratch Org and initialize the org with data for Template being developed
 # Created by: Terrence Tse, ttse@salesforce.com
@@ -23,7 +24,14 @@ TEMPLATE_API_NAME=''
 
 # Argument Usage
 print_usage() {
-  printf "Usage: ..."
+  echo
+    echo "Usage:"
+    echo "  initOrg.sh -d <DURATION> -t <TEMPLATE API NAME>"
+    echo
+    echo "Arguments:"
+    echo "    -t    template api name to deploy, should be same as folder name under waveTemplates/"
+    echo "    -d    [optional] set scratch org duration [default: $ORG_DURATION"
+    echo
 }
 
 while getopts 'd::t:' flag; do
@@ -35,12 +43,21 @@ while getopts 'd::t:' flag; do
   esac
 done
 
+if ((OPTIND == 1))
+then
+    echo "${WARN}No arguments specified${NC}"
+    print_usage
+    exit 1
+fi
+
+shift $((OPTIND-1))
+
 # print args
 echo "ORG_DURATION=${WARN}$ORG_DURATION${NC} TEMPLATE_API_NAME=${WARN}$TEMPLATE_API_NAME${NC}"
 
 # sfdx_temp directory for working files
 echo "${MSG}$(date "+%Y-%m-%d %H:%M:%S")|[INFO] Creating sfdx_temp folder...${NC}"
-mkdir sfdx_temp
+mkdir -p sfdx_temp
 
 # create scratch org
 echo "${MSG}$(date "+%Y-%m-%d %H:%M:%S")|[INFO] Creating Scratch Org with Duration: $ORG_DURATION Day(s)...${NC}"

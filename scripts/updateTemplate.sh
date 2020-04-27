@@ -1,3 +1,4 @@
+#!/bin/zsh
 ##################################################################################################################
 # Automate commands to update template with dashboard changes and pull source from org to local
 # Created by: Terrence Tse, ttse@salesforce.com
