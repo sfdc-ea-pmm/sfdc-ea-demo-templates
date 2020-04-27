@@ -39,9 +39,11 @@ Before trying the steps detailed here, you need the following:
 
 ### Deploy template to non scratch org
 1. Use `sfdx force:auth:web:login --setalias [ALIAS]` to add your non scratch org (First time only)
-2. Use the commands `SFDX: Deploy Source to Org` (VS Code) or `sfdx force:source:deploy -u [ALIAS] -p force-app/main/default/waveTemplates/[TEMPLATE NAME]` (Salesforce CLI) to deploy the latest changes to a non scratch org
+2. Run `./scripts/deployTemplatesNonScratch.sh -u <TARGET ORG ALIAS> -t <TEMPLATE API NAME>` to specified template into target org or Use the command `SFDX: Deploy Source to Org` if using VS Code
 
 ### Retreive template from a source org
+Use the following to convert an existing app to a template to commit to source control or with the `deployTemplateNoScratch.sh` script this can also be used to migrate assets from one org to another.
+
 #### Preq 
 App in source org needs to be converted into a template and packaged first
 1. Run `sfdx analytics:app:list -u [SOURCE ORG ALIAS]` to get the list of the apps
@@ -50,6 +52,14 @@ App in source org needs to be converted into a template and packaged first
 3. Go to Setup --> Manage Packages and create a new package with the Einstein Analytics assets. No need to upload. 
 
 #### Retrieve the source
-1. Run `./scripts/retrieveTemplate.sh -s [SOURCE ORG ALIAS] -p [PACKAGE NAME]`
-2. Once the script completes, the source for the selected packaged template will be available in the sfdx_temp folder. You will then have to manually move these folders into the `force-app/main/default` folder.
-3. Spin up a scratch org push into an non-scratch org to validate.
+1. Run `./scripts/retrieveTemplate.sh -u [SOURCE ORG ALIAS] -p [PACKAGE NAME] -d [DATASETS optional]`
+2. Once the script completes, the source for the selected packaged template will be available in the sfdx_temp folder. You will then have to manually move these folders into the `force-app/main/default` folder. There also a couple manual steps that need to be taken:
+    1. Move the `external_files` folder into `waveTemplates\[TEMPLATE API NAME]`
+    2. Move dataset XMD files into `external_files` from `waveTemplates\dataset_files` if datasets are not created by dataflow
+    3. Create datasets schema files, by using Create Dataset UI in Analytics Studio.
+        1. Create --> Dataset --> CSV File --> Upload File --> Next --> Make any changes if needed --> Back --> Data Schema File --> Download File
+        2. Save file into same folder as CSV file. i.e. `../waveTemplates/[TEMPLATE API NAME]/external_files`
+    3. Rename any datasets names that end with a # and update references
+    4. Fix dot notations
+3. Spin up a scratch org push into an non-scratch org to validate or deploy to a non-scratch org.
+
