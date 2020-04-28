@@ -53,26 +53,23 @@ shift $((OPTIND-1))
 
 # sfdx_temp directory for working files
 echo "${MSG}$(date "+%Y-%m-%d %H:%M:%S")|[INFO] Creating sfdx_temp folder...${NC}"
-mkdir -p sfdx_temp
+mkdir -p sfdx_temp/external_files
 
 sfdx force:mdapi:retrieve -u $SOURCE_ORG_ALIAS -r sfdx_temp -p $PACKAGE_NAME
  
- # uncompress retrieved zip
 unzip -o sfdx_temp/unpackaged.zip -d sfdx_temp
 
 echo "${MSG}$(date "+%Y-%m-%d %H:%M:%S")|[INFO] $PACKAGE_NAME package retrieved from $SOURCE_ORG_ALIAS and unzipped to sfdx_temp/.${NC}"
 
-# download datasets as csvs if specified
 if [ -z "$DATASETS" ]
 then
   echo "${MSG}$(date "+%Y-%m-%d %H:%M:%S")|[INFO] No datasets specified.${NC}"
   exit 0
 else
-  mkdir -p sfdx_temp/csv/$PACKAGE_NAME/external_files
   arr=("${(@s/ /)DATASETS}")
   for s in "${arr[@]}"; do
     echo "${MSG}$(date "+%Y-%m-%d %H:%M:%S")|[INFO] Downloading dataset: $s${NC}"
-    sfdx shane:analytics:dataset:download -u $SOURCE_ORG_ALIAS -t sfdx_temp/csv/$PACKAGE_NAME/external_files -b 10000 -n $s  
+    sfdx shane:analytics:dataset:download -u $SOURCE_ORG_ALIAS -t sfdx_temp/external_files/$PACKAGE_NAME -b 10000 -n $s  
   done
-  echo "${MSG}$(date "+%Y-%m-%d %H:%M:%S")|[INFO] Datasets downloaded to sfdx_temp/csv/$PACKAGE_NAME/external_files${NC}"
+  echo "${MSG}$(date "+%Y-%m-%d %H:%M:%S")|[INFO] Datasets downloaded tosfdx_temp/external_files/$PACKAGE_NAME.${NC}"
 fi
