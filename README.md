@@ -62,7 +62,8 @@ App in source org needs to be converted into a template and packaged first
     3. Create datasets schema files, by using Create Dataset UI in Analytics Studio.
         1. Create --> Dataset --> CSV File --> Upload File --> Next --> Make any changes if needed --> Back --> Data Schema File --> Download File
         2. Save file into same folder as CSV file. i.e. `../waveTemplates/[TEMPLATE API NAME]/external_files`
-    3. Rename any datasets names that end with a # and update references
-    4. Fix dot notations
+    3. Rename any datasets names that end with a # and update references in dashboard json and template-info.json
+    4. Update template-info.json so that the external files are referenced along with the csv, schema and xmd
+    4. Fix dot notations in dashboard jsons where needed
 3. Spin up a scratch org push into an non-scratch org to validate or deploy to a non-scratch org.
 
