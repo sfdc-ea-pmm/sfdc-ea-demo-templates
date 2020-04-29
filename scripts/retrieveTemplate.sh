@@ -22,13 +22,13 @@ PACKAGE_NAME='' # Name of package to retrieve
 print_usage() {
   echo
     echo "Usage:"
-    echo "  retrieveTemplapte.sh -u <TARGSOURCEET ORG ALIAS> -p <PACKAGE NAME> [ -d <DATASETS> ]"
+    echo "  retrieveTemplapte.sh -u <SOURCE ORG ALIAS> -p <PACKAGE NAME> [ -d <DATASETS> ]"
     
     echo "Arguments:"
     echo "    -u    alias of source org to retrieve from"
     echo "    -p    name of package containing templates assets to retrieve"
-    echo "    -d    [optional] space delimited list of dataset to extract. eg. DATASET_1 DATASET_2"
-    echo "  "
+    echo "    -d    [optional] space delimited list of dataset to extract with quotes for multiple. eg. DATASET_1 DATASET_2"
+    echo "e.g. scripts/retrieveTemplate.sh -u shared-sales -p CLA_Demo -d \"Accounts Cases\""
     echo
 }
 

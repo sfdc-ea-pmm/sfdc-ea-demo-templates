@@ -31,6 +31,7 @@ print_usage() {
     echo "    -t    template api name to deploy, should be same as folder name under waveTemplates/"
     echo "    -c    [optional] set to create app after source is deployed"
     echo "    -p    [optional] overide path to source to deploy [default: $PATH_TO_SOURCE]"
+    echo "e.g. `./scripts/deployTemplateNonScratch.sh -u targetSDO -t Key_Account_Management`"
     echo
 }
 

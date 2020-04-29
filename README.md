@@ -41,6 +41,7 @@ Before trying the steps detailed here, you need the following:
 ### Deploy template to non scratch org
 1. Use `sfdx force:auth:web:login --setalias [ALIAS]` to add your non scratch org (First time only)
 2. Run `./scripts/deployTemplatesNonScratch.sh -u <TARGET ORG ALIAS> -t <TEMPLATE API NAME>` to specified template into target org or Use the command `SFDX: Deploy Source to Org` if using VS Code
+    e.g. `./scripts/deployTemplateNonScratch.sh -u targetSDO -t Key_Account_Management`
 
 ### Retreive template from a source org
 Use the following to convert an existing app to a template to commit to source control or with the `deployTemplateNoScratch.sh` script this can also be used to migrate assets from one org to another.
@@ -54,7 +55,7 @@ App in source org needs to be converted into a template and packaged first
 4. Go to Setup --> Manage Packages and create a new package with the Einstein Analytics assets. No need to upload. 
 
 #### Retrieve the source
-1. Run `./scripts/retrieveTemplate.sh -u [SOURCE ORG ALIAS] -p [PACKAGE NAME] -d [DATASETS optional]`
+1. Run `./scripts/retrieveTemplate.sh -u [SOURCE ORG ALIAS] -p [PACKAGE NAME] -d [DATASETS optional]` e.g `./scripts/retrieveTemplate.sh -u shared-sales -p CLA_Demo -d "Account Cases"`
 2. Once the script completes, the source for the selected packaged template will be available in the sfdx_temp folder. You will then have to manually move these folders into the `force-app/main/default` folder. There also a couple manual steps that need to be taken:
     1. Move the `external_files` folder into `waveTemplates\[TEMPLATE API NAME]`
     2. Move dataset XMD files into `external_files` from `waveTemplates\dataset_files` if datasets are not created by dataflow
