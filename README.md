@@ -1,9 +1,6 @@
 # Einstein Analytics Demo Templates
 This repo contains the source for the Einstein Analytics Demo Templates.
 
-## Development Model
-Development and testing of the Einstein Analytics Assets should be done using scratch orgs with the repo acting as the source of truth. Once the code is finalized, it should be then either deployed into a Dev org for packaging or else where to be included as a greater deployment.
-
 ### Development Flow
 [Image]
 
