@@ -93,7 +93,7 @@ sfdx force:data:record:create -s Contact -v "LastName='Sample Contact'"
 
 # clean up
 echo "${MSG}$(date "+%Y-%m-%d %H:%M:%S")|[INFO] Clean up...${NC}"
-rm -rf sfdx_temp
+rm -f sfdx_temp/User_Load.csv
 
 # get template ID
 TEMPLATE_ID="$(sfdx analytics:template:list | grep $TEMPLATE_API_NAME | sed 's/  /,/g' | cut -d ',' -f2)"
