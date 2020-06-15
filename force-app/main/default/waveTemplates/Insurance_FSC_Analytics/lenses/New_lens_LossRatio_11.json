@@ -1,151 +1,100 @@
 {
-  "name" : "New_lens_LossRatio_11_tp",
-  "label" : "New lens: LossRatio_1",
-  "folder" : {
-    "id" : "${App.Folder.Id}"
+  "name": "New_lens_LossRatio_11_tp",
+  "label": "New lens: LossRatio_1",
+  "folder": {
+    "id": "${App.Folder.Id}"
   },
-  "visualizationType" : "time",
-  "dateVersion" : 1,
-  "datasets" : [
+  "visualizationType": "time",
+  "dateVersion": 1,
+  "datasets": [
     {
-      "id" : "${App.Datasets.Insurance_tp.Id}"
+      "id": "${App.Datasets.Insurance_tp.Id}"
     }
   ],
-  "xmd" : {
-    "measures" : [
+  "xmd": {
+    "measures": [
       {
-        "conditionalFormatting" : { },
-        "field" : "aggregateflex.Loss_Ratio",
-        "format" : {
-          "delimiters" : { },
-          "customFormat" : "[\"#,###.##%\",100]"
+        "conditionalFormatting": {},
+        "field": "aggregateflex.Loss_Ratio",
+        "format": {
+          "delimiters": {},
+          "customFormat": "[\"#,###.##%\",100]"
         }
       }
     ],
-    "derivedDimensions" : [ ],
-    "organizations" : [ ],
-    "showDetailsDefaultFields" : [ ],
-    "dates" : [ ],
-    "derivedMeasures" : [ ],
-    "dimensions" : [ ]
+    "derivedDimensions": [],
+    "organizations": [],
+    "showDetailsDefaultFields": [],
+    "dates": [],
+    "derivedMeasures": [],
+    "dimensions": []
   },
-  "state" : {
-    "dataSourceLinks" : [ ],
-    "filters" : [ ],
-    "gridLayouts" : [ ],
-    "layouts" : [ ],
-    "steps" : {
-      "aggregateflex" : {
-        "broadcastFacet" : true,
-        "datasets" : [
+  "state": {
+    "dataSourceLinks": [],
+    "filters": [],
+    "gridLayouts": [],
+    "layouts": [],
+    "steps": {
+      "aggregateflex": {
+        "broadcastFacet": true,
+        "datasets": [
           {
-            "name" : "${App.Datasets.Insurance_tp.Name}"
+            "name": "${App.Datasets.Insurance_tp.Name}"
           }
         ],
-        "isGlobal" : false,
-        "label" : "LossRatio",
-        "query" : {
-          "query" : {
-            "measures" : [
-              [
-                "sum",
-                "written_base_premium",
-                "A"
-              ],
-              [
-                "sum",
-                "claim_payment",
-                "B"
-              ],
-              [
-                "count",
-                "*",
-                "Loss_Ratio"
-              ]
+        "isGlobal": false,
+        "label": "LossRatio",
+        "query": {
+          "query": {
+            "measures": [
+              ["sum", "written_base_premium", "A"],
+              ["sum", "claim_payment", "B"],
+              ["count", "*", "Loss_Ratio"]
             ],
-            "columns" : [
+            "columns": [
               {
-                "query" : {
-                  "measures" : [
-                    [
-                      "sum",
-                      "written_base_premium"
-                    ]
-                  ],
-                  "groups" : [
-                    [
-                      "commencement_Year",
-                      "commencement_Month"
-                    ],
+                "query": {
+                  "measures": [["sum", "written_base_premium"]],
+                  "groups": [
+                    ["commencement_Year", "commencement_Month"],
                     "Insurance.PRODUCT_TYPE"
                   ]
                 }
               },
               {
-                "query" : {
-                  "measures" : [
-                    [
-                      "sum",
-                      "claim_payment"
-                    ]
-                  ],
-                  "groups" : [
-                    [
-                      "commencement_Year",
-                      "commencement_Month"
-                    ],
+                "query": {
+                  "measures": [["sum", "claim_payment"]],
+                  "groups": [
+                    ["commencement_Year", "commencement_Month"],
                     "Insurance.PRODUCT_TYPE"
                   ]
                 }
               },
               {
-                "query" : {
-                  "measures" : [
-                    [
-                      "count",
-                      "*"
-                    ]
-                  ],
-                  "groups" : [
-                    [
-                      "commencement_Year",
-                      "commencement_Month"
-                    ],
+                "query": {
+                  "measures": [["count", "*"]],
+                  "groups": [
+                    ["commencement_Year", "commencement_Month"],
                     "Insurance.PRODUCT_TYPE"
                   ],
-                  "formula" : "B/(A*3.5)"
+                  "formula": "B/(A*3.5)"
                 },
-                "name" : "Loss_Ratio",
-                "header" : "Loss Ratio"
+                "name": "Loss_Ratio",
+                "header": "Loss Ratio"
               }
             ],
-            "groups" : [
-              [
-                "commencement_Year",
-                "commencement_Month"
-              ],
+            "groups": [
+              ["commencement_Year", "commencement_Month"],
               "Insurance.PRODUCT_TYPE"
             ],
-            "filters" : [
-              [
-                "Location.REGION",
-                [
-                  "Midwest"
-                ],
-                "in"
-              ],
+            "filters": [
+              ["Location.REGION", ["Midwest"], "in"],
               [
                 "commencement",
                 [
                   [
-                    [
-                      "year",
-                      -1
-                    ],
-                    [
-                      "day",
-                      0
-                    ]
+                    ["year", -1],
+                    ["day", 0]
                   ]
                 ],
                 ">=<="
@@ -162,25 +111,13 @@
                 ],
                 "in"
               ],
-              [
-                "Location.REGION",
-                [
-                  "Midwest"
-                ],
-                "in"
-              ],
+              ["Location.REGION", ["Midwest"], "in"],
               [
                 "commencement",
                 [
                   [
-                    [
-                      "year",
-                      -1
-                    ],
-                    [
-                      "day",
-                      0
-                    ]
+                    ["year", -1],
+                    ["day", 0]
                   ]
                 ],
                 ">=<="
@@ -199,120 +136,111 @@
               ]
             ]
           },
-          "version" : -1.0
+          "version": -1.0
         },
-        "receiveFacetSource" : {
-          "mode" : "all",
-          "steps" : [ ]
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
         },
-        "selectMode" : "multi",
-        "type" : "aggregateflex",
-        "useGlobal" : true,
-        "visualizationParameters" : {
-          "options" : { },
-          "visualizationType" : "time"
+        "selectMode": "multi",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "visualizationType": "time"
         }
       }
     },
-    "widgets" : {
-      "aggregateflex_chart" : {
-        "parameters" : {
-          "autoFitMode" : "keepLabels",
-          "showPoints" : false,
-          "legend" : {
-            "descOrder" : false,
-            "showHeader" : false,
-            "show" : true,
-            "customSize" : "auto",
-            "position" : "top-center",
-            "inside" : false
+    "widgets": {
+      "aggregateflex_chart": {
+        "parameters": {
+          "autoFitMode": "keepLabels",
+          "showPoints": false,
+          "legend": {
+            "descOrder": false,
+            "showHeader": false,
+            "show": true,
+            "customSize": "auto",
+            "position": "top-center",
+            "inside": false
           },
-          "axisMode" : "multi",
-          "tooltip" : {
-            "showBinLabel" : true,
-            "measures" : "",
-            "showNullValues" : true,
-            "showPercentage" : true,
-            "showDimensions" : true,
-            "showMeasures" : true,
-            "customizeTooltip" : false,
-            "dimensions" : ""
+          "axisMode": "multi",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
           },
-          "visualizationType" : "time",
-          "missingValue" : "connect",
-          "dashLine" : {
-            "measures" : "",
-            "showDashLine" : false
+          "visualizationType": "time",
+          "missingValue": "connect",
+          "dashLine": {
+            "measures": "",
+            "showDashLine": false
           },
-          "timeAxis" : {
-            "showTitle" : false,
-            "showAxis" : true,
-            "title" : ""
+          "timeAxis": {
+            "showTitle": false,
+            "showAxis": true,
+            "title": ""
           },
-          "exploreLink" : true,
-          "title" : {
-            "fontSize" : 14,
-            "subtitleFontSize" : 11,
-            "label" : "Loss Ratio by Product",
-            "align" : "left",
-            "subtitleLabel" : ""
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "Loss Ratio by Product",
+            "align": "left",
+            "subtitleLabel": ""
           },
-          "trellis" : {
-            "flipLabels" : false,
-            "showGridLines" : true,
-            "size" : [
-              100,
-              100
-            ],
-            "enable" : false,
-            "type" : "x",
-            "chartsPerLine" : 4
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "chartsPerLine": 4
           },
-          "fillArea" : true,
-          "columnMap" : {
-            "split" : [
-              "Insurance.PRODUCT_TYPE"
-            ],
-            "timeAxis" : [
-              "commencement_Year~~~commencement_Month"
-            ],
-            "trellis" : [ ],
-            "plots" : [
-              "Loss_Ratio"
-            ]
+          "fillArea": true,
+          "columnMap": {
+            "split": ["Insurance.PRODUCT_TYPE"],
+            "timeAxis": ["commencement_Year~~~commencement_Month"],
+            "trellis": [],
+            "plots": ["Loss_Ratio"]
           },
-          "showActionMenu" : true,
-          "showZero" : true,
-          "measureAxis2" : {
-            "sqrtScale" : false,
-            "showTitle" : true,
-            "showAxis" : true,
-            "title" : "",
-            "customDomain" : {
-              "showDomain" : false
+          "showActionMenu": true,
+          "showZero": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
             }
           },
-          "measureAxis1" : {
-            "sqrtScale" : false,
-            "showTitle" : false,
-            "showAxis" : true,
-            "title" : "",
-            "customDomain" : {
-              "showDomain" : false
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": false,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
             }
           },
-          "valueType" : "none",
-          "theme" : "wave",
-          "step" : "aggregateflex",
-          "applyConditionalFormatting" : false,
-          "drawArea" : {
-            "measure" : "",
-            "showDrawArea" : false,
-            "bounding1" : "",
-            "bounding2" : ""
+          "valueType": "none",
+          "theme": "wave",
+          "step": "aggregateflex",
+          "applyConditionalFormatting": false,
+          "drawArea": {
+            "measure": "",
+            "showDrawArea": false,
+            "bounding1": "",
+            "bounding2": ""
           }
         },
-        "type" : "chart"
+        "type": "chart"
       }
     }
   }
