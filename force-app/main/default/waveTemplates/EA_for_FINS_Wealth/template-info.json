@@ -1,0 +1,473 @@
+{
+  "templateType": "app",
+  "label": "Demo | EA for FINS - Wealth",
+  "name": "EA_for_FINS_Wealth",
+  "description": "EAPMM v2020.26 - Demo asset for Analytics for Financial Services (Summer '19) with sample data.",
+  "assetVersion": 48.0,
+  "variableDefinition": "variables.json",
+  "uiDefinition": "ui.json",
+  "rules": [
+    {
+      "type": "templateToApp",
+      "file": "template-to-app-rules.json"
+    },
+    {
+      "type": "appToTemplate",
+      "file": "app-to-template-rules.json"
+    }
+  ],
+  "releaseInfo": {
+    "templateVersion": "1.0",
+    "notesFile": "releaseNotes.html"
+  },
+  "folderDefinition": "folder.json",
+  "externalFiles": [
+    {
+      "label": "FscDemoAccount",
+      "name": "FscDemoAccount",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/FscDemoAccount.csv",
+      "type": "CSV",
+      "schema": "external_files/FscDemoAccount.json",
+      "userXmd": "external_files/FscDemoAccount_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "FscDemoAccountSnapshot",
+      "name": "FscDemoAccountSnapshot",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/FscDemoAccountSnapshot.csv",
+      "type": "CSV",
+      "schema": "external_files/FscDemoAccountSnapshot.json",
+      "userXmd": "external_files/FscDemoAccountSnapshot_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "FscDemoAccountED",
+      "name": "FscDemoAccountED",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/FscDemoAccountED.csv",
+      "type": "CSV",
+      "schema": "external_files/FscDemoAccountED.json",
+      "userXmd": "external_files/FscDemoAccountED_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "FscDemoActivity",
+      "name": "FscDemoActivity",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/FscDemoActivity.csv",
+      "type": "CSV",
+      "schema": "external_files/FscDemoActivity.json",
+      "userXmd": "external_files/FscDemoActivity_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "FscDemoCampaign",
+      "name": "FscDemoCampaign",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/FscDemoCampaign.csv",
+      "type": "CSV",
+      "schema": "external_files/FscDemoCampaign.json",
+      "userXmd": "external_files/FscDemoCampaign_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "FscDemoCampaignMember",
+      "name": "FscDemoCampaignMember",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/FscDemoCampaignMember.csv",
+      "type": "CSV",
+      "schema": "external_files/FscDemoCampaignMember.json",
+      "userXmd": "external_files/FscDemoCampaignMember_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "FscDemoCase",
+      "name": "FscDemoCase",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/FscDemoCase.csv",
+      "type": "CSV",
+      "schema": "external_files/FscDemoCase.json",
+      "userXmd": "external_files/FscDemoCase_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "FscDemoEarningsAndFees",
+      "name": "FscDemoEarningsAndFees",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/FscDemoEarningsAndFees.csv",
+      "type": "CSV",
+      "schema": "external_files/FscDemoEarningsAndFees.json",
+      "userXmd": "external_files/FscDemoEarningsAndFees_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "FscDemoEvent",
+      "name": "FscDemoEvent",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/FscDemoEvent.csv",
+      "type": "CSV",
+      "schema": "external_files/FscDemoEvent.json",
+      "userXmd": "external_files/FscDemoEvent_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "FscDemoFinancialAccount",
+      "name": "FscDemoFinancialAccount",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/FscDemoFinancialAccount.csv",
+      "type": "CSV",
+      "schema": "external_files/FscDemoFinancialAccount.json",
+      "userXmd": "external_files/FscDemoFinancialAccount_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "FscDemoFinancialAccountSnapshot",
+      "name": "FscDemoFinancialAccountSnapshot",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/FscDemoFinancialAccountSnapshot.csv",
+      "type": "CSV",
+      "schema": "external_files/FscDemoFinancialAccountSnapshot.json",
+      "userXmd": "external_files/FscDemoFinancialAccountSnapshot_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "FscDemoFinancialAccountTransaction",
+      "name": "FscDemoFinancialAccountTransaction",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/FscDemoFinancialAccountTransaction.csv",
+      "type": "CSV",
+      "schema": "external_files/FscDemoFinancialAccountTransaction.json",
+      "userXmd": "external_files/FscDemoFinancialAccountTransaction_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "FscDemoFinancialAccountTransactionSnapshot",
+      "name": "FscDemoFinancialAccountTransactionSnapshot",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/FscDemoFinancialAccountTransactionSnapshot.csv",
+      "type": "CSV",
+      "schema": "external_files/FscDemoFinancialAccountTransactionSnapshot.json",
+      "userXmd": "external_files/FscDemoFinancialAccountTransactionSnapshot_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "FscDemoFinancialGoal",
+      "name": "FscDemoFinancialGoal",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/FscDemoFinancialGoal.csv",
+      "type": "CSV",
+      "schema": "external_files/FscDemoFinancialGoal.json",
+      "userXmd": "external_files/FscDemoFinancialGoal_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "FscDemoFinancialGoalSnapshot",
+      "name": "FscDemoFinancialGoalSnapshot",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/FscDemoFinancialGoalSnapshot.csv",
+      "type": "CSV",
+      "schema": "external_files/FscDemoFinancialGoalSnapshot.json",
+      "userXmd": "external_files/FscDemoFinancialGoalSnapshot_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "FscDemoLead",
+      "name": "FscDemoLead",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/FscDemoLead.csv",
+      "type": "CSV",
+      "schema": "external_files/FscDemoLead.json",
+      "userXmd": "external_files/FscDemoLead_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "FscDemoLeadHistory",
+      "name": "FscDemoLeadHistory",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/FscDemoLeadHistory.csv",
+      "type": "CSV",
+      "schema": "external_files/FscDemoLeadHistory.json",
+      "userXmd": "external_files/FscDemoLeadHistory_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "FscDemoOpportunity",
+      "name": "FscDemoOpportunity",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/FscDemoOpportunity.csv",
+      "type": "CSV",
+      "schema": "external_files/FscDemoOpportunity.json",
+      "userXmd": "external_files/FscDemoOpportunity_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "FscDemoPipelineTrending",
+      "name": "FscDemoPipelineTrending",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/FscDemoPipelineTrending.csv",
+      "type": "CSV",
+      "schema": "external_files/FscDemoPipelineTrending.json",
+      "userXmd": "external_files/FscDemoPipelineTrending_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "FscDemoQuota",
+      "name": "FscDemoQuota",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/FscDemoQuota.csv",
+      "type": "CSV",
+      "schema": "external_files/FscDemoQuota.json",
+      "userXmd": "external_files/FscDemoQuota_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "FscDemoWeeks",
+      "name": "FscDemoWeeks",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/FscDemoWeeks.csv",
+      "type": "CSV",
+      "schema": "external_files/FscDemoWeeks.json",
+      "userXmd": "external_files/FscDemoWeeks_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "WM_Add_Assets_Prediction_Final",
+      "name": "WM_Add_Assets_Prediction_Final",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/WM_Add_Assets_Prediction_Final.csv",
+      "type": "CSV",
+      "schema": "external_files/WM_Add_Assets_Prediction_Final.json",
+      "userXmd": "external_files/WM_Add_Assets_Prediction_Final_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "WM_Churn_Predictions_Final",
+      "name": "WM_Churn_Predictions_Final",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/WM_Churn_Predictions_Final.csv",
+      "type": "CSV",
+      "schema": "external_files/WM_Churn_Predictions_Final.json",
+      "userXmd": "external_files/WM_Churn_Predictions_Final_XMD.json",
+      "rows": 5
+    }
+  ],
+  "lenses": [],
+  "dashboards": [
+    {
+      "label": "Client Acquisition",
+      "name": "ClientAcquisition_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/ClientAcquisition.json"
+    },
+    {
+      "label": "Client Interactions",
+      "name": "ClientInteractions_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/ClientInteractions.json"
+    },
+    {
+      "label": "Clients List View",
+      "name": "ClientsListView_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/ClientsListView.json"
+    },
+    {
+      "label": "Events and Seminars",
+      "name": "EventsAndSeminars_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/EventsAndSeminars.json"
+    },
+    {
+      "label": "Financial Account (Embedded)",
+      "name": "FinancialAccountEmbedded_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/FinancialAccountEmbedded.json"
+    },
+    {
+      "label": "Financial Advisor Home",
+      "name": "FinancialAdvisorHome_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/FinancialAdvisorHome.json"
+    },
+    {
+      "label": "Goal (Embedded)",
+      "name": "GoalEmbedded_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/GoalEmbedded.json"
+    },
+    {
+      "label": "Home (Embedded)",
+      "name": "HomeEmbedded_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/HomeEmbedded.json"
+    },
+    {
+      "label": "Lead & Referral (Embedded)",
+      "name": "LeadAndReferralEmbedded_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/LeadAndReferralEmbedded.json"
+    },
+    {
+      "label": "Manager/Executive Home",
+      "name": "ManagerExecutiveHome_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/ManagerExecutiveHome.json"
+    },
+    {
+      "label": "Manager: Team Book of Business",
+      "name": "ManagerTeamBookOfBusiness_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/ManagerTeamBookOfBusiness.json"
+    },
+    {
+      "label": "Manager: Team Client Acquisition",
+      "name": "ManagerTeamClientAcquisition_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/ManagerTeamClientAcquisition.json"
+    },
+    {
+      "label": "Manager: Team Sales Performance",
+      "name": "ManagerTeamSalesPerformance_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/ManagerTeamSalesPerformance.json"
+    },
+    {
+      "label": "My Book of Business",
+      "name": "MyBookOfBusiness_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/MyBookOfBusiness.json"
+    },
+    {
+      "label": "My Clients",
+      "name": "MyClients_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/MyClients.json"
+    },
+    {
+      "label": "My Households",
+      "name": "MyHouseholds_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/MyHouseholds.json"
+    },
+    {
+      "label": "Sales Performance",
+      "name": "SalesPerformance_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/SalesPerformance.json"
+    }
+  ],
+  "eltDataflows": [],
+  "recipes": [],
+  "storedQueries": [],
+  "imageFiles": [
+    {
+      "name": "salesgreen7png1png",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/salesgreen7png1.png"
+    },
+    {
+      "name": "salesgreen7png1png1",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/salesgreen7png1.png"
+    },
+    {
+      "name": "clients7png1png",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/clients7png1.png"
+    },
+    {
+      "name": "sales7png1png",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/sales7png1.png"
+    },
+    {
+      "name": "carouselpngpng",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/carouselpng.png"
+    },
+    {
+      "name": "carouselleftpng6png",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/carouselleftpng6.png"
+    },
+    {
+      "name": "carouselrightpng6png",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/carouselrightpng6.png"
+    },
+    {
+      "name": "carousel42png6png",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/carousel42png6.png"
+    },
+    {
+      "name": "carousel43png6png",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/carousel43png6.png"
+    },
+    {
+      "name": "carousel44png6png",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/carousel44png6.png"
+    },
+    {
+      "name": "infopng5png",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/infopng5.png"
+    },
+    {
+      "name": "infopng5png1",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/infopng5.png"
+    },
+    {
+      "name": "salesgreen7png1_1png",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/salesgreen7png1 (1).png"
+    },
+    {
+      "name": "benchmarkingpng6png",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/benchmarkingpng6.png"
+    },
+    {
+      "name": "salesgreen7png1png2",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/salesgreen7png1.png"
+    },
+    {
+      "name": "infopng5png2",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/infopng5.png"
+    },
+    {
+      "name": "poweredbyeapngpng",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/poweredbyeapng.png"
+    },
+    {
+      "name": "infopng5png3",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/infopng5.png"
+    }
+  ],
+  "extendedTypes": {},
+  "templateDependencies": [],
+  "icons": {
+    "appBadge": {
+      "name": "16.png"
+    },
+    "templateBadge": {
+      "name": "analytics_icon"
+    },
+    "templatePreviews": [
+      {
+        "name": "einstein_scene",
+        "label": "Description",
+        "description": "This template includes limited sample data. For more data, download the CSVs and schema files from here: (https://ac-sdo-repo.s3-us-west-2.amazonaws.com/EA_for_FINS_Wealth/EA_for_FINS_Wealth.zip), and update the corresponding dataset after app creation."
+      }
+    ]
+  }
+}
