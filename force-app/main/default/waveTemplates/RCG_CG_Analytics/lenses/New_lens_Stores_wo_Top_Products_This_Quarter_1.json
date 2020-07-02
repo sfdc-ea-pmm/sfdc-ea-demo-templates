@@ -1,0 +1,168 @@
+{
+  "name" : "New_lens_Stores_wo_Top_Products_This_Quarter_1_tp",
+  "label" : "New lens: Stores_wo_Top_Products_This_Quarter_1",
+  "folder" : {
+    "id" : "${App.Folder.Id}"
+  },
+  "visualizationType" : "vbar",
+  "dateVersion" : 1,
+  "datasets" : [
+    {
+      "id" : "${App.Datasets.CG_OrderItem5_tp.Id}"
+    },
+    {
+      "id" : "${App.Datasets.CG_RetailStore_with_All_Products5_tp.Id}"
+    }
+  ],
+  "xmd" : {
+    "measures" : [ ],
+    "derivedDimensions" : [ ],
+    "organizations" : [ ],
+    "showDetailsDefaultFields" : [ ],
+    "dates" : [ ],
+    "derivedMeasures" : [ ],
+    "dimensions" : [ ]
+  },
+  "state" : {
+    "dataSourceLinks" : [ ],
+    "filters" : [ ],
+    "gridLayouts" : [ ],
+    "layouts" : [ ],
+    "steps" : {
+      "saql" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Stores wo Top Products This Quarter",
+        "numbers" : [ ],
+        "query" : "orderitem = load \"${App.Datasets.CG_OrderItem5_tp.FullyQualifiedName}\";\norderitem = filter orderitem by date('Order_ActivatedDate_Year', 'Order_ActivatedDate_Month', 'Order_ActivatedDate_Day') in [\"current quarter\"..\"current day\"];\norderitem = group orderitem by ('Order_AssessmentTaskOrder_AssessmentTask_ActionPlanItem_ActionPlan_Visit_RetailStore_Id', 'Product_Name', 'Product2Id');\norderitem = foreach orderitem generate 'Order_AssessmentTaskOrder_AssessmentTask_ActionPlanItem_ActionPlan_Visit_RetailStore_Id' as 'RetailStoreId', 'Product_Name' as 'Product_Name', 'Product2Id' as 'Product.Id', sum('Quantity') as 'Quantity';\nretailstore = load \"${App.Datasets.CG_RetailStore_with_All_Products5_tp.FullyQualifiedName}\";\nretailstore = group retailstore by ('Id', 'Product_Id_with_Name');\nretailstore = foreach retailstore generate 'Id' as 'RetailStoreId', 'Product_Id_with_Name' as 'Product_Id_with_Name', substr('Product_Id_with_Name',index_of('Product_Id_with_Name',\"_\")+1) as 'Product_Name', substr('Product_Id_with_Name',1,index_of('Product_Id_with_Name',\"_\")-1) as 'Product.Id',  -1 as 'dummy';\n\nresult = cogroup orderitem by ('RetailStoreId','Product_Name', 'Product.Id') full, retailstore by ('RetailStoreId','Product_Name', 'Product.Id');\nresult = foreach result generate coalesce(retailstore.'RetailStoreId',orderitem.'RetailStoreId') as 'RetailStoreId', coalesce(retailstore.'Product_Name',orderitem.'Product_Name') as 'Product_Name', coalesce(retailstore.'Product.Id', orderitem.'Product.Id') as 'Product.Id', coalesce(sum(orderitem.'Quantity'),0) as 'Quantity';\n\nresult = filter result by 'Quantity' == 0;\n\nresult = group result by 'Product_Name';\nresult = foreach result generate 'Product_Name' as 'Product_Name', count() as '# Stores';",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "none",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "visualizationType" : "vbar"
+        }
+      }
+    },
+    "widgets" : {
+      "saql_chart" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showValues" : true,
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "vbar",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "binValues" : false,
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "columnMap" : {
+            "trellis" : [ ],
+            "dimensionAxis" : [
+              "Product_Name"
+            ],
+            "plots" : [
+              "# Stores"
+            ]
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : false,
+            "showAxis" : false,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "theme" : "wave",
+          "step" : "saql",
+          "dimensionAxis" : {
+            "showTitle" : false,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      }
+    }
+  }
+}

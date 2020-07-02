@@ -1,0 +1,94 @@
+{
+  "templateType" : "app",
+  "label" : "RCG IDO - Direct Selling (MLM)",
+  "name" : "RCG_MLM",
+  "description" : "RCG IDO Multi Level Marketing Analytics and resources. This is pre-installed in your org.",
+  "assetVersion" : 48.0,
+  "variableDefinition" : "variables.json",
+  "uiDefinition" : "ui.json",
+  "rules" : [
+    {
+      "type" : "templateToApp",
+      "file" : "template-to-app-rules.json"
+    },
+    {
+      "type" : "appToTemplate",
+      "file" : "app-to-template-rules.json"
+    }
+  ],
+  "releaseInfo" : {
+    "templateVersion" : "1.0",
+    "notesFile" : "releaseNotes.html"
+  },
+  "folderDefinition" : "folder.json",
+  "externalFiles" : [
+    {
+      "label" : "MLM - Insights_Data",
+      "name" : "Insights_Data1_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "file": "external_files/Insights_Data1.csv",
+      "type": "CSV",
+      "schema": "external_files/Insights_Data1.json",
+      "userXmd" : "external_files/Insights_Data1_XMD.json"
+    },
+    {
+      "label" : "MLM - Leads Data v4",
+      "name" : "Leads_Data_v4_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "file": "external_files/Leads_Data_v4.csv",
+      "type": "CSV",
+      "schema": "external_files/Leads_Data_v4.json",
+      "userXmd" : "external_files/Leads_Data_v4_XMD.json"
+    },
+    {
+      "label" : "MLM_Distributor_Detailed_Table",
+      "name" : "MLM_Distributor_Detailed_Table_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "file": "external_files/MLM_Distributor_Detailed_Table.csv",
+      "type": "CSV",
+      "schema": "external_files/MLM_Distributor_Detailed_Table.json",
+      "userXmd" : "external_files/MLM_Distributor_Detailed_Table_XMD.json"
+    },
+    {
+      "label" : "MLM -  Consultant Activity v2",
+      "name" : "Pulse_Consultant_Activity_v2_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "file": "external_files/Pulse_Consultant_Activity_v2.csv",
+      "type": "CSV",
+      "schema": "external_files/Pulse_Consultant_Activity_v2.json",
+      "userXmd" : "external_files/Pulse_Consultant_Activity_v2_XMD.json"
+    }
+
+   ],
+  "lenses" : [ ],
+  "dashboards" : [
+    {
+      "label" : "Direct Selling - Insights Dashboard",
+      "name" : "Direct_Selling_Insights_Dashboard_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Direct_Selling_Insights_Dashboard.json"
+    },
+    {
+      "label" : "Direct Selling - Insights Dashboard_Contact_Record",
+      "name" : "Direct_Selling_Insights_Dashboard_Contact_Record_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Direct_Selling_Insights_Dashboard_Contact_Record.json"
+    }
+  ],
+  "eltDataflows" : [ ],
+  "recipes" : [ ],
+  "datasetFiles" : [],
+  "storedQueries" : [ ],
+  "imageFiles" : [ ],
+  "extendedTypes" : { },
+  "templateDependencies" : [ ],
+  "icons" : {
+    "appBadge" : {
+      "name" : "16.png"
+    },
+    "templateBadge" : {
+      "name" : "default.png"
+    },
+    "templatePreviews" : [ ]
+  }
+}
