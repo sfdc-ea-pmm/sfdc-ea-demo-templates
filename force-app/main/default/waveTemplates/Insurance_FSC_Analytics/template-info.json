@@ -1,0 +1,400 @@
+{
+  "templateType": "app",
+  "label": "Demo | EA for FINS - Insurance",
+  "name": "Insurance_FSC_Analytics",
+  "description": "EAPMM v2020.26 - Demo asset for Analytics for Financial Services (Spring '20), with sample data.",
+  "assetVersion": 48.0,
+  "variableDefinition": "variables.json",
+  "uiDefinition": "ui.json",
+  "rules": [
+    {
+      "type": "templateToApp",
+      "file": "template-to-app-rules.json"
+    },
+    {
+      "type": "appToTemplate",
+      "file": "app-to-template-rules.json"
+    }
+  ],
+  "releaseInfo": {
+    "templateVersion": "1.0",
+    "notesFile": "releaseNotes.html"
+  },
+  "folderDefinition": "folder.json",
+  "externalFiles": [
+    {
+      "label": "WM_Churn_Predictions_Final",
+      "name": "WM_Churn_Predictions_Final_tp",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/WM_Churn_Predictions_Final.csv",
+      "type": "CSV",
+      "schema": "external_files/WM_Churn_Predictions_Final.json",
+      "userXmd": "external_files/WM_Churn_Predictions_Final_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "WM_Add_Assets_Prediction_Final",
+      "name": "WM_Add_Assets_Prediction_Final_tp",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/WM_Add_Assets_Prediction_Final.csv",
+      "type": "CSV",
+      "schema": "external_files/WM_Add_Assets_Prediction_Final.json",
+      "userXmd": "external_files/WM_Add_Assets_Prediction_Final_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "BusinessLicense",
+      "name": "BusinessLicense_tp",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/BusinessLicense.csv",
+      "type": "CSV",
+      "schema": "external_files/BusinessLicense.json",
+      "userXmd": "external_files/AGENT_NAMES_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "AGENT_NAMES",
+      "name": "AGENT_NAMES_tp",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/AGENT_NAMES.csv",
+      "type": "CSV",
+      "schema": "external_files/AGENT_NAMES.json",
+      "userXmd": "external_files/AGENT_NAMES_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "Claims",
+      "name": "Claims_tp",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/Claims.csv",
+      "type": "CSV",
+      "schema": "external_files/Claims.json",
+      "userXmd": "external_files/Claims_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "IDOKPI",
+      "name": "IDOKPI_tp",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/IDOKPI.csv",
+      "type": "CSV",
+      "schema": "external_files/IDOKPI.json",
+      "userXmd": "external_files/IDOKPI_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "InsAccounts",
+      "name": "InsAccounts_tp",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/InsAccounts.csv",
+      "type": "CSV",
+      "schema": "external_files/InsAccounts.json",
+      "userXmd": "external_files/InsAccounts_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "InsActivities",
+      "name": "InsActivities_tp",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/InsActivities.csv",
+      "type": "CSV",
+      "schema": "external_files/InsActivities.json",
+      "userXmd": "external_files/InsActivities_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "InsLeads",
+      "name": "InsLeads_tp",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/InsLeads.csv",
+      "type": "CSV",
+      "schema": "external_files/InsLeads.json",
+      "userXmd": "external_files/InsLeads_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "InsOpportunities",
+      "name": "InsOpportunities_tp",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/InsOpportunities.csv",
+      "type": "CSV",
+      "schema": "external_files/InsOpportunities.json",
+      "userXmd": "external_files/InsOpportunities_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "InsPipelineTrending",
+      "name": "InsPipelineTrending_tp",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/InsPipelineTrending.csv",
+      "type": "CSV",
+      "schema": "external_files/InsPipelineTrending.json",
+      "userXmd": "external_files/InsPipelineTrending_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "InsQuota",
+      "name": "InsQuota_tp",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/InsQuota.csv",
+      "type": "CSV",
+      "schema": "external_files/InsQuota.json",
+      "userXmd": "external_files/InsQuota_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "Insurance_Base",
+      "name": "Insurance_Base_tp",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/Insurance_Base.csv",
+      "type": "CSV",
+      "schema": "external_files/Insurance_Base.json",
+      "userXmd": "external_files/Insurance_Base_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "Insurance_Policies",
+      "name": "Insurance_Policies_tp",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/Insurance_Policies.csv",
+      "type": "CSV",
+      "schema": "external_files/Insurance_Policies.json",
+      "userXmd": "external_files/Insurance_Policies_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "Insurance",
+      "name": "Insurance_tp",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/Insurance.csv",
+      "type": "CSV",
+      "schema": "external_files/Insurance.json",
+      "userXmd": "external_files/Insurance_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "InsWeeks",
+      "name": "InsWeeks_tp",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/InsWeeks.csv",
+      "type": "CSV",
+      "schema": "external_files/InsWeeks.json",
+      "userXmd": "external_files/InsWeeks_XMD.json",
+      "rows": 5
+    },
+    {
+      "name": "LOCATION_MAP_tp",
+      "label": "LOCATION_MAP",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/LOCATION_MAP.csv",
+      "type": "CSV",
+      "schema": "external_files/LOCATION_MAP.json",
+      "userXmd": "external_files/LOCATION_MAP_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "POLICIES",
+      "name": "POLICIES_tp",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/POLICIES.csv",
+      "type": "CSV",
+      "schema": "external_files/POLICIES.json",
+      "userXmd": "external_files/POLICIES_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "PRODUCT_INS_STRUCTURE",
+      "name": "PRODUCT_INS_STRUCTURE_tp",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/PRODUCT_INS_STRUCTURE.csv",
+      "type": "CSV",
+      "schema": "external_files/PRODUCT_INS_STRUCTURE.json",
+      "userXmd": "external_files/PRODUCT_INS_STRUCTURE_XMD.json",
+      "rows": 5
+    }
+  ],
+  "lenses": [
+    {
+      "label": "LossRatio",
+      "name": "New_lens_commencement_Year_co_1_tp",
+      "condition": "${Variables.Overrides.createAllLenses}",
+      "file": "lenses/New_lens_commencement_Year_co_1.json"
+    },
+    {
+      "label": "New lens: LossRatio_1",
+      "name": "New_lens_LossRatio_11_tp",
+      "condition": "${Variables.Overrides.createAllLenses}",
+      "file": "lenses/New_lens_LossRatio_11.json"
+    },
+    {
+      "label": "New lens: LossRatio_2",
+      "name": "New_lens_LossRatio_1_tp",
+      "condition": "${Variables.Overrides.createAllLenses}",
+      "file": "lenses/New_lens_LossRatio_1.json"
+    },
+    {
+      "label": "Policy Demographic Extract",
+      "name": "Policy_Demographic_Extract_tp",
+      "condition": "${Variables.Overrides.createAllLenses}",
+      "file": "lenses/Policy_Demographic_Extract.json"
+    }
+  ],
+  "dashboards": [
+    {
+      "label": "Agency Manager: BoB (Embedded)",
+      "name": "Agent_Manager_BoB_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Agent_Manager_BoB.json"
+    },
+    {
+      "label": "Captive Insurance Agent: BoB (Embedded)",
+      "name": "Captive_Insurance_Agent_BoB_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Captive_Insurance_Agent_BoB.json"
+    },
+    {
+      "label": "Captive Insurance Agent: BoB (Embedded) Craig Holman",
+      "name": "Captive_Insurance_Agent_BoB_Holman_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Captive_Insurance_Agent_BoB_Holman.json"
+    },
+    {
+      "label": "Captive Insurance Agent: BoB (Embedded) Craig Holman with Predictions",
+      "name": "Guardian_Captive_Insurance_Agent_BoB_Embedded_Craig_Holman_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Guardian_Captive_Insurance_Agent_BoB_Embedded_Craig_Holman.json"
+    },
+    {
+      "label": "Cumulus Agency BoB (Embedded)",
+      "name": "Copy_of_Agency_Embedded_BoB2_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Copy_of_Agency_Embedded_BoB2.json"
+    },
+    {
+      "label": "Cumulus Agency Distribution Management (Embedded)",
+      "name": "Cumulus_Agency_Distribution_Management_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Cumulus_Agency_Distribution_Management.json"
+    },
+    {
+      "label": "Cumulus Underwriting (Embedded)",
+      "name": "Cumulus_Underwriting_Embedded_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Cumulus_Underwriting_Embedded.json"
+    },
+    {
+      "label": "Customer (Embedded)",
+      "name": "Customer_Embedded_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Customer_Embedded.json"
+    },
+    {
+      "label": "Insurance Agent Home (Trending) EA4FSC",
+      "name": "Insurance_Agent_Home_Trending_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Insurance_Agent_Home_Trending.json"
+    },
+    {
+      "label": "Licensed States (Embedded)",
+      "name": "Licensed_States_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Licensed_States.json"
+    },
+    {
+      "label": "Producer BoB (Embedded)",
+      "name": "Producer_Embedded_BoB_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Producer_Embedded_BoB.json"
+    },
+    {
+      "label": "Production Profile (Embedded)",
+      "name": "Production_Profile_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Production_Profile.json"
+    },
+    {
+      "label": "Renewals and Cancelations EA4FSC",
+      "name": "Renewals_and_Cancelations_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Renewals_and_Cancelations.json"
+    },
+    {
+      "label": "Sales Manager: Team Book of Business (Trending) EA4FSC",
+      "name": "Sales_Manager_Team_Book_of_Business_Trending_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Sales_Manager_Team_Book_of_Business_Trending.json"
+    },
+    {
+      "label": "Sales Performance (Insurance) EA4FSC",
+      "name": "Sales_Performance1_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Sales_Performance1.json"
+    }
+  ],
+  "eltDataflows": [],
+  "recipes": [],
+
+  "storedQueries": [],
+  "imageFiles": [
+    {
+      "name": "InsuranceConsolepng",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/InsuranceConsole.png"
+    },
+    {
+      "name": "carousel1png",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/carousel1.png"
+    },
+    {
+      "name": "carouselrightpng6",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/carouselright.png"
+    },
+    {
+      "name": "carouselleftpng6",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/carouselleft.png"
+    },
+    {
+      "name": "carousel2png",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/carousel2.png"
+    },
+    {
+      "name": "powered_by_ea_greypng",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/powered_by_ea_grey.png"
+    },
+    {
+      "name": "clients",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/clients.png"
+    },
+    {
+      "name": "sales",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/sales.png"
+    },
+    {
+      "name": "sales1",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/sales.png"
+    }
+  ],
+  "icons": {
+    "appBadge": {
+      "name": "16.png"
+    },
+    "templateBadge": {
+      "name": "analytics_icon"
+    },
+    "templatePreviews": [
+      {
+        "name": "einstein_scene",
+        "label": "Description",
+        "description": "This template includes limited sample data. For more data, download the CSVs and schema files from here: (https://ac-sdo-repo.s3-us-west-2.amazonaws.com/Insurance_FSC_Analytics/Insurance_FSC_Analytics.zip), and update the corresponding datasets after app creation."
+      }
+    ]
+  }
+}

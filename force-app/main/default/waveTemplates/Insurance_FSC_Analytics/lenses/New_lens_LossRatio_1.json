@@ -1,0 +1,137 @@
+{
+  "name": "New_lens_LossRatio_1_tp",
+  "label": "New lens: LossRatio_2",
+  "folder": {
+    "id": "${App.Folder.Id}"
+  },
+  "visualizationType": "time",
+  "dateVersion": 1,
+  "datasets": [
+    {
+      "id": "${App.Datasets.Insurance_tp.Id}"
+    }
+  ],
+  "xmd": {
+    "measures": [],
+    "derivedDimensions": [],
+    "organizations": [],
+    "showDetailsDefaultFields": [],
+    "dates": [],
+    "derivedMeasures": [],
+    "dimensions": []
+  },
+  "state": {
+    "dataSourceLinks": [],
+    "filters": [],
+    "gridLayouts": [],
+    "layouts": [],
+    "steps": {
+      "saql": {
+        "broadcastFacet": false,
+        "groups": [],
+        "numbers": [],
+        "query": "q = load \"${App.Datasets.Insurance_tp.FullyQualifiedName}\";\nq = filter q by 'Location.REGION' == \"Midwest\";\nq = filter q by date('commencement_Year', 'commencement_Month', 'commencement_Day') in [\"1 year ago\"..\"current day\"];\nq = filter q by 'Insurance.PRODUCT_TYPE' in [\"Accident & Health\", \"Collision Coverage\", \"Comprehensive\", \"Construction\", \"Cyber Insurance\", \"Estate Planning\"];\nq = filter q by 'Location.REGION' == \"Midwest\";\nq = filter q by date('commencement_Year', 'commencement_Month', 'commencement_Day') in [\"1 year ago\"..\"current day\"];\nq = filter q by 'Insurance.PRODUCT_TYPE' in [\"Accident & Health\", \"Collision Coverage\", \"Comprehensive\", \"Construction\", \"Cyber Insurance\", \"Estate Planning\"];\nresult = group q by ('commencement_Year', 'commencement_Month', 'Insurance.PRODUCT_TYPE');\nresult = foreach result generate q.'commencement_Year' + \"~~~\" + q.'commencement_Month' as 'commencement_Year~~~commencement_Month', q.'Insurance.PRODUCT_TYPE' as 'Insurance.PRODUCT_TYPE', sum(q.'written_base_premium') as 'A', sum(q.'claim_payment') as 'B';\nresult = foreach result generate 'commencement_Year~~~commencement_Month', 'Insurance.PRODUCT_TYPE', 'A', 'B', B/(A*3) as 'Loss_Ratio';\nresult = order result by ('commencement_Year~~~commencement_Month' asc, 'Insurance.PRODUCT_TYPE' asc);\nresult = limit result 2000;",
+        "receiveFacetSource": {
+          "mode": "none",
+          "steps": []
+        },
+        "selectMode": "none",
+        "strings": [],
+        "type": "saql",
+        "useGlobal": true
+      }
+    },
+    "widgets": {
+      "saql_chart": {
+        "parameters": {
+          "autoFitMode": "keepLabels",
+          "showPoints": false,
+          "legend": {
+            "descOrder": false,
+            "showHeader": false,
+            "show": true,
+            "customSize": "auto",
+            "position": "top-center",
+            "inside": false
+          },
+          "axisMode": "multi",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "time",
+          "missingValue": "connect",
+          "dashLine": {
+            "measures": "",
+            "showDashLine": false
+          },
+          "timeAxis": {
+            "showTitle": false,
+            "showAxis": true,
+            "title": ""
+          },
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "Loss Ratio by Product",
+            "align": "left",
+            "subtitleLabel": ""
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "chartsPerLine": 4
+          },
+          "fillArea": true,
+          "columnMap": {
+            "split": ["Insurance.PRODUCT_TYPE"],
+            "timeAxis": ["commencement_Year~~~commencement_Month"],
+            "trellis": [],
+            "plots": ["Loss_Ratio"]
+          },
+          "showActionMenu": true,
+          "showZero": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": false,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "valueType": "none",
+          "theme": "wave",
+          "step": "saql",
+          "applyConditionalFormatting": false,
+          "drawArea": {
+            "measure": "",
+            "showDrawArea": false,
+            "bounding1": "",
+            "bounding2": ""
+          }
+        },
+        "type": "chart"
+      }
+    }
+  }
+}

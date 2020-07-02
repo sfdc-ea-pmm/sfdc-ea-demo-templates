@@ -1,0 +1,3941 @@
+{
+  "name": "Renewals_and_Cancelations_tp",
+  "label": "Renewals and Cancelations EA4FSC",
+  "folder": {
+    "id": "${App.Folder.Id}"
+  },
+  "dateVersion": 1,
+  "mobileDisabled": false,
+  "xmd": {
+    "measures": [
+      {
+        "conditionalFormatting": {
+          "backgroundColor": {
+            "referenceField": "A",
+            "type": "multiple",
+            "parameters": {
+              "bins": [
+                {
+                  "formatValue": "#E84340",
+                  "bin": "*"
+                },
+                {
+                  "formatValue": "#E8963B",
+                  "bin": "70"
+                },
+                {
+                  "bin": "80"
+                }
+              ]
+            }
+          },
+          "color": {
+            "referenceField": "A",
+            "type": "multiple",
+            "parameters": {
+              "bins": [
+                {
+                  "formatValue": "#FFFFFF",
+                  "bin": "*"
+                },
+                {
+                  "formatValue": "#FFFFFF",
+                  "bin": "70"
+                },
+                {
+                  "formatValue": "#00B531",
+                  "bin": "80"
+                }
+              ]
+            }
+          }
+        },
+        "field": "lens_1.A",
+        "format": {
+          "delimiters": {}
+        }
+      },
+      {
+        "conditionalFormatting": {},
+        "field": "RenewalCancelationMe_1.C",
+        "format": {
+          "delimiters": {},
+          "customFormat": "[\"$#,###\",1]"
+        }
+      },
+      {
+        "conditionalFormatting": {},
+        "field": "RenewalMetrics_1.D",
+        "format": {
+          "delimiters": {},
+          "customFormat": "[\"#,###.##%\",100]"
+        }
+      },
+      {
+        "conditionalFormatting": {},
+        "field": "RenewalCancelationMe_1.E",
+        "format": {
+          "delimiters": {},
+          "customFormat": "[\"$#,###\",1]"
+        }
+      },
+      {
+        "conditionalFormatting": {},
+        "field": "RenewalMetrics_1.C",
+        "format": {
+          "delimiters": {},
+          "customFormat": "[\"$#,###\",1]"
+        }
+      },
+      {
+        "conditionalFormatting": {},
+        "field": "Canceled_Metrics_1.B",
+        "format": {
+          "delimiters": {},
+          "customFormat": "[\"$#,###\",1]"
+        }
+      }
+    ],
+    "derivedDimensions": [],
+    "organizations": [],
+    "showDetailsDefaultFields": [],
+    "dates": [],
+    "derivedMeasures": [],
+    "dimensions": []
+  },
+  "state": {
+    "dataSourceLinks": [],
+    "filters": [
+      {
+        "dataset": {
+          "name": "${App.Datasets.Insurance_tp.Name}"
+        },
+        "dependent": true,
+        "fields": ["Insurance_PRODUCT_TYPE"],
+        "label": "Policy Type",
+        "locked": false,
+        "operator": "in"
+      },
+      {
+        "dataset": {
+          "name": "${App.Datasets.Insurance_tp.Name}"
+        },
+        "dependent": true,
+        "fields": ["Insurance_PRODUCT_NAME"],
+        "label": "Product Name",
+        "locked": false,
+        "operator": "in"
+      },
+      {
+        "dataset": {
+          "name": "${App.Datasets.Insurance_tp.Name}"
+        },
+        "dependent": true,
+        "fields": ["written_base_premium"],
+        "label": "Gross Written Premium",
+        "locked": false,
+        "operator": ">=<="
+      },
+      {
+        "dataset": {
+          "name": "${App.Datasets.Insurance_tp.Name}"
+        },
+        "dependent": true,
+        "fields": ["Agent_AGENT_NAME"],
+        "label": "Agent Name",
+        "locked": false,
+        "operator": "in",
+        "value": "[\"Frank Levin\",\"Thelma Mitchell\"]"
+      },
+      {
+        "dataset": {
+          "name": "${App.Datasets.Insurance_tp.Name}"
+        },
+        "dependent": true,
+        "fields": ["Insurance_PRODUCT_BUSINESS_LINE"],
+        "label": "Business Line",
+        "locked": false,
+        "operator": "in"
+      },
+      {
+        "dataset": {
+          "name": "${App.Datasets.Insurance_tp.Name}"
+        },
+        "dependent": true,
+        "fields": ["Agent_REGION"],
+        "label": "Region",
+        "locked": false,
+        "operator": "in"
+      }
+    ],
+    "gridLayouts": [
+      {
+        "maxWidth": 1500,
+        "name": "Default",
+        "numColumns": 50,
+        "pages": [
+          {
+            "label": "Policies Up for Renewal",
+            "name": "c4c80845-d9c0-4f34-851b-bf702d0d3b2f",
+            "navigationHidden": false,
+            "widgets": [
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "navigation_1",
+                "row": 6,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#C6D3E1",
+                  "borderEdges": ["top"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 19,
+                "column": 1,
+                "name": "text_45",
+                "row": 103,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "container_2",
+                "row": 101,
+                "rowspan": 46,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["top"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "container_11",
+                "row": 15,
+                "rowspan": 11,
+                "widgetStyle": {
+                  "backgroundColor": "rgb(9, 26, 62)",
+                  "borderColor": "rgb(65, 80, 106)",
+                  "borderEdges": ["bottom"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "container_22",
+                "row": 26,
+                "rowspan": 40,
+                "widgetStyle": {
+                  "backgroundColor": "#091A3E",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 31,
+                "column": 1,
+                "name": "text_61",
+                "row": 28,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "container_9",
+                "row": 0,
+                "rowspan": 6,
+                "widgetStyle": {
+                  "backgroundColor": "rgb(228, 234, 240)",
+                  "borderColor": "#335779",
+                  "borderEdges": ["top"],
+                  "borderRadius": 0,
+                  "borderWidth": 4
+                }
+              },
+              {
+                "colspan": 7,
+                "column": 8,
+                "name": "text_7",
+                "row": 20,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 7,
+                "column": 29,
+                "name": "text_11",
+                "row": 20,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 7,
+                "column": 1,
+                "name": "text_20",
+                "row": 20,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 10,
+                "column": 15,
+                "name": "text_16",
+                "row": 20,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 9,
+                "column": 1,
+                "name": "text_23",
+                "row": 67,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 15,
+                "column": 8,
+                "name": "text_35",
+                "row": 11,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "container_5",
+                "row": 10,
+                "rowspan": 5,
+                "widgetStyle": {
+                  "backgroundColor": "rgb(9, 26, 62)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 8,
+                "column": 36,
+                "name": "text_10",
+                "row": 20,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 10,
+                "column": 23,
+                "name": "dateselector_1",
+                "row": 11,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 48,
+                "column": 1,
+                "name": "chart_1",
+                "row": 71,
+                "rowspan": 29,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 48,
+                "column": 1,
+                "name": "filterpanel_2",
+                "row": 1,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 7,
+                "column": 1,
+                "name": "number_1",
+                "row": 22,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 7,
+                "column": 8,
+                "name": "number_2",
+                "row": 22,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 9,
+                "column": 15,
+                "name": "number_3",
+                "row": 22,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 7,
+                "column": 29,
+                "name": "number_4",
+                "row": 22,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 9,
+                "column": 36,
+                "name": "number_5",
+                "row": 22,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 22,
+                "column": 1,
+                "name": "chart_2",
+                "row": 31,
+                "rowspan": 34,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 25,
+                "column": 24,
+                "name": "chart_3",
+                "row": 31,
+                "rowspan": 34,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 17,
+                "column": 1,
+                "name": "text_17",
+                "row": 16,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 17,
+                "column": 29,
+                "name": "text_18",
+                "row": 16,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 43,
+                "name": "rangeselector_1",
+                "row": 102,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["all"],
+                  "borderRadius": 4,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 5,
+                "column": 38,
+                "name": "text_14",
+                "row": 102,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 48,
+                "column": 1,
+                "name": "table_5",
+                "row": 106,
+                "rowspan": 39,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              }
+            ]
+          },
+          {
+            "label": "Renewed Policies",
+            "name": "d6130fb8-3819-4f95-b8f1-65b56e0ed8de",
+            "navigationHidden": false,
+            "widgets": [
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "navigation_1",
+                "row": 6,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#C6D3E1",
+                  "borderEdges": ["top"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "container_2",
+                "row": 57,
+                "rowspan": 46,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["top"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "container_11",
+                "row": 10,
+                "rowspan": 7,
+                "widgetStyle": {
+                  "backgroundColor": "rgb(9, 26, 62)",
+                  "borderColor": "rgb(65, 80, 106)",
+                  "borderEdges": ["bottom"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "container_22",
+                "row": 17,
+                "rowspan": 40,
+                "widgetStyle": {
+                  "backgroundColor": "#091A3E",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "container_9",
+                "row": 0,
+                "rowspan": 6,
+                "widgetStyle": {
+                  "backgroundColor": "rgb(228, 234, 240)",
+                  "borderColor": "#335779",
+                  "borderEdges": ["top"],
+                  "borderRadius": 0,
+                  "borderWidth": 4
+                }
+              },
+              {
+                "colspan": 8,
+                "column": 1,
+                "name": "text_1",
+                "row": 10,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 10,
+                "name": "text_4",
+                "row": 10,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 8,
+                "column": 16,
+                "name": "text_6",
+                "row": 10,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 11,
+                "column": 1,
+                "name": "text_8",
+                "row": 18,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 48,
+                "column": 1,
+                "name": "filterpanel_2",
+                "row": 1,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 19,
+                "column": 1,
+                "name": "text_9",
+                "row": 59,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 24,
+                "column": 25,
+                "name": "chart_4",
+                "row": 21,
+                "rowspan": 35,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 23,
+                "column": 1,
+                "name": "chart_5",
+                "row": 21,
+                "rowspan": 35,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 8,
+                "column": 1,
+                "name": "number_6",
+                "row": 13,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 10,
+                "name": "number_7",
+                "row": 13,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 9,
+                "column": 16,
+                "name": "number_9",
+                "row": 13,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 48,
+                "column": 1,
+                "name": "table_2",
+                "row": 63,
+                "rowspan": 39,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              }
+            ]
+          },
+          {
+            "label": "Canceled policies",
+            "name": "aa1e84e9-b961-4f05-aef5-d0e542d6a93a",
+            "navigationHidden": false,
+            "widgets": [
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "navigation_1",
+                "row": 6,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#C6D3E1",
+                  "borderEdges": ["top"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "container_2",
+                "row": 63,
+                "rowspan": 46,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["top"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "container_11",
+                "row": 15,
+                "rowspan": 7,
+                "widgetStyle": {
+                  "backgroundColor": "rgb(9, 26, 62)",
+                  "borderColor": "rgb(65, 80, 106)",
+                  "borderEdges": ["bottom"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "container_22",
+                "row": 22,
+                "rowspan": 40,
+                "widgetStyle": {
+                  "backgroundColor": "#091A3E",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "container_9",
+                "row": 0,
+                "rowspan": 6,
+                "widgetStyle": {
+                  "backgroundColor": "rgb(228, 234, 240)",
+                  "borderColor": "#335779",
+                  "borderEdges": ["top"],
+                  "borderRadius": 0,
+                  "borderWidth": 4
+                }
+              },
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "container_5",
+                "row": 10,
+                "rowspan": 5,
+                "widgetStyle": {
+                  "backgroundColor": "rgb(9, 26, 62)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 48,
+                "column": 1,
+                "name": "filterpanel_2",
+                "row": 1,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 8,
+                "column": 1,
+                "name": "text_3",
+                "row": 15,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 8,
+                "column": 9,
+                "name": "text_12",
+                "row": 15,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 8,
+                "column": 17,
+                "name": "text_13",
+                "row": 15,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 8,
+                "column": 1,
+                "name": "number_10",
+                "row": 18,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 8,
+                "column": 9,
+                "name": "number_11",
+                "row": 18,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 8,
+                "column": 17,
+                "name": "number_12",
+                "row": 18,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 48,
+                "column": 1,
+                "name": "chart_7",
+                "row": 24,
+                "rowspan": 37,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 9,
+                "column": 1,
+                "name": "text_15",
+                "row": 64,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 48,
+                "column": 1,
+                "name": "table_3",
+                "row": 67,
+                "rowspan": 41,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 8,
+                "column": 22,
+                "name": "dateselector_2",
+                "row": 11,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 9,
+                "column": 13,
+                "name": "text_5",
+                "row": 11,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight": "fine",
+        "selectors": [],
+        "style": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "backgroundColor": "#F2F6FA",
+          "cellSpacingX": 0,
+          "cellSpacingY": 0,
+          "fit": "original",
+          "gutterColor": "#C5D3E0"
+        },
+        "version": 1.0
+      }
+    ],
+    "layouts": [],
+    "steps": {
+      "RenewalMetrics_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "RenewalMetrics",
+        "query": {
+          "query": {
+            "measures": [
+              ["unique", "POLICY_ID", "A"],
+              ["unique", "POLICY_ID", "B"],
+              ["sum", "written_base_premium", "C"],
+              ["sum", "written_base_premium", "D"]
+            ],
+            "columns": [
+              {
+                "query": {
+                  "measures": [["unique", "POLICY_ID"]],
+                  "groups": [["report_Year", "report_Month"]],
+                  "filters": [["POLICY_STATUS", ["RENEWAL"], "in"]]
+                },
+                "header": "Total Policies Up for Renewal"
+              },
+              {
+                "query": {
+                  "measures": [["unique", "POLICY_ID"]],
+                  "groups": [["report_Year", "report_Month"]],
+                  "filters": [["POLICY_STATUS", ["RENEWED"], "in"]]
+                },
+                "header": "Total Renewed"
+              },
+              {
+                "query": {
+                  "measures": [["sum", "written_base_premium"]],
+                  "groups": [["report_Year", "report_Month"]],
+                  "filters": [["POLICY_STATUS", ["RENEWED"], "in"]]
+                },
+                "header": "GWP from Renewed Policies"
+              },
+              {
+                "query": {
+                  "measures": [["sum", "written_base_premium"]],
+                  "groups": [["report_Year", "report_Month"]],
+                  "formula": "B/A"
+                },
+                "header": "Renewal Rate"
+              }
+            ],
+            "groups": [["report_Year", "report_Month"]]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "none",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "showValues": true,
+            "stack": false,
+            "showPoints": true,
+            "legend": {
+              "descOrder": false,
+              "showHeader": true,
+              "show": true,
+              "customSize": "auto",
+              "position": "right-top",
+              "inside": false
+            },
+            "axisMode": "multi",
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "visualizationType": "time-combo",
+            "missingValue": "connect",
+            "showValuesOnLine": false,
+            "timeAxis": {
+              "showTitle": true,
+              "showAxis": true,
+              "title": ""
+            },
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "",
+              "align": "center",
+              "subtitleLabel": ""
+            },
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "x",
+              "chartsPerLine": 4
+            },
+            "columnMap": {
+              "timeAxis": ["report_Year~~~report_Month"],
+              "trellis": [],
+              "plots": ["C", "D"]
+            },
+            "showActionMenu": true,
+            "measureAxis2": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "measureAxis1": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "theme": "wave",
+            "applyConditionalFormatting": true
+          },
+          "type": "chart"
+        }
+      },
+      "Renewal_Rate_Metrics_2": {
+        "broadcastFacet": true,
+        "groups": [],
+        "label": "Renewal Rate Metrics Bar (Renewed)",
+        "numbers": [],
+        "query": "q = load \"${App.Datasets.Insurance_Policies_tp.FullyQualifiedName}\";\nq = filter q by date('DateRenewed_Year', 'DateRenewed_Month', 'DateRenewed_Day') in [\"13 months ago\"..\"1 month ago\"] || date('PreviousRenewalDate_Year', 'PreviousRenewalDate_Month', 'PreviousRenewalDate_Day') in [\"13 months ago\"..\"1 month ago\"];q= filter q by {{cell(Renewal_rate_over_ti_1.selection,0,\"DateRenewed_Year\").asEquality(\"DateRenewed_Year\")}} && {{cell(Renewal_rate_over_ti_1.selection,0,\"DateRenewed_Month\").asEquality(\"DateRenewed_Month\")}} || {{cell(Renewal_rate_over_ti_1.selection,0,\"DateRenewed_Year\").asEquality(\"PreviousRenewalDate_Year\")}} && {{cell(Renewal_rate_over_ti_1.selection,0,\"DateRenewed_Month\").asEquality(\"PreviousRenewalDate_Month\")}} ;\nq = filter q by 'IsActive' == \"true\";\nq = group q by all;\nq = foreach q generate count() as 'count', sum('GrossWrittenPremium') as 'sum_GrossWrittenPremium';\nq = limit q 2000;",
+        "receiveFacetSource": {
+          "mode": "none",
+          "steps": []
+        },
+        "selectMode": "single",
+        "strings": [],
+        "type": "saql",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "autoFitMode": "keepLabels",
+            "showValues": true,
+            "bins": {
+              "breakpoints": {
+                "high": 100,
+                "low": 0
+              },
+              "bands": {
+                "high": {
+                  "color": "#008000",
+                  "label": ""
+                },
+                "low": {
+                  "color": "#B22222",
+                  "label": ""
+                },
+                "medium": {
+                  "color": "#ffa500",
+                  "label": ""
+                }
+              }
+            },
+            "legend": {
+              "descOrder": false,
+              "showHeader": true,
+              "show": true,
+              "customSize": "auto",
+              "position": "right-top",
+              "inside": false
+            },
+            "axisMode": "multi",
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "visualizationType": "hbar",
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "",
+              "align": "center",
+              "subtitleLabel": ""
+            },
+            "binValues": false,
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "x",
+              "chartsPerLine": 4
+            },
+            "showActionMenu": true,
+            "measureAxis2": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "measureAxis1": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "theme": "wave",
+            "dimensionAxis": {
+              "showTitle": true,
+              "customSize": "auto",
+              "showAxis": true,
+              "title": "",
+              "icons": {
+                "useIcons": false,
+                "iconProps": {
+                  "fit": "cover",
+                  "column": "",
+                  "type": "round"
+                }
+              }
+            },
+            "applyConditionalFormatting": true
+          },
+          "type": "chart"
+        }
+      },
+      "reported_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["count", "*"]],
+            "groups": ["reported"]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {}
+      },
+      "RenewalPololiciesDet_1": {
+        "broadcastFacet": true,
+        "groups": [],
+        "label": "RenewalPololiciesDetails",
+        "numbers": [],
+        "query": "q = load \"${App.Datasets.Insurance_tp.FullyQualifiedName}\";\nq = filter q by 'POLICY_STATUS' == \"RENEWAL\";\nq = foreach q generate 'ICA_NAME' as 'Name', 'Insurance_PRODUCT_FAMILY' as 'Product Family', 'Insurance_PRODUCT_ID' as 'Product ID', 'Insurance_PRODUCT_NAME' as 'Product Name', 'Insurance_PRODUCT_TYPE' as 'Product Type', 'TERM_LENGTH' as 'Term Length', 'written_base_premium' as 'Premium', 'RenewalChance' as 'RenewalChance';\nq = limit q 10000;",
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "strings": [],
+        "type": "saql",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "borderColor": "#e0e5ee",
+            "borderWidth": 1,
+            "cell": {
+              "backgroundColor": "#ffffff",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "columnProperties": {},
+            "columns": [],
+            "customBulkActions": [
+              {
+                "label": "Send Reminder",
+                "visualforce": {
+                  "name": "dummyBulkAction",
+                  "namespace": ""
+                }
+              }
+            ],
+            "header": {
+              "backgroundColor": "#f4f6f9",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "innerMajorBorderColor": "#a8b7c7",
+            "innerMinorBorderColor": "#e0e5ee",
+            "mode": "fittocontainer",
+            "numberOfLines": 1,
+            "showActionMenu": true,
+            "showRowIndexColumn": false,
+            "totals": true,
+            "verticalPadding": 8
+          },
+          "type": "table"
+        }
+      },
+      "RenewalCalendar_1": {
+        "broadcastFacet": true,
+        "groups": [],
+        "label": "RenewalCalendar",
+        "numbers": [],
+        "query": "q = load \"${App.Datasets.Insurance_tp.FullyQualifiedName}\";\nq = filter q by 'POLICY_STATUS' == \"RENEWAL\";\nq = group q by ('expiry_Year', 'expiry_Month', 'expiry_Day');\nq = foreach q generate 'expiry_Year' + \"~~~\" + 'expiry_Month' + \"~~~\" + 'expiry_Day' as 'expiry_Year~~~expiry_Month~~~expiry_Day', sum('written_base_premium') as 'sum_GrossWrittenPremium', unique('POLICY_PRODUCT_ID') as '# Policies';\nq = order q by 'expiry_Year~~~expiry_Month~~~expiry_Day' asc;\nq = limit q 2000;",
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "start": [],
+        "strings": [],
+        "type": "saql",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "autoFitMode": "keepLabels",
+            "showValues": true,
+            "bins": {
+              "breakpoints": {
+                "high": 100,
+                "low": 0
+              },
+              "bands": {
+                "high": {
+                  "color": "#008000",
+                  "label": ""
+                },
+                "low": {
+                  "color": "#B22222",
+                  "label": ""
+                },
+                "medium": {
+                  "color": "#ffa500",
+                  "label": ""
+                }
+              }
+            },
+            "legend": {
+              "descOrder": false,
+              "showHeader": true,
+              "show": true,
+              "customSize": "auto",
+              "position": "right-top",
+              "inside": false
+            },
+            "axisMode": "multi",
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "visualizationType": "time-bar",
+            "timeAxis": {
+              "showTitle": true,
+              "showAxis": true,
+              "title": ""
+            },
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "",
+              "align": "center",
+              "subtitleLabel": ""
+            },
+            "binValues": false,
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "x",
+              "chartsPerLine": 4
+            },
+            "showActionMenu": true,
+            "measureAxis2": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "measureAxis1": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "theme": "wave",
+            "applyConditionalFormatting": true
+          },
+          "type": "chart"
+        }
+      },
+      "PoliciesPremiumByRen_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "PoliciesPremiumByRenewalDate",
+        "query": {
+          "query": {
+            "measures": [
+              ["unique", "POLICY_PRODUCT_ID", "A"],
+              ["sum", "written_base_premium", "B"]
+            ],
+            "columns": [
+              {
+                "query": {
+                  "measures": [["unique", "POLICY_PRODUCT_ID"]],
+                  "groups": ["DaysToRenewalBucket"]
+                },
+                "header": "# Policies"
+              },
+              {
+                "query": {
+                  "measures": [["sum", "written_base_premium"]],
+                  "groups": ["DaysToRenewalBucket"]
+                }
+              }
+            ],
+            "groups": ["DaysToRenewalBucket"],
+            "filters": [["POLICY_STATUS", ["RENEWAL"], "in"]]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "start": [],
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "parameters": {
+            "borderColor": "#e0e5ee",
+            "borderWidth": 1,
+            "cell": {
+              "backgroundColor": "#ffffff",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "columnProperties": {},
+            "columns": [],
+            "customBulkActions": [],
+            "header": {
+              "backgroundColor": "#f4f6f9",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "innerMajorBorderColor": "#a8b7c7",
+            "innerMinorBorderColor": "#e0e5ee",
+            "maxColumnWidth": 300,
+            "minColumnWidth": 40,
+            "mode": "variable",
+            "numberOfLines": 1,
+            "showActionMenu": true,
+            "showRowIndexColumn": false,
+            "totals": true,
+            "verticalPadding": 8
+          },
+          "type": "table"
+        }
+      },
+      "PremiumRenewedPolici_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "PremiumRenewedPolicies",
+        "query": {
+          "query": {
+            "measures": [["sum", "written_base_premium"]],
+            "groups": [["effective_Year", "effective_Month"]],
+            "filters": [
+              [
+                "effective",
+                [
+                  [
+                    ["month", -12],
+                    ["day", 0]
+                  ]
+                ],
+                ">=<="
+              ],
+              ["POLICY_STATUS", ["RENEWED"], "in"]
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "none",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "autoFitMode": "keepLabels",
+            "showValues": true,
+            "bins": {
+              "breakpoints": {
+                "high": 100,
+                "low": 0
+              },
+              "bands": {
+                "high": {
+                  "color": "#008000",
+                  "label": ""
+                },
+                "low": {
+                  "color": "#B22222",
+                  "label": ""
+                },
+                "medium": {
+                  "color": "#ffa500",
+                  "label": ""
+                }
+              }
+            },
+            "legend": {
+              "descOrder": false,
+              "showHeader": true,
+              "show": true,
+              "customSize": "auto",
+              "position": "right-top",
+              "inside": false
+            },
+            "axisMode": "multi",
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "visualizationType": "vbar",
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "",
+              "align": "center",
+              "subtitleLabel": ""
+            },
+            "binValues": false,
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "x",
+              "chartsPerLine": 4
+            },
+            "columnMap": {
+              "trellis": [],
+              "dimensionAxis": ["effective_Year~~~effective_Month"],
+              "plots": ["sum_written_base_premium"]
+            },
+            "showActionMenu": true,
+            "measureAxis2": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "measureAxis1": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "theme": "wave",
+            "dimensionAxis": {
+              "showTitle": true,
+              "customSize": "auto",
+              "showAxis": true,
+              "title": "",
+              "icons": {
+                "useIcons": false,
+                "iconProps": {
+                  "fit": "cover",
+                  "column": "",
+                  "type": "round"
+                }
+              }
+            },
+            "applyConditionalFormatting": true
+          },
+          "type": "chart"
+        }
+      },
+      "effective_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["count", "*"]],
+            "groups": ["effective"]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {}
+      },
+      "Canceled_Metrics_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "Canceled Metrics",
+        "query": {
+          "query": {
+            "measures": [
+              ["unique", "POLICY_ID", "A"],
+              ["sum", "written_base_premium", "B"],
+              ["avg", "written_base_premium", "C"]
+            ],
+            "columns": [
+              {
+                "query": {
+                  "measures": [["unique", "POLICY_ID"]],
+                  "filters": [["POLICY_STATUS", ["EXPIRED"], "in"]]
+                },
+                "header": "# of Canceled Policies"
+              },
+              {
+                "query": {
+                  "measures": [["sum", "written_base_premium"]],
+                  "filters": [["POLICY_STATUS", ["EXPIRED"], "in"]]
+                },
+                "header": "Total Premium Lost"
+              },
+              {
+                "query": {
+                  "measures": [["avg", "written_base_premium"]],
+                  "filters": [["POLICY_STATUS", ["EXPIRED"], "in"]]
+                },
+                "header": "Avg Canceled Policy Size"
+              }
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "none",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "parameters": {
+            "borderColor": "#e0e5ee",
+            "borderWidth": 1,
+            "cell": {
+              "backgroundColor": "#ffffff",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "columnProperties": {},
+            "columns": [],
+            "customBulkActions": [],
+            "header": {
+              "backgroundColor": "#f4f6f9",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "innerMajorBorderColor": "#a8b7c7",
+            "innerMinorBorderColor": "#e0e5ee",
+            "maxColumnWidth": 300,
+            "minColumnWidth": 40,
+            "mode": "variable",
+            "numberOfLines": 1,
+            "showActionMenu": true,
+            "showRowIndexColumn": false,
+            "totals": true,
+            "verticalPadding": 8
+          },
+          "type": "table"
+        }
+      },
+      "report_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["count", "*"]],
+            "groups": ["report"]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {}
+      },
+      "Premium_from_renewed_1": {
+        "broadcastFacet": false,
+        "groups": [],
+        "label": "Premium from renewed policies",
+        "numbers": [],
+        "query": "q = load \"${App.Datasets.Insurance_Policies_tp.FullyQualifiedName}\";\nq = filter q by 'IsActive' == \"true\";q = filter q by date('DateRenewed_Year', 'DateRenewed_Month', 'DateRenewed_Day') in [\"13 months ago\"..\"1 month ago\"] || date('PreviousRenewalDate_Year', 'PreviousRenewalDate_Month', 'PreviousRenewalDate_Day') in [\"13 months ago\"..\"1 month ago\"];\n q= filter q by {{cell(Renewal_rate_over_ti_1.result,0,\"DateRenewed_Year\").asEquality(\"EffectiveDate_Year\")}} && {{cell(Renewal_rate_over_ti_1.selection,0,\"DateRenewed_Month\").asEquality(\"EffectiveDate_Month\")}};\nq = group q by ('EffectiveDate_Year', 'EffectiveDate_Month');\nq = foreach q generate 'EffectiveDate_Year','EffectiveDate_Month','EffectiveDate_Year' + \"~~~\" + 'EffectiveDate_Month' as 'EffectiveDate_Year~~~EffectiveDate_Month', sum('GrossWrittenPremium') as 'sum_GrossWrittenPremium';\nq = order q by 'EffectiveDate_Year~~~EffectiveDate_Month' asc;\nq = limit q 2000;",
+        "receiveFacetSource": {
+          "mode": "none",
+          "steps": []
+        },
+        "selectMode": "none",
+        "strings": [],
+        "type": "saql",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "autoFitMode": "keepLabels",
+            "showValues": true,
+            "stack": false,
+            "showPoints": true,
+            "legend": {
+              "descOrder": false,
+              "showHeader": true,
+              "show": true,
+              "customSize": "auto",
+              "position": "bottom-center",
+              "inside": false
+            },
+            "axisMode": "dual",
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "visualizationType": "combo",
+            "missingValue": "connect",
+            "showValuesOnLine": false,
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "Premium from Renewed Policies",
+              "align": "left",
+              "subtitleLabel": ""
+            },
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "x",
+              "chartsPerLine": 4
+            },
+            "columnMap": {
+              "trellis": [],
+              "dimensionAxis": [
+                "EffectiveDate_Year",
+                "EffectiveDate_Month",
+                "EffectiveDate_Year~~~EffectiveDate_Month"
+              ],
+              "plots": ["count", "sum_GrossWrittenPremium"]
+            },
+            "showActionMenu": true,
+            "measureAxis2": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "measureAxis1": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "theme": "wave",
+            "dimensionAxis": {
+              "showTitle": true,
+              "customSize": "auto",
+              "showAxis": true,
+              "title": "",
+              "icons": {
+                "useIcons": false,
+                "iconProps": {
+                  "fit": "cover",
+                  "column": "",
+                  "type": "round"
+                }
+              }
+            },
+            "applyConditionalFormatting": true
+          },
+          "type": "chart"
+        }
+      },
+      "CustomersRenewing_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "CustomersRenewing",
+        "query": {
+          "query": {
+            "measures": [
+              ["sum", "written_base_premium", "A"],
+              ["sum", "claim_payment", "B"],
+              ["sum", "claim_payment", "C"]
+            ],
+            "columns": [
+              {
+                "query": {
+                  "measures": [["sum", "written_base_premium"]],
+                  "groups": ["Location_STATE"],
+                  "order": [
+                    [
+                      -1,
+                      {
+                        "ascending": false
+                      }
+                    ]
+                  ]
+                },
+                "header": "Sum of Premium"
+              },
+              {
+                "query": {
+                  "measures": [["sum", "claim_payment"]],
+                  "groups": ["Location_STATE"]
+                }
+              },
+              {
+                "query": {
+                  "measures": [["sum", "claim_payment"]],
+                  "groups": ["Location_STATE"],
+                  "formula": "A-B"
+                },
+                "header": "Profitability (Total Premiums - Claims)"
+              }
+            ],
+            "groups": ["Location_STATE"],
+            "filters": [["POLICY_STATUS", ["RENEWAL"], "in"]]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "start": [],
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "parameters": {
+            "borderColor": "#e0e5ee",
+            "borderWidth": 1,
+            "cell": {
+              "backgroundColor": "#ffffff",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "columnProperties": {},
+            "columns": [],
+            "customBulkActions": [],
+            "header": {
+              "backgroundColor": "#f4f6f9",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "innerMajorBorderColor": "#a8b7c7",
+            "innerMinorBorderColor": "#e0e5ee",
+            "maxColumnWidth": 300,
+            "minColumnWidth": 40,
+            "mode": "variable",
+            "numberOfLines": 1,
+            "showActionMenu": true,
+            "showRowIndexColumn": false,
+            "totals": true,
+            "verticalPadding": 8
+          },
+          "type": "table"
+        }
+      },
+      "Class_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "Class",
+        "query": {
+          "query": {
+            "measures": [
+              ["count", "*"],
+              ["sum", "written_base_premium"]
+            ],
+            "groups": ["apra_Class"],
+            "order": [
+              [
+                "count",
+                {
+                  "ascending": false
+                }
+              ]
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "none",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "autoFitMode": "keepLabels",
+            "showValues": true,
+            "bins": {
+              "breakpoints": {
+                "high": 100,
+                "low": 0
+              },
+              "bands": {
+                "high": {
+                  "color": "#008000",
+                  "label": ""
+                },
+                "low": {
+                  "color": "#B22222",
+                  "label": ""
+                },
+                "medium": {
+                  "color": "#ffa500",
+                  "label": ""
+                }
+              }
+            },
+            "legend": {
+              "descOrder": false,
+              "showHeader": true,
+              "show": true,
+              "customSize": "auto",
+              "position": "right-top",
+              "inside": false
+            },
+            "axisMode": "multi",
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "visualizationType": "hbar",
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "",
+              "align": "center",
+              "subtitleLabel": ""
+            },
+            "binValues": false,
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "x",
+              "chartsPerLine": 4
+            },
+            "columnMap": {
+              "trellis": [],
+              "dimensionAxis": ["apra_Class"],
+              "plots": ["count", "sum_written_base_premium"]
+            },
+            "showActionMenu": true,
+            "measureAxis2": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "measureAxis1": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "theme": "wave",
+            "dimensionAxis": {
+              "showTitle": true,
+              "customSize": "auto",
+              "showAxis": true,
+              "title": "",
+              "icons": {
+                "useIcons": false,
+                "iconProps": {
+                  "fit": "cover",
+                  "column": "",
+                  "type": "round"
+                }
+              }
+            },
+            "applyConditionalFormatting": true
+          },
+          "type": "chart"
+        }
+      },
+      "RenewedPoliciesOverT_1": {
+        "broadcastFacet": true,
+        "groups": ["report_Year~~~report_Month"],
+        "label": "RenewedPoliciesOverTime",
+        "numbers": ["# Renewed Policies"],
+        "query": "q = load \"${App.Datasets.Insurance_tp.FullyQualifiedName}\";\nq = filter q by date('report_Year', 'report_Month', 'report_Day') in [\"12 months ago\"..\"current day\"];\nq = group q by ('report_Year', 'report_Month');\nq = foreach q generate 'report_Year' + \"~~~\" + 'report_Month' as 'report_Year~~~report_Month', unique('POLICY_ID') as '# Renewed Policies';\nq = order q by 'report_Year~~~report_Month' asc;",
+        "receiveFacetSource": {
+          "mode": "none",
+          "steps": []
+        },
+        "selectMode": "single",
+        "strings": ["report_Year~~~report_Month"],
+        "type": "saql",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "autoFitMode": "keepLabels",
+            "showValues": true,
+            "bins": {
+              "breakpoints": {
+                "high": 100,
+                "low": 0
+              },
+              "bands": {
+                "high": {
+                  "color": "#008000",
+                  "label": ""
+                },
+                "low": {
+                  "color": "#B22222",
+                  "label": ""
+                },
+                "medium": {
+                  "color": "#ffa500",
+                  "label": ""
+                }
+              }
+            },
+            "legend": {
+              "descOrder": false,
+              "showHeader": true,
+              "show": true,
+              "customSize": "auto",
+              "position": "right-top",
+              "inside": false
+            },
+            "axisMode": "multi",
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "visualizationType": "vbar",
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "",
+              "align": "center",
+              "subtitleLabel": ""
+            },
+            "binValues": false,
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "x",
+              "chartsPerLine": 4
+            },
+            "showActionMenu": true,
+            "measureAxis2": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "measureAxis1": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "theme": "wave",
+            "dimensionAxis": {
+              "showTitle": true,
+              "customSize": "auto",
+              "showAxis": true,
+              "title": "",
+              "icons": {
+                "useIcons": false,
+                "iconProps": {
+                  "fit": "cover",
+                  "column": "",
+                  "type": "round"
+                }
+              }
+            },
+            "applyConditionalFormatting": true
+          },
+          "type": "chart"
+        }
+      },
+      "RenewalChance_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["sum", "RenewalChance"]]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "start": [],
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {}
+      },
+      "expiry_2": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["count", "*"]],
+            "groups": ["expiry"]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "start": [
+          [
+            ["day", 0],
+            ["day", 30]
+          ]
+        ],
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {}
+      },
+      "RenewalCancelationMe_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "RenewalCancelationMetrics",
+        "query": {
+          "query": {
+            "measures": [
+              ["unique", "POLICY_ID", "A"],
+              ["unique", "POLICY_PRODUCT_ID", "B"],
+              ["sum", "written_base_premium", "C"],
+              ["unique", "POLICY_PRODUCT_ID", "D"],
+              ["sum", "written_base_premium", "E"]
+            ],
+            "columns": [
+              {
+                "query": {
+                  "measures": [["unique", "POLICY_ID"]],
+                  "filters": [["POLICY_STATUS", ["RENEWAL"], "in"]]
+                },
+                "header": "# of Customers with Renewal"
+              },
+              {
+                "query": {
+                  "measures": [["unique", "POLICY_PRODUCT_ID"]],
+                  "filters": [["POLICY_STATUS", ["RENEWAL"], "in"]]
+                },
+                "header": "Policies Due for Renewal"
+              },
+              {
+                "query": {
+                  "measures": [["sum", "written_base_premium"]],
+                  "formula": "E*2.75",
+                  "filters": [["POLICY_STATUS", ["RENEWAL"], "in"]]
+                },
+                "header": "Total Premiums Up for Renewal"
+              },
+              {
+                "query": {
+                  "measures": [["unique", "POLICY_PRODUCT_ID"]],
+                  "formula": "round(B*0.45)",
+                  "filters": [["POLICY_STATUS", ["RENEWAL"], "in"]]
+                },
+                "header": "# of Policies with Grace Period"
+              },
+              {
+                "query": {
+                  "measures": [["sum", "written_base_premium"]],
+                  "filters": [["POLICY_STATUS", ["RENEWAL"], "in"]]
+                },
+                "header": "Total Premiums for Policies with Grace Period"
+              }
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "parameters": {
+            "borderColor": "#e0e5ee",
+            "borderWidth": 1,
+            "cell": {
+              "backgroundColor": "#ffffff",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "columnProperties": {},
+            "columns": ["A", "B", "E", "C", "D"],
+            "customBulkActions": [],
+            "header": {
+              "backgroundColor": "#f4f6f9",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "innerMajorBorderColor": "#a8b7c7",
+            "innerMinorBorderColor": "#e0e5ee",
+            "maxColumnWidth": 300,
+            "minColumnWidth": 40,
+            "mode": "variable",
+            "numberOfLines": 1,
+            "showActionMenu": true,
+            "showRowIndexColumn": false,
+            "totals": true,
+            "verticalPadding": 8
+          },
+          "type": "table"
+        }
+      },
+      "Renewed_Policies_Det_1": {
+        "broadcastFacet": false,
+        "groups": [],
+        "label": "Renewed Policies Details",
+        "numbers": [],
+        "query": "q = load \"${App.Datasets.Insurance_Policies_tp.FullyQualifiedName}\";\nq = filter q by 'IsActive' == \"true\";\n\nq = filter q by date('DateRenewed_Year', 'DateRenewed_Month', 'DateRenewed_Day') in [\"13 months ago\"..\"1 month ago\"] || date('PreviousRenewalDate_Year', 'PreviousRenewalDate_Month', 'PreviousRenewalDate_Day') in [\"13 months ago\"..\"1 month ago\"];q= filter q by {{cell(Renewal_rate_over_ti_1.selection,0,\"DateRenewed_Year\").asEquality(\"DateRenewed_Year\")}} && {{cell(Renewal_rate_over_ti_1.selection,0,\"DateRenewed_Month\").asEquality(\"DateRenewed_Month\")}} || {{cell(Renewal_rate_over_ti_1.selection,0,\"DateRenewed_Year\").asEquality(\"PreviousRenewalDate_Year\")}} && {{cell(Renewal_rate_over_ti_1.selection,0,\"DateRenewed_Month\").asEquality(\"PreviousRenewalDate_Month\")}} ;\nq = foreach q generate 'PolicyOwner_Name','PolicyType','Product_Name','Name','PlanTier','EffectiveDateFormatted','GrossWrittenPremium','DateRenewedFormatted' as 'Date Renewed';\nq = limit q 200;",
+        "receiveFacetSource": {
+          "mode": "none",
+          "steps": []
+        },
+        "selectMode": "single",
+        "strings": [],
+        "type": "saql",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "borderColor": "#e0e5ee",
+            "borderWidth": 1,
+            "cell": {
+              "backgroundColor": "#ffffff",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "columnProperties": {},
+            "columns": [],
+            "customBulkActions": [],
+            "header": {
+              "backgroundColor": "#f4f6f9",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "innerMajorBorderColor": "#a8b7c7",
+            "innerMinorBorderColor": "#e0e5ee",
+            "mode": "fittocontainer",
+            "numberOfLines": 1,
+            "showActionMenu": true,
+            "totals": true,
+            "verticalPadding": 8
+          },
+          "type": "table"
+        }
+      },
+      "ChartDetails_1": {
+        "broadcastFacet": true,
+        "groups": [],
+        "label": "ChartDetails",
+        "numbers": [],
+        "query": "q = load \"${App.Datasets.Insurance_tp.FullyQualifiedName}\";\nq = filter q by 'POLICY_STATUS' == \"EXPIRED\";\nq = foreach q generate 'ICA_NAME' as 'Name', 'Insurance_PRODUCT_FAMILY' as 'Product Family', 'Insurance_PRODUCT_ID' as 'Product ID', 'Insurance_PRODUCT_NAME' as 'Product Name', 'POLICY_STATUS' as 'Policy Status', 'TERM_LENGTH' as 'Term Length', 'written_base_premium' as 'Premium';\nq = limit q 100;",
+        "receiveFacetSource": {
+          "mode": "none",
+          "steps": []
+        },
+        "selectMode": "single",
+        "strings": [],
+        "type": "saql",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "borderColor": "#e0e5ee",
+            "borderWidth": 1,
+            "cell": {
+              "backgroundColor": "#ffffff",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "columnProperties": {},
+            "columns": [],
+            "customBulkActions": [],
+            "header": {
+              "backgroundColor": "#f4f6f9",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "innerMajorBorderColor": "#a8b7c7",
+            "innerMinorBorderColor": "#e0e5ee",
+            "maxColumnWidth": 300,
+            "minColumnWidth": 40,
+            "mode": "variable",
+            "numberOfLines": 1,
+            "showActionMenu": true,
+            "totals": true,
+            "verticalPadding": 8
+          },
+          "type": "table"
+        }
+      },
+      "ChartDetails_2": {
+        "broadcastFacet": true,
+        "groups": [],
+        "label": "ChartDetails",
+        "numbers": [],
+        "query": "q = load \"${App.Datasets.Insurance_tp.FullyQualifiedName}\";\nq = filter q by 'POLICY_STATUS' == \"RENEWED\";\nq = foreach q generate 'ICA_NAME' as 'Name', 'Insurance_PRODUCT_FAMILY' as 'Product Family', 'Insurance_PRODUCT_NAME' as 'Product Name', 'Insurance_PRODUCT_TYPE' as 'Product Type', date_to_string(toDate('effective_sec_epoch'), \"yyyy-MM-dd\") as 'Effective Date', 'written_base_premium' as 'Premium';\nq = limit q 100;",
+        "receiveFacetSource": {
+          "mode": "none",
+          "steps": []
+        },
+        "selectMode": "single",
+        "strings": [],
+        "type": "saql",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "borderColor": "#e0e5ee",
+            "borderWidth": 1,
+            "cell": {
+              "backgroundColor": "#ffffff",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "columnProperties": {},
+            "columns": [],
+            "customBulkActions": [],
+            "header": {
+              "backgroundColor": "#f4f6f9",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "innerMajorBorderColor": "#a8b7c7",
+            "innerMinorBorderColor": "#e0e5ee",
+            "maxColumnWidth": 300,
+            "minColumnWidth": 40,
+            "mode": "variable",
+            "numberOfLines": 1,
+            "showActionMenu": true,
+            "showRowIndexColumn": true,
+            "totals": true,
+            "verticalPadding": 8
+          },
+          "type": "table"
+        }
+      },
+      "expiry_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["count", "*"]],
+            "groups": ["expiry"]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {}
+      },
+      "lens_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "lens_1",
+        "query": {
+          "query": {
+            "measures": [
+              ["avg", "RenewalChance", "A"],
+              ["sum", "written_base_premium", "B"],
+              ["avg", "TERM_LENGTH", "C"]
+            ],
+            "columns": [
+              {
+                "query": {
+                  "measures": [["avg", "RenewalChance"]],
+                  "groups": [
+                    "POLICY_ID",
+                    "Policy_NAME",
+                    "Insurance_PRODUCT_FAMILY",
+                    ["expiry_Year", "expiry_Month", "expiry_Day"]
+                  ]
+                }
+              },
+              {
+                "query": {
+                  "measures": [["sum", "written_base_premium"]],
+                  "groups": [
+                    "POLICY_ID",
+                    "Policy_NAME",
+                    "Insurance_PRODUCT_FAMILY",
+                    ["expiry_Year", "expiry_Month", "expiry_Day"]
+                  ]
+                }
+              },
+              {
+                "query": {
+                  "measures": [["avg", "TERM_LENGTH"]],
+                  "groups": [
+                    "POLICY_ID",
+                    "Policy_NAME",
+                    "Insurance_PRODUCT_FAMILY",
+                    ["expiry_Year", "expiry_Month", "expiry_Day"]
+                  ]
+                }
+              }
+            ],
+            "groups": [
+              "POLICY_ID",
+              "Policy_NAME",
+              "Insurance_PRODUCT_FAMILY",
+              ["expiry_Year", "expiry_Month", "expiry_Day"]
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "multi",
+        "start": [],
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "parameters": {
+            "borderColor": "#e0e5ee",
+            "borderWidth": 1,
+            "cell": {
+              "backgroundColor": "#ffffff",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "columnProperties": {},
+            "columns": [
+              "C",
+              "B",
+              "A",
+              "POLICY_ID",
+              "Policy_NAME",
+              "Insurance_PRODUCT_FAMILY",
+              "expiry_Year~~~expiry_Month~~~expiry_Day"
+            ],
+            "customBulkActions": [
+              {
+                "label": "Send Personalized Reminder",
+                "visualforce": {
+                  "name": "dummyBulkAction",
+                  "namespace": ""
+                }
+              }
+            ],
+            "header": {
+              "backgroundColor": "#f4f6f9",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "innerMajorBorderColor": "#a8b7c7",
+            "innerMinorBorderColor": "#e0e5ee",
+            "mode": "fittocontainer",
+            "numberOfLines": 1,
+            "showActionMenu": true,
+            "showRowIndexColumn": false,
+            "totals": true,
+            "verticalPadding": 8
+          },
+          "type": "table"
+        }
+      }
+    },
+    "widgetStyle": {
+      "backgroundColor": "rgba(255, 255, 255, 0)",
+      "borderColor": "#E6ECF2",
+      "borderEdges": [],
+      "borderRadius": 0,
+      "borderWidth": 1
+    },
+    "widgets": {
+      "number_12": {
+        "parameters": {
+          "compact": true,
+          "exploreLink": true,
+          "measureField": "C",
+          "numberColor": "#FFFFFF",
+          "numberSize": 16,
+          "showActionMenu": true,
+          "step": "Canceled_Metrics_1",
+          "textAlignment": "left",
+          "title": "",
+          "titleColor": "#091A3E",
+          "titleSize": 16
+        },
+        "type": "number"
+      },
+      "number_11": {
+        "parameters": {
+          "compact": true,
+          "exploreLink": true,
+          "measureField": "B",
+          "numberColor": "#FFFFFF",
+          "numberSize": 16,
+          "showActionMenu": true,
+          "step": "Canceled_Metrics_1",
+          "textAlignment": "left",
+          "title": "",
+          "titleColor": "#091A3E",
+          "titleSize": 16
+        },
+        "type": "number"
+      },
+      "number_10": {
+        "parameters": {
+          "compact": false,
+          "exploreLink": true,
+          "measureField": "A",
+          "numberColor": "#FFFFFF",
+          "numberSize": 16,
+          "showActionMenu": true,
+          "step": "Canceled_Metrics_1",
+          "textAlignment": "left",
+          "title": "",
+          "titleColor": "#091A3E",
+          "titleSize": 16
+        },
+        "type": "number"
+      },
+      "text_18": {
+        "parameters": {
+          "fontSize": 14,
+          "showActionMenu": true,
+          "text": "Policies Up For Renewal in Grace Period",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "text_17": {
+        "parameters": {
+          "fontSize": 14,
+          "showActionMenu": true,
+          "text": "Policies Up For Renewal Excluding Policies in Grace Period",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "text_14": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "Likelihood to Renew",
+          "textAlignment": "right",
+          "textColor": "#091A3E"
+        },
+        "type": "text"
+      },
+      "text_13": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "Avg Canceled Policy Size",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "text_16": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "Total Gross Written Premium (GWP)",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "text_15": {
+        "parameters": {
+          "fontSize": 16,
+          "showActionMenu": true,
+          "text": "Canceled Policies Detail",
+          "textAlignment": "left",
+          "textColor": "#091A3E"
+        },
+        "type": "text"
+      },
+      "text_10": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "Total GWP",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "text_12": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "Total Premium Lost",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "text_11": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "# Policies",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "container_2": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "container_5": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "text_3": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "# Canceled Policies",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "container_22": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "text_2": {
+        "parameters": {
+          "fontSize": 16,
+          "showActionMenu": true,
+          "text": "Policies Detail",
+          "textAlignment": "left",
+          "textColor": "#091A3E",
+          "tooltip": ""
+        },
+        "type": "text"
+      },
+      "chart_5": {
+        "parameters": {
+          "autoFitMode": "keepLabels",
+          "showValues": true,
+          "bins": {
+            "breakpoints": {
+              "high": 100,
+              "low": 0
+            },
+            "bands": {
+              "high": {
+                "color": "#008000",
+                "label": ""
+              },
+              "low": {
+                "color": "#B22222",
+                "label": ""
+              },
+              "medium": {
+                "color": "#ffa500",
+                "label": ""
+              }
+            }
+          },
+          "legend": {
+            "descOrder": false,
+            "showHeader": true,
+            "show": false,
+            "customSize": "auto",
+            "position": "bottom-center",
+            "inside": false
+          },
+          "axisMode": "dual",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "vbar",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "Renewed Policies",
+            "align": "left",
+            "subtitleLabel": "Am I able to protect my existing business?"
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "binValues": false,
+          "showActionMenu": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "theme": "dark",
+          "step": "RenewedPoliciesOverT_1",
+          "applyConditionalFormatting": true,
+          "dimensionAxis": {
+            "showTitle": true,
+            "customSize": "auto",
+            "showAxis": true,
+            "title": "",
+            "icons": {
+              "useIcons": false,
+              "iconProps": {
+                "fit": "cover",
+                "column": "",
+                "type": "round",
+                "parameters": {}
+              }
+            }
+          }
+        },
+        "type": "chart"
+      },
+      "text_5": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "Show Canceled Policies",
+          "textAlignment": "right",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "container_9": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "text_4": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "# Renewed",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "chart_7": {
+        "parameters": {
+          "autoFitMode": "keepLabels",
+          "showValues": true,
+          "bins": {
+            "breakpoints": {
+              "high": 100,
+              "low": 0
+            },
+            "bands": {
+              "high": {
+                "color": "#008000",
+                "label": ""
+              },
+              "low": {
+                "color": "#B22222",
+                "label": ""
+              },
+              "medium": {
+                "color": "#ffa500",
+                "label": ""
+              }
+            }
+          },
+          "legend": {
+            "descOrder": false,
+            "showHeader": true,
+            "show": false,
+            "customSize": "auto",
+            "position": "right-top",
+            "inside": false
+          },
+          "axisMode": "multi",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "hbar",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "Top Cancelation Reasons",
+            "align": "left",
+            "subtitleLabel": "What are the top reasons for policy cancellations?"
+          },
+          "binValues": false,
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "columnMap": {
+            "trellis": [],
+            "dimensionAxis": ["apra_Class"],
+            "plots": ["count", "sum_written_base_premium"]
+          },
+          "showActionMenu": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "theme": "dark",
+          "step": "Class_1",
+          "dimensionAxis": {
+            "showTitle": true,
+            "customSize": "auto",
+            "showAxis": true,
+            "title": "",
+            "icons": {
+              "useIcons": false,
+              "iconProps": {
+                "fit": "cover",
+                "column": "",
+                "type": "round",
+                "parameters": {}
+              }
+            }
+          },
+          "applyConditionalFormatting": true
+        },
+        "type": "chart"
+      },
+      "text_7": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "# Policies",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "chart_2": {
+        "parameters": {
+          "autoFitMode": "keepLabels",
+          "showValues": true,
+          "bins": {
+            "breakpoints": {
+              "high": 100,
+              "low": 0
+            },
+            "bands": {
+              "high": {
+                "color": "#008000",
+                "label": ""
+              },
+              "low": {
+                "color": "#B22222",
+                "label": ""
+              },
+              "medium": {
+                "color": "#ffa500",
+                "label": ""
+              }
+            }
+          },
+          "legend": {
+            "descOrder": false,
+            "showHeader": false,
+            "show": true,
+            "customSize": "auto",
+            "position": "bottom-center",
+            "inside": false
+          },
+          "axisMode": "dual",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "vbar",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "# Policies and Total GWP by Renewal Date",
+            "align": "left",
+            "subtitleLabel": ""
+          },
+          "binValues": false,
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "showActionMenu": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": false,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": false,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "theme": "dark",
+          "step": "PoliciesPremiumByRen_1",
+          "dimensionAxis": {
+            "showTitle": true,
+            "customSize": "auto",
+            "showAxis": true,
+            "title": "",
+            "icons": {
+              "useIcons": false,
+              "iconProps": {
+                "fit": "cover",
+                "column": "",
+                "type": "round",
+                "parameters": {}
+              }
+            }
+          },
+          "applyConditionalFormatting": true
+        },
+        "type": "chart"
+      },
+      "chart_1": {
+        "parameters": {
+          "autoFitMode": "keepLabels",
+          "showValues": true,
+          "bins": {
+            "breakpoints": {
+              "high": 100,
+              "low": 0
+            },
+            "bands": {
+              "high": {
+                "color": "#008000",
+                "label": ""
+              },
+              "low": {
+                "color": "#B22222",
+                "label": ""
+              },
+              "medium": {
+                "color": "#ffa500",
+                "label": ""
+              }
+            }
+          },
+          "legend": {
+            "descOrder": false,
+            "showHeader": true,
+            "show": false,
+            "customSize": "auto",
+            "position": "right-top",
+            "inside": false
+          },
+          "axisMode": "multi",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "time-bar",
+          "exploreLink": true,
+          "timeAxis": {
+            "showTitle": true,
+            "predictiveLine": {
+              "color": "#E8963B",
+              "label": "Today",
+              "time": ""
+            },
+            "showAxis": true,
+            "title": ""
+          },
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "",
+            "align": "center",
+            "subtitleLabel": ""
+          },
+          "binValues": false,
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "showActionMenu": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "theme": "light",
+          "step": "RenewalCalendar_1",
+          "applyConditionalFormatting": true
+        },
+        "type": "chart"
+      },
+      "text_6": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "GWP from Renewed Policies",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "text_9": {
+        "parameters": {
+          "fontSize": 16,
+          "showActionMenu": true,
+          "text": "Renewed Policies Details",
+          "textAlignment": "left",
+          "textColor": "#091A3E",
+          "tooltip": ""
+        },
+        "type": "text"
+      },
+      "chart_4": {
+        "parameters": {
+          "autoFitMode": "keepLabels",
+          "showValues": true,
+          "bins": {
+            "breakpoints": {
+              "high": 100,
+              "low": 0
+            },
+            "bands": {
+              "high": {
+                "color": "#008000",
+                "label": ""
+              },
+              "low": {
+                "color": "#B22222",
+                "label": ""
+              },
+              "medium": {
+                "color": "#ffa500",
+                "label": ""
+              }
+            }
+          },
+          "legend": {
+            "descOrder": false,
+            "showHeader": true,
+            "show": false,
+            "customSize": "auto",
+            "position": "bottom-center",
+            "inside": false
+          },
+          "axisMode": "dual",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "vbar",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "Premium from Renewed Policies",
+            "align": "left",
+            "subtitleLabel": ""
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "binValues": false,
+          "columnMap": {
+            "trellis": [],
+            "dimensionAxis": ["effective_Year~~~effective_Month"],
+            "plots": ["sum_written_base_premium"]
+          },
+          "showActionMenu": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "theme": "dark",
+          "step": "PremiumRenewedPolici_1",
+          "dimensionAxis": {
+            "showTitle": true,
+            "customSize": "auto",
+            "showAxis": true,
+            "title": "",
+            "icons": {
+              "useIcons": false,
+              "iconProps": {
+                "fit": "cover",
+                "column": "",
+                "type": "round",
+                "parameters": {}
+              }
+            }
+          },
+          "applyConditionalFormatting": true
+        },
+        "type": "chart"
+      },
+      "text_8": {
+        "parameters": {
+          "fontSize": 16,
+          "showActionMenu": true,
+          "text": "Renewals Over 12 Months",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "chart_3": {
+        "parameters": {
+          "autoFitMode": "keepLabels",
+          "showValues": true,
+          "bins": {
+            "breakpoints": {
+              "high": 100,
+              "low": 0
+            },
+            "bands": {
+              "high": {
+                "color": "#008000",
+                "label": ""
+              },
+              "low": {
+                "color": "#B22222",
+                "label": ""
+              },
+              "medium": {
+                "color": "#ffa500",
+                "label": ""
+              }
+            }
+          },
+          "legend": {
+            "descOrder": false,
+            "showHeader": true,
+            "show": false,
+            "customSize": "auto",
+            "position": "bottom-center",
+            "inside": false
+          },
+          "axisMode": "multi",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "hbar",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "Customers By Total GWP Renewing",
+            "align": "left",
+            "subtitleLabel": ""
+          },
+          "binValues": false,
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "columnMap": {
+            "trellis": [],
+            "dimensionAxis": ["Location_STATE"],
+            "plots": ["A", "C"]
+          },
+          "showActionMenu": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "theme": "dark",
+          "step": "CustomersRenewing_1",
+          "dimensionAxis": {
+            "showTitle": false,
+            "customSize": "auto",
+            "showAxis": true,
+            "title": "",
+            "icons": {
+              "useIcons": false,
+              "iconProps": {
+                "fit": "cover",
+                "column": "",
+                "type": "round",
+                "parameters": {}
+              }
+            }
+          },
+          "applyConditionalFormatting": true
+        },
+        "type": "chart"
+      },
+      "dateselector_1": {
+        "parameters": {
+          "absoluteModeEnabled": true,
+          "calendarTypeSwitchingAllowed": true,
+          "defaultFiscalMode": false,
+          "displayMode": "combo",
+          "filterStyle": {
+            "titleColor": "#091A3E",
+            "valueColor": "#17324D"
+          },
+          "instant": false,
+          "presetsEnabled": true,
+          "relativeModeEnabled": true,
+          "showActionMenu": true,
+          "step": "expiry_2",
+          "title": ""
+        },
+        "type": "dateselector"
+      },
+      "text_1": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "# Policies up for Renewal ",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "filterpanel_2": {
+        "parameters": {
+          "filterItemOptions": {
+            "backgroundColor": "#FFFFFF",
+            "borderColor": "#E6ECF2",
+            "borderRadius": 4,
+            "borderWidth": 1,
+            "propertyColor": "#54698D",
+            "valueColor": "#16325C"
+          },
+          "filters": [],
+          "itemsPerRow": 6,
+          "showAllFilters": true,
+          "title": {
+            "separatorColor": "#E6ECF2",
+            "text": {
+              "align": "left",
+              "color": "#091A3E",
+              "fontSize": 16,
+              "label": ""
+            },
+            "visible": false
+          }
+        },
+        "type": "filterpanel"
+      },
+      "text_45": {
+        "parameters": {
+          "fontSize": 16,
+          "showActionMenu": true,
+          "text": "Policies Up For Renewals Details",
+          "textAlignment": "left",
+          "textColor": "#091A3E",
+          "tooltip": ""
+        },
+        "type": "text"
+      },
+      "number_5": {
+        "parameters": {
+          "compact": true,
+          "exploreLink": true,
+          "measureField": "E",
+          "numberColor": "#FFFFFF",
+          "numberSize": 16,
+          "showActionMenu": true,
+          "step": "RenewalCancelationMe_1",
+          "textAlignment": "left",
+          "title": "",
+          "titleColor": "#091A3E",
+          "titleSize": 16
+        },
+        "type": "number"
+      },
+      "number_4": {
+        "parameters": {
+          "compact": true,
+          "exploreLink": true,
+          "measureField": "D",
+          "numberColor": "#FFFFFF",
+          "numberSize": 16,
+          "showActionMenu": true,
+          "step": "RenewalCancelationMe_1",
+          "textAlignment": "left",
+          "title": "",
+          "titleColor": "#091A3E",
+          "titleSize": 16
+        },
+        "type": "number"
+      },
+      "number_3": {
+        "parameters": {
+          "compact": true,
+          "exploreLink": true,
+          "measureField": "C",
+          "numberColor": "#FFFFFF",
+          "numberSize": 16,
+          "showActionMenu": true,
+          "step": "RenewalCancelationMe_1",
+          "textAlignment": "left",
+          "title": "",
+          "titleColor": "#091A3E",
+          "titleSize": 16
+        },
+        "type": "number"
+      },
+      "number_2": {
+        "parameters": {
+          "compact": true,
+          "exploreLink": true,
+          "measureField": "B",
+          "numberColor": "#FFFFFF",
+          "numberSize": 16,
+          "showActionMenu": true,
+          "step": "RenewalCancelationMe_1",
+          "textAlignment": "left",
+          "title": "",
+          "titleColor": "#091A3E",
+          "titleSize": 16
+        },
+        "type": "number"
+      },
+      "number_1": {
+        "parameters": {
+          "compact": true,
+          "exploreLink": true,
+          "measureField": "A",
+          "numberColor": "#FFFFFF",
+          "numberSize": 16,
+          "showActionMenu": true,
+          "step": "RenewalCancelationMe_1",
+          "textAlignment": "left",
+          "title": "",
+          "titleColor": "#091A3E",
+          "titleSize": 16
+        },
+        "type": "number"
+      },
+      "container_11": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "text_35": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "Show policies renewing in",
+          "textAlignment": "right",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "number_9": {
+        "parameters": {
+          "compact": true,
+          "exploreLink": true,
+          "measureField": "C",
+          "numberColor": "#FFFFFF",
+          "numberSize": 16,
+          "showActionMenu": true,
+          "step": "RenewalMetrics_1",
+          "textAlignment": "left",
+          "title": "",
+          "titleColor": "#091A3E",
+          "titleSize": 16
+        },
+        "type": "number"
+      },
+      "number_7": {
+        "parameters": {
+          "compact": true,
+          "exploreLink": true,
+          "measureField": "B",
+          "numberColor": "#FFFFFF",
+          "numberSize": 16,
+          "showActionMenu": true,
+          "step": "RenewalMetrics_1",
+          "textAlignment": "left",
+          "title": "",
+          "titleColor": "#091A3E",
+          "titleSize": 16
+        },
+        "type": "number"
+      },
+      "number_6": {
+        "parameters": {
+          "compact": true,
+          "exploreLink": true,
+          "measureField": "A",
+          "numberColor": "#FFFFFF",
+          "numberSize": 16,
+          "showActionMenu": true,
+          "step": "RenewalMetrics_1",
+          "textAlignment": "left",
+          "title": "",
+          "titleColor": "#091A3E",
+          "titleSize": 16
+        },
+        "type": "number"
+      },
+      "rangeselector_1": {
+        "parameters": {
+          "displayMode": "filter",
+          "filterStyle": {
+            "titleColor": "#54698D",
+            "valueColor": "#16325C"
+          },
+          "instant": true,
+          "showActionMenu": true,
+          "step": "RenewalChance_1",
+          "title": ""
+        },
+        "type": "rangeselector"
+      },
+      "dateselector_2": {
+        "parameters": {
+          "absoluteModeEnabled": true,
+          "calendarTypeSwitchingAllowed": false,
+          "defaultFiscalMode": false,
+          "displayMode": "combo",
+          "filterStyle": {
+            "titleColor": "#091A3E",
+            "valueColor": "#091A3E"
+          },
+          "instant": false,
+          "presetsEnabled": false,
+          "relativeModeEnabled": false,
+          "showActionMenu": true,
+          "step": "expiry_1",
+          "title": ""
+        },
+        "type": "dateselector"
+      },
+      "navigation_1": {
+        "parameters": {
+          "fontSize": 12,
+          "selectedTab": {
+            "backgroundColor": "rgb(240, 248, 252)",
+            "borderColor": "rgb(0, 112, 210)",
+            "borderEdges": ["bottom"],
+            "borderWidth": 2,
+            "textColor": "rgb(0, 112, 210)"
+          },
+          "tabCount": 7,
+          "textColor": "#091A3E"
+        },
+        "type": "navigation"
+      },
+      "text_20": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "# Customers",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "text_23": {
+        "parameters": {
+          "fontSize": 16,
+          "showActionMenu": true,
+          "text": "Renewal Calendar",
+          "textAlignment": "left",
+          "textColor": "#091A3E"
+        },
+        "type": "text"
+      },
+      "text_61": {
+        "parameters": {
+          "fontSize": 16,
+          "showActionMenu": true,
+          "text": "Policy Renewals",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF",
+          "tooltip": ""
+        },
+        "type": "text"
+      },
+      "table_2": {
+        "parameters": {
+          "borderColor": "#e0e5ee",
+          "borderWidth": 1,
+          "cell": {
+            "backgroundColor": "#ffffff",
+            "fontColor": "#16325c",
+            "fontSize": 12
+          },
+          "columnProperties": {},
+          "columns": [],
+          "customBulkActions": [],
+          "exploreLink": true,
+          "header": {
+            "backgroundColor": "#f4f6f9",
+            "fontColor": "#16325c",
+            "fontSize": 12
+          },
+          "innerMajorBorderColor": "#a8b7c7",
+          "innerMinorBorderColor": "#e0e5ee",
+          "mode": "fittocontainer",
+          "numberOfLines": 1,
+          "showActionMenu": true,
+          "showRowIndexColumn": false,
+          "step": "ChartDetails_2",
+          "totals": true,
+          "verticalPadding": 8
+        },
+        "type": "table"
+      },
+      "table_3": {
+        "parameters": {
+          "borderColor": "#e0e5ee",
+          "borderWidth": 1,
+          "cell": {
+            "backgroundColor": "#ffffff",
+            "fontColor": "#16325c",
+            "fontSize": 12
+          },
+          "columnProperties": {},
+          "columns": [],
+          "customBulkActions": [],
+          "exploreLink": true,
+          "header": {
+            "backgroundColor": "#f4f6f9",
+            "fontColor": "#16325c",
+            "fontSize": 12
+          },
+          "innerMajorBorderColor": "#a8b7c7",
+          "innerMinorBorderColor": "#e0e5ee",
+          "mode": "fittocontainer",
+          "numberOfLines": 1,
+          "showActionMenu": true,
+          "showRowIndexColumn": false,
+          "step": "ChartDetails_1",
+          "totals": true,
+          "verticalPadding": 8
+        },
+        "type": "table"
+      },
+      "table_5": {
+        "parameters": {
+          "borderColor": "#e0e5ee",
+          "borderWidth": 1,
+          "cell": {
+            "backgroundColor": "#ffffff",
+            "fontColor": "#16325c",
+            "fontSize": 12
+          },
+          "columnProperties": {},
+          "columns": [
+            "C",
+            "B",
+            "A",
+            "POLICY_ID",
+            "Policy_NAME",
+            "Insurance_PRODUCT_FAMILY",
+            "expiry_Year~~~expiry_Month~~~expiry_Day"
+          ],
+          "customBulkActions": [
+            {
+              "label": "Send Email Reminder",
+              "visualforce": {
+                "name": "dummyBulkAction",
+                "namespace": ""
+              }
+            }
+          ],
+          "exploreLink": true,
+          "header": {
+            "backgroundColor": "#f4f6f9",
+            "fontColor": "#16325c",
+            "fontSize": 12
+          },
+          "innerMajorBorderColor": "#a8b7c7",
+          "innerMinorBorderColor": "#e0e5ee",
+          "mode": "fittocontainer",
+          "numberOfLines": 1,
+          "showActionMenu": true,
+          "showRowIndexColumn": false,
+          "step": "lens_1",
+          "totals": true,
+          "verticalPadding": 8
+        },
+        "type": "table"
+      }
+    }
+  }
+}

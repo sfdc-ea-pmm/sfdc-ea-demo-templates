@@ -1,0 +1,2881 @@
+{
+  "name": "Cumulus_Underwriting_Embedded_tp",
+  "label": "Cumulus Underwriting (Embedded)",
+  "folder": {
+    "id": "${App.Folder.Id}"
+  },
+  "dateVersion": 1,
+  "mobileDisabled": false,
+  "xmd": {
+    "measures": [
+      {
+        "conditionalFormatting": {},
+        "field": "Totals_AGENCY_NAME_2_1.N",
+        "format": {
+          "delimiters": {}
+        }
+      },
+      {
+        "conditionalFormatting": {
+          "chartColor": {
+            "referenceField": "L",
+            "type": "multiple",
+            "parameters": {
+              "bins": [
+                {
+                  "formatValue": "#98B1FF",
+                  "bin": "*"
+                },
+                {
+                  "formatValue": "#00B3B4",
+                  "bin": "0.33"
+                },
+                {
+                  "formatValue": "#6300B6",
+                  "bin": "0.66"
+                }
+              ]
+            }
+          }
+        },
+        "field": "Totals_AGENCY_NAME_2_1.L",
+        "format": {
+          "delimiters": {}
+        }
+      },
+      {
+        "conditionalFormatting": {},
+        "field": "Totals_AGENCY_NAME_2_1.F",
+        "format": {
+          "delimiters": {},
+          "customFormat": "[\"$#,###\",1]"
+        }
+      },
+      {
+        "conditionalFormatting": {},
+        "field": "Totals_AGENCY_NAME_2_1.D",
+        "format": {
+          "delimiters": {},
+          "customFormat": "[\"$#,###\",1]"
+        }
+      }
+    ],
+    "derivedDimensions": [],
+    "organizations": [],
+    "showDetailsDefaultFields": [],
+    "dates": [],
+    "derivedMeasures": [],
+    "dimensions": [
+      {
+        "recordDisplayFields": [],
+        "conditionalFormatting": {
+          "chartColor": {
+            "referenceField": "L",
+            "type": "multiple",
+            "parameters": {
+              "bins": [
+                {
+                  "formatValue": "#98B1FF",
+                  "bin": "*"
+                },
+                {
+                  "formatValue": "#00B3B4",
+                  "bin": "0.33"
+                },
+                {
+                  "formatValue": "#6300B6",
+                  "bin": "0.66"
+                }
+              ]
+            }
+          }
+        },
+        "salesforceActions": [],
+        "field": "Totals_AGENCY_NAME_2_1.ALL",
+        "members": [],
+        "customActions": []
+      }
+    ]
+  },
+  "state": {
+    "dataSourceLinks": [],
+    "filters": [
+      {
+        "dataset": {
+          "name": "${App.Datasets.Insurance_tp.Name}"
+        },
+        "dependent": true,
+        "fields": ["Location_REGION"],
+        "locked": false,
+        "operator": "in",
+        "value": "[\"Midwest\"]"
+      },
+      {
+        "dataset": {
+          "name": "${App.Datasets.Insurance_tp.Name}"
+        },
+        "dependent": true,
+        "fields": ["commencement"],
+        "locked": false,
+        "operator": ">=<=",
+        "value": "[[[\"year\",-1],[\"day\",0]]]"
+      },
+      {
+        "dataset": {
+          "name": "${App.Datasets.Insurance_tp.Name}"
+        },
+        "dependent": true,
+        "fields": ["Insurance_PRODUCT_TYPE"],
+        "locked": false,
+        "operator": "in",
+        "value": "[\"Accident & Health\",\"Collision Coverage\",\"Comprehensive\",\"Construction\",\"Cyber Insurance\",\"Estate Planning\"]"
+      },
+      {
+        "dataset": {
+          "name": "${App.Datasets.Insurance_tp.Name}"
+        },
+        "dependent": true,
+        "fields": ["Agent_AGENCY_NAME"],
+        "locked": false,
+        "operator": "in"
+      },
+      {
+        "dataset": {
+          "name": "${App.Datasets.Insurance_tp.Name}"
+        },
+        "dependent": true,
+        "fields": ["Location_STATE"],
+        "locked": false,
+        "operator": "in"
+      },
+      {
+        "dataset": {
+          "name": "${App.Datasets.Insurance_tp.Name}"
+        },
+        "dependent": true,
+        "fields": ["Agent_REGION"],
+        "locked": false,
+        "operator": "in"
+      },
+      {
+        "dataset": {
+          "name": "${App.Datasets.Insurance_tp.Name}"
+        },
+        "dependent": true,
+        "fields": ["Insurance_PRODUCT_FAMILY"],
+        "locked": false,
+        "operator": "in"
+      }
+    ],
+    "gridLayouts": [
+      {
+        "maxWidth": 1500,
+        "name": "Default",
+        "numColumns": 50,
+        "pages": [
+          {
+            "label": "Summary",
+            "name": "876eb5c6-7ee1-4e00-8964-743dd9270c00",
+            "navigationHidden": false,
+            "widgets": [
+              {
+                "colspan": 7,
+                "column": 2,
+                "name": "text_21",
+                "row": 8,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 4,
+                "column": 2,
+                "name": "number_6",
+                "row": 10,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 9,
+                "name": "text_14",
+                "row": 8,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 4,
+                "column": 9,
+                "name": "number_7",
+                "row": 10,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 7,
+                "column": 18,
+                "name": "text_16",
+                "row": 8,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 5,
+                "column": 18,
+                "name": "number_8",
+                "row": 10,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 7,
+                "column": 25,
+                "name": "text_43",
+                "row": 8,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 5,
+                "column": 25,
+                "name": "number_2",
+                "row": 10,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 15,
+                "column": 17,
+                "name": "container_3",
+                "row": 7,
+                "rowspan": 22,
+                "widgetStyle": {
+                  "backgroundColor": "#335779",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["all"],
+                  "borderRadius": 8,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 16,
+                "column": 33,
+                "name": "chart_4",
+                "row": 7,
+                "rowspan": 22,
+                "widgetStyle": {
+                  "backgroundColor": "#335779",
+                  "borderColor": "rgba(125, 152, 179, 0)",
+                  "borderEdges": ["all"],
+                  "borderRadius": 8,
+                  "borderWidth": 8
+                }
+              },
+              {
+                "colspan": 13,
+                "column": 2,
+                "name": "chart_5",
+                "row": 13,
+                "rowspan": 15,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 13,
+                "column": 18,
+                "name": "chart_10",
+                "row": 14,
+                "rowspan": 14,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 15,
+                "column": 1,
+                "name": "container_13",
+                "row": 7,
+                "rowspan": 22,
+                "widgetStyle": {
+                  "backgroundColor": "#335779",
+                  "borderColor": "#335779",
+                  "borderEdges": ["all"],
+                  "borderRadius": 8,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 16,
+                "column": 33,
+                "name": "container_14",
+                "row": 30,
+                "rowspan": 28,
+                "widgetStyle": {
+                  "backgroundColor": "#335779",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["all"],
+                  "borderRadius": 8,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 31,
+                "column": 1,
+                "name": "container_15",
+                "row": 30,
+                "rowspan": 28,
+                "widgetStyle": {
+                  "backgroundColor": "#335779",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["all"],
+                  "borderRadius": 8,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 7,
+                "column": 1,
+                "name": "pillbox_1",
+                "row": 3,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#C6D3E1",
+                  "borderEdges": ["all"],
+                  "borderRadius": 8,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 5,
+                "column": 1,
+                "name": "text_60",
+                "row": 1,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 7,
+                "column": 34,
+                "name": "text_63",
+                "row": 33,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 7,
+                "column": 34,
+                "name": "chart_17",
+                "row": 35,
+                "rowspan": 10,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 7,
+                "column": 41,
+                "name": "text_67",
+                "row": 33,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 7,
+                "column": 41,
+                "name": "chart_26",
+                "row": 35,
+                "rowspan": 10,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 7,
+                "column": 34,
+                "name": "chart_21",
+                "row": 48,
+                "rowspan": 10,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 7,
+                "column": 34,
+                "name": "text_68",
+                "row": 45,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 7,
+                "column": 41,
+                "name": "text_69",
+                "row": 45,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 7,
+                "column": 41,
+                "name": "number_1",
+                "row": 50,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 9,
+                "column": 33,
+                "name": "text_70",
+                "row": 30,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderColor": "rgba(230, 236, 242, 0)",
+                  "borderEdges": ["left"],
+                  "borderWidth": 8
+                }
+              },
+              {
+                "colspan": 9,
+                "column": 20,
+                "name": "filterpanel_4",
+                "row": 2,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["all"],
+                  "borderRadius": 4,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 9,
+                "column": 30,
+                "name": "filterpanel_5",
+                "row": 2,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["all"],
+                  "borderRadius": 4,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 9,
+                "column": 10,
+                "name": "listselector_6",
+                "row": 2,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["all"],
+                  "borderRadius": 4,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 9,
+                "column": 40,
+                "name": "listselector_7",
+                "row": 2,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["all"],
+                  "borderRadius": 4,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 9,
+                "column": 20,
+                "name": "link_3",
+                "row": 58,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 29,
+                "column": 2,
+                "name": "chart_1",
+                "row": 31,
+                "rowspan": 25,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              }
+            ]
+          },
+          {
+            "label": "Agency Details",
+            "name": "249b421f-1b68-490f-b013-3520eb87b0bf",
+            "navigationHidden": false,
+            "widgets": [
+              {
+                "colspan": 7,
+                "column": 2,
+                "name": "text_21",
+                "row": 8,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 4,
+                "column": 2,
+                "name": "number_6",
+                "row": 10,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 9,
+                "name": "text_14",
+                "row": 8,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 4,
+                "column": 9,
+                "name": "number_7",
+                "row": 10,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 7,
+                "column": 18,
+                "name": "text_16",
+                "row": 8,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 5,
+                "column": 18,
+                "name": "number_8",
+                "row": 10,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 7,
+                "column": 25,
+                "name": "text_43",
+                "row": 8,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 5,
+                "column": 25,
+                "name": "number_2",
+                "row": 10,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 15,
+                "column": 17,
+                "name": "container_3",
+                "row": 7,
+                "rowspan": 22,
+                "widgetStyle": {
+                  "backgroundColor": "#335779",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["all"],
+                  "borderRadius": 8,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 16,
+                "column": 33,
+                "name": "chart_4",
+                "row": 7,
+                "rowspan": 22,
+                "widgetStyle": {
+                  "backgroundColor": "#335779",
+                  "borderColor": "rgba(125, 152, 179, 0)",
+                  "borderEdges": ["all"],
+                  "borderRadius": 8,
+                  "borderWidth": 8
+                }
+              },
+              {
+                "colspan": 13,
+                "column": 2,
+                "name": "chart_5",
+                "row": 13,
+                "rowspan": 15,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 13,
+                "column": 18,
+                "name": "chart_10",
+                "row": 14,
+                "rowspan": 14,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 15,
+                "column": 1,
+                "name": "container_13",
+                "row": 7,
+                "rowspan": 22,
+                "widgetStyle": {
+                  "backgroundColor": "#335779",
+                  "borderColor": "#335779",
+                  "borderEdges": ["all"],
+                  "borderRadius": 8,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 7,
+                "column": 1,
+                "name": "pillbox_1",
+                "row": 3,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#C6D3E1",
+                  "borderEdges": ["all"],
+                  "borderRadius": 8,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 5,
+                "column": 1,
+                "name": "text_60",
+                "row": 1,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 47,
+                "column": 1,
+                "name": "filterpanel_2",
+                "row": 65,
+                "rowspan": 10,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 48,
+                "column": 1,
+                "name": "table_1",
+                "row": 32,
+                "rowspan": 31,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 13,
+                "column": 34,
+                "name": "text_66",
+                "row": 106,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 9,
+                "column": 20,
+                "name": "filterpanel_4",
+                "row": 2,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["all"],
+                  "borderRadius": 4,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 9,
+                "column": 30,
+                "name": "filterpanel_5",
+                "row": 2,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["all"],
+                  "borderRadius": 4,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 9,
+                "column": 10,
+                "name": "listselector_6",
+                "row": 2,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["all"],
+                  "borderRadius": 4,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 9,
+                "column": 40,
+                "name": "listselector_7",
+                "row": 2,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["all"],
+                  "borderRadius": 4,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 9,
+                "column": 20,
+                "name": "link_1",
+                "row": 29,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight": "fine",
+        "selectors": [],
+        "style": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "backgroundColor": "#FFFFFF",
+          "cellSpacingX": 0,
+          "cellSpacingY": 0,
+          "fit": "original",
+          "gutterColor": "#FFFFFF"
+        },
+        "version": 1.0
+      }
+    ],
+    "layouts": [],
+    "steps": {
+      "KPI_1": {
+        "broadcastFacet": true,
+        "columns": {},
+        "label": "KPI",
+        "selectMode": "single",
+        "type": "staticflex",
+        "values": [
+          {
+            "display": "Agencies",
+            "value": 34
+          }
+        ]
+      },
+      "LossRatio_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "LossRatio",
+        "query": {
+          "query": {
+            "measures": [
+              ["sum", "written_base_premium", "A"],
+              ["sum", "claim_payment", "B"],
+              ["count", "*", "Loss_Ratio"]
+            ],
+            "columns": [
+              {
+                "query": {
+                  "measures": [["sum", "written_base_premium"]],
+                  "groups": [
+                    ["commencement_Year", "commencement_Month"],
+                    "Insurance_PRODUCT_TYPE"
+                  ]
+                }
+              },
+              {
+                "query": {
+                  "measures": [["sum", "claim_payment"]],
+                  "groups": [
+                    ["commencement_Year", "commencement_Month"],
+                    "Insurance_PRODUCT_TYPE"
+                  ]
+                }
+              },
+              {
+                "query": {
+                  "measures": [["count", "*"]],
+                  "groups": [
+                    ["commencement_Year", "commencement_Month"],
+                    "Insurance_PRODUCT_TYPE"
+                  ],
+                  "formula": "B/(A*2)"
+                },
+                "name": "Loss_Ratio",
+                "header": "Loss Ratio"
+              }
+            ],
+            "groups": [
+              ["commencement_Year", "commencement_Month"],
+              "Insurance_PRODUCT_TYPE"
+            ],
+            "filters": [
+              ["Location_REGION", ["Midwest"], "in"],
+              [
+                "commencement",
+                [
+                  [
+                    ["year", -1],
+                    ["day", 0]
+                  ]
+                ],
+                ">=<="
+              ],
+              [
+                "Insurance_PRODUCT_TYPE",
+                [
+                  "Accident & Health",
+                  "Collision Coverage",
+                  "Comprehensive",
+                  "Construction",
+                  "Cyber Insurance",
+                  "Estate Planning"
+                ],
+                "in"
+              ]
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "autoFitMode": "keepLabels",
+            "showPoints": false,
+            "legend": {
+              "descOrder": false,
+              "showHeader": false,
+              "show": true,
+              "customSize": "auto",
+              "position": "top-center",
+              "inside": false
+            },
+            "axisMode": "multi",
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "visualizationType": "time",
+            "missingValue": "connect",
+            "dashLine": {
+              "measures": "",
+              "showDashLine": false
+            },
+            "timeAxis": {
+              "showTitle": false,
+              "showAxis": true,
+              "title": ""
+            },
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "By Product",
+              "align": "left",
+              "subtitleLabel": ""
+            },
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "x",
+              "chartsPerLine": 4
+            },
+            "fillArea": true,
+            "columnMap": {
+              "split": ["Insurance_PRODUCT_TYPE"],
+              "timeAxis": ["commencement_Year~~~commencement_Month"],
+              "trellis": [],
+              "plots": ["Loss_Ratio"]
+            },
+            "showActionMenu": true,
+            "showZero": true,
+            "measureAxis2": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "measureAxis1": {
+              "sqrtScale": false,
+              "showTitle": false,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "valueType": "none",
+            "theme": "wave",
+            "applyConditionalFormatting": false,
+            "drawArea": {
+              "measure": "",
+              "showDrawArea": false,
+              "bounding1": "",
+              "bounding2": ""
+            }
+          },
+          "type": "chart"
+        }
+      },
+      "static_3": {
+        "broadcastFacet": true,
+        "columns": {},
+        "selectMode": "singlerequired",
+        "start": {
+          "display": ["GWP"]
+        },
+        "type": "staticflex",
+        "values": [
+          {
+            "display": "GWP",
+            "value": ["sum", "written_base_premium"],
+            "color": "sum_written_base_premium"
+          },
+          {
+            "display": "PIF",
+            "value": ["unique", "POLICY_ID"],
+            "color": "unique_POLICY_ID"
+          }
+        ]
+      },
+      "report_Year_report_M_2": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "report_Year_report_M_2",
+        "query": {
+          "query": {
+            "timeSeries": {
+              "ignoreLast": true,
+              "length": 5,
+              "model": "multiplicative",
+              "seasonality": 4
+            },
+            "measures": "{{column(static_3.selection, [\"value\"]).asObject()}}",
+            "groups": [["commencement_Year", "commencement_Month"]],
+            "filters": [
+              [
+                "commencement",
+                [
+                  [
+                    ["fiscal_quarter", -7],
+                    ["day", 0]
+                  ]
+                ],
+                ">=<="
+              ]
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "start": [],
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "autoFitMode": "keepLabels",
+            "showPoints": false,
+            "legend": {
+              "descOrder": false,
+              "showHeader": true,
+              "show": true,
+              "customSize": "auto",
+              "position": "right-top",
+              "inside": false
+            },
+            "axisMode": "multi",
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "visualizationType": "time",
+            "missingValue": "connect",
+            "dashLine": {
+              "measures": "",
+              "showDashLine": false
+            },
+            "timeAxis": {
+              "showTitle": true,
+              "predictiveLine": {
+                "color": "#8932ED",
+                "label": "TODAY"
+              },
+              "showAxis": true,
+              "title": ""
+            },
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "",
+              "align": "center",
+              "subtitleLabel": ""
+            },
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "x",
+              "chartsPerLine": 4
+            },
+            "fillArea": true,
+            "showActionMenu": true,
+            "showZero": true,
+            "measureAxis2": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "measureAxis1": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "valueType": "none",
+            "theme": "wave",
+            "drawArea": {
+              "measure": "",
+              "showDrawArea": false,
+              "bounding1": "",
+              "bounding2": ""
+            }
+          },
+          "type": "chart"
+        }
+      },
+      "Totals_AGENCY_NAME_2_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "Totals_AGENCY_NAME_2",
+        "query": {
+          "query": {
+            "measures": [
+              ["unique", "POLICY_ID", "A"],
+              ["unique", "POLICY_ID", "B"],
+              ["unique", "POLICY_ID", "C"],
+              ["unique", "POLICY_ID", "D"],
+              ["unique", "POLICY_PRODUCT_ID", "E"],
+              ["sum", "written_base_premium", "F"],
+              ["unique", "POLICY_ID", "G"],
+              ["unique", "POLICY_PRODUCT_ID", "H"],
+              ["unique", "POLICY_PRODUCT_ID", "I"],
+              ["unique", "POLICY_PRODUCT_ID", "J"],
+              ["count", "*", "K"],
+              ["count", "*", "L"],
+              ["sum", "claim_payment", "M"],
+              ["count", "*", "N"],
+              ["unique", "Agent_AGENCY_NAME", "O"]
+            ],
+            "columns": [
+              {
+                "query": {
+                  "measures": [["unique", "POLICY_ID"]]
+                },
+                "header": "# Customers"
+              },
+              {
+                "query": {
+                  "measures": [["unique", "POLICY_ID"]],
+                  "filters": [
+                    ["POLICY_EXPIRED", ["ACTIVE"], "in"],
+                    ["claim_status_description", ["Open"], "in"]
+                  ]
+                },
+                "header": "Active Claims"
+              },
+              {
+                "query": {
+                  "measures": [["unique", "POLICY_ID"]],
+                  "formula": "'E' / 'A'"
+                },
+                "header": "Avg Policies per Customer"
+              },
+              {
+                "query": {
+                  "measures": [["unique", "POLICY_ID"]],
+                  "formula": "'F' / 'A'"
+                },
+                "header": "Avg GWP per Customer"
+              },
+              {
+                "query": {
+                  "measures": [["unique", "POLICY_PRODUCT_ID"]]
+                },
+                "header": "# Policies"
+              },
+              {
+                "query": {
+                  "measures": [["sum", "written_base_premium"]]
+                },
+                "header": "Total GWP"
+              },
+              {
+                "query": {
+                  "measures": [["unique", "POLICY_ID"]],
+                  "filters": [["POLICY_STATUS", ["EXPIRED"], "in"]]
+                },
+                "header": "# Cancellations"
+              },
+              {
+                "query": {
+                  "measures": [["unique", "POLICY_PRODUCT_ID"]],
+                  "filters": [["POLICY_STATUS", ["EXPIRED"], "in"]]
+                },
+                "header": "# Cancelled Policies"
+              },
+              {
+                "query": {
+                  "measures": [["unique", "POLICY_PRODUCT_ID"]],
+                  "filters": [["POLICY_STATUS", ["REDUCED", "RENEWED"], "in"]]
+                },
+                "header": "# Renewed"
+              },
+              {
+                "query": {
+                  "measures": [["unique", "POLICY_PRODUCT_ID"]],
+                  "filters": [["POLICY_STATUS", ["RENEWAL"], "in"]]
+                },
+                "header": "#Still to Renew"
+              },
+              {
+                "query": {
+                  "measures": [["count", "*"]],
+                  "formula": "('E' - 'H') / 'E'"
+                },
+                "header": "Policy Renewal Rate"
+              },
+              {
+                "query": {
+                  "measures": [["count", "*"]],
+                  "formula": "('A' - 'G') / 'A'"
+                },
+                "header": "Customer Retention"
+              },
+              {
+                "query": {
+                  "measures": [["sum", "claim_payment"]],
+                  "filters": [["POLICY_EXPIRED", ["ACTIVE"], "in"]]
+                }
+              },
+              {
+                "query": {
+                  "measures": [["count", "*"]],
+                  "formula": "M/F"
+                },
+                "header": "Loss Ratio"
+              },
+              {
+                "query": {
+                  "measures": [["unique", "Agent_AGENCY_NAME"]]
+                }
+              }
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "parameters": {
+            "borderColor": "#e0e5ee",
+            "borderWidth": 1,
+            "cell": {
+              "backgroundColor": "#ffffff",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "columnProperties": {},
+            "columns": [
+              "J",
+              "I",
+              "H",
+              "G",
+              "F",
+              "E",
+              "A",
+              "B",
+              "C",
+              "D",
+              "K",
+              "L",
+              "M",
+              "N",
+              "O"
+            ],
+            "customBulkActions": [],
+            "header": {
+              "backgroundColor": "#f4f6f9",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "innerMajorBorderColor": "#a8b7c7",
+            "innerMinorBorderColor": "#e0e5ee",
+            "maxColumnWidth": 300,
+            "minColumnWidth": 40,
+            "mode": "variable",
+            "numberOfLines": 1,
+            "showActionMenu": true,
+            "showRowIndexColumn": false,
+            "totals": true,
+            "verticalPadding": 8
+          },
+          "type": "table"
+        }
+      },
+      "Agent_Totals_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "Agent_Totals",
+        "query": {
+          "query": {
+            "measures": "{{column(static_3.selection, [\"value\"]).asObject()}}",
+            "limit": 8,
+            "groups": ["Agent_AGENCY_NAME"],
+            "order": [
+              [
+                -1,
+                {
+                  "ascending": false
+                }
+              ]
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "start": [],
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "autoFitMode": "none",
+            "showValues": true,
+            "bins": {
+              "breakpoints": {
+                "high": 100,
+                "low": 0
+              },
+              "bands": {
+                "high": {
+                  "color": "#008000",
+                  "label": ""
+                },
+                "low": {
+                  "color": "#B22222",
+                  "label": ""
+                },
+                "medium": {
+                  "color": "#ffa500",
+                  "label": ""
+                }
+              }
+            },
+            "legend": {
+              "descOrder": false,
+              "showHeader": true,
+              "show": false,
+              "customSize": "auto",
+              "position": "right-top",
+              "inside": false
+            },
+            "axisMode": "multi",
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "visualizationType": "hbar",
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "Top Agents",
+              "align": "left",
+              "subtitleLabel": ""
+            },
+            "binValues": false,
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "x",
+              "parameters": {},
+              "chartsPerLine": 4
+            },
+            "showActionMenu": true,
+            "measureAxis2": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "measureAxis1": {
+              "sqrtScale": false,
+              "showTitle": false,
+              "showAxis": false,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "theme": "wave",
+            "dimensionAxis": {
+              "showTitle": false,
+              "customSize": "auto",
+              "showAxis": true,
+              "title": "",
+              "icons": {
+                "useIcons": false,
+                "iconProps": {
+                  "fit": "cover",
+                  "column": "",
+                  "type": "round",
+                  "parameters": {}
+                }
+              }
+            }
+          },
+          "type": "chart"
+        }
+      },
+      "undefined_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "undefined_1",
+        "query": {
+          "query": {
+            "measures": "{{column(static_3.selection, [\"value\"]).asObject()}}",
+            "groups": ["Location_STATE"]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "start": [],
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {}
+      },
+      "Agent_AGENCY_NAME_Ag_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "Agent_AGENCY_NAME_Ag_1",
+        "query": {
+          "query": {
+            "measures": [
+              ["sum", "written_base_premium", "A"],
+              ["sum", "written_broker_comm", "B"],
+              ["avg", "TERM_LENGTH", "C"]
+            ],
+            "columns": [
+              {
+                "query": {
+                  "measures": [["sum", "written_base_premium"]],
+                  "groups": ["Agent_AGENCY_NAME"],
+                  "order": [
+                    [
+                      -1,
+                      {
+                        "ascending": false,
+                        "inner": false
+                      }
+                    ]
+                  ]
+                },
+                "header": "GWP"
+              },
+              {
+                "query": {
+                  "measures": [["sum", "written_broker_comm"]],
+                  "groups": ["Agent_AGENCY_NAME"]
+                },
+                "header": "Total Commission"
+              },
+              {
+                "query": {
+                  "measures": [["avg", "TERM_LENGTH"]],
+                  "groups": ["Agent_AGENCY_NAME"]
+                },
+                "header": "Average Term"
+              }
+            ],
+            "groups": ["Agent_AGENCY_NAME"]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "start": [],
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "parameters": {
+            "borderColor": "#a8b7c7",
+            "borderWidth": 1,
+            "cell": {
+              "backgroundColor": "#ffffff",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "columnProperties": {},
+            "columns": ["A", "Agent_AGENCY_NAME", "B", "C"],
+            "customBulkActions": [
+              {
+                "label": "Add to Call List",
+                "visualforce": {
+                  "name": "PSBulkActionHandler",
+                  "namespace": ""
+                }
+              }
+            ],
+            "header": {
+              "backgroundColor": "#16325c",
+              "fontColor": "#ffffff",
+              "fontSize": 12
+            },
+            "innerMajorBorderColor": "#54698d",
+            "innerMinorBorderColor": "#a8b7c7",
+            "mode": "fittocontainer",
+            "numberOfLines": 1,
+            "pivoted": false,
+            "showActionMenu": true,
+            "showRowIndexColumn": false,
+            "totals": true,
+            "verticalPadding": 4
+          },
+          "type": "table"
+        }
+      },
+      "commencement_Year_co_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "commencement_Year_co_1",
+        "query": {
+          "query": {
+            "measures": "{{column(static_3.selection, [\"value\"]).asObject()}}",
+            "groups": [
+              ["commencement_Year", "commencement_Month"],
+              "Insurance_PRODUCT_TYPE"
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "start": [],
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "autoFitMode": "keepLabels",
+            "showPoints": false,
+            "legend": {
+              "descOrder": false,
+              "showHeader": false,
+              "show": true,
+              "customSize": "auto",
+              "position": "top-center",
+              "inside": false
+            },
+            "axisMode": "multi",
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "visualizationType": "time",
+            "missingValue": "connect",
+            "dashLine": {
+              "measures": "",
+              "showDashLine": false
+            },
+            "timeAxis": {
+              "showTitle": true,
+              "showAxis": true,
+              "title": ""
+            },
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "GWP by Product",
+              "align": "left",
+              "subtitleLabel": ""
+            },
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "x",
+              "chartsPerLine": 4
+            },
+            "fillArea": true,
+            "showActionMenu": true,
+            "showZero": true,
+            "measureAxis2": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "measureAxis1": {
+              "sqrtScale": false,
+              "showTitle": false,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "valueType": "none",
+            "theme": "wave",
+            "drawArea": {
+              "measure": "",
+              "showDrawArea": false,
+              "bounding1": "",
+              "bounding2": ""
+            }
+          },
+          "type": "chart"
+        }
+      },
+      "Insurance_PRODUCT_FA_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["count", "*"]],
+            "groups": ["Insurance_PRODUCT_FAMILY"]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {}
+      },
+      "Agent_AGENCY_NAME_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["count", "*"]],
+            "groups": ["Agent_AGENCY_NAME"]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {}
+      }
+    },
+    "widgetStyle": {
+      "backgroundColor": "rgba(255, 255, 255, 0)",
+      "borderColor": "#E6ECF2",
+      "borderEdges": [],
+      "borderRadius": 0,
+      "borderWidth": 1
+    },
+    "widgets": {
+      "text_18": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "Choose KPI:",
+          "textAlignment": "center",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "container_15": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "container_14": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "text_19": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "Group by:",
+          "textAlignment": "center",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "container_13": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "text_14": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "GWP",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "text_13": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "Average # Touches to Convert",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "text_16": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "Quotes",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "text_15": {
+        "parameters": {
+          "fontSize": 16,
+          "showActionMenu": true,
+          "text": "Open Leads",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "number_8": {
+        "parameters": {
+          "compact": true,
+          "exploreLink": true,
+          "measureField": "J",
+          "numberColor": "#FFFFFF",
+          "numberSize": 20,
+          "showActionMenu": true,
+          "step": "Totals_AGENCY_NAME_2_1",
+          "textAlignment": "left",
+          "title": "",
+          "titleColor": "#091A3E",
+          "titleSize": 16
+        },
+        "type": "number"
+      },
+      "text_12": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "Average Days to Convert",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "number_7": {
+        "parameters": {
+          "compact": true,
+          "exploreLink": true,
+          "measureField": "F",
+          "numberColor": "#FFFFFF",
+          "numberSize": 20,
+          "showActionMenu": true,
+          "step": "Totals_AGENCY_NAME_2_1",
+          "textAlignment": "left",
+          "title": "",
+          "titleColor": "#091A3E",
+          "titleSize": 16
+        },
+        "type": "number"
+      },
+      "number_6": {
+        "parameters": {
+          "compact": false,
+          "exploreLink": true,
+          "measureField": "E",
+          "numberColor": "#FFFFFF",
+          "numberSize": 20,
+          "showActionMenu": true,
+          "step": "Totals_AGENCY_NAME_2_1",
+          "textAlignment": "left",
+          "title": "",
+          "titleColor": "#091A3E",
+          "titleSize": 16
+        },
+        "type": "number"
+      },
+      "container_3": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "filterpanel_5": {
+        "parameters": {
+          "filterItemOptions": {
+            "propertyColor": "#54698D",
+            "valueColor": "#16325C"
+          },
+          "filters": [
+            {
+              "dataset": {
+                "name": "${App.Datasets.Insurance_tp.Name}"
+              },
+              "field": "Agent_REGION"
+            }
+          ],
+          "showAllFilters": false
+        },
+        "type": "filterpanel"
+      },
+      "text_70": {
+        "parameters": {
+          "fontSize": 14,
+          "showActionMenu": true,
+          "text": "Territory Metrics",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "filterpanel_4": {
+        "parameters": {
+          "filterItemOptions": {
+            "propertyColor": "#54698D",
+            "valueColor": "#16325C"
+          },
+          "filters": [
+            {
+              "dataset": {
+                "name": "${App.Datasets.Insurance_tp.Name}"
+              },
+              "field": "Location_STATE"
+            }
+          ],
+          "showAllFilters": false
+        },
+        "type": "filterpanel"
+      },
+      "container_5": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "chart_5": {
+        "parameters": {
+          "autoFitMode": "keepLabels",
+          "bins": {
+            "breakpoints": {
+              "high": 100,
+              "low": 0
+            },
+            "bands": {
+              "high": {
+                "color": "#008000",
+                "label": ""
+              },
+              "low": {
+                "color": "#B22222",
+                "label": ""
+              },
+              "medium": {
+                "color": "#ffa500",
+                "label": ""
+              }
+            }
+          },
+          "legend": {
+            "descOrder": false,
+            "showHeader": false,
+            "show": true,
+            "customSize": "auto",
+            "position": "top-center",
+            "inside": false
+          },
+          "autoZoom": true,
+          "highColor": "#1674D9",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "projectionType": "AlbersUSA",
+          "lowColor": "#C5DBF7",
+          "visualizationType": "choropleth",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "",
+            "align": "center",
+            "subtitleLabel": ""
+          },
+          "binValues": false,
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "showActionMenu": true,
+          "theme": "dark",
+          "step": "undefined_1",
+          "map": "US States",
+          "applyConditionalFormatting": false
+        },
+        "type": "chart"
+      },
+      "text_5": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "# of Leads Closed",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "container_8": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "chart_26": {
+        "parameters": {
+          "max": 0.18,
+          "showPercentage": false,
+          "legend": {
+            "showHeader": true,
+            "show": false,
+            "position": "right-top",
+            "inside": false
+          },
+          "columns": ["L"],
+          "visualizationType": "gauge",
+          "exploreLink": true,
+          "medium": 33,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "",
+            "align": "center",
+            "subtitleLabel": ""
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "bands": {
+            "high": {
+              "color": "#008000",
+              "label": "High"
+            },
+            "low": {
+              "color": "#B22222",
+              "label": "Low"
+            },
+            "medium": {
+              "color": "#ffa500",
+              "label": "Medium"
+            }
+          },
+          "showRange": false,
+          "showLabel": false,
+          "showValue": true,
+          "high": 66,
+          "showActionMenu": true,
+          "min": 0,
+          "angle": 240,
+          "theme": "dark",
+          "step": "Totals_AGENCY_NAME_2_1",
+          "applyConditionalFormatting": true
+        },
+        "type": "chart"
+      },
+      "text_4": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "# of Leads Received",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "chart_1": {
+        "parameters": {
+          "autoFitMode": "keepLabels",
+          "showPoints": false,
+          "legend": {
+            "descOrder": false,
+            "showHeader": false,
+            "show": true,
+            "customSize": "auto",
+            "position": "top-center",
+            "inside": false
+          },
+          "axisMode": "multi",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "missingValue": "connect",
+          "visualizationType": "time",
+          "dashLine": {
+            "measures": "",
+            "showDashLine": false
+          },
+          "timeAxis": {
+            "showTitle": false,
+            "showAxis": true,
+            "title": ""
+          },
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "Loss Ratio by Product",
+            "align": "left",
+            "subtitleLabel": ""
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "fillArea": true,
+          "columnMap": {
+            "split": ["Insurance_PRODUCT_TYPE"],
+            "timeAxis": ["commencement_Year~~~commencement_Month"],
+            "trellis": [],
+            "plots": ["Loss_Ratio"]
+          },
+          "showActionMenu": true,
+          "showZero": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": false,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "valueType": "none",
+          "theme": "dark",
+          "step": "LossRatio_1",
+          "applyConditionalFormatting": false,
+          "drawArea": {
+            "measure": "",
+            "showDrawArea": false,
+            "bounding1": "",
+            "bounding2": ""
+          }
+        },
+        "type": "chart"
+      },
+      "text_9": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "Average Conversion Rate",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "chart_4": {
+        "parameters": {
+          "autoFitMode": "fit",
+          "showValues": true,
+          "bins": {
+            "breakpoints": {
+              "high": 100,
+              "low": 0
+            },
+            "bands": {
+              "high": {
+                "color": "#008000",
+                "label": ""
+              },
+              "low": {
+                "color": "#B22222",
+                "label": ""
+              },
+              "medium": {
+                "color": "#ffa500",
+                "label": ""
+              }
+            }
+          },
+          "legend": {
+            "descOrder": false,
+            "showHeader": true,
+            "show": false,
+            "customSize": "auto",
+            "position": "right-top",
+            "inside": false
+          },
+          "axisMode": "multi",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "hbar",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "Top Agencies",
+            "align": "left",
+            "subtitleLabel": ""
+          },
+          "binValues": false,
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "showActionMenu": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": false,
+            "showAxis": false,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "theme": "dark",
+          "step": "Agent_Totals_1",
+          "dimensionAxis": {
+            "showTitle": false,
+            "customSize": "auto",
+            "showAxis": true,
+            "title": "",
+            "icons": {
+              "useIcons": false,
+              "iconProps": {
+                "fit": "cover",
+                "column": "",
+                "type": "round",
+                "parameters": {}
+              }
+            }
+          },
+          "applyConditionalFormatting": false
+        },
+        "type": "chart"
+      },
+      "chart_21": {
+        "parameters": {
+          "max": 0.1,
+          "showPercentage": false,
+          "legend": {
+            "showHeader": true,
+            "show": false,
+            "position": "right-top",
+            "inside": false
+          },
+          "columns": ["N"],
+          "visualizationType": "gauge",
+          "exploreLink": true,
+          "medium": 33,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "",
+            "align": "center",
+            "subtitleLabel": ""
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "bands": {
+            "high": {
+              "color": "#008000",
+              "label": "High"
+            },
+            "low": {
+              "color": "#B22222",
+              "label": "Low"
+            },
+            "medium": {
+              "color": "#ffa500",
+              "label": "Medium"
+            }
+          },
+          "showRange": false,
+          "showLabel": false,
+          "showValue": true,
+          "high": 66,
+          "showActionMenu": true,
+          "min": 0.5,
+          "angle": 240,
+          "theme": "dark",
+          "step": "Totals_AGENCY_NAME_2_1",
+          "applyConditionalFormatting": true
+        },
+        "type": "chart"
+      },
+      "listselector_7": {
+        "parameters": {
+          "compact": false,
+          "displayMode": "filter",
+          "exploreLink": false,
+          "filterStyle": {
+            "titleColor": "#54698D",
+            "valueColor": "#16325C"
+          },
+          "instant": true,
+          "measureField": "count",
+          "showActionMenu": true,
+          "step": "Agent_AGENCY_NAME_1",
+          "title": "Agency Name"
+        },
+        "type": "listselector"
+      },
+      "listselector_6": {
+        "parameters": {
+          "compact": false,
+          "displayMode": "filter",
+          "exploreLink": false,
+          "filterStyle": {
+            "titleColor": "#54698D",
+            "valueColor": "#16325C"
+          },
+          "instant": true,
+          "measureField": "count",
+          "showActionMenu": true,
+          "step": "Insurance_PRODUCT_FA_1",
+          "title": "Insurance Product"
+        },
+        "type": "listselector"
+      },
+      "text_69": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "Agencies",
+          "textAlignment": "center",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "filterpanel_2": {
+        "parameters": {
+          "filterItemOptions": {
+            "backgroundColor": "#FFFFFF",
+            "borderColor": "#E6ECF2",
+            "borderRadius": 4,
+            "borderWidth": 1,
+            "propertyColor": "#54698D",
+            "valueColor": "#16325C"
+          },
+          "filters": [],
+          "itemsPerRow": 2,
+          "showAllFilters": true,
+          "title": {
+            "separatorColor": "#E6ECF2",
+            "text": {
+              "align": "left",
+              "color": "#091A3E",
+              "fontSize": 16,
+              "label": "Filters"
+            },
+            "visible": false
+          }
+        },
+        "type": "filterpanel"
+      },
+      "link_3": {
+        "parameters": {
+          "destinationLink": {
+            "name": "249b421f-1b68-490f-b013-3520eb87b0bf"
+          },
+          "destinationType": "page",
+          "fontSize": 16,
+          "includeState": false,
+          "text": "Show ▲",
+          "textAlignment": "center",
+          "textColor": "#0070D2"
+        },
+        "type": "link"
+      },
+      "text_68": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "Loss Ratio",
+          "textAlignment": "center",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "link_1": {
+        "parameters": {
+          "destinationLink": {
+            "name": "876eb5c6-7ee1-4e00-8964-743dd9270c00"
+          },
+          "destinationType": "page",
+          "fontSize": 16,
+          "includeState": false,
+          "text": "Hide ▼",
+          "textAlignment": "center",
+          "textColor": "#0070D2"
+        },
+        "type": "link"
+      },
+      "text_43": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "Binds\n",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "text_21": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "# Policies in Force",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "text_67": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "P&C Growth",
+          "textAlignment": "center",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "text_66": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "Renewal Rate (QTD)",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "table_1": {
+        "parameters": {
+          "borderColor": "#a8b7c7",
+          "borderWidth": 1,
+          "cell": {
+            "backgroundColor": "#ffffff",
+            "fontColor": "#16325c",
+            "fontSize": 12
+          },
+          "columnProperties": {},
+          "columns": ["A", "Agent_AGENCY_NAME", "B", "C"],
+          "customBulkActions": [
+            {
+              "label": "Add to Call List",
+              "visualforce": {
+                "name": "PSBulkActionHandler",
+                "namespace": ""
+              }
+            }
+          ],
+          "exploreLink": true,
+          "header": {
+            "backgroundColor": "#16325c",
+            "fontColor": "#ffffff",
+            "fontSize": 12
+          },
+          "innerMajorBorderColor": "#54698d",
+          "innerMinorBorderColor": "#a8b7c7",
+          "mode": "fittocontainer",
+          "numberOfLines": 1,
+          "pivoted": false,
+          "showActionMenu": true,
+          "showRowIndexColumn": false,
+          "step": "Agent_AGENCY_NAME_Ag_1",
+          "totals": true,
+          "verticalPadding": 4
+        },
+        "type": "table"
+      },
+      "text_60": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": false,
+          "text": "Metric",
+          "textAlignment": "left",
+          "textColor": "#335779"
+        },
+        "type": "text"
+      },
+      "text_63": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "Retention",
+          "textAlignment": "center",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "number_2": {
+        "parameters": {
+          "compact": false,
+          "exploreLink": true,
+          "measureField": "G",
+          "numberColor": "#FFFFFF",
+          "numberSize": 20,
+          "showActionMenu": true,
+          "step": "Totals_AGENCY_NAME_2_1",
+          "textAlignment": "left",
+          "title": "",
+          "titleColor": "#091A3E",
+          "titleSize": 16
+        },
+        "type": "number"
+      },
+      "number_1": {
+        "parameters": {
+          "compact": false,
+          "exploreLink": true,
+          "measureField": "O",
+          "numberColor": "#FFFFFF",
+          "numberSize": 48,
+          "showActionMenu": true,
+          "step": "Totals_AGENCY_NAME_2_1",
+          "textAlignment": "center",
+          "title": "",
+          "titleColor": "#091A3E",
+          "titleSize": 16
+        },
+        "type": "number"
+      },
+      "pillbox_1": {
+        "parameters": {
+          "compact": false,
+          "exploreLink": false,
+          "fontSize": 14,
+          "selectedTab": {
+            "backgroundColor": "#0070D2",
+            "borderColor": "#E6ECF2",
+            "borderEdges": [],
+            "borderWidth": 2,
+            "textColor": "#FFFFFF"
+          },
+          "showActionMenu": false,
+          "step": "static_3",
+          "textColor": "#0070D2"
+        },
+        "type": "pillbox"
+      },
+      "chart_17": {
+        "parameters": {
+          "max": 1,
+          "showPercentage": true,
+          "legend": {
+            "showHeader": true,
+            "show": false,
+            "position": "right-top",
+            "inside": false
+          },
+          "columns": ["L"],
+          "visualizationType": "gauge",
+          "medium": 33,
+          "exploreLink": true,
+          "title": {
+            "fontSize": 10,
+            "subtitleFontSize": 11,
+            "label": "",
+            "align": "center",
+            "subtitleLabel": ""
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "bands": {
+            "high": {
+              "color": "#008000",
+              "label": "High"
+            },
+            "low": {
+              "color": "#B22222",
+              "label": "Low"
+            },
+            "medium": {
+              "color": "#ffa500",
+              "label": "Medium"
+            }
+          },
+          "showRange": false,
+          "showLabel": false,
+          "showValue": false,
+          "high": 66,
+          "showActionMenu": true,
+          "min": 0,
+          "angle": 240,
+          "theme": "dark",
+          "step": "Totals_AGENCY_NAME_2_1",
+          "applyConditionalFormatting": true
+        },
+        "type": "chart"
+      },
+      "chart_10": {
+        "parameters": {
+          "autoFitMode": "keepLabels",
+          "showPoints": false,
+          "legend": {
+            "descOrder": false,
+            "showHeader": true,
+            "show": true,
+            "customSize": "auto",
+            "position": "right-top",
+            "inside": false
+          },
+          "axisMode": "multi",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "time",
+          "missingValue": "connect",
+          "dashLine": {
+            "measures": "",
+            "showDashLine": false
+          },
+          "exploreLink": true,
+          "timeAxis": {
+            "showTitle": false,
+            "predictiveLine": {
+              "color": "#8932ED",
+              "label": "TODAY"
+            },
+            "showAxis": true,
+            "title": ""
+          },
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "",
+            "align": "center",
+            "subtitleLabel": ""
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "fillArea": true,
+          "showActionMenu": true,
+          "showZero": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": false,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "valueType": "none",
+          "theme": "waterDark",
+          "step": "report_Year_report_M_2",
+          "applyConditionalFormatting": false,
+          "drawArea": {
+            "measure": "",
+            "showDrawArea": false,
+            "bounding1": "",
+            "bounding2": ""
+          }
+        },
+        "type": "chart"
+      }
+    }
+  }
+}
