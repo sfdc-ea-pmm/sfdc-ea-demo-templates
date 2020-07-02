@@ -1,0 +1,759 @@
+{
+  "name": "Licensed_States_tp",
+  "label": "Licensed States (Embedded)",
+  "description": "Live View of Appointments using Direct query",
+  "folder": {
+    "id": "${App.Folder.Id}"
+  },
+  "dateVersion": 1,
+  "mobileDisabled": false,
+  "xmd": {
+    "measures": [
+      {
+        "conditionalFormatting": {
+          "chartColor": {
+            "referenceField": "count",
+            "type": "gradient",
+            "parameters": {
+              "bins": [
+                {
+                  "formatValue": "#98B1FF"
+                },
+                {
+                  "formatValue": "#0D34B6"
+                }
+              ]
+            }
+          }
+        },
+        "field": "Issuer_1.count",
+        "format": {
+          "delimiters": {}
+        }
+      },
+      {
+        "conditionalFormatting": {
+          "chartColor": {
+            "referenceField": "count",
+            "type": "gradient",
+            "parameters": {
+              "bins": [
+                {
+                  "formatValue": "#C6D3E1"
+                },
+                {
+                  "formatValue": "#0D34B6"
+                }
+              ]
+            }
+          }
+        },
+        "field": "JurisdictionState_1.count",
+        "format": {
+          "delimiters": {}
+        }
+      }
+    ],
+    "derivedDimensions": [],
+    "organizations": [],
+    "showDetailsDefaultFields": [],
+    "dates": [],
+    "derivedMeasures": [],
+    "dimensions": [
+      {
+        "recordDisplayFields": [],
+        "conditionalFormatting": {
+          "chartColor": {
+            "referenceField": "count",
+            "type": "gradient",
+            "parameters": {
+              "bins": [
+                {
+                  "formatValue": "#98B1FF"
+                },
+                {
+                  "formatValue": "#0D34B6"
+                }
+              ]
+            }
+          }
+        },
+        "salesforceActions": [],
+        "field": "Issuer_1.ALL",
+        "members": [],
+        "customActions": []
+      },
+      {
+        "recordDisplayFields": [],
+        "conditionalFormatting": {
+          "chartColor": {
+            "referenceField": "count",
+            "type": "gradient",
+            "parameters": {
+              "bins": [
+                {
+                  "formatValue": "#C6D3E1"
+                },
+                {
+                  "formatValue": "#0D34B6"
+                }
+              ]
+            }
+          }
+        },
+        "salesforceActions": [],
+        "field": "JurisdictionState_1.ALL",
+        "members": [],
+        "customActions": []
+      }
+    ]
+  },
+  "state": {
+    "dataSourceLinks": [],
+    "filters": [],
+    "gridLayouts": [
+      {
+        "maxWidth": 400,
+        "name": "Default",
+        "numColumns": 2,
+        "pages": [
+          {
+            "label": "Licensed States",
+            "name": "1f17fc3e-1f4b-4ae3-a022-117c31e3e85c",
+            "navigationHidden": false,
+            "widgets": [
+              {
+                "colspan": 2,
+                "column": 0,
+                "name": "chart_1",
+                "row": 1,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "#001668",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 2,
+                "column": 0,
+                "name": "container_1",
+                "row": 0,
+                "rowspan": 10,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 2,
+                "column": 0,
+                "name": "text_1",
+                "row": 0,
+                "rowspan": 1,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["bottom"],
+                  "borderRadius": 0,
+                  "borderWidth": 4
+                }
+              },
+              {
+                "colspan": 2,
+                "column": 0,
+                "name": "chart_3",
+                "row": 5,
+                "rowspan": 5,
+                "widgetStyle": {
+                  "backgroundColor": "#001668",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight": "normal",
+        "selectors": [],
+        "style": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "backgroundColor": "#001668",
+          "cellSpacingX": 8,
+          "cellSpacingY": 4,
+          "fit": "original",
+          "gutterColor": "#C5D3E0"
+        },
+        "version": 1.0
+      }
+    ],
+    "layouts": [],
+    "steps": {
+      "Issuer_JurisdictionS_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.BusinessLicense_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "Issuer_JurisdictionS_1",
+        "query": {
+          "query": {
+            "measures": [["count", "*"]],
+            "groups": ["ISSUER", "JURISDICTIONSTATE"],
+            "order": [
+              [
+                "count",
+                {
+                  "ascending": false
+                }
+              ]
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "autoFitMode": "keepLabels",
+            "showValues": true,
+            "legend": {
+              "descOrder": false,
+              "showHeader": true,
+              "show": false,
+              "customSize": "auto",
+              "position": "right-top",
+              "inside": false
+            },
+            "axisMode": "multi",
+            "totalSumMode": "none",
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "visualizationType": "stackhbar",
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "",
+              "align": "center",
+              "subtitleLabel": ""
+            },
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "x",
+              "chartsPerLine": 4
+            },
+            "columnMap": {
+              "split": ["JURISDICTIONSTATE"],
+              "trellis": [],
+              "dimensionAxis": ["ISSUER"],
+              "plots": ["count"]
+            },
+            "showActionMenu": true,
+            "measureAxis2": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "measureAxis1": {
+              "sqrtScale": false,
+              "showTitle": false,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "normalize": false,
+            "theme": "wave",
+            "dimensionAxis": {
+              "showTitle": true,
+              "customSize": "auto",
+              "showAxis": true,
+              "title": "",
+              "icons": {
+                "useIcons": false,
+                "iconProps": {
+                  "fit": "cover",
+                  "column": "",
+                  "type": "round"
+                }
+              }
+            },
+            "applyConditionalFormatting": true
+          },
+          "type": "chart"
+        }
+      },
+      "JurisdictionState_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.BusinessLicense_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "JurisdictionState_1",
+        "query": {
+          "query": {
+            "measures": [["count", "*"]],
+            "groups": ["JURISDICTIONSTATE"]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "autoFitMode": "keepLabels",
+            "bins": {
+              "breakpoints": {
+                "high": 100,
+                "low": 0
+              },
+              "bands": {
+                "high": {
+                  "color": "#008000",
+                  "label": ""
+                },
+                "low": {
+                  "color": "#B22222",
+                  "label": ""
+                },
+                "medium": {
+                  "color": "#ffa500",
+                  "label": ""
+                }
+              }
+            },
+            "legend": {
+              "descOrder": false,
+              "showHeader": true,
+              "show": true,
+              "customSize": "auto",
+              "position": "right-top",
+              "inside": false
+            },
+            "autoZoom": true,
+            "highColor": "#1674D9",
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "projectionType": "AlbersUSA",
+            "lowColor": "#C5DBF7",
+            "visualizationType": "choropleth",
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "",
+              "align": "center",
+              "subtitleLabel": ""
+            },
+            "binValues": false,
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "x",
+              "chartsPerLine": 4
+            },
+            "columnMap": {
+              "color": ["count"],
+              "trellis": [],
+              "plots": ["JURISDICTIONSTATE"]
+            },
+            "showActionMenu": true,
+            "theme": "wave",
+            "map": "US States",
+            "applyConditionalFormatting": true
+          },
+          "type": "chart"
+        }
+      },
+      "Issuer_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.BusinessLicense_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "Issuer_1",
+        "query": {
+          "query": {
+            "measures": [["count", "*"]],
+            "groups": ["ISSUER"],
+            "order": [
+              [
+                "count",
+                {
+                  "ascending": false
+                }
+              ]
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "autoFitMode": "keepLabels",
+            "showValues": true,
+            "bins": {
+              "breakpoints": {
+                "high": 100,
+                "low": 0
+              },
+              "bands": {
+                "high": {
+                  "color": "#008000",
+                  "label": ""
+                },
+                "low": {
+                  "color": "#B22222",
+                  "label": ""
+                },
+                "medium": {
+                  "color": "#ffa500",
+                  "label": ""
+                }
+              }
+            },
+            "legend": {
+              "descOrder": false,
+              "showHeader": true,
+              "show": true,
+              "customSize": "auto",
+              "position": "right-top",
+              "inside": false
+            },
+            "axisMode": "multi",
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "visualizationType": "hbar",
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "",
+              "align": "center",
+              "subtitleLabel": ""
+            },
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "y",
+              "chartsPerLine": 4
+            },
+            "binValues": false,
+            "columnMap": {
+              "trellis": [],
+              "dimensionAxis": ["ISSUER"],
+              "plots": ["count"]
+            },
+            "showActionMenu": true,
+            "measureAxis2": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "measureAxis1": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "theme": "wave",
+            "applyConditionalFormatting": true,
+            "dimensionAxis": {
+              "showTitle": true,
+              "customSize": "auto",
+              "showAxis": true,
+              "title": "",
+              "icons": {
+                "useIcons": false,
+                "iconProps": {
+                  "fit": "cover",
+                  "column": "",
+                  "type": "round"
+                }
+              }
+            }
+          },
+          "type": "chart"
+        }
+      }
+    },
+    "widgetStyle": {
+      "backgroundColor": "rgba(255, 255, 255, 0)",
+      "borderColor": "#E6ECF2",
+      "borderEdges": [],
+      "borderRadius": 0,
+      "borderWidth": 1
+    },
+    "widgets": {
+      "container_1": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "text_1": {
+        "parameters": {
+          "fontSize": 16,
+          "showActionMenu": true,
+          "text": "Active Carrier Appointments",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "chart_1": {
+        "parameters": {
+          "autoFitMode": "keepLabels",
+          "bins": {
+            "breakpoints": {
+              "high": 100,
+              "low": 0
+            },
+            "bands": {
+              "high": {
+                "color": "#008000",
+                "label": ""
+              },
+              "low": {
+                "color": "#B22222",
+                "label": ""
+              },
+              "medium": {
+                "color": "#ffa500",
+                "label": ""
+              }
+            }
+          },
+          "legend": {
+            "descOrder": false,
+            "showHeader": true,
+            "show": false,
+            "customSize": "auto",
+            "position": "right-top",
+            "inside": false
+          },
+          "autoZoom": true,
+          "highColor": "#1674D9",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "projectionType": "AlbersUSA",
+          "lowColor": "#C5DBF7",
+          "visualizationType": "choropleth",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "",
+            "align": "center",
+            "subtitleLabel": ""
+          },
+          "binValues": false,
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "columnMap": {
+            "color": ["count"],
+            "trellis": [],
+            "plots": ["JURISDICTIONSTATE"]
+          },
+          "showActionMenu": true,
+          "theme": "dark",
+          "step": "JurisdictionState_1",
+          "map": "US States",
+          "applyConditionalFormatting": true
+        },
+        "type": "chart"
+      },
+      "chart_3": {
+        "parameters": {
+          "autoFitMode": "keepLabels",
+          "showValues": true,
+          "bins": {
+            "breakpoints": {
+              "high": 100,
+              "low": 0
+            },
+            "bands": {
+              "high": {
+                "color": "#008000",
+                "label": ""
+              },
+              "low": {
+                "color": "#B22222",
+                "label": ""
+              },
+              "medium": {
+                "color": "#ffa500",
+                "label": ""
+              }
+            }
+          },
+          "legend": {
+            "descOrder": false,
+            "showHeader": true,
+            "show": false,
+            "customSize": "auto",
+            "position": "right-top",
+            "inside": false
+          },
+          "axisMode": "multi",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "hbar",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "Carrier Apointments",
+            "align": "center",
+            "subtitleLabel": ""
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "y",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "binValues": false,
+          "columnMap": {
+            "trellis": [],
+            "dimensionAxis": ["ISSUER"],
+            "plots": ["count"]
+          },
+          "showActionMenu": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": false,
+            "showAxis": false,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "theme": "dark",
+          "step": "Issuer_1",
+          "applyConditionalFormatting": true,
+          "dimensionAxis": {
+            "showTitle": true,
+            "customSize": "auto",
+            "showAxis": true,
+            "title": "",
+            "icons": {
+              "useIcons": false,
+              "iconProps": {
+                "fit": "cover",
+                "column": "",
+                "type": "round",
+                "parameters": {}
+              }
+            }
+          }
+        },
+        "type": "chart"
+      }
+    }
+  }
+}

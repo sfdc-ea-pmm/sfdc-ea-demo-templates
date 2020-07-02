@@ -1,0 +1,560 @@
+{
+  "name": "Production_Profile_tp",
+  "label": "Production Profile (Embedded)",
+  "description": "Whoilesaler Investment Profile",
+  "folder": {
+    "id": "${App.Folder.Id}"
+  },
+  "dateVersion": 1,
+  "mobileDisabled": false,
+  "xmd": {
+    "measures": [
+      {
+        "conditionalFormatting": {
+          "chartColor": {
+            "referenceField": "sum_written_base_premium",
+            "type": "gradient",
+            "parameters": {
+              "bins": [
+                {
+                  "formatValue": "#FFCD95"
+                },
+                {
+                  "formatValue": "#CD96FF"
+                }
+              ]
+            }
+          }
+        },
+        "field": "Insurance_PRODUCT_FA_1.sum_written_base_premium",
+        "format": {
+          "delimiters": {}
+        }
+      },
+      {
+        "conditionalFormatting": {
+          "chartColor": {
+            "referenceField": "Agent_AGENT_GENDER",
+            "type": "categories",
+            "parameters": {
+              "values": [
+                {
+                  "formatValue": "#E8963B",
+                  "value": "Female"
+                },
+                {
+                  "formatValue": "#963CE9",
+                  "value": "Male"
+                }
+              ]
+            }
+          }
+        },
+        "field": "Agent_AGENT_GENDER_1.unique_claim_num",
+        "format": {
+          "delimiters": {}
+        }
+      }
+    ],
+    "derivedDimensions": [],
+    "organizations": [],
+    "showDetailsDefaultFields": [],
+    "dates": [],
+    "derivedMeasures": [],
+    "dimensions": [
+      {
+        "recordDisplayFields": [],
+        "conditionalFormatting": {
+          "chartColor": {
+            "referenceField": "sum_written_base_premium",
+            "type": "gradient",
+            "parameters": {
+              "bins": [
+                {
+                  "formatValue": "#FFCD95"
+                },
+                {
+                  "formatValue": "#CD96FF"
+                }
+              ]
+            }
+          }
+        },
+        "salesforceActions": [],
+        "field": "Insurance_PRODUCT_FA_1.ALL",
+        "members": [],
+        "customActions": []
+      },
+      {
+        "recordDisplayFields": [],
+        "conditionalFormatting": {
+          "chartColor": {
+            "referenceField": "Agent_AGENT_GENDER",
+            "type": "categories",
+            "parameters": {
+              "values": [
+                {
+                  "formatValue": "#E8963B",
+                  "value": "Female"
+                },
+                {
+                  "formatValue": "#963CE9",
+                  "value": "Male"
+                }
+              ]
+            }
+          }
+        },
+        "salesforceActions": [],
+        "field": "Agent_AGENT_GENDER_1.ALL",
+        "members": [],
+        "customActions": []
+      }
+    ]
+  },
+  "state": {
+    "dataSourceLinks": [],
+    "filters": [],
+    "gridLayouts": [
+      {
+        "name": "Default",
+        "numColumns": 2,
+        "pages": [
+          {
+            "label": "Untitled",
+            "name": "27ed3aa7-c425-4942-88e2-c02b849cbc88",
+            "navigationHidden": false,
+            "widgets": [
+              {
+                "colspan": 2,
+                "column": 0,
+                "name": "chart_1",
+                "row": 0,
+                "rowspan": 7,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 2,
+                "column": 0,
+                "name": "chart_2",
+                "row": 7,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight": "normal",
+        "selectors": [],
+        "style": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "backgroundColor": "#091A3E",
+          "cellSpacingX": 8,
+          "cellSpacingY": 8,
+          "fit": "original",
+          "gutterColor": "#C5D3E0"
+        },
+        "version": 1.0
+      }
+    ],
+    "layouts": [],
+    "steps": {
+      "Agent_AGENT_GENDER_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "Agent_AGENT_GENDER_1",
+        "query": {
+          "query": {
+            "measures": [["unique", "claim_num"]],
+            "groups": ["Agent_AGENT_GENDER"]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "autoFitMode": "keepLabels",
+            "centerText": "",
+            "legend": {
+              "descOrder": false,
+              "showHeader": false,
+              "show": true,
+              "customSize": "auto",
+              "position": "right-top",
+              "inside": false
+            },
+            "showMeasureTitle": false,
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "visualizationType": "pie",
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "Client Blend",
+              "align": "center",
+              "subtitleLabel": ""
+            },
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "x",
+              "chartsPerLine": 4
+            },
+            "inner": 60,
+            "columnMap": {
+              "trellis": [],
+              "dimension": ["Agent_AGENT_GENDER"],
+              "plots": ["unique_claim_num"]
+            },
+            "showActionMenu": true,
+            "centerValueType": "number",
+            "valueType": "compactNumber",
+            "theme": "wave",
+            "applyConditionalFormatting": true
+          },
+          "type": "chart"
+        }
+      },
+      "Insurance_PRODUCT_FA_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.Insurance_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "Insurance_PRODUCT_FA_1",
+        "query": {
+          "query": {
+            "measures": [["sum", "written_base_premium"]],
+            "groups": ["Insurance_PRODUCT_FAMILY"],
+            "filters": [
+              [
+                "Insurance_PRODUCT_FAMILY",
+                ["Annuities", "Life", "Mutual Funds"],
+                "in"
+              ]
+            ],
+            "order": [
+              [
+                "Insurance_PRODUCT_FAMILY",
+                {
+                  "ascending": false
+                }
+              ]
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "autoFitMode": "fit",
+            "showValues": true,
+            "bins": {
+              "breakpoints": {
+                "high": 100,
+                "low": 0
+              },
+              "bands": {
+                "high": {
+                  "color": "#008000",
+                  "label": ""
+                },
+                "low": {
+                  "color": "#B22222",
+                  "label": ""
+                },
+                "medium": {
+                  "color": "#ffa500",
+                  "label": ""
+                }
+              }
+            },
+            "legend": {
+              "descOrder": false,
+              "showHeader": true,
+              "show": false,
+              "customSize": "auto",
+              "position": "right-top",
+              "inside": false
+            },
+            "axisMode": "multi",
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "visualizationType": "vbar",
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "Production Profile",
+              "align": "center",
+              "subtitleLabel": ""
+            },
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "x",
+              "chartsPerLine": 4
+            },
+            "binValues": false,
+            "columnMap": {
+              "trellis": [],
+              "dimensionAxis": ["Insurance_PRODUCT_FAMILY"],
+              "plots": ["sum_written_base_premium"]
+            },
+            "showActionMenu": true,
+            "measureAxis2": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "measureAxis1": {
+              "sqrtScale": false,
+              "showTitle": false,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "theme": "wave",
+            "applyConditionalFormatting": true,
+            "dimensionAxis": {
+              "showTitle": true,
+              "customSize": "auto",
+              "showAxis": true,
+              "title": "",
+              "icons": {
+                "useIcons": false,
+                "iconProps": {
+                  "fit": "cover",
+                  "column": "",
+                  "type": "round"
+                }
+              }
+            }
+          },
+          "type": "chart"
+        }
+      }
+    },
+    "widgetStyle": {
+      "backgroundColor": "rgba(255, 255, 255, 0)",
+      "borderColor": "#E6ECF2",
+      "borderEdges": [],
+      "borderRadius": 0,
+      "borderWidth": 1
+    },
+    "widgets": {
+      "chart_2": {
+        "parameters": {
+          "centerText": "",
+          "autoFitMode": "keepLabels",
+          "legend": {
+            "descOrder": false,
+            "showHeader": false,
+            "show": true,
+            "customSize": "auto",
+            "position": "right-top",
+            "inside": false
+          },
+          "showMeasureTitle": false,
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "pie",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "Client Blend",
+            "align": "center",
+            "subtitleLabel": ""
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "inner": 60,
+          "columnMap": {
+            "trellis": [],
+            "dimension": ["Agent_AGENT_GENDER"],
+            "plots": ["unique_claim_num"]
+          },
+          "showActionMenu": true,
+          "centerValueType": "number",
+          "valueType": "compactNumber",
+          "theme": "dark",
+          "step": "Agent_AGENT_GENDER_1",
+          "applyConditionalFormatting": true
+        },
+        "type": "chart"
+      },
+      "chart_1": {
+        "parameters": {
+          "autoFitMode": "fit",
+          "showValues": true,
+          "bins": {
+            "breakpoints": {
+              "high": 100,
+              "low": 0
+            },
+            "bands": {
+              "high": {
+                "color": "#008000",
+                "label": ""
+              },
+              "low": {
+                "color": "#B22222",
+                "label": ""
+              },
+              "medium": {
+                "color": "#ffa500",
+                "label": ""
+              }
+            }
+          },
+          "legend": {
+            "descOrder": false,
+            "showHeader": true,
+            "show": false,
+            "customSize": "auto",
+            "position": "right-top",
+            "inside": false
+          },
+          "axisMode": "multi",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "vbar",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "Production Profile",
+            "align": "center",
+            "subtitleLabel": ""
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "binValues": false,
+          "columnMap": {
+            "trellis": [],
+            "dimensionAxis": ["Insurance_PRODUCT_FAMILY"],
+            "plots": ["sum_written_base_premium"]
+          },
+          "showActionMenu": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": false,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "theme": "bluegrassDark",
+          "step": "Insurance_PRODUCT_FA_1",
+          "applyConditionalFormatting": true,
+          "dimensionAxis": {
+            "showTitle": true,
+            "customSize": "auto",
+            "showAxis": true,
+            "title": "",
+            "icons": {
+              "useIcons": false,
+              "iconProps": {
+                "fit": "cover",
+                "column": "",
+                "type": "round",
+                "parameters": {}
+              }
+            }
+          }
+        },
+        "type": "chart"
+      }
+    }
+  }
+}

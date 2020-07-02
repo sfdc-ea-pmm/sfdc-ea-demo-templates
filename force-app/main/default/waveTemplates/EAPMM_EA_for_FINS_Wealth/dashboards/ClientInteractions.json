@@ -1,0 +1,6274 @@
+{
+  "name" : "ClientInteractions_tp",
+  "label" : "Client Interactions",
+  "folder" : {
+    "id" : "${App.Folder.Id}"
+  },
+  "dateVersion" : 1,
+  "mobileDisabled" : false,
+  "xmd" : {
+    "measures" : [
+      {
+        "conditionalFormatting" : {
+          "chartColor" : {
+            "referenceField" : "AUM_Change",
+            "type" : "static",
+            "parameters" : {
+              "formatValue" : "#B50E03"
+            }
+          }
+        },
+        "field" : "AUM_Change.AUM_Change",
+        "format" : {
+          "delimiters" : { }
+        }
+      },
+      {
+        "conditionalFormatting" : { },
+        "field" : "days_since_last_activity_Scatter.sum_FinServ__AUM__c",
+        "format" : {
+          "delimiters" : { }
+        }
+      },
+      {
+        "conditionalFormatting" : {
+          "chartColor" : {
+            "referenceField" : "max_DAYSSINCELASTINTERACTION",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "#4269E9",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "#E84340",
+                  "bin" : "45"
+                }
+              ]
+            }
+          }
+        },
+        "field" : "days_since_last_activity_Scatter.sum_AUM",
+        "format" : {
+          "delimiters" : { }
+        }
+      },
+      {
+        "conditionalFormatting" : {
+          "backgroundColor" : {
+            "referenceField" : "Other_Tasks",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "#091A3E",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "#B50E03",
+                  "bin" : "1"
+                }
+              ]
+            }
+          },
+          "color" : {
+            "referenceField" : "Other_Tasks",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "#FFFFFF",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "#FFFFFF",
+                  "bin" : "1"
+                }
+              ]
+            }
+          }
+        },
+        "field" : "Activity_metric_bar.Other_Tasks",
+        "format" : {
+          "delimiters" : { }
+        }
+      },
+      {
+        "conditionalFormatting" : {
+          "chartColor" : {
+            "referenceField" : "max_DaysSinceLastInteraction",
+            "type" : "static",
+            "parameters" : {
+              "formatValue" : "rgb(50, 150, 237)"
+            }
+          }
+        },
+        "field" : "AUM_Change.max_DaysSinceLastInteraction",
+        "format" : {
+          "delimiters" : { }
+        }
+      }
+    ],
+    "derivedDimensions" : [ ],
+    "organizations" : [ ],
+    "showDetailsDefaultFields" : [ ],
+    "dates" : [ ],
+    "derivedMeasures" : [ ],
+    "dimensions" : [
+      {
+        "recordDisplayFields" : [ ],
+        "conditionalFormatting" : {
+          "chartColor" : {
+            "referenceField" : "max_DAYSSINCELASTINTERACTION",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "#4269E9",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "#E84340",
+                  "bin" : "45"
+                }
+              ]
+            }
+          }
+        },
+        "salesforceActions" : [ ],
+        "field" : "days_since_last_activity_Scatter.ALL",
+        "members" : [ ],
+        "customActions" : [ ]
+      },
+      {
+        "recordDisplayFields" : [ ],
+        "conditionalFormatting" : {
+          "chartColor" : {
+            "referenceField" : "AUM_Change",
+            "type" : "static",
+            "parameters" : {
+              "formatValue" : "#B50E03"
+            }
+          }
+        },
+        "salesforceActions" : [ ],
+        "field" : "AUM_Change.ALL",
+        "members" : [ ],
+        "customActions" : [ ]
+      }
+    ]
+  },
+  "state" : {
+    "dataSourceLinks" : [
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoActivity.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "ACCOUNTMARKETINGSEGMENT"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoAccount.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "MARKETINGSEGMENT"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoAccountSnapshot.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "MarketingSegment"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoFinancialAccountTransactionSnapshot.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "AccountMarketingSegment"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoFinancialAccountTransaction.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "AccountMarketingSegment"
+          }
+        ],
+        "label" : "Market_Segment",
+        "name" : "Link_9670"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoActivity.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "ACCOUNTINVESTMENTEXPERIENCE"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoAccount.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "INVESTMENTEXPERIENCE"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoAccountSnapshot.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "InvestmentExperience"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoFinancialAccountTransactionSnapshot.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "AccountInvestmentExperience"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoFinancialAccountTransaction.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "AccountInvestmentExperience"
+          }
+        ],
+        "label" : "Investment Experience",
+        "name" : "Link_9932"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoAccount.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "INVESTMENTOBJECTIVES"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoActivity.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "ACCOUNTINVESTMENTOBJECTIVES"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoAccountSnapshot.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "InvestmentObjectives"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoFinancialAccountTransactionSnapshot.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "AccountInvestmentObjectives"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoFinancialAccountTransaction.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "AccountInvestmentObjectives"
+          }
+        ],
+        "label" : "Investment Objectives",
+        "name" : "Link_9905"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoActivity.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "ACCOUNTSERVICEMODEL"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoAccount.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "SERVICEMODEL"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoAccountSnapshot.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "ServiceModel"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoFinancialAccountTransactionSnapshot.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "AccountServiceModel"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoFinancialAccountTransaction.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "ACCOUNTSERVICEMODEL"
+          }
+        ],
+        "label" : "Service Tier",
+        "name" : "Link_9689"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoAccount.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "CREATEDDATE"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoAccountSnapshot.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "SnapshotDate"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoActivity.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "ACTIVITYDATE"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoFinancialAccountTransactionSnapshot.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "SnapshotDate"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoFinancialAccountTransaction.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "TRANSACTIONDATE"
+          }
+        ],
+        "label" : "Date",
+        "name" : "Link_3187"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoActivity.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "ACCOUNTNAME"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoAccount.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "NAME"
+          }
+        ],
+        "label" : "Activity_Account_Name",
+        "name" : "Link_1583"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoActivity.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "ACCOUNTOWNERNAME"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoAccount.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "OWNERNAME"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoAccountSnapshot.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "OwnerName"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoFinancialAccountTransaction.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "OWNERNAME"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoFinancialAccountTransactionSnapshot.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "OwnerName"
+          }
+        ],
+        "label" : "Advisor Name",
+        "name" : "Link_918"
+      }
+    ],
+    "filters" : [
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.FscDemoAccount.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "OWNERNAME"
+        ],
+        "label" : "Advisor Name",
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.FscDemoAccount.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "MARKETINGSEGMENT"
+        ],
+        "label" : "Marketing Segment",
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.FscDemoAccount.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "SERVICEMODEL"
+        ],
+        "label" : "Service Model",
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.FscDemoAccount.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "INVESTMENTOBJECTIVES"
+        ],
+        "label" : "Investment Objectives",
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.FscDemoAccount.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "INVESTMENTEXPERIENCE"
+        ],
+        "label" : "Investment Experience",
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.FscDemoAccount.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "CREATEDDATE"
+        ],
+        "label" : "Date",
+        "locked" : false,
+        "operator" : ">=<=",
+        "value" : "[]"
+      }
+    ],
+    "gridLayouts" : [
+      {
+        "maxWidth" : 3000,
+        "name" : "Default",
+        "numColumns" : 50,
+        "pages" : [
+          {
+            "label" : "Overview",
+            "name" : "c4c80845-d9c0-4f34-851b-bf702d0d3b2f",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "filterpanel_1",
+                "row" : 1,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "navigation_1",
+                "row" : 6,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#C6D3E1",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 19,
+                "column" : 1,
+                "name" : "text_45",
+                "row" : 97,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_2",
+                "row" : 95,
+                "rowspan" : 46,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "table_5",
+                "row" : 101,
+                "rowspan" : 37,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_11",
+                "row" : 10,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(9, 26, 62)",
+                  "borderColor" : "rgb(65, 80, 106)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 6,
+                "name" : "text_12",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 11,
+                "name" : "text_14",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 1,
+                "name" : "text_17",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "text_44",
+                "row" : 57,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 16,
+                "name" : "text_46",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 15,
+                "column" : 1,
+                "name" : "container_13",
+                "row" : 61,
+                "rowspan" : 32,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 2,
+                "name" : "text_49",
+                "row" : 62,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 2,
+                "name" : "chart_10",
+                "row" : 66,
+                "rowspan" : 26,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 16,
+                "column" : 17,
+                "name" : "container_14",
+                "row" : 61,
+                "rowspan" : 32,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 14,
+                "column" : 18,
+                "name" : "text_51",
+                "row" : 62,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 14,
+                "column" : 18,
+                "name" : "chart_12",
+                "row" : 66,
+                "rowspan" : 26,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 15,
+                "column" : 34,
+                "name" : "container_16",
+                "row" : 61,
+                "rowspan" : 32,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 35,
+                "name" : "text_53",
+                "row" : 62,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 21,
+                "name" : "text_54",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_22",
+                "row" : 17,
+                "rowspan" : 38,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "text_61",
+                "row" : 19,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 35,
+                "name" : "chart_19",
+                "row" : 66,
+                "rowspan" : 25,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "chart_20",
+                "row" : 22,
+                "rowspan" : 32,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_3",
+                "row" : 0,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "rgb(20, 143, 86)",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 1,
+                "name" : "number_1",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 6,
+                "name" : "number_2",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 11,
+                "name" : "number_3",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 16,
+                "name" : "number_4",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 21,
+                "name" : "number_5",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#091A3E",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 8,
+                  "borderWidth" : 4
+                }
+              }
+            ]
+          },
+          {
+            "label" : "Activity History ",
+            "name" : "f2aa5331-d807-4c53-bcf8-34986033051f",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "filterpanel_1",
+                "row" : 1,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "navigation_1",
+                "row" : 6,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#C6D3E1",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_12",
+                "row" : 17,
+                "rowspan" : 38,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(9, 26, 62)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 43,
+                "name" : "pillbox_5",
+                "row" : 20,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 38,
+                "name" : "text_48",
+                "row" : 20,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 1,
+                "name" : "chart_6",
+                "row" : 22,
+                "rowspan" : 30,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 37,
+                "column" : 1,
+                "name" : "text_50",
+                "row" : 19,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_3",
+                "row" : 0,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "rgb(20, 143, 86)",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_10",
+                "row" : 55,
+                "rowspan" : 54,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 35,
+                "column" : 14,
+                "name" : "chart_18",
+                "row" : 22,
+                "rowspan" : 31,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_11",
+                "row" : 10,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(9, 26, 62)",
+                  "borderColor" : "rgb(65, 80, 106)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 6,
+                "name" : "text_12",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 11,
+                "name" : "text_14",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 1,
+                "name" : "text_17",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 16,
+                "name" : "text_46",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 21,
+                "name" : "text_54",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 1,
+                "name" : "number_1",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 6,
+                "name" : "number_2",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 11,
+                "name" : "number_3",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 16,
+                "name" : "number_4",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 21,
+                "name" : "number_5",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#091A3E",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 8,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "text_3",
+                "row" : 57,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "table_4",
+                "row" : 61,
+                "rowspan" : 46,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              }
+            ]
+          },
+          {
+            "label" : "Activity Outcomes",
+            "name" : "9cc85cde-4189-476e-8d0a-430e30d2044c",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "filterpanel_1",
+                "row" : 1,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "navigation_1",
+                "row" : 6,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#C6D3E1",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 21,
+                "column" : 1,
+                "name" : "chart_4",
+                "row" : 19,
+                "rowspan" : 27,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_3",
+                "row" : 0,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "rgb(20, 143, 86)",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_27",
+                "row" : 10,
+                "rowspan" : 37,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "text_96",
+                "row" : 12,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 27,
+                "column" : 1,
+                "name" : "text_108",
+                "row" : 49,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 24,
+                "name" : "text_9",
+                "row" : 15,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 32,
+                "name" : "text_11",
+                "row" : 16,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "#335779",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 10,
+                "column" : 1,
+                "name" : "text_23",
+                "row" : 15,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 11,
+                "name" : "text_48",
+                "row" : 16,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 16,
+                "name" : "pillbox_5",
+                "row" : 16,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 37,
+                "name" : "text_4",
+                "row" : 15,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 41,
+                "name" : "text_6",
+                "row" : 154,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 23,
+                "column" : 1,
+                "name" : "container_4",
+                "row" : 54,
+                "rowspan" : 32,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 21,
+                "column" : 2,
+                "name" : "text_5",
+                "row" : 55,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 23,
+                "column" : 1,
+                "name" : "container_6",
+                "row" : 88,
+                "rowspan" : 32,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 21,
+                "column" : 2,
+                "name" : "text_7",
+                "row" : 89,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 25,
+                "name" : "container_7",
+                "row" : 54,
+                "rowspan" : 32,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 22,
+                "column" : 26,
+                "name" : "text_8",
+                "row" : 55,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 25,
+                "name" : "container_8",
+                "row" : 88,
+                "rowspan" : 32,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 22,
+                "column" : 26,
+                "name" : "text_10",
+                "row" : 89,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 25,
+                "column" : 24,
+                "name" : "table_2",
+                "row" : 19,
+                "rowspan" : 26,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 21,
+                "column" : 2,
+                "name" : "chart_1",
+                "row" : 58,
+                "rowspan" : 26,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 21,
+                "column" : 2,
+                "name" : "chart_2",
+                "row" : 92,
+                "rowspan" : 26,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 22,
+                "column" : 26,
+                "name" : "chart_5",
+                "row" : 59,
+                "rowspan" : 26,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 22,
+                "column" : 26,
+                "name" : "chart_7",
+                "row" : 92,
+                "rowspan" : 26,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 39,
+                "name" : "pillbox_2",
+                "row" : 50,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 30,
+                "name" : "text_13",
+                "row" : 49,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 0,
+                "name" : "text_15",
+                "row" : 120,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight" : "fine",
+        "selectors" : [ ],
+        "style" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "backgroundColor" : "#F2F6FA",
+          "cellSpacingX" : 0,
+          "cellSpacingY" : 0,
+          "fit" : "original",
+          "gutterColor" : "#C5D3E0"
+        },
+        "version" : 1.0
+      }
+    ],
+    "layouts" : [ ],
+    "steps" : {
+      "Activity_Type_2" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.FscDemoActivity.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "Activity_Type_2",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              "TYPE"
+            ],
+            "filters" : [
+              [
+                "ACCOUNTRECORDTYPENAME",
+                [
+                  "Household"
+                ],
+                "not in"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : false,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "Filter by Type",
+              "align" : "left",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "binValues" : false,
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimensionAxis" : [
+                "Type"
+              ],
+              "plots" : [
+                "count"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "applyConditionalFormatting" : true,
+            "dimensionAxis" : {
+              "showTitle" : false,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            }
+          },
+          "type" : "chart"
+        }
+      },
+      "filtered_activities" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.FscDemoActivity.FullyQualifiedName}\";\nq = foreach q generate 'ACCOUNTID' as 'ACCOUNTID', 'ID' as 'ID';\nq = filter q by 'ACCOUNTID' is not null;\n q = filter q by  !({{ column(Households_list.result,[\"ID\"]).asEquality(\"ACCOUNTID\") }});\nq = foreach q generate ID as ID;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Households_list" : {
+        "broadcastFacet" : false,
+        "groups" : [ ],
+        "label" : "Households_list",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.FscDemoAccount.FullyQualifiedName}\";\nq = filter q by 'RECORDTYPENAME' == \"Household\";\nq = group q by 'ID';\nq = foreach q generate 'ID' as 'ID', count() as 'count';\nq = order q by 'ID' asc;",
+        "receiveFacetSource" : {
+          "mode" : "none",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : false,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Snapshot_Deposits_Overtime" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.FscDemoFinancialAccountTransactionSnapshot.FullyQualifiedName}\";\r\nq = filter q by 'TransactionType' == \"Credit\";\r\nc = filter q by {{column(top_deposits.result,[\"ID\"]).asEquality(\"FinancialAccountId\")}};\r\nq = filter q by {{column(interacted_account_list.result,[\"ID\"]).asEquality(\"Id\")}};\r\nq = group q by ('SnapshotDate_Year', 'SnapshotDate_Month', 'SnapshotDate_Day');\r\nc = group c by ('SnapshotDate_Year', 'SnapshotDate_Month', 'SnapshotDate_Day');\r\nq = foreach q generate 'SnapshotDate_Year' + \"~~~\" + 'SnapshotDate_Month' + \"~~~\" + 'SnapshotDate_Day' as 'SnapshotDate_Year~~~SnapshotDate_Month~~~SnapshotDate_Day',\"Selected\" as 'category', sum('Amount') as 'sum_Amount';\r\nc = foreach c generate 'SnapshotDate_Year' + \"~~~\" + 'SnapshotDate_Month' + \"~~~\" + 'SnapshotDate_Day' as 'SnapshotDate_Year~~~SnapshotDate_Month~~~SnapshotDate_Day',\"{{ cell(static_7.selection,0,\"value\").asString() }}\" as 'category', sum('Amount') as 'sum_Amount';\r\nresult =  union q,c;\r\nresult = order result by 'SnapshotDate_Year~~~SnapshotDate_Month~~~SnapshotDate_Day' asc;\r\nresult = limit result 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimensionAxis" : [ ],
+              "plots" : [
+                "count"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "freq_variable_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "freq_variable",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.FscDemoActivity.FullyQualifiedName}\";\nq = foreach q generate case when \"{{ cell(static_12.selection,0,\"display\").asString() }}\" ==\"M\" then \"CREATEDDATE_Month\"  when \"{{ cell(static_12.selection,0,\"display\").asString() }}\" ==\"Q\" then \"CREATEDDATE_Quarter\"  when \"{{ cell(static_12.selection,0,\"display\").asString() }}\" ==\"W\" then \"CREATEDDATE_Week\" end as 'freqvariable', \"CREATEDDATE_Year\" as 'freqyear';\nq = limit q 1;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "top_deposits" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.FscDemoFinancialAccountTransaction.FullyQualifiedName}\";\nq = filter q by 'TRANSACTIONTYPE' == \"Credit\";\nq = foreach q generate q.'FINANCIALACCOUNTID' as 'ID', sum('AMOUNT') as 'sum_Amount';\nresult = order q by ('sum_Amount' desc);{{ cell(static_7.selection,0,\"limit\").asString() }}",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "days_since_last_activity_Scatter" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.FscDemoAccount.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "days_since_last_activity_Scatter",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "max",
+                "DAYSSINCELASTINTERACTION"
+              ],
+              [
+                "avg",
+                "AUM"
+              ],
+              [
+                "sum",
+                "AUM"
+              ]
+            ],
+            "groups" : [
+              "NAME"
+            ],
+            "filters" : [
+              [
+                "RECORDTYPENAME",
+                [
+                  "Household"
+                ],
+                "not in"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : false,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "scatter",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "radiusRatio" : 3,
+            "columnMap" : {
+              "r" : [
+                "sum_FinServ__AUM__c"
+              ],
+              "x" : [
+                "avg_FinServ__AUM__c"
+              ],
+              "y" : [
+                "max_DaysSinceLastInteraction"
+              ],
+              "trellis" : [ ],
+              "plots" : [
+                "Name"
+              ]
+            },
+            "showActionMenu" : true,
+            "x" : {
+              "sqrtScale" : false,
+              "showZero" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "AUM",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "y" : {
+              "sqrtScale" : false,
+              "showZero" : true,
+              "showTitle" : true,
+              "showAxis" : true,
+              "referenceLines" : [
+                {
+                  "color" : "rgb(0, 161, 224)",
+                  "label" : {
+                    "data" : "Goal: 1 touch every 45 days",
+                    "type" : "static"
+                  },
+                  "value" : {
+                    "data" : 45,
+                    "type" : "static"
+                  }
+                }
+              ],
+              "title" : "Days Since Last Activity",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Snapshot_Wallet_Overtime" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.FscDemoAccountSnapshot.FullyQualifiedName}\";\r\nc = filter q by {{column(top_Wallet_Share_Number.result,[\"ID\"]).asEquality(\"Id\")}};\r\nq= filter q by {{column(interacted_account_list.result,[\"ID\"]).asEquality(\"Id\")}};\r\nq = filter q by 'RecordTypeName' != \"Household\";\r\nc = group c by ('SnapshotDate_Year', 'SnapshotDate_Month', 'SnapshotDate_Day');\r\nq = group q by ('SnapshotDate_Year', 'SnapshotDate_Month', 'SnapshotDate_Day');\r\nq = foreach q generate 'SnapshotDate_Year' + \"~~~\" + 'SnapshotDate_Month' + \"~~~\" + 'SnapshotDate_Day' as 'SnapshotDate_Year~~~SnapshotDate_Month~~~SnapshotDate_Day',\"Selected\" as 'category', avg('WalletShare') as 'avg_FinServ__WalletShare__c';\r\nc = foreach c generate 'SnapshotDate_Year' + \"~~~\" + 'SnapshotDate_Month' + \"~~~\" + 'SnapshotDate_Day' as 'SnapshotDate_Year~~~SnapshotDate_Month~~~SnapshotDate_Day',\"{{ cell(static_7.selection,0,\"value\").asString() }}\" as 'category', avg('WalletShare') as 'avg_FinServ__WalletShare';\r\nresult =  union q,c;\r\nresult = order result by 'SnapshotDate_Year~~~SnapshotDate_Month~~~SnapshotDate_Day' asc;\r\nresult = limit result 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showPoints" : false,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "time",
+            "missingValue" : "connect",
+            "dashLine" : {
+              "measures" : "",
+              "showDashLine" : false
+            },
+            "timeAxis" : {
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : ""
+            },
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "split" : [
+                "category"
+              ],
+              "timeAxis" : [
+                "SnapshotDate_Year~~~SnapshotDate_Month~~~SnapshotDate_Day"
+              ],
+              "trellis" : [ ],
+              "plots" : [
+                "avg_FinServ__WalletShare__c"
+              ]
+            },
+            "fillArea" : true,
+            "showActionMenu" : true,
+            "showZero" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "valueType" : "none",
+            "theme" : "wave",
+            "applyConditionalFormatting" : true,
+            "drawArea" : {
+              "measure" : "",
+              "showDrawArea" : false,
+              "bounding1" : "",
+              "bounding2" : ""
+            }
+          },
+          "type" : "chart"
+        }
+      },
+      "interacted_account_list" : {
+        "broadcastFacet" : false,
+        "groups" : [ ],
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.FscDemoAccount.FullyQualifiedName}\";\r\nq= filter q by {{column(activities_to_account_map.result,[\"Accountid\"]).asEquality(\"ID\")}};\r\nq = foreach q generate  'ID' as 'ID','NAME' as 'NAME', 'AUA' as 'AUA', 'AUM' as 'AUM', 'FINANCIALINTERESTS' as 'FINANCIALINTERESTS', 'PRIMARYCONTACTANNUALINCOME' as 'PRIMARYCONTACTANNUALINCOME';\r\nq = limit q 100;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : false,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimensionAxis" : [ ],
+              "plots" : [
+                "count"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Last_Name_3" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Last_Name_3",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.FscDemoActivity.FullyQualifiedName}\";\nq = filter q by 'ACCOUNTRECORDTYPENAME' !=\"Household\";\nq = filter q by 'RECORDTYPENAME' matches \"Task\" ;\nq = foreach q generate 'ACCOUNTNAME' as 'ACCOUNTNAME',date_diff(\"day\",toDate(ACTIVITYDATE,\"yyyy-MM-dd\"),now()) as 'Overdue_By_Days','STATUS' as 'STATUS';\nq = filter q by Overdue_By_Days>0;\nq = filter q by 'STATUS' !=\"Completed\";\nq = filter q by 'ACCOUNTNAME' is not null;\nq = group q by 'ACCOUNTNAME';\nq = foreach q generate 'ACCOUNTNAME' as 'ACCOUNTNAME', max('Overdue_By_Days') as 'max_Overdue_By_Days';\nq = order q by 'max_Overdue_By_Days' desc;\nq = limit q 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : false,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "Days Overdue",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : false,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Activity_Date_Year_A_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.FscDemoActivity.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "Activity_Date_Year_A_1",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : "{{ cell(static_12.selection,0,\"value\").asObject() }}",
+            "filters" : [
+              [
+                "ACCOUNTRECORDTYPENAME",
+                [
+                  "Household"
+                ],
+                "not in"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "parameters" : {
+            "showPoints" : false,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "time",
+            "missingValue" : "connect",
+            "dashLine" : {
+              "measures" : "",
+              "showDashLine" : false
+            },
+            "timeAxis" : {
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : ""
+            },
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "fillArea" : true,
+            "showZero" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "valueType" : "none",
+            "theme" : "wave",
+            "applyConditionalFormatting" : true,
+            "drawArea" : {
+              "measure" : "",
+              "showDrawArea" : false,
+              "bounding1" : "",
+              "bounding2" : ""
+            }
+          },
+          "type" : "chart",
+          "visualizationType" : "time"
+        }
+      },
+      "Activity_Date_Year_A_2" : {
+        "broadcastFacet" : false,
+        "groups" : [ ],
+        "label" : "Activity_Date_Year_A_2",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.FscDemoActivity.FullyQualifiedName}\";\nq= filter q by {{column(filtered_activities.result,[\"ID\"]).asEquality(\"ID\")}};\nq= filter q by !({{column(Households_list.result,[\"ID\"]).asEquality(\"ID\")}});\nq = group q by ('CREATEDDATE_Year', '{{ cell(static_12.selection,0,\"svalue\").asString() }}');\nq = foreach q generate 'CREATEDDATE_Year' + \" - \" + '{{ cell(static_12.selection,0,\"svalue\").asString() }}' as 'Time', count() as 'count', 'CREATEDDATE_Year' as 'freq1','{{ cell(static_12.selection,0,\"svalue\").asString() }}' as 'freq2';\nq = order q by 'Time' asc;\nq = limit q 2000;",
+        "receiveFacetSource" : {
+          "mode" : "none",
+          "steps" : [ ]
+        },
+        "selectMode" : "singlerequired",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart",
+          "visualizationType" : "hbar"
+        }
+      },
+      "activities_to_account_map" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "activities_to_account_map",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.FscDemoActivity.FullyQualifiedName}\";\nq= filter q by !({{column(Households_list.result,[\"ID\"]).asEquality(\"ACCOUNTID\")}});\nq= filter q by CREATEDDATE_Year == \"{{cell(Activity_Date_Year_A_2.selection,0,\"freq1\").asString()}}\";\nq= filter q by {{cell(static_12.selection,0,\"svalue\").asString()}} == \"{{cell(Activity_Date_Year_A_2.selection,0,\"freq2\").asString()}}\";\nq = group q by 'ACCOUNTID';\nq = foreach q generate 'ACCOUNTID' as 'Accountid';",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "pivoted" : false,
+            "showActionMenu" : true,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "Client_List_Table" : {
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.FscDemoAccount.Name}"
+          }
+        ],
+        "isFacet" : true,
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "values" : [
+              "ID",
+              "NAME",
+              "PRIMARYCONTACTANNUALINCOME",
+              "AUM",
+              "AUA",
+              "BILLINGCOUNTRY",
+              "CLIENTCATEGORYCUSTOM",
+              "FINANCIALINTERESTS",
+              "PRIMARYCONTACTEMAIL"
+            ],
+            "filters" : [
+              [
+                "RECORDTYPENAME",
+                [
+                  "Household"
+                ],
+                "not in"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "type" : "grain",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "showRowIndexColumn" : true,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "household_days_since_last_interaction" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.FscDemoAccount.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "household_days_since_last_interaction",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "max",
+                "DAYSSINCELASTINTERACTION"
+              ]
+            ],
+            "groups" : [
+              "NAME"
+            ],
+            "filters" : [
+              [
+                "RECORDTYPENAME",
+                [
+                  "Household"
+                ],
+                "not in"
+              ],
+              [
+                "DAYSSINCELASTINTERACTION",
+                [
+                  [
+                    0
+                  ]
+                ],
+                ">="
+              ]
+            ],
+            "order" : [
+              [
+                "max_DAYSSINCELASTINTERACTION",
+                {
+                  "ascending" : false
+                }
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : false,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimensionAxis" : [
+                "NAME"
+              ],
+              "plots" : [
+                "max_DAYSSINCELASTINTERACTION"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : false,
+              "title" : "Days Since Last Contact",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : false,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Snapshot_AUM_Overtime" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.FscDemoAccountSnapshot.FullyQualifiedName}\";\r\nc = filter q by {{column(top_AUM.result,[\"ID\"]).asEquality(\"Id\")}};\r\nq= filter q by {{column(interacted_account_list.result,[\"ID\"]).asEquality(\"Id\")}};\r\nq = filter q by 'RecordTypeName' != \"Household\";\r\nc = group c by ('SnapshotDate_Year', 'SnapshotDate_Month', 'SnapshotDate_Day');\r\nq = group q by ('SnapshotDate_Year', 'SnapshotDate_Month', 'SnapshotDate_Day');\r\nq = foreach q generate 'SnapshotDate_Year' + \"~~~\" + 'SnapshotDate_Month' + \"~~~\" + 'SnapshotDate_Day' as 'SnapshotDate_Year~~~SnapshotDate_Month~~~SnapshotDate_Day',\"Selected\" as 'category', sum('AUM') as 'sum_AUM';\r\nc = foreach c generate 'SnapshotDate_Year' + \"~~~\" + 'SnapshotDate_Month' + \"~~~\" + 'SnapshotDate_Day' as 'SnapshotDate_Year~~~SnapshotDate_Month~~~SnapshotDate_Day',\"{{ cell(static_7.selection,0,\"value\").asString() }}\" as 'category', sum('AUM') as 'sum_AUM';\r\nresult =  union q,c;\r\nresult = order result by 'SnapshotDate_Year~~~SnapshotDate_Month~~~SnapshotDate_Day' asc;\r\nresult = limit result 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showPoints" : false,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "time",
+            "missingValue" : "connect",
+            "dashLine" : {
+              "measures" : "",
+              "showDashLine" : false
+            },
+            "timeAxis" : {
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : ""
+            },
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "split" : [ ],
+              "timeAxis" : [
+                "SnapshotDate_Year~~~SnapshotDate_Month~~~SnapshotDate_Day"
+              ],
+              "trellis" : [ ],
+              "plots" : [
+                "sum_FinServ__AUM__c"
+              ]
+            },
+            "fillArea" : true,
+            "showActionMenu" : true,
+            "showZero" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "valueType" : "none",
+            "theme" : "wave",
+            "applyConditionalFormatting" : true,
+            "drawArea" : {
+              "measure" : "",
+              "showDrawArea" : false,
+              "bounding1" : "",
+              "bounding2" : ""
+            }
+          },
+          "type" : "chart"
+        }
+      },
+      "Snapshot_AUA_Overtime" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.FscDemoAccountSnapshot.FullyQualifiedName}\";\r\nc = filter q by {{column(top_AUA.result,[\"ID\"]).asEquality(\"Id\")}};\r\nq= filter q by {{column(interacted_account_list.result,[\"ID\"]).asEquality(\"Id\")}};\r\nq = filter q by 'RecordTypeName' != \"Household\";\r\nc = group c by ('SnapshotDate_Year', 'SnapshotDate_Month', 'SnapshotDate_Day');\r\nq = group q by ('SnapshotDate_Year', 'SnapshotDate_Month', 'SnapshotDate_Day');\r\nq = foreach q generate 'SnapshotDate_Year' + \"~~~\" + 'SnapshotDate_Month' + \"~~~\" + 'SnapshotDate_Day' as 'SnapshotDate_Year~~~SnapshotDate_Month~~~SnapshotDate_Day',\"Selected\" as 'category', sum('AUA') as 'sum_AUA';\r\nc = foreach c generate 'SnapshotDate_Year' + \"~~~\" + 'SnapshotDate_Month' + \"~~~\" + 'SnapshotDate_Day' as 'SnapshotDate_Year~~~SnapshotDate_Month~~~SnapshotDate_Day',\"{{ cell(static_7.selection,0,\"value\").asString() }}\" as 'category', sum('AUA') as 'sum_AUA';\r\nresult =  union q,c;\r\nresult = order result by 'SnapshotDate_Year~~~SnapshotDate_Month~~~SnapshotDate_Day' asc;\r\nresult = limit result 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showPoints" : false,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "time",
+            "missingValue" : "connect",
+            "dashLine" : {
+              "measures" : "",
+              "showDashLine" : false
+            },
+            "timeAxis" : {
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : ""
+            },
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "split" : [ ],
+              "timeAxis" : [
+                "SnapshotDate_Year~~~SnapshotDate_Month~~~SnapshotDate_Day"
+              ],
+              "trellis" : [ ],
+              "plots" : [
+                "sum_FinServ__AUM__c"
+              ]
+            },
+            "fillArea" : true,
+            "showActionMenu" : true,
+            "showZero" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "valueType" : "none",
+            "theme" : "wave",
+            "applyConditionalFormatting" : true,
+            "drawArea" : {
+              "measure" : "",
+              "showDrawArea" : false,
+              "bounding1" : "",
+              "bounding2" : ""
+            }
+          },
+          "type" : "chart"
+        }
+      },
+      "top_AUA" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.FscDemoAccount.FullyQualifiedName}\";\r\nq = filter q by 'RECORDTYPENAME' != \"Household\";\r\nq = group q by ('NAME','ID');\r\nq = foreach q generate 'NAME' as 'NAME',q.'ID' as 'ID', sum('AUA') as 'sum_AUA';\r\nresult = order q by ('sum_AUA' desc);\r\n{{ cell(static_7.selection,0,\"limit\").asString() }}",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "static_2" : {
+        "broadcastFacet" : true,
+        "columns" : { },
+        "selectMode" : "singlerequired",
+        "type" : "staticflex",
+        "values" : [
+          {
+            "display" : "#",
+            "value" : "#"
+          },
+          {
+            "display" : "$",
+            "value" : "#"
+          }
+        ]
+      },
+      "AUM_Change" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "AUM_Change",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.FscDemoAccount.FullyQualifiedName}\";\nc = load \"${App.Datasets.FscDemoAccountSnapshot.FullyQualifiedName}\";\nq = filter q by 'RECORDTYPENAME' != \"Household\";\nc = filter c by 'RecordTypeName' != \"Household\";\nc =  filter c by date('SnapshotDate_Year', 'SnapshotDate_Month', 'SnapshotDate_Day') in [\"1 month ago\"..\"1 month ago\"];\nq = group q by 'NAME';\nc = group c by 'Name';\nr = cogroup q by 'NAME' left, c by 'Name';\nr = foreach r generate q.'NAME' as 'NAME', ((max(q.'AUM') - max(c.'AUM'))/max(q.'AUM'))*100 as 'AUM Change',max(q.'DAYSSINCELASTINTERACTION') as 'Days Since Last Contact';\nr = filter r by 'AUM Change' <0;\nr = order r by 'AUM Change' asc;\nr = limit r 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : false,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : false,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "binValues" : false,
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "Change %",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : false,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "static_1" : {
+        "broadcastFacet" : true,
+        "columns" : { },
+        "selectMode" : "singlerequired",
+        "type" : "staticflex",
+        "values" : [
+          {
+            "display" : "W",
+            "value" : "W"
+          },
+          {
+            "display" : "M",
+            "value" : "M"
+          },
+          {
+            "display" : "Q",
+            "value" : "Q"
+          }
+        ]
+      },
+      "static_7" : {
+        "broadcastFacet" : true,
+        "columns" : { },
+        "selectMode" : "singlerequired",
+        "type" : "staticflex",
+        "values" : [
+          {
+            "display" : "All",
+            "limit" : "result = limit result 99999999999;",
+            "value" : "All"
+          },
+          {
+            "display" : "Top 20 Clients",
+            "limit" : "result = limit result 20;",
+            "value" : "Top 20"
+          }
+        ]
+      },
+      "top_Wallet_Share_Number" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "top_Wallet_Share_Number",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.FscDemoAccount.FullyQualifiedName}\";\r\nq = filter q by 'RECORDTYPENAME' != \"Household\";\r\nq = group q by ('NAME','ID');\r\nq = foreach q generate 'NAME' as 'NAME',q.'ID' as 'ID', avg('WALLETSHARE') as 'avg_WALLETSHARE';\r\nresult = order q by ('avg_WALLETSHARE' desc);\r\n{{ cell(static_7.selection,0,\"limit\").asString() }}",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "static_12" : {
+        "broadcastFacet" : true,
+        "columns" : { },
+        "selectMode" : "singlerequired",
+        "start" : {
+          "display" : [
+            "W"
+          ]
+        },
+        "type" : "staticflex",
+        "values" : [
+          {
+            "display" : "W",
+            "value" : [
+              [
+                "CREATEDDATE_Year",
+                "CREATEDDATE_Week"
+              ],
+              "REGARDING"
+            ],
+            "value1" : [
+              [
+                "CREATEDDATE_Year",
+                "CREATEDDATE_Week"
+              ]
+            ],
+            "svalue" : "CREATEDDATE_Week",
+            "dfrequency" : "W"
+          },
+          {
+            "display" : "M",
+            "value" : [
+              [
+                "CREATEDDATE_Year",
+                "CREATEDDATE_Month"
+              ],
+              "REGARDING"
+            ],
+            "value1" : [
+              [
+                "CREATEDDATE_Year",
+                "CREATEDDATE_Month"
+              ]
+            ],
+            "svalue" : "CREATEDDATE_Month",
+            "dfrequency" : "M"
+          },
+          {
+            "display" : "Q",
+            "value" : [
+              [
+                "CREATEDDATE_Year",
+                "CREATEDDATE_Quarter"
+              ],
+              "REGARDING"
+            ],
+            "value1" : [
+              [
+                "CREATEDDATE_Year",
+                "CREATEDDATE_Quarter"
+              ]
+            ],
+            "svalue" : "CREATEDDATE_Quarter",
+            "dfrequency" : "Q"
+          }
+        ]
+      },
+      "Metric_1" : {
+        "broadcastFacet" : true,
+        "columns" : { },
+        "label" : "Metric",
+        "selectMode" : "multirequired",
+        "type" : "staticflex",
+        "values" : [
+          {
+            "display" : "AUM",
+            "value" : "AUM"
+          },
+          {
+            "display" : "AUA",
+            "value" : "AUA"
+          },
+          {
+            "display" : "# of Accounts",
+            "value" : "# Accounts"
+          },
+          {
+            "display" : "# Households",
+            "value" : "# Households"
+          },
+          {
+            "display" : "Wallet Share",
+            "value" : "Wallet Share"
+          },
+          {
+            "display" : "Held Away",
+            "value" : "Held Away"
+          }
+        ]
+      },
+      "top_AUM" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "top_AUM",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.FscDemoAccount.FullyQualifiedName}\";\nq = filter q by 'RECORDTYPENAME' != \"Household\";\nresult = group q by ('NAME','ID');\nresult = foreach result generate q.'NAME' as 'Name',q.'ID' as 'ID', sum(q.'AUM') as 'AUM';\nresult = order result by ('AUM' desc);{{ cell(static_7.selection,0,\"limit\").asString() }}",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "Activity_metric_bar" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Activity_metric_bar",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.FscDemoActivity.FullyQualifiedName}\";\nq= filter q by 'ACCOUNTRECORDTYPENAME' !=\"Household\";\nq_B = filter q by 'TYPE' == \"Call\";\nq_C = filter q by 'RECORDTYPENAME' matches \"Task\";\nq_D = filter q by 'TYPE' == \"Email\";\nq_E = filter q by 'RECORDTYPENAME' matches \"Task\" ;\nq_E =  foreach q_E generate ID as 'ID', 'ACTIVITYDATE' as 'ACTIVITYDATE', date_diff(\"day\",toDate(ACTIVITYDATE,\"yyyy-MM-dd\"),now()) as 'overdue_date', 'STATUS' as 'STATUS';\nq_E = filter q_E by 'overdue_date'>0;\nq_E = filter q_E by 'STATUS' != \"Completed\";\nresult = group q by all full, q_B by all full, q_C by all full, q_D by all full, q_E by all;\nresult = foreach result generate count(q) as 'Total', count(q_B) as 'Call', count(q_C) as 'Task', count(q_D) as 'Email', count(q_E) as 'Other_Tasks';\nresult = order result by ('Total' desc);\nresult = limit result 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "lens_4" : {
+        "broadcastFacet" : false,
+        "groups" : [ ],
+        "label" : "lens_4",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.FscDemoActivity.FullyQualifiedName}\";\nq = filter q by {{ cell(freq_variable_1.result,0,\"freqvariable\").asString() }} == \"{{ cell(Activity_Date_Year_A_2.selection,0,\"freq2\").asString() }}\";\nq = filter q by {{ cell(freq_variable_1.result,0,\"freqyear\").asString() }} == \"{{ cell(Activity_Date_Year_A_2.selection,0,\"freq1\").asString() }}\";\nq = foreach q generate  'ACCOUNTNAME' as 'ACCOUNTNAME', 'ACCOUNTAUM' as 'ACCOUNTAUM', 'CREATEDDATE' as 'CREATEDDATE', 'TYPE' as 'TYPE', 'ACCOUNTINVESTMENTEXPERIENCE' as 'ACCOUNTINVESTMENTEXPERIENCE', 'ACCOUNTSERVICEMODEL' as 'ACCOUNTSERVICEMODEL';\n",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showRowIndexColumn" : true,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table",
+          "visualizationType" : "comparisontable"
+        }
+      },
+      "lens_1" : {
+        "broadcastFacet" : false,
+        "groups" : [ ],
+        "label" : "lens_1",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.FscDemoActivity.FullyQualifiedName}\";\nq= filter q by  'ACCOUNTRECORDTYPENAME' !=\"Household\" ;\nq = foreach q generate 'ACCOUNTNAME' as 'ACCOUNTNAME', 'ACCOUNTTYPE' as 'ACCOUNTTYPE', 'ACCOUNTID' as 'ACCOUNTID', 'ID' as 'ID', 'ACCOUNTOWNERNAME' as 'ACCOUNTOWNERNAME', 'RECORDTYPENAME' as 'RECORDTYPENAME', 'STATUS' as 'STATUS', 'TASKSUBTYPE' as 'TASKSUBTYPE', 'TYPE' as 'TYPE';\nq = limit q 100;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "mode" : "fittocontainer",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "lens_2" : {
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.FscDemoActivity.Name}"
+          }
+        ],
+        "isFacet" : true,
+        "isGlobal" : false,
+        "label" : "lens_2",
+        "query" : {
+          "query" : {
+            "values" : [
+              "CREATEDDATE",
+              "ACCOUNTNAME",
+              "REGARDING",
+              "STATUS",
+              "SUBJECT",
+              "PRIORITY",
+              "TYPE",
+              "TASKSUBTYPE"
+            ],
+            "filters" : [
+              [
+                "ACCOUNTRECORDTYPENAME",
+                [
+                  "Household"
+                ],
+                "not in"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "type" : "grain",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "evenRowColor" : "#f4f6f9",
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "mode" : "fittocontainer",
+            "numberOfLines" : 1,
+            "oddRowColor" : "#ffffff",
+            "showActionMenu" : true,
+            "showRowIndexColumn" : false,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      }
+    },
+    "widgetStyle" : {
+      "backgroundColor" : "rgba(255, 255, 255, 0)",
+      "borderColor" : "#E6ECF2",
+      "borderEdges" : [ ],
+      "borderRadius" : 0,
+      "borderWidth" : 1
+    },
+    "widgets" : {
+      "text_18" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "text" : "Choose KPI:",
+          "textAlignment" : "center",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "container_16" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_17" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : false,
+          "text" : "Total Activities",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "container_14" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_19" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "text" : "Group by:",
+          "textAlignment" : "center",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "container_13" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_14" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : false,
+          "text" : "Total Emails",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_13" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : false,
+          "text" : "Compare to average for",
+          "textAlignment" : "right",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text_15" : {
+        "parameters" : {
+          "fontSize" : 20,
+          "showActionMenu" : true,
+          "text" : "",
+          "textAlignment" : "center",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text_10" : {
+        "parameters" : {
+          "fontSize" : 14,
+          "showActionMenu" : false,
+          "text" : "Deposits",
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text_54" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : false,
+          "text" : "Overdue Tasks",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_53" : {
+        "parameters" : {
+          "fontSize" : 14,
+          "showActionMenu" : false,
+          "text" : "Clients With Overdue Tasks",
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text_12" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : false,
+          "text" : "Total Calls",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_11" : {
+        "parameters" : {
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "text" : "{{ cell(Activity_Date_Year_A_2.selection,0,\"freq1\").asString() }} - {{ cell(static_12.selection,0,\"dfrequency\").asString() }}{{ cell(Activity_Date_Year_A_2.selection,0,\"freq2\").asString() }}",
+          "textAlignment" : "center",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_50" : {
+        "parameters" : {
+          "fontSize" : 16,
+          "showActionMenu" : false,
+          "text" : "What am I spending my time on?",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_96" : {
+        "parameters" : {
+          "fontSize" : 16,
+          "showActionMenu" : false,
+          "text" : "1. Choose Cohort",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "container_1" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_51" : {
+        "parameters" : {
+          "fontSize" : 14,
+          "showActionMenu" : false,
+          "text" : "Clients Whose AUM Has Dropped in Last 30 Days",
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "container_2" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_3" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_92" : {
+        "parameters" : {
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "text" : "Choose a Cohort",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "container_4" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_5" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "chart_6" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showValues" : true,
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "hbar",
+          "exploreLink" : false,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "Filter by Type",
+            "align" : "left",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "binValues" : false,
+          "columnMap" : {
+            "trellis" : [ ],
+            "dimensionAxis" : [
+              "TYPE"
+            ],
+            "plots" : [
+              "count"
+            ]
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "theme" : "dark",
+          "step" : "Activity_Type_2",
+          "applyConditionalFormatting" : true,
+          "dimensionAxis" : {
+            "showTitle" : false,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          }
+        },
+        "type" : "chart"
+      },
+      "container_6" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_3" : {
+        "parameters" : {
+          "fontSize" : 16,
+          "showActionMenu" : false,
+          "text" : "Activities List Detail",
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text_2" : {
+        "parameters" : {
+          "fontSize" : 20,
+          "showActionMenu" : true,
+          "text" : "48",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "container_22" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_7" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "chart_5" : {
+        "parameters" : {
+          "showPoints" : false,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "time",
+          "missingValue" : "connect",
+          "dashLine" : {
+            "measures" : "",
+            "showDashLine" : false
+          },
+          "exploreLink" : true,
+          "timeAxis" : {
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : ""
+          },
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "columnMap" : {
+            "split" : [
+              "category"
+            ],
+            "timeAxis" : [
+              "SnapshotDate_Year~~~SnapshotDate_Month~~~SnapshotDate_Day"
+            ],
+            "trellis" : [ ],
+            "plots" : [
+              "avg_FinServ__WalletShare__c"
+            ]
+          },
+          "fillArea" : true,
+          "showActionMenu" : true,
+          "showZero" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "Wallet Share %",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "valueType" : "none",
+          "theme" : "wave",
+          "step" : "Snapshot_Wallet_Overtime",
+          "applyConditionalFormatting" : true,
+          "drawArea" : {
+            "measure" : "",
+            "showDrawArea" : false,
+            "bounding1" : "",
+            "bounding2" : ""
+          }
+        },
+        "type" : "chart"
+      },
+      "text_5" : {
+        "parameters" : {
+          "fontSize" : 14,
+          "showActionMenu" : false,
+          "text" : "AUM",
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "container_8" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_4" : {
+        "parameters" : {
+          "fontSize" : 14,
+          "showActionMenu" : false,
+          "text" : ":",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "chart_7" : {
+        "parameters" : {
+          "showPoints" : false,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "time",
+          "missingValue" : "connect",
+          "dashLine" : {
+            "measures" : "",
+            "showDashLine" : false
+          },
+          "exploreLink" : true,
+          "timeAxis" : {
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : ""
+          },
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "columnMap" : {
+            "split" : [
+              "category"
+            ],
+            "timeAxis" : [
+              "SnapshotDate_Year~~~SnapshotDate_Month~~~SnapshotDate_Day"
+            ],
+            "trellis" : [ ],
+            "plots" : [
+              "sum_Amount"
+            ]
+          },
+          "fillArea" : true,
+          "showActionMenu" : true,
+          "showZero" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "valueType" : "none",
+          "theme" : "wave",
+          "step" : "Snapshot_Deposits_Overtime",
+          "applyConditionalFormatting" : true,
+          "drawArea" : {
+            "measure" : "",
+            "showDrawArea" : false,
+            "bounding1" : "",
+            "bounding2" : ""
+          }
+        },
+        "type" : "chart"
+      },
+      "text_7" : {
+        "parameters" : {
+          "fontSize" : 14,
+          "showActionMenu" : false,
+          "text" : "AUA",
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "chart_2" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showPoints" : false,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "time",
+          "missingValue" : "connect",
+          "dashLine" : {
+            "measures" : "",
+            "showDashLine" : false
+          },
+          "exploreLink" : true,
+          "timeAxis" : {
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : ""
+          },
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "fillArea" : true,
+          "columnMap" : {
+            "split" : [
+              "category"
+            ],
+            "timeAxis" : [
+              "SnapshotDate_Year~~~SnapshotDate_Month~~~SnapshotDate_Day"
+            ],
+            "trellis" : [ ],
+            "plots" : [
+              "sum_AUA"
+            ]
+          },
+          "showActionMenu" : true,
+          "showZero" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "valueType" : "none",
+          "theme" : "wave",
+          "step" : "Snapshot_AUA_Overtime",
+          "applyConditionalFormatting" : true,
+          "drawArea" : {
+            "measure" : "",
+            "showDrawArea" : false,
+            "bounding1" : "",
+            "bounding2" : ""
+          }
+        },
+        "type" : "chart"
+      },
+      "text_6" : {
+        "parameters" : {
+          "fontSize" : 20,
+          "showActionMenu" : true,
+          "text" : "",
+          "textAlignment" : "center",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "chart_1" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showPoints" : false,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "time",
+          "missingValue" : "connect",
+          "dashLine" : {
+            "measures" : "",
+            "showDashLine" : false
+          },
+          "timeAxis" : {
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : ""
+          },
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "columnMap" : {
+            "split" : [
+              "category"
+            ],
+            "timeAxis" : [
+              "SnapshotDate_Year~~~SnapshotDate_Month~~~SnapshotDate_Day"
+            ],
+            "trellis" : [ ],
+            "plots" : [
+              "sum_AUM"
+            ]
+          },
+          "fillArea" : true,
+          "showActionMenu" : true,
+          "showZero" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "valueType" : "none",
+          "theme" : "wave",
+          "step" : "Snapshot_AUM_Overtime",
+          "applyConditionalFormatting" : true,
+          "drawArea" : {
+            "measure" : "",
+            "showDrawArea" : false,
+            "bounding1" : "",
+            "bounding2" : ""
+          }
+        },
+        "type" : "chart"
+      },
+      "chart_4" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showValues" : true,
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "vbar",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "left",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "xy",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "binValues" : false,
+          "columnMap" : {
+            "trellis" : [ ],
+            "dimensionAxis" : [
+              "Time"
+            ],
+            "plots" : [
+              "count"
+            ]
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : false,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "theme" : "dark",
+          "step" : "Activity_Date_Year_A_2",
+          "applyConditionalFormatting" : true,
+          "dimensionAxis" : {
+            "showTitle" : true,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          }
+        },
+        "type" : "chart"
+      },
+      "text_9" : {
+        "parameters" : {
+          "fontSize" : 14,
+          "showActionMenu" : false,
+          "text" : "Clients I interacted with in",
+          "textAlignment" : "right",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_8" : {
+        "parameters" : {
+          "fontSize" : 14,
+          "showActionMenu" : false,
+          "text" : "Wallet Share",
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "chart_20" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "scatter",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 12,
+            "label" : "",
+            "align" : "left",
+            "subtitleLabel" : "My Clients by Days Since Last Touch and AUM"
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "radiusRatio" : 5,
+          "columnMap" : {
+            "r" : [
+              "sum_AUM"
+            ],
+            "x" : [
+              "avg_AUM"
+            ],
+            "y" : [
+              "max_DAYSSINCELASTINTERACTION"
+            ],
+            "trellis" : [ ],
+            "plots" : [
+              "NAME"
+            ]
+          },
+          "showActionMenu" : true,
+          "x" : {
+            "sqrtScale" : false,
+            "showZero" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "AUM",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "y" : {
+            "sqrtScale" : false,
+            "showZero" : true,
+            "showTitle" : true,
+            "showAxis" : true,
+            "referenceLines" : [
+              {
+                "color" : "rgb(0, 161, 224)",
+                "label" : {
+                  "data" : "Goal: 1 touch every 45 days",
+                  "type" : "static"
+                },
+                "value" : {
+                  "data" : 45,
+                  "type" : "static"
+                }
+              }
+            ],
+            "title" : "Days Since Last Activity",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "theme" : "dark",
+          "step" : "days_since_last_activity_Scatter",
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "text_1" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "text" : "# Clients\n",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "filterpanel_1" : {
+        "parameters" : {
+          "filterItemOptions" : {
+            "backgroundColor" : "#FFFFFF",
+            "borderColor" : "#E6ECF2",
+            "borderRadius" : 4,
+            "borderWidth" : 1,
+            "propertyColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "filters" : [ ],
+          "itemsPerRow" : 7,
+          "showAllFilters" : true,
+          "title" : {
+            "separatorColor" : "#E6ECF2",
+            "text" : {
+              "align" : "left",
+              "color" : "#091A3E",
+              "fontSize" : 16,
+              "label" : "Filters"
+            },
+            "visible" : false
+          }
+        },
+        "type" : "filterpanel"
+      },
+      "text_46" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : false,
+          "text" : "Total Tasks",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_49" : {
+        "parameters" : {
+          "fontSize" : 14,
+          "showActionMenu" : false,
+          "text" : "Clients by Days Since Last Touch",
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text_48" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : false,
+          "text" : "Group by",
+          "textAlignment" : "right",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_45" : {
+        "parameters" : {
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "text" : "Client List Detail",
+          "textAlignment" : "left",
+          "textColor" : "#091A3E",
+          "tooltip" : ""
+        },
+        "type" : "text"
+      },
+      "text_44" : {
+        "parameters" : {
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "text" : "Who should I talk to next?",
+          "textAlignment" : "left",
+          "textColor" : "#091A3E",
+          "tooltip" : ""
+        },
+        "type" : "text"
+      },
+      "number_5" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : false,
+          "measureField" : "Other_Tasks",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "Activity_metric_bar",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "number_4" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "Task",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "Activity_metric_bar",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "number_3" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "Email",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "Activity_metric_bar",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "number_2" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "Call",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "Activity_metric_bar",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "number_1" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "Total",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "Activity_metric_bar",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "chart_19" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showValues" : true,
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "hbar",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "binValues" : false,
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "Days Overdue",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "theme" : "light",
+          "step" : "Last_Name_3",
+          "dimensionAxis" : {
+            "showTitle" : false,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "chart_18" : {
+        "parameters" : {
+          "showValues" : true,
+          "showPoints" : false,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "stackvbar",
+          "missingValue" : "connect",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "showZero" : true,
+          "valueType" : "none",
+          "normalize" : false,
+          "theme" : "dark",
+          "applyConditionalFormatting" : true,
+          "dimensionAxis" : {
+            "showTitle" : true,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "drawArea" : {
+            "measure" : "",
+            "showDrawArea" : false,
+            "bounding1" : "",
+            "bounding2" : ""
+          },
+          "autoFitMode" : "keepLabels",
+          "totalSumMode" : "none",
+          "dashLine" : {
+            "measures" : "",
+            "showDashLine" : false
+          },
+          "timeAxis" : {
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : ""
+          },
+          "fillArea" : true,
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "step" : "Activity_Date_Year_A_1"
+        },
+        "type" : "chart"
+      },
+      "container_12" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_11" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "chart_16" : {
+        "parameters" : {
+          "showActionMenu" : true
+        },
+        "type" : "chart"
+      },
+      "container_10" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "chart_12" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showValues" : true,
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "hbar",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "binValues" : false,
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "Change %",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "theme" : "light",
+          "step" : "AUM_Change",
+          "dimensionAxis" : {
+            "showTitle" : false,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "chart_10" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showValues" : true,
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "hbar",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "binValues" : false,
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "columnMap" : {
+            "trellis" : [ ],
+            "dimensionAxis" : [
+              "NAME"
+            ],
+            "plots" : [
+              "max_DAYSSINCELASTINTERACTION"
+            ]
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : false,
+            "title" : "Days Since Last Contact",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "theme" : "light",
+          "step" : "household_days_since_last_interaction",
+          "dimensionAxis" : {
+            "showTitle" : false,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "text_38" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "text" : "Avg AUM/Household",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_34" : {
+        "parameters" : {
+          "fontSize" : 20,
+          "showActionMenu" : true,
+          "text" : "$980K",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_108" : {
+        "parameters" : {
+          "fontSize" : 16,
+          "showActionMenu" : false,
+          "text" : "2. For these clients, what has changed since we spoke?",
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "container_27" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_28" : {
+        "parameters" : {
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "text" : "Activities List",
+          "textAlignment" : "left",
+          "textColor" : "#091A3E",
+          "tooltip" : ""
+        },
+        "type" : "text"
+      },
+      "text_25" : {
+        "parameters" : {
+          "fontSize" : 20,
+          "showActionMenu" : true,
+          "text" : "$1.2M",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_24" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "text" : "Avg AUA/Household",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_21" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "text" : "# Households\n",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "navigation_1" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "selectedTab" : {
+            "backgroundColor" : "rgb(240, 248, 252)",
+            "borderColor" : "rgb(0, 112, 210)",
+            "borderEdges" : [
+              "bottom"
+            ],
+            "borderWidth" : 2,
+            "textColor" : "rgb(0, 112, 210)"
+          },
+          "tabCount" : 7,
+          "textColor" : "#091A3E"
+        },
+        "type" : "navigation"
+      },
+      "text_20" : {
+        "parameters" : {
+          "fontSize" : 20,
+          "showActionMenu" : true,
+          "text" : "25",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_23" : {
+        "parameters" : {
+          "fontSize" : 14,
+          "showActionMenu" : false,
+          "text" : "Select a time frame",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_22" : {
+        "parameters" : {
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "text" : "Segmenting My Households",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_61" : {
+        "parameters" : {
+          "fontSize" : 16,
+          "showActionMenu" : false,
+          "text" : "Am I staying connected with my important clients?",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF",
+          "tooltip" : ""
+        },
+        "type" : "text"
+      },
+      "table_2" : {
+        "parameters" : {
+          "borderColor" : "#54698d",
+          "borderWidth" : 1,
+          "cell" : {
+            "backgroundColor" : "#16325c",
+            "fontColor" : "#ffffff",
+            "fontSize" : 12
+          },
+          "columnProperties" : { },
+          "columns" : [ ],
+          "customBulkActions" : [ ],
+          "exploreLink" : true,
+          "header" : {
+            "backgroundColor" : "#000000",
+            "fontColor" : "#ffffff",
+            "fontSize" : 12
+          },
+          "innerMajorBorderColor" : "#54698d",
+          "innerMinorBorderColor" : "#54698d",
+          "mode" : "fittocontainer",
+          "numberOfLines" : 1,
+          "showActionMenu" : true,
+          "showRowIndexColumn" : false,
+          "step" : "interacted_account_list",
+          "totals" : true,
+          "verticalPadding" : 8
+        },
+        "type" : "table"
+      },
+      "table_4" : {
+        "parameters" : {
+          "borderColor" : "#e0e5ee",
+          "borderWidth" : 1,
+          "cell" : {
+            "backgroundColor" : "#ffffff",
+            "fontColor" : "#16325c",
+            "fontSize" : 12
+          },
+          "columnProperties" : { },
+          "columns" : [ ],
+          "customBulkActions" : [ ],
+          "evenRowColor" : "#f4f6f9",
+          "exploreLink" : true,
+          "header" : {
+            "backgroundColor" : "#f4f6f9",
+            "fontColor" : "#16325c",
+            "fontSize" : 12
+          },
+          "innerMajorBorderColor" : "#a8b7c7",
+          "innerMinorBorderColor" : "#e0e5ee",
+          "mode" : "fittocontainer",
+          "numberOfLines" : 1,
+          "oddRowColor" : "#ffffff",
+          "showActionMenu" : true,
+          "showRowIndexColumn" : false,
+          "step" : "lens_2",
+          "totals" : true,
+          "verticalPadding" : 8
+        },
+        "type" : "table"
+      },
+      "table_5" : {
+        "parameters" : {
+          "borderColor" : "#e1e5ee",
+          "borderWidth" : 1,
+          "cell" : {
+            "backgroundColor" : "#f2f6fa",
+            "fontColor" : "#16325c",
+            "fontSize" : 12
+          },
+          "columnProperties" : { },
+          "columns" : [ ],
+          "customBulkActions" : [ ],
+          "evenRowColor" : "#f2f6fa",
+          "exploreLink" : true,
+          "header" : {
+            "backgroundColor" : "#e4ecf2",
+            "fontColor" : "#5c7a99",
+            "fontSize" : 12
+          },
+          "innerMajorBorderColor" : "#a9b7c7",
+          "innerMinorBorderColor" : "#e1e5ee",
+          "mode" : "fittocontainer",
+          "numberOfLines" : 1,
+          "oddRowColor" : "#ffffff",
+          "showActionMenu" : true,
+          "showRowIndexColumn" : false,
+          "step" : "Client_List_Table",
+          "totals" : true,
+          "verticalPadding" : 8
+        },
+        "type" : "table"
+      },
+      "pillbox_2" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : false,
+          "fontSize" : 16,
+          "selectedTab" : {
+            "backgroundColor" : "#677A97",
+            "borderColor" : "#C6D3E1",
+            "borderEdges" : [ ],
+            "borderWidth" : 1,
+            "textColor" : "#FFFFFF"
+          },
+          "showActionMenu" : false,
+          "step" : "static_7",
+          "textColor" : "#5C7A99"
+        },
+        "type" : "pillbox"
+      },
+      "pillbox_1" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : false,
+          "fontSize" : 16,
+          "selectedTab" : {
+            "backgroundColor" : "#677A97",
+            "borderColor" : "#C6D3E1",
+            "borderEdges" : [ ],
+            "borderWidth" : 1,
+            "textColor" : "#FFFFFF"
+          },
+          "showActionMenu" : true,
+          "step" : "static_1",
+          "textColor" : "#5C7A99"
+        },
+        "type" : "pillbox"
+      },
+      "pillbox_3" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : false,
+          "fontSize" : 16,
+          "selectedTab" : {
+            "backgroundColor" : "#677A97",
+            "borderColor" : "#C6D3E1",
+            "borderEdges" : [ ],
+            "borderWidth" : 1,
+            "textColor" : "#FFFFFF"
+          },
+          "showActionMenu" : true,
+          "step" : "static_2",
+          "textColor" : "#5C7A99"
+        },
+        "type" : "pillbox"
+      },
+      "pillbox_5" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : false,
+          "fontSize" : 16,
+          "selectedTab" : {
+            "backgroundColor" : "#677A97",
+            "borderColor" : "#C6D3E1",
+            "borderEdges" : [ ],
+            "borderWidth" : 1,
+            "textColor" : "#FFFFFF"
+          },
+          "showActionMenu" : false,
+          "step" : "static_12",
+          "textColor" : "#5C7A99"
+        },
+        "type" : "pillbox"
+      },
+      "listselector_1" : {
+        "parameters" : {
+          "compact" : false,
+          "displayMode" : "combo",
+          "exploreLink" : false,
+          "filterStyle" : {
+            "titleColor" : "#091A3E",
+            "valueColor" : "#17324D"
+          },
+          "instant" : true,
+          "showActionMenu" : false,
+          "step" : "Metric_1",
+          "title" : ""
+        },
+        "type" : "listselector"
+      }
+    }
+  }
+}

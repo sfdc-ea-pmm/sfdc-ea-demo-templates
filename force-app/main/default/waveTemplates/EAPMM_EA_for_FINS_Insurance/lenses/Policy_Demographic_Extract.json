@@ -1,0 +1,105 @@
+{
+  "name": "Policy_Demographic_Extract_tp",
+  "label": "Policy Demographic Extract",
+  "description": "Source data for Policies, note this is a very large query over 700k records.",
+  "folder": {
+    "id": "${App.Folder.Id}"
+  },
+  "visualizationType": "valuestable",
+  "dateVersion": 1,
+  "datasets": [
+    {
+      "id": "${App.Datasets.POLICIES_tp.Id}"
+    }
+  ],
+  "xmd": {
+    "measures": [],
+    "derivedDimensions": [],
+    "organizations": [],
+    "showDetailsDefaultFields": [],
+    "dates": [],
+    "derivedMeasures": [],
+    "dimensions": []
+  },
+  "state": {
+    "dataSourceLinks": [],
+    "filters": [],
+    "gridLayouts": [],
+    "layouts": [],
+    "steps": {
+      "aggregateflex": {
+        "broadcastFacet": false,
+        "datasets": [
+          {
+            "name": "${App.Datasets.POLICIES_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "values": [
+              "POLICY_ID",
+              "LOCATION_ID",
+              "NAME",
+              "AGE",
+              "LOYALTY",
+              "EconomicActivity",
+              "Dependants",
+              "Housing",
+              "Education",
+              "Industry",
+              "LeadSource",
+              "Relationship",
+              "SocialGrade"
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "none",
+          "steps": []
+        },
+        "selectMode": "multi",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "visualizationType": "valuestable"
+        }
+      }
+    },
+    "widgets": {
+      "aggregateflex_table": {
+        "parameters": {
+          "borderColor": "#e0e5ee",
+          "borderWidth": 1,
+          "cell": {
+            "backgroundColor": "#ffffff",
+            "fontColor": "#16325c",
+            "fontSize": 12
+          },
+          "columnProperties": {},
+          "columns": [],
+          "customBulkActions": [],
+          "header": {
+            "backgroundColor": "#f4f6f9",
+            "fontColor": "#16325c",
+            "fontSize": 12
+          },
+          "innerMajorBorderColor": "#a8b7c7",
+          "innerMinorBorderColor": "#e0e5ee",
+          "maxColumnWidth": 300,
+          "minColumnWidth": 40,
+          "mode": "variable",
+          "numberOfLines": 1,
+          "showActionMenu": true,
+          "showRowIndexColumn": true,
+          "step": "aggregateflex",
+          "totals": true,
+          "verticalPadding": 8
+        },
+        "type": "table"
+      }
+    }
+  }
+}

@@ -1,0 +1,2716 @@
+{
+  "name": "Fees_and_Charges_Retail_Personal_Banker_tp",
+  "label": "Fees and Charges - Retail Personal Banker",
+  "folder": {
+    "id": "${App.Folder.Id}"
+  },
+  "dateVersion": 1,
+  "mobileDisabled": false,
+  "xmd": {
+    "measures": [
+      {
+        "conditionalFormatting": {},
+        "field": "Fees_by_Fee_Type_1.D",
+        "format": {
+          "delimiters": {},
+          "customFormat": "[\"#,###.##%\",100]"
+        }
+      },
+      {
+        "conditionalFormatting": {},
+        "field": "Customers_Charged_Fees_1.D",
+        "format": {
+          "delimiters": {},
+          "customFormat": "[\"#,###.##%\",100]"
+        }
+      }
+    ],
+    "derivedDimensions": [],
+    "organizations": [],
+    "showDetailsDefaultFields": [],
+    "dates": [],
+    "derivedMeasures": [],
+    "dimensions": []
+  },
+  "state": {
+    "dataSourceLinks": [],
+    "filters": [
+      {
+        "dataset": {
+          "name": "${App.Datasets.RBDemoChargesAndFees.Name}"
+        },
+        "dependent": true,
+        "fields": ["ACCOUNTOWNERNAME"],
+        "label": "Banker Name",
+        "locked": false,
+        "operator": "in"
+      },
+      {
+        "dataset": {
+          "name": "${App.Datasets.RBDemoChargesAndFees.Name}"
+        },
+        "dependent": true,
+        "fields": ["FEESTYPE"],
+        "label": "Fees Type",
+        "locked": false,
+        "operator": "in"
+      },
+      {
+        "dataset": {
+          "name": "${App.Datasets.RBDemoChargesAndFees.Name}"
+        },
+        "dependent": true,
+        "fields": ["TRANSACTIONTYPE"],
+        "label": "Reversed",
+        "locked": false,
+        "operator": "in"
+      },
+      {
+        "dataset": {
+          "name": "${App.Datasets.RBDemoChargesAndFees.Name}"
+        },
+        "dependent": true,
+        "fields": ["FEES"],
+        "label": "Fee Amount",
+        "locked": false,
+        "operator": ">=<="
+      },
+      {
+        "dataset": {
+          "name": "${App.Datasets.RBDemoChargesAndFees.Name}"
+        },
+        "dependent": true,
+        "fields": ["TRANSACTIONDATE"],
+        "label": "Transaction Date",
+        "locked": false,
+        "operator": ">=<="
+      }
+    ],
+    "gridLayouts": [
+      {
+        "maxWidth": 1500,
+        "name": "Default",
+        "numColumns": 50,
+        "pages": [
+          {
+            "label": "What fees were charged?",
+            "name": "64575053-97e6-4e49-b68c-f6a5f5d56ed2",
+            "navigationHidden": false,
+            "widgets": [
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "container_24",
+                "row": 0,
+                "rowspan": 6,
+                "widgetStyle": {
+                  "backgroundColor": "rgb(230, 236, 242)",
+                  "borderColor": "rgb(0, 103, 20)",
+                  "borderEdges": ["top"],
+                  "borderRadius": 0,
+                  "borderWidth": 4
+                }
+              },
+              {
+                "colspan": 48,
+                "column": 1,
+                "name": "filterpanel_1",
+                "row": 1,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "container_6",
+                "row": 10,
+                "rowspan": 7,
+                "widgetStyle": {
+                  "backgroundColor": "rgb(9, 26, 62)",
+                  "borderColor": "rgb(65, 80, 106)",
+                  "borderEdges": ["bottom"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 1,
+                "name": "text_41",
+                "row": 11,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "container_7",
+                "row": 17,
+                "rowspan": 43,
+                "widgetStyle": {
+                  "backgroundColor": "rgb(9, 26, 62)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 48,
+                "column": 1,
+                "name": "text_42",
+                "row": 19,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 24,
+                "column": 1,
+                "name": "chart_1",
+                "row": 23,
+                "rowspan": 34,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "container_12",
+                "row": 104,
+                "rowspan": 46,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#C6D3E1",
+                  "borderEdges": ["top"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 19,
+                "column": 1,
+                "name": "text_48",
+                "row": 106,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 48,
+                "column": 1,
+                "name": "table_1",
+                "row": 110,
+                "rowspan": 37,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 8,
+                "name": "text_55",
+                "row": 11,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 29,
+                "name": "text_57",
+                "row": 11,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 8,
+                "column": 21,
+                "name": "text_59",
+                "row": 11,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 15,
+                "name": "text_60",
+                "row": 11,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 22,
+                "column": 26,
+                "name": "chart_4",
+                "row": 23,
+                "rowspan": 34,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 1,
+                "name": "number_1",
+                "row": 13,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 8,
+                "name": "number_3",
+                "row": 13,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 15,
+                "name": "number_4",
+                "row": 13,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 21,
+                "name": "number_5",
+                "row": 13,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 29,
+                "name": "number_6",
+                "row": 13,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 48,
+                "column": 1,
+                "name": "text_1",
+                "row": 62,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 36,
+                "name": "number_2",
+                "row": 13,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 13,
+                "column": 36,
+                "name": "text_3",
+                "row": 11,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "navigation_1",
+                "row": 6,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#C6D3E1",
+                  "borderEdges": ["top"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 48,
+                "column": 1,
+                "name": "chart_7",
+                "row": 65,
+                "rowspan": 37,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "container_5",
+                "row": 60,
+                "rowspan": 44,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              }
+            ]
+          },
+          {
+            "label": "Which customers were charged?",
+            "name": "13f25a25-a4c8-4b47-be6a-a8db8ab27865",
+            "navigationHidden": false,
+            "widgets": [
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "container_24",
+                "row": 0,
+                "rowspan": 6,
+                "widgetStyle": {
+                  "backgroundColor": "rgb(230, 236, 242)",
+                  "borderColor": "rgb(0, 103, 20)",
+                  "borderEdges": ["top"],
+                  "borderRadius": 0,
+                  "borderWidth": 4
+                }
+              },
+              {
+                "colspan": 48,
+                "column": 1,
+                "name": "filterpanel_1",
+                "row": 1,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "container_6",
+                "row": 10,
+                "rowspan": 7,
+                "widgetStyle": {
+                  "backgroundColor": "rgb(9, 26, 62)",
+                  "borderColor": "rgb(65, 80, 106)",
+                  "borderEdges": ["bottom"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 1,
+                "name": "text_41",
+                "row": 11,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 8,
+                "name": "text_55",
+                "row": 11,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 29,
+                "name": "text_57",
+                "row": 11,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 8,
+                "column": 21,
+                "name": "text_59",
+                "row": 11,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 15,
+                "name": "text_60",
+                "row": 11,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 1,
+                "name": "number_1",
+                "row": 13,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 8,
+                "name": "number_3",
+                "row": 13,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 15,
+                "name": "number_4",
+                "row": 13,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 21,
+                "name": "number_5",
+                "row": 13,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 29,
+                "name": "number_6",
+                "row": 13,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "container_1",
+                "row": 17,
+                "rowspan": 43,
+                "widgetStyle": {
+                  "backgroundColor": "rgb(9, 26, 62)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 48,
+                "column": 1,
+                "name": "text_2",
+                "row": 19,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 24,
+                "column": 1,
+                "name": "chart_6",
+                "row": 23,
+                "rowspan": 35,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 13,
+                "column": 36,
+                "name": "text_3",
+                "row": 11,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 36,
+                "name": "number_2",
+                "row": 13,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "container_2",
+                "row": 104,
+                "rowspan": 46,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#C6D3E1",
+                  "borderEdges": ["top"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 19,
+                "column": 1,
+                "name": "text_4",
+                "row": 106,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 48,
+                "column": 1,
+                "name": "table_1",
+                "row": 110,
+                "rowspan": 37,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "navigation_1",
+                "row": 6,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#C6D3E1",
+                  "borderEdges": ["top"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 17,
+                "column": 1,
+                "name": "text_5",
+                "row": 62,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(255, 255, 255, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 48,
+                "column": 1,
+                "name": "chart_5",
+                "row": 65,
+                "rowspan": 37,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 23,
+                "column": 26,
+                "name": "chart_8",
+                "row": 23,
+                "rowspan": 35,
+                "widgetStyle": {
+                  "backgroundColor": "rgba(51, 87, 121, 0)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 50,
+                "column": 0,
+                "name": "container_4",
+                "row": 60,
+                "rowspan": 44,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight": "fine",
+        "selectors": [],
+        "style": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "backgroundColor": "#E6ECF2",
+          "cellSpacingX": 0,
+          "cellSpacingY": 0,
+          "fit": "original",
+          "gutterColor": "#C6D3E1"
+        },
+        "version": 1.0
+      }
+    ],
+    "layouts": [],
+    "steps": {
+      "Reversed_Fees_Over_Time_1": {
+        "broadcastFacet": true,
+        "groups": [],
+        "label": "Reversed Fees Over Time",
+        "numbers": [],
+        "query": "q = load \"${App.Datasets.RBDemoChargesAndFees.FullyQualifiedName}\";\nq = group q by ('TRANSACTIONDATE_Year', 'TRANSACTIONDATE_Month', 'TRANSACTIONTYPE');\nq = foreach q generate 'TRANSACTIONDATE_Year' + \"~~~\" + 'TRANSACTIONDATE_Month' as 'TRANSACTIONDATE_Year~~~TRANSACTIONDATE_Month', case when 'TRANSACTIONTYPE' == \"Credit\" then \"True\" else \"False\" end as 'TRANSACTIONTYPE', sum('FEES') as 'sum_Fees';\nq = order q by ('TRANSACTIONDATE_Year~~~TRANSACTIONDATE_Month' asc, 'TRANSACTIONTYPE' asc);\nq = limit q 2000;",
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "strings": [],
+        "type": "saql",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "autoFitMode": "keepLabels",
+            "showValues": true,
+            "legend": {
+              "descOrder": false,
+              "showHeader": true,
+              "show": true,
+              "customSize": "auto",
+              "position": "right-top",
+              "inside": false
+            },
+            "axisMode": "dual",
+            "totalSumMode": "none",
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "visualizationType": "stackvbar",
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "Reversed Fees",
+              "align": "left",
+              "subtitleLabel": ""
+            },
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "x",
+              "chartsPerLine": 4
+            },
+            "columnMap": {
+              "split": ["TRANSACTIONTYPE"],
+              "trellis": [],
+              "dimensionAxis": ["TRANSACTIONDATE_Year~~~TRANSACTIONDATE_Month"],
+              "plots": ["sum_Fees"]
+            },
+            "showActionMenu": true,
+            "measureAxis2": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "measureAxis1": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "# Fees Charged",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "normalize": false,
+            "theme": "wave",
+            "applyConditionalFormatting": true,
+            "dimensionAxis": {
+              "showTitle": true,
+              "customSize": "auto",
+              "showAxis": true,
+              "title": "",
+              "icons": {
+                "useIcons": false,
+                "iconProps": {
+                  "fit": "cover",
+                  "column": "",
+                  "type": "round"
+                }
+              }
+            }
+          },
+          "type": "chart"
+        }
+      },
+      "By_Customer_Balance_Category_1": {
+        "broadcastFacet": false,
+        "groups": [],
+        "label": "By Customer Balance Category",
+        "numbers": [],
+        "query": "q = load \"${App.Datasets.RBDemoChargesAndFees.FullyQualifiedName}\";\nq_A = filter q by 'TRANSACTIONTYPE' == \"Debit\";\nq_B = filter q by 'TRANSACTIONTYPE' == \"Credit\";\nq_C = filter q by 'TRANSACTIONTYPE' == \"Debit\";\nresult = group q by 'ACCOUNTNAME' full, q_A by 'ACCOUNTNAME' full, q_B by 'ACCOUNTNAME';\nresult = foreach result generate coalesce(q_A.'ACCOUNTNAME', q_B.'ACCOUNTNAME', q.'ACCOUNTNAME') as 'ACCOUNTNAME', count(q_A) as 'count_Fees_Charged', count(q_B) as 'count_Fees_Reversed', unique(q_A.'ACCOUNTNAME') as 'Customers_Charged_Fees', case when min(q.'BALANCEAMOUNT') < 50000 then \"1.Less than 50k\" when min(q.'BALANCEAMOUNT') >= 50000 and min(q.'BALANCEAMOUNT')< 250000 then \"2.Between 50k and 250k\" when min(q.'BALANCEAMOUNT') >= 250000 and min(q.'BALANCEAMOUNT')< 500000 then \"3.Between 250k and 500k\" when min(q.'BALANCEAMOUNT') <= 500000 and min(q.'BALANCEAMOUNT')< 1000000 then \"4.Between 500k and 1M\" else \"5.More than 1M\" end as 'Balance_Category';\nresult = group result by 'Balance_Category';\nresult = foreach result generate 'Balance_Category' as 'Balance Category', sum('count_Fees_Charged') as '# Fees Charged', sum('count_Fees_Reversed') as '# of Fees Reversed', sum('Customers_Charged_Fees') as '# of Customers with Fees';\nresult = order result by ('Balance Category' asc);\nresult = limit result 2000;",
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "none",
+        "strings": [],
+        "type": "saql",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "autoFitMode": "keepLabels",
+            "showValues": true,
+            "bins": {
+              "breakpoints": {
+                "high": 100,
+                "low": 0
+              },
+              "bands": {
+                "high": {
+                  "color": "#008000",
+                  "label": ""
+                },
+                "low": {
+                  "color": "#B22222",
+                  "label": ""
+                },
+                "medium": {
+                  "color": "#ffa500",
+                  "label": ""
+                }
+              }
+            },
+            "legend": {
+              "descOrder": false,
+              "showHeader": false,
+              "show": true,
+              "customSize": "auto",
+              "position": "bottom-center",
+              "inside": false
+            },
+            "axisMode": "sync",
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "visualizationType": "hbar",
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "By Customer Balance Category",
+              "align": "left",
+              "subtitleLabel": ""
+            },
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "x",
+              "chartsPerLine": 4
+            },
+            "binValues": false,
+            "columnMap": {
+              "trellis": [],
+              "dimensionAxis": ["Balance Category"],
+              "plots": [
+                "# Fees Charged",
+                "# of Customers with Fees",
+                "# of Fees Reversed"
+              ]
+            },
+            "showActionMenu": true,
+            "measureAxis2": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "measureAxis1": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "theme": "wave",
+            "applyConditionalFormatting": true,
+            "dimensionAxis": {
+              "showTitle": true,
+              "customSize": "auto",
+              "showAxis": true,
+              "title": "Balance Category",
+              "icons": {
+                "useIcons": false,
+                "iconProps": {
+                  "fit": "cover",
+                  "column": "",
+                  "type": "round"
+                }
+              }
+            }
+          },
+          "type": "chart"
+        }
+      },
+      "Fees_Charged_Over_Time_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.RBDemoChargesAndFees.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "Fees Charged Over Time",
+        "query": {
+          "query": {
+            "measures": [
+              ["count", "*"],
+              ["sum", "FEES"]
+            ],
+            "groups": [["TRANSACTIONDATE_Year", "TRANSACTIONDATE_Month"]],
+            "filters": [["TRANSACTIONTYPE", ["Debit"], "in"]]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "autoFitMode": "keepLabels",
+            "showValues": true,
+            "stack": false,
+            "showPoints": true,
+            "legend": {
+              "descOrder": false,
+              "showHeader": true,
+              "show": true,
+              "customSize": "auto",
+              "position": "bottom-center",
+              "inside": false
+            },
+            "axisMode": "dual",
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "visualizationType": "combo",
+            "missingValue": "connect",
+            "showValuesOnLine": false,
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "",
+              "align": "center",
+              "subtitleLabel": ""
+            },
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "x",
+              "chartsPerLine": 4
+            },
+            "columnMap": {
+              "trellis": [],
+              "dimensionAxis": ["TRANSACTIONDATE_Year~~~TRANSACTIONDATE_Month"],
+              "plots": ["count", "sum_Fees"]
+            },
+            "showActionMenu": true,
+            "measureAxis2": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "Total Fee Amount",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "measureAxis1": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "# Fees Charged",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "theme": "wave",
+            "dimensionAxis": {
+              "showTitle": true,
+              "customSize": "auto",
+              "showAxis": true,
+              "title": "",
+              "icons": {
+                "useIcons": false,
+                "iconProps": {
+                  "fit": "cover",
+                  "column": "",
+                  "type": "round"
+                }
+              }
+            },
+            "applyConditionalFormatting": true
+          },
+          "type": "chart"
+        }
+      },
+      "Details_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.RBDemoChargesAndFees.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "Details",
+        "query": {
+          "query": {
+            "values": [
+              "TRANSACTIONDATE",
+              "ACCOUNTNAME",
+              "FINANCIALACCOUNTNAME",
+              "BALANCEAMOUNT",
+              "FEESTYPE",
+              "TRANSACTIONTYPE",
+              "FEES"
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "parameters": {
+            "borderColor": "#e0e5ee",
+            "borderWidth": 1,
+            "cell": {
+              "backgroundColor": "#ffffff",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "columnProperties": {},
+            "columns": [],
+            "customBulkActions": [],
+            "header": {
+              "backgroundColor": "#f4f6f9",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "innerMajorBorderColor": "#a8b7c7",
+            "innerMinorBorderColor": "#e0e5ee",
+            "maxColumnWidth": 300,
+            "minColumnWidth": 40,
+            "mode": "variable",
+            "numberOfLines": 1,
+            "showActionMenu": true,
+            "showRowIndexColumn": true,
+            "totals": true,
+            "verticalPadding": 8
+          },
+          "type": "table"
+        }
+      },
+      "Times_Charged_Fees_1": {
+        "broadcastFacet": false,
+        "groups": [],
+        "label": "Customers with number of Times Charged Fees",
+        "numbers": [],
+        "query": "q = load \"${App.Datasets.RBDemoChargesAndFees.FullyQualifiedName}\";\nq = filter q by 'TRANSACTIONTYPE' == \"Debit\";\nresult = group q by 'ACCOUNTNAME';\nresult = foreach result generate q.'ACCOUNTNAME' as 'ACCOUNTNAME', count(q) as 'Times_Charged_Fees_Num', number_to_string(count(q), \"#\") as 'Times_Charged_Fees', unique(q.'ACCOUNTNAME') as 'Customers';\nresult = group result by 'Times_Charged_Fees';\nresult = foreach result generate 'Times_Charged_Fees' as 'Times Charged Fees', sum('Customers') as '# Customers', min('Times_Charged_Fees_Num') as 'Times_Charged_Fees_Num';\nresult = order result by ('Times_Charged_Fees_Num' asc);\nresult = limit result 2000;",
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "none",
+        "strings": [],
+        "type": "saql",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "autoFitMode": "keepLabels",
+            "showValues": true,
+            "bins": {
+              "breakpoints": {
+                "high": 100,
+                "low": 0
+              },
+              "bands": {
+                "high": {
+                  "color": "#008000",
+                  "label": ""
+                },
+                "low": {
+                  "color": "#B22222",
+                  "label": ""
+                },
+                "medium": {
+                  "color": "#ffa500",
+                  "label": ""
+                }
+              }
+            },
+            "legend": {
+              "descOrder": false,
+              "showHeader": true,
+              "show": false,
+              "customSize": "auto",
+              "position": "right-top",
+              "inside": false
+            },
+            "axisMode": "multi",
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "visualizationType": "vbar",
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "How many times were they charged?",
+              "align": "left",
+              "subtitleLabel": ""
+            },
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "x",
+              "chartsPerLine": 4
+            },
+            "binValues": false,
+            "columnMap": {
+              "trellis": [],
+              "dimensionAxis": ["Times Charged Fees"],
+              "plots": ["# Customers"]
+            },
+            "showActionMenu": true,
+            "measureAxis2": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "measureAxis1": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "# of Customers",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "theme": "wave",
+            "dimensionAxis": {
+              "showTitle": true,
+              "customSize": "auto",
+              "showAxis": true,
+              "title": "",
+              "icons": {
+                "useIcons": false,
+                "iconProps": {
+                  "fit": "cover",
+                  "column": "",
+                  "type": "round"
+                }
+              }
+            },
+            "applyConditionalFormatting": true
+          },
+          "type": "chart"
+        }
+      },
+      "KPIs_1": {
+        "broadcastFacet": true,
+        "groups": [],
+        "label": "KPIs1",
+        "numbers": [],
+        "query": "q = load \"${App.Datasets.RBDemoChargesAndFees.FullyQualifiedName}\";\nq_A = filter q by 'TRANSACTIONTYPE' == \"Debit\";\nq_C = filter q by 'TRANSACTIONTYPE' == \"Credit\";\nresult = group q_A by all full, q_C by all;\nresult = foreach result generate count(q_A) as '# Fees Charged', sum(q_A.'FEES') as 'Total Fee Amount', count(q_C) as '# Fee Reversed', sum(q_C.'FEES') as 'Total Amount Reversed', unique(q_A.'ACCOUNTNAME') as '# Customers Charged Fees';\nresult = foreach result generate '# Fees Charged', 'Total Fee Amount', '# Fee Reversed', 'Total Amount Reversed', '# Customers Charged Fees', coalesce('Total Amount Reversed'/'Total Fee Amount',0) as '% Fees Reversed';\nresult = limit result 2000;",
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "strings": [],
+        "type": "saql",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "borderColor": "#e0e5ee",
+            "borderWidth": 1,
+            "cell": {
+              "backgroundColor": "#ffffff",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "columnProperties": {},
+            "columns": [],
+            "customBulkActions": [],
+            "header": {
+              "backgroundColor": "#f4f6f9",
+              "fontColor": "#16325c",
+              "fontSize": 12
+            },
+            "innerMajorBorderColor": "#a8b7c7",
+            "innerMinorBorderColor": "#e0e5ee",
+            "maxColumnWidth": 300,
+            "minColumnWidth": 40,
+            "mode": "variable",
+            "numberOfLines": 1,
+            "showActionMenu": true,
+            "showRowIndexColumn": false,
+            "totals": true,
+            "verticalPadding": 8
+          },
+          "type": "table"
+        }
+      },
+      "Fees_by_Fee_Type_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.RBDemoChargesAndFees.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "Fees by Fee Type",
+        "query": {
+          "query": {
+            "measures": [
+              ["count", "*", "A"],
+              ["sum", "FEES", "B"],
+              ["sum", "FEES", "C"],
+              ["count", "*", "D"]
+            ],
+            "columns": [
+              {
+                "query": {
+                  "measures": [["count", "*"]],
+                  "groups": ["FEESTYPE"],
+                  "filters": [["TRANSACTIONTYPE", ["Debit"], "in"]],
+                  "order": [
+                    [
+                      -1,
+                      {
+                        "ascending": false,
+                        "inner": false
+                      }
+                    ]
+                  ]
+                },
+                "header": "# Fees"
+              },
+              {
+                "query": {
+                  "measures": [["sum", "FEES"]],
+                  "groups": ["FEESTYPE"],
+                  "filters": [["TRANSACTIONTYPE", ["Debit"], "in"]]
+                },
+                "header": "Total Fee Amount"
+              },
+              {
+                "query": {
+                  "measures": [["sum", "FEES"]],
+                  "groups": ["FEESTYPE"],
+                  "filters": [["TRANSACTIONTYPE", ["Credit"], "in"]]
+                },
+                "header": "Total Amount Reversed"
+              },
+              {
+                "query": {
+                  "measures": [["count", "*"]],
+                  "formula": "C/B",
+                  "groups": ["FEESTYPE"]
+                },
+                "header": "% Reversed"
+              }
+            ],
+            "groups": ["FEESTYPE"]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "autoFitMode": "keepLabels",
+            "showValues": true,
+            "bins": {
+              "breakpoints": {
+                "high": 100,
+                "low": 0
+              },
+              "bands": {
+                "high": {
+                  "color": "#008000",
+                  "label": ""
+                },
+                "low": {
+                  "color": "#B22222",
+                  "label": ""
+                },
+                "medium": {
+                  "color": "#ffa500",
+                  "label": ""
+                }
+              }
+            },
+            "legend": {
+              "descOrder": false,
+              "showHeader": true,
+              "show": false,
+              "customSize": "auto",
+              "position": "right-top",
+              "inside": false
+            },
+            "axisMode": "multi",
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "visualizationType": "hbar",
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "",
+              "align": "center",
+              "subtitleLabel": ""
+            },
+            "binValues": false,
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "x",
+              "chartsPerLine": 4
+            },
+            "columnMap": {
+              "trellis": [],
+              "dimensionAxis": ["FEESTYPE"],
+              "plots": ["A", "B", "D"]
+            },
+            "showActionMenu": true,
+            "measureAxis2": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "measureAxis1": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "theme": "wave",
+            "dimensionAxis": {
+              "showTitle": true,
+              "customSize": "auto",
+              "showAxis": true,
+              "title": "",
+              "icons": {
+                "useIcons": false,
+                "iconProps": {
+                  "fit": "cover",
+                  "column": "",
+                  "type": "round"
+                }
+              }
+            },
+            "applyConditionalFormatting": true
+          },
+          "type": "chart"
+        }
+      },
+      "Customers_Charged_Fees_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.RBDemoChargesAndFees.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "Customers_Charged_Fees",
+        "query": {
+          "query": {
+            "measures": [
+              ["min", "BALANCEAMOUNT", "A"],
+              ["sum", "FEES", "B"],
+              ["sum", "FEES", "C"],
+              ["count", "*", "D"]
+            ],
+            "columns": [
+              {
+                "query": {
+                  "measures": [["min", "BALANCEAMOUNT"]],
+                  "groups": ["ACCOUNTNAME"],
+                  "order": [
+                    [
+                      -1,
+                      {
+                        "ascending": false,
+                        "inner": false
+                      }
+                    ]
+                  ]
+                },
+                "header": "Total Balance"
+              },
+              {
+                "query": {
+                  "measures": [["sum", "FEES"]],
+                  "groups": ["ACCOUNTNAME"],
+                  "filters": [["TRANSACTIONTYPE", ["Debit"], "in"]]
+                },
+                "header": "Total Fee Amount"
+              },
+              {
+                "query": {
+                  "measures": [["sum", "FEES"]],
+                  "groups": ["ACCOUNTNAME"],
+                  "filters": [["TRANSACTIONTYPE", ["Credit"], "in"]]
+                },
+                "header": "Total Amount Reversed"
+              },
+              {
+                "query": {
+                  "measures": [["count", "*"]],
+                  "formula": "C/B",
+                  "groups": ["ACCOUNTNAME"]
+                },
+                "header": "% Reversed"
+              }
+            ],
+            "groups": ["ACCOUNTNAME"]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "autoFitMode": "keepLabels",
+            "showValues": true,
+            "bins": {
+              "breakpoints": {
+                "high": 100,
+                "low": 0
+              },
+              "bands": {
+                "high": {
+                  "color": "#008000",
+                  "label": ""
+                },
+                "low": {
+                  "color": "#B22222",
+                  "label": ""
+                },
+                "medium": {
+                  "color": "#ffa500",
+                  "label": ""
+                }
+              }
+            },
+            "legend": {
+              "descOrder": false,
+              "showHeader": true,
+              "show": false,
+              "customSize": "auto",
+              "position": "right-top",
+              "inside": false
+            },
+            "axisMode": "multi",
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "visualizationType": "hbar",
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "Who was charged fees?",
+              "align": "left",
+              "subtitleLabel": ""
+            },
+            "binValues": false,
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "x",
+              "chartsPerLine": 4
+            },
+            "columnMap": {
+              "trellis": [],
+              "dimensionAxis": ["ACCOUNTNAME"],
+              "plots": ["A", "B", "D"]
+            },
+            "showActionMenu": true,
+            "measureAxis2": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "measureAxis1": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "theme": "wave",
+            "dimensionAxis": {
+              "showTitle": true,
+              "customSize": "auto",
+              "showAxis": true,
+              "title": "",
+              "icons": {
+                "useIcons": false,
+                "iconProps": {
+                  "fit": "cover",
+                  "column": "",
+                  "type": "round"
+                }
+              }
+            },
+            "applyConditionalFormatting": true
+          },
+          "type": "chart"
+        }
+      }
+    },
+    "widgetStyle": {
+      "backgroundColor": "rgba(255, 255, 255, 0)",
+      "borderColor": "#E6ECF2",
+      "borderEdges": [],
+      "borderRadius": 0,
+      "borderWidth": 1
+    },
+    "widgets": {
+      "text_18": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "Choose KPI:",
+          "textAlignment": "center",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "text_19": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "Group by:",
+          "textAlignment": "center",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "text_57": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "% Fees Reversed",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "text_59": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "Total Amount Reversed",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "text_55": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "Total Fee Amount",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "number_6": {
+        "parameters": {
+          "compact": false,
+          "exploreLink": true,
+          "measureField": "% Fees Reversed",
+          "numberColor": "#FFFFFF",
+          "numberSize": 20,
+          "showActionMenu": true,
+          "step": "KPIs_1",
+          "textAlignment": "left",
+          "title": "",
+          "titleColor": "#091A3E",
+          "titleSize": 16
+        },
+        "type": "number"
+      },
+      "container_1": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "container_2": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "container_4": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "container_5": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "container_6": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "chart_6": {
+        "parameters": {
+          "autoFitMode": "keepLabels",
+          "showValues": true,
+          "bins": {
+            "breakpoints": {
+              "high": 100,
+              "low": 0
+            },
+            "bands": {
+              "high": {
+                "color": "#008000",
+                "label": ""
+              },
+              "low": {
+                "color": "#B22222",
+                "label": ""
+              },
+              "medium": {
+                "color": "#ffa500",
+                "label": ""
+              }
+            }
+          },
+          "legend": {
+            "descOrder": false,
+            "showHeader": false,
+            "show": true,
+            "customSize": "auto",
+            "position": "bottom-center",
+            "inside": false
+          },
+          "axisMode": "sync",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "hbar",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "By Customer Balance Category",
+            "align": "left",
+            "subtitleLabel": ""
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "binValues": false,
+          "columnMap": {
+            "trellis": [],
+            "dimensionAxis": ["Balance Category"],
+            "plots": [
+              "# Fees Charged",
+              "# of Customers with Fees",
+              "# of Fees Reversed"
+            ]
+          },
+          "showActionMenu": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": false,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "theme": "dark",
+          "step": "By_Customer_Balance_Category_1",
+          "applyConditionalFormatting": true,
+          "dimensionAxis": {
+            "showTitle": true,
+            "customSize": "auto",
+            "showAxis": true,
+            "title": "Balance Category",
+            "icons": {
+              "useIcons": false,
+              "iconProps": {
+                "fit": "cover",
+                "column": "",
+                "type": "round",
+                "parameters": {}
+              }
+            }
+          }
+        },
+        "type": "chart"
+      },
+      "text_3": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "# Customers Charged Fees",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "container_7": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "chart_5": {
+        "parameters": {
+          "autoFitMode": "keepLabels",
+          "showValues": true,
+          "bins": {
+            "breakpoints": {
+              "high": 100,
+              "low": 0
+            },
+            "bands": {
+              "high": {
+                "color": "#008000",
+                "label": ""
+              },
+              "low": {
+                "color": "#B22222",
+                "label": ""
+              },
+              "medium": {
+                "color": "#ffa500",
+                "label": ""
+              }
+            }
+          },
+          "legend": {
+            "descOrder": false,
+            "showHeader": true,
+            "show": false,
+            "customSize": "auto",
+            "position": "right-top",
+            "inside": false
+          },
+          "axisMode": "multi",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "hbar",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "Who was charged fees?",
+            "align": "left",
+            "subtitleLabel": ""
+          },
+          "binValues": false,
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "columnMap": {
+            "trellis": [],
+            "dimensionAxis": ["ACCOUNTNAME"],
+            "plots": ["A", "B", "D"]
+          },
+          "showActionMenu": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "theme": "light",
+          "step": "Customers_Charged_Fees_1",
+          "dimensionAxis": {
+            "showTitle": true,
+            "customSize": "auto",
+            "showAxis": true,
+            "title": "Name",
+            "icons": {
+              "useIcons": false,
+              "iconProps": {
+                "fit": "cover",
+                "column": "",
+                "type": "round",
+                "parameters": {}
+              }
+            }
+          },
+          "applyConditionalFormatting": true
+        },
+        "type": "chart"
+      },
+      "text_2": {
+        "parameters": {
+          "fontSize": 16,
+          "showActionMenu": true,
+          "text": "Customers Charged Fees",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "text_5": {
+        "parameters": {
+          "fontSize": 16,
+          "showActionMenu": true,
+          "text": "My Customers Charged Fees",
+          "textAlignment": "left",
+          "textColor": "#091A3E"
+        },
+        "type": "text"
+      },
+      "chart_8": {
+        "parameters": {
+          "autoFitMode": "keepLabels",
+          "showValues": true,
+          "bins": {
+            "breakpoints": {
+              "high": 100,
+              "low": 0
+            },
+            "bands": {
+              "high": {
+                "color": "#008000",
+                "label": ""
+              },
+              "low": {
+                "color": "#B22222",
+                "label": ""
+              },
+              "medium": {
+                "color": "#ffa500",
+                "label": ""
+              }
+            }
+          },
+          "legend": {
+            "descOrder": false,
+            "showHeader": true,
+            "show": false,
+            "customSize": "auto",
+            "position": "right-top",
+            "inside": false
+          },
+          "axisMode": "multi",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "vbar",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "How many times were they charged?",
+            "align": "left",
+            "subtitleLabel": ""
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "binValues": false,
+          "columnMap": {
+            "trellis": [],
+            "dimensionAxis": ["Times Charged Fees"],
+            "plots": ["# Customers"]
+          },
+          "showActionMenu": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "# of Customers",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "theme": "dark",
+          "step": "Times_Charged_Fees_1",
+          "dimensionAxis": {
+            "showTitle": true,
+            "customSize": "auto",
+            "showAxis": true,
+            "title": "",
+            "icons": {
+              "useIcons": false,
+              "iconProps": {
+                "fit": "cover",
+                "column": "",
+                "type": "round",
+                "parameters": {}
+              }
+            }
+          },
+          "applyConditionalFormatting": true
+        },
+        "type": "chart"
+      },
+      "text_4": {
+        "parameters": {
+          "fontSize": 16,
+          "showActionMenu": true,
+          "text": "Customer Detail",
+          "textAlignment": "left",
+          "textColor": "#091A3E",
+          "tooltip": ""
+        },
+        "type": "text"
+      },
+      "chart_7": {
+        "parameters": {
+          "autoFitMode": "keepLabels",
+          "showValues": true,
+          "bins": {
+            "breakpoints": {
+              "high": 100,
+              "low": 0
+            },
+            "bands": {
+              "high": {
+                "color": "#008000",
+                "label": ""
+              },
+              "low": {
+                "color": "#B22222",
+                "label": ""
+              },
+              "medium": {
+                "color": "#ffa500",
+                "label": ""
+              }
+            }
+          },
+          "legend": {
+            "descOrder": false,
+            "showHeader": true,
+            "show": false,
+            "customSize": "auto",
+            "position": "right-top",
+            "inside": false
+          },
+          "axisMode": "multi",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "hbar",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "",
+            "align": "center",
+            "subtitleLabel": ""
+          },
+          "binValues": false,
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "columnMap": {
+            "trellis": [],
+            "dimensionAxis": ["FEESTYPE"],
+            "plots": ["A", "B", "D"]
+          },
+          "showActionMenu": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "theme": "light",
+          "step": "Fees_by_Fee_Type_1",
+          "dimensionAxis": {
+            "showTitle": true,
+            "customSize": "auto",
+            "showAxis": true,
+            "title": "",
+            "icons": {
+              "useIcons": false,
+              "iconProps": {
+                "fit": "cover",
+                "column": "",
+                "type": "round",
+                "parameters": {}
+              }
+            }
+          },
+          "applyConditionalFormatting": true
+        },
+        "type": "chart"
+      },
+      "chart_1": {
+        "parameters": {
+          "autoFitMode": "keepLabels",
+          "stack": false,
+          "showValues": true,
+          "showPoints": true,
+          "legend": {
+            "descOrder": false,
+            "showHeader": false,
+            "show": true,
+            "customSize": "auto",
+            "position": "bottom-center",
+            "inside": false
+          },
+          "axisMode": "dual",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "combo",
+          "missingValue": "connect",
+          "showValuesOnLine": false,
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "# of Fees Charged and Fee Amount",
+            "align": "left",
+            "subtitleLabel": ""
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "showActionMenu": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "# Fees Charged",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "theme": "dark",
+          "step": "Fees_Charged_Over_Time_1",
+          "applyConditionalFormatting": true,
+          "dimensionAxis": {
+            "showTitle": true,
+            "customSize": "auto",
+            "showAxis": true,
+            "title": "",
+            "icons": {
+              "useIcons": false,
+              "iconProps": {
+                "fit": "cover",
+                "column": "",
+                "type": "round",
+                "parameters": {}
+              }
+            }
+          }
+        },
+        "type": "chart"
+      },
+      "chart_4": {
+        "parameters": {
+          "autoFitMode": "keepLabels",
+          "showValues": true,
+          "legend": {
+            "descOrder": false,
+            "showHeader": true,
+            "show": true,
+            "customSize": "auto",
+            "position": "bottom-center",
+            "inside": false
+          },
+          "axisMode": "dual",
+          "totalSumMode": "none",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "stackvbar",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "Reversed Fees",
+            "align": "left",
+            "subtitleLabel": ""
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "columnMap": {
+            "split": ["TRANSACTIONTYPE"],
+            "trellis": [],
+            "dimensionAxis": ["TRANSACTIONDATE_Year~~~TRANSACTIONDATE_Month"],
+            "plots": ["sum_Fees"]
+          },
+          "showActionMenu": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "# Fees Charged",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "normalize": false,
+          "theme": "dark",
+          "step": "Reversed_Fees_Over_Time_1",
+          "applyConditionalFormatting": true,
+          "dimensionAxis": {
+            "showTitle": true,
+            "customSize": "auto",
+            "showAxis": true,
+            "title": "",
+            "icons": {
+              "useIcons": false,
+              "iconProps": {
+                "fit": "cover",
+                "column": "",
+                "type": "round",
+                "parameters": {}
+              }
+            }
+          }
+        },
+        "type": "chart"
+      },
+      "text_1": {
+        "parameters": {
+          "fontSize": 16,
+          "showActionMenu": true,
+          "text": "Fees by Fee Type",
+          "textAlignment": "left",
+          "textColor": "#091A3E"
+        },
+        "type": "text"
+      },
+      "container_24": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "filterpanel_1": {
+        "parameters": {
+          "filterItemOptions": {
+            "backgroundColor": "#FFFFFF",
+            "borderColor": "#E6ECF2",
+            "borderRadius": 4,
+            "borderWidth": 1,
+            "propertyColor": "#54698D",
+            "valueColor": "#16325C"
+          },
+          "filters": [],
+          "itemsPerRow": 8,
+          "showAllFilters": true,
+          "title": {
+            "separatorColor": "#E6ECF2",
+            "text": {
+              "align": "left",
+              "color": "#091A3E",
+              "fontSize": 16,
+              "label": "Filters"
+            },
+            "visible": false
+          }
+        },
+        "type": "filterpanel"
+      },
+      "text_48": {
+        "parameters": {
+          "fontSize": 16,
+          "showActionMenu": true,
+          "text": "Fees Detail",
+          "textAlignment": "left",
+          "textColor": "#091A3E",
+          "tooltip": ""
+        },
+        "type": "text"
+      },
+      "text_42": {
+        "parameters": {
+          "fontSize": 16,
+          "showActionMenu": true,
+          "text": "Fees Charged Over Time",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "navigation_1": {
+        "parameters": {
+          "fontSize": 12,
+          "selectedTab": {
+            "backgroundColor": "rgb(240, 248, 252)",
+            "borderColor": "#0070D2",
+            "borderEdges": ["bottom"],
+            "borderWidth": 2,
+            "textColor": "#0070D2"
+          },
+          "tabCount": 5,
+          "textColor": "#091A3E"
+        },
+        "type": "navigation"
+      },
+      "table_1": {
+        "parameters": {
+          "borderColor": "#e1e5ee",
+          "borderWidth": 1,
+          "cell": {
+            "backgroundColor": "#f2f6fa",
+            "fontColor": "#16325c",
+            "fontSize": 12
+          },
+          "columnProperties": {},
+          "columns": [],
+          "customBulkActions": [],
+          "evenRowColor": "#f2f6fa",
+          "exploreLink": true,
+          "header": {
+            "backgroundColor": "#e4ecf2",
+            "fontColor": "#5c7a99",
+            "fontSize": 12
+          },
+          "innerMajorBorderColor": "#a9b7c7",
+          "innerMinorBorderColor": "#e1e5ee",
+          "mode": "fittocontainer",
+          "numberOfLines": 1,
+          "oddRowColor": "#ffffff",
+          "showActionMenu": true,
+          "showRowIndexColumn": false,
+          "step": "Details_1",
+          "totals": true,
+          "verticalPadding": 8
+        },
+        "type": "table"
+      },
+      "number_5": {
+        "parameters": {
+          "compact": false,
+          "exploreLink": true,
+          "measureField": "Total Amount Reversed",
+          "numberColor": "#FFFFFF",
+          "numberSize": 20,
+          "showActionMenu": true,
+          "step": "KPIs_1",
+          "textAlignment": "left",
+          "title": "",
+          "titleColor": "#091A3E",
+          "titleSize": 16
+        },
+        "type": "number"
+      },
+      "text_60": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "# Fees Reversed",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "number_4": {
+        "parameters": {
+          "compact": false,
+          "exploreLink": true,
+          "measureField": "# Fee Reversed",
+          "numberColor": "#FFFFFF",
+          "numberSize": 20,
+          "showActionMenu": true,
+          "step": "KPIs_1",
+          "textAlignment": "left",
+          "title": "",
+          "titleColor": "#091A3E",
+          "titleSize": 16
+        },
+        "type": "number"
+      },
+      "text_41": {
+        "parameters": {
+          "fontSize": 12,
+          "showActionMenu": true,
+          "text": "# Fees Charged",
+          "textAlignment": "left",
+          "textColor": "#FFFFFF"
+        },
+        "type": "text"
+      },
+      "number_3": {
+        "parameters": {
+          "compact": false,
+          "exploreLink": true,
+          "measureField": "Total Fee Amount",
+          "numberColor": "#FFFFFF",
+          "numberSize": 20,
+          "showActionMenu": true,
+          "step": "KPIs_1",
+          "textAlignment": "left",
+          "title": "",
+          "titleColor": "#091A3E",
+          "titleSize": 16
+        },
+        "type": "number"
+      },
+      "number_2": {
+        "parameters": {
+          "compact": false,
+          "exploreLink": true,
+          "measureField": "# Customers Charged Fees",
+          "numberColor": "#FFFFFF",
+          "numberSize": 20,
+          "showActionMenu": true,
+          "step": "KPIs_1",
+          "textAlignment": "left",
+          "title": "",
+          "titleColor": "#091A3E",
+          "titleSize": 16
+        },
+        "type": "number"
+      },
+      "number_1": {
+        "parameters": {
+          "compact": false,
+          "exploreLink": true,
+          "measureField": "# Fees Charged",
+          "numberColor": "#FFFFFF",
+          "numberSize": 20,
+          "showActionMenu": true,
+          "step": "KPIs_1",
+          "textAlignment": "left",
+          "title": "",
+          "titleColor": "#091A3E",
+          "titleSize": 16
+        },
+        "type": "number"
+      },
+      "container_12": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "fit": "original"
+        },
+        "type": "container"
+      }
+    }
+  }
+}

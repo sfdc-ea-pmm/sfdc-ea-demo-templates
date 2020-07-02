@@ -1,0 +1,4527 @@
+{
+  "name" : "ManagerTeamSalesPerformance_tp",
+  "label" : "Manager: Team Sales Performance",
+  "folder" : {
+    "id" : "${App.Folder.Id}"
+  },
+  "dateVersion" : 1,
+  "mobileDisabled" : false,
+  "xmd" : {
+    "measures" : [
+      {
+        "conditionalFormatting" : { },
+        "field" : "Win_Rate_by_Advisor.C",
+        "format" : {
+          "delimiters" : { },
+          "customFormat" : "[\"#,###.##%\",100]"
+        }
+      },
+      {
+        "conditionalFormatting" : { },
+        "field" : "Closed_Deals_Trend_1.B",
+        "format" : {
+          "delimiters" : { },
+          "customFormat" : "[\"$#,###\",1]"
+        }
+      },
+      {
+        "conditionalFormatting" : { },
+        "field" : "Activities_per_Oppor_1.C",
+        "format" : {
+          "delimiters" : { },
+          "customFormat" : "[\"#,###\",1]"
+        }
+      }
+    ],
+    "derivedDimensions" : [ ],
+    "organizations" : [ ],
+    "showDetailsDefaultFields" : [ ],
+    "dates" : [ ],
+    "derivedMeasures" : [ ],
+    "dimensions" : [ ]
+  },
+  "state" : {
+    "dataSourceLinks" : [
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoOpportunity.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "CLOSEDATE"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoQuota.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "STARTDATE"
+          }
+        ],
+        "label" : "CloseDate",
+        "name" : "Link_3069"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoOpportunity.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "OWNERCITY"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoPipelineTrending.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "OPPORTUNITYOWNERCITY"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoQuota.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "CITY"
+          }
+        ],
+        "label" : "City",
+        "name" : "Link_2717"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoOpportunity.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "OWNERSTATE"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoPipelineTrending.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "OPPORTUNITYOWNERSTATE"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoQuota.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "STATE"
+          }
+        ],
+        "label" : "State",
+        "name" : "Link_2694"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoOpportunity.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "STAGENAME"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoPipelineTrending.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "STAGENAME"
+          }
+        ],
+        "label" : "Stage",
+        "name" : "Link_4622"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoOpportunity.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "OPPORTUNITYOWNER"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoPipelineTrending.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "OPPORTUNITYOWNER"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.FscDemoQuota.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "USER"
+          }
+        ],
+        "label" : "Owner",
+        "name" : "Link_32021"
+      }
+    ],
+    "filters" : [
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.FscDemoOpportunity.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "OWNERSTATE"
+        ],
+        "label" : "State",
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.FscDemoOpportunity.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "OWNERCITY"
+        ],
+        "label" : "City",
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.FscDemoOpportunity.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "OPPORTUNITYOWNER"
+        ],
+        "label" : "Advisor",
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.FscDemoOpportunity.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "CLOSEDATE"
+        ],
+        "label" : "Close Date",
+        "locked" : false,
+        "operator" : ">=<=",
+        "value" : "[]"
+      }
+    ],
+    "gridLayouts" : [
+      {
+        "maxWidth" : 1500,
+        "name" : "Default",
+        "numColumns" : 50,
+        "pages" : [
+          {
+            "label" : "Sales Performance",
+            "name" : "fd88bd69-e1a5-40e3-8876-6a30714aecfb",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "navigation_1",
+                "row" : 6,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#C6D3E1",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_1",
+                "row" : 0,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(228, 234, 240)",
+                  "borderColor" : "rgb(20, 143, 86)",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "filterpanel_1",
+                "row" : 1,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_11",
+                "row" : 17,
+                "rowspan" : 43,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 31,
+                "column" : 18,
+                "name" : "chart_Closed_Deals_Trend_1",
+                "row" : 23,
+                "rowspan" : 36,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "text_Who_Will_Make_Their_Number_",
+                "row" : 19,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_6",
+                "row" : 60,
+                "rowspan" : 41,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "text_Opportunity_Details",
+                "row" : 62,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "table_Opportunity_Details_1",
+                "row" : 66,
+                "rowspan" : 32,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 16,
+                "column" : 1,
+                "name" : "chart_Advisor_Analysis_1",
+                "row" : 26,
+                "rowspan" : 33,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_7",
+                "row" : 10,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#335779",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 1,
+                "name" : "text_Total_Closed_Won",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 20,
+                "name" : "text_Quota",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 25,
+                "name" : "text_Team_Attainment",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 36,
+                "name" : "text_Expected_Revenue",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 41,
+                "name" : "image_3",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 14,
+                "name" : "number_Opportunity_KPIs_13",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 30,
+                "name" : "text_Avg_Attainment_Advisor",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 7,
+                "name" : "number_Opportunity_KPIs_17",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 7,
+                "name" : "text_Average_Closed_Advisor1",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 16,
+                "column" : 1,
+                "name" : "pillbox_static_1",
+                "row" : 23,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 20,
+                "name" : "number_Quota_Attainment_KPIs_13",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 25,
+                "name" : "number_Quota_Attainment_KPIs_12",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 30,
+                "name" : "number_Quota_Attainment_KPIs_11",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 36,
+                "name" : "number_Quota_Attainment_KPIs_1",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 41,
+                "name" : "number_Quota_Attainment_KPIs_14",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#091A3E",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 8,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 46,
+                "name" : "text_vs_quota",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 14,
+                "name" : "text_Total_Open_Pipe",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 1,
+                "name" : "number_Opportunity_KPIs_14",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              }
+            ]
+          },
+          {
+            "label" : "Opportunity Processing",
+            "name" : "2a8302ae-a504-42bd-9755-75494eb1bacb",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_2",
+                "row" : 17,
+                "rowspan" : 43,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "navigation_1",
+                "row" : 6,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#C6D3E1",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "chart_Avg_Days_in_Stage_1",
+                "row" : 22,
+                "rowspan" : 36,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_6",
+                "row" : 95,
+                "rowspan" : 41,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "text_Opportunity_Details",
+                "row" : 97,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "table_Opportunity_Details_1",
+                "row" : 101,
+                "rowspan" : 32,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_1",
+                "row" : 0,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(228, 234, 240)",
+                  "borderColor" : "rgb(20, 143, 86)",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "filterpanel_1",
+                "row" : 1,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 1,
+                "name" : "text_Who_is_Processing_Opportunities_Efficiently_",
+                "row" : 19,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 16,
+                "column" : 1,
+                "name" : "container_4",
+                "row" : 62,
+                "rowspan" : 31,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 14,
+                "column" : 2,
+                "name" : "text_Are_Advisors_Spending_More_Time_on_High_or_Low_Value_Opportunities_",
+                "row" : 63,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 15,
+                "column" : 34,
+                "name" : "container_9",
+                "row" : 62,
+                "rowspan" : 31,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 35,
+                "name" : "text_Who_is_Winning_the_Most_Deals_",
+                "row" : 63,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 35,
+                "name" : "chart_Win_Rate_by_Advisor",
+                "row" : 66,
+                "rowspan" : 26,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 14,
+                "column" : 2,
+                "name" : "chart_Activities_per_Oppty_by_Amount_Bucket",
+                "row" : 67,
+                "rowspan" : 25,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_7",
+                "row" : 10,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#335779",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 16,
+                "name" : "text_Average_Days_to_Close",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 1,
+                "name" : "number_Opportunity_KPIs_18",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 15,
+                "column" : 18,
+                "name" : "container_10",
+                "row" : 62,
+                "rowspan" : 31,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 14,
+                "column" : 19,
+                "name" : "text_Activities_Per_",
+                "row" : 63,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 19,
+                "name" : "chart_Activities_per_Oppor_1",
+                "row" : 66,
+                "rowspan" : 26,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 1,
+                "name" : "text__Closed_Won_Deals",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 8,
+                "name" : "text_Average_Closed_Advisor",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 16,
+                "name" : "number_Opportunity_KPIs_16",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 23,
+                "name" : "text_Team_Win_Rate",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 23,
+                "name" : "number_Opportunity_KPIs_12",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 38,
+                "name" : "text_Average_Activities_Per_1K_Closed",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 10,
+                "column" : 38,
+                "name" : "number_Opportunity_KPIs_11",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 8,
+                "name" : "number_Opportunity_KPIs_1",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 30,
+                "name" : "text_Average_Win_Rate_Advisor",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 30,
+                "name" : "number_Opportunity_KPIs_15",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight" : "fine",
+        "selectors" : [ ],
+        "style" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "backgroundColor" : "rgb(242, 246, 250)",
+          "cellSpacingX" : 0,
+          "cellSpacingY" : 0,
+          "fit" : "original",
+          "gutterColor" : "#C5D3E0"
+        },
+        "version" : 1.0
+      },
+      {
+        "name" : "Phone",
+        "numColumns" : 24,
+        "pages" : [
+          {
+            "label" : "Sales Performance",
+            "name" : "fd88bd69-e1a5-40e3-8876-6a30714aecfb",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "container_1",
+                "row" : 0,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(228, 234, 240)",
+                  "borderColor" : "rgb(20, 143, 86)",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "filterpanel_1",
+                "row" : 1,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "navigation_1",
+                "row" : 6,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#C6D3E1",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "container_7",
+                "row" : 10,
+                "rowspan" : 20,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#335779",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 1,
+                "name" : "text_Total_Closed_Won",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 9,
+                "name" : "text_Average_Closed_Advisor1",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 17,
+                "name" : "text_Total_Open_Pipe",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 1,
+                "name" : "text_Quota",
+                "row" : 17,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 9,
+                "name" : "text_Team_Attainment",
+                "row" : 17,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 17,
+                "name" : "text_Avg_Attainment_Advisor",
+                "row" : 17,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 1,
+                "name" : "text_Expected_Revenue",
+                "row" : 23,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 8,
+                "name" : "image_3",
+                "row" : 23,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 1,
+                "name" : "number_Opportunity_KPIs_14",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 9,
+                "name" : "number_Opportunity_KPIs_17",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 17,
+                "name" : "number_Opportunity_KPIs_13",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 1,
+                "name" : "number_Quota_Attainment_KPIs_13",
+                "row" : 19,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 9,
+                "name" : "number_Quota_Attainment_KPIs_12",
+                "row" : 19,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 17,
+                "name" : "number_Quota_Attainment_KPIs_11",
+                "row" : 19,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 1,
+                "name" : "number_Quota_Attainment_KPIs_1",
+                "row" : 25,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 6,
+                "name" : "number_Quota_Attainment_KPIs_14",
+                "row" : 25,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#091A3E",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 8,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 13,
+                "name" : "text_vs_quota",
+                "row" : 25,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "container_11",
+                "row" : 30,
+                "rowspan" : 77,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 22,
+                "column" : 1,
+                "name" : "text_Who_Will_Make_Their_Number_",
+                "row" : 32,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 22,
+                "column" : 1,
+                "name" : "pillbox_static_1",
+                "row" : 36,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 22,
+                "column" : 1,
+                "name" : "chart_Closed_Deals_Trend_1",
+                "row" : 73,
+                "rowspan" : 32,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 22,
+                "column" : 1,
+                "name" : "chart_Advisor_Analysis_1",
+                "row" : 38,
+                "rowspan" : 33,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "container_6",
+                "row" : 107,
+                "rowspan" : 41,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 22,
+                "column" : 1,
+                "name" : "text_Opportunity_Details",
+                "row" : 109,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 22,
+                "column" : 1,
+                "name" : "table_Opportunity_Details_1",
+                "row" : 113,
+                "rowspan" : 32,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              }
+            ]
+          },
+          {
+            "label" : "Opportunity Processing",
+            "name" : "2a8302ae-a504-42bd-9755-75494eb1bacb",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "container_1",
+                "row" : 0,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(228, 234, 240)",
+                  "borderColor" : "rgb(20, 143, 86)",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "filterpanel_1",
+                "row" : 1,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "navigation_1",
+                "row" : 6,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#C6D3E1",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "container_7",
+                "row" : 10,
+                "rowspan" : 15,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#335779",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 1,
+                "name" : "text__Closed_Won_Deals",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 7,
+                "name" : "text_Average_Closed_Advisor",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 15,
+                "name" : "text_Average_Days_to_Close",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 1,
+                "name" : "text_Team_Win_Rate",
+                "row" : 18,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 7,
+                "name" : "text_Average_Win_Rate_Advisor",
+                "row" : 18,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 15,
+                "name" : "text_Average_Activities_Per_1K_Closed",
+                "row" : 18,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 1,
+                "name" : "number_Opportunity_KPIs_18",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 7,
+                "name" : "number_Opportunity_KPIs_1",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 15,
+                "name" : "number_Opportunity_KPIs_16",
+                "row" : 13,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 1,
+                "name" : "number_Opportunity_KPIs_12",
+                "row" : 20,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 7,
+                "name" : "number_Opportunity_KPIs_15",
+                "row" : 20,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 15,
+                "name" : "number_Opportunity_KPIs_11",
+                "row" : 20,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "container_2",
+                "row" : 25,
+                "rowspan" : 43,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 22,
+                "column" : 1,
+                "name" : "text_Who_is_Processing_Opportunities_Efficiently_",
+                "row" : 27,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 22,
+                "column" : 1,
+                "name" : "chart_Avg_Days_in_Stage_1",
+                "row" : 30,
+                "rowspan" : 36,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 22,
+                "column" : 1,
+                "name" : "container_4",
+                "row" : 69,
+                "rowspan" : 31,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 20,
+                "column" : 2,
+                "name" : "text_Are_Advisors_Spending_More_Time_on_High_or_Low_Value_Opportunities_",
+                "row" : 70,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 20,
+                "column" : 2,
+                "name" : "chart_Activities_per_Oppty_by_Amount_Bucket",
+                "row" : 74,
+                "rowspan" : 25,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 22,
+                "column" : 1,
+                "name" : "container_10",
+                "row" : 102,
+                "rowspan" : 31,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 20,
+                "column" : 2,
+                "name" : "text_Activities_Per_",
+                "row" : 103,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 20,
+                "column" : 2,
+                "name" : "chart_Activities_per_Oppor_1",
+                "row" : 106,
+                "rowspan" : 26,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 22,
+                "column" : 1,
+                "name" : "container_9",
+                "row" : 135,
+                "rowspan" : 31,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 20,
+                "column" : 2,
+                "name" : "text_Who_is_Winning_the_Most_Deals_",
+                "row" : 136,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 20,
+                "column" : 2,
+                "name" : "chart_Win_Rate_by_Advisor",
+                "row" : 139,
+                "rowspan" : 26,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "container_6",
+                "row" : 168,
+                "rowspan" : 41,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 22,
+                "column" : 1,
+                "name" : "text_Opportunity_Details",
+                "row" : 170,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 22,
+                "column" : 1,
+                "name" : "table_Opportunity_Details_1",
+                "row" : 174,
+                "rowspan" : 32,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight" : "fine",
+        "selectors" : [
+          "maxWidth(599)"
+        ],
+        "style" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "backgroundColor" : "rgb(242, 246, 250)",
+          "cellSpacingX" : 0,
+          "cellSpacingY" : 0,
+          "fit" : "original",
+          "gutterColor" : "#C5D3E0"
+        },
+        "version" : 1.0
+      }
+    ],
+    "layouts" : [ ],
+    "steps" : {
+      "Advisor_Analysis_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Advisor Analysis",
+        "numbers" : [ ],
+        "query" : "opp = load \"${App.Datasets.FscDemoOpportunity.FullyQualifiedName}\";\nclosed_won = filter opp by 'ISCLOSED' == \"true\" && 'ISWON' == \"true\";\nexp_rev = filter opp by ('ISCLOSED' == \"true\" && 'ISWON' == \"true\") || ('ISCLOSED' == \"false\" && 'PROBABILITY' >= 90);\nquota = load \"${App.Datasets.FscDemoQuota.FullyQualifiedName}\";\nresult = group closed_won by 'OPPORTUNITYOWNER' full, exp_rev by 'OPPORTUNITYOWNER' full, quota by 'USER';\nresult = foreach result generate coalesce(closed_won.'OPPORTUNITYOWNER', exp_rev.'OPPORTUNITYOWNER', quota.'USER') as 'OPPORTUNITYOWNER', sum(closed_won.'AMOUNT') as 'sum_Closed_Amount', sum(exp_rev.'EXPECTEDREVENUE') as 'sum_Expected_Revenue', sum(quota.'QUOTAAMOUNT') as 'sum_Quota_Amount', coalesce(first(closed_won.'OWNERSMALLPHOTOURL'), first(exp_rev.'OWNERSMALLPHOTOURL'), first(quota.'SMALLPHOTOURL')) as 'Owner.SmallPhotoUrl';\nresult_final = foreach result generate 'OPPORTUNITYOWNER', first('Owner.SmallPhotoUrl') as 'Owner.SmallPhotoUrl', {{cell(static_1.selection,0,\"measure\").asObject()}} as '{{cell(static_1.selection,0,\"label\").asObject()}}';\nresult_final = order result_final by ('{{cell(static_1.selection,0,\"label\").asObject()}}' desc);\nresult_final = limit result_final 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Closed_Deals_Trend_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.FscDemoOpportunity.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "Closed Deals Trend",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "sum",
+                "AMOUNT",
+                "A"
+              ],
+              [
+                "sum",
+                "AMOUNT",
+                "B"
+              ]
+            ],
+            "columns" : [
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "sum",
+                      "AMOUNT"
+                    ]
+                  ],
+                  "groups" : [
+                    [
+                      "CLOSEDATE_Year",
+                      "CLOSEDATE_Month",
+                      "CLOSEDATE_Day"
+                    ]
+                  ]
+                },
+                "header" : "Amount"
+              },
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "sum",
+                      "AMOUNT"
+                    ]
+                  ],
+                  "groups" : [
+                    [
+                      "CLOSEDATE_Year",
+                      "CLOSEDATE_Month",
+                      "CLOSEDATE_Day"
+                    ]
+                  ],
+                  "formula" : "sum(A) over ([..0] partition by all order by ('CLOSEDATE_Year~~~CLOSEDATE_Month~~~CLOSEDATE_Day'))"
+                },
+                "header" : "Amount (Running Total)"
+              }
+            ],
+            "groups" : [
+              [
+                "CLOSEDATE_Year",
+                "CLOSEDATE_Month",
+                "CLOSEDATE_Day"
+              ]
+            ],
+            "filters" : [
+              [
+                "ISWON",
+                [
+                  "true"
+                ],
+                "in"
+              ],
+              [
+                "ISCLOSED",
+                [
+                  "true"
+                ],
+                "in"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showPoints" : true,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : false,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "time",
+            "missingValue" : "connect",
+            "dashLine" : {
+              "measures" : "",
+              "showDashLine" : false
+            },
+            "timeAxis" : {
+              "showTitle" : true,
+              "predictiveLine" : {
+                "color" : "#8932ED",
+                "time" : "",
+                "label" : "TODAY"
+              },
+              "showAxis" : true,
+              "title" : ""
+            },
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "split" : [ ],
+              "timeAxis" : [
+                "CLOSEDATE_Year~~~CLOSEDATE_Month~~~CLOSEDATE_Day"
+              ],
+              "trellis" : [ ],
+              "plots" : [
+                "B"
+              ]
+            },
+            "fillArea" : true,
+            "showActionMenu" : true,
+            "showZero" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "referenceLines" : [
+                {
+                  "color" : "rgb(0, 161, 224)",
+                  "label" : {
+                    "data" : "Quota: {{cell(Quota_Attainment_KPIs_1.result,0,\"sum_Quota Amount\").asObject()}}",
+                    "type" : "static"
+                  },
+                  "value" : {
+                    "data" : "{{cell(Quota_Attainment_KPIs_1.result,0,\"sum_Quota Amount\").asObject()}}",
+                    "type" : "static"
+                  }
+                }
+              ],
+              "title" : "Closed Won",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "valueType" : "none",
+            "theme" : "wave",
+            "applyConditionalFormatting" : true,
+            "drawArea" : {
+              "measure" : "",
+              "showDrawArea" : false,
+              "bounding1" : "",
+              "bounding2" : ""
+            }
+          },
+          "type" : "chart"
+        }
+      },
+      "static_1" : {
+        "broadcastFacet" : true,
+        "columns" : { },
+        "selectMode" : "singlerequired",
+        "type" : "staticflex",
+        "values" : [
+          {
+            "display" : "$ Closed",
+            "measure" : "sum('sum_Closed_Amount')",
+            "label" : "sum_Closed Amount",
+            "title" : "Closed Amount"
+          },
+          {
+            "display" : "% Attainment",
+            "measure" : "sum('sum_Closed_Amount') / sum('sum_Quota_Amount')",
+            "label" : "sum_Attainment Percentage",
+            "title" : "Attainment Percentage"
+          },
+          {
+            "display" : "Expected Revenue",
+            "measure" : "sum('sum_Expected_Revenue')",
+            "label" : "sum_Expected Revenue",
+            "title" : "Expected Revenue"
+          }
+        ]
+      },
+      "Opportunity_Details_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Opportunity Details",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.FscDemoOpportunity.FullyQualifiedName}\";\nq = filter q by 'ISCLOSED' == \"false\";\nq = group q by ID;\nq = foreach q generate first('ACCOUNTNAME') as 'Account.Name', first('OPPORTUNITYAGE') as 'Opportunity Age', sum('AMOUNT') as 'Amount', first('CLOSEDATE') as 'CloseDate', first('ACCOUNTCLIENTCATEGORY') as 'Client Category', first('LEADSOURCE') as 'LeadSource', first('ACCOUNTMARKETINGSEGMENT') as 'Account Marketing Segment', first('OPPORTUNITYNAME') as 'Name',first('OPPORTUNITYOWNER') as 'Opportunity Owner', unique('ACTIVITYID') as '# of Activities', first('STAGE') as 'Stage';\nq = limit q 100;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e1e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#f2f6fa",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "evenRowColor" : "#f2f6fa",
+            "header" : {
+              "backgroundColor" : "#e4ecf2",
+              "fontColor" : "#5c7a99",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a9b7c7",
+            "innerMinorBorderColor" : "#e1e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "oddRowColor" : "#ffffff",
+            "showActionMenu" : true,
+            "showRowIndexColumn" : false,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "Win_Rate_by_Advisor" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.FscDemoOpportunity.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "Win Rate by Advisor",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "sum",
+                "AMOUNT",
+                "A"
+              ],
+              [
+                "sum",
+                "AMOUNT",
+                "B"
+              ],
+              [
+                "sum",
+                "AMOUNT",
+                "C"
+              ]
+            ],
+            "columns" : [
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "sum",
+                      "AMOUNT"
+                    ]
+                  ],
+                  "groups" : [
+                    "OPPORTUNITYOWNER"
+                  ],
+                  "filters" : [
+                    [
+                      "ISWON",
+                      [
+                        "true"
+                      ],
+                      "in"
+                    ]
+                  ]
+                },
+                "header" : "$ Closed Won"
+              },
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "sum",
+                      "AMOUNT"
+                    ]
+                  ],
+                  "groups" : [
+                    "OPPORTUNITYOWNER"
+                  ]
+                },
+                "header" : "$ Closed"
+              },
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "sum",
+                      "AMOUNT"
+                    ]
+                  ],
+                  "groups" : [
+                    "OPPORTUNITYOWNER"
+                  ],
+                  "formula" : "(A/B)",
+                  "order" : [
+                    [
+                      -1,
+                      {
+                        "ascending" : false,
+                        "inner" : false
+                      }
+                    ]
+                  ]
+                },
+                "header" : "Win Rate (%)"
+              }
+            ],
+            "groups" : [
+              "OPPORTUNITYOWNER"
+            ],
+            "filters" : [
+              [
+                "ISCLOSED",
+                [
+                  "true"
+                ],
+                "in"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : false,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimensionAxis" : [
+                "OPPORTUNITYOWNER"
+              ],
+              "plots" : [
+                "C"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "Win Rate",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "Advisor",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Activities_per_Oppty_by_Amount_Bucket" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Activities per Opportunity by Amount Bucket",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.FscDemoOpportunity.FullyQualifiedName}\";\nresult = group q by ('OPPORTUNITYOWNER', 'ID');\nresult = foreach result generate q.'OPPORTUNITYOWNER' as 'OPPORTUNITYOWNER', q.'ID' as 'Id', count(q) as 'A', unique(q.'ACTIVITYID') as 'B', sum(q.'AMOUNT') as 'C';\nresult = group result by ('OPPORTUNITYOWNER', 'Id');\nresult = foreach result generate 'OPPORTUNITYOWNER', 'Id', sum(A) as 'A', sum(B) as 'B', sum(C) as 'C', avg(sum(C)) over ([..] partition by all) as 'D';\nresult = foreach result generate 'OPPORTUNITYOWNER', 'Id', sum(A) as 'A', sum(B) as 'B', sum(C) as 'C', case when 'C' >= 'D' then \"1 - Top Half\" else \"2 - Bottom Half\" end as 'Amount_Bucket';\nresult = group result by ('OPPORTUNITYOWNER', 'Amount_Bucket');\nresult = foreach result generate 'OPPORTUNITYOWNER', 'Amount_Bucket', sum(A) as 'count_Opportunities', sum(B) as 'count_Activities', sum(B) / sum(A) as 'count_Activities per Opportunity',  sum(C) as 'sum_Amount';\nresult = order result by ('OPPORTUNITYOWNER' asc, 'Amount_Bucket' asc);\nresult = limit result 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "none",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showActionMenu" : true,
+            "showZero" : true,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hdot",
+            "theme" : "wave",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Activities_per_Oppor_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.FscDemoOpportunity.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "Activities per Opportunity",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "unique",
+                "ACTIVITYID",
+                "A"
+              ],
+              [
+                "sum",
+                "AMOUNT",
+                "B"
+              ],
+              [
+                "unique",
+                "ID",
+                "C"
+              ]
+            ],
+            "columns" : [
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "unique",
+                      "ACTIVITYID"
+                    ]
+                  ],
+                  "groups" : [
+                    "OPPORTUNITYOWNER"
+                  ]
+                },
+                "header" : "# of Activities"
+              },
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "sum",
+                      "AMOUNT"
+                    ]
+                  ],
+                  "groups" : [
+                    "OPPORTUNITYOWNER"
+                  ]
+                },
+                "header" : "$ Closed Won"
+              },
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "unique",
+                      "ID"
+                    ]
+                  ],
+                  "groups" : [
+                    "OPPORTUNITYOWNER"
+                  ],
+                  "formula" : "A/(B/1000)",
+                  "order" : [
+                    [
+                      -1,
+                      {
+                        "ascending" : false,
+                        "inner" : false
+                      }
+                    ]
+                  ]
+                },
+                "header" : "Activities per 1K Won"
+              }
+            ],
+            "groups" : [
+              "OPPORTUNITYOWNER"
+            ],
+            "filters" : [
+              [
+                "ISCLOSED",
+                [
+                  "true"
+                ],
+                "in"
+              ],
+              [
+                "ISWON",
+                [
+                  "true"
+                ],
+                "in"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : false,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimensionAxis" : [
+                "OPPORTUNITYOWNER"
+              ],
+              "plots" : [
+                "C"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "Activities per $1K of Closed Won",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "Advisor",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Opportunity_KPIs_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Opportunity_KPIs",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.FscDemoOpportunity.FullyQualifiedName}\";\nq_A = filter q by 'ISCLOSED' == \"false\";\nq_B = filter q by 'ISCLOSED' == \"true\";\nq_C = filter q by 'ISWON' == \"true\" && 'ISCLOSED' == \"true\";\nq_D = filter q by 'ISCLOSED' == \"true\" && 'ISWON' == \"false\";\nq_F = filter q by 'DAYSSINCELASTACTIVITY' >= 30 && 'ISCLOSED' == \"false\";\nresult = group q by all full, q_A by all full, q_B by all full, q_C by all full, q_D by all full, q_F by all;\nresult = foreach result generate count(q_A) as 'count_OpenDeals', count(q_B) as 'count_ClosedDeals', count(q_C) as 'count_ClosedWonDeals', count(q_D) as 'count_ClosedLostDeals', sum(q_A.'AMOUNT') as 'sum_OpenAmount', count(q_F) as 'count_NoActivitySince30Days', sum(q_C.'AMOUNT') as 'sum_ClosedWonAmount', sum(q_B.'AMOUNT') as 'sum_ClosedAmount', sum(q_D.'AMOUNT') as 'sum_ClosedLostAmount', unique(q.'OPPORTUNITYOWNER') as 'count_Advisors', sum(q_C.'OPPORTUNITYAGE') as 'sum_OpportunityAge', unique(q_C.'ACTIVITYID') as 'count_ClosedWonActivities';\nresult = foreach result generate 'count_OpenDeals' as 'count_Open Deals', 'count_ClosedDeals' as 'count_Closed Deals', 'count_ClosedWonDeals' as 'count_Closed Won Deals', 'count_ClosedLostDeals' as 'count_Closed Lost Deals', 'sum_OpenAmount' as 'sum_Open Amount', 'sum_ClosedAmount' as 'sum_Closed Amount', 'sum_ClosedWonAmount' as 'sum_Closed Won Amount', 'sum_ClosedLostAmount' as 'sum_Closed Lost Amount', 'count_NoActivitySince30Days' as 'count_No Activity Since 30 Days', 'count_Advisors', 'sum_OpportunityAge' as 'sum_Opportunity Age', 'count_ClosedWonActivities' as 'count_Closed Won Activities', ('sum_ClosedWonAmount'/'sum_ClosedAmount')*100 as 'Win Rate (%)', (('sum_ClosedWonAmount'/'sum_ClosedAmount') / 'count_Advisors')*100 as 'Win Rate (%) per Advisor', 'sum_ClosedWonAmount'/'count_Advisors' as 'avg_Closed Won Amount per Advisor', 'sum_OpportunityAge'/'count_ClosedWonDeals' as 'avg_Days To Close per Opportunity', 'count_ClosedWonDeals'/count_Advisors as 'avg_Closed Won Deals per Advisor', 'count_ClosedWonActivities'/('sum_ClosedWonAmount'/1000) as 'avg_Activities per 1k Closed';\nresult = limit result 1;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "Avg_Days_in_Stage_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.FscDemoPipelineTrending.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "Average Days in Stage for Closed Ops",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "avg",
+                "DURATION",
+                "A"
+              ],
+              [
+                "avg",
+                "DURATION",
+                "B"
+              ]
+            ],
+            "columns" : [
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "avg",
+                      "DURATION"
+                    ]
+                  ],
+                  "groups" : [
+                    "OPPORTUNITYOWNER",
+                    "STAGE"
+                  ]
+                },
+                "header" : "Duration in Seconds"
+              },
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "avg",
+                      "DURATION"
+                    ]
+                  ],
+                  "groups" : [
+                    "OPPORTUNITYOWNER",
+                    "STAGE"
+                  ],
+                  "formula" : "A/86400",
+                  "order" : [
+                    [
+                      -1,
+                      {
+                        "ascending" : true,
+                        "inner" : false
+                      }
+                    ]
+                  ]
+                },
+                "header" : "Average Days in Stage"
+              }
+            ],
+            "groups" : [
+              "OPPORTUNITYOWNER",
+              "STAGE"
+            ],
+            "filters" : [
+              [
+                "OPPORTUNITYISCLOSED",
+                [
+                  "true"
+                ],
+                "in"
+              ],
+              [
+                "OPPORTUNITYISWON",
+                [
+                  "true"
+                ],
+                "in"
+              ],
+              [
+                "STAGEISCLOSED",
+                [
+                  "false"
+                ],
+                "in"
+              ],
+              [
+                "STAGEISWON",
+                [
+                  "false"
+                ],
+                "in"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "stackhbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "split" : [
+                "STAGE"
+              ],
+              "trellis" : [ ],
+              "dimensionAxis" : [
+                "OPPORTUNITYOWNER"
+              ],
+              "plots" : [
+                "B"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "normalize" : false,
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Quota_Attainment_KPIs_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Quota_Attainment_KPIs",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.FscDemoOpportunity.FullyQualifiedName}\";\noppty = filter q by 'ISCLOSED' == \"true\" && 'ISWON' == \"true\";\nexp_rev = filter q by ('ISCLOSED' == \"true\" && 'ISWON' == \"true\") || ('ISCLOSED' == \"false\" && 'PROBABILITY' >= 90);\nquota = load \"${App.Datasets.FscDemoQuota.FullyQualifiedName}\";\nresult = group oppty by all full, exp_rev by all full, quota by all, q by all;\nresult = foreach result generate sum(oppty['AMOUNT']) as 'sum_Closed_Amount', sum(quota['QUOTAAMOUNT']) as 'sum_Quota_Amount', sum(exp_rev['AMOUNT']) as 'sum_Expected_Revenue', unique(q['OPPORTUNITYOWNER']) as 'count_Advisors' ;\nresult_final = foreach result generate 'sum_Closed_Amount' as 'sum_Closed Amount', 'sum_Quota_Amount' as 'sum_Quota Amount', 'sum_Expected_Revenue' as 'sum_Expected Revenue', 'count_Advisors', round('sum_Closed_Amount' / 'sum_Quota_Amount' * 100, 2) as 'sum_Quota Attainment', 'sum_Expected_Revenue' - 'sum_Quota_Amount' as 'sum_Expected Revenue Diff from Quota', round((('sum_Closed_Amount' / 'sum_Quota_Amount' / 'count_Advisors') * 100), 2) as 'sum_Quota Attainment per Advisor';",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      }
+    },
+    "widgetStyle" : {
+      "backgroundColor" : "rgba(255, 255, 255, 0)",
+      "borderColor" : "#E6ECF2",
+      "borderEdges" : [ ],
+      "borderRadius" : 0,
+      "borderWidth" : 1
+    },
+    "widgets" : {
+      "text_Expected_Revenue" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : false,
+          "text" : "Expected Revenue",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "chart_Advisor_Analysis_1" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showValues" : true,
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "hbar",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "left",
+            "subtitleLabel" : ""
+          },
+          "binValues" : false,
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "{{cell(static_1.selection,0,\"title\").asObject()}}",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "theme" : "dark",
+          "step" : "Advisor_Analysis_1",
+          "dimensionAxis" : {
+            "showTitle" : true,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "Advisor",
+            "icons" : {
+              "useIcons" : true,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "Owner.SmallPhotoUrl",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "text_Average_Win_Rate_Advisor" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : false,
+          "text" : "Average Win Rate / Advisor",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text__of_Leads_Received" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "text" : "# of Leads Received",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "container_1" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_2" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_4" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_5" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_6" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_7" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_8" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_9" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_Group_by_" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "text" : "Group by:",
+          "textAlignment" : "center",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_42_5_" : {
+        "parameters" : {
+          "fontSize" : 20,
+          "showActionMenu" : true,
+          "text" : "42.5%",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "chart_Win_Rate_by_Advisor" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showValues" : true,
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "hbar",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "binValues" : false,
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "columnMap" : {
+            "trellis" : [ ],
+            "dimensionAxis" : [
+              "OPPORTUNITYOWNER"
+            ],
+            "plots" : [
+              "C"
+            ]
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "Win Rate",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "theme" : "light",
+          "step" : "Win_Rate_by_Advisor",
+          "dimensionAxis" : {
+            "showTitle" : true,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "Advisor",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "filterpanel_1" : {
+        "parameters" : {
+          "filterItemOptions" : {
+            "backgroundColor" : "#FFFFFF",
+            "borderColor" : "#E6ECF2",
+            "borderRadius" : 4,
+            "borderWidth" : 1,
+            "propertyColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "filters" : [ ],
+          "itemsPerRow" : 6,
+          "showAllFilters" : true,
+          "title" : {
+            "separatorColor" : "#E6ECF2",
+            "text" : {
+              "align" : "left",
+              "color" : "#091A3E",
+              "fontSize" : 16,
+              "label" : "Filters"
+            },
+            "visible" : false
+          }
+        },
+        "type" : "filterpanel"
+      },
+      "text_Quota" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : false,
+          "text" : "Quota",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_5_6" : {
+        "parameters" : {
+          "fontSize" : 20,
+          "showActionMenu" : true,
+          "text" : "5.6",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_Average_Touches_to_Convert" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "text" : "Average # Touches to Convert",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_Who_is_Processing_Opportunities_Efficiently_" : {
+        "parameters" : {
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "text" : "Who is Processing Opportunities Efficiently?",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_Avg_Attainment_Advisor" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : false,
+          "text" : "Avg Attainment / Advisor",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_Average_Days_to_Convert" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "text" : "Average Days to Convert",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "container_11" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_Team_Win_Rate" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : false,
+          "text" : "Team Win Rate",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "container_10" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "image_3" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "center",
+          "fit" : "original",
+          "image" : {
+            "name" : "${App.Images['infopng5png1'].Name}",
+            "namespace" : "${Org.Namespace}"
+          },
+          "tooltip" : "Expected revenue is closed won amount plus open pipeline amount * probability"
+        },
+        "type" : "image"
+      },
+      "text_Open_Leads" : {
+        "parameters" : {
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "text" : "Open Leads",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_Total_Open_Pipe" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : false,
+          "text" : "Total Open Pipe",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "number_Quota_Attainment_KPIs_1" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "sum_Expected Revenue",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "Quota_Attainment_KPIs_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "text_" : {
+        "parameters" : {
+          "fontSize" : 20,
+          "showActionMenu" : true,
+          "text" : "",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_Opportunity_Details" : {
+        "parameters" : {
+          "fontSize" : 16,
+          "showActionMenu" : false,
+          "text" : "Opportunity Details",
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text__Closed_Won_Deals" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : false,
+          "text" : "# Closed Won Deals",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_Who_Will_Make_Their_Number_" : {
+        "parameters" : {
+          "fontSize" : 16,
+          "showActionMenu" : false,
+          "text" : "Who Will Make Their Number?",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text__of_Leads_Closed" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "text" : "# of Leads Closed",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_vs_quota" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "text" : "vs quota",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_4_0M" : {
+        "parameters" : {
+          "fontSize" : 20,
+          "showActionMenu" : true,
+          "text" : "$4.0M",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_Are_Advisors_Spending_More_Time_on_High_or_Low_Value_Opportunities_" : {
+        "parameters" : {
+          "fontSize" : 14,
+          "showActionMenu" : false,
+          "text" : "Are Advisors Spending More Time on High or Low Value Opportunities?",
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text_Average_Days_to_Close" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : false,
+          "text" : "Average Days to Close",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_Average_Conversion_Rate" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "text" : "Average Conversion Rate",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_Total_Closed_Won" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : false,
+          "text" : "Total Closed Won",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "chart_Closed_Deals_Trend_1" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showPoints" : true,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "time",
+          "missingValue" : "connect",
+          "dashLine" : {
+            "measures" : "",
+            "showDashLine" : false
+          },
+          "exploreLink" : true,
+          "timeAxis" : {
+            "showTitle" : true,
+            "predictiveLine" : {
+              "color" : "#8932ED",
+              "time" : "",
+              "label" : "TODAY"
+            },
+            "showAxis" : true,
+            "title" : ""
+          },
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "Closed Won Over Time",
+            "align" : "left",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "columnMap" : {
+            "split" : [ ],
+            "timeAxis" : [
+              "CLOSEDATE_Year~~~CLOSEDATE_Month~~~CLOSEDATE_Day"
+            ],
+            "trellis" : [ ],
+            "plots" : [
+              "B"
+            ]
+          },
+          "fillArea" : true,
+          "showActionMenu" : true,
+          "showZero" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "referenceLines" : [
+              {
+                "color" : "rgb(0, 161, 224)",
+                "label" : {
+                  "data" : "Quota: {{cell(Quota_Attainment_KPIs_1.result,0,\"sum_Quota Amount\").asObject()}}",
+                  "type" : "static"
+                },
+                "value" : {
+                  "data" : "{{cell(Quota_Attainment_KPIs_1.result,0,\"sum_Quota Amount\").asObject()}}",
+                  "type" : "static"
+                }
+              }
+            ],
+            "title" : "Closed Won",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "valueType" : "none",
+          "theme" : "dark",
+          "step" : "Closed_Deals_Trend_1",
+          "applyConditionalFormatting" : true,
+          "drawArea" : {
+            "measure" : "",
+            "showDrawArea" : false,
+            "bounding1" : "",
+            "bounding2" : ""
+          }
+        },
+        "type" : "chart"
+      },
+      "text_Choose_KPI_" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "text" : "Choose KPI:",
+          "textAlignment" : "center",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "chart_Activities_per_Oppty_by_Amount_Bucket" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "bottom-center",
+            "inside" : false
+          },
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "hdot",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "columnMap" : {
+            "r" : [ ],
+            "split" : [
+              "Amount_Bucket"
+            ],
+            "trellis" : [ ],
+            "dimensionAxis" : [
+              "OPPORTUNITYOWNER"
+            ],
+            "plots" : [
+              "count_Activities per Opportunity"
+            ]
+          },
+          "showActionMenu" : true,
+          "showZero" : true,
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "Average # of Activities Per Opportunity",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "theme" : "light",
+          "step" : "Activities_per_Oppty_by_Amount_Bucket",
+          "dimensionAxis" : {
+            "showTitle" : true,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "Advisor",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "chart_Activities_per_Oppor_1" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showValues" : true,
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "hbar",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "binValues" : false,
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "columnMap" : {
+            "trellis" : [ ],
+            "dimensionAxis" : [
+              "OPPORTUNITYOWNER"
+            ],
+            "plots" : [
+              "C"
+            ]
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "Activities per $1K of Closed Won",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "theme" : "light",
+          "step" : "Activities_per_Oppor_1",
+          "dimensionAxis" : {
+            "showTitle" : true,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "Advisor",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "text_Average_Closed_Advisor" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : false,
+          "text" : "Average Closed / Advisor",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_Average_Closed_Advisor1" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "text" : "Average Closed / Advisor",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_4_16M" : {
+        "parameters" : {
+          "fontSize" : 20,
+          "showActionMenu" : true,
+          "text" : "$4.16M",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "number_Quota_Attainment_KPIs_14" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "sum_Expected Revenue Diff from Quota",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 16,
+          "showActionMenu" : true,
+          "step" : "Quota_Attainment_KPIs_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "number_Opportunity_KPIs_16" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "avg_Days To Close per Opportunity",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "Opportunity_KPIs_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "number_Opportunity_KPIs_15" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "Win Rate (%) per Advisor",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "Opportunity_KPIs_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#335779",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "text_Average_Activities_Per_1K_Closed" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : false,
+          "text" : "Average Activities Per $1K Closed",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "number_Opportunity_KPIs_14" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "sum_Closed Won Amount",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "Opportunity_KPIs_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "number_Opportunity_KPIs_13" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "sum_Open Amount",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "Opportunity_KPIs_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "navigation_1" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "selectedTab" : {
+            "backgroundColor" : "rgb(240, 248, 252)",
+            "borderColor" : "rgb(0, 112, 210)",
+            "borderEdges" : [
+              "bottom"
+            ],
+            "borderWidth" : 2,
+            "textColor" : "rgb(0, 112, 210)"
+          },
+          "tabCount" : 5,
+          "textColor" : "#091A3E"
+        },
+        "type" : "navigation"
+      },
+      "number_Quota_Attainment_KPIs_11" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "sum_Quota Attainment per Advisor",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "Quota_Attainment_KPIs_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "number_Opportunity_KPIs_18" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "count_Closed Won Deals",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "Opportunity_KPIs_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "number_Quota_Attainment_KPIs_12" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "sum_Quota Attainment",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "Quota_Attainment_KPIs_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "number_Opportunity_KPIs_17" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "avg_Closed Won Amount per Advisor",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "Opportunity_KPIs_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "table_Opportunity_Details_1" : {
+        "parameters" : {
+          "borderColor" : "#e1e5ee",
+          "borderWidth" : 1,
+          "cell" : {
+            "backgroundColor" : "#f2f6fa",
+            "fontColor" : "#16325c",
+            "fontSize" : 12
+          },
+          "columnProperties" : { },
+          "columns" : [ ],
+          "customBulkActions" : [ ],
+          "evenRowColor" : "#f2f6fa",
+          "exploreLink" : true,
+          "header" : {
+            "backgroundColor" : "#e4ecf2",
+            "fontColor" : "#5c7a99",
+            "fontSize" : 12
+          },
+          "innerMajorBorderColor" : "#a9b7c7",
+          "innerMinorBorderColor" : "#e1e5ee",
+          "maxColumnWidth" : 300,
+          "minColumnWidth" : 40,
+          "mode" : "variable",
+          "numberOfLines" : 1,
+          "oddRowColor" : "#ffffff",
+          "showActionMenu" : true,
+          "showRowIndexColumn" : false,
+          "step" : "Opportunity_Details_1",
+          "totals" : true,
+          "verticalPadding" : 8
+        },
+        "type" : "table"
+      },
+      "number_Quota_Attainment_KPIs_13" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "sum_Quota Amount",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "Quota_Attainment_KPIs_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "text_185_2K" : {
+        "parameters" : {
+          "fontSize" : 20,
+          "showActionMenu" : true,
+          "text" : "$185.2K",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "number_Opportunity_KPIs_1" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "avg_Closed Won Deals per Advisor",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "Opportunity_KPIs_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "chart_Avg_Days_in_Stage_1" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showValues" : true,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "totalSumMode" : "none",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "stackhbar",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 12,
+            "label" : "",
+            "align" : "left",
+            "subtitleLabel" : "Average Days in Stage for Closed Won Deals"
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "columnMap" : {
+            "split" : [
+              "STAGE"
+            ],
+            "trellis" : [ ],
+            "dimensionAxis" : [
+              "OPPORTUNITYOWNER"
+            ],
+            "plots" : [
+              "B"
+            ]
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "Average Days in Stage",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "normalize" : false,
+          "theme" : "dark",
+          "step" : "Avg_Days_in_Stage_1",
+          "dimensionAxis" : {
+            "showTitle" : true,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "Advisor Name",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "image",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "number_Opportunity_KPIs_12" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "Win Rate (%)",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "Opportunity_KPIs_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "pillbox_static_1" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : false,
+          "fontSize" : 16,
+          "selectedTab" : {
+            "backgroundColor" : "#677A97",
+            "borderColor" : "#C6D3E1",
+            "borderEdges" : [ ],
+            "borderWidth" : 1,
+            "textColor" : "#FFFFFF"
+          },
+          "showActionMenu" : false,
+          "step" : "static_1",
+          "textColor" : "#5C7A99"
+        },
+        "type" : "pillbox"
+      },
+      "number_Opportunity_KPIs_11" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "avg_Activities per 1k Closed",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "Opportunity_KPIs_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "text_Team_Attainment" : {
+        "parameters" : {
+          "fontSize" : 12,
+          "showActionMenu" : false,
+          "text" : "Team Attainment",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_Activities_Per_" : {
+        "parameters" : {
+          "fontSize" : 14,
+          "showActionMenu" : false,
+          "text" : "Activities Per $ ",
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text_56_" : {
+        "parameters" : {
+          "fontSize" : 20,
+          "showActionMenu" : true,
+          "text" : "56%",
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_Who_is_Winning_the_Most_Deals_" : {
+        "parameters" : {
+          "fontSize" : 14,
+          "showActionMenu" : false,
+          "text" : "Who is Winning the Most Deals?",
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      }
+    }
+  }
+}
