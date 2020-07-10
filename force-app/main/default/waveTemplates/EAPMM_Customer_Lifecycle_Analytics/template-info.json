@@ -1,241 +1,288 @@
 {
-  "templateType" : "app",
-  "label" : "Demo | Customer Lifecycle Analytics",
-  "name" : "EAPMM_Customer_Lifecycle_Analytics",
-  "description" : "EAPMM v2020.21 - Demo version of Customer Lifecycle Analytics v224",
-  "assetVersion" : 49.0,
-  "variableDefinition" : "variables.json",
-  "uiDefinition" : "ui.json",
-  "rules" : [
+  "templateType": "app",
+  "label": "Demo | Customer Lifecycle Analytics",
+  "name": "EAPMM_Customer_Lifecycle_Analytics",
+  "description": "EAPMM v2020.21 - Demo version of Customer Lifecycle Analytics v224",
+  "assetVersion": 49.0,
+  "variableDefinition": "variables.json",
+  "uiDefinition": "ui.json",
+  "rules": [
     {
-      "type" : "templateToApp",
-      "file" : "template-to-app-rules.json"
+      "type": "templateToApp",
+      "file": "template-to-app-rules.json"
     },
     {
-      "type" : "appToTemplate",
-      "file" : "app-to-template-rules.json"
+      "type": "appToTemplate",
+      "file": "app-to-template-rules.json"
     }
   ],
-  "releaseInfo" : {
-    "templateVersion" : "1.0",
-    "notesFile" : "releaseNotes.html"
+  "releaseInfo": {
+    "templateVersion": "1.0",
+    "notesFile": "releaseNotes.html"
   },
-  "folderDefinition" : "folder.json",
-  "lenses" : [ ],
-  "dashboards" : [
+  "folderDefinition": "folder.json",
+  "externalFiles": [
     {
-      "label" : "Account NPS",
-      "name" : "Account_NPS17_tp",
-      "condition" : "${Variables.Overrides.createAllDashboards}",
-      "file" : "dashboards/Account_NPS17.json"
+      "label": "Accounts",
+      "name": "Accounts_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/Accounts_XMD.json",
+      "file": "external_files/Accounts.csv",
+      "type": "CSV",
+      "schema": "external_files/Accounts.json"
     },
     {
-      "label" : "Case CSAT",
-      "name" : "Case_CSAT17_tp",
-      "condition" : "${Variables.Overrides.createAllDashboards}",
-      "file" : "dashboards/Case_CSAT17.json"
+      "label": "Cases",
+      "name": "Cases_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/Cases_XMD.json",
+      "file": "external_files/Cases.csv",
+      "type": "CSV",
+      "schema": "external_files/Cases.json"
     },
     {
-      "label" : "Contact CSAT",
-      "name" : "Contact_CSAT17_tp",
-      "condition" : "${Variables.Overrides.createAllDashboards}",
-      "file" : "dashboards/Contact_CSAT17.json"
+      "label": "Participants",
+      "name": "Contacts_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/Contacts_XMD.json",
+      "file": "external_files/Contacts.csv",
+      "type": "CSV",
+      "schema": "external_files/Contacts.json"
     },
     {
-      "label" : "Contact NPS",
-      "name" : "Contact_NPS17_tp",
-      "condition" : "${Variables.Overrides.createAllDashboards}",
-      "file" : "dashboards/Contact_NPS17.json"
+      "label": "Journey Survey Question Config Metadata",
+      "name": "Journey_Survey_Question_Config_Metadata_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/Journey_Survey_Question_Config_Metadata_XMD.json",
+      "file": "external_files/Journey_Survey_Question_Config_Metadata.csv",
+      "type": "CSV",
+      "schema": "external_files/Journey_Survey_Question_Config_Metadata.json"
     },
     {
-      "label" : "Customer CSAT Journey (Embedded) - Beta",
-      "name" : "Customer_CSAT_Journey_Embedded18_tp",
-      "condition" : "${Variables.Overrides.createAllDashboards}",
-      "file" : "dashboards/Customer_CSAT_Journey_Embedded18.json"
+      "label": "Survey Invitation",
+      "name": "SurveyInvitation_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/SurveyInvitation_XMD.json",
+      "file": "external_files/SurveyInvitation.csv",
+      "type": "CSV",
+      "schema": "external_files/SurveyInvitation.json"
     },
     {
-      "label" : "Customer Journey Map for CSAT - Beta",
-      "name" : "Customer_Journey_Map_for_CSAT_Beta_tp",
-      "condition" : "${Variables.Overrides.createAllDashboards}",
-      "file" : "dashboards/Customer_Journey_Map_for_CSAT_Beta.json"
+      "label": "Survey Question Response with Details",
+      "name": "SurveyQuestionResponsewithDetails_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/SurveyQuestionResponsewithDetails_XMD.json",
+      "file": "external_files/SurveyQuestionResponsewithDetails.csv",
+      "type": "CSV",
+      "schema": "external_files/SurveyQuestionResponsewithDetails.json"
     },
     {
-      "label" : "Customer Journey Map for CSAT - Stage Analysis - Beta",
-      "name" : "Customer_Journey_Map_for_CSAT_Stage_Analysis_Beta_tp",
-      "condition" : "${Variables.Overrides.createAllDashboards}",
-      "file" : "dashboards/Customer_Journey_Map_for_CSAT_Stage_Analysis_Beta.json"
+      "label": "Survey Question Score with Details",
+      "name": "SurveyQuestionScoreWithDetails_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/SurveyQuestionScoreWithDetails_XMD.json",
+      "file": "external_files/SurveyQuestionScoreWithDetails.csv",
+      "type": "CSV",
+      "schema": "external_files/SurveyQuestionScoreWithDetails.json"
     },
     {
-      "label" : "Customer Journey Map for NPS - Beta",
-      "name" : "Customer_Journey_Map_for_NPS_Beta_tp",
-      "condition" : "${Variables.Overrides.createAllDashboards}",
-      "file" : "dashboards/Customer_Journey_Map_for_NPS_Beta.json"
+      "label": "Survey Question with Details",
+      "name": "SurveyQuestionWithDetails_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/SurveyQuestionWithDetails_XMD.json",
+      "file": "external_files/SurveyQuestionWithDetails.csv",
+      "type": "CSV",
+      "schema": "external_files/SurveyQuestionWithDetails.json"
     },
     {
-      "label" : "Customer Journey Map for NPS - Stage Analysis - Beta",
-      "name" : "Customer_Journey_Map_for_NPS_Stage_Analysis_Beta1_tp",
-      "condition" : "${Variables.Overrides.createAllDashboards}",
-      "file" : "dashboards/Customer_Journey_Map_for_NPS_Stage_Analysis_Beta1.json"
+      "label": "Survey Response with Details",
+      "name": "SurveyResponseWithDetails_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/SurveyResponseWithDetails_XMD.json",
+      "file": "external_files/SurveyResponseWithDetails.csv",
+      "type": "CSV",
+      "schema": "external_files/SurveyResponseWithDetails.json"
     },
     {
-      "label" : "Customer Lifecycle Home",
-      "name" : "Customer_Experience_Home14_tp",
-      "condition" : "${Variables.Overrides.createAllDashboards}",
-      "file" : "dashboards/Customer_Experience_Home14.json"
+      "label": "Topic Assignments",
+      "name": "TopicAssignments_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/TopicAssignments_XMD.json",
+      "file": "external_files/TopicAssignments.csv",
+      "type": "CSV",
+      "schema": "external_files/TopicAssignments.json"
     },
     {
-      "label" : "Customer NPS Journey (Embedded) - Beta",
-      "name" : "Customer_NPS_Journey_Embedded18_tp",
-      "condition" : "${Variables.Overrides.createAllDashboards}",
-      "file" : "dashboards/Customer_NPS_Journey_Embedded18.json"
+      "label": "Topics",
+      "name": "Topics_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/Topics_XMD.json",
+      "file": "external_files/Topics.csv",
+      "type": "CSV",
+      "schema": "external_files/Topics.json"
     },
     {
-      "label" : "Person Account CSAT",
-      "name" : "Person_Account_CSAT17_tp",
-      "condition" : "${Variables.Overrides.createAllDashboards}",
-      "file" : "dashboards/Person_Account_CSAT17.json"
-    },
-    {
-      "label" : "Person Account NPS",
-      "name" : "Person_Account_NPS17_tp",
-      "condition" : "${Variables.Overrides.createAllDashboards}",
-      "file" : "dashboards/Person_Account_NPS17.json"
-    },
-    {
-      "label" : "Response Analysis",
-      "name" : "Response_Analysis_tp",
-      "condition" : "${Variables.Overrides.createAllDashboards}",
-      "file" : "dashboards/Response_Analysis.json"
-    },
-    {
-      "label" : "Response Distribution",
-      "name" : "Response_Distribution14_tp",
-      "condition" : "${Variables.Overrides.createAllDashboards}",
-      "file" : "dashboards/Response_Distribution14.json"
-    },
-    {
-      "label" : "Single Customer's CSAT Journey (Embedded) - Beta",
-      "name" : "Single_Customer_CSAT_Journey_Embedded18_tp",
-      "condition" : "${Variables.Overrides.createAllDashboards}",
-      "file" : "dashboards/Single_Customer_CSAT_Journey_Embedded18.json"
-    },
-    {
-      "label" : "Single Customer's NPS Journey (Embedded) - Beta",
-      "name" : "Single_Customer_NPS_Journey_Embedded18_tp",
-      "condition" : "${Variables.Overrides.createAllDashboards}",
-      "file" : "dashboards/Single_Customer_NPS_Journey_Embedded18.json"
+      "label": "Users",
+      "name": "Users_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/Users_XMD.json",
+      "file": "external_files/Users.csv",
+      "type": "CSV",
+      "schema": "external_files/Users.json"
     }
   ],
-  "eltDataflows" : [
+  "storedQueries": [],
+  "imageFiles": [
     {
-      "label" : "Timeshifting",
-      "name" : "Timeshifting1",
-      "condition" : "${Variables.Overrides.createDataflow}",
-      "file" : "dataflow/Timeshifting1.json"
+      "name": "surveyslciconjpg18407",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/surveys-lc-icon.jpg"
+    },
+    {
+      "name": "Backgroundpng144",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/Background.png"
+    },
+    {
+      "name": "surveyslciconjpg18408",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/surveys-lc-icon.jpg"
+    },
+    {
+      "name": "surveyslciconjpg18409",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/surveys-lc-icon.jpg"
+    },
+    {
+      "name": "CLA_Iconpng32",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/CLA_Iconpng.png"
     }
   ],
-  "recipes" : [ ],
-  "externalFiles" : [
+  "lenses": [],
+  "dashboards": [
     {
-      "label" : "Accounts",
-      "name" : "Accounts18_tp",
-      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-      "userXmd" : "external_files/Accounts18_XMD.json",
-      "file": "external_files/Accounts18.csv",
-      "type": "CSV",
-      "schema": "external_files/Accounts18.json"
+      "label": "Account NPS",
+      "name": "Account_NPS40_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Account_NPS40.json"
     },
     {
-      "label" : "Cases18",
-      "name" : "Cases18_tp",
-      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-      "userXmd" : "external_files/Cases18_XMD.json",
-      "file": "external_files/Cases18.csv",
-      "type": "CSV",
-      "schema": "external_files/Cases18.json"
+      "label": "Case CSAT",
+      "name": "Case_CSAT40_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Case_CSAT40.json"
     },
     {
-      "label" : "Contacts18",
-      "name" : "Contacts18_tp",
-      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-      "userXmd" : "external_files/Contacts18_XMD.json",
-      "file": "external_files/Contacts18.csv",
-      "type": "CSV",
-      "schema": "external_files/Contacts18.json"
+      "label": "Contact CSAT",
+      "name": "Contact_CSAT40_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Contact_CSAT40.json"
     },
     {
-      "label" : "Journey Survey Question Config Metadata",
-      "name" : "Journey_Survey_Question_Config_Metadata18_tp",
-      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-      "userXmd" : "external_files/Journey_Survey_Question_Config_Metadata18_XMD.json",
-      "file": "external_files/Journey_Survey_Question_Config_Metadata18.csv",
-      "type": "CSV",
-      "schema": "external_files/Journey_Survey_Question_Config_Metadata18.json"
+      "label": "Contact NPS",
+      "name": "Contact_NPS40_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Contact_NPS40.json"
     },
     {
-      "label" : "Scorecard Survey Question Config Metadata",
-      "name" : "Scorecard_Survey_Question_Config_Metadata18_tp",
-      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-      "userXmd" : "external_files/Scorecard_Survey_Question_Config_Metadata18_XMD.json",
-      "file": "external_files/Scorecard_Survey_Question_Config_Metadata18.csv",
-      "type": "CSV",
-      "schema": "external_files/Scorecard_Survey_Question_Config_Metadata18.json"
+      "label": "Cross Tabulation Analysis",
+      "name": "Cross_Tabulation_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Cross_Tabulation.json"
     },
     {
-      "label" : "SurveyInvitation18",
-      "name" : "SurveyInvitation18_tp",
-      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-      "userXmd" : "external_files/SurveyInvitation18_XMD.json",
-      "file": "external_files/SurveyInvitation18.csv",
-      "type": "CSV",
-      "schema": "external_files/SurveyInvitation18.json"
+      "label": "Customer CSAT Lifecycle Map (Embedded)",
+      "name": "Customer_CSAT_Journey_Embedded28_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Customer_CSAT_Journey_Embedded28.json"
     },
     {
-      "label" : "SurveyQuestionResponsewithDetails18",
-      "name" : "SurveyQuestionResponsewithDetails18_tp",
-      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-      "userXmd" : "external_files/SurveyQuestionResponsewithDetails18_XMD.json",
-      "file": "external_files/SurveyQuestionResponsewithDetails18.csv",
-      "type": "CSV",
-      "schema": "external_files/SurveyQuestionResponsewithDetails18.json"
+      "label": "Customer Lifecycle Map for CSAT",
+      "name": "Customer_Journey_Map_for_CSAT31_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Customer_Journey_Map_for_CSAT31.json"
     },
     {
-      "label" : "SurveyQuestionScoreWithDetails13",
-      "name" : "SurveyQuestionScoreWithDetails13_tp",
-      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-      "userXmd" : "external_files/SurveyQuestionScoreWithDetails13_XMD.json",
-      "file": "external_files/SurveyQuestionScoreWithDetails13.csv",
-      "type": "CSV",
-      "schema": "external_files/SurveyQuestionScoreWithDetails13.json"
+      "label": "Customer Lifecycle Map for NPS",
+      "name": "Customer_Journey_Map_for_NPS31_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Customer_Journey_Map_for_NPS31.json"
     },
     {
-      "label" : "SurveyResponseWithDetails13",
-      "name" : "SurveyResponseWithDetails13_tp",
-      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-      "userXmd" : "external_files/SurveyResponseWithDetails13_XMD.json",
-      "file": "external_files/SurveyResponseWithDetails13.csv",
-      "type": "CSV",
-      "schema": "external_files/SurveyResponseWithDetails13.json"
+      "label": "Person Account CSAT",
+      "name": "Person_Account_CSAT40_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Person_Account_CSAT40.json"
+    },
+    {
+      "label": "Person Account NPS",
+      "name": "Person_Account_NPS40_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Person_Account_NPS40.json"
+    },
+    {
+      "label": "Response Analysis",
+      "name": "Question_Wise_Response_Analysis35_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Question_Wise_Response_Analysis35.json"
+    },
+    {
+      "label": "Response Distribution",
+      "name": "Response_Distribution38_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Response_Distribution38.json"
+    },
+    {
+      "label": "Single Customer's CSAT Lifecycle Map (Embedded)",
+      "name": "Single_Customer_CSAT_Journey_Embedded28_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Single_Customer_CSAT_Journey_Embedded28.json"
+    },
+    {
+      "label": "Single Customer's NPS Lifecycle (Embedded)",
+      "name": "Single_Customer_NPS_Journey_Embedded28_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Single_Customer_NPS_Journey_Embedded28.json"
+    },
+    {
+      "label": "Summer RD - Customer Lifecycle Home",
+      "name": "Customer_Experience_Home24_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Customer_Experience_Home24.json"
+    },
+    {
+      "label": "Summer RD - Customer NPS Lifecycle Map (Embedded)",
+      "name": "Customer_NPS_Journey_Embedded28_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Customer_NPS_Journey_Embedded28.json"
+    },
+    {
+      "label": "Topic Analysis",
+      "name": "Topic_Analysis119_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Topic_Analysis119.json"
+    },
+    {
+      "label": "User CSAT",
+      "name": "User_CSAT118_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/User_CSAT118.json"
+    },
+    {
+      "label": "User NPS",
+      "name": "User_NPS118_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/User_NPS118.json"
     }
   ],
-  "storedQueries" : [ ],
-  "imageFiles" : [
-    {
-      "name" : "surveyslciconjpg1898jpg",
-      "condition" : "${Variables.Overrides.createAllImages}",
-      "file" : "images/surveyslciconjpg1898.jpg"
-    },
-    {
-      "name" : "surveyslciconjpg1898jpg1",
-      "condition" : "${Variables.Overrides.createAllImages}",
-      "file" : "images/surveyslciconjpg1898.jpg"
-    }
-  ],
-  "extendedTypes" : { },
-  "templateDependencies" : [ ],
-  "icons" : {
-    "appBadge" : {
-      "name" : "16.png"
+  "eltDataflows": [],
+  "recipes": [],
+  "extendedTypes": {},
+  "templateDependencies": [],
+  "icons": {
+    "appBadge": {
+      "name": "16.png"
     },
     "templateBadge": {
       "name": "analytics_icon"
@@ -244,7 +291,7 @@
       {
         "name": "einstein_scene",
         "label": "Description",
-        "description": ""
+        "description": "This template includes limited sample data. For more data, download the CSVs and schema files from here: (https://ac-sdo-repo.s3-us-west-2.amazonaws.com/demo-template-csv/EAPMM_Customer_Lifecycle_Analytics.zip), and update the corresponding datasets after app creation."
       }
     ]
   }
