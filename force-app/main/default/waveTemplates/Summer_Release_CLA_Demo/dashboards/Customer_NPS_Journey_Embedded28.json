@@ -108,7 +108,7 @@
             "dataSourceName": "${App.Datasets.SurveyQuestionResponsewithDetails_tp.Name}",
             "dataSourceNamespace": "${Org.Namespace}",
             "dataSourceType": "saql",
-            "fieldName": "JourneyConfig.Journey"
+            "fieldName": "JourneyConfig_Journey"
           }
         ],
         "label": "Journey Connection",
@@ -691,7 +691,7 @@
         "groups": [],
         "label": "NPS - Customer Journey KPI Delta",
         "numbers": [],
-        "query": "config = load \"${App.Datasets.Journey_Survey_Question_Config_Metadata_tp.FullyQualifiedName}\";\nconfig = filter config by {{cell(NSP___Customer_Journ_1.selection,0,\"JourneyConfig.Journey\").asEquality(\"Journey\")}};\nconfig = filter config by {{column(NPS___Customer_Journ_1.selection,[\"Stage\"]).asEquality(\"Stage\")}};\nconfig = filter config by 'Context' == \"Customer NPS\";\nconfig = filter config by 'QuestionType' == \"NPS\";\nq = load \"${App.Datasets.SurveyQuestionResponsewithDetails_tp.FullyQualifiedName}\";\nq = filter q by {{cell(NSP___Customer_Journ_1.selection,0,\"JourneyConfig.Journey\").asEquality(\"JourneyConfig.Journey\")}};\nq = filter q by 'Question.QuestionType' == \"NPS\";q = filter q by 'CreatedDate_sec_epoch' >= {{coalesce(cell(Date_Parser_1.result,0,\"Compare Min\"),0).asObject()}}/1000; q = filter q by 'CreatedDate_sec_epoch' <= {{coalesce(cell(Date_Parser_1.result,0,\"Compare Max\"),0).asObject()}}/1000;\npromoters = filter q by 'NumberValue' > 8;\ndetractors = filter q by 'NumberValue' < 7;\njourney = group config by ('Stage', 'SurveyID', 'SurveyVersionID', 'QuestionID') left, q by ('JourneyConfig.Stage', 'SurveyVersion.Survey.Id', 'SurveyVersionId', 'QuestionId') left,  promoters by ('JourneyConfig.Stage','SurveyVersion.Survey.Id', 'SurveyVersionId', 'QuestionId') left, detractors by ('JourneyConfig.Stage','SurveyVersion.Survey.Id', 'SurveyVersionId', 'QuestionId');\njourney = foreach journey generate config.'Stage' as 'Stage', config.'SurveyID' as 'SurveyID', config.'SurveyVersionID' as 'SurveyVersionID', config.'QuestionID' as 'QuestionID', first(config.'SurveyName') as 'SurveyName', count(promoters) - count(detractors) as 'Value', count(q) as 'count';\njourney = group journey by all;\njourney = foreach journey generate round((sum('Value')*100)/sum('count'),2) as 'Value', sum('count') as 'count', {{coalesce(cell(NPS___Customer_Journ_2.result, 0, \"Value\"),0).asObject()}} - round((sum('Value')*100)/sum('count'),2) as 'Delta', case when {{coalesce(cell(NPS___Customer_Journ_2.result, 0, \"Value\"),0).asObject()}} > round((sum('Value')*100)/sum('count'),2) then \"rgb(0, 103, 20)\" else \"#B50E03\" end as 'Colour';",
+        "query": "config = load \"${App.Datasets.Journey_Survey_Question_Config_Metadata_tp.FullyQualifiedName}\";\nconfig = filter config by {{cell(NSP___Customer_Journ_1.selection,0,\"JourneyConfig_Journey\").asEquality(\"Journey\")}};\nconfig = filter config by {{column(NPS___Customer_Journ_1.selection,[\"Stage\"]).asEquality(\"Stage\")}};\nconfig = filter config by 'Context' == \"Customer NPS\";\nconfig = filter config by 'QuestionType' == \"NPS\";\nq = load \"${App.Datasets.SurveyQuestionResponsewithDetails_tp.FullyQualifiedName}\";\nq = filter q by {{cell(NSP___Customer_Journ_1.selection,0,\"JourneyConfig_Journey\").asEquality(\"JourneyConfig_Journey\")}};\nq = filter q by 'Question_QuestionType' == \"NPS\";q = filter q by 'CreatedDate_sec_epoch' >= {{coalesce(cell(Date_Parser_1.result,0,\"Compare Min\"),0).asObject()}}/1000; q = filter q by 'CreatedDate_sec_epoch' <= {{coalesce(cell(Date_Parser_1.result,0,\"Compare Max\"),0).asObject()}}/1000;\npromoters = filter q by 'NumberValue' > 8;\ndetractors = filter q by 'NumberValue' < 7;\njourney = group config by ('Stage', 'SurveyID', 'SurveyVersionID', 'QuestionID') left, q by ('JourneyConfig_Stage', 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId') left,  promoters by ('JourneyConfig_Stage','SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId') left, detractors by ('JourneyConfig_Stage','SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId');\njourney = foreach journey generate config.'Stage' as 'Stage', config.'SurveyID' as 'SurveyID', config.'SurveyVersionID' as 'SurveyVersionID', config.'QuestionID' as 'QuestionID', first(config.'SurveyName') as 'SurveyName', count(promoters) - count(detractors) as 'Value', count(q) as 'count';\njourney = group journey by all;\njourney = foreach journey generate round((sum('Value')*100)/sum('count'),2) as 'Value', sum('count') as 'count', {{coalesce(cell(NPS___Customer_Journ_2.result, 0, \"Value\"),0).asObject()}} - round((sum('Value')*100)/sum('count'),2) as 'Delta', case when {{coalesce(cell(NPS___Customer_Journ_2.result, 0, \"Value\"),0).asObject()}} > round((sum('Value')*100)/sum('count'),2) then \"rgb(0, 103, 20)\" else \"#B50E03\" end as 'Colour';",
         "receiveFacetSource": {
           "mode": "none",
           "steps": []
@@ -804,7 +804,7 @@
         "groups": [],
         "label": "NPS - Customer Journey KPI",
         "numbers": [],
-        "query": "config = load \"${App.Datasets.Journey_Survey_Question_Config_Metadata_tp.FullyQualifiedName}\";\nconfig = filter config by 'Context' == \"Customer NPS\"; \nconfig = filter config by 'QuestionType' == \"NPS\";\n\nq = load \"${App.Datasets.SurveyQuestionResponsewithDetails_tp.FullyQualifiedName}\";\nq = filter q by 'Question.QuestionType' == \"NPS\";\n\npromoters = filter q by 'NumberValue' > 8;\ndetractors = filter q by 'NumberValue' < 7;\n\njourney = group config by ('Stage', 'SurveyID', 'SurveyVersionID', 'QuestionID') left, q by ('JourneyConfig.Stage', 'SurveyVersion.Survey.Id', 'SurveyVersionId', 'QuestionId') left,  promoters by ('JourneyConfig.Stage','SurveyVersion.Survey.Id', 'SurveyVersionId', 'QuestionId') left, detractors by ('JourneyConfig.Stage','SurveyVersion.Survey.Id', 'SurveyVersionId', 'QuestionId');\n\njourney = foreach journey generate config.'Stage' as 'Stage', config.'SurveyID' as 'SurveyID', config.'SurveyVersionID' as 'SurveyVersionID', config.'QuestionID' as 'QuestionID', first(config.'SurveyName') as 'SurveyName', count(promoters) - count(detractors) as 'Value', count(q) as 'count';\n\njourney = group journey by all;\njourney = foreach journey generate round((sum('Value')*100)/sum('count'),2) as 'Value', sum('count') as 'count';",
+        "query": "config = load \"${App.Datasets.Journey_Survey_Question_Config_Metadata_tp.FullyQualifiedName}\";\nconfig = filter config by 'Context' == \"Customer NPS\"; \nconfig = filter config by 'QuestionType' == \"NPS\";\n\nq = load \"${App.Datasets.SurveyQuestionResponsewithDetails_tp.FullyQualifiedName}\";\nq = filter q by 'Question_QuestionType' == \"NPS\";\n\npromoters = filter q by 'NumberValue' > 8;\ndetractors = filter q by 'NumberValue' < 7;\n\njourney = group config by ('Stage', 'SurveyID', 'SurveyVersionID', 'QuestionID') left, q by ('JourneyConfig_Stage', 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId') left,  promoters by ('JourneyConfig_Stage','SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId') left, detractors by ('JourneyConfig_Stage','SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId');\n\njourney = foreach journey generate config.'Stage' as 'Stage', config.'SurveyID' as 'SurveyID', config.'SurveyVersionID' as 'SurveyVersionID', config.'QuestionID' as 'QuestionID', first(config.'SurveyName') as 'SurveyName', count(promoters) - count(detractors) as 'Value', count(q) as 'count';\n\njourney = group journey by all;\njourney = foreach journey generate round((sum('Value')*100)/sum('count'),2) as 'Value', sum('count') as 'count';",
         "receiveFacetSource": {
           "mode": "all",
           "steps": []
@@ -924,10 +924,10 @@
         "query": {
           "query": {
             "measures": [["count", "*"]],
-            "groups": ["JourneyConfig.Journey"],
+            "groups": ["JourneyConfig_Journey"],
             "filters": [
-              ["Question.QuestionType", ["NPS"], "in"],
-              ["JourneyConfig.Context", ["Customer NPS"], "in"]
+              ["Question_QuestionType", ["NPS"], "in"],
+              ["JourneyConfig_Context", ["Customer NPS"], "in"]
             ]
           },
           "version": -1.0
@@ -1002,7 +1002,7 @@
             },
             "columnMap": {
               "trellis": [],
-              "dimensionAxis": ["JourneyConfig.Journey"],
+              "dimensionAxis": ["JourneyConfig_Journey"],
               "plots": ["count"]
             },
             "showActionMenu": true,
@@ -1049,7 +1049,7 @@
         "groups": [],
         "label": "NPS - Customer Journey Unique Participants",
         "numbers": [],
-        "query": "q = load \"${App.Datasets.SurveyQuestionResponsewithDetails_tp.FullyQualifiedName}\"; q = filter q by {{column(NPS___Customer_Journ_1.selection, [\"Stage\"]).asEquality(\"JourneyConfig.Stage\")}};\nconfig = load \"${App.Datasets.Journey_Survey_Question_Config_Metadata_tp.FullyQualifiedName}\";\nconfig = filter config by 'Context' == \"Customer NPS\";\nq = group config by all left, q by all;\nq = foreach q generate unique(q.'Invitation.ParticipantId') as 'unique_Invitation.ParticipantId';\nq = limit q 2000;",
+        "query": "q = load \"${App.Datasets.SurveyQuestionResponsewithDetails_tp.FullyQualifiedName}\"; q = filter q by {{column(NPS___Customer_Journ_1.selection, [\"Stage\"]).asEquality(\"JourneyConfig_Stage\")}};\nconfig = load \"${App.Datasets.Journey_Survey_Question_Config_Metadata_tp.FullyQualifiedName}\";\nconfig = filter config by 'Context' == \"Customer NPS\";\nq = group config by all left, q by all;\nq = foreach q generate unique(q.'Invitation_ParticipantId') as 'unique_Invitation_ParticipantId';\nq = limit q 2000;",
         "receiveFacetSource": {
           "mode": "all",
           "steps": []
@@ -1162,7 +1162,7 @@
         "groups": [],
         "label": "NPS - Customer Journey",
         "numbers": [],
-        "query": "config = load \"${App.Datasets.Journey_Survey_Question_Config_Metadata_tp.FullyQualifiedName}\";\nconfig = filter config by 'Context' == \"Customer NPS\"; \nconfig = filter config by 'QuestionType' == \"NPS\";\n\nq = load \"${App.Datasets.SurveyQuestionResponsewithDetails_tp.FullyQualifiedName}\";\nq = filter q by 'Question.QuestionType' == \"NPS\";\n\npromoters = filter q by 'NumberValue' > 8;\ndetractors = filter q by 'NumberValue' < 7;\n\njourney = group config by ('Stage', 'SurveyID', 'SurveyVersionID', 'QuestionID') left, q by ('JourneyConfig.Stage', 'SurveyVersion.Survey.Id', 'SurveyVersionId', 'QuestionId') left,  promoters by ('JourneyConfig.Stage','SurveyVersion.Survey.Id', 'SurveyVersionId', 'QuestionId') left, detractors by ('JourneyConfig.Stage','SurveyVersion.Survey.Id', 'SurveyVersionId', 'QuestionId');\n\njourney = foreach journey generate config.'Stage' as 'Stage', config.'SurveyID' as 'SurveyID', config.'SurveyVersionID' as 'SurveyVersionID', config.'QuestionID' as 'QuestionID', first(config.'SurveyName') as 'SurveyName', count(promoters) - count(detractors) as 'Value', count(q) as 'count', first(config.'StageOrder') as 'StageOrder';\n\njourney = group journey by ('Stage');\njourney = foreach journey generate 'Stage' as 'Stage', round((sum('Value')*100)/sum('count'),2) as 'Value', sum('count') as 'count', first('StageOrder') as 'StageOrder'; journey = order journey by 'StageOrder' asc;",
+        "query": "config = load \"${App.Datasets.Journey_Survey_Question_Config_Metadata_tp.FullyQualifiedName}\";\nconfig = filter config by 'Context' == \"Customer NPS\"; \nconfig = filter config by 'QuestionType' == \"NPS\";\n\nq = load \"${App.Datasets.SurveyQuestionResponsewithDetails_tp.FullyQualifiedName}\";\nq = filter q by 'Question_QuestionType' == \"NPS\";\n\npromoters = filter q by 'NumberValue' > 8;\ndetractors = filter q by 'NumberValue' < 7;\n\njourney = group config by ('Stage', 'SurveyID', 'SurveyVersionID', 'QuestionID') left, q by ('JourneyConfig_Stage', 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId') left,  promoters by ('JourneyConfig_Stage','SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId') left, detractors by ('JourneyConfig_Stage','SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId');\n\njourney = foreach journey generate config.'Stage' as 'Stage', config.'SurveyID' as 'SurveyID', config.'SurveyVersionID' as 'SurveyVersionID', config.'QuestionID' as 'QuestionID', first(config.'SurveyName') as 'SurveyName', count(promoters) - count(detractors) as 'Value', count(q) as 'count', first(config.'StageOrder') as 'StageOrder';\n\njourney = group journey by ('Stage');\njourney = foreach journey generate 'Stage' as 'Stage', round((sum('Value')*100)/sum('count'),2) as 'Value', sum('count') as 'count', first('StageOrder') as 'StageOrder'; journey = order journey by 'StageOrder' asc;",
         "receiveFacetSource": {
           "mode": "all",
           "steps": []
@@ -1484,7 +1484,7 @@
         "parameters": {
           "compact": true,
           "exploreLink": true,
-          "measureField": "unique_Invitation.ParticipantId",
+          "measureField": "unique_Invitation_ParticipantId",
           "noResultsLabel": "-",
           "numberColor": "#091A3E",
           "numberSize": 24,
