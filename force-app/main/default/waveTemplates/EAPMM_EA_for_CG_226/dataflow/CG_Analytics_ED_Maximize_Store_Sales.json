@@ -1,0 +1,1757 @@
+{
+  "notificationLevel": "",
+  "workflowDefinition": {
+    "CG_ED_Story_Digest_Case": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {"name": "ClosedDate"},
+          {"name": "Id"},
+          {"name": "CreatedDate"},
+          {"name": "ContactId"}
+        ],
+        "object": "Case"
+      }
+    },
+    "CG_ED_Story_Augment_Case_onto_RetailStore": {
+      "action": "augment",
+      "parameters": {
+        "right_key": [
+          "AccountId",
+          "ContactId"
+        ],
+        "left": "CG_ED_Story_Augment_RetailVisitKpi_onto_RetailStore",
+        "left_key": [
+          "AccountId",
+          "PrimaryContactId"
+        ],
+        "right_select": ["Cases_Count"],
+        "right": "CG_ED_Story_Filter_Case",
+        "relationship": "Case",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_ED_Story_Filter_Case": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_CE_Case",
+        "saqlFilter": "CreatedDate_Filter_Flag == 1"
+      }
+    },
+    "CG_ED_Story_Augment_InStoreLocation_onto_RetailStore": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["RetailStoreId"],
+        "left": "CG_ED_Story_Augment_Location_onto_RetailStore",
+        "left_key": ["Id"],
+        "right_select": ["Number_of_InStoreLocations"],
+        "right": "CG_ED_Story_CE_InStoreLocation",
+        "relationship": "InStoreLocation",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_ED_Story_Register_ED": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_Maximize_Store_Sales_ED",
+        "alias": "${App.Datasets.CG_Maximize_Store_Sales_ED6_tp.FullyQualifiedName}",
+        "source": "CG_ED_Story_Slice3_RetailStore"
+      }
+    },
+    "CG_ED_Story_Augment_OrderItem_onto_RetailStore": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Id"],
+        "left": "CG_ED_Story_Augment_InStoreLocation_onto_RetailStore",
+        "left_key": ["Id"],
+        "right_select": [
+          "Quantity",
+          "Unique_Products",
+          "Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.RetailLocationGroupId"
+        ],
+        "right": "CG_ED_Story_CR_OrderItem_GetUniqueProductsByStore",
+        "relationship": "OrderItem",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_ED_Story_Augment_RetailVisitKpi_onto_RetailStore": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["AssessmentTask.Visit.RetailStore.Id"],
+        "left": "CG_ED_Story_Augment_PlannedVisits_onto_RetailStore",
+        "left_key": ["Id"],
+        "right_select": [
+          "SoS_Compliance_Temp",
+          "SoS_Tasks_Count",
+          "OutOfStock_Compliance_Temp",
+          "OutOfStock_Tasks_Count",
+          "Promotion_Compliance_Temp",
+          "Promotion_Tasks_Count",
+          "Facing_Compliance_Temp",
+          "Facing_Tasks_Count",
+          "Number_of_Promotions"
+        ],
+        "right": "CG_ED_Story_CR_RetailVisitKpi",
+        "relationship": "RetailVisitKpi",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_ED_Story_Augment_SurveyInvitation_onto_SurveySubject": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Digest_SurveySubject",
+        "left_key": ["ParentId"],
+        "right_select": ["Id"],
+        "right": "CG_ED_Story_Digest_SurveyInvitation",
+        "relationship": "SurveyInvitation",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Filter_AssessmentTaskOrder_Remove_Duplicates": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_CE_AssessmentTaskOrder_Find_Duplicate_Orders",
+        "saqlFilter": "'IsDuplicate' == \"False\""
+      }
+    },
+    "CG_ED_Story_Augment_AssessmentTaskOrder_onto_Order": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["OrderId"],
+        "left": "CG_ED_Story_Digest_Order",
+        "left_key": ["Id"],
+        "right_select": [
+          "AssessmentTask.Visit.RetailStore.Id",
+          "AssessmentTask.Visit.RetailStore.RetailLocationGroupId"
+        ],
+        "right": "CG_ED_Story_Augment_AssessmentTask_onto_AssessmentTaskOrder",
+        "relationship": "AssessmentTaskOrder",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Augment_Location_onto_RetailStore": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Digest_RetailStore",
+        "left_key": ["LocationId"],
+        "right_select": [
+          "Address.City",
+          "Address.State"
+        ],
+        "right": "CG_ED_Story_Augment_Address_onto_Location",
+        "relationship": "Location",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_CE_RetailStore1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_ED_Story_Filter_RetailStore",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "StoreTextDummy",
+            "saqlExpression": "\"S1\"",
+            "label": "StoreTextDummy",
+            "type": "Text"
+          },
+          {
+            "defaultValue": "0",
+            "precision": 16,
+            "name": "Percent_Successful_Visits",
+            "saqlExpression": "'ActualVisits.Completed_Visits' / 'ActualVisits.Completed_and_Abandoned_Visits' * 100",
+            "scale": 2,
+            "label": "% Successful visits",
+            "type": "Numeric"
+          },
+          {
+            "defaultValue": "0",
+            "precision": 16,
+            "saqlExpression": "'ActualVisits.ActualVisitDuration' / 'ActualVisits.Completed_and_Abandoned_Visits'",
+            "name": "Avg_Visit_Duration",
+            "scale": 0,
+            "label": "Visit duration",
+            "type": "Numeric"
+          },
+          {
+            "defaultValue": "0",
+            "precision": 16,
+            "name": "Percent_High_Priority_Visits_Completed",
+            "saqlExpression": "'ActualVisits.High_Priority_Visits_Completed' / 'PlannedVisits.Total_High_Priority_Visits_Planned' * 100",
+            "scale": 2,
+            "label": "% High priority visits completed",
+            "type": "Numeric"
+          },
+          {
+            "defaultValue": "0",
+            "precision": 16,
+            "name": "ShareOfShelf_Compliance",
+            "saqlExpression": "'RetailVisitKpi.SoS_Compliance_Temp' / 'RetailVisitKpi.SoS_Tasks_Count'",
+            "scale": 2,
+            "label": "SoS Compliance",
+            "type": "Numeric"
+          },
+          {
+            "defaultValue": "0",
+            "precision": 16,
+            "name": "OutOfStock_Compliance",
+            "saqlExpression": "'RetailVisitKpi.OutOfStock_Compliance_Temp' / 'RetailVisitKpi.OutOfStock_Tasks_Count'",
+            "scale": 2,
+            "label": "OOS Compliance",
+            "type": "Numeric"
+          },
+          {
+            "defaultValue": "0",
+            "precision": 16,
+            "name": "Facing_Compliance",
+            "saqlExpression": "'RetailVisitKpi.Facing_Compliance_Temp' / 'RetailVisitKpi.Facing_Tasks_Count'",
+            "scale": 2,
+            "label": "Facings Compliance",
+            "type": "Numeric"
+          },
+          {
+            "defaultValue": "0",
+            "precision": 16,
+            "name": "Promotion_Compliance",
+            "saqlExpression": "'RetailVisitKpi.Promotion_Compliance_Temp' / 'RetailVisitKpi.Promotion_Tasks_Count'",
+            "scale": 2,
+            "label": "Promotion Compliance",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "NetPromoterScore",
+            "saqlExpression": "(('SurveyQuestionResponse.Promoters' / 'SurveyQuestionResponse.All_Responses') - ('SurveyQuestionResponse.Detractors' / 'SurveyQuestionResponse.All_Responses')) * 100",
+            "scale": 2,
+            "label": "NPS",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Total_Stores",
+            "saqlExpression": "1",
+            "scale": 0,
+            "label": "Total_Stores",
+            "type": "Numeric"
+          }
+        ]
+      }
+    },
+    "CG_ED_Story_CE_RetailStore2": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_ED_Story_Augment_RetailStoreGroup_onto_RetailStore",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "defaultValue": "All Stores",
+            "name": "Average_by",
+            "saqlExpression": "\"All Stores\"",
+            "label": "Average_by",
+            "type": "Text"
+          },
+          {
+            "precision": 16,
+            "name": "Avg_InStore_Locations",
+            "saqlExpression": "case when 'Average_by' == \"All Stores\" ||  'RetailLocationGroupId' is null then 'Avg_InStore_Locations_by_AllStores' else 'RetailStoreGroup.Avg_InStore_Locations_by_StoreGroup' end",
+            "scale": 0,
+            "label": "Avg in-store Locations",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Avg_Products",
+            "saqlExpression": "case when 'Average_by' == \"All Stores\" ||  'RetailLocationGroupId' is null then 'Avg_Products_by_AllStores' else 'RetailStoreGroup.Avg_Products_by_StoreGroup' end",
+            "scale": 0,
+            "label": "Avg Products ordered",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Avg_SoS_Compliance",
+            "saqlExpression": "case when 'Average_by' == \"All Stores\" ||  'RetailLocationGroupId' is null then 'Avg_SoS_Compliance_by_AllStores' else 'RetailStoreGroup.Avg_SoS_Compliance_by_StoreGroup' end",
+            "scale": 2,
+            "label": "Avg SoS Compliance",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Avg_OOS_Compliance",
+            "saqlExpression": "case when 'Average_by' == \"All Stores\" ||  'RetailLocationGroupId' is null then 'Avg_OOS_Compliance_by_AllStores' else 'RetailStoreGroup.Avg_OOS_Compliance_by_StoreGroup' end",
+            "scale": 2,
+            "label": "Avg OOS Compliance",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Avg_Facing_Compliance",
+            "saqlExpression": "case when 'Average_by' == \"All Stores\" ||  'RetailLocationGroupId' is null then 'Avg_Facing_Compliance_by_AllStores' else 'RetailStoreGroup.Avg_Facing_Compliance_by_StoreGroup' end",
+            "scale": 2,
+            "label": "Avg Facing Compliance",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Avg_Promotion_Compliance",
+            "saqlExpression": "case when 'Average_by' == \"All Stores\" ||  'RetailLocationGroupId' is null then 'Avg_Promotion_Compliance_by_AllStores' else 'RetailStoreGroup.Avg_Promotion_Compliance_by_StoreGroup' end",
+            "scale": 2,
+            "label": "Avg Promotion Compliance",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Avg_Visits_Planned",
+            "saqlExpression": "case when 'Average_by' == \"All Stores\" ||  'RetailLocationGroupId' is null then 'Avg_Visits_Planned_by_AllStores' else 'RetailStoreGroup.Avg_Visits_Planned_by_StoreGroup' end",
+            "scale": 2,
+            "label": "# Visits",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Avg_High_Priority_Visits_Planned",
+            "saqlExpression": "case when 'Average_by' == \"All Stores\" ||  'RetailLocationGroupId' is null then 'Avg_High_Priority_Visits_Planned_by_AllStores' else 'RetailStoreGroup.Avg_High_Priority_Visits_Planned_by_StoreGroup' end",
+            "scale": 2,
+            "label": "Avg high priority visits",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Avg_Promotions",
+            "saqlExpression": "case when 'Average_by' == \"All Stores\" ||  'RetailLocationGroupId' is null then 'Avg_Promotions_by_AllStores' else 'RetailStoreGroup.Avg_Promotions_by_StoreGroup' end",
+            "scale": 2,
+            "label": "Avg Promotions",
+            "type": "Numeric"
+          }
+        ]
+      }
+    },
+    "CG_ED_Story_Digest_SurveyInvitation": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "InvitationLink"},
+          {"name": "Name"},
+          {"name": "ParticipantId"},
+          {"name": "ResponseStatus"}
+        ],
+        "object": "SurveyInvitation"
+      }
+    },
+    "CG_ED_Story_CR_AssessmentTaskOrder_Find_Previous_Orders": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["OrderId"],
+        "orderBy": [{
+          "name": "LastModifiedDate",
+          "direction": "desc"
+        }],
+        "source": "CG_ED_Story_Digest_AssessmentTaskOrder",
+        "computedFields": [{
+          "expression": {
+            "sourceField": "OrderId",
+            "offset": "previous()"
+          },
+          "name": "OrderIdPrevious",
+          "label": "OrderIdPrevious"
+        }]
+      }
+    },
+    "CG_ED_Story_Augment_PlannedVisits_onto_RetailStore": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["PlaceId"],
+        "left": "CG_ED_Story_Augment_ActualVisits_onto_RetailStore",
+        "left_key": ["Id"],
+        "right_select": [
+          "Total_Visits_Planned",
+          "Total_High_Priority_Visits_Planned"
+        ],
+        "right": "CG_ED_Story_Filter_Planned_Visits",
+        "relationship": "PlannedVisits",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_ED_Story_Augment_AID_onto_RetailVisitKpi": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Digest_RetailVisitKpi",
+        "left_key": ["AssessmentIndDefinitionId"],
+        "right_select": ["DataType"],
+        "right": "CG_ED_Story_Digest_AssessmentIndicatorDefinition",
+        "relationship": "AssessmentIndicatorDefinition",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Digest_SurveyQuestion": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "Name"},
+          {"name": "QuestionName"},
+          {"name": "QuestionType"}
+        ],
+        "object": "SurveyQuestion"
+      }
+    },
+    "CG_ED_Story_Filter_RetailVisitKpi": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_CE_RetailVisitKpi_Compute_Values",
+        "saqlFilter": "'AssessmentTask.Visit.ActualVisitStartTime_Filter_Flag' == 1 && 'Include_In_Compliance' == \"True\""
+      }
+    },
+    "CG_ED_Story_Augment_RetailStore_onto_Visit": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_CE_Visit",
+        "left_key": ["PlaceId"],
+        "right_select": [
+          "AccountId",
+          "Id",
+          "RetailLocationGroupId",
+          "Priority",
+          "Name",
+          "Location.Address.City",
+          "Location.Address.State",
+          "PrimaryContactId"
+        ],
+        "right": "CG_ED_Story_Augment_Location_onto_RetailStore",
+        "relationship": "RetailStore",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Digest_SurveyQuestionResponse": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "CreatedDate"},
+          {"name": "Datatype"},
+          {"name": "Id"},
+          {"name": "InvitationId"},
+          {"name": "IsDeleted"},
+          {"name": "NumberValue"},
+          {"name": "QuestionChoiceId"},
+          {"name": "QuestionId"},
+          {"name": "ResponseId"},
+          {"name": "ResponseValue"}
+        ],
+        "object": "SurveyQuestionResponse"
+      }
+    },
+    "CG_ED_Story_Augment_ActualVisits_onto_RetailStore": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["PlaceId"],
+        "left": "CG_ED_Story_Augment_OrderItem_onto_RetailStore",
+        "left_key": ["Id"],
+        "right_select": [
+          "ActualVisitDuration",
+          "Attempted_Visits",
+          "Completed_Visits",
+          "High_Priority_Visits_Completed",
+          "Completed_and_Abandoned_Visits"
+        ],
+        "right": "CG_ED_Story_Filter_Actual_Visits",
+        "relationship": "ActualVisits",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_ED_Story_Augment_SurveyQuestion_onto_SurveyQuestionResponse": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Digest_SurveyQuestionResponse",
+        "left_key": ["QuestionId"],
+        "right_select": [
+          "Name",
+          "QuestionName",
+          "QuestionType"
+        ],
+        "right": "CG_ED_Story_Digest_SurveyQuestion",
+        "relationship": "SurveyQuestion",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Digest_OrderItem": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AvailableQuantity"},
+          {"name": "Id"},
+          {"name": "UnitPrice"},
+          {"name": "TotalPrice"},
+          {"name": "Quantity"},
+          {"name": "Product2Id"},
+          {"name": "OrderItemNumber"},
+          {"name": "OrderId"},
+          {"name": "ListPrice"},
+          {"name": "IsDeleted"}
+        ],
+        "object": "OrderItem"
+      }
+    },
+    "CG_ED_Story_Augment_Product_onto_OrderItem": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Digest_OrderItem",
+        "left_key": ["Product2Id"],
+        "right_select": ["Name"],
+        "right": "CG_ED_Story_Digest_Product",
+        "relationship": "Product",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Augment_Survey_onto_SurveySubject": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Augment_SurveyInvitation_onto_SurveySubject",
+        "left_key": ["SurveyId"],
+        "right_select": [
+          "Description",
+          "Name",
+          "SurveyType"
+        ],
+        "right": "CG_ED_Story_Digest_Survey",
+        "relationship": "Survey",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Digest_AssessmentTask": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "TaskType"},
+          {"name": "Name"},
+          {"name": "Id"},
+          {"name": "ParentId"}
+        ],
+        "object": "AssessmentTask"
+      }
+    },
+    "CG_ED_Story_Augment_RetailStore_onto_SurveySubject": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Augment_Survey_onto_SurveySubject",
+        "left_key": ["SubjectId"],
+        "right_select": [
+          "Id",
+          "PrimaryContactId",
+          "Name"
+        ],
+        "right": "CG_ED_Story_Augment_Location_onto_RetailStore",
+        "relationship": "RetailStore",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Digest_AssessmentIndicatorDefinition": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "DataType"},
+          {"name": "Name"},
+          {"name": "Id"},
+          {"name": "Description"}
+        ],
+        "object": "AssessmentIndicatorDefinition"
+      }
+    },
+    "CG_ED_Story_Filter_Planned_Visits": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_CE_Visit",
+        "saqlFilter": "PlannedVisitStartTime_Filter_Flag == 1"
+      }
+    },
+    "CG_ED_Story_CE_InStoreLocation": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_ED_Story_Digest_InStoreLocation",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "precision": 10,
+          "name": "Number_of_InStoreLocations",
+          "saqlExpression": "1",
+          "scale": 0,
+          "label": "Number_of_InStoreLocations",
+          "type": "Numeric"
+        }]
+      }
+    },
+    "CG_ED_Story_CE_AssessmentTaskOrder_Find_Duplicate_Orders": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_ED_Story_CR_AssessmentTaskOrder_Find_Previous_Orders",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "IsDuplicate",
+          "saqlExpression": "case when 'OrderId' == 'OrderIdPrevious' then \"True\" else \"False\" end",
+          "label": "IsDuplicate",
+          "type": "Text"
+        }]
+      }
+    },
+    "CG_ED_Story_Digest_RetailVisitKpi": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "ActualBooleanValue"},
+          {"name": "ActualDecimalValue"},
+          {"name": "ActualIntegerValue"},
+          {"name": "AssessmentIndDefinitionId"},
+          {"name": "AssessmentTaskId"},
+          {"name": "Id"},
+          {"name": "InStoreLocationId"},
+          {"name": "UnitOfMeasure"},
+          {"name": "Type"},
+          {"name": "TargetIntegerValue"},
+          {"name": "TargetDecimalValue"},
+          {"name": "TargetBooleanValue"},
+          {"name": "ProductId"},
+          {"name": "ProductCategoryId"},
+          {"name": "Name"},
+          {"name": "PromotionId"},
+          {"name": "ActualDateTimeValue"},
+          {"name": "ActualStringValue"}
+        ],
+        "object": "RetailVisitKpi"
+      }
+    },
+    "CG_ED_Story_Filter_SurveyQuestionResponse": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_SurveyResponse_onto_SurveyQuestionResponse",
+        "saqlFilter": "date('SurveyResponse.CompletionDateTime_Year', 'SurveyResponse.CompletionDateTime_Month', 'SurveyResponse.CompletionDateTime_Day') in [\"90 days ago\"..\"current day\"]"
+      }
+    },
+    "CG_ED_Story_Filter_SurveyQuestionResponse_GetFirstResponse": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_CR_SurveyQuestionResponse",
+        "saqlFilter": "FirstResponseValue is null"
+      }
+    },
+    "CG_ED_Story_Digest_Location": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "VisitorAddressId"},
+          {"name": "Id"}
+        ],
+        "object": "Location"
+      }
+    },
+    "CG_ED_Story_Augment_RetailStore_onto_RetailStoreGroup": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["RetailLocationGroupId"],
+        "left": "CG_ED_Story_Digest_RetailStoreGroup",
+        "left_key": ["Id"],
+        "right_select": [
+          "PlannedVisits.Total_Visits_Planned",
+          "PlannedVisits.Total_High_Priority_Visits_Planned",
+          "Total_Stores",
+          "OutOfStock_Compliance",
+          "ShareOfShelf_Compliance",
+          "Promotion_Compliance",
+          "Facing_Compliance",
+          "InStoreLocation.Number_of_InStoreLocations",
+          "RetailVisitKpi.Number_of_Promotions",
+          "OrderItem.Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.RetailLocationGroupId"
+        ],
+        "right": "CG_ED_Story_CE_RetailStore1",
+        "relationship": "StoreGroup",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_ED_Story_Digest_Survey": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Description"},
+          {"name": "Id"},
+          {"name": "Name"},
+          {"name": "SurveyType"}
+        ],
+        "object": "Survey"
+      }
+    },
+    "CG_ED_Story_Augment_Address_onto_Location": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Digest_Location",
+        "left_key": ["VisitorAddressId"],
+        "right_select": [
+          "City",
+          "State"
+        ],
+        "right": "CG_ED_Story_Digest_Address",
+        "relationship": "Address",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Augment_AssessmentTask_onto_RetailVisitKpi": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Augment_AID_onto_RetailVisitKpi",
+        "left_key": ["AssessmentTaskId"],
+        "right_select": [
+          "TaskType",
+          "Visit.ActualVisitStartTime",
+          "Visit.Id",
+          "Visit.ActualVisitStartTime_Filter_Flag",
+          "Visit.RetailStore.Id",
+          "Visit.RetailStore.Name",
+          "Visit.RetailStore.RetailLocationGroupId"
+        ],
+        "right": "CG_ED_Story_Augment_Visit_onto_AssessmentTask",
+        "relationship": "AssessmentTask",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Augment_SurveyQuestionResponse_onto_RetailStore": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["SurveyResponse.SurveySubject.RetailStoreId"],
+        "left": "CG_ED_Story_Augment_Case_onto_RetailStore",
+        "left_key": ["Id"],
+        "right_select": [
+          "All_Responses",
+          "Detractors",
+          "Promoters"
+        ],
+        "right": "CG_ED_Story_Filter_SurveyQuestionResponse",
+        "relationship": "SurveyQuestionResponse",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_ED_Story_CE_RetailVisitKpi_Compute_Values": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_ED_Story_Augment_AssessmentTask_onto_RetailVisitKpi",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' == \"Number\" then case when 'ActualIntegerValue' is not null && 'TargetIntegerValue' is null then \"True\" else \"False\" end\nwhen 'AssessmentIndicatorDefinition.DataType' == \"Decimal\" then case when 'ActualDecimalValue' is not null && 'TargetDecimalValue' is null then \"True\" else \"False\" end\nwhen 'AssessmentIndicatorDefinition.DataType' == \"Boolean\" then case when 'ActualBooleanValue' is not null && 'TargetBooleanValue' is null then \"True\" else \"False\" end end",
+            "name": "Target_Empty_Flag",
+            "label": "Target_Empty_Flag",
+            "type": "Text"
+          },
+          {
+            "precision": 16,
+            "name": "ActualValue_Num_Dec_Computed",
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' == \"Number\" then 'ActualIntegerValue' when 'AssessmentIndicatorDefinition.DataType' == \"Decimal\" then 'ActualDecimalValue' end",
+            "scale": 5,
+            "label": "ActualValue_Num_Dec_Computed",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' == \"Number\" then 'TargetIntegerValue' when 'AssessmentIndicatorDefinition.DataType' == \"Decimal\" then 'TargetDecimalValue' end",
+            "name": "TargetValue_Num_Dec_Computed",
+            "scale": 5,
+            "label": "TargetValue_Num_Dec_Computed",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "ActualValue_Num_Dec_Adjusted",
+            "saqlExpression": "case when 'Target_Empty_Flag' == \"False\" && 'ActualValue_Num_Dec_Computed' > 'TargetValue_Num_Dec_Computed' then 'TargetValue_Num_Dec_Computed' else 'ActualValue_Num_Dec_Computed' end",
+            "scale": 5,
+            "label": "ActualValue_Num_Dec_Adjusted",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "saqlExpression": "case when 'Type' in [\"Facing\",\"ShareOfShelf\", \"Inventory\"] && 'AssessmentIndicatorDefinition.DataType' in [\"Number\", \"Decimal\"] && 'Target_Empty_Flag' == \"True\" then 'ActualValue_Num_Dec_Computed' else 'TargetValue_Num_Dec_Computed' end",
+            "name": "Fill_Target_Num_Dec_when_Empty",
+            "scale": 5,
+            "label": "Fill_Target_Num_Dec_when_Empty",
+            "type": "Numeric"
+          },
+          {
+            "name": "Fill_Target_Boolean_when_Empty",
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' == \"Boolean\" then case when 'Target_Empty_Flag' == \"False\" then 'TargetBooleanValue' else case when 'Type' != \"OutOfStock\" && 'ActualBooleanValue'==\"True\" then 'ActualBooleanValue' else \"False\" end end end",
+            "label": "Fill_Target_Boolean_when_Empty",
+            "type": "Text"
+          },
+          {
+            "precision": 16,
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' in [\"Number\",\"Decimal\"] then 'ActualValue_Num_Dec_Adjusted' when 'AssessmentIndicatorDefinition.DataType' == \"Boolean\" then \ncase when 'ActualBooleanValue' == \"True\" then 1 else 0 end end",
+            "name": "ActualValue_Computed",
+            "scale": 5,
+            "label": "ActualValue_Computed",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' in [\"Number\",\"Decimal\"] then 'Fill_Target_Num_Dec_when_Empty' when 'AssessmentIndicatorDefinition.DataType' == \"Boolean\" then case when 'Fill_Target_Boolean_when_Empty' == \"True\" then 1 else 0 end end",
+            "name": "TargetValue_Computed",
+            "scale": 5,
+            "label": "TargetValue_Computed",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' == \"Boolean\" then abs('ActualValue_Computed' - 'TargetValue_Computed')*100 else abs('ActualValue_Computed' - 'TargetValue_Computed')/'TargetValue_Computed' *100 end",
+            "name": "NonCompliance_Percentage",
+            "scale": 5,
+            "label": "NonCompliance_Percentage",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "saqlExpression": "100 - 'NonCompliance_Percentage'",
+            "name": "Compliance_Percentage",
+            "scale": 5,
+            "label": "Compliance_Percentage",
+            "type": "Numeric"
+          },
+          {
+            "name": "Target_n_Actual_Values_Present_Flag",
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' == \"Number\" && 'ActualIntegerValue' is not null then \"True\" when 'AssessmentIndicatorDefinition.DataType' == \"Decimal\" && 'ActualDecimalValue' is not null then \"True\" when 'AssessmentIndicatorDefinition.DataType' == \"Boolean\" && 'ActualBooleanValue' is not null then \"True\" else \"False\" end",
+            "label": "Target_n_Actual_Values_Present_Flag",
+            "type": "Text"
+          },
+          {
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' in [\"Number\",\"Decimal\"] && 'Type' in [\"Facing\",\"ShareOfShelf\", \"Inventory\"] then \"True\" when 'AssessmentIndicatorDefinition.DataType' == \"Boolean\" && ('PromotionId' is not null || 'Type' == \"OutOfStock\") then \"True\" else \"False\" end",
+            "name": "Include_In_Compliance_Temp",
+            "label": "Include in Compliance - Temp",
+            "type": "Text"
+          },
+          {
+            "name": "Include_In_Compliance",
+            "saqlExpression": "case when 'Target_n_Actual_Values_Present_Flag' == \"True\" && 'Include_In_Compliance_Temp' == \"True\" then \"True\" else \"False\" end",
+            "label": "Include In Compliance?",
+            "type": "Text"
+          },
+          {
+            "name": "Type_Computed",
+            "saqlExpression": "case when 'PromotionId' is not null then \"Promotion\" else 'Type' end",
+            "label": "Type_Computed",
+            "type": "Text"
+          },
+          {
+            "precision": 10,
+            "name": "Completed_Tasks_Count",
+            "saqlExpression": "case when ActualIntegerValue is not null || ActualDecimalValue is not null || ActualBooleanValue is not null || ActualDateTimeValue is not null || ActualStringValue is not null then 1 else 0 end",
+            "scale": 0,
+            "label": "Completed_Tasks_Count",
+            "type": "Numeric"
+          },
+          {
+            "saqlExpression": "toDate('AssessmentTask.Visit.ActualVisitStartTime_sec_epoch')",
+            "name": "ActualVisitStartTime",
+            "format": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+            "label": "ActualVisitStartTime",
+            "type": "Date",
+            "isYearEndFiscalYear": false
+          },
+          {
+            "precision": 16,
+            "name": "SoS_Compliance_Temp",
+            "saqlExpression": "case when 'Type_Computed' == \"ShareOfShelf\" then Compliance_Percentage end",
+            "scale": 5,
+            "label": "SoS_Compliance_Temp",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "SoS_Tasks_Count",
+            "saqlExpression": "case when 'Type_Computed' == \"ShareOfShelf\" then 1 else 0 end",
+            "scale": 0,
+            "label": "SoS_Tasks_Count",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "OutOfStock_Compliance_Temp",
+            "saqlExpression": "case when 'Type_Computed' == \"OutOfStock\" then Compliance_Percentage end",
+            "scale": 5,
+            "label": "OutOfStock_Compliance_Temp",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "OutOfStock_Tasks_Count",
+            "saqlExpression": "case when 'Type_Computed' == \"OutOfStock\" then 1 else 0 end",
+            "scale": 0,
+            "label": "OutOfStock_Tasks_Count",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Promotion_Compliance_Temp",
+            "saqlExpression": "case when 'Type_Computed' == \"Promotion\" then Compliance_Percentage end",
+            "scale": 5,
+            "label": "Promotion_Compliance_Temp",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "case when 'Type_Computed' == \"Promotion\" then 1 else 0 end",
+            "name": "Promotion_Tasks_Count",
+            "scale": 0,
+            "label": "Promotion_Tasks_Count",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "saqlExpression": "case when 'Type_Computed' == \"Facing\" then Compliance_Percentage end",
+            "name": "Facing_Compliance_Temp",
+            "scale": 5,
+            "label": "Facing_Compliance_Temp",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "Facing_Tasks_Count",
+            "saqlExpression": "case when 'Type_Computed' == \"Facing\" then 1 else 0 end",
+            "scale": 0,
+            "label": "Facing_Tasks_Count",
+            "type": "Numeric"
+          }
+        ]
+      }
+    },
+    "CG_ED_Story_Digest_Product": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Name"},
+          {"name": "Id"},
+          {"name": "Family"}
+        ],
+        "object": "Product2"
+      }
+    },
+    "CG_ED_Story_OrderItem_onto_RetailStoreGroup": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.RetailLocationGroupId"],
+        "left": "CG_ED_Story_Augment_RetailStore_onto_RetailStoreGroup",
+        "left_key": ["Id"],
+        "right_select": [
+          "Unique_Products_SG",
+          "Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.RetailLocationGroupId"
+        ],
+        "right": "CG_ED_Story_CR_OrderItem_GetUniqueProductsByStoreGroup",
+        "relationship": "OrderItem",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_ED_Story_Slice1_RetailStore": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "select",
+        "source": "CG_ED_Story_Augment_SurveyQuestionResponse_onto_RetailStore",
+        "fields": [
+          {"name": "Id"},
+          {"name": "StoreType"},
+          {"name": "RetailLocationGroupId"},
+          {"name": "Priority"},
+          {"name": "Name"},
+          {"name": "Location.Address.City"},
+          {"name": "Location.Address.State"},
+          {"name": "OrderItem.Quantity"},
+          {"name": "OrderItem.Unique_Products"},
+          {"name": "ActualVisits.ActualVisitDuration"},
+          {"name": "ActualVisits.Attempted_Visits"},
+          {"name": "ActualVisits.Completed_Visits"},
+          {"name": "ActualVisits.Completed_and_Abandoned_Visits"},
+          {"name": "ActualVisits.High_Priority_Visits_Completed"},
+          {"name": "PlannedVisits.Total_Visits_Planned"},
+          {"name": "PlannedVisits.Total_High_Priority_Visits_Planned"},
+          {"name": "RetailVisitKpi.SoS_Compliance_Temp"},
+          {"name": "RetailVisitKpi.SoS_Tasks_Count"},
+          {"name": "RetailVisitKpi.OutOfStock_Compliance_Temp"},
+          {"name": "RetailVisitKpi.OutOfStock_Tasks_Count"},
+          {"name": "RetailVisitKpi.Promotion_Compliance_Temp"},
+          {"name": "RetailVisitKpi.Promotion_Tasks_Count"},
+          {"name": "RetailVisitKpi.Facing_Compliance_Temp"},
+          {"name": "RetailVisitKpi.Facing_Tasks_Count"},
+          {"name": "Case.Cases_Count"},
+          {"name": "SurveyQuestionResponse.Promoters"},
+          {"name": "SurveyQuestionResponse.Detractors"},
+          {"name": "SurveyQuestionResponse.All_Responses"},
+          {"name": "RetailVisitKpi.Number_of_Promotions"},
+          {"name": "InStoreLocation.Number_of_InStoreLocations"},
+          {"name": "OrderItem.Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.RetailLocationGroupId"}
+        ]
+      }
+    },
+    "CG_ED_Story_Augment_RetailStore_Self": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["StoreTextDummy"],
+        "left": "CG_ED_Story_CE_RetailStore1",
+        "left_key": ["StoreTextDummy"],
+        "right_select": [
+          "InStoreLocation.Number_of_InStoreLocations",
+          "OrderItem.Unique_Products",
+          "PlannedVisits.Total_Visits_Planned",
+          "PlannedVisits.Total_High_Priority_Visits_Planned",
+          "ShareOfShelf_Compliance",
+          "OutOfStock_Compliance",
+          "Facing_Compliance",
+          "Promotion_Compliance",
+          "Total_Stores",
+          "RetailVisitKpi.Number_of_Promotions",
+          "OrderItem.Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.RetailLocationGroupId"
+        ],
+        "right": "CG_ED_Story_CE_RetailStore1",
+        "relationship": "Total",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_ED_Story_CE_RetailStoreGroup_Calc_Avg": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_ED_Story_OrderItem_onto_RetailStoreGroup",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 16,
+            "name": "Avg_InStore_Locations_by_StoreGroup",
+            "saqlExpression": "'StoreGroup.InStoreLocation.Number_of_InStoreLocations' / 'StoreGroup.Total_Stores'",
+            "scale": 0,
+            "label": "Avg_InStore_Locations_by_StoreGroup",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Avg_Products_by_StoreGroup",
+            "saqlExpression": "'OrderItem.Unique_Products_SG' / 'StoreGroup.Total_Stores'",
+            "scale": 0,
+            "label": "Avg_Products_by_StoreGroup",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Avg_SoS_Compliance_by_StoreGroup",
+            "saqlExpression": "'StoreGroup.ShareOfShelf_Compliance' / 'StoreGroup.Total_Stores'",
+            "scale": 2,
+            "label": "Avg_SoS_Compliance_by_StoreGroup",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Avg_OOS_Compliance_by_StoreGroup",
+            "saqlExpression": "'StoreGroup.OutOfStock_Compliance' / 'StoreGroup.Total_Stores'",
+            "scale": 2,
+            "label": "Avg_OOS_Compliance_by_StoreGroup",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Avg_Facing_Compliance_by_StoreGroup",
+            "saqlExpression": "'StoreGroup.Facing_Compliance' / 'StoreGroup.Total_Stores'",
+            "scale": 2,
+            "label": "Avg_Facing_Compliance_by_StoreGroup",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Avg_Promotion_Compliance_by_StoreGroup",
+            "saqlExpression": "'StoreGroup.Promotion_Compliance' / 'StoreGroup.Total_Stores'",
+            "scale": 2,
+            "label": "Avg_Promotion_Compliance_by_StoreGroup",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Avg_Visits_Planned_by_StoreGroup",
+            "saqlExpression": "'StoreGroup.PlannedVisits.Total_Visits_Planned' / 'StoreGroup.Total_Stores'",
+            "scale": 2,
+            "label": "Avg_Visits_Planned_by_StoreGroup",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Avg_High_Priority_Visits_Planned_by_StoreGroup",
+            "saqlExpression": "'StoreGroup.PlannedVisits.Total_High_Priority_Visits_Planned' / 'StoreGroup.Total_Stores'",
+            "scale": 2,
+            "label": "Avg_High_Priority_Visits_Planned_by_StoreGroup",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "saqlExpression": "'StoreGroup.RetailVisitKpi.Number_of_Promotions' / 'StoreGroup.Total_Stores'",
+            "name": "Avg_Promotions_by_StoreGroup",
+            "scale": 2,
+            "label": "Avg_Promotions_by_StoreGroup",
+            "type": "Numeric"
+          }
+        ]
+      }
+    },
+    "CG_ED_Story_Digest_RetailStoreGroup": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "Name"}
+        ],
+        "object": "RetailLocationGroup"
+      }
+    },
+    "CG_ED_Story_Digest_Address": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "City"},
+          {"name": "Country"},
+          {"name": "State"},
+          {"name": "Name"},
+          {"name": "Id"}
+        ],
+        "object": "Address"
+      }
+    },
+    "CG_ED_Story_CE_Visit": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_ED_Story_Digest_Visit",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 10,
+            "saqlExpression": "case when date('PlannedVisitStartTime_Year', 'PlannedVisitStartTime_Month', 'PlannedVisitStartTime_Day') in [\"90 days ago\"..\"current day\"] then 1 else 0 end",
+            "name": "PlannedVisitStartTime_Filter_Flag",
+            "scale": 0,
+            "label": "PlannedVisitStartTime_Filter_Flag",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "case when date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [\"90 days ago\"..\"current day\"] then 1 else 0 end",
+            "name": "ActualVisitStartTime_Filter_Flag",
+            "scale": 0,
+            "label": "ActualVisitStartTime_Filter_Flag",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "PlannedVisitDuration",
+            "saqlExpression": "(PlannedVisitEndTime_sec_epoch - PlannedVisitStartTime_sec_epoch)/60",
+            "scale": 0,
+            "label": "Planned Visit Duration (Minutes)",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "ActualVisitDuration",
+            "saqlExpression": "(ActualVisitEndTime_sec_epoch - ActualVisitStartTime_sec_epoch)/60",
+            "scale": 0,
+            "label": "Actual Visit Duration (Minutes)",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "Attempted_Visits",
+            "saqlExpression": "case when 'Status' in [\"Completed\", \"Abandoned\", \"InProgress\"] then 1 else 0 end",
+            "scale": 0,
+            "label": "Attempted_Visits",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "Completed_Visits",
+            "saqlExpression": "case when 'Status' == \"Completed\" then 1 else 0 end",
+            "scale": 0,
+            "label": "Completed_Visits",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "Completed_and_Abandoned_Visits",
+            "saqlExpression": "case when 'Status' in [\"Completed\", \"Abandoned\"] then 1 else 0 end",
+            "scale": 0,
+            "label": "Completed_and_Abandoned_Visits",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "Total_Visits_Planned",
+            "saqlExpression": "1",
+            "scale": 0,
+            "label": "Total_Visits_Planned",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "case when 'VisitPriority' == \"High\" && 'Status' == \"Completed\" then 1 else 0 end",
+            "name": "High_Priority_Visits_Completed",
+            "scale": 0,
+            "label": "High_Priority_Visits_Completed",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "Total_High_Priority_Visits_Planned",
+            "saqlExpression": "case when 'VisitPriority' == \"High\" then 1 else 0 end",
+            "scale": 0,
+            "label": "Total_High_Priority_Visits_Planned",
+            "type": "Numeric"
+          }
+        ]
+      }
+    },
+    "CG_ED_Story_Digest_Visit": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "ActualVisitEndTime"},
+          {"name": "ActualVisitStartTime"},
+          {"name": "Id"},
+          {"name": "CreatedDate"},
+          {"name": "VisitPriority"},
+          {"name": "VisitorId"},
+          {"name": "Status"},
+          {"name": "PlannedVisitStartTime"},
+          {"name": "PlannedVisitEndTime"},
+          {"name": "PlaceId"},
+          {"name": "Name"}
+        ],
+        "object": "Visit"
+      }
+    },
+    "CG_ED_Story_Digest_InStoreLocation": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "RetailStoreId"},
+          {"name": "Name"},
+          {"name": "InStoreLocationType"}
+        ],
+        "object": "InStoreLocation"
+      }
+    },
+    "CG_ED_Story_Filter_RetailStore": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_Slice1_RetailStore",
+        "saqlFilter": "'PlannedVisits.Total_Visits_Planned' > 0"
+      }
+    },
+    "CG_ED_Story_Augment_Visit_onto_SurveySubject": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Augment_RetailStore_onto_SurveySubject",
+        "left_key": ["SubjectId"],
+        "right_select": [
+          "PlaceId",
+          "RetailStore.Id",
+          "RetailStore.PrimaryContactId",
+          "RetailStore.Name"
+        ],
+        "right": "CG_ED_Story_Augment_RetailStore_onto_Visit",
+        "relationship": "Visit",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Augment_AssessmentTask_onto_AssessmentTaskOrder": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Filter_AssessmentTaskOrder_Remove_Duplicates",
+        "left_key": ["AssessmentTaskId"],
+        "right_select": [
+          "Visit.RetailStore.Id",
+          "Visit.RetailStore.RetailLocationGroupId"
+        ],
+        "right": "CG_ED_Story_Augment_Visit_onto_AssessmentTask",
+        "relationship": "AssessmentTask",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Digest_Order": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {"name": "ActivatedDate"},
+          {"name": "Type"},
+          {"name": "OrderNumber"},
+          {"name": "Id"}
+        ],
+        "object": "Order"
+      }
+    },
+    "CG_ED_Story_Filter_Actual_Visits": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_CE_Visit",
+        "saqlFilter": "ActualVisitStartTime_Filter_Flag == 1"
+      }
+    },
+    "CG_ED_Story_CR_SurveyQuestionResponse": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["ResponseId"],
+        "orderBy": [{
+          "name": "QuestionId",
+          "direction": "asc"
+        }],
+        "source": "CG_ED_Story_Filter_SurveyQuestionResponse_Keep_NPS_Data",
+        "computedFields": [{
+          "expression": {
+            "sourceField": "ResponseId",
+            "offset": "previous()"
+          },
+          "name": "FirstResponseValue",
+          "label": "FirstResponseValue"
+        }]
+      }
+    },
+    "CG_ED_Story_Augment_Order_onto_OrderItem": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Augment_Product_onto_OrderItem",
+        "left_key": ["OrderId"],
+        "right_select": [
+          "ActivatedDate",
+          "AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Id",
+          "AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.RetailLocationGroupId"
+        ],
+        "right": "CG_ED_Story_Augment_AssessmentTaskOrder_onto_Order",
+        "relationship": "Order",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Digest_AssessmentTaskOrder": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AssessmentTaskId"},
+          {"name": "Id"},
+          {"name": "CreatedDate"},
+          {"name": "LastModifiedDate"},
+          {"name": "OrderId"},
+          {"name": "RetailStoreId"}
+        ],
+        "object": "AssessmentTaskOrder"
+      }
+    },
+    "CG_ED_Story_Slice3_RetailStore": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "select",
+        "source": "CG_ED_Story_CE_RetailStore2",
+        "fields": [
+          {"name": "StoreType"},
+          {"name": "Priority"},
+          {"name": "Location.Address.City"},
+          {"name": "Location.Address.State"},
+          {"name": "InStoreLocation.Number_of_InStoreLocations"},
+          {"name": "OrderItem.Quantity"},
+          {"name": "OrderItem.Unique_Products"},
+          {"name": "PlannedVisits.Total_Visits_Planned"},
+          {"name": "PlannedVisits.Total_High_Priority_Visits_Planned"},
+          {"name": "RetailVisitKpi.Number_of_Promotions"},
+          {"name": "Case.Cases_Count"},
+          {"name": "Percent_Successful_Visits"},
+          {"name": "Avg_Visit_Duration"},
+          {"name": "Percent_High_Priority_Visits_Completed"},
+          {"name": "ShareOfShelf_Compliance"},
+          {"name": "OutOfStock_Compliance"},
+          {"name": "Facing_Compliance"},
+          {"name": "Promotion_Compliance"},
+          {"name": "NetPromoterScore"},
+          {"name": "RetailStoreGroup.Name"},
+          {"name": "Avg_InStore_Locations"},
+          {"name": "Avg_Products"},
+          {"name": "Avg_SoS_Compliance"},
+          {"name": "Avg_OOS_Compliance"},
+          {"name": "Avg_Facing_Compliance"},
+          {"name": "Avg_Promotion_Compliance"},
+          {"name": "Avg_Visits_Planned"},
+          {"name": "Avg_High_Priority_Visits_Planned"},
+          {"name": "Avg_Promotions"}
+        ]
+      }
+    },
+    "CG_ED_Story_Filter_SurveyQuestionResponse_Keep_NPS_Data": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_Augment_SurveyQuestion_onto_SurveyQuestionResponse",
+        "saqlFilter": "'SurveyQuestion.QuestionType' == \"NPS\""
+      }
+    },
+    "CG_ED_Story_Filter_OrderItem": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_Augment_Order_onto_OrderItem",
+        "saqlFilter": "date('Order.ActivatedDate_Year', 'Order.ActivatedDate_Month', 'Order.ActivatedDate_Day') in [\"90 days ago\"..\"current day\"]"
+      }
+    },
+    "CG_ED_Story_SurveyResponse_onto_SurveyQuestionResponse": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_CE_SurveyQuestionResponse_ScoreBucketing",
+        "left_key": ["ResponseId"],
+        "right_select": [
+          "CompletionDateTime",
+          "SurveySubject.RetailStoreId"
+        ],
+        "right": "CG_ED_Story_Augment_SurveySubject_onto_SurveyResponse",
+        "relationship": "SurveyResponse",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_CR_RetailVisitKpi": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["AssessmentTask.Visit.RetailStore.Id"],
+        "orderBy": [{
+          "name": "PromotionId",
+          "direction": "asc"
+        }],
+        "source": "CG_ED_Story_Filter_RetailVisitKpi",
+        "computedFields": [{
+          "expression": {
+            "saqlExpression": "case when 'PromotionId' is not null then case when current('PromotionId') == previous('PromotionId') then 0 else 1 end end",
+            "scale": 0,
+            "type": "Numeric"
+          },
+          "name": "Number_of_Promotions",
+          "label": "Number_of_Promotions"
+        }]
+      }
+    },
+    "CG_ED_Story_CE_Case": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_ED_Story_Digest_Case",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 10,
+            "saqlExpression": "case when date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [\"90 days ago\"..\"current day\"] then 1 else 0 end",
+            "name": "CreatedDate_Filter_Flag",
+            "scale": 0,
+            "label": "CreatedDate_Filter_Flag",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "Cases_Count",
+            "saqlExpression": "1",
+            "scale": 0,
+            "label": "Cases_Count",
+            "type": "Numeric"
+          }
+        ]
+      }
+    },
+    "CG_ED_Story_Digest_SurveySubject": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "ParentId"},
+          {"name": "SubjectId"},
+          {"name": "SurveyId"},
+          {"name": "SurveyInvitationId"},
+          {"name": "SurveyResponseId"}
+        ],
+        "object": "SurveySubject"
+      }
+    },
+    "CG_ED_Story_Augment_Visit_onto_AssessmentTask": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Digest_AssessmentTask",
+        "left_key": ["ParentId"],
+        "right_select": [
+          "ActualVisitStartTime",
+          "Id",
+          "ActualVisitStartTime_Filter_Flag",
+          "RetailStore.Id",
+          "RetailStore.Name",
+          "RetailStore.RetailLocationGroupId"
+        ],
+        "right": "CG_ED_Story_Augment_RetailStore_onto_Visit",
+        "relationship": "Visit",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Digest_SurveyResponse": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "CompletionDateTime"},
+          {"name": "Id"},
+          {"name": "InvitationId"},
+          {"name": "Name"},
+          {"name": "Status"},
+          {"name": "SurveyId"}
+        ],
+        "object": "SurveyResponse"
+      }
+    },
+    "CG_ED_Story_CE_SurveyQuestionResponse_ScoreBucketing": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_ED_Story_Filter_SurveyQuestionResponse_GetFirstResponse",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "ResponseValueBucket",
+            "saqlExpression": "case \n    when 'NumberValue' >= 0 and 'NumberValue' <= 6 then \"Detractors\"\nwhen 'NumberValue' >= 7  and 'NumberValue' <= 8 then \"Passives\" \n    when 'NumberValue' >= 9  and 'NumberValue' <= 10 then \"Promoters\" \n    end",
+            "label": "ResponseValueBucket",
+            "type": "Text"
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "case when 'ResponseValueBucket' == \"Promoters\" then 1 else 0 end",
+            "name": "Promoters",
+            "scale": 0,
+            "label": "Promoters",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "case when 'ResponseValueBucket' == \"Detractors\" then 1 else 0 end",
+            "name": "Detractors",
+            "scale": 0,
+            "label": "Detractors",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "All_Responses",
+            "saqlExpression": "1",
+            "scale": 0,
+            "label": "All_Responses",
+            "type": "Numeric"
+          }
+        ]
+      }
+    },
+    "CG_ED_Story_CR_OrderItem_GetUniqueProductsByStoreGroup": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.RetailLocationGroupId"],
+        "orderBy": [{
+          "name": "Product2Id",
+          "direction": "asc"
+        }],
+        "source": "CG_ED_Story_Filter_OrderItem",
+        "computedFields": [{
+          "expression": {
+            "saqlExpression": "case when current('Product2Id') == previous('Product2Id') then 0 else 1 end",
+            "scale": 0,
+            "type": "Numeric"
+          },
+          "name": "Unique_Products_SG",
+          "label": "Unique_Products_SG"
+        }]
+      }
+    },
+    "CG_ED_Story_Augment_RetailStoreGroup_onto_RetailStore": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_CE_RetailStore_Calc_Avg",
+        "left_key": ["RetailLocationGroupId"],
+        "right_select": [
+          "StoreGroup.OrderItem.Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.RetailLocationGroupId",
+          "OrderItem.Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.RetailLocationGroupId",
+          "Avg_InStore_Locations_by_StoreGroup",
+          "Avg_Products_by_StoreGroup",
+          "Avg_SoS_Compliance_by_StoreGroup",
+          "Avg_OOS_Compliance_by_StoreGroup",
+          "Avg_Facing_Compliance_by_StoreGroup",
+          "Avg_Promotion_Compliance_by_StoreGroup",
+          "Avg_Visits_Planned_by_StoreGroup",
+          "Avg_High_Priority_Visits_Planned_by_StoreGroup",
+          "Avg_Promotions_by_StoreGroup",
+          "Name"
+        ],
+        "right": "CG_ED_Story_CE_RetailStoreGroup_Calc_Avg",
+        "relationship": "RetailStoreGroup",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Digest_RetailStore": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {"name": "Id"},
+          {"name": "StoreType"},
+          {"name": "RetailLocationGroupId"},
+          {"name": "Priority"},
+          {"name": "PrimaryContactId"},
+          {"name": "Name"},
+          {"name": "LocationId"}
+        ],
+        "object": "RetailStore"
+      }
+    },
+    "CG_ED_Story_CE_RetailStore_Calc_Avg": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_ED_Story_Augment_RetailStore_Self",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 16,
+            "name": "Avg_InStore_Locations_by_AllStores",
+            "saqlExpression": "'Total.InStoreLocation.Number_of_InStoreLocations' / 'Total.Total_Stores'",
+            "scale": 0,
+            "label": "Avg_InStore_Locations_by_AllStores",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Avg_Products_by_AllStores",
+            "saqlExpression": "'Total.OrderItem.Unique_Products' / 'Total.Total_Stores'",
+            "scale": 0,
+            "label": "Avg_Products_by_AllStores",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Avg_SoS_Compliance_by_AllStores",
+            "saqlExpression": "'Total.ShareOfShelf_Compliance' / 'Total.Total_Stores'",
+            "scale": 2,
+            "label": "Avg_SoS_Compliance_by_AllStores",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Avg_OOS_Compliance_by_AllStores",
+            "saqlExpression": "'Total.OutOfStock_Compliance' / 'Total.Total_Stores'",
+            "scale": 2,
+            "label": "Avg_OOS_Compliance_by_AllStores",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Avg_Facing_Compliance_by_AllStores",
+            "saqlExpression": "'Total.Facing_Compliance' / 'Total.Total_Stores'",
+            "scale": 2,
+            "label": "Avg_Facing_Compliance_by_AllStores",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Avg_Promotion_Compliance_by_AllStores",
+            "saqlExpression": "'Total.Promotion_Compliance' / 'Total.Total_Stores'",
+            "scale": 2,
+            "label": "Avg_Promotion_Compliance_by_AllStores",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Avg_Visits_Planned_by_AllStores",
+            "saqlExpression": "'Total.PlannedVisits.Total_Visits_Planned' / 'Total.Total_Stores'",
+            "scale": 2,
+            "label": "Avg_Visits_Planned_by_AllStores",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Avg_High_Priority_Visits_Planned_by_AllStores",
+            "saqlExpression": "'Total.PlannedVisits.Total_High_Priority_Visits_Planned' / 'Total.Total_Stores'",
+            "scale": 2,
+            "label": "Avg_High_Priority_Visits_Planned_by_AllStores",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Avg_Promotions_by_AllStores",
+            "saqlExpression": "'RetailVisitKpi.Number_of_Promotions' / 'Total.Total_Stores'",
+            "scale": 2,
+            "label": "Avg_Promotions_by_AllStores",
+            "type": "Numeric"
+          }
+        ]
+      }
+    },
+    "CG_ED_Story_CE_SurveySubject_Combine_ParticipantId": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_ED_Story_Augment_Visit_onto_SurveySubject",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "RetailStoreId",
+            "saqlExpression": "coalesce('RetailStore.Id', 'Visit.RetailStore.Id')",
+            "label": "RetailStoreId",
+            "type": "Text"
+          },
+          {
+            "saqlExpression": "coalesce('RetailStore.Name','Visit.RetailStore.Name')",
+            "name": "StoreName",
+            "label": "StoreName",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "CG_ED_Story_CR_OrderItem_GetUniqueProductsByStore": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Id"],
+        "orderBy": [{
+          "name": "Product2Id",
+          "direction": "asc"
+        }],
+        "source": "CG_ED_Story_Filter_OrderItem",
+        "computedFields": [{
+          "expression": {
+            "saqlExpression": "case when current('Product2Id') == previous('Product2Id') then 0 else 1 end",
+            "scale": 0,
+            "type": "Numeric"
+          },
+          "name": "Unique_Products",
+          "label": "Unique_Products"
+        }]
+      }
+    },
+    "CG_ED_Story_Augment_SurveySubject_onto_SurveyResponse": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["SurveyInvitation.Id"],
+        "left": "CG_ED_Story_Digest_SurveyResponse",
+        "left_key": ["InvitationId"],
+        "right_select": [
+          "RetailStoreId",
+          "StoreName"
+        ],
+        "right": "CG_ED_Story_CE_SurveySubject_Combine_ParticipantId",
+        "relationship": "SurveySubject",
+        "operation": "LookupMultiValue"
+      }
+    }
+  },
+  "_type": "dataflow",
+  "description": "CG Analytics ED - Maximize Store Sales",
+  "MasterLabel": "CG Analytics ED - Maximize Store Sales",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive",
+  "isDeletable": true,
+  "longRunningAlertInMins": "",
+  "DataflowType": "USER",
+  "name": "CG_Analytics_ED_Maximize_Store_Sales",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": ""
+}
