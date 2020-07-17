@@ -353,7 +353,7 @@
           "name": "${App.Datasets.ERM_Account_tp.Name}"
         },
         "dependent": true,
-        "fields": ["Contact_MailingState"],
+        "fields": ["Contact.MailingState"],
         "locked": false,
         "operator": "in"
       },
@@ -362,7 +362,7 @@
           "name": "${App.Datasets.ERM_Account_tp.Name}"
         },
         "dependent": true,
-        "fields": ["Contact_MailingCity"],
+        "fields": ["Contact.MailingCity"],
         "locked": false,
         "operator": "in"
       },
@@ -371,7 +371,7 @@
           "name": "${App.Datasets.ERM_Account_tp.Name}"
         },
         "dependent": true,
-        "fields": ["Contact_ConditionStatus"],
+        "fields": ["Contact.ConditionStatus"],
         "locked": false,
         "operator": "in"
       },
@@ -380,7 +380,7 @@
           "name": "${App.Datasets.ERM_Account_tp.Name}"
         },
         "dependent": true,
-        "fields": ["Contact_Testing_Status"],
+        "fields": ["Contact.Testing_Status"],
         "locked": false,
         "operator": "in"
       },
@@ -3320,19 +3320,19 @@
         "query": {
           "query": {
             "values": [
-              "Name",
+              "Contact.Name",
               "CreatedDate_Custom",
-              "Contact_ConditionStatus",
-              "Contact_Testing_Status",
-              "Contact_Monitored_at_Home",
+              "Contact.ConditionStatus",
+              "Contact.Testing_Status",
+              "Contact.Monitored_at_Home",
               "ContactsTraced",
               "Household_Members",
-              "Contact_Phone",
-              "Contact_Email",
-              "Contact_MailingCity",
-              "Contact_MailingState",
-              "Contact_Gender",
-              "Contact_Age_Text",
+              "Contact.Phone",
+              "Contact.Email",
+              "Contact.MailingCity",
+              "Contact.MailingState",
+              "Contact.Gender",
+              "Contact.Age_Text",
               "Id"
             ],
             "filters": [["IsPersonAccount_Computed", ["True"], "in"]],
@@ -3405,7 +3405,7 @@
         "type": "saql",
         "useGlobal": true
       },
-      "Contact_Testing_Status_1": {
+      "Contact.Testing_Status_1": {
         "broadcastFacet": true,
         "datasets": [
           {
@@ -3413,11 +3413,11 @@
           }
         ],
         "isGlobal": false,
-        "label": "Contact_Testing_Status_1",
+        "label": "Contact.Testing_Status_1",
         "query": {
           "query": {
             "measures": [["count", "*"]],
-            "groups": ["Contact_Testing_Status"],
+            "groups": ["Contact.Testing_Status"],
             "filters": [["IsPersonAccount_Computed", ["True"], "in"]],
             "order": [
               [
@@ -3492,7 +3492,7 @@
             "fillArea": true,
             "columnMap": {
               "trellis": [],
-              "dimension": ["Contact_Testing_Status"],
+              "dimension": ["Contact.Testing_Status"],
               "plots": ["count"]
             },
             "showActionMenu": true,
@@ -3872,7 +3872,7 @@
           }
         ]
       },
-      "Contact_MailingState_1": {
+      "Contact.MailingState_1": {
         "broadcastFacet": true,
         "datasets": [
           {
@@ -3880,11 +3880,11 @@
           }
         ],
         "isGlobal": false,
-        "label": "Contact_MailingState_1",
+        "label": "Contact.MailingState_1",
         "query": {
           "query": {
             "measures": [["count", "*"]],
-            "groups": ["Contact_MailingState"],
+            "groups": ["Contact.MailingState"],
             "filters": [["IsPersonAccount_Computed", ["True"], "in"]]
           },
           "version": -1.0
@@ -3985,7 +3985,7 @@
             "columnMap": {
               "color": ["count"],
               "trellis": [],
-              "plots": ["Contact_MailingState"]
+              "plots": ["Contact.MailingState"]
             },
             "fillArea": true,
             "showActionMenu": true,
@@ -4050,7 +4050,7 @@
         "query": {
           "query": {
             "measures": [["count", "*"]],
-            "groups": ["Contact_Gender"],
+            "groups": ["Contact.Gender"],
             "filters": [["IsPersonAccount_Computed", ["True"], "in"]],
             "order": [
               [
@@ -4117,7 +4117,7 @@
             ],
             "columnMap": {
               "trellis": [],
-              "dimension": ["Contact_Gender"],
+              "dimension": ["Contact.Gender"],
               "plots": ["count"]
             },
             "showActionMenu": true,
@@ -4141,7 +4141,7 @@
         "query": {
           "query": {
             "measures": [["count", "*"]],
-            "groups": ["Contact_Age_Bucket"],
+            "groups": ["Contact.Age_Bucket"],
             "filters": [["IsPersonAccount_Computed", ["True"], "in"]]
           },
           "version": -1.0
@@ -4215,7 +4215,7 @@
             },
             "columnMap": {
               "trellis": [],
-              "dimensionAxis": ["Contact_Age_Bucket"],
+              "dimensionAxis": ["Contact.Age_Bucket"],
               "plots": ["count"]
             },
             "showActionMenu": true,
@@ -4554,7 +4554,7 @@
                   "measures": [["count", "*"]],
                   "filters": [
                     [
-                      "Contact_ConditionStatus",
+                      "Contact.ConditionStatus",
                       ["Asymptomatic"],
                       "in"
                     ]
@@ -4568,7 +4568,7 @@
                   "measures": [["count", "*"]],
                   "filters": [
                     [
-                      "Contact_ConditionStatus",
+                      "Contact.ConditionStatus",
                       ["Symptomatic"],
                       "in"
                     ]
@@ -4582,7 +4582,7 @@
                   "measures": [["count", "*"]],
                   "filters": [
                     [
-                      "Contact_Testing_Status",
+                      "Contact.Testing_Status",
                       ["Positive Test"],
                       "in"
                     ]
@@ -4843,7 +4843,7 @@
         "query": {
           "query": {
             "measures": [["count", "*"]],
-            "groups": ["Contact_Monitored_at_Home"],
+            "groups": ["Contact.Monitored_at_Home"],
             "filters": [["IsPersonAccount_Computed", ["True"], "in"]],
             "order": [
               [
@@ -4906,7 +4906,7 @@
             "inner": 60,
             "columnMap": {
               "trellis": [],
-              "dimension": ["Contact_Monitored_at_Home"],
+              "dimension": ["Contact.Monitored_at_Home"],
               "plots": ["count"]
             },
             "showActionMenu": true,
@@ -5201,7 +5201,7 @@
         "query": {
           "query": {
             "measures": [["count", "*"]],
-            "groups": ["Contact_ConditionStatus"],
+            "groups": ["Contact.ConditionStatus"],
             "filters": [["IsPersonAccount_Computed", ["True"], "in"]],
             "order": [
               [
@@ -5285,7 +5285,7 @@
             "binValues": false,
             "columnMap": {
               "trellis": [],
-              "dimensionAxis": ["Contact_ConditionStatus"],
+              "dimensionAxis": ["Contact.ConditionStatus"],
               "plots": ["count"]
             },
             "showActionMenu": true,
@@ -5540,7 +5540,7 @@
           "inner": 60,
           "columnMap": {
             "trellis": [],
-            "dimension": ["Contact_Monitored_at_Home"],
+            "dimension": ["Contact.Monitored_at_Home"],
             "plots": ["count"]
           },
           "showActionMenu": true,
@@ -5852,7 +5852,7 @@
           "fillArea": true,
           "columnMap": {
             "trellis": [],
-            "dimension": ["Contact_Testing_Status"],
+            "dimension": ["Contact.Testing_Status"],
             "plots": ["count"]
           },
           "showActionMenu": true,
@@ -5860,7 +5860,7 @@
           "centerValueType": "number",
           "valueType": "compactNumber",
           "theme": "waterDark",
-          "step": "Contact_Testing_Status_1",
+          "step": "Contact.Testing_Status_1",
           "applyConditionalFormatting": true,
           "drawArea": {
             "measure": "",
@@ -5946,7 +5946,7 @@
           "binValues": false,
           "columnMap": {
             "trellis": [],
-            "dimensionAxis": ["Contact_ConditionStatus"],
+            "dimensionAxis": ["Contact.ConditionStatus"],
             "plots": ["count"]
           },
           "showActionMenu": true,
@@ -6590,17 +6590,17 @@
           "columns": [
             "Name",
             "CreatedDate_Custom",
-            "Contact_ConditionStatus",
-            "Contact_Testing_Status",
-            "Contact_Monitored_at_Home",
+            "Contact.ConditionStatus",
+            "Contact.Testing_Status",
+            "Contact.Monitored_at_Home",
             "ContactsTraced",
             "Household_Members",
-            "Contact_Phone",
-            "Contact_Email",
-            "Contact_MailingCity",
-            "Contact_MailingState",
-            "Contact_Gender",
-            "Contact_Age_Text"
+            "Contact.Phone",
+            "Contact.Email",
+            "Contact.MailingCity",
+            "Contact.MailingState",
+            "Contact.Gender",
+            "Contact.Age_Text"
           ],
           "customBulkActions": [],
           "evenRowColor": "#f2f6fa",
@@ -6981,7 +6981,7 @@
               "dataset": {
                 "name": "${App.Datasets.ERM_Account_tp.Name}"
               },
-              "field": "Contact_MailingState"
+              "field": "Contact.MailingState"
             }
           ],
           "showAllFilters": false
@@ -7169,7 +7169,7 @@
           ],
           "columnMap": {
             "trellis": [],
-            "dimension": ["Contact_Gender"],
+            "dimension": ["Contact.Gender"],
             "plots": ["count"]
           },
           "showActionMenu": true,
@@ -7245,7 +7245,7 @@
           },
           "columnMap": {
             "trellis": [],
-            "dimensionAxis": ["Contact_Age_Bucket"],
+            "dimensionAxis": ["Contact.Age_Bucket"],
             "plots": ["count"]
           },
           "showActionMenu": true,
@@ -7378,7 +7378,7 @@
           "columnMap": {
             "color": ["count"],
             "trellis": [],
-            "plots": ["Contact_MailingState"]
+            "plots": ["Contact.MailingState"]
           },
           "fillArea": true,
           "showActionMenu": true,
@@ -7400,7 +7400,7 @@
               "showDomain": false
             }
           },
-          "step": "Contact_MailingState_1"
+          "step": "Contact.MailingState_1"
         },
         "type": "chart"
       },
@@ -7768,7 +7768,7 @@
               "dataset": {
                 "name": "${App.Datasets.ERM_Account_tp.Name}"
               },
-              "field": "Contact_Testing_Status"
+              "field": "Contact.Testing_Status"
             }
           ],
           "showAllFilters": false
@@ -7786,7 +7786,7 @@
               "dataset": {
                 "name": "${App.Datasets.ERM_Account_tp.Name}"
               },
-              "field": "Contact_ConditionStatus"
+              "field": "Contact.ConditionStatus"
             }
           ],
           "showAllFilters": false
@@ -7804,7 +7804,7 @@
               "dataset": {
                 "name": "${App.Datasets.ERM_Account_tp.Name}"
               },
-              "field": "Contact_MailingCity"
+              "field": "Contact.MailingCity"
             }
           ],
           "showAllFilters": false

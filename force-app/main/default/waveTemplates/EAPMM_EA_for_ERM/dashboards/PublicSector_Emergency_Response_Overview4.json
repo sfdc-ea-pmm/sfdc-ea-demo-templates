@@ -906,7 +906,7 @@
             "dataSourceName": "${App.Datasets.ERM_Account_tp.Name}",
             "dataSourceNamespace": "${Org.Namespace}",
             "dataSourceType": "saql",
-            "fieldName": "Contact_MailingState"
+            "fieldName": "Contact.MailingState"
           },
           {
             "dataSourceName": "${App.Datasets.ERM_EmergencyRequest_tp.Name}",
@@ -954,7 +954,7 @@
             "dataSourceName": "${App.Datasets.ERM_Account_tp.Name}",
             "dataSourceNamespace": "${Org.Namespace}",
             "dataSourceType": "saql",
-            "fieldName": "Contact_MailingCity"
+            "fieldName": "Contact.MailingCity"
           },
           {
             "dataSourceName": "${App.Datasets.ERM_EmergencyRequest_tp.Name}",
@@ -3739,19 +3739,19 @@
         "query": {
           "query": {
             "values": [
-              "Name",
+              "Contact.Name",
               "CreatedDate_Custom",
-              "Contact_ConditionStatus",
-              "Contact_Testing_Status",
-              "Contact_Monitored_at_Home",
+              "Contact.ConditionStatus",
+              "Contact.Testing_Status",
+              "Contact.Monitored_at_Home",
               "ContactsTraced",
               "Household_Members",
-              "Contact_Phone",
-              "Contact_Email",
-              "Contact_MailingCity",
-              "Contact_MailingState",
-              "Contact_Gender",
-              "Contact_Age_Text",
+              "Contact.Phone",
+              "Contact.Email",
+              "Contact.MailingCity",
+              "Contact.MailingState",
+              "Contact.Gender",
+              "Contact.Age_Text",
               "Id"
             ],
             "filters": [["IsPersonAccount_Computed", ["True"], "in"]],
@@ -4772,16 +4772,16 @@
       },
       "Patients_State_1": {
         "broadcastFacet": true,
-        "groups": ["Contact_MailingState"],
+        "groups": ["Contact.MailingState"],
         "label": "Patients_State",
         "numbers": ["Number of Patients"],
-        "query": "q = load \"${App.Datasets.ERM_Account_tp.FullyQualifiedName}\";\nq = filter q by 'IsPersonAccount_Computed' == \"True\";\nq = group q by 'Contact_MailingState';\nq = foreach q generate 'Contact_MailingState' as 'Contact_MailingState', count() as 'Number of Patients';\nq = order q by 'Number of Patients' desc;\nq = limit q 2000;",
+        "query": "q = load \"${App.Datasets.ERM_Account_tp.FullyQualifiedName}\";\nq = filter q by 'IsPersonAccount_Computed' == \"True\";\nq = group q by 'Contact.MailingState';\nq = foreach q generate 'Contact.MailingState' as 'Contact.MailingState', count() as 'Number of Patients';\nq = order q by 'Number of Patients' desc;\nq = limit q 2000;",
         "receiveFacetSource": {
           "mode": "all",
           "steps": []
         },
         "selectMode": "single",
-        "strings": ["Contact_MailingState"],
+        "strings": ["Contact.MailingState"],
         "type": "saql",
         "useGlobal": true,
         "visualizationParameters": {
@@ -4847,13 +4847,13 @@
             },
             "plots": [
               {
-                "column": ["Contact_MailingState"]
+                "column": ["Contact.MailingState"]
               }
             ],
             "columnMap": {
               "color": ["Number of Patients"],
               "trellis": [],
-              "plots": ["Contact_MailingState"]
+              "plots": ["Contact.MailingState"]
             },
             "showActionMenu": true,
             "theme": "wave",
@@ -5506,50 +5506,6 @@
             "showActionMenu": true,
             "totals": true,
             "verticalPadding": 4
-          },
-          "type": "table"
-        }
-      },
-      "Patients_Detail_Tabl_1": {
-        "broadcastFacet": true,
-        "groups": [],
-        "label": "Patients_Detail_Table",
-        "numbers": [],
-        "query": "q = load \"${App.Datasets.ERM_Account_tp.FullyQualifiedName}\";\nresult = group q by ('Name', 'CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day', 'Contact_ConditionStatus', 'Contact_Testing_Status', 'Contact_Monitored_at_Home', 'Contact_Phone', 'Contact_Email', 'Contact_MailingState', 'Contact_MailingCity', 'Contact_Gender', 'Contact_Age_Text');\nresult = foreach result generate q.'Name' as 'Name', q.'CreatedDate_Year' + \"~~~\" + q.'CreatedDate_Month' + \"~~~\" + q.'CreatedDate_Day' as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day', q.'Contact_ConditionStatus' as 'Contact_ConditionStatus', q.'Contact_Testing_Status' as 'Contact_Testing_Status', 'Contact_Monitored_at_Home' as 'Contact_Monitored_at_Home', sum('ContactsTraced') as 'ContactsTraced', sum('Household_Members') as 'Household_Members', 'Contact_Phone' as 'Contact_Phone', 'Contact_Email' as 'Contact_Email', 'Contact_MailingState' as 'Contact_MailingState', 'Contact_MailingCity' as 'Contact_MailingCity', 'Contact_Gender' as 'Contact_Gender', 'Contact_Age_Text' as 'Age';\nresult = order result by 'Name' asc;\nresult = limit result 2000;",
-        "receiveFacetSource": {
-          "mode": "all",
-          "steps": []
-        },
-        "selectMode": "single",
-        "strings": [],
-        "type": "saql",
-        "useGlobal": true,
-        "visualizationParameters": {
-          "parameters": {
-            "borderColor": "#e0e5ee",
-            "borderWidth": 1,
-            "cell": {
-              "backgroundColor": "#ffffff",
-              "fontColor": "#16325c",
-              "fontSize": 12
-            },
-            "columnProperties": {},
-            "columns": [],
-            "customBulkActions": [],
-            "header": {
-              "backgroundColor": "#f4f6f9",
-              "fontColor": "#16325c",
-              "fontSize": 12
-            },
-            "innerMajorBorderColor": "#a8b7c7",
-            "innerMinorBorderColor": "#e0e5ee",
-            "mode": "fittocontainer",
-            "numberOfLines": 1,
-            "pivoted": false,
-            "showActionMenu": true,
-            "showRowIndexColumn": false,
-            "totals": true,
-            "verticalPadding": 8
           },
           "type": "table"
         }
@@ -6218,12 +6174,12 @@
           "query": {
             "values": [
               "IA_BLA_Name",
-              "Account_Name",
+              "Account.Contact.Name",
               "AppliedDate_Custom",
               "Status",
               "CaseNumber",
-              "Account_Contact_Phone",
-              "Account_Contact_Email",
+              "Account.Contact.Phone",
+              "Account.Contact.Email",
               "Address_City",
               "Address_State",
               "AccountId"
@@ -7187,13 +7143,13 @@
           },
           "plots": [
             {
-              "column": ["Contact_MailingState"]
+              "column": ["Contact.MailingState"]
             }
           ],
           "columnMap": {
             "color": ["Number of Patients"],
             "trellis": [],
-            "plots": ["Contact_MailingState"]
+            "plots": ["Contact.MailingState"]
           },
           "showActionMenu": true,
           "theme": "dark",
@@ -7750,17 +7706,17 @@
           "columns": [
             "Name",
             "CreatedDate_Custom",
-            "Contact_ConditionStatus",
-            "Contact_Testing_Status",
-            "Contact_Monitored_at_Home",
+            "Contact.ConditionStatus",
+            "Contact.Testing_Status",
+            "Contact.Monitored_at_Home",
             "ContactsTraced",
             "Household_Members",
-            "Contact_Phone",
-            "Contact_Email",
-            "Contact_MailingCity",
-            "Contact_MailingState",
-            "Contact_Gender",
-            "Contact_Age_Text"
+            "Contact.Phone",
+            "Contact.Email",
+            "Contact.MailingCity",
+            "Contact.MailingState",
+            "Contact.Gender",
+            "Contact.Age_Text"
           ],
           "customBulkActions": [],
           "evenRowColor": "#f2f6fa",
@@ -7969,12 +7925,12 @@
           "columnProperties": {},
           "columns": [
             "IA_BLA_Name",
-            "Account_Name",
+            "Account.Contact.Name",
             "AppliedDate_Custom",
             "Status",
             "CaseNumber",
-            "Account_Contact_Phone",
-            "Account_Contact_Email",
+            "Account.Contact.Phone",
+            "Account.Contact.Email",
             "Address_City",
             "Address_State"
           ],
