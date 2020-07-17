@@ -1,0 +1,95 @@
+{
+  "templateType": "app",
+  "label": "RCG IDO - Key Account Management",
+  "name": "RCGIDO_KAM",
+  "description": "",
+  "assetVersion": 49.0,
+  "variableDefinition": "variables.json",
+  "uiDefinition": "ui.json",
+  "rules": [
+    {
+      "type": "templateToApp",
+      "file": "template-to-app-rules.json"
+    },
+    {
+      "type": "appToTemplate",
+      "file": "app-to-template-rules.json"
+    }
+  ],
+  "releaseInfo": {
+    "templateVersion": "1.0",
+    "notesFile": "releaseNotes.html"
+  },
+  "folderDefinition": "folder.json",
+  "externalFiles": [
+    {
+      "label": "AllOutletsWithKPI",
+      "name": "AllOutletsWithKPI_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/AllOutletsWithKPI_XMD.json",
+      "file": "external_files/AllOutletsWithKPI.csv",
+      "type": "CSV",
+      "schema": "external_files/AllOutletsWithKPI.json"
+    },
+    {
+      "label": "FullModelInputWithOutletKPI",
+      "name": "FullModelInputWithOutletKPI_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/FullModelInputWithOutletKPI_XMD.json",
+      "file": "external_files/FullModelInputWithOutletKPI.csv",
+      "type": "CSV",
+      "schema": "external_files/FullModelInputWithOutletKPI.json"
+    },
+    {
+      "label": "Sales_Data",
+      "name": "Sales_Data3_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/Sales_Data_XMD.json",
+      "file": "external_files/Sales_Data.csv",
+      "type": "CSV",
+      "schema": "external_files/Sales_Data.json"
+    }
+  ],
+  "lenses": [],
+  "dashboards": [
+    {
+      "label": "Outlet Execution Recommendations",
+      "name": "Outlet_Execution_Recommendations_clean_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Outlet_Execution_Recommendations_clean.json"
+    },
+    {
+      "name" : "KAM_Executive_View_NEW_tp",
+      "label" : "KAM - Executive View",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/KAM_Executive_View_NEW.json"
+    }
+  ],
+  "eltDataflows": [],
+  "recipes": [],
+  "datasetFiles": [],
+  "storedQueries": [],
+  "imageFiles": [
+    {
+      "name": "Screenshot_20191128_at_132051png",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/Screenshot 2019-11-28 at 13.20.51.png"
+    },
+    {
+      "name": "X2018_Eureka_pose_rightpng",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/2018_Eureka pose - right.png"
+    }
+  ],
+  "extendedTypes": {},
+  "templateDependencies": [],
+  "icons": {
+    "appBadge": {
+      "name": "16.png"
+    },
+    "templateBadge": {
+      "name": "default.png"
+    },
+    "templatePreviews": []
+  }
+}
