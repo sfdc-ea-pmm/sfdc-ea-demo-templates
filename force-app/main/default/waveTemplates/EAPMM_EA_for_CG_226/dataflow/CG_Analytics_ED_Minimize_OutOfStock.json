@@ -1,0 +1,2717 @@
+{
+  "notificationLevel": "",
+  "workflowDefinition": {
+    "CG_ED_Story_CR_RetailVisitKpi_DaysSinceLastInventoryComplianceCheck": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["StoreProductId"],
+        "orderBy": [{
+          "name": "ActualVisitStartTime",
+          "direction": "desc"
+        }],
+        "source": "CG_ED_Story_Filter_RetailVisitKpi_DaysSinceLastInventoryComplianceCheck",
+        "computedFields": [
+          {
+            "expression": {
+              "default": "0",
+              "saqlExpression": "daysBetween(toDate(first('ActualVisitStartTime_sec_epoch')), now())",
+              "scale": 0,
+              "type": "Numeric"
+            },
+            "name": "DaysSinceInventoryComplianceCheck",
+            "label": "Days Since Inventory Compliance Check"
+          },
+          {
+            "expression": {
+              "sourceField": "ActualValue_Num_Dec_Computed",
+              "default": "0",
+              "offset": "first()"
+            },
+            "name": "Inventory_Actual",
+            "label": "Inventory_Actual"
+          },
+          {
+            "expression": {
+              "sourceField": "TargetValue_Num_Dec_Computed",
+              "default": "0",
+              "offset": "first()"
+            },
+            "name": "Inventory_Target",
+            "label": "Inventory_Target"
+          }
+        ]
+      }
+    },
+    "CG_ED_Story_Augment_StoreVisits_onto_StoreProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["PlaceId"],
+        "left": "CG_ED_Story_Augment_DaysSinceLastInventoryComplianceCheck_onto_StoreProduct",
+        "left_key": ["RetailStoreId"],
+        "right_select": ["Number_of_Visits"],
+        "right": "CG_ED_Story_CE_Visit",
+        "relationship": "Store",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_ED_Story_CR_RetailVisitKpi_DaysSinceLastOOSComplianceCheck": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["StoreProductId"],
+        "orderBy": [{
+          "name": "ActualVisitStartTime",
+          "direction": "desc"
+        }],
+        "source": "CG_ED_Story_Filter_RetailVisitKpi_DaysSinceLastOOSComplianceCheck",
+        "computedFields": [
+          {
+            "expression": {
+              "saqlExpression": "case when first('ActualVisitStartTime_sec_epoch') == current('ActualVisitStartTime_sec_epoch') then 1 else 0 end",
+              "scale": 10,
+              "type": "Numeric"
+            },
+            "name": "LastVisit_OOS_Flag",
+            "label": "LastVisit_OOS_Flag"
+          },
+          {
+            "expression": {
+              "saqlExpression": "daysBetween(toDate(first('ActualVisitStartTime_sec_epoch')), now())",
+              "scale": 0,
+              "type": "Numeric"
+            },
+            "name": "DaysSinceOOSComplianceCheck",
+            "label": "Days Since OOS Compliance Check"
+          },
+          {
+            "expression": {
+              "saqlExpression": "case when current('StoreProductId') == next('StoreProductId') && current('ActualVisitStartTime_sec_epoch') == next('ActualVisitStartTime_sec_epoch') then 1 else 0 end",
+              "scale": 0,
+              "type": "Numeric"
+            },
+            "name": "Duplicate_OOS_Record_Flag",
+            "label": "Duplicate_OOS_Record_Flag"
+          },
+          {
+            "expression": {
+              "sourceField": "ActualBooleanValue",
+              "offset": "first()"
+            },
+            "name": "OOS_Actual",
+            "label": "OOS_Actual"
+          }
+        ]
+      }
+    },
+    "CG_ED_Story_Filter_AssessmentTaskOrder_Remove_Duplicates": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_CE_AssessmentTaskOrder_Find_Duplicate_Orders",
+        "saqlFilter": "'IsDuplicate' == \"False\""
+      }
+    },
+    "CG_ED_Story_Augment_Location_onto_RetailStore": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Augment_RetailStoreGroup_onto_RetailStore",
+        "left_key": ["LocationId"],
+        "right_select": [
+          "Address.City",
+          "Address.State"
+        ],
+        "right": "CG_ED_Story_Augment_Address_onto_Location",
+        "relationship": "Location",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_CE_PromotionChannel_ComputeEndDate": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_ED_Story_Promotion_onto_PromotionChannel",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "saqlExpression": "case when coalesce(toDate('EndDate', \"yyyy-MM-dd\"), toDate('Promotion.EndDate', \"yyyy-MM-dd\")) is null then case when toDate('StartDate', \"yyyy-MM-dd\") >= toDate(date_to_string(now(),\"yyyy-MM-dd\"), \"yyyy-MM-dd\") then toDate('StartDate', \"yyyy-MM-dd\") else toDate(date_to_string(now(),\"yyyy-MM-dd\"), \"yyyy-MM-dd\") end else coalesce(toDate('EndDate', \"yyyy-MM-dd\"), toDate('Promotion.EndDate', \"yyyy-MM-dd\")) end",
+          "name": "EndDate_Computed",
+          "format": "yyyy-MM-dd",
+          "label": "EndDate_Computed",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "CG_ED_Story_CR_PromotionChannel": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["PromotionId"],
+        "orderBy": [{
+          "name": "Channel_Rank",
+          "direction": "asc"
+        }],
+        "source": "CG_ED_Story_CE_PromotionChannel",
+        "computedFields": [{
+          "expression": {
+            "saqlExpression": "case when first('Channel_Rank') == current('Channel_Rank') then 1 else 0 end",
+            "scale": 0,
+            "type": "Numeric"
+          },
+          "name": "ChannelPriority_Flag",
+          "label": "ChannelPriority_Flag"
+        }]
+      }
+    },
+    "CG_ED_Story_Filter_RetailVisitKpi_with_VisitStatus": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_Augment_AssessmentTask_onto_RetailVisitKpi",
+        "saqlFilter": "'AssessmentTask.Visit.VisitsUntilCurrentTime_Flag' == 1 && 'AssessmentTask.Visit.Status' in [\"Completed\", \"Abandoned\"]"
+      }
+    },
+    "CG_ED_Story_CR_AssessmentTaskOrder_Find_Previous_Orders": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["OrderId"],
+        "orderBy": [{
+          "name": "LastModifiedDate",
+          "direction": "desc"
+        }],
+        "source": "CG_ED_Story_Digest_AssessmentTaskOrder",
+        "computedFields": [{
+          "expression": {
+            "sourceField": "OrderId",
+            "offset": "previous()"
+          },
+          "name": "OrderIdPrevious",
+          "label": "OrderIdPrevious"
+        }]
+      }
+    },
+    "CG_ED_Story_Augment_OrderItem_DaysSinceLastOrder_onto_StoreProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["StoreProductId"],
+        "left": "CG_ED_Story_Augment_OrderItem_onto_StoreProduct",
+        "left_key": ["StoreProductId"],
+        "right_select": ["DaysSinceLastOrder"],
+        "right": "CG_ED_Story_CR_OrderItem_GetDaysSinceLastOrder",
+        "relationship": "OrderItem",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Filter_PromotionChannel_KeepLatestPromotionEndDateFuture": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_CR_PromotionChannel",
+        "saqlFilter": "ChannelPriority_Flag == 1 && DaysAfterPromotionEnds >= 0"
+      }
+    },
+    "CG_ED_Story_TD_Augment_LastVisitDatebyStore_onto_Visit": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["RetailStoreId"],
+        "left": "CG_ED_Story_CE_Visit",
+        "left_key": ["PlaceId"],
+        "right_select": ["LastVisitDate_by_Store"],
+        "right": "CG_ED_Story_TD_CR_GetLastVisitDatebyStore",
+        "relationship": "LastVisit",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Digest_Promotion": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "EndDate"},
+          {"name": "Id"},
+          {"name": "Name"},
+          {"name": "StartDate"}
+        ],
+        "object": "Promotion"
+      }
+    },
+    "CG_ED_Story_Filter_RetailVisitKpi": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_CE_RetailVisitKpi_ComputeValues",
+        "saqlFilter": "'AssessmentTask.Visit.ActualVisitStartTime_SelectedPeriod_Filter_Flag' == 1 && 'Include_In_Compliance' == \"True\""
+      }
+    },
+    "CG_ED_Story_TD_CR_GetLastVisitDatebyStore": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["RetailStoreId"],
+        "orderBy": [{
+          "name": "ActualVisitStartTime",
+          "direction": "desc"
+        }],
+        "source": "CG_ED_Story_TD_Filter_RetailVisitKpi_OOS_LastVisitRecords",
+        "computedFields": [{
+          "expression": {
+            "sourceField": "ActualVisitStartTime",
+            "offset": "first()"
+          },
+          "name": "LastVisitDate_by_Store",
+          "label": "LastVisitDate_by_Store"
+        }]
+      }
+    },
+    "CG_ED_Story_TD_Filter_OrderItem_GetOrdersBeforeLVD": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_CE_OrderItem",
+        "saqlFilter": "'StoreProductTD.ActualVisitStartTime' is not null && DaysSinceLastOrder_FromLastVisit >= 0"
+      }
+    },
+    "CG_ED_Story_TD_Slice_StoreProduct": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "select",
+        "source": "CG_ED_Story_TD_Filter_RetailVisitKpi_OOS_LastVisitRecords",
+        "fields": [
+          {"name": "ActualBooleanValue"},
+          {"name": "AssessmentTask.Visit.Id"},
+          {"name": "ActualVisitStartTime"},
+          {"name": "StoreProductId"}
+        ]
+      }
+    },
+    "CG_ED_Story_TD_Augment_DaysSinceLastOOSComplianceCheck_onto_StoreProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["StoreProductId"],
+        "left": "CG_ED_Story_TD_Augment_DaysSinceLastComplianceCheck_onto_StoreProduct",
+        "left_key": ["StoreProductId"],
+        "right_select": [
+          "DaysSinceOOSComplianceCheck",
+          "OOS_Actual"
+        ],
+        "right": "CG_ED_Story_TD_CR_RetailVisitKpi_DaysSinceLastOOSComplianceCheck",
+        "relationship": "OutOfStock",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_TD_CR_RetailVisitKpi_GetLatestPromotionStartDatePast": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["StoreProductId"],
+        "orderBy": [{
+          "name": "LatestPromotionStartDatePast_TD_Temp",
+          "direction": "desc"
+        }],
+        "source": "CG_ED_Story_TD_Filter_RetailVisitKpi_GetPromotions",
+        "computedFields": [{
+          "expression": {
+            "sourceField": "LatestPromotionStartDatePast_TD_Temp",
+            "offset": "first()"
+          },
+          "name": "LatestPromotionStartDatePast",
+          "label": "LatestPromotionStartDatePast"
+        }]
+      }
+    },
+    "CG_ED_Story_Digest_AssessmentTask": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "TaskType"},
+          {"name": "Name"},
+          {"name": "Id"},
+          {"name": "ParentId"}
+        ],
+        "object": "AssessmentTask"
+      }
+    },
+    "CG_ED_Story_TD_Filter_RetailVisitKpi_OOS_LastVisitRecords": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_CR_RetailVisitKpi_DaysSinceLastOOSComplianceCheck",
+        "saqlFilter": "'LastVisit_OOS_Flag' == 1 && 'Duplicate_OOS_Record_Flag' == 0"
+      }
+    },
+    "CG_ED_Story_Digest_PromotionChannel": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {"name": "EndDate"},
+          {"name": "Id"},
+          {"name": "InStoreLocationId"},
+          {"name": "Name"},
+          {"name": "PromotionId"},
+          {"name": "RetailLocationGroupId"},
+          {"name": "RetailStoreId"},
+          {"name": "StartDate"}
+        ],
+        "object": "PromotionChannel"
+      }
+    },
+    "CG_ED_Story_Augment_InStoreLocation_onto_StoreProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Digest_StoreProduct",
+        "left_key": ["InStoreLocationId"],
+        "right_select": ["InStoreLocationType"],
+        "right": "CG_ED_Story_Digest_InStoreLocation",
+        "relationship": "InStoreLocation",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_TD_CR_RetailVisitKpi_GetStoreProductVisits": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["StoreProductId"],
+        "orderBy": [{
+          "name": "AssessmentTask.Visit.Id",
+          "direction": "asc"
+        }],
+        "source": "CG_ED_Story_TD_Filter_RetailVisitKpi",
+        "computedFields": [{
+          "expression": {
+            "saqlExpression": "case when current('AssessmentTask.Visit.Id') == previous('AssessmentTask.Visit.Id') then 0 else 1 end",
+            "scale": 0,
+            "type": "Numeric"
+          },
+          "name": "StoreProduct_Visits",
+          "label": "StoreProduct_Visits"
+        }]
+      }
+    },
+    "CG_ED_Story_Digest_RetailVisitKpi": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "ActualBooleanValue"},
+          {"name": "ActualDecimalValue"},
+          {"name": "ActualIntegerValue"},
+          {"name": "AssessmentIndDefinitionId"},
+          {"name": "AssessmentTaskId"},
+          {"name": "Id"},
+          {"name": "InStoreLocationId"},
+          {"name": "UnitOfMeasure"},
+          {"name": "Type"},
+          {"name": "TargetIntegerValue"},
+          {"name": "TargetDecimalValue"},
+          {"name": "TargetBooleanValue"},
+          {"name": "ProductId"},
+          {"name": "ProductCategoryId"},
+          {"name": "Name"},
+          {"name": "PromotionId"},
+          {"name": "ActualDateTimeValue"},
+          {"name": "ActualStringValue"}
+        ],
+        "object": "RetailVisitKpi"
+      }
+    },
+    "CG_ED_Story_Digest_Location": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "VisitorAddressId"},
+          {"name": "Id"}
+        ],
+        "object": "Location"
+      }
+    },
+    "CG_ED_Story_CR_RetailVisitKpi_DaysSinceLastComplianceCheck": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["StoreProductId"],
+        "orderBy": [{
+          "name": "ActualVisitStartTime",
+          "direction": "desc"
+        }],
+        "source": "CG_ED_Story_Filter_RetailVisitKpi_DaysSinceLastComplianceCheck",
+        "computedFields": [{
+          "expression": {
+            "saqlExpression": "daysBetween(toDate(first('ActualVisitStartTime_sec_epoch')), now())",
+            "scale": 0,
+            "type": "Numeric"
+          },
+          "name": "DaysSinceLastComplianceCheck",
+          "label": "Days Since Last Compliance Check"
+        }]
+      }
+    },
+    "CG_ED_Story_TD_Filter_RetailVisitKpi": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_TD_CE_RetailVisitKpi_ComputeValues",
+        "saqlFilter": "'DaysSinceLastOOSVisit'>=0 && 'DaysSinceLastOOSVisit' <= 365 && 'Include_In_Compliance' == \"True\""
+      }
+    },
+    "CG_ED_Story_Augment_RetailVisitKpiWithPromotionDates_onto_StoreProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["StoreProductId"],
+        "left": "CG_ED_Story_Augment_StoreVisits_onto_StoreProduct",
+        "left_key": ["StoreProductId"],
+        "right_select": [
+          "LatestPromotionStartDatePast",
+          "LatestPromotionEndDatePast",
+          "LatestPromotionEndDateFuture"
+        ],
+        "right": "CG_ED_Story_CR_RetailVisitKpi_GetLatestPromotionEndDateFuture",
+        "relationship": "Promotion",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_TD_CR_RetailVisitKpi_DaysSinceLastInventoryComplianceCheck": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["StoreProductId"],
+        "orderBy": [{
+          "name": "ActualVisitStartTime",
+          "direction": "desc"
+        }],
+        "source": "CG_ED_Story_TD_Filter_RetailVisitKpi_DaysSinceLastInventoryComplianceCheck",
+        "computedFields": [
+          {
+            "expression": {
+              "saqlExpression": "daysBetween(toDate(first('ActualVisitStartTime_sec_epoch')), toDate(current('LastOOSVisit.ActualVisitStartTime_sec_epoch')))",
+              "scale": 0,
+              "type": "Numeric"
+            },
+            "name": "DaysSinceInventoryComplianceCheck",
+            "label": "Days Since Inventory Compliance Check"
+          },
+          {
+            "expression": {
+              "sourceField": "ActualValue_Num_Dec_Computed",
+              "offset": "first()"
+            },
+            "name": "Inventory_Actual",
+            "label": "Inventory_Actual"
+          },
+          {
+            "expression": {
+              "sourceField": "TargetValue_Num_Dec_Computed",
+              "offset": "first()"
+            },
+            "name": "Inventory_Target",
+            "label": "Inventory_Target"
+          }
+        ]
+      }
+    },
+    "CG_ED_Story_TR_CR_RetailVisitKpi_LY_SamePeriod_Promotions": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["StoreProductId"],
+        "orderBy": [{
+          "name": "PromotionId",
+          "direction": "asc"
+        }],
+        "source": "CG_ED_Story_TD_Filter_RetailVisitKpi_LY_SamePeriod_Promotions",
+        "computedFields": [{
+          "expression": {
+            "saqlExpression": "case when current('PromotionId') == previous('PromotionId') then 0 else 1 end",
+            "scale": 0,
+            "type": "Numeric"
+          },
+          "name": "Number_of_Promotions",
+          "label": "Number_of_Promotions"
+        }]
+      }
+    },
+    "CG_ED_Story_TD_CE_StoreProduct_ComputeValues": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_ED_Story_TD_Augment_RetailVisitKpiWithPromotionDates_onto_StoreProduct",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "Temp",
+            "saqlExpression": "\"NA\"",
+            "label": "Temp",
+            "type": "Text"
+          },
+          {
+            "name": "State_City",
+            "saqlExpression": "'RetailStore.Location.Address.State' +\" - \"+'RetailStore.Location.Address.City'",
+            "label": "State - City",
+            "type": "Text"
+          },
+          {
+            "precision": 10,
+            "name": "Quantity_Change_Percentage_vs_Previous_Period",
+            "saqlExpression": "('OrderItem.Quantity_Current_Period_TD' - 'OrderItem.Quantity_Previous_Period_TD') / 'OrderItem.Quantity_Previous_Period_TD'",
+            "scale": 2,
+            "label": "Quantity_Change_Percentage_vs_Previous_Period",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "('OrderItem.Quantity_Current_Period_TD' - 'OrderItem.Quantity_Coming_Period_LastYear_TD') / 'OrderItem.Quantity_Coming_Period_LastYear_TD'",
+            "name": "Quantity_Change_Percentage_vs_Coming_Period_LastYear",
+            "scale": 2,
+            "label": "Quantity_Change_Percentage_vs_Coming_Period_LastYear",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "ShareOfShelf_Compliance",
+            "saqlExpression": "'RetailVisitKpi.SoS_Compliance_Temp' / 'RetailVisitKpi.SoS_Tasks_Count'",
+            "scale": 2,
+            "label": "SoS Compliance",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "OutOfStock_Compliance",
+            "saqlExpression": "'RetailVisitKpi.OutOfStock_Compliance_Temp' / 'RetailVisitKpi.OutOfStock_Tasks_Count'",
+            "scale": 2,
+            "label": "OOS Compliance",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "Facing_Compliance",
+            "saqlExpression": "'RetailVisitKpi.Facing_Compliance_Temp' / 'RetailVisitKpi.Facing_Tasks_Count'",
+            "scale": 2,
+            "label": "Facing Compliance",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "Promotion_Compliance",
+            "saqlExpression": "'RetailVisitKpi.Promotion_Compliance_Temp' / 'RetailVisitKpi.Promotion_Tasks_Count'",
+            "scale": 2,
+            "label": "Promotion Compliance",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "'RetailVisitKpi.Inventory_Compliance_Temp' / 'RetailVisitKpi.Inventory_Tasks_Count'",
+            "name": "Inventory_Compliance",
+            "scale": 2,
+            "label": "Inventory Compliance",
+            "type": "Numeric"
+          },
+          {
+            "name": "Last_Visit_Date",
+            "saqlExpression": "toDate('TD.ActualVisitStartTime_sec_epoch')",
+            "format": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+            "label": "Last_Visit_Date",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "'OrderItem.Quantity_Current_Period_TD'",
+            "name": "Quantity_Current_Period",
+            "scale": 0,
+            "label": "Quantity_Current_Period",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "Quantity_Previous_Period",
+            "saqlExpression": "'OrderItem.Quantity_Previous_Period_TD'",
+            "scale": 0,
+            "label": "Quantity_Previous_Period",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "'OrderItem.Quantity_Coming_Period_LastYear_TD'",
+            "name": "Quantity_Coming_Period_LastYear",
+            "scale": 0,
+            "label": "Quantity_Coming_Period_LastYear",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "Store_Visits",
+            "saqlExpression": "'Store.Number_of_Visits_TD'",
+            "scale": 0,
+            "label": "Store_Visits",
+            "type": "Numeric"
+          },
+          {
+            "name": "Dataset_Type",
+            "saqlExpression": "\"TD\"",
+            "label": "Dataset Type",
+            "type": "Text"
+          },
+          {
+            "name": "OOS_Kpi_ActualValue",
+            "saqlExpression": "'TD.ActualBooleanValue'",
+            "label": "OOS_Kpi_ActualValue",
+            "type": "Text"
+          },
+          {
+            "saqlExpression": "case when toDate('Promotion.LatestPromotionStartDatePast', \"yyyy-MM-dd\") != toDate(\"1970-01-01\", \"yyyy-MM-dd\") then toDate('Promotion.LatestPromotionStartDatePast', \"yyyy-MM-dd\") end",
+            "name": "LatestPromotionStartDatePast",
+            "format": "yyyy-MM-dd",
+            "label": "LatestPromotionStartDatePast",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "case when toDate('Promotion.LatestPromotionEndDatePast', \"yyyy-MM-dd\") != toDate(\"1970-01-01\", \"yyyy-MM-dd\") then toDate('Promotion.LatestPromotionEndDatePast', \"yyyy-MM-dd\") end",
+            "name": "LatestPromotionEndDatePast",
+            "format": "yyyy-MM-dd",
+            "label": "LatestPromotionEndDatePast",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "case when toDate('Promotion.LatestPromotionEndDateFuture', \"yyyy-MM-dd\") != toDate(\"1970-01-01\", \"yyyy-MM-dd\") then toDate('Promotion.LatestPromotionEndDateFuture', \"yyyy-MM-dd\") end",
+            "name": "LatestPromotionEndDateFuture",
+            "format": "yyyy-MM-dd",
+            "label": "LatestPromotionEndDateFuture",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "CG_ED_Story_Augment_LatestPromotionEndDateFuture_onto_RetailVisitKpi": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["PromotionId"],
+        "left": "CG_ED_Story_Augment_LatestPromotionEndDatePast_onto_RetailVisitKpi",
+        "left_key": ["PromotionId"],
+        "right_select": ["LatestPromotionEndDateFuture"],
+        "right": "CG_ED_Story_CR_PromotionChannel_GetLatestPromotionEndDateFuture",
+        "relationship": "Promotion",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Digest_ProductCategory": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "Name"}
+        ],
+        "object": "ProductCategory"
+      }
+    },
+    "CG_ED_Story_CR_RetailVisitKpi_GetLatestPromotionEndDateFuture": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["StoreProductId"],
+        "orderBy": [{
+          "name": "LatestPromotionEndDateFuture_Temp",
+          "direction": "asc"
+        }],
+        "source": "CG_ED_Story_CR_RetailVisitKpi_GetLatestPromotionEndDatePast",
+        "computedFields": [{
+          "expression": {
+            "sourceField": "LatestPromotionEndDateFuture_Temp",
+            "offset": "first()"
+          },
+          "name": "LatestPromotionEndDateFuture",
+          "label": "LatestPromotionEndDateFuture"
+        }]
+      }
+    },
+    "CG_ED_Story_TD_Augment_RetailVisitKpiWithPromotionDates_onto_StoreProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["StoreProductId"],
+        "left": "CG_ED_Story_TD_Augment_RetailVisitKpi_LYSamePeriodPromotions_onto_StoreProduct",
+        "left_key": ["StoreProductId"],
+        "right_select": [
+          "LatestPromotionEndDatePast",
+          "LatestPromotionStartDatePast",
+          "LatestPromotionEndDateFuture"
+        ],
+        "right": "CG_ED_Story_TD_CR_RetailVisitKpi_GetLatestPromotionEndDateFuture",
+        "relationship": "Promotion",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_CE_PromotionChannel": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_ED_Story_CE_PromotionChannel_ComputeEndDate",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 10,
+            "saqlExpression": "case when 'RetailStoreId' is not null then 1 when 'AccountId' is not null then 2 when 'RetailLocationGroupId' is not null then 3 else 4 end",
+            "name": "Channel_Rank",
+            "scale": 0,
+            "label": "Channel_Rank",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "DaysSincePromotionStarted",
+            "saqlExpression": "daysBetween(toDate(StartDate_sec_epoch), now())",
+            "scale": 0,
+            "label": "DaysSincePromotionStarted",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "DaysSincePromotionEnded",
+            "saqlExpression": "daysBetween(toDate(EndDate_Computed_sec_epoch), now())",
+            "scale": 0,
+            "label": "DaysSincePromotionEnded",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "daysBetween(now(), toDate(EndDate_Computed_sec_epoch))",
+            "name": "DaysAfterPromotionEnds",
+            "scale": 0,
+            "label": "DaysAfterPromotionEnds",
+            "type": "Numeric"
+          }
+        ]
+      }
+    },
+    "CG_ED_Story_CE_Visit": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_ED_Story_Digest_Visit",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 10,
+            "saqlExpression": "case when date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [\"365 days ago\"..\"current day\"] then 1 else 0 end",
+            "name": "ActualVisitStartTime_SelectedPeriod_Filter_Flag",
+            "scale": 0,
+            "label": "ActualVisitStartTime_SelectedPeriod_Filter_Flag",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "case when date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [\"365 days ago - 1 year\"..\"current day - 1 year\"] then 1 else 0 end",
+            "name": "ActualVisitStartTime_LastYear_SamePeriod_Filter_Flag",
+            "scale": 0,
+            "label": "ActualVisitStartTime_LastYear_SamePeriod_Filter_Flag",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "case when 'Status' in [\"InProgress\", \"Completed\", \"Abandoned\"]  then 1 else 0 end",
+            "name": "VisitStatus_ICA",
+            "scale": 0,
+            "label": "Visit Status - [InProgress Completed Abandoned]",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "Number_of_Visits",
+            "saqlExpression": "case when VisitStatus_ICA == 1 && ActualVisitStartTime_SelectedPeriod_Filter_Flag == 1 then 1 else 0 end",
+            "scale": 0,
+            "label": "Number_of_Visits",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "case when daysBetween(toDate(ActualVisitStartTime_sec_epoch), now())>0 then 1 else 0 end",
+            "name": "VisitsUntilCurrentTime_Flag",
+            "scale": 0,
+            "label": "VisitsUntilCurrentTime_Flag",
+            "type": "Numeric"
+          },
+          {
+            "saqlExpression": "toDate(date_to_epoch(now())+86399 - (date_to_epoch(now())- (86400 * floor(date_to_epoch(now())/86400))))",
+            "name": "CurrentDay",
+            "format": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+            "label": "CurrentDay",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "CG_ED_Story_TD_Filter_RetailVisitKpi_DaysSinceLastComplianceCheck": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_TD_CE_RetailVisitKpi_ComputeValues",
+        "saqlFilter": "'Include_In_Compliance' == \"True\" &&  'DaysSinceLastOOSVisit' >= 0 && PriorVisit_Flag == 1"
+      }
+    },
+    "CG_ED_Story_Digest_InStoreLocation": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "RetailStoreId"},
+          {"name": "Name"},
+          {"name": "InStoreLocationType"},
+          {"name": "Id"}
+        ],
+        "object": "InStoreLocation"
+      }
+    },
+    "CG_ED_Story_Filter_RetailVisitKpi_DaysSinceLastInventoryComplianceCheck": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_Filter_RetailVisitKpi_DaysSinceLastComplianceCheck",
+        "saqlFilter": "Type == \"Inventory\""
+      }
+    },
+    "CG_ED_Story_Augment_AssessmentTask_onto_AssessmentTaskOrder": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Filter_AssessmentTaskOrder_Remove_Duplicates",
+        "left_key": ["AssessmentTaskId"],
+        "right_select": [
+          "Visit.PlaceId",
+          "Visit.Id"
+        ],
+        "right": "CG_ED_Story_Augment_Visit_onto_AssessmentTask",
+        "relationship": "AssessmentTask",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_TD_CE_Visit": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_ED_Story_TD_Augment_LastVisitDatebyStore_onto_Visit",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 10,
+            "name": "DaysSinceLastVisit_TD",
+            "saqlExpression": "case when 'LastVisit.LastVisitDate_by_Store' is not null then  daysBetween(toDate(ActualVisitStartTime_sec_epoch), toDate('LastVisit.LastVisitDate_by_Store_sec_epoch')) end",
+            "scale": 0,
+            "label": "ActualVisitStartTime_SelectedPeriod_FilterFlag_TD",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "Number_of_Visits_TD",
+            "saqlExpression": "case when 'VisitStatus_ICA' == 1 && 'DaysSinceLastVisit_TD' >= 0 && 'DaysSinceLastVisit_TD' <= 365 then 1 else 0 end",
+            "scale": 0,
+            "label": "Number_of_Visits_TD",
+            "type": "Numeric"
+          }
+        ]
+      }
+    },
+    "CG_ED_Story_Filter_PromotionChannel_KeepLatestPromotionEndDatePast": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_CR_PromotionChannel",
+        "saqlFilter": "ChannelPriority_Flag == 1 && DaysSincePromotionEnded >= 0"
+      }
+    },
+    "CG_ED_Story_TD_Augment_StoreProduct_onto_OrderItem": {
+      "action": "augment",
+      "parameters": {
+        "right_key": [
+          "ProductId",
+          "RetailStoreId"
+        ],
+        "left": "CG_ED_Story_Augment_Order_onto_OrderItem",
+        "left_key": [
+          "Product2Id",
+          "Order.AssessmentTaskOrder.AssessmentTask.Visit.PlaceId"
+        ],
+        "right_select": [
+          "ActualVisitStartTime",
+          "ActualVisitStartTime_FS_ComingPeriod_LY"
+        ],
+        "right": "CG_ED_Story_TD_Filter_RetailVisitKpi_OOS_LastVisitRecords",
+        "relationship": "StoreProductTD",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_CR_RetailVisitKpi_LY_SamePeriod_Promotions": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["StoreProductId"],
+        "orderBy": [{
+          "name": "PromotionId",
+          "direction": "desc"
+        }],
+        "source": "CG_ED_Story_Filter_RetailVisitKpi_LY_SamePeriod_Promotions",
+        "computedFields": [{
+          "expression": {
+            "saqlExpression": "case when current('PromotionId') == previous('PromotionId') then 0 else 1 end",
+            "scale": 0,
+            "type": "Numeric"
+          },
+          "name": "Number_of_Promotions",
+          "label": "Number_of_Promotions"
+        }]
+      }
+    },
+    "CG_ED_Story_Augment_Order_onto_OrderItem": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Digest_OrderItem",
+        "left_key": ["OrderId"],
+        "right_select": [
+          "ActivatedDate",
+          "AssessmentTaskOrder.AssessmentTask.Visit.PlaceId",
+          "AssessmentTaskOrder.AssessmentTask.Visit.Id"
+        ],
+        "right": "CG_ED_Story_Augment_AssessmentTaskOrder_onto_Order",
+        "relationship": "Order",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Augment_DaysSinceLastOOSComplianceCheck_onto_StoreProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["StoreProductId"],
+        "left": "CG_ED_Story_Augment_DaysSinceLastComplianceCheck_onto_StoreProduct",
+        "left_key": ["StoreProductId"],
+        "right_select": [
+          "DaysSinceOOSComplianceCheck",
+          "OOS_Actual"
+        ],
+        "right": "CG_ED_Story_CR_RetailVisitKpi_DaysSinceLastOOSComplianceCheck",
+        "relationship": "OutOfStock",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_TD_CR_RetailVisitKpi_DaysSinceLastOOSComplianceCheck": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["StoreProductId"],
+        "orderBy": [{
+          "name": "ActualVisitStartTime",
+          "direction": "desc"
+        }],
+        "source": "CG_ED_Story_TD_Filter_RetailVisitKpi_DaysSinceLastOOSComplianceCheck",
+        "computedFields": [
+          {
+            "expression": {
+              "saqlExpression": "daysBetween(toDate(first('ActualVisitStartTime_sec_epoch')), toDate(current('LastOOSVisit.ActualVisitStartTime_sec_epoch')))",
+              "type": "Numeric"
+            },
+            "name": "DaysSinceOOSComplianceCheck",
+            "label": "Days Since OOS Compliance Check"
+          },
+          {
+            "expression": {
+              "sourceField": "ActualBooleanValue",
+              "offset": "first()"
+            },
+            "name": "OOS_Actual",
+            "label": "OOS_Actual"
+          }
+        ]
+      }
+    },
+    "CG_ED_Story_Slice_StoreProduct_GetStoreProduct": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "select",
+        "source": "CG_ED_Story_Filter_RetailVisitKpi_GetStoreProduct",
+        "fields": [
+          {"name": "ProductId"},
+          {"name": "StoreProductId"},
+          {"name": "RetailStoreId"}
+        ]
+      }
+    },
+    "CG_ED_Story_Register_StoreProduct": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_Minimize_OutOfStock_Occurrences_ED",
+        "alias": "${App.Datasets.CG_Minimize_OutOfStock_Occurrences_ED6_tp.FullyQualifiedName}",
+        "source": "CG_ED_Story_Append_TD_SD_Data"
+      }
+    },
+    "CG_ED_Story_Augment_StoreProductTD_onto_StoreProductSD": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["StoreProductId"],
+        "left": "CG_ED_Story_Augment_ProductCategory_onto_StoreProduct",
+        "left_key": ["StoreProductId"],
+        "right_select": [
+          "ActualBooleanValue",
+          "AssessmentTask.Visit.Id",
+          "ActualVisitStartTime"
+        ],
+        "right": "CG_ED_Story_TD_Slice_StoreProduct",
+        "relationship": "TD",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_CE_RetailVisitKpi_ComputeValues": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_ED_Story_Augment_LatestPromotionEndDateFuture_onto_RetailVisitKpi",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' == \"Number\" then case when 'ActualIntegerValue' is not null && 'TargetIntegerValue' is null then \"True\" else \"False\" end\nwhen 'AssessmentIndicatorDefinition.DataType' == \"Decimal\" then case when 'ActualDecimalValue' is not null && 'TargetDecimalValue' is null then \"True\" else \"False\" end\nwhen 'AssessmentIndicatorDefinition.DataType' == \"Boolean\" then case when 'ActualBooleanValue' is not null && 'TargetBooleanValue' is null then \"True\" else \"False\" end end",
+            "name": "Target_Empty_Flag",
+            "label": "Target_Empty_Flag",
+            "type": "Text"
+          },
+          {
+            "precision": 16,
+            "name": "ActualValue_Num_Dec_Computed",
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' == \"Number\" then 'ActualIntegerValue' when 'AssessmentIndicatorDefinition.DataType' == \"Decimal\" then 'ActualDecimalValue' end",
+            "scale": 5,
+            "label": "ActualValue_Num_Dec_Computed",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' == \"Number\" then 'TargetIntegerValue' when 'AssessmentIndicatorDefinition.DataType' == \"Decimal\" then 'TargetDecimalValue' end",
+            "name": "TargetValue_Num_Dec_Computed",
+            "scale": 5,
+            "label": "TargetValue_Num_Dec_Computed",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "ActualValue_Num_Dec_Adjusted",
+            "saqlExpression": "case when 'Target_Empty_Flag' == \"False\" && 'ActualValue_Num_Dec_Computed' > 'TargetValue_Num_Dec_Computed' then 'TargetValue_Num_Dec_Computed' else 'ActualValue_Num_Dec_Computed' end",
+            "scale": 5,
+            "label": "ActualValue_Num_Dec_Adjusted",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "saqlExpression": "case when 'Type' in [\"Facing\",\"ShareOfShelf\", \"Inventory\"] && 'AssessmentIndicatorDefinition.DataType' in [\"Number\", \"Decimal\"] && 'Target_Empty_Flag' == \"True\" then 'ActualValue_Num_Dec_Computed' else 'TargetValue_Num_Dec_Computed' end",
+            "name": "Fill_Target_Num_Dec_when_Empty",
+            "scale": 5,
+            "label": "Fill_Target_Num_Dec_when_Empty",
+            "type": "Numeric"
+          },
+          {
+            "name": "Fill_Target_Boolean_when_Empty",
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' == \"Boolean\" then case when 'Target_Empty_Flag' == \"False\" then 'TargetBooleanValue' else case when 'Type' != \"OutOfStock\" && 'ActualBooleanValue'==\"True\" then 'ActualBooleanValue' else \"False\" end end end",
+            "label": "Fill_Target_Boolean_when_Empty",
+            "type": "Text"
+          },
+          {
+            "precision": 16,
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' in [\"Number\",\"Decimal\"] then 'ActualValue_Num_Dec_Adjusted' when 'AssessmentIndicatorDefinition.DataType' == \"Boolean\" then \ncase when 'ActualBooleanValue' == \"True\" then 1 else 0 end end",
+            "name": "ActualValue_Computed",
+            "scale": 5,
+            "label": "ActualValue_Computed",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' in [\"Number\",\"Decimal\"] then 'Fill_Target_Num_Dec_when_Empty' when 'AssessmentIndicatorDefinition.DataType' == \"Boolean\" then case when 'Fill_Target_Boolean_when_Empty' == \"True\" then 1 else 0 end end",
+            "name": "TargetValue_Computed",
+            "scale": 5,
+            "label": "TargetValue_Computed",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' == \"Boolean\" then abs('ActualValue_Computed' - 'TargetValue_Computed')*100 else abs('ActualValue_Computed' - 'TargetValue_Computed')/'TargetValue_Computed' *100 end",
+            "name": "NonCompliance_Percentage",
+            "scale": 5,
+            "label": "NonCompliance_Percentage",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "saqlExpression": "100 - 'NonCompliance_Percentage'",
+            "name": "Compliance_Percentage",
+            "scale": 5,
+            "label": "Compliance_Percentage",
+            "type": "Numeric"
+          },
+          {
+            "name": "Target_n_Actual_Values_Present_Flag",
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' == \"Number\" && 'ActualIntegerValue' is not null then \"True\" when 'AssessmentIndicatorDefinition.DataType' == \"Decimal\" && 'ActualDecimalValue' is not null then \"True\" when 'AssessmentIndicatorDefinition.DataType' == \"Boolean\" && 'ActualBooleanValue' is not null then \"True\" else \"False\" end",
+            "label": "Target_n_Actual_Values_Present_Flag",
+            "type": "Text"
+          },
+          {
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' in [\"Number\",\"Decimal\"] && 'Type' in [\"Facing\",\"ShareOfShelf\", \"Inventory\"] then \"True\" when 'AssessmentIndicatorDefinition.DataType' == \"Boolean\" && ('PromotionId' is not null || 'Type' == \"OutOfStock\") then \"True\" else \"False\" end",
+            "name": "Include_In_Compliance_Temp",
+            "label": "Include in Compliance - Temp",
+            "type": "Text"
+          },
+          {
+            "name": "Include_In_Compliance",
+            "saqlExpression": "case when 'Target_n_Actual_Values_Present_Flag' == \"True\" && 'Include_In_Compliance_Temp' == \"True\" then \"True\" else \"False\" end",
+            "label": "Include In Compliance?",
+            "type": "Text"
+          },
+          {
+            "name": "Type_Computed",
+            "saqlExpression": "case when 'PromotionId' is not null then \"Promotion\" else 'Type' end",
+            "label": "Type_Computed",
+            "type": "Text"
+          },
+          {
+            "saqlExpression": "toDate('AssessmentTask.Visit.ActualVisitStartTime_sec_epoch')",
+            "name": "ActualVisitStartTime",
+            "format": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+            "label": "ActualVisitStartTime",
+            "type": "Date",
+            "isYearEndFiscalYear": false
+          },
+          {
+            "precision": 16,
+            "name": "SoS_Compliance_Temp",
+            "saqlExpression": "case when 'Type_Computed' == \"ShareOfShelf\" then Compliance_Percentage end",
+            "scale": 5,
+            "label": "SoS_Compliance_Temp",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "SoS_Tasks_Count",
+            "saqlExpression": "case when 'Type_Computed' == \"ShareOfShelf\" then 1 else 0 end",
+            "scale": 0,
+            "label": "SoS_Tasks_Count",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "OutOfStock_Compliance_Temp",
+            "saqlExpression": "case when 'Type_Computed' == \"OutOfStock\" then Compliance_Percentage end",
+            "scale": 5,
+            "label": "OutOfStock_Compliance_Temp",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "OutOfStock_Tasks_Count",
+            "saqlExpression": "case when 'Type_Computed' == \"OutOfStock\" then 1 else 0 end",
+            "scale": 0,
+            "label": "OutOfStock_Tasks_Count",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Promotion_Compliance_Temp",
+            "saqlExpression": "case when 'Type_Computed' == \"Promotion\" then Compliance_Percentage end",
+            "scale": 5,
+            "label": "Promotion_Compliance_Temp",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "case when 'Type_Computed' == \"Promotion\" then 1 else 0 end",
+            "name": "Promotion_Tasks_Count",
+            "scale": 0,
+            "label": "Promotion_Tasks_Count",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "saqlExpression": "case when 'Type_Computed' == \"Facing\" then Compliance_Percentage end",
+            "name": "Facing_Compliance_Temp",
+            "scale": 5,
+            "label": "Facing_Compliance_Temp",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "Facing_Tasks_Count",
+            "saqlExpression": "case when 'Type_Computed' == \"Facing\" then 1 else 0 end",
+            "scale": 0,
+            "label": "Facing_Tasks_Count",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "saqlExpression": "case when 'Type_Computed' == \"Inventory\" then Compliance_Percentage end",
+            "name": "Inventory_Compliance_Temp",
+            "scale": 5,
+            "label": "Inventory_Compliance_Temp",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "Inventory_Tasks_Count",
+            "saqlExpression": "case when 'Type_Computed' == \"Inventory\" then 1 else 0 end",
+            "scale": 0,
+            "label": "Inventory_Tasks_Count",
+            "type": "Numeric"
+          },
+          {
+            "saqlExpression": "'AssessmentTask.Visit.PlaceId'+\"-\"+'ProductId'",
+            "name": "StoreProductId",
+            "label": "StoreProductId",
+            "type": "Text"
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "case when 'AssessmentTask.Visit.PlaceId' is not null && 'ProductId' is not null then 1 else 0 end",
+            "name": "StoreProduct_Exists_Flag",
+            "scale": 0,
+            "label": "StoreProduct_Exists_Flag",
+            "type": "Numeric"
+          },
+          {
+            "saqlExpression": "'AssessmentTask.Visit.PlaceId'",
+            "name": "RetailStoreId",
+            "label": "RetailStoreId",
+            "type": "Text"
+          },
+          {
+            "saqlExpression": "toDate(number_to_string(string_to_number(toString(toDate('AssessmentTask.Visit.ActualVisitStartTime_sec_epoch'),\"yyyy\"))-1, \"#\")+\"-\"+toString(toDate('AssessmentTask.Visit.ActualVisitStartTime_sec_epoch'+86400),\"MM-dd\"),\"yyyy-MM-dd\")",
+            "name": "ActualVisitStartTime_FS_ComingPeriod_LY",
+            "format": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+            "label": "ActualVisitStartTime_FS_ComingPeriod_LY",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate(date_to_epoch(now())+86399 - (date_to_epoch(now())- (86400 * floor(date_to_epoch(now())/86400))))",
+            "name": "CurrentDay",
+            "format": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+            "label": "CurrentDay",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "coalesce(toDate('Promotion.LatestPromotionStartDatePast', \"yyyy-MM-dd\"), toDate(\"1970-01-01\", \"yyyy-MM-dd\"))",
+            "name": "LatestPromotionStartDatePast_Temp",
+            "format": "yyyy-MM-dd",
+            "label": "LatestPromotionStartDatePast_Temp",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "coalesce(toDate('Promotion.LatestPromotionEndDatePast', \"yyyy-MM-dd\"), toDate(\"1970-01-01\", \"yyyy-MM-dd\"))",
+            "name": "LatestPromotionEndDatePast_Temp",
+            "format": "yyyy-MM-dd",
+            "label": "LatestPromotionEndDatePast_Temp",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "coalesce(toDate('Promotion.LatestPromotionEndDateFuture', \"yyyy-MM-dd\"), toDate(\"1970-01-01\", \"yyyy-MM-dd\"))",
+            "name": "LatestPromotionEndDateFuture_Temp",
+            "format": "yyyy-MM-dd",
+            "label": "LatestPromotionEndDateFuture_Temp",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate(date_to_epoch(toDate(number_to_string(string_to_number(toString(toDate('AssessmentTask.Visit.ActualVisitStartTime_sec_epoch'),\"yyyy\"))-1, \"#\")+\"-\"+toString(toDate('AssessmentTask.Visit.ActualVisitStartTime_sec_epoch'+86400),\"MM-dd\"),\"yyyy-MM-dd\"))+86399)",
+            "name": "ActualVisitStartTime_LS_SamePeriod_LY",
+            "format": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+            "label": "ActualVisitStartTime Last Second SamePeriod Last Year",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "CG_ED_Story_CR_PromotionChannel_GetLatestPromotionStartDatePast": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["PromotionId"],
+        "orderBy": [{
+          "name": "DaysSincePromotionStarted",
+          "direction": "asc"
+        }],
+        "source": "CG_ED_Story_Filter_PromotionChannel_KeepLatestPromotionStartDatePast",
+        "computedFields": [{
+          "expression": {
+            "sourceField": "StartDate",
+            "offset": "first()"
+          },
+          "name": "LatestPromotionStartDatePast",
+          "label": "LatestPromotionStartDatePast"
+        }]
+      }
+    },
+    "CG_ED_Story_Augment_Product_onto_StoreProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Augment_RetailStore_onto_StoreProduct",
+        "left_key": ["ProductId"],
+        "right_select": [
+          "Name",
+          "Family"
+        ],
+        "right": "CG_ED_Story_Digest_Product",
+        "relationship": "Product",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Augment_Visit_onto_AssessmentTask": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Digest_AssessmentTask",
+        "left_key": ["ParentId"],
+        "right_select": [
+          "ActualVisitStartTime",
+          "Id",
+          "Status",
+          "PlaceId",
+          "ActualVisitStartTime_SelectedPeriod_Filter_Flag",
+          "VisitsUntilCurrentTime_Flag",
+          "ActualVisitStartTime_LastYear_SamePeriod_Filter_Flag",
+          "CurrentDay"
+        ],
+        "right": "CG_ED_Story_CE_Visit",
+        "relationship": "Visit",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_TD_Augment_OrderItem_DaysSinceLastOrder_onto_StoreProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["StoreProductId"],
+        "left": "CG_ED_Story_TD_Augment_OrderItem_onto_StoreProduct",
+        "left_key": ["StoreProductId"],
+        "right_select": ["DaysSinceLastOrder"],
+        "right": "CG_ED_Story_TD_CR_OrderItem_GetDaysSinceLastOrder_SinceLWD",
+        "relationship": "OrderItem",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Digest_RetailStore": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {"name": "Id"},
+          {"name": "StoreType"},
+          {"name": "RetailLocationGroupId"},
+          {"name": "Priority"},
+          {"name": "PrimaryContactId"},
+          {"name": "Name"},
+          {"name": "LocationId"}
+        ],
+        "object": "RetailStore"
+      }
+    },
+    "CG_ED_Story_TD_Augment_StoreVisits_onto_StoreProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["PlaceId"],
+        "left": "CG_ED_Story_TD_Augment_DaysSinceLastInventoryComplianceCheck_onto_StoreProduct",
+        "left_key": ["RetailStoreId"],
+        "right_select": ["Number_of_Visits_TD"],
+        "right": "CG_ED_Story_TD_CE_Visit",
+        "relationship": "Store",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_ED_Story_CR_RetailVisitKpi_GetPromoCount": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["StoreProductId"],
+        "orderBy": [{
+          "name": "PromotionId",
+          "direction": "desc"
+        }],
+        "source": "CG_ED_Story_CR_RetailVisitKpi_GetStoreProductVisits",
+        "computedFields": [{
+          "expression": {
+            "saqlExpression": "case when 'PromotionId' is not null then case when current('PromotionId') == previous('PromotionId') then 0 else 1 end end",
+            "scale": 0,
+            "type": "Numeric"
+          },
+          "name": "Number_of_Promotions",
+          "label": "Number_of_Promotions"
+        }]
+      }
+    },
+    "CG_ED_Story_TD_CR_RetailVisitKpi_GetLatestPromotionEndDateFuture": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["StoreProductId"],
+        "orderBy": [{
+          "name": "LatestPromotionEndDateFuture_TD_Temp",
+          "direction": "asc"
+        }],
+        "source": "CG_ED_Story_TD_CR_RetailVisitKpi_GetLatestPromotionEndDatePast",
+        "computedFields": [{
+          "expression": {
+            "sourceField": "LatestPromotionEndDateFuture_TD_Temp",
+            "offset": "first()"
+          },
+          "name": "LatestPromotionEndDateFuture",
+          "label": "LatestPromotionEndDateFuture"
+        }]
+      }
+    },
+    "CG_ED_Story_TD_CR_RetailVisitKpi_GetLatestPromotionEndDatePast": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["StoreProductId"],
+        "orderBy": [{
+          "name": "LatestPromotionEndDatePast_TD_Temp",
+          "direction": "desc"
+        }],
+        "source": "CG_ED_Story_TD_CR_RetailVisitKpi_GetLatestPromotionStartDatePast",
+        "computedFields": [{
+          "expression": {
+            "sourceField": "LatestPromotionEndDatePast_TD_Temp",
+            "offset": "first()"
+          },
+          "name": "LatestPromotionEndDatePast",
+          "label": "LatestPromotionEndDatePast"
+        }]
+      }
+    },
+    "CG_ED_Story_TD_Filter_RetailVisitKpi_GetPromotions": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_TD_CE_RetailVisitKpi_ComputeValues",
+        "saqlFilter": "'PromotionId' is not null"
+      }
+    },
+    "CG_ED_Story_TD_CE_RetailVisitKpi_ComputeValues": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_ED_Story_TD_Augment_StoreProductLastOOSVisitDate_onto_RetailVisitKpi",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 10,
+            "name": "DaysSinceLastOOSVisit",
+            "saqlExpression": "daysBetween(toDate('ActualVisitStartTime_sec_epoch'), toDate('LastOOSVisit.ActualVisitStartTime_sec_epoch'))",
+            "scale": 2,
+            "label": "DaysSinceLastOOSVisit",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "case when 'ActualVisitStartTime_sec_epoch' == 'LastOOSVisit.ActualVisitStartTime_sec_epoch' then 0 else 1 end",
+            "name": "PriorVisit_Flag",
+            "scale": 0,
+            "label": "Prior to Last Visit Flag",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "daysBetween(toDate('ActualVisitStartTime_sec_epoch'), toDate('LastOOSVisit.ActualVisitStartTime_LS_SamePeriod_LY_sec_epoch'))",
+            "name": "DaysSinceLastOOSVisit_LY",
+            "scale": 0,
+            "label": "DaysSinceLastOOSVisit_LY",
+            "type": "Numeric"
+          },
+          {
+            "saqlExpression": "case when 'LatestPromotionStartDatePast_Temp_sec_epoch' <= 'LastOOSVisit.ActualVisitStartTime_sec_epoch' then toDate('LatestPromotionStartDatePast_Temp', \"yyyy-MM-dd\") end",
+            "name": "LatestPromotionStartDatePast_TD_Temp",
+            "format": "yyyy-MM-dd",
+            "label": "LatestPromotionStartDatePast_TD_Temp",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LatestPromotionEndDatePast_TD_Temp",
+            "saqlExpression": "case when 'LatestPromotionEndDatePast_Temp_sec_epoch' <= 'LastOOSVisit.ActualVisitStartTime_sec_epoch' then toDate('LatestPromotionEndDatePast_Temp', \"yyyy-MM-dd\") end",
+            "format": "yyyy-MM-dd",
+            "label": "LatestPromotionEndDatePast_TD_Temp",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "case when 'LatestPromotionEndDateFuture_Temp_sec_epoch' >= 'LastOOSVisit.ActualVisitStartTime_sec_epoch' then toDate('LatestPromotionEndDateFuture_Temp', \"yyyy-MM-dd\") end",
+            "name": "LatestPromotionEndDateFuture_TD_Temp",
+            "format": "yyyy-MM-dd",
+            "label": "LatestPromotionEndDateFuture_TD_Temp",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "CG_ED_Story_Augment_RetailVisitKpi_onto_StoreProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["StoreProductId"],
+        "left": "CG_ED_Story_Augment_OrderItem_DaysSinceLastOrder_onto_StoreProduct",
+        "left_key": ["StoreProductId"],
+        "right_select": [
+          "SoS_Compliance_Temp",
+          "SoS_Tasks_Count",
+          "OutOfStock_Compliance_Temp",
+          "OutOfStock_Tasks_Count",
+          "Promotion_Compliance_Temp",
+          "Promotion_Tasks_Count",
+          "Facing_Compliance_Temp",
+          "Facing_Tasks_Count",
+          "Inventory_Compliance_Temp",
+          "Inventory_Tasks_Count",
+          "StoreProduct_Visits",
+          "Number_of_Promotions"
+        ],
+        "right": "CG_ED_Story_CR_RetailVisitKpi_GetPromoCount",
+        "relationship": "RetailVisitKpi",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_ED_Story_CR_PromotionChannel_GetLatestPromotionEndDateFuture": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["PromotionId"],
+        "orderBy": [{
+          "name": "DaysAfterPromotionEnds",
+          "direction": "asc"
+        }],
+        "source": "CG_ED_Story_Filter_PromotionChannel_KeepLatestPromotionEndDateFuture",
+        "computedFields": [{
+          "expression": {
+            "sourceField": "EndDate_Computed",
+            "offset": "first()"
+          },
+          "name": "LatestPromotionEndDateFuture",
+          "label": "LatestPromotionEndDateFuture"
+        }]
+      }
+    },
+    "CG_ED_Story_Augment_AssessmentTaskOrder_onto_Order": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["OrderId"],
+        "left": "CG_ED_Story_Digest_Order",
+        "left_key": ["Id"],
+        "right_select": [
+          "AssessmentTask.Visit.PlaceId",
+          "AssessmentTask.Visit.Id"
+        ],
+        "right": "CG_ED_Story_Augment_AssessmentTask_onto_AssessmentTaskOrder",
+        "relationship": "AssessmentTaskOrder",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Augment_LatestPromotionEndDatePast_onto_RetailVisitKpi": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["PromotionId"],
+        "left": "CG_ED_Story_Augment_LatestPromotionStartDatePast_onto_RetailVisitKpi",
+        "left_key": ["PromotionId"],
+        "right_select": ["LatestPromotionEndDatePast"],
+        "right": "CG_ED_Story_CR_PromotionChannel_GetLatestPromotionEndDatePast",
+        "relationship": "Promotion",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_CE_OrderItem": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_ED_Story_TD_Augment_StoreProduct_onto_OrderItem",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 10,
+            "saqlExpression": "case when date('Order.ActivatedDate_Year', 'Order.ActivatedDate_Month', 'Order.ActivatedDate_Day') in [\"365 days ago\"..\"current day\"] then 'Quantity' else 0 end",
+            "name": "Quantity_Current_Period",
+            "scale": 0,
+            "label": "Quantity_Current_Period",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "case when date('Order.ActivatedDate_Year', 'Order.ActivatedDate_Month', 'Order.ActivatedDate_Day') in [\"731 days ago\"..\"366 days ago\"] then 'Quantity' else 0 end",
+            "name": "Quantity_Previous_Period",
+            "scale": 0,
+            "label": "Quantity_Previous_Period",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "case when date('Order.ActivatedDate_Year', 'Order.ActivatedDate_Month', 'Order.ActivatedDate_Day') in [\"1 day ahead - 1 year\"..\"366 days ahead - 1 year\"] then 'Quantity' else 0 end",
+            "name": "Quantity_Coming_Period_LastYear",
+            "scale": 0,
+            "label": "Quantity_Coming_Period_LastYear",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "daysBetween(toDate('Order.ActivatedDate_sec_epoch'), toDate('StoreProductTD.ActualVisitStartTime_sec_epoch')) ",
+            "name": "DaysSinceLastOrder_FromLastVisit",
+            "scale": 0,
+            "label": "DaysSinceLastOrder_FromLastVisit",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "daysBetween(toDate('StoreProductTD.ActualVisitStartTime_FS_ComingPeriod_LY_sec_epoch'), toDate('Order.ActivatedDate_sec_epoch')) ",
+            "name": "DaysSinceLastOrder_LY_FromLastVisit",
+            "scale": 0,
+            "label": "DaysSinceLastOrder_LY_FromLastVisit",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "Quantity_Current_Period_TD",
+            "saqlExpression": "case when 'DaysSinceLastOrder_FromLastVisit' >=0 && 'DaysSinceLastOrder_FromLastVisit' <= 365 then 'Quantity' else 0 end",
+            "scale": 0,
+            "label": "Quantity_Current_Period_TD",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "Quantity_Previous_Period_TD",
+            "saqlExpression": "case when 'DaysSinceLastOrder_FromLastVisit' >= 731 && 'DaysSinceLastOrder_FromLastVisit' <= 366 then 'Quantity' else 0 end",
+            "scale": 0,
+            "label": "Quantity_Previous_Period_TD",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "case when 'DaysSinceLastOrder_LY_FromLastVisit' >=0 && 'DaysSinceLastOrder_LY_FromLastVisit' <= 365 then 'Quantity' else 0 end",
+            "name": "Quantity_Coming_Period_LastYear_TD",
+            "scale": 0,
+            "label": "Quantity_Coming_Period_LastYear_TD",
+            "type": "Numeric"
+          },
+          {
+            "saqlExpression": "'Order.AssessmentTaskOrder.AssessmentTask.Visit.PlaceId' +\"-\"+'Product2Id'",
+            "name": "StoreProductId",
+            "label": "StoreProductId",
+            "type": "Text"
+          },
+          {
+            "precision": 10,
+            "name": "StoreProduct_Exists_Flag",
+            "saqlExpression": "case when 'Order.AssessmentTaskOrder.AssessmentTask.Visit.PlaceId' is not null && 'Product2Id' is not null then 1 else 0 end",
+            "scale": 0,
+            "label": "StoreProduct_Exists_Flag",
+            "type": "Numeric"
+          },
+          {
+            "saqlExpression": "'Order.AssessmentTaskOrder.AssessmentTask.Visit.PlaceId'",
+            "name": "RetailStoreId",
+            "label": "RetailStoreId",
+            "type": "Text"
+          },
+          {
+            "saqlExpression": "'Product2Id'",
+            "name": "ProductId",
+            "label": "ProductId",
+            "type": "Text"
+          },
+          {
+            "saqlExpression": "case when daysBetween(toDate('Order.ActivatedDate_sec_epoch'), now()) >= 0 then toDate('Order.ActivatedDate_sec_epoch') end",
+            "name": "ActivatedDate_Computed",
+            "format": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+            "label": "ActivatedDate_Computed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "precision": 10,
+            "name": "DaysSinceLastOrder_SD",
+            "saqlExpression": "daysBetween(toDate('Order.ActivatedDate_sec_epoch'), now()) ",
+            "scale": 0,
+            "label": "DaysSinceLastOrder_SD",
+            "type": "Numeric"
+          }
+        ]
+      }
+    },
+    "CG_ED_Story_Augment_OrderItem_onto_StoreProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["StoreProductId"],
+        "left": "CG_ED_Story_Augment_ProductCategory_onto_StoreProduct",
+        "left_key": ["StoreProductId"],
+        "right_select": [
+          "Quantity_Current_Period",
+          "Quantity_Previous_Period",
+          "Quantity_Coming_Period_LastYear"
+        ],
+        "right": "CG_ED_Story_CE_OrderItem",
+        "relationship": "OrderItem",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_ED_Story_CE_StoreProduct_ComputeValues": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_ED_Story_Augment_RetailVisitKpiWithPromotionDates_onto_StoreProduct",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "State_City",
+            "saqlExpression": "'RetailStore.Location.Address.State' +\" - \"+'RetailStore.Location.Address.City'",
+            "label": "State - City",
+            "type": "Text"
+          },
+          {
+            "precision": 10,
+            "name": "Quantity_Change_Percentage_vs_Previous_Period",
+            "saqlExpression": "('OrderItem.Quantity_Current_Period' - 'OrderItem.Quantity_Previous_Period') / 'OrderItem.Quantity_Previous_Period'",
+            "scale": 2,
+            "label": "Quantity_Change_Percentage_vs_Previous_Period",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "('OrderItem.Quantity_Current_Period' - 'OrderItem.Quantity_Coming_Period_LastYear') / 'OrderItem.Quantity_Coming_Period_LastYear'",
+            "name": "Quantity_Change_Percentage_vs_Coming_Period_LastYear",
+            "scale": 2,
+            "label": "Quantity_Change_Percentage_vs_Coming_Period_LastYear",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "ShareOfShelf_Compliance",
+            "saqlExpression": "'RetailVisitKpi.SoS_Compliance_Temp' / 'RetailVisitKpi.SoS_Tasks_Count'",
+            "scale": 2,
+            "label": "SoS Compliance",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "OutOfStock_Compliance",
+            "saqlExpression": "'RetailVisitKpi.OutOfStock_Compliance_Temp' / 'RetailVisitKpi.OutOfStock_Tasks_Count'",
+            "scale": 2,
+            "label": "OOS Compliance",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "Facing_Compliance",
+            "saqlExpression": "'RetailVisitKpi.Facing_Compliance_Temp' / 'RetailVisitKpi.Facing_Tasks_Count'",
+            "scale": 2,
+            "label": "Facing Compliance",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "Promotion_Compliance",
+            "saqlExpression": "'RetailVisitKpi.Promotion_Compliance_Temp' / 'RetailVisitKpi.Promotion_Tasks_Count'",
+            "scale": 2,
+            "label": "Promotion Compliance",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "'RetailVisitKpi.Inventory_Compliance_Temp' / 'RetailVisitKpi.Inventory_Tasks_Count'",
+            "name": "Inventory_Compliance",
+            "scale": 2,
+            "label": "Inventory Compliance",
+            "type": "Numeric"
+          },
+          {
+            "saqlExpression": "case when toDate('Promotion.LatestPromotionStartDatePast', \"yyyy-MM-dd\") != toDate(\"1970-01-01\", \"yyyy-MM-dd\") then toDate('Promotion.LatestPromotionStartDatePast', \"yyyy-MM-dd\") end",
+            "name": "LatestPromotionStartDatePast",
+            "format": "yyyy-MM-dd",
+            "label": "LatestPromotionStartDatePast",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "case when toDate('Promotion.LatestPromotionEndDatePast', \"yyyy-MM-dd\") != toDate(\"1970-01-01\", \"yyyy-MM-dd\") then toDate('Promotion.LatestPromotionEndDatePast', \"yyyy-MM-dd\") end",
+            "name": "LatestPromotionEndDatePast",
+            "format": "yyyy-MM-dd",
+            "label": "LatestPromotionEndDatePast",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "case when toDate('Promotion.LatestPromotionEndDateFuture', \"yyyy-MM-dd\") != toDate(\"1970-01-01\", \"yyyy-MM-dd\") then toDate('Promotion.LatestPromotionEndDateFuture', \"yyyy-MM-dd\") end",
+            "format": "yyyy-MM-dd",
+            "name": "LatestPromotionEndDateFuture",
+            "label": "LatestPromotionEndDateFuture",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Last_Visit_Date",
+            "saqlExpression": "toDate(date_to_epoch(now())+86399 - (date_to_epoch(now())- (86400 * floor(date_to_epoch(now())/86400))))",
+            "format": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+            "label": "Last_Visit_Date",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "'OrderItem.Quantity_Current_Period'",
+            "name": "Quantity_Current_Period",
+            "scale": 0,
+            "label": "Quantity_Current_Period",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "Quantity_Previous_Period",
+            "saqlExpression": "'OrderItem.Quantity_Previous_Period'",
+            "scale": 0,
+            "label": "Quantity_Previous_Period",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "saqlExpression": "'OrderItem.Quantity_Coming_Period_LastYear'",
+            "name": "Quantity_Coming_Period_LastYear",
+            "scale": 0,
+            "label": "Quantity_Coming_Period_LastYear",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "Store_Visits",
+            "saqlExpression": "'Store.Number_of_Visits'",
+            "scale": 0,
+            "label": "Store_Visits",
+            "type": "Numeric"
+          },
+          {
+            "name": "Dataset_Type",
+            "saqlExpression": "\"SD\"",
+            "label": "Dataset Type",
+            "type": "Text"
+          },
+          {
+            "name": "OOS_Kpi_ActualValue",
+            "saqlExpression": "\"\"",
+            "label": "OOS_Kpi_ActualValue",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "CG_ED_Story_Filter_RetailVisitKpi_DaysSinceLastComplianceCheck": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_CE_RetailVisitKpi_ComputeValues",
+        "saqlFilter": "Include_In_Compliance == \"True\""
+      }
+    },
+    "CG_ED_Story_TD_Filter_RetailVisitKpi_LY_SamePeriod_Promotions": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_TD_CE_RetailVisitKpi_ComputeValues",
+        "saqlFilter": "'DaysSinceLastOOSVisit_LY'>=0 && 'DaysSinceLastOOSVisit_LY' <= 365 && 'PromotionId' is not null"
+      }
+    },
+    "CG_ED_Story_Augment_AID_onto_RetailVisitKpi": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Digest_RetailVisitKpi",
+        "left_key": ["AssessmentIndDefinitionId"],
+        "right_select": ["DataType"],
+        "right": "CG_ED_Story_Digest_AssessmentIndicatorDefinition",
+        "relationship": "AssessmentIndicatorDefinition",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_TD_Augment_OrderItem_onto_StoreProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["StoreProductId"],
+        "left": "CG_ED_Story_TD_Filter_StoreProduct",
+        "left_key": ["StoreProductId"],
+        "right_select": [
+          "Quantity_Current_Period_TD",
+          "Quantity_Previous_Period_TD",
+          "Quantity_Coming_Period_LastYear_TD"
+        ],
+        "right": "CG_ED_Story_CE_OrderItem",
+        "relationship": "OrderItem",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_ED_Story_TD_Slice_StoreProduct_Final": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "select",
+        "source": "CG_ED_Story_TD_CE_StoreProduct_ComputeValues",
+        "fields": [
+          {"name": "StoreProduct.InStoreLocationType_Shelf"},
+          {"name": "StoreProduct.InStoreLocationType_Bin"},
+          {"name": "StoreProduct.InStoreLocationType_Backroom"},
+          {"name": "StoreProduct.InStoreLocationType_Assets"},
+          {"name": "StoreProduct.InStoreLocationType_Other"},
+          {"name": "StoreProduct.Favorite"},
+          {"name": "RetailStore.StoreType"},
+          {"name": "RetailStore.Priority"},
+          {"name": "RetailStore.Name"},
+          {"name": "RetailStore.RetailStoreGroup.Name"},
+          {"name": "Product.Name"},
+          {"name": "Product.Family"},
+          {"name": "Product.ProductCategory.Name"},
+          {"name": "OrderItem.DaysSinceLastOrder"},
+          {"name": "RetailVisitKpi.StoreProduct_Visits"},
+          {"name": "RetailVisitKpi.Number_of_Promotions"},
+          {"name": "Compliance.DaysSinceLastComplianceCheck"},
+          {"name": "OutOfStock.DaysSinceOOSComplianceCheck"},
+          {"name": "OutOfStock.OOS_Actual"},
+          {"name": "Inventory.DaysSinceInventoryComplianceCheck"},
+          {"name": "Inventory.Inventory_Actual"},
+          {"name": "Inventory.Inventory_Target"},
+          {"name": "LastYearSamePeriod.Number_of_Promotions"},
+          {"name": "State_City"},
+          {"name": "Quantity_Change_Percentage_vs_Previous_Period"},
+          {"name": "Quantity_Change_Percentage_vs_Coming_Period_LastYear"},
+          {"name": "ShareOfShelf_Compliance"},
+          {"name": "OutOfStock_Compliance"},
+          {"name": "Facing_Compliance"},
+          {"name": "Promotion_Compliance"},
+          {"name": "Inventory_Compliance"},
+          {"name": "Quantity_Current_Period"},
+          {"name": "Quantity_Previous_Period"},
+          {"name": "Quantity_Coming_Period_LastYear"},
+          {"name": "Store_Visits"},
+          {"name": "OOS_Kpi_ActualValue"},
+          {"name": "LatestPromotionStartDatePast"},
+          {"name": "LatestPromotionEndDatePast"},
+          {"name": "LatestPromotionEndDateFuture"}
+        ]
+      }
+    },
+    "CG_ED_Story_Filter_PromotionChannel_KeepLatestPromotionStartDatePast": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_CR_PromotionChannel",
+        "saqlFilter": "ChannelPriority_Flag == 1 && DaysSincePromotionStarted >= 0"
+      }
+    },
+    "CG_ED_Story_TD_Filter_RetailVisitKpi_DaysSinceLastInventoryComplianceCheck": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_TD_Filter_RetailVisitKpi_DaysSinceLastComplianceCheck",
+        "saqlFilter": "Type == \"Inventory\""
+      }
+    },
+    "CG_ED_Story_TD_CR_OrderItem_GetDaysSinceLastOrder_SinceLWD": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["StoreProductId"],
+        "orderBy": [{
+          "name": "Order.ActivatedDate",
+          "direction": "desc"
+        }],
+        "source": "CG_ED_Story_TD_Filter_OrderItem_GetOrdersBeforeLVD",
+        "computedFields": [{
+          "expression": {
+            "saqlExpression": "first('DaysSinceLastOrder_FromLastVisit')",
+            "scale": 0,
+            "type": "Numeric"
+          },
+          "name": "DaysSinceLastOrder",
+          "label": "DaysSinceLastOrder"
+        }]
+      }
+    },
+    "CG_ED_Story_CR_OrderItem_GetDaysSinceLastOrder": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["StoreProductId"],
+        "orderBy": [{
+          "name": "Order.ActivatedDate",
+          "direction": "desc"
+        }],
+        "source": "CG_ED_Story_Filter_OrderItem_GetOrdersBeforeToday",
+        "computedFields": [{
+          "expression": {
+            "saqlExpression": "daysBetween(toDate(first('Order.ActivatedDate_sec_epoch')), now())",
+            "scale": 10,
+            "type": "Numeric"
+          },
+          "name": "DaysSinceLastOrder",
+          "label": "Days Since Last Order"
+        }]
+      }
+    },
+    "CG_ED_Story_Digest_OrderItem": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AvailableQuantity"},
+          {"name": "Id"},
+          {"name": "UnitPrice"},
+          {"name": "TotalPrice"},
+          {"name": "Quantity"},
+          {"name": "Product2Id"},
+          {"name": "OrderItemNumber"},
+          {"name": "OrderId"},
+          {"name": "ListPrice"},
+          {"name": "IsDeleted"}
+        ],
+        "object": "OrderItem"
+      }
+    },
+    "CG_ED_Story_TD_CR_RetailVisitKpi_GetPromoCount": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["StoreProductId"],
+        "orderBy": [{
+          "name": "PromotionId",
+          "direction": "asc"
+        }],
+        "source": "CG_ED_Story_TD_CR_RetailVisitKpi_GetStoreProductVisits",
+        "computedFields": [{
+          "expression": {
+            "saqlExpression": "case when 'PromotionId' is not null then case when current('PromotionId') == previous('PromotionId') then 0 else 1 end end",
+            "scale": 0,
+            "type": "Numeric"
+          },
+          "name": "Number_of_Promotions",
+          "label": "Number_of_Promotions"
+        }]
+      }
+    },
+    "CG_ED_Story_Promotion_onto_PromotionChannel": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Digest_PromotionChannel",
+        "left_key": ["PromotionId"],
+        "right_select": ["EndDate"],
+        "right": "CG_ED_Story_Digest_Promotion",
+        "relationship": "Promotion",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Digest_AssessmentIndicatorDefinition": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "DataType"},
+          {"name": "Name"},
+          {"name": "Id"},
+          {"name": "Description"}
+        ],
+        "object": "AssessmentIndicatorDefinition"
+      }
+    },
+    "CG_ED_Story_CE_AssessmentTaskOrder_Find_Duplicate_Orders": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_ED_Story_CR_AssessmentTaskOrder_Find_Previous_Orders",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "IsDuplicate",
+          "saqlExpression": "case when 'OrderId' == 'OrderIdPrevious' then \"True\" else \"False\" end",
+          "label": "IsDuplicate",
+          "type": "Text"
+        }]
+      }
+    },
+    "CG_ED_Story_Slice_StoreProduct": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "select",
+        "source": "CG_ED_Story_CE_StoreProduct_ComputeValues",
+        "fields": [
+          {"name": "StoreProduct.InStoreLocationType_Shelf"},
+          {"name": "StoreProduct.InStoreLocationType_Bin"},
+          {"name": "StoreProduct.InStoreLocationType_Backroom"},
+          {"name": "StoreProduct.InStoreLocationType_Assets"},
+          {"name": "StoreProduct.InStoreLocationType_Other"},
+          {"name": "StoreProduct.Favorite"},
+          {"name": "RetailStore.StoreType"},
+          {"name": "RetailStore.Priority"},
+          {"name": "RetailStore.Name"},
+          {"name": "RetailStore.RetailStoreGroup.Name"},
+          {"name": "Product.Name"},
+          {"name": "Product.Family"},
+          {"name": "Product.ProductCategory.Name"},
+          {"name": "OrderItem.DaysSinceLastOrder"},
+          {"name": "RetailVisitKpi.StoreProduct_Visits"},
+          {"name": "RetailVisitKpi.Number_of_Promotions"},
+          {"name": "LastYearSamePeriod.Number_of_Promotions"},
+          {"name": "Compliance.DaysSinceLastComplianceCheck"},
+          {"name": "OutOfStock.DaysSinceOOSComplianceCheck"},
+          {"name": "OutOfStock.OOS_Actual"},
+          {"name": "Inventory.DaysSinceInventoryComplianceCheck"},
+          {"name": "Inventory.Inventory_Actual"},
+          {"name": "Inventory.Inventory_Target"},
+          {"name": "State_City"},
+          {"name": "Quantity_Change_Percentage_vs_Previous_Period"},
+          {"name": "Quantity_Change_Percentage_vs_Coming_Period_LastYear"},
+          {"name": "ShareOfShelf_Compliance"},
+          {"name": "OutOfStock_Compliance"},
+          {"name": "Facing_Compliance"},
+          {"name": "Promotion_Compliance"},
+          {"name": "Inventory_Compliance"},
+          {"name": "LatestPromotionStartDatePast"},
+          {"name": "LatestPromotionEndDatePast"},
+          {"name": "LatestPromotionEndDateFuture"},
+          {"name": "Quantity_Current_Period"},
+          {"name": "Quantity_Previous_Period"},
+          {"name": "Quantity_Coming_Period_LastYear"},
+          {"name": "Store_Visits"},
+          {"name": "OOS_Kpi_ActualValue"}
+        ]
+      }
+    },
+    "CG_ED_Story_Augment_Address_onto_Location": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Digest_Location",
+        "left_key": ["VisitorAddressId"],
+        "right_select": [
+          "City",
+          "State"
+        ],
+        "right": "CG_ED_Story_Digest_Address",
+        "relationship": "Address",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Augment_AssessmentTask_onto_RetailVisitKpi": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Augment_AID_onto_RetailVisitKpi",
+        "left_key": ["AssessmentTaskId"],
+        "right_select": [
+          "TaskType",
+          "Visit.ActualVisitStartTime",
+          "Visit.Id",
+          "Visit.Status",
+          "Visit.PlaceId",
+          "Visit.ActualVisitStartTime_SelectedPeriod_Filter_Flag",
+          "Visit.VisitsUntilCurrentTime_Flag",
+          "Visit.ActualVisitStartTime_LastYear_SamePeriod_Filter_Flag",
+          "Visit.CurrentDay"
+        ],
+        "right": "CG_ED_Story_Augment_Visit_onto_AssessmentTask",
+        "relationship": "AssessmentTask",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_CR_RetailVisitKpi_GetStoreProductVisits": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["StoreProductId"],
+        "orderBy": [{
+          "name": "AssessmentTask.Visit.Id",
+          "direction": "asc"
+        }],
+        "source": "CG_ED_Story_Filter_RetailVisitKpi",
+        "computedFields": [{
+          "expression": {
+            "saqlExpression": "case when current('AssessmentTask.Visit.Id') == previous('AssessmentTask.Visit.Id') then 0 else 1 end",
+            "scale": 0,
+            "type": "Numeric"
+          },
+          "name": "StoreProduct_Visits",
+          "label": "StoreProduct_Visits"
+        }]
+      }
+    },
+    "CG_ED_Story_Filter_RetailVisitKpi_GetStoreProduct": {
+      "action": "filter",
+      "parameters": {
+        "source": "CR_ED_Story_CR_RetailVisitKpi_GetStoreProduct",
+        "saqlFilter": "'Unique_StoreProduct_Flag' == 1 && 'StoreProduct_Exists_Flag' == 1"
+      }
+    },
+    "CG_ED_Story_Augment_ProductCategory_onto_ProductCategoryProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Digest_ProductCategoryProduct",
+        "left_key": ["ProductCategoryId"],
+        "right_select": ["Name"],
+        "right": "CG_ED_Story_Digest_ProductCategory",
+        "relationship": "ProductCategory",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Digest_Product": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Name"},
+          {"name": "Id"},
+          {"name": "Family"}
+        ],
+        "object": "Product2"
+      }
+    },
+    "CG_ED_Story_TD_CR_RetailVisitKpi_DaysSinceLastComplianceCheck": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["StoreProductId"],
+        "orderBy": [{
+          "name": "ActualVisitStartTime",
+          "direction": "desc"
+        }],
+        "source": "CG_ED_Story_TD_Filter_RetailVisitKpi_DaysSinceLastComplianceCheck",
+        "computedFields": [{
+          "expression": {
+            "saqlExpression": "daysBetween(toDate(first('ActualVisitStartTime_sec_epoch')), toDate('LastOOSVisit.ActualVisitStartTime_sec_epoch'))",
+            "scale": 2,
+            "type": "Numeric"
+          },
+          "name": "DaysSinceLastComplianceCheck",
+          "label": "Days Since Last Compliance Check"
+        }]
+      }
+    },
+    "CG_ED_Story_Filter_RetailVisitKpi_GetPromotions": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_CE_RetailVisitKpi_ComputeValues",
+        "saqlFilter": "'PromotionId' is not null"
+      }
+    },
+    "CG_ED_Story_Digest_RetailStoreGroup": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "Name"}
+        ],
+        "object": "RetailLocationGroup"
+      }
+    },
+    "CG_ED_Story_Digest_Address": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "City"},
+          {"name": "Country"},
+          {"name": "State"},
+          {"name": "Name"},
+          {"name": "Id"}
+        ],
+        "object": "Address"
+      }
+    },
+    "CG_ED_Story_CR_PromotionChannel_GetLatestPromotionEndDatePast": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["PromotionId"],
+        "orderBy": [{
+          "name": "DaysSincePromotionEnded",
+          "direction": "asc"
+        }],
+        "source": "CG_ED_Story_Filter_PromotionChannel_KeepLatestPromotionEndDatePast",
+        "computedFields": [{
+          "expression": {
+            "sourceField": "EndDate_Computed",
+            "offset": "first()"
+          },
+          "name": "LatestPromotionEndDatePast",
+          "label": "LatestPromotionEndDatePast"
+        }]
+      }
+    },
+    "CG_ED_Story_Filter_RetailVisitKpi_LY_SamePeriod_Promotions": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_CE_RetailVisitKpi_ComputeValues",
+        "saqlFilter": "'AssessmentTask.Visit.ActualVisitStartTime_LastYear_SamePeriod_Filter_Flag' == 1 && 'PromotionId' is not null"
+      }
+    },
+    "CG_ED_Story_Digest_Visit": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "ActualVisitEndTime"},
+          {"name": "ActualVisitStartTime"},
+          {"name": "Id"},
+          {"name": "CreatedDate"},
+          {"name": "VisitPriority"},
+          {"name": "VisitorId"},
+          {"name": "Status"},
+          {"name": "PlannedVisitStartTime"},
+          {"name": "PlannedVisitEndTime"},
+          {"name": "PlaceId"},
+          {"name": "Name"}
+        ],
+        "object": "Visit"
+      }
+    },
+    "CG_ED_Story_TD_Augment_RetailVisitKpi_onto_StoreProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["StoreProductId"],
+        "left": "CG_ED_Story_TD_Augment_OrderItem_DaysSinceLastOrder_onto_StoreProduct",
+        "left_key": ["StoreProductId"],
+        "right_select": [
+          "SoS_Compliance_Temp",
+          "SoS_Tasks_Count",
+          "OutOfStock_Compliance_Temp",
+          "OutOfStock_Tasks_Count",
+          "Promotion_Compliance_Temp",
+          "Promotion_Tasks_Count",
+          "Facing_Compliance_Temp",
+          "Facing_Tasks_Count",
+          "Inventory_Compliance_Temp",
+          "Inventory_Tasks_Count",
+          "Number_of_Promotions",
+          "StoreProduct_Visits"
+        ],
+        "right": "CG_ED_Story_TD_CR_RetailVisitKpi_GetPromoCount",
+        "relationship": "RetailVisitKpi",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_ED_Story_Augment_RetailVisitKpi_LYSamePeriodPromotions_onto_StoreProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["StoreProductId"],
+        "left": "CG_ED_Story_Augment_RetailVisitKpi_onto_StoreProduct",
+        "left_key": ["StoreProductId"],
+        "right_select": ["Number_of_Promotions"],
+        "right": "CG_ED_Story_CR_RetailVisitKpi_LY_SamePeriod_Promotions",
+        "relationship": "LastYearSamePeriod",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_ED_Story_Digest_StoreProduct": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "InStoreLocationId"},
+          {"name": "ProductId"},
+          {"name": "RetailStoreId"},
+          {"name": "IsFavorite"}
+        ],
+        "object": "StoreProduct"
+      }
+    },
+    "CG_ED_Story_Augment_DaysSinceLastInventoryComplianceCheck_onto_StoreProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["StoreProductId"],
+        "left": "CG_ED_Story_Augment_DaysSinceLastOOSComplianceCheck_onto_StoreProduct",
+        "left_key": ["StoreProductId"],
+        "right_select": [
+          "DaysSinceInventoryComplianceCheck",
+          "Inventory_Actual",
+          "Inventory_Target"
+        ],
+        "right": "CG_ED_Story_CR_RetailVisitKpi_DaysSinceLastInventoryComplianceCheck",
+        "relationship": "Inventory",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_CE_StoreProduct": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_ED_Story_Augment_InStoreLocation_onto_StoreProduct",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "InStoreLocationType_Shelf",
+            "saqlExpression": "case when 'InStoreLocation.InStoreLocationType' == \"Shelf\" then \"Yes\" else \"No\" end ",
+            "label": "InStoreLocationType_Shelf",
+            "type": "Text"
+          },
+          {
+            "saqlExpression": "case when 'InStoreLocation.InStoreLocationType' == \"Bin\" then \"Yes\" else \"No\" end ",
+            "name": "InStoreLocationType_Bin",
+            "label": "InStoreLocationType_Bin",
+            "type": "Text"
+          },
+          {
+            "saqlExpression": "case when 'InStoreLocation.InStoreLocationType' == \"Backroom\" then \"Yes\" else \"No\" end ",
+            "name": "InStoreLocationType_Backroom",
+            "label": "InStoreLocationType_Backroom",
+            "type": "Text"
+          },
+          {
+            "saqlExpression": "case when 'InStoreLocation.InStoreLocationType' == \"Assets\" then \"Yes\" else \"No\" end ",
+            "name": "InStoreLocationType_Assets",
+            "label": "InStoreLocationType_Assets",
+            "type": "Text"
+          },
+          {
+            "saqlExpression": "case when 'InStoreLocation.InStoreLocationType' == \"Other\" then \"Yes\" else \"No\" end ",
+            "name": "InStoreLocationType_Other",
+            "label": "InStoreLocationType_Other",
+            "type": "Text"
+          },
+          {
+            "name": "Favorite",
+            "saqlExpression": "case when 'IsFavorite' == \"true\" then \"Yes\" when 'IsFavorite' == \"false\" then \"No\" end ",
+            "label": "Favorite",
+            "type": "Text"
+          },
+          {
+            "name": "StoreProductId",
+            "saqlExpression": "'RetailStoreId' +\"-\"+'ProductId'",
+            "label": "StoreProductId",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "CG_ED_Story_TD_Augment_RetailVisitKpi_LYSamePeriodPromotions_onto_StoreProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["StoreProductId"],
+        "left": "CG_ED_Story_TD_Augment_StoreVisits_onto_StoreProduct",
+        "left_key": ["StoreProductId"],
+        "right_select": ["Number_of_Promotions"],
+        "right": "CG_ED_Story_TR_CR_RetailVisitKpi_LY_SamePeriod_Promotions",
+        "relationship": "LastYearSamePeriod",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Filter_OrderItem_GetOrdersBeforeToday": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_CE_OrderItem",
+        "saqlFilter": "'Order.AssessmentTaskOrder.AssessmentTask.Visit.Id' is not null && 'DaysSinceLastOrder_SD'>= 0"
+      }
+    },
+    "CG_ED_Story_Digest_Order": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {"name": "ActivatedDate"},
+          {"name": "Type"},
+          {"name": "OrderNumber"},
+          {"name": "Id"}
+        ],
+        "object": "Order"
+      }
+    },
+    "CG_ED_Story_TD_Filter_StoreProduct": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_Augment_StoreProductTD_onto_StoreProductSD",
+        "saqlFilter": "'TD.ActualBooleanValue' is not null"
+      }
+    },
+    "CG_ED_Story_Augment_DaysSinceLastComplianceCheck_onto_StoreProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["StoreProductId"],
+        "left": "CG_ED_Story_Augment_RetailVisitKpi_LYSamePeriodPromotions_onto_StoreProduct",
+        "left_key": ["StoreProductId"],
+        "right_select": ["DaysSinceLastComplianceCheck"],
+        "right": "CG_ED_Story_CR_RetailVisitKpi_DaysSinceLastComplianceCheck",
+        "relationship": "Compliance",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Digest_AssessmentTaskOrder": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AssessmentTaskId"},
+          {"name": "Id"},
+          {"name": "CreatedDate"},
+          {"name": "LastModifiedDate"},
+          {"name": "OrderId"},
+          {"name": "RetailStoreId"}
+        ],
+        "object": "AssessmentTaskOrder"
+      }
+    },
+    "CG_ED_Story_Augment_RetailStore_onto_StoreProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Augment_StoreProductwithInStoreLocation_onto_StoreProduct",
+        "left_key": ["RetailStoreId"],
+        "right_select": [
+          "Priority",
+          "Name",
+          "RetailStoreGroup.Name",
+          "Location.Address.City",
+          "Location.Address.State",
+          "StoreType"
+        ],
+        "right": "CG_ED_Story_Augment_Location_onto_RetailStore",
+        "relationship": "RetailStore",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_TD_Augment_DaysSinceLastComplianceCheck_onto_StoreProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["StoreProductId"],
+        "left": "CG_ED_Story_TD_Augment_RetailVisitKpi_onto_StoreProduct",
+        "left_key": ["StoreProductId"],
+        "right_select": ["DaysSinceLastComplianceCheck"],
+        "right": "CG_ED_Story_TD_CR_RetailVisitKpi_DaysSinceLastComplianceCheck",
+        "relationship": "Compliance",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_TD_Augment_DaysSinceLastInventoryComplianceCheck_onto_StoreProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["StoreProductId"],
+        "left": "CG_ED_Story_TD_Augment_DaysSinceLastOOSComplianceCheck_onto_StoreProduct",
+        "left_key": ["StoreProductId"],
+        "right_select": [
+          "DaysSinceInventoryComplianceCheck",
+          "Inventory_Actual",
+          "Inventory_Target"
+        ],
+        "right": "CG_ED_Story_TD_CR_RetailVisitKpi_DaysSinceLastInventoryComplianceCheck",
+        "relationship": "Inventory",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Augment_LatestPromotionStartDatePast_onto_RetailVisitKpi": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["PromotionId"],
+        "left": "CG_ED_Story_Filter_RetailVisitKpi_with_VisitStatus",
+        "left_key": ["PromotionId"],
+        "right_select": ["LatestPromotionStartDatePast"],
+        "right": "CG_ED_Story_CR_PromotionChannel_GetLatestPromotionStartDatePast",
+        "relationship": "Promotion",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Filter_RetailVisitKpi_DaysSinceLastOOSComplianceCheck": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_Filter_RetailVisitKpi_DaysSinceLastComplianceCheck",
+        "saqlFilter": "Type == \"OutOfStock\""
+      }
+    },
+    "CG_ED_Story_TD_Filter_RetailVisitKpi_DaysSinceLastOOSComplianceCheck": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_ED_Story_TD_Filter_RetailVisitKpi_DaysSinceLastComplianceCheck",
+        "saqlFilter": "Type == \"OutOfStock\""
+      }
+    },
+    "CG_ED_Story_Augment_RetailStoreGroup_onto_RetailStore": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_ED_Story_Digest_RetailStore",
+        "left_key": ["RetailLocationGroupId"],
+        "right_select": ["Name"],
+        "right": "CG_ED_Story_Digest_RetailStoreGroup",
+        "relationship": "RetailStoreGroup",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_ED_Story_Append_TD_SD_Data": {
+      "action": "append",
+      "parameters": {
+        "enableDisjointedSchemaMerge": true,
+        "sources": [
+          "CG_ED_Story_TD_Slice_StoreProduct_Final",
+          "CG_ED_Story_Slice_StoreProduct"
+        ]
+      }
+    },
+    "CG_ED_Story_Digest_ProductCategoryProduct": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "ProductCategoryId"},
+          {"name": "ProductId"}
+        ],
+        "object": "ProductCategoryProduct"
+      }
+    },
+    "CG_ED_Story_CR_RetailVisitKpi_GetLatestPromotionStartDatePast": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["StoreProductId"],
+        "orderBy": [{
+          "name": "LatestPromotionStartDatePast_Temp",
+          "direction": "desc"
+        }],
+        "source": "CG_ED_Story_Filter_RetailVisitKpi_GetPromotions",
+        "computedFields": [{
+          "expression": {
+            "sourceField": "LatestPromotionStartDatePast_Temp",
+            "offset": "first()"
+          },
+          "name": "LatestPromotionStartDatePast",
+          "label": "LatestPromotionStartDatePast"
+        }]
+      }
+    },
+    "CG_ED_Story_Augment_ProductCategory_onto_StoreProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["ProductId"],
+        "left": "CG_ED_Story_Augment_Product_onto_StoreProduct",
+        "left_key": ["ProductId"],
+        "right_select": ["ProductCategory.Name"],
+        "right": "CG_ED_Story_Augment_ProductCategory_onto_ProductCategoryProduct",
+        "relationship": "Product",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_ED_Story_Augment_StoreProductwithInStoreLocation_onto_StoreProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["StoreProductId"],
+        "left": "CG_ED_Story_Slice_StoreProduct_GetStoreProduct",
+        "left_key": ["StoreProductId"],
+        "right_select": [
+          "InStoreLocationType_Assets",
+          "InStoreLocationType_Backroom",
+          "InStoreLocationType_Bin",
+          "InStoreLocationType_Other",
+          "InStoreLocationType_Shelf",
+          "Favorite"
+        ],
+        "right": "CG_ED_Story_CE_StoreProduct",
+        "relationship": "StoreProduct",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CR_ED_Story_CR_RetailVisitKpi_GetStoreProduct": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["StoreProductId"],
+        "orderBy": [{
+          "name": "StoreProductId",
+          "direction": "asc"
+        }],
+        "source": "CG_ED_Story_CE_RetailVisitKpi_ComputeValues",
+        "computedFields": [{
+          "expression": {
+            "saqlExpression": "case when current('StoreProductId') == previous('StoreProductId') then 0 else 1 end",
+            "scale": 0,
+            "type": "Numeric"
+          },
+          "name": "Unique_StoreProduct_Flag",
+          "label": "Unique_StoreProduct_Flag"
+        }]
+      }
+    },
+    "CG_ED_Story_CR_RetailVisitKpi_GetLatestPromotionEndDatePast": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["StoreProductId"],
+        "orderBy": [{
+          "name": "LatestPromotionEndDatePast_Temp",
+          "direction": "desc"
+        }],
+        "source": "CG_ED_Story_CR_RetailVisitKpi_GetLatestPromotionStartDatePast",
+        "computedFields": [{
+          "expression": {
+            "sourceField": "LatestPromotionEndDatePast_Temp",
+            "offset": "first()"
+          },
+          "name": "LatestPromotionEndDatePast",
+          "label": "LatestPromotionEndDatePast"
+        }]
+      }
+    },
+    "CG_ED_Story_TD_Augment_StoreProductLastOOSVisitDate_onto_RetailVisitKpi": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["StoreProductId"],
+        "left": "CG_ED_Story_CE_RetailVisitKpi_ComputeValues",
+        "left_key": ["StoreProductId"],
+        "right_select": [
+          "ActualVisitStartTime",
+          "ActualVisitStartTime_LS_SamePeriod_LY"
+        ],
+        "right": "CG_ED_Story_TD_Filter_RetailVisitKpi_OOS_LastVisitRecords",
+        "relationship": "LastOOSVisit",
+        "operation": "LookupSingleValue"
+      }
+    }
+  },
+  "_type": "dataflow",
+  "description": "CG Analytics ED - Minimize OutOfStock",
+  "MasterLabel": "CG Analytics ED - Minimize OutOfStock",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive",
+  "isDeletable": true,
+  "longRunningAlertInMins": "",
+  "DataflowType": "USER",
+  "name": "CG_Analytics_ED_Minimize_OutOfStock",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": ""
+}
