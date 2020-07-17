@@ -371,7 +371,7 @@
           "name": "${App.Datasets.ERM_Account_tp.Name}"
         },
         "dependent": true,
-        "fields": ["Contact_HealthCloudGA_ConditionStatus__c"],
+        "fields": ["Contact_ConditionStatus"],
         "locked": false,
         "operator": "in"
       },
@@ -380,7 +380,7 @@
           "name": "${App.Datasets.ERM_Account_tp.Name}"
         },
         "dependent": true,
-        "fields": ["Contact_HealthCloudGA_Testing_Status__c"],
+        "fields": ["Contact_Testing_Status"],
         "locked": false,
         "operator": "in"
       },
@@ -3322,17 +3322,17 @@
             "values": [
               "Name",
               "CreatedDate_Custom",
-              "Contact_HealthCloudGA_ConditionStatus__c",
-              "Contact_HealthCloudGA_Testing_Status__c",
-              "Contact_HealthCloudGA_Monitored_at_Home__c",
+              "Contact_ConditionStatus",
+              "Contact_Testing_Status",
+              "Contact_Monitored_at_Home",
               "ContactsTraced",
               "Household_Members",
               "Contact_Phone",
               "Contact_Email",
               "Contact_MailingCity",
               "Contact_MailingState",
-              "Contact_HealthCloudGA_Gender__c",
-              "Age_Text",
+              "Contact_Gender",
+              "Contact_Age_Text",
               "Id"
             ],
             "filters": [["IsPersonAccount_Computed", ["True"], "in"]],
@@ -3417,7 +3417,7 @@
         "query": {
           "query": {
             "measures": [["count", "*"]],
-            "groups": ["Contact_HealthCloudGA_Testing_Status__c"],
+            "groups": ["Contact_Testing_Status"],
             "filters": [["IsPersonAccount_Computed", ["True"], "in"]],
             "order": [
               [
@@ -3492,7 +3492,7 @@
             "fillArea": true,
             "columnMap": {
               "trellis": [],
-              "dimension": ["Contact_HealthCloudGA_Testing_Status__c"],
+              "dimension": ["Contact_Testing_Status"],
               "plots": ["count"]
             },
             "showActionMenu": true,
@@ -4050,7 +4050,7 @@
         "query": {
           "query": {
             "measures": [["count", "*"]],
-            "groups": ["Contact_HealthCloudGA_Gender__c"],
+            "groups": ["Contact_Gender"],
             "filters": [["IsPersonAccount_Computed", ["True"], "in"]],
             "order": [
               [
@@ -4117,7 +4117,7 @@
             ],
             "columnMap": {
               "trellis": [],
-              "dimension": ["Contact_HealthCloudGA_Gender__c"],
+              "dimension": ["Contact_Gender"],
               "plots": ["count"]
             },
             "showActionMenu": true,
@@ -4141,7 +4141,7 @@
         "query": {
           "query": {
             "measures": [["count", "*"]],
-            "groups": ["Age_Bucket"],
+            "groups": ["Contact_Age_Bucket"],
             "filters": [["IsPersonAccount_Computed", ["True"], "in"]]
           },
           "version": -1.0
@@ -4215,7 +4215,7 @@
             },
             "columnMap": {
               "trellis": [],
-              "dimensionAxis": ["Age_Bucket"],
+              "dimensionAxis": ["Contact_Age_Bucket"],
               "plots": ["count"]
             },
             "showActionMenu": true,
@@ -4554,7 +4554,7 @@
                   "measures": [["count", "*"]],
                   "filters": [
                     [
-                      "Contact_HealthCloudGA_ConditionStatus__c",
+                      "Contact_ConditionStatus",
                       ["Asymptomatic"],
                       "in"
                     ]
@@ -4568,7 +4568,7 @@
                   "measures": [["count", "*"]],
                   "filters": [
                     [
-                      "Contact_HealthCloudGA_ConditionStatus__c",
+                      "Contact_ConditionStatus",
                       ["Symptomatic"],
                       "in"
                     ]
@@ -4582,7 +4582,7 @@
                   "measures": [["count", "*"]],
                   "filters": [
                     [
-                      "Contact_HealthCloudGA_Testing_Status__c",
+                      "Contact_Testing_Status",
                       ["Positive Test"],
                       "in"
                     ]
@@ -4843,7 +4843,7 @@
         "query": {
           "query": {
             "measures": [["count", "*"]],
-            "groups": ["Contact_HealthCloudGA_Monitored_at_Home__c"],
+            "groups": ["Contact_Monitored_at_Home"],
             "filters": [["IsPersonAccount_Computed", ["True"], "in"]],
             "order": [
               [
@@ -4906,7 +4906,7 @@
             "inner": 60,
             "columnMap": {
               "trellis": [],
-              "dimension": ["Contact_HealthCloudGA_Monitored_at_Home__c"],
+              "dimension": ["Contact_Monitored_at_Home"],
               "plots": ["count"]
             },
             "showActionMenu": true,
@@ -5201,7 +5201,7 @@
         "query": {
           "query": {
             "measures": [["count", "*"]],
-            "groups": ["Contact_HealthCloudGA_ConditionStatus__c"],
+            "groups": ["Contact_ConditionStatus"],
             "filters": [["IsPersonAccount_Computed", ["True"], "in"]],
             "order": [
               [
@@ -5285,7 +5285,7 @@
             "binValues": false,
             "columnMap": {
               "trellis": [],
-              "dimensionAxis": ["Contact_HealthCloudGA_ConditionStatus__c"],
+              "dimensionAxis": ["Contact_ConditionStatus"],
               "plots": ["count"]
             },
             "showActionMenu": true,
@@ -5540,7 +5540,7 @@
           "inner": 60,
           "columnMap": {
             "trellis": [],
-            "dimension": ["Contact_HealthCloudGA_Monitored_at_Home__c"],
+            "dimension": ["Contact_Monitored_at_Home"],
             "plots": ["count"]
           },
           "showActionMenu": true,
@@ -5852,7 +5852,7 @@
           "fillArea": true,
           "columnMap": {
             "trellis": [],
-            "dimension": ["Contact_HealthCloudGA_Testing_Status__c"],
+            "dimension": ["Contact_Testing_Status"],
             "plots": ["count"]
           },
           "showActionMenu": true,
@@ -5946,7 +5946,7 @@
           "binValues": false,
           "columnMap": {
             "trellis": [],
-            "dimensionAxis": ["Contact_HealthCloudGA_ConditionStatus__c"],
+            "dimensionAxis": ["Contact_ConditionStatus"],
             "plots": ["count"]
           },
           "showActionMenu": true,
@@ -6590,17 +6590,17 @@
           "columns": [
             "Name",
             "CreatedDate_Custom",
-            "Contact_HealthCloudGA_ConditionStatus__c",
-            "Contact_HealthCloudGA_Testing_Status__c",
-            "Contact_HealthCloudGA_Monitored_at_Home__c",
+            "Contact_ConditionStatus",
+            "Contact_Testing_Status",
+            "Contact_Monitored_at_Home",
             "ContactsTraced",
             "Household_Members",
             "Contact_Phone",
             "Contact_Email",
             "Contact_MailingCity",
             "Contact_MailingState",
-            "Contact_HealthCloudGA_Gender__c",
-            "Age_Text"
+            "Contact_Gender",
+            "Contact_Age_Text"
           ],
           "customBulkActions": [],
           "evenRowColor": "#f2f6fa",
@@ -7169,7 +7169,7 @@
           ],
           "columnMap": {
             "trellis": [],
-            "dimension": ["Contact_HealthCloudGA_Gender__c"],
+            "dimension": ["Contact_Gender"],
             "plots": ["count"]
           },
           "showActionMenu": true,
@@ -7245,7 +7245,7 @@
           },
           "columnMap": {
             "trellis": [],
-            "dimensionAxis": ["Age_Bucket"],
+            "dimensionAxis": ["Contact_Age_Bucket"],
             "plots": ["count"]
           },
           "showActionMenu": true,
@@ -7768,7 +7768,7 @@
               "dataset": {
                 "name": "${App.Datasets.ERM_Account_tp.Name}"
               },
-              "field": "Contact_HealthCloudGA_Testing_Status__c"
+              "field": "Contact_Testing_Status"
             }
           ],
           "showAllFilters": false
@@ -7786,7 +7786,7 @@
               "dataset": {
                 "name": "${App.Datasets.ERM_Account_tp.Name}"
               },
-              "field": "Contact_HealthCloudGA_ConditionStatus__c"
+              "field": "Contact_ConditionStatus"
             }
           ],
           "showAllFilters": false

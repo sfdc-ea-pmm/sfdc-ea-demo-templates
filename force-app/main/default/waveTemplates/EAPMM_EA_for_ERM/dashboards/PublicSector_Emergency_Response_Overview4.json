@@ -3741,17 +3741,17 @@
             "values": [
               "Name",
               "CreatedDate_Custom",
-              "Contact_HealthCloudGA_ConditionStatus__c",
-              "Contact_HealthCloudGA_Testing_Status__c",
-              "Contact_HealthCloudGA_Monitored_at_Home__c",
+              "Contact_ConditionStatus",
+              "Contact_Testing_Status",
+              "Contact_Monitored_at_Home",
               "ContactsTraced",
               "Household_Members",
               "Contact_Phone",
               "Contact_Email",
               "Contact_MailingCity",
               "Contact_MailingState",
-              "Contact_HealthCloudGA_Gender__c",
-              "Age_Text",
+              "Contact_Gender",
+              "Contact_Age_Text",
               "Id"
             ],
             "filters": [["IsPersonAccount_Computed", ["True"], "in"]],
@@ -5515,7 +5515,7 @@
         "groups": [],
         "label": "Patients_Detail_Table",
         "numbers": [],
-        "query": "q = load \"${App.Datasets.ERM_Account_tp.FullyQualifiedName}\";\nresult = group q by ('Name', 'CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day', 'Contact_HealthCloudGA_ConditionStatus__c', 'Contact_HealthCloudGA_Testing_Status__c', 'Contact_HealthCloudGA_Monitored_at_Home__c', 'Contact_Phone', 'Contact_Email', 'Contact_MailingState', 'Contact_MailingCity', 'Contact_HealthCloudGA_Gender__c', 'Age_Text');\nresult = foreach result generate q.'Name' as 'Name', q.'CreatedDate_Year' + \"~~~\" + q.'CreatedDate_Month' + \"~~~\" + q.'CreatedDate_Day' as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day', q.'Contact_HealthCloudGA_ConditionStatus__c' as 'Contact_HealthCloudGA_ConditionStatus__c', q.'Contact_HealthCloudGA_Testing_Status__c' as 'Contact_HealthCloudGA_Testing_Status__c', 'Contact_HealthCloudGA_Monitored_at_Home__c' as 'Contact_HealthCloudGA_Monitored_at_Home__c', sum('ContactsTraced') as 'ContactsTraced', sum('Household_Members') as 'Household_Members', 'Contact_Phone' as 'Contact_Phone', 'Contact_Email' as 'Contact_Email', 'Contact_MailingState' as 'Contact_MailingState', 'Contact_MailingCity' as 'Contact_MailingCity', 'Contact_HealthCloudGA_Gender__c' as 'Contact_HealthCloudGA_Gender__c', 'Age_Text' as 'Age';\nresult = order result by 'Name' asc;\nresult = limit result 2000;",
+        "query": "q = load \"${App.Datasets.ERM_Account_tp.FullyQualifiedName}\";\nresult = group q by ('Name', 'CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day', 'Contact_ConditionStatus', 'Contact_Testing_Status', 'Contact_Monitored_at_Home', 'Contact_Phone', 'Contact_Email', 'Contact_MailingState', 'Contact_MailingCity', 'Contact_Gender', 'Contact_Age_Text');\nresult = foreach result generate q.'Name' as 'Name', q.'CreatedDate_Year' + \"~~~\" + q.'CreatedDate_Month' + \"~~~\" + q.'CreatedDate_Day' as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day', q.'Contact_ConditionStatus' as 'Contact_ConditionStatus', q.'Contact_Testing_Status' as 'Contact_Testing_Status', 'Contact_Monitored_at_Home' as 'Contact_Monitored_at_Home', sum('ContactsTraced') as 'ContactsTraced', sum('Household_Members') as 'Household_Members', 'Contact_Phone' as 'Contact_Phone', 'Contact_Email' as 'Contact_Email', 'Contact_MailingState' as 'Contact_MailingState', 'Contact_MailingCity' as 'Contact_MailingCity', 'Contact_Gender' as 'Contact_Gender', 'Contact_Age_Text' as 'Age';\nresult = order result by 'Name' asc;\nresult = limit result 2000;",
         "receiveFacetSource": {
           "mode": "all",
           "steps": []
@@ -6218,12 +6218,12 @@
           "query": {
             "values": [
               "IA_BLA_Name",
-              "IA_BLA_Account_Name",
+              "Account_Name",
               "AppliedDate_Custom",
               "Status",
               "CaseNumber",
-              "IA_BLA_Account_Contact_Phone",
-              "IA_BLA_Account_Contact_Email",
+              "Account_Contact_Phone",
+              "Account_Contact_Email",
               "Address_City",
               "Address_State",
               "AccountId"
@@ -7750,17 +7750,17 @@
           "columns": [
             "Name",
             "CreatedDate_Custom",
-            "Contact_HealthCloudGA_ConditionStatus__c",
-            "Contact_HealthCloudGA_Testing_Status__c",
-            "Contact_HealthCloudGA_Monitored_at_Home__c",
+            "Contact_ConditionStatus",
+            "Contact_Testing_Status",
+            "Contact_Monitored_at_Home",
             "ContactsTraced",
             "Household_Members",
             "Contact_Phone",
             "Contact_Email",
             "Contact_MailingCity",
             "Contact_MailingState",
-            "Contact_HealthCloudGA_Gender__c",
-            "Age_Text"
+            "Contact_Gender",
+            "Contact_Age_Text"
           ],
           "customBulkActions": [],
           "evenRowColor": "#f2f6fa",
@@ -7969,12 +7969,12 @@
           "columnProperties": {},
           "columns": [
             "IA_BLA_Name",
-            "IA_BLA_Account_Name",
+            "Account_Name",
             "AppliedDate_Custom",
             "Status",
             "CaseNumber",
-            "IA_BLA_Account_Contact_Phone",
-            "IA_BLA_Account_Contact_Email",
+            "Account_Contact_Phone",
+            "Account_Contact_Email",
             "Address_City",
             "Address_State"
           ],
