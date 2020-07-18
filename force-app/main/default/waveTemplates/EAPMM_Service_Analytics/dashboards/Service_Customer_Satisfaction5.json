@@ -1,0 +1,4044 @@
+{
+  "name": "Service_Customer_Satisfaction5_tp",
+  "label": "Service Customer Satisfaction",
+  "folder": {
+    "id": "${App.Folder.Id}"
+  },
+  "dateVersion": 1,
+  "mobileDisabled": false,
+  "xmd": {
+    "measures": [
+      {
+        "conditionalFormatting": {},
+        "field": "kpi_response_rate.C",
+        "format": {
+          "customFormat": "[\"#,###.##%\",100]"
+        }
+      }
+    ],
+    "derivedDimensions": [],
+    "organizations": [],
+    "showDetailsDefaultFields": [],
+    "dates": [],
+    "derivedMeasures": [],
+    "dimensions": []
+  },
+  "state": {
+    "dataSourceLinks": [],
+    "filters": [
+      {
+        "dataset": {
+          "name": "${App.Datasets.ServiceCase_tp.Name}"
+        },
+        "dependent": false,
+        "fields": ["Role_Name"],
+        "label": "Role Name",
+        "locked": false,
+        "operator": "in"
+      },
+      {
+        "dataset": {
+          "name": "${App.Datasets.ServiceCase_tp.Name}"
+        },
+        "dependent": false,
+        "fields": ["Type"],
+        "label": "Type",
+        "locked": false,
+        "operator": "in"
+      },
+      {
+        "dataset": {
+          "name": "${App.Datasets.ServiceCase_tp.Name}"
+        },
+        "dependent": false,
+        "fields": ["RecordType_Name"],
+        "label": "Record Type",
+        "locked": false,
+        "operator": "in"
+      },
+      {
+        "dataset": {
+          "name": "${App.Datasets.ServiceCase_tp.Name}"
+        },
+        "dependent": false,
+        "fields": ["Account_Name"],
+        "label": "Account Name",
+        "locked": false,
+        "operator": "in"
+      },
+      {
+        "dataset": {
+          "name": "${App.Datasets.ServiceCase_tp.Name}"
+        },
+        "dependent": false,
+        "fields": ["Product_Family_KB__c"],
+        "label": "Product",
+        "locked": false,
+        "operator": "in"
+      },
+      {
+        "dataset": {
+          "name": "${App.Datasets.ServiceCase_tp.Name}"
+        },
+        "dependent": false,
+        "fields": ["Created Date"],
+        "label": "Date Range",
+        "locked": false,
+        "operator": ">=<=",
+        "value": "[[[\"day\",-180],[\"day\",0]]]"
+      }
+    ],
+    "gridLayouts": [
+      {
+        "maxWidth": 1360,
+        "name": "Default",
+        "numColumns": 48,
+        "pages": [
+          {
+            "label": "Untitled",
+            "name": "Default",
+            "navigationHidden": false,
+            "widgets": [
+              {
+                "colspan": 20,
+                "column": 1,
+                "name": "text_Customer_Satisfaction",
+                "row": 3,
+                "rowspan": 8,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#C5D3E0",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 3,
+                "column": 36,
+                "name": "link_Home",
+                "row": 8,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#C5D3E0",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 4,
+                "column": 40,
+                "name": "link_Account_Profile",
+                "row": 8,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "rgb(89, 65, 149)",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 2
+                }
+              },
+              {
+                "colspan": 2,
+                "column": 45,
+                "name": "link_Constants_CaseCustomerSatLabel",
+                "row": 8,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "rgb(89, 65, 149)",
+                  "borderEdges": ["bottom"],
+                  "borderRadius": 0,
+                  "borderWidth": 2
+                }
+              },
+              {
+                "colspan": 48,
+                "column": 0,
+                "name": "container_1",
+                "row": 3,
+                "rowspan": 8,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "rgb(146, 113, 232)",
+                  "borderEdges": ["bottom"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 48,
+                "column": 0,
+                "name": "container_2",
+                "row": 11,
+                "rowspan": 8,
+                "widgetStyle": {
+                  "backgroundColor": "rgb(230, 236, 242)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["top"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 5,
+                "column": 41,
+                "name": "listselector_Time_Selection",
+                "row": 12,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "#E6ECF2",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 21,
+                "column": 1,
+                "name": "text_CSAT_Breakdown",
+                "row": 20,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#FFFFFF",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 8
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 27,
+                "name": "pillbox_static_Order",
+                "row": 21,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#FFFFFF",
+                  "borderEdges": [],
+                  "borderRadius": 4,
+                  "borderWidth": 8
+                }
+              },
+              {
+                "colspan": 9,
+                "column": 2,
+                "name": "chart_case_account_by_csat",
+                "row": 30,
+                "rowspan": 12,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 9,
+                "column": 13,
+                "name": "chart_case_origin_by_csat",
+                "row": 30,
+                "rowspan": 12,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 9,
+                "column": 24,
+                "name": "chart_case_priority_by_csat",
+                "row": 30,
+                "rowspan": 12,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 9,
+                "column": 2,
+                "name": "chart_case_owner_by_csat",
+                "row": 50,
+                "rowspan": 12,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 9,
+                "column": 13,
+                "name": "chart_case_product_by_csat",
+                "row": 50,
+                "rowspan": 12,
+                "widgetStyle": {
+                  "borderColor": "#FFFFFF",
+                  "borderEdges": ["bottom"],
+                  "borderWidth": 8
+                }
+              },
+              {
+                "colspan": 9,
+                "column": 24,
+                "name": "chart_case_reason_by_csat",
+                "row": 50,
+                "rowspan": 12,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 34,
+                "column": 0,
+                "name": "container_4",
+                "row": 19,
+                "rowspan": 45,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 11,
+                "column": 35,
+                "name": "text_CSAT_Scorecard",
+                "row": 20,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "rgb(9, 27, 61)",
+                  "borderColor": "rgb(9, 27, 61)",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 5,
+                "column": 35,
+                "name": "number_kpi_avg_CSAT",
+                "row": 26,
+                "rowspan": 6,
+                "widgetStyle": {
+                  "backgroundColor": "#091A3E",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 7,
+                "column": 40,
+                "name": "number_CSAT_PrevPeriod",
+                "row": 28,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "{{cell(CSAT_PrevPeriod.result, 0, \"color\").asString()}}",
+                  "borderColor": "{{cell(CSAT_PrevPeriod.result, 0, \"color\").asString()}}",
+                  "borderEdges": [],
+                  "borderRadius": 4,
+                  "borderWidth": 4
+                }
+              },
+              {
+                "colspan": 13,
+                "column": 34,
+                "name": "chart_csat_over_time",
+                "row": 33,
+                "rowspan": 12,
+                "widgetStyle": {
+                  "backgroundColor": "#091A3E",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 12,
+                "column": 35,
+                "name": "number_kpi_response_rate",
+                "row": 50,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "#091A3E",
+                  "borderColor": "rgba(51, 87, 121, 0.5)",
+                  "borderEdges": ["bottom"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 12,
+                "column": 35,
+                "name": "number_kpi_bottom_quartile",
+                "row": 54,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "#091A3E",
+                  "borderColor": "rgba(51, 87, 121, 0.5)",
+                  "borderEdges": ["bottom"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 12,
+                "column": 35,
+                "name": "number_kpi_bottom_quartile_per",
+                "row": 58,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "#091A3E",
+                  "borderColor": "rgba(51, 87, 121, 0.5)",
+                  "borderEdges": ["bottom"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 12,
+                "column": 1,
+                "name": "text_Case_Segmentation",
+                "row": 130,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#FFFFFF",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 8
+                }
+              },
+              {
+                "colspan": 8,
+                "column": 39,
+                "name": "listselector_Grouping_Bubble_Select",
+                "row": 129,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 46,
+                "column": 1,
+                "name": "chart_avg_csat_duration_by_grouping",
+                "row": 135,
+                "rowspan": 25,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 48,
+                "column": 0,
+                "name": "container_6",
+                "row": 128,
+                "rowspan": 34,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["top"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 15,
+                "column": 1,
+                "name": "text_Closed_Case_Details",
+                "row": 163,
+                "rowspan": 4,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#FFFFFF",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 8
+                }
+              },
+              {
+                "colspan": 48,
+                "column": 0,
+                "name": "container_7",
+                "row": 162,
+                "rowspan": 33,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["top"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 46,
+                "column": 1,
+                "name": "table_lens_table",
+                "row": 168,
+                "rowspan": 25,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 14,
+                "column": 34,
+                "name": "container_12",
+                "row": 19,
+                "rowspan": 45,
+                "widgetStyle": {
+                  "backgroundColor": "#091A3E",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 39,
+                "column": 0,
+                "name": "globalfilterpanel",
+                "row": 11,
+                "rowspan": 8,
+                "widgetStyle": {
+                  "backgroundColor": "rgb(230, 236, 242)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 8,
+                "column": 25,
+                "name": "text_1",
+                "row": 27,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 8,
+                "column": 14,
+                "name": "text_2",
+                "row": 27,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 8,
+                "column": 3,
+                "name": "text_3",
+                "row": 27,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 8,
+                "column": 3,
+                "name": "text_4",
+                "row": 47,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 8,
+                "column": 14,
+                "name": "text_5",
+                "row": 47,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 8,
+                "column": 25,
+                "name": "text_6",
+                "row": 47,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 48,
+                "column": 0,
+                "name": "container_20",
+                "row": 64,
+                "rowspan": 64,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 8,
+                "column": 1,
+                "name": "text_13",
+                "row": 64,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 42,
+                "column": 3,
+                "name": "chart_3",
+                "row": 67,
+                "rowspan": 24,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 42,
+                "column": 3,
+                "name": "chart_4",
+                "row": 97,
+                "rowspan": 28,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight": "fine",
+        "selectors": [],
+        "style": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "backgroundColor": "#C5D3E0",
+          "cellSpacingX": 0,
+          "cellSpacingY": 0,
+          "documentId": "",
+          "fit": "original"
+        },
+        "version": 1.0
+      },
+      {
+        "name": "iPhone",
+        "numColumns": 6,
+        "pages": [
+          {
+            "label": "Untitled",
+            "name": "iPhone",
+            "navigationHidden": false,
+            "widgets": [
+              {
+                "colspan": 6,
+                "column": 0,
+                "name": "text_iphone_CustSat_Title",
+                "row": 0,
+                "rowspan": 5,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 0,
+                "name": "container_1",
+                "row": 0,
+                "rowspan": 6,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "rgb(146, 113, 232)",
+                  "borderEdges": ["bottom"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 3,
+                "column": 3,
+                "name": "listselector_Time_Selection",
+                "row": 6,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "#E6ECF2",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 0,
+                "name": "text_CSAT_Breakdown",
+                "row": 91,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#FFFFFF",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 8
+                }
+              },
+              {
+                "colspan": 4,
+                "column": 1,
+                "name": "pillbox_static_Order",
+                "row": 94,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#C5D3E0",
+                  "borderEdges": [],
+                  "borderRadius": 4,
+                  "borderWidth": 8
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 0,
+                "name": "chart_case_account_by_csat",
+                "row": 103,
+                "rowspan": 12,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 0,
+                "name": "chart_case_origin_by_csat",
+                "row": 121,
+                "rowspan": 9,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 0,
+                "name": "chart_case_priority_by_csat",
+                "row": 136,
+                "rowspan": 9,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 0,
+                "name": "chart_case_owner_by_csat",
+                "row": 151,
+                "rowspan": 12,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 0,
+                "name": "chart_case_product_by_csat",
+                "row": 169,
+                "rowspan": 12,
+                "widgetStyle": {
+                  "borderColor": "#FFFFFF",
+                  "borderEdges": ["bottom"],
+                  "borderWidth": 8
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 0,
+                "name": "chart_case_reason_by_csat",
+                "row": 187,
+                "rowspan": 12,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 0,
+                "name": "container_4",
+                "row": 91,
+                "rowspan": 108,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["all"],
+                  "borderRadius": 8,
+                  "borderWidth": 8
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 0,
+                "name": "text_CSAT_Scorecard",
+                "row": 23,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "rgb(9, 27, 61)",
+                  "borderColor": "rgb(9, 27, 61)",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 3,
+                "column": 0,
+                "name": "number_kpi_avg_CSAT",
+                "row": 26,
+                "rowspan": 6,
+                "widgetStyle": {
+                  "backgroundColor": "#091A3E",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 2,
+                "column": 3,
+                "name": "number_CSAT_PrevPeriod",
+                "row": 27,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "{{cell(CSAT_PrevPeriod.result, 0, \"color\").asString()}}",
+                  "borderColor": "{{cell(CSAT_PrevPeriod.result, 0, \"color\").asString()}}",
+                  "borderEdges": ["all"],
+                  "borderRadius": 4,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 0,
+                "name": "chart_csat_over_time",
+                "row": 35,
+                "rowspan": 12,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 3,
+                "column": 0,
+                "name": "number_kpi_response_rate",
+                "row": 47,
+                "rowspan": 6,
+                "widgetStyle": {
+                  "backgroundColor": "#091A3E",
+                  "borderColor": "rgba(51, 87, 121, 0.5)",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 3,
+                "column": 3,
+                "name": "number_kpi_bottom_quartile",
+                "row": 47,
+                "rowspan": 6,
+                "widgetStyle": {
+                  "backgroundColor": "#091A3E",
+                  "borderColor": "rgba(51, 87, 121, 0.5)",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 0,
+                "name": "number_kpi_bottom_quartile_per",
+                "row": 53,
+                "rowspan": 6,
+                "widgetStyle": {
+                  "backgroundColor": "#091A3E",
+                  "borderColor": "rgba(51, 87, 121, 0.5)",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 0,
+                "name": "container_12",
+                "row": 23,
+                "rowspan": 12,
+                "widgetStyle": {
+                  "backgroundColor": "#091A3E",
+                  "borderColor": "#091A3E",
+                  "borderEdges": ["left"],
+                  "borderRadius": 0,
+                  "borderWidth": 4
+                }
+              },
+              {
+                "colspan": 4,
+                "column": 1,
+                "name": "listselector_Grouping_Bubble_Select",
+                "row": 62,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 0,
+                "name": "text_Case_Segmentation",
+                "row": 59,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#FFFFFF",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 8
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 0,
+                "name": "chart_avg_csat_duration_by_grouping",
+                "row": 65,
+                "rowspan": 24,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 0,
+                "name": "container_6",
+                "row": 59,
+                "rowspan": 32,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["all"],
+                  "borderRadius": 8,
+                  "borderWidth": 8
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 0,
+                "name": "text_Closed_Case_Details",
+                "row": 199,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#FFFFFF",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 8
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 0,
+                "name": "table_lens_table",
+                "row": 202,
+                "rowspan": 24,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 0,
+                "name": "container_7",
+                "row": 199,
+                "rowspan": 27,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["all"],
+                  "borderRadius": 8,
+                  "borderWidth": 8
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 0,
+                "name": "container_13",
+                "row": 47,
+                "rowspan": 12,
+                "widgetStyle": {
+                  "backgroundColor": "#091A3E",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 0,
+                "name": "container_14",
+                "row": 35,
+                "rowspan": 12,
+                "widgetStyle": {
+                  "backgroundColor": "#FFFFFF",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["all"],
+                  "borderRadius": 8,
+                  "borderWidth": 8
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 0,
+                "name": "globalfitlerpanel_mobile",
+                "row": 6,
+                "rowspan": 12,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 2,
+                "column": 2,
+                "name": "text_7",
+                "row": 118,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 2,
+                "column": 2,
+                "name": "text_8",
+                "row": 100,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 2,
+                "column": 2,
+                "name": "text_9",
+                "row": 133,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 2,
+                "column": 2,
+                "name": "text_10",
+                "row": 148,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 2,
+                "column": 2,
+                "name": "text_11",
+                "row": 166,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              },
+              {
+                "colspan": 2,
+                "column": 2,
+                "name": "text_12",
+                "row": 184,
+                "rowspan": 3,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight": "fine",
+        "selectors": ["maxWidth(599)"],
+        "style": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "backgroundColor": "#E6ECF2",
+          "cellSpacingX": 0,
+          "cellSpacingY": 0,
+          "fit": "original",
+          "gutterColor": "#C5D3E0"
+        },
+        "version": 1.0
+      }
+    ],
+    "layouts": [],
+    "steps": {
+      "case_product_by_csat": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.ServiceCase_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["avg", "CSAT"]],
+            "groups": ["Product_Family_KB__c"],
+            "filters": [
+              ["CSAT", [[-10]], ">="],
+              [
+                "CreatedDate",
+                "{{column(Time_Selection.selection, [\"Compact\"]).asObject()}}"
+              ],
+              ["IsClosed", ["true"], "in"]
+            ],
+            "order": [
+              [
+                -1,
+                {
+                  "ascending": "{{cell(static_Order.selection, 0, \"compact_value\").asObject()}}"
+                }
+              ]
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "visualizationType": "hbar"
+        }
+      },
+      "csat_over_time": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.ServiceCase_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["avg", "CSAT"]],
+            "groups": [
+              "{{cell(Time_Selection.selection,0,\"compactGroup\").asObject()}}"
+            ],
+            "filters": [
+              ["CSAT", [[-10]], ">="],
+              ["IsClosed", ["true"], "in"],
+              [
+                "CreatedDate",
+                "{{column(Time_Selection.selection, [\"Compact\"]).asObject()}}"
+              ]
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "visualizationType": "time"
+        }
+      },
+      "negleadingcauses_1_1": {
+        "broadcastFacet": true,
+        "groups": [],
+        "label": "negleadingcauses_1",
+        "numbers": [],
+        "query": "q = load \"${App.Datasets.Cases_Leading_Causes_tp.FullyQualifiedName}\";\nq = filter q by ('LeadingCause' != \"from the baseline\") && ('LeadingCause' != \"of other factors\");\nq = group q by 'LeadingCause';\nq = foreach q generate 'LeadingCause' as 'LeadingCause', avg('Variance') as 'avg_Variance';\nq = filter q by 'avg_Variance' < 0;\nq = order q by 'avg_Variance' asc;\nq = limit q 2000;",
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "strings": [],
+        "type": "saql",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "autoFitMode": "none",
+            "totalValue": "computeTotal",
+            "showValues": true,
+            "bins": {
+              "breakpoints": {
+                "high": 100,
+                "low": 0
+              },
+              "bands": {
+                "high": {
+                  "color": "#008000",
+                  "label": ""
+                },
+                "low": {
+                  "color": "#B22222",
+                  "label": ""
+                },
+                "medium": {
+                  "color": "#ffa500",
+                  "label": ""
+                }
+              }
+            },
+            "legend": {
+              "descOrder": false,
+              "showHeader": true,
+              "show": false,
+              "customSize": "auto",
+              "position": "right-top",
+              "inside": false
+            },
+            "axisMode": "multi",
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "visualizationType": "hbar",
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "",
+              "align": "center",
+              "subtitleLabel": ""
+            },
+            "binValues": false,
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "x",
+              "chartsPerLine": 4
+            },
+            "totalLabel": "",
+            "columnMap": {
+              "trellis": [],
+              "dimensionAxis": ["LeadingCause"],
+              "plots": ["avg_Variance"]
+            },
+            "showActionMenu": true,
+            "measureAxis2": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "measureAxis1": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "Avg CSAT Impact",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "theme": "wave",
+            "dimensionAxis": {
+              "showTitle": true,
+              "customSize": 30,
+              "showAxis": true,
+              "title": "Leading Cause",
+              "icons": {
+                "useIcons": false,
+                "iconProps": {
+                  "fit": "cover",
+                  "column": "",
+                  "type": "round"
+                }
+              }
+            },
+            "applyConditionalFormatting": false
+          },
+          "type": "chart"
+        }
+      },
+      "avg_csat_duration_by_grouping": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.ServiceCase_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [
+              "{{cell(Static_Duration.selection,0, \"value\").asObject()}}",
+              ["avg", "CSAT"],
+              ["count", "*"]
+            ],
+            "groups": [
+              "{{cell(Grouping_Bubble_Select.selection,0,\"value\").asObject()}}"
+            ],
+            "filters": [
+              ["CSAT", [[-10]], ">="],
+              ["IsClosed", ["true"], "in"],
+              [
+                "CreatedDate",
+                "{{column(Time_Selection.selection, [\"Compact\"]).asObject()}}"
+              ]
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "visualizationType": "scatter"
+        }
+      },
+      "kpi_avg_CSAT": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.ServiceCase_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["avg", "CSAT"]],
+            "filters": [
+              ["CSAT", [[-10]], ">="],
+              ["IsClosed", ["true"], "in"],
+              [
+                "CreatedDate",
+                "{{column(Time_Selection.selection, [\"Compact\"]).asObject()}}"
+              ]
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "visualizationType": "hbar"
+        }
+      },
+      "posleadingcauses_1_1": {
+        "broadcastFacet": true,
+        "groups": [],
+        "label": "posleadingcauses_1",
+        "numbers": [],
+        "query": "q = load \"${App.Datasets.Cases_Leading_Causes_tp.FullyQualifiedName}\";\nq = filter q by ('LeadingCause' != \"from the baseline\") && ('LeadingCause' != \"of other factors\");\nq = group q by 'LeadingCause';\nq = foreach q generate 'LeadingCause' as 'LeadingCause', avg('Variance') as 'avg_Variance';\nq = filter q by 'avg_Variance' > 0;\nq = order q by 'avg_Variance' desc;\nq = limit q 2000;",
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "strings": [],
+        "type": "saql",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "autoFitMode": "none",
+            "totalValue": "computeTotal",
+            "showValues": true,
+            "bins": {
+              "breakpoints": {
+                "high": 100,
+                "low": 0
+              },
+              "bands": {
+                "high": {
+                  "color": "#008000",
+                  "label": ""
+                },
+                "low": {
+                  "color": "#B22222",
+                  "label": ""
+                },
+                "medium": {
+                  "color": "#ffa500",
+                  "label": ""
+                }
+              }
+            },
+            "legend": {
+              "descOrder": false,
+              "showHeader": true,
+              "show": false,
+              "customSize": "auto",
+              "position": "right-top",
+              "inside": false
+            },
+            "axisMode": "multi",
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "visualizationType": "hbar",
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "",
+              "align": "center",
+              "subtitleLabel": ""
+            },
+            "binValues": false,
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "x",
+              "chartsPerLine": 4
+            },
+            "totalLabel": "",
+            "columnMap": {
+              "trellis": [],
+              "dimensionAxis": ["LeadingCause"],
+              "plots": ["avg_Variance"]
+            },
+            "showActionMenu": true,
+            "measureAxis2": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "measureAxis1": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "Avg CSAT Impact",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "theme": "wave",
+            "dimensionAxis": {
+              "showTitle": true,
+              "customSize": 30,
+              "showAxis": true,
+              "title": "Leading Cause",
+              "icons": {
+                "useIcons": false,
+                "iconProps": {
+                  "fit": "cover",
+                  "column": "",
+                  "type": "round"
+                }
+              }
+            },
+            "applyConditionalFormatting": false
+          },
+          "type": "chart"
+        }
+      },
+      "kpi_response_rate": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.ServiceCase_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "label": "",
+        "query": {
+          "query": {
+            "measures": [["count", "*", "C"]],
+            "columns": [
+              {
+                "query": {
+                  "measures": [["count", "*"]],
+                  "filters": [["IsClosed", ["true"], "in"]]
+                },
+                "header": "Closed Cases"
+              },
+              {
+                "query": {
+                  "measures": [["count", "*"]],
+                  "filters": [
+                    ["IsClosed", ["true"], "in"],
+                    ["CSAT", [[-10]], ">="]
+                  ]
+                }
+              },
+              {
+                "query": {
+                  "measures": [["count", "*"]],
+                  "formula": "B/A",
+                  "filters": [["IsClosed", ["true"], "in"]]
+                }
+              }
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "visualizationType": "comparisontable"
+        }
+      },
+      "static_Order": {
+        "broadcastFacet": false,
+        "columns": {},
+        "isGlobal": false,
+        "selectMode": "singlerequired",
+        "start": {
+          "display": ["Desc"]
+        },
+        "type": "staticflex",
+        "useGlobal": false,
+        "values": [
+          {
+            "display": "Asc",
+            "value": "asc",
+            "compact_value": true
+          },
+          {
+            "display": "Desc",
+            "value": "desc",
+            "compact_value": false
+          }
+        ],
+        "visualizationParameters": {}
+      },
+      "kpi_bottom_quartile": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.ServiceCase_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["per", "CSAT"]],
+            "pigql": "q = load \"${App.Datasets.ServiceCase_tp.FullyQualifiedName}\"; q = filter q by 'CSAT' >= -10; q = filter q by 'IsClosed' == \"false\"; q = group q by all; q = foreach q generate percentile_disc(0.25) within group (order by 'CSAT' asc) as 'per_CSAT';",
+            "autoFilter": true
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "visualizationType": "hbar"
+        }
+      },
+      "case_owner_by_csat": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.ServiceCase_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["avg", "CSAT"]],
+            "groups": ["Owner_Name"],
+            "filters": [
+              ["CSAT", [[-10]], ">="],
+              ["IsClosed", ["true"], "in"],
+              [
+                "CreatedDate",
+                "{{column(Time_Selection.selection, [\"Compact\"]).asObject()}}"
+              ]
+            ],
+            "order": [
+              [
+                -1,
+                {
+                  "ascending": "{{cell(static_Order.selection, 0, \"compact_value\").asObject()}}"
+                }
+              ]
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "visualizationType": "hbar"
+        }
+      },
+      "case_account_by_csat": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.ServiceCase_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["avg", "CSAT"]],
+            "groups": ["Account_Name"],
+            "filters": [
+              ["CSAT", [[-10]], ">="],
+              ["IsClosed", ["true"], "in"],
+              [
+                "CreatedDate",
+                "{{column(Time_Selection.selection, [\"Compact\"]).asObject()}}"
+              ]
+            ],
+            "order": [
+              [
+                -1,
+                {
+                  "ascending": "{{cell(static_Order.selection, 0, \"compact_value\").asObject()}}"
+                }
+              ]
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "visualizationType": "hbar"
+        }
+      },
+      "case_origin_by_csat": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.ServiceCase_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["avg", "CSAT"]],
+            "groups": ["Origin"],
+            "filters": [
+              ["CSAT", [[-10]], ">="],
+              ["IsClosed", ["true"], "in"],
+              [
+                "CreatedDate",
+                "{{column(Time_Selection.selection, [\"Compact\"]).asObject()}}"
+              ]
+            ],
+            "order": [
+              [
+                -1,
+                {
+                  "ascending": "{{cell(static_Order.selection, 0, \"compact_value\").asObject()}}"
+                }
+              ]
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "visualizationType": "hbar"
+        }
+      },
+      "CSAT_PrevYear": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.ServiceCase_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["perc", "Percent"]],
+            "pigql": "q = load \"${App.Datasets.ServiceCase_tp.FullyQualifiedName}\"; q = filter q by 'CSAT' >= -10; ENDTOTAL = filter q by 'IsClosed' == \"false\"; updcreatedTOTAL = filter q by {{cell(Time_Selection.selection, 0, \"LastYearCompare\").asDateRange(\"date('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day')\")}}; updclosedTOTAL = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('ClosedDate_Year','ClosedDate_Month','ClosedDate_Day')\")}};compare = group updcreatedTOTAL by all full, updclosedTOTAL by all full, ENDTOTAL by all; compare = foreach compare generate 100*(avg(updclosedTOTAL.'CSAT')-avg(updcreatedTOTAL.'CSAT'))/avg(updcreatedTOTAL.'CSAT') as 'perc_Percent', (case when 100*(avg(updclosedTOTAL.'CSAT')-avg(updcreatedTOTAL.'CSAT'))/avg(updcreatedTOTAL.'CSAT') < 0 then \"#ff545f\" when 100*(avg(updclosedTOTAL.'CSAT')-avg(updcreatedTOTAL.'CSAT'))/avg(updcreatedTOTAL.'CSAT') > 0 then \"#ee9f77\" else \"#32b181\" end) as 'color';",
+            "autoFilter": true
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "visualizationType": "hbar"
+        }
+      },
+      "case_reason_by_csat": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.ServiceCase_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["avg", "CSAT"]],
+            "groups": ["Reason"],
+            "filters": [
+              ["CSAT", [[-10]], ">="],
+              [
+                "CreatedDate",
+                "{{column(Time_Selection.selection, [\"Compact\"]).asObject()}}"
+              ],
+              ["IsClosed", ["true"], "in"]
+            ],
+            "order": [
+              [
+                -1,
+                {
+                  "ascending": "{{cell(static_Order.selection, 0, \"compact_value\").asObject()}}"
+                }
+              ]
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "visualizationType": "hbar"
+        }
+      },
+      "Time_Selection": {
+        "broadcastFacet": false,
+        "columns": {},
+        "isGlobal": false,
+        "selectMode": "singlerequired",
+        "start": {
+          "display": ["Last 180 Days"]
+        },
+        "type": "staticflex",
+        "useGlobal": false,
+        "values": [
+          {
+            "display": "YTD",
+            "text_display": "Vs Prior YTD",
+            "Backlog30DayClose": "[\"current day - 395 days\"..\"current day - 1 year\"]",
+            "BacklogCompare": ["current day - 1 year", "current day"],
+            "BacklogLabel": "Backlog Last Year",
+            "ClosedField": "'ClosedDate__c_Month'",
+            "CoGroup": "('CreatedDate_Month')",
+            "Compact": [
+              ["year", 0],
+              ["year", 0]
+            ],
+            "CreatedField": "'CreatedDate_Month'",
+            "CreatedProjection": "created['CreatedDate_Month']",
+            "Current": ["current year", "current day"],
+            "FullGroup": "CreatedDate_Year~~~CreatedDate_Month",
+            "GenerateClosedDate": "'ClosedDate__c_Year'+\"~~~\"+'ClosedDate__c_Month' as 'CreatedDate_Year~~~CreatedDate_Month'",
+            "GenerateCoGroupDate": "created['CreatedDate_Year']+\"~~~\"+created['CreatedDate_Month'] as 'CreatedDate_Year~~~CreatedDate_Month'",
+            "GenerateCreatedDate": "'CreatedDate_Year'+\"~~~\"+'CreatedDate_Month' as 'CreatedDate_Year~~~CreatedDate_Month'",
+            "GroupbyClosedDate": "('ClosedDate__c_Year','ClosedDate__c_Month')",
+            "GroupbyCreatedDate": "('CreatedDate_Year','CreatedDate_Month')",
+            "Grouping": "CreatedDate_Year~~~CreatedDate_Month",
+            "LastPeriodCompare": [
+              "current year - 1 year",
+              "current day - 1 year"
+            ],
+            "LastYearCompare": [
+              "current year - 1 year",
+              "current day - 1 year"
+            ],
+            "Measure": [
+              "Backlog",
+              "Count",
+              null,
+              {
+                "display": "Backlog Count at Start of Month"
+              }
+            ],
+            "compactGroup": ["CreatedDate_Year", "CreatedDate_Month"],
+            "filter": "year",
+            "queryCogroupNew": "first(ThisYear['CreatedDate_Year'])+\"~~~\"+ThisYear['CreatedDate_Month'] as 'CreatedDate_Year~~~CreatedDate_Month'",
+            "SAQL": "coalesce((avg(ThisYear['Time_Open__c'])-avg(LastYear['Time_Open__c']))/avg(LastYear['Time_Open__c']),0)*100 as sum_Percent",
+            "trendProjection": "toString(now(), \"yyyy\")+\"~~~\"+toString(now(), \"99\")"
+          },
+          {
+            "display": "QTD",
+            "text_display": "Vs Prior QTD",
+            "Backlog30DayClose": "[\"current day - 120 days\"..\"current day - 1 quarter\"]",
+            "BacklogCompare": ["current day - 1 quarter", "current day"],
+            "BacklogLabel": "Backlog Last Quarter",
+            "ClosedField": "'ClosedDate__c_Week'",
+            "CoGroup": "('CreatedDate_Week')",
+            "Compact": [
+              ["quarter", 0],
+              ["quarter", 0]
+            ],
+            "CreatedField": "'CreatedDate_Week'",
+            "CreatedProjection": "created['CreatedDate_Week']",
+            "Current": ["current quarter", "current day"],
+            "FullGroup": "CreatedDate_Year~~~CreatedDate_Week",
+            "GenerateClosedDate": "'ClosedDate__c_Year'+\"~~~\"+'ClosedDate__c_Week' as 'CreatedDate_Year~~~CreatedDate_Week'",
+            "GenerateCoGroupDate": "created['CreatedDate_Year']+\"~~~\"+created['CreatedDate_Week'] as 'CreatedDate_Year~~~CreatedDate_Week'",
+            "GenerateCreatedDate": "'CreatedDate_Year'+\"~~~\"+'CreatedDate_Week' as 'CreatedDate_Year~~~CreatedDate_Week'",
+            "GroupbyClosedDate": "('ClosedDate__c_Year','ClosedDate__c_Week')",
+            "GroupbyCreatedDate": "('CreatedDate_Year','CreatedDate_Week')",
+            "Grouping": "CreatedDate_Year~~~CreatedDate_Week",
+            "LastPeriodCompare": [
+              "current quarter - 1 quarter",
+              "current day - 1 quarter"
+            ],
+            "LastYearCompare": [
+              "current quarter - 1 year",
+              "current day - 1 year"
+            ],
+            "Measure": [
+              "Backlog",
+              "Count",
+              null,
+              {
+                "display": "Backlog Count at Start of Week"
+              }
+            ],
+            "compactGroup": ["CreatedDate_Year", "CreatedDate_Week"],
+            "filter": "quarter",
+            "queryCogroupNew": "first(ThisYear['CreatedDate_Year'])+\"~~~\"+ThisYear['CreatedDate_Week'] as 'CreatedDate_Year~~~CreatedDate_Week'",
+            "SAQL": "coalesce((avg(ThisYear['Time_Open__c'])-avg(LastYear['Time_Open__c']))/avg(LastYear['Time_Open__c']),0)*100 as sum_Percent",
+            "trendProjection": "toString(now(), \"yyyy\")+\"~~~\"+toString(now(), \"99\")"
+          },
+          {
+            "display": "MTD",
+            "text_display": "Vs Prior MTD",
+            "Backlog30DayClose": "[\"current day - 60 days\"..\"current day - 1 month\"]",
+            "BacklogCompare": ["current day - 1 month", "current day"],
+            "BacklogLabel": "Backlog Last Month",
+            "ClosedField": "'ClosedDate__c_Month','ClosedDate__c_Day'",
+            "CoGroup": "('CreatedDate_Month','CreatedDate_Day')",
+            "Compact": [
+              ["month", 0],
+              ["month", 0]
+            ],
+            "CreatedField": "'CreatedDate_Month','CreatedDate_Day'",
+            "CreatedProjection": "created['CreatedDate_Month'] +\"~~~\" + created['CreatedDate_Day']",
+            "Current": ["current month", "current month"],
+            "FullGroup": "CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day",
+            "GenerateClosedDate": "'ClosedDate__c_Year'+\"~~~\"+'ClosedDate__c_Month'+\"~~~\"+'ClosedDate__c_Day' as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day'",
+            "GenerateCoGroupDate": "created['CreatedDate_Year']+\"~~~\"+created['CreatedDate_Month']+\"~~~\"+created['CreatedDate_Day'] as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day'",
+            "GenerateCreatedDate": "'CreatedDate_Year'+\"~~~\"+'CreatedDate_Month'+\"~~~\"+'CreatedDate_Day' as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day'",
+            "GroupbyClosedDate": "('ClosedDate__c_Year','ClosedDate__c_Month','ClosedDate__c_Day')",
+            "GroupbyCreatedDate": "('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day')",
+            "Grouping": "CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day",
+            "LastPeriodCompare": [
+              "current month - 1 month",
+              "current day - 1 month"
+            ],
+            "LastYearCompare": [
+              "current month - 1 year",
+              "current day - 1 year"
+            ],
+            "Measure": [
+              "Backlog",
+              "Count",
+              null,
+              {
+                "display": "Backlog Count at Start of Day"
+              }
+            ],
+            "compactGroup": [
+              "CreatedDate_Year",
+              "CreatedDate_Month",
+              "CreatedDate_Day"
+            ],
+            "filter": "month",
+            "queryCogroupNew": "first(ThisYear['CreatedDate_Year'])+\"~~~\"+ThisYear['CreatedDate_Month']+\"~~~\"+ThisYear['CreatedDate_Day'] as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day'",
+            "trendProjection": "toString(now(), \"yyyy~~~MM\")+\"~~~\"+toString(now(), \"99\")"
+          },
+          {
+            "display": "Last 7 Days",
+            "text_display": "Vs Prior 7 Days",
+            "Backlog30DayClose": "[\"current day - 37 days\"..\"current day - 7 days\"]",
+            "BacklogCompare": ["current day - 1 week", "current day"],
+            "BacklogLabel": "Backlog Last 7 Days",
+            "ClosedField": "'ClosedDate__c_Month','ClosedDate__c_Day'",
+            "CoGroup": "('CreatedDate_Month','CreatedDate_Day')",
+            "Compact": [
+              ["day", -7],
+              ["day", 0]
+            ],
+            "CreatedField": "'CreatedDate_Month','CreatedDate_Day'",
+            "CreatedProjection": "created['CreatedDate_Month'] +\"~~~\" + created['CreatedDate_Day']",
+            "Current": ["7 days ago", "current day"],
+            "FullGroup": "CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day",
+            "GenerateClosedDate": "'ClosedDate__c_Year'+\"~~~\"+'ClosedDate__c_Month'+\"~~~\"+'ClosedDate__c_Day' as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day'",
+            "GenerateCoGroupDate": "created['CreatedDate_Year']+\"~~~\"+created['CreatedDate_Month']+\"~~~\"+created['CreatedDate_Day'] as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day'",
+            "GenerateCreatedDate": "'CreatedDate_Year'+\"~~~\"+'CreatedDate_Month'+\"~~~\"+'CreatedDate_Day' as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day'",
+            "GroupbyClosedDate": "('ClosedDate__c_Year','ClosedDate__c_Month','ClosedDate__c_Day')",
+            "GroupbyCreatedDate": "('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day')",
+            "Grouping": "CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day",
+            "LastPeriodCompare": [
+              "7 days ago - 1 week",
+              "current day - 1 week"
+            ],
+            "LastYearCompare": ["7 days ago - 1 year", "current day - 1 year"],
+            "Measure": [
+              "Backlog",
+              "Count",
+              null,
+              {
+                "display": "Backlog Count at Start of Day"
+              }
+            ],
+            "compactGroup": [
+              "CreatedDate_Year",
+              "CreatedDate_Month",
+              "CreatedDate_Day"
+            ],
+            "filter": "week",
+            "queryCogroupNew": "first(ThisYear['CreatedDate_Year'])+\"~~~\"+ThisYear['CreatedDate_Month']+\"~~~\"+ThisYear['CreatedDate_Day'] as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day'",
+            "trendProjection": "toString(now(), \"yyyy~~~MM\")+\"~~~\"+toString(now(), \"99\")"
+          },
+          {
+            "display": "Last 30 Days",
+            "text_display": "Vs Prior 30 Days",
+            "Backlog30DayClose": "[\"current day - 60 days\"..\"current day - 30 days\"]",
+            "BacklogCompare": ["current day - 30 days", "current day"],
+            "BacklogLabel": "Backlog Last 30 Days",
+            "ClosedField": "'ClosedDate__c_Week'",
+            "CoGroup": "('CreatedDate_Week')",
+            "Compact": [
+              ["day", -30],
+              ["day", 0]
+            ],
+            "CreatedField": "'CreatedDate_Week'",
+            "CreatedProjection": "created['CreatedDate_Week']",
+            "Current": ["30 days ago", "current day"],
+            "FullGroup": "CreatedDate_Year~~~CreatedDate_Week",
+            "GenerateClosedDate": "'ClosedDate__c_Year'+\"~~~\"+'ClosedDate__c_Week' as 'CreatedDate_Year~~~CreatedDate_Week'",
+            "GenerateCoGroupDate": "created['CreatedDate_Year']+\"~~~\"+created['CreatedDate_Week'] as 'CreatedDate_Year~~~CreatedDate_Week'",
+            "GenerateCreatedDate": "'CreatedDate_Year'+\"~~~\"+'CreatedDate_Week' as 'CreatedDate_Year~~~CreatedDate_Week'",
+            "GroupbyClosedDate": "('ClosedDate__c_Year','ClosedDate__c_Week')",
+            "GroupbyCreatedDate": "('CreatedDate_Year','CreatedDate_Week')",
+            "Grouping": "CreatedDate_Year~~~CreatedDate_Week",
+            "LastPeriodCompare": [
+              "30 days ago - 30 days",
+              "current day - 30 days"
+            ],
+            "LastYearCompare": ["30 days ago - 1 year", "current day - 1 year"],
+            "Measure": [
+              "Backlog",
+              "Count",
+              null,
+              {
+                "display": "Backlog Count at Start of Week"
+              }
+            ],
+            "compactGroup": ["CreatedDate_Year", "CreatedDate_Week"],
+            "filter": "month",
+            "queryCogroupNew": "first(ThisYear['CreatedDate_Year'])+\"~~~\"+ThisYear['CreatedDate_Week'] as 'CreatedDate_Year~~~CreatedDate_Week'",
+            "trendProjection": "toString(now(), \"yyyy~~~MM\")+\"~~~\"+toString(now(), \"99\")"
+          },
+          {
+            "display": "Last 180 Days",
+            "text_display": "Vs Prior 180 Days",
+            "Backlog30DayClose": "[\"current day - 240 days\"..\"current day - 180 days\"]",
+            "BacklogCompare": ["current day - 180 days", "current day"],
+            "BacklogLabel": "Backlog Last 180 Days",
+            "ClosedField": "'ClosedDate__c_Month'",
+            "CoGroup": "('CreatedDate_Month')",
+            "Compact": [
+              ["day", -180],
+              ["day", 0]
+            ],
+            "CreatedField": "'CreatedDate_Month'",
+            "CreatedProjection": "created['CreatedDate_Month']",
+            "Current": ["180 days ago", "current day"],
+            "FullGroup": "CreatedDate_Year~~~CreatedDate_Month",
+            "GenerateClosedDate": "'ClosedDate__c_Year'+\"~~~\"+'ClosedDate__c_Month' as 'CreatedDate_Year~~~CreatedDate_Month'",
+            "GenerateCoGroupDate": "created['CreatedDate_Year']+\"~~~\"+created['CreatedDate_Month'] as 'CreatedDate_Year~~~CreatedDate_Month'",
+            "GenerateCreatedDate": "'CreatedDate_Year'+\"~~~\"+'CreatedDate_Month' as 'CreatedDate_Year~~~CreatedDate_Month'",
+            "GroupbyClosedDate": "('ClosedDate__c_Year','ClosedDate__c_Month')",
+            "GroupbyCreatedDate": "('CreatedDate_Year','CreatedDate_Month')",
+            "Grouping": "CreatedDate_Year~~~CreatedDate_Month",
+            "LastPeriodCompare": [
+              "180 days ago - 180 days",
+              "current day - 180 days"
+            ],
+            "LastYearCompare": [
+              "180 days ago - 1 year",
+              "current day - 1 year"
+            ],
+            "Measure": [
+              "Backlog",
+              "Count",
+              null,
+              {
+                "display": "Backlog Count at Start of Month"
+              }
+            ],
+            "compactGroup": ["CreatedDate_Year", "CreatedDate_Month"],
+            "filter": "month",
+            "queryCogroupNew": "first(ThisYear['CreatedDate_Year'])+\"~~~\"+ThisYear['CreatedDate_Month'] as 'CreatedDate_Year~~~CreatedDate_Month'",
+            "trendProjection": "toString(now(), \"yyyy\")+\"~~~\"+toString(now(), \"99\")"
+          }
+        ]
+      },
+      "case_priority_by_csat": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.ServiceCase_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["avg", "CSAT"]],
+            "groups": ["Priority"],
+            "filters": [
+              ["CSAT", [[-10]], ">="],
+              ["IsClosed", ["true"], "in"],
+              [
+                "CreatedDate",
+                "{{column(Time_Selection.selection, [\"Compact\"]).asObject()}}"
+              ]
+            ],
+            "order": [
+              [
+                -1,
+                {
+                  "ascending": "{{cell(static_Order.selection, 0, \"compact_value\").asObject()}}"
+                }
+              ]
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "visualizationType": "hbar"
+        }
+      },
+      "all_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.ServiceCase_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "pigql": "q = load \"${App.Datasets.ServiceCase_tp.FullyQualifiedName}\"; q = filter q by 'CSAT' <= 34; q = filter q by 'IsClosed' == \"false\"; q = group q by all; q = foreach q generate count() as count;",
+            "measures": [["count", "*", "count"]],
+            "measuresMap": {},
+            "groups": []
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {}
+      },
+      "kpi_bottom_quartile_per": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.ServiceCase_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["count", "*"]],
+            "pigql": "q = load \"${App.Datasets.ServiceCase_tp.FullyQualifiedName}\"; q = filter q by 'CSAT' <= {{coalesce(cell(kpi_bottom_quartile.result, 0, \"per_CSAT\"),0).asObject()}}; q = filter q by 'IsClosed' == \"false\"; q = group q by all; q = foreach q generate count() as count;",
+            "autoFilter": true
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "visualizationType": "hbar"
+        }
+      },
+      "Static_Duration": {
+        "broadcastFacet": true,
+        "columns": {},
+        "isGlobal": false,
+        "selectMode": "singlerequired",
+        "start": {
+          "display": ["Time Open"]
+        },
+        "type": "staticflex",
+        "useGlobal": true,
+        "values": [
+          {
+            "display": "Time Open",
+            "value": ["avg", "Time_Open__c"],
+            "pigql_value": "Time_Open__c",
+            "measure_field": "avg_Time_Open__c"
+          }
+        ],
+        "visualizationParameters": {}
+      },
+      "lens_table": {
+        "broadcastFacet": true,
+        "groups": [],
+        "numbers": [],
+        "query": "q = load \"${App.Datasets.ServiceCase_tp.FullyQualifiedName}\"; q = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('ClosedDate_Year','ClosedDate_Month','ClosedDate_Day')\")}}; q = foreach q generate 'CaseNumber', first('Account_Name') as 'Account_Name', first('CSAT') as 'CSAT', first('First_Contact_Close__c') as 'First_Contact_Close__c',  first('Type') as 'Type', first('Owner_Name') as 'Owner_Name', first('MilestoneStatus__c') as 'MilestoneStatus__c', avg('{{column(Static_Duration.selection, [\"pigql_value\"]).asObject()}}') as '{{column(Static_Duration.selection, [\"measure_field\"]).asObject()}}', first('Origin') as 'Origin', first('Priority') as 'Priority', first('Status') as 'Status', first('Type_of_Support__c') as 'Type_of_Support__c', first('IsEscalated') as 'Escalated' ; q = order q by 'CaseNumber' desc; q = limit q 100;",
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "strings": [],
+        "type": "saql",
+        "useGlobal": true
+      },
+      "CSAT_PrevPeriod": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.ServiceCase_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["perc", "Percent"]],
+            "pigql": "q = load \"${App.Datasets.ServiceCase_tp.FullyQualifiedName}\"; q = filter q by 'CSAT' >= -10; ENDTOTAL = filter q by 'IsClosed' == \"false\"; updcreatedTOTAL = filter q by {{cell(Time_Selection.selection, 0, \"LastPeriodCompare\").asDateRange(\"date('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day')\")}}; updclosedTOTAL = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('ClosedDate_Year','ClosedDate_Month','ClosedDate_Day')\")}};compare = group updcreatedTOTAL by all full, updclosedTOTAL by all full, ENDTOTAL by all; compare = foreach compare generate 100*(avg(updclosedTOTAL.'CSAT')-avg(updcreatedTOTAL.'CSAT'))/avg(updcreatedTOTAL.'CSAT') as 'perc_Percent', (case when 100*(avg(updclosedTOTAL.'CSAT')-avg(updcreatedTOTAL.'CSAT'))/avg(updcreatedTOTAL.'CSAT') < 0 then \"#f2536d\" when 100*(avg(updclosedTOTAL.'CSAT')-avg(updcreatedTOTAL.'CSAT'))/avg(updcreatedTOTAL.'CSAT') > 0 then \"#3CAF6D\" else \"#32b181\" end) as 'color';",
+            "autoFilter": true
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "visualizationType": "hbar"
+        }
+      },
+      "lens_1": {
+        "broadcastFacet": true,
+        "groups": [],
+        "numbers": [],
+        "query": "q = load \"${App.Datasets.ServiceCase_tp.FullyQualifiedName}\";\nq = group q by all;\nq = foreach q generate count() as 'count';\nq = limit q 2000;",
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "strings": [],
+        "type": "saql",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "parameters": {
+            "autoFitMode": "keepLabels",
+            "showValues": true,
+            "bins": {
+              "breakpoints": {
+                "high": 100,
+                "low": 0
+              },
+              "bands": {
+                "high": {
+                  "color": "#008000",
+                  "label": ""
+                },
+                "low": {
+                  "color": "#B22222",
+                  "label": ""
+                },
+                "medium": {
+                  "color": "#ffa500",
+                  "label": ""
+                }
+              }
+            },
+            "legend": {
+              "descOrder": false,
+              "showHeader": true,
+              "show": true,
+              "customSize": "auto",
+              "position": "right-top",
+              "inside": false
+            },
+            "axisMode": "multi",
+            "tooltip": {
+              "showBinLabel": true,
+              "measures": "",
+              "showNullValues": true,
+              "showPercentage": true,
+              "showDimensions": true,
+              "showMeasures": true,
+              "customizeTooltip": false,
+              "dimensions": ""
+            },
+            "visualizationType": "hbar",
+            "title": {
+              "fontSize": 14,
+              "subtitleFontSize": 11,
+              "label": "",
+              "align": "center",
+              "subtitleLabel": ""
+            },
+            "binValues": false,
+            "trellis": {
+              "flipLabels": false,
+              "showGridLines": true,
+              "size": [100, 100],
+              "enable": false,
+              "type": "x",
+              "chartsPerLine": 4
+            },
+            "columnMap": {
+              "trellis": [],
+              "dimensionAxis": [],
+              "plots": ["count"]
+            },
+            "showActionMenu": true,
+            "measureAxis2": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "measureAxis1": {
+              "sqrtScale": false,
+              "showTitle": true,
+              "showAxis": true,
+              "title": "",
+              "customDomain": {
+                "showDomain": false
+              }
+            },
+            "theme": "wave",
+            "dimensionAxis": {
+              "showTitle": true,
+              "customSize": "auto",
+              "showAxis": true,
+              "title": "",
+              "icons": {
+                "useIcons": false,
+                "iconProps": {
+                  "fit": "cover",
+                  "column": "",
+                  "type": "round"
+                }
+              }
+            },
+            "applyConditionalFormatting": true
+          },
+          "type": "chart"
+        }
+      },
+      "Grouping_Bubble_Select": {
+        "broadcastFacet": false,
+        "columns": {},
+        "isGlobal": false,
+        "selectMode": "singlerequired",
+        "start": {
+          "display": ["Product Family"]
+        },
+        "type": "staticflex",
+        "useGlobal": false,
+        "values": [
+          {
+            "display": "Product Family",
+            "value": "Product_Family_KB__c"
+          },
+          {
+            "display": "Origin",
+            "value": "Origin"
+          },
+          {
+            "display": "SLA",
+            "value": "MilestoneStatus__c"
+          }
+        ],
+        "visualizationParameters": {}
+      }
+    },
+    "widgetStyle": {
+      "backgroundColor": "#FFFFFF",
+      "borderColor": "#E6ECF2",
+      "borderEdges": [],
+      "borderRadius": 0,
+      "borderWidth": 1
+    },
+    "widgets": {
+      "container_19": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "documentId": "",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "link_Account_Profile": {
+        "parameters": {
+          "destination": "${App.Dashboards['Service Account Profile'].Id}",
+          "destinationType": "dashboard",
+          "fontSize": 12,
+          "includeState": false,
+          "text": "Account Profile",
+          "textAlignment": "center",
+          "textColor": "#091A3E"
+        },
+        "type": "link"
+      },
+      "container_18": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "documentId": "",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "pillbox_static_Order": {
+        "parameters": {
+          "compact": false,
+          "exploreLink": false,
+          "fontSize": 16,
+          "selectedTab": {
+            "backgroundColor": "#677A97",
+            "borderEdges": [],
+            "textColor": "#FFFFFF"
+          },
+          "showActionMenu": true,
+          "step": "static_Order",
+          "textColor": "#5C7A99"
+        },
+        "type": "pillbox"
+      },
+      "container_17": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "documentId": "",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "number_kpi_avg_CSAT": {
+        "parameters": {
+          "compact": false,
+          "exploreLink": true,
+          "measureField": "avg_CSAT",
+          "numberColor": "#FFFFFF",
+          "numberSize": 24,
+          "showActionMenu": true,
+          "step": "kpi_avg_CSAT",
+          "textAlignment": "left",
+          "titleColor": "#C5D3E0",
+          "titleSize": 14
+        },
+        "type": "number"
+      },
+      "container_16": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "documentId": "",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "container_15": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "documentId": "",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "container_14": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "container_13": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "text_13": {
+        "parameters": {
+          "content": {
+            "displayTemplate": "Einstein Discovery"
+          },
+          "fontSize": 16,
+          "showActionMenu": true,
+          "textAlignment": "left",
+          "textColor": "#091A3E"
+        },
+        "type": "text"
+      },
+      "text_CSAT_Scorecard": {
+        "parameters": {
+          "content": {
+            "displayTemplate": "CSAT Scorecard"
+          },
+          "fontSize": 16,
+          "showActionMenu": true,
+          "textAlignment": "left",
+          "textColor": "#C5D3E0"
+        },
+        "type": "text"
+      },
+      "text_10": {
+        "parameters": {
+          "content": {
+            "displayTemplate": "By Owner Name"
+          },
+          "fontSize": 14,
+          "showActionMenu": true,
+          "textAlignment": "left",
+          "textColor": "rgb(51, 87, 121)"
+        },
+        "type": "text"
+      },
+      "text_12": {
+        "parameters": {
+          "content": {
+            "displayTemplate": "By Reason"
+          },
+          "fontSize": 14,
+          "showActionMenu": true,
+          "textAlignment": "left",
+          "textColor": "rgb(51, 87, 121)"
+        },
+        "type": "text"
+      },
+      "text_11": {
+        "parameters": {
+          "content": {
+            "displayTemplate": "By Product Family "
+          },
+          "fontSize": 14,
+          "showActionMenu": true,
+          "textAlignment": "left",
+          "textColor": "rgb(51, 87, 121)"
+        },
+        "type": "text"
+      },
+      "container_1": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "documentId": "",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "container_2": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "documentId": "",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "container_3": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "documentId": "",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "container_4": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "documentId": "",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "container_5": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "documentId": "",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "container_6": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "documentId": "",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "text_3": {
+        "parameters": {
+          "content": {
+            "displayTemplate": "By Account Name"
+          },
+          "fontSize": 14,
+          "showActionMenu": true,
+          "textAlignment": "left",
+          "textColor": "rgb(51, 87, 121)"
+        },
+        "type": "text"
+      },
+      "container_7": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "documentId": "",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "text_CSAT_Breakdown": {
+        "parameters": {
+          "content": {
+            "displayTemplate": "CSAT Breakdown"
+          },
+          "fontSize": 16,
+          "showActionMenu": true,
+          "textAlignment": "left",
+          "textColor": "#091A3E"
+        },
+        "type": "text"
+      },
+      "text_2": {
+        "parameters": {
+          "content": {
+            "displayTemplate": "By Origin"
+          },
+          "fontSize": 14,
+          "showActionMenu": true,
+          "textAlignment": "left",
+          "textColor": "rgb(51, 87, 121)"
+        },
+        "type": "text"
+      },
+      "container_8": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "documentId": "",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "text_5": {
+        "parameters": {
+          "content": {
+            "displayTemplate": "By Product Family"
+          },
+          "fontSize": 14,
+          "showActionMenu": true,
+          "textAlignment": "left",
+          "textColor": "rgb(51, 87, 121)"
+        },
+        "type": "text"
+      },
+      "text_iphone_CustSat_Title": {
+        "parameters": {
+          "content": {
+            "displayTemplate": "Customer Satisfaction"
+          },
+          "fontSize": 24,
+          "showActionMenu": true,
+          "textAlignment": "center",
+          "textColor": "#091A3E"
+        },
+        "type": "text"
+      },
+      "container_9": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "documentId": "",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "text_4": {
+        "parameters": {
+          "content": {
+            "displayTemplate": "By Owner Name"
+          },
+          "fontSize": 14,
+          "showActionMenu": true,
+          "textAlignment": "left",
+          "textColor": "rgb(51, 87, 121)"
+        },
+        "type": "text"
+      },
+      "container_20": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "text_7": {
+        "parameters": {
+          "content": {
+            "displayTemplate": "By Origin"
+          },
+          "fontSize": 14,
+          "showActionMenu": true,
+          "textAlignment": "left",
+          "textColor": "rgb(51, 87, 121)"
+        },
+        "type": "text"
+      },
+      "text_6": {
+        "parameters": {
+          "content": {
+            "displayTemplate": "By Reason"
+          },
+          "fontSize": 14,
+          "showActionMenu": true,
+          "textAlignment": "left",
+          "textColor": "rgb(51, 87, 121)"
+        },
+        "type": "text"
+      },
+      "text_9": {
+        "parameters": {
+          "content": {
+            "displayTemplate": "By Priority"
+          },
+          "fontSize": 14,
+          "showActionMenu": true,
+          "textAlignment": "left",
+          "textColor": "rgb(51, 87, 121)"
+        },
+        "type": "text"
+      },
+      "chart_4": {
+        "parameters": {
+          "autoFitMode": "none",
+          "totalValue": "computeTotal",
+          "showValues": true,
+          "bins": {
+            "breakpoints": {
+              "high": 100,
+              "low": 0
+            },
+            "bands": {
+              "high": {
+                "color": "#008000",
+                "label": ""
+              },
+              "low": {
+                "color": "#B22222",
+                "label": ""
+              },
+              "medium": {
+                "color": "#ffa500",
+                "label": ""
+              }
+            }
+          },
+          "legend": {
+            "descOrder": false,
+            "showHeader": true,
+            "show": false,
+            "customSize": "auto",
+            "position": "right-top",
+            "inside": false
+          },
+          "axisMode": "multi",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "hbar",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "",
+            "align": "center",
+            "subtitleLabel": ""
+          },
+          "binValues": false,
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "totalLabel": "",
+          "columnMap": {
+            "trellis": [],
+            "dimensionAxis": ["LeadingCause"],
+            "plots": ["avg_Variance"]
+          },
+          "showActionMenu": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "Avg CSAT Impact",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "theme": "light",
+          "step": "posleadingcauses_1_1",
+          "dimensionAxis": {
+            "showTitle": true,
+            "customSize": 30,
+            "showAxis": true,
+            "title": "Leading Cause",
+            "icons": {
+              "useIcons": false,
+              "iconProps": {
+                "fit": "cover",
+                "column": "",
+                "type": "round",
+                "parameters": {}
+              }
+            }
+          },
+          "applyConditionalFormatting": false
+        },
+        "type": "chart"
+      },
+      "text_8": {
+        "parameters": {
+          "content": {
+            "displayTemplate": "By Account"
+          },
+          "fontSize": 14,
+          "showActionMenu": true,
+          "textAlignment": "left",
+          "textColor": "rgb(51, 87, 121)"
+        },
+        "type": "text"
+      },
+      "chart_3": {
+        "parameters": {
+          "autoFitMode": "none",
+          "totalValue": "computeTotal",
+          "showValues": true,
+          "bins": {
+            "breakpoints": {
+              "high": 100,
+              "low": 0
+            },
+            "bands": {
+              "high": {
+                "color": "#008000",
+                "label": ""
+              },
+              "low": {
+                "color": "#B22222",
+                "label": ""
+              },
+              "medium": {
+                "color": "#ffa500",
+                "label": ""
+              }
+            }
+          },
+          "legend": {
+            "descOrder": false,
+            "showHeader": true,
+            "show": false,
+            "customSize": "auto",
+            "position": "right-top",
+            "inside": false
+          },
+          "axisMode": "multi",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "hbar",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "",
+            "align": "center",
+            "subtitleLabel": ""
+          },
+          "binValues": false,
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "totalLabel": "",
+          "columnMap": {
+            "trellis": [],
+            "dimensionAxis": ["LeadingCause"],
+            "plots": ["avg_Variance"]
+          },
+          "showActionMenu": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "Avg CSAT Impact",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "theme": "light",
+          "step": "negleadingcauses_1_1",
+          "dimensionAxis": {
+            "showTitle": true,
+            "customSize": 30,
+            "showAxis": true,
+            "title": "Leading Cause",
+            "icons": {
+              "useIcons": false,
+              "iconProps": {
+                "fit": "cover",
+                "column": "",
+                "type": "round",
+                "parameters": {}
+              }
+            }
+          },
+          "applyConditionalFormatting": false
+        },
+        "type": "chart"
+      },
+      "chart_avg_csat_duration_by_grouping": {
+        "parameters": {
+          "legend": {
+            "descOrder": false,
+            "showHeader": true,
+            "show": true,
+            "customSize": "auto",
+            "position": "right-top",
+            "inside": false
+          },
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "scatter",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "",
+            "align": "center",
+            "subtitleLabel": ""
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [150, 150],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "radiusRatio": 5,
+          "showActionMenu": true,
+          "x": {
+            "sqrtScale": false,
+            "showZero": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "y": {
+            "sqrtScale": false,
+            "showZero": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "Avg of CSAT",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "step": "avg_csat_duration_by_grouping",
+          "theme": "wave",
+          "applyConditionalFormatting": false
+        },
+        "type": "chart"
+      },
+      "text_1": {
+        "parameters": {
+          "content": {
+            "displayTemplate": "By Priority"
+          },
+          "fontSize": 14,
+          "showActionMenu": true,
+          "textAlignment": "left",
+          "textColor": "rgb(51, 87, 121)"
+        },
+        "type": "text"
+      },
+      "container_12": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "container_11": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "documentId": "",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "container_10": {
+        "parameters": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "documentId": "",
+          "fit": "original"
+        },
+        "type": "container"
+      },
+      "chart_case_priority_by_csat": {
+        "parameters": {
+          "autoFitMode": "none",
+          "showValues": true,
+          "bins": {
+            "breakpoints": {
+              "high": 100,
+              "low": 0
+            },
+            "bands": {
+              "high": {
+                "color": "#008000",
+                "label": ""
+              },
+              "low": {
+                "color": "#B22222",
+                "label": ""
+              },
+              "medium": {
+                "color": "#ffa500",
+                "label": ""
+              }
+            }
+          },
+          "legend": {
+            "descOrder": false,
+            "showHeader": true,
+            "show": false,
+            "customSize": "auto",
+            "position": "right-top",
+            "inside": false
+          },
+          "axisMode": "multi",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "hbar",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "",
+            "align": "center",
+            "subtitleLabel": ""
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "binValues": false,
+          "showActionMenu": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": false,
+            "showAxis": false,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "step": "case_priority_by_csat",
+          "theme": "light",
+          "dimensionAxis": {
+            "showTitle": false,
+            "customSize": 30,
+            "showAxis": true,
+            "title": "",
+            "icons": {
+              "useIcons": false,
+              "iconProps": {
+                "fit": "cover",
+                "column": "",
+                "type": "round",
+                "parameters": {}
+              }
+            }
+          },
+          "applyConditionalFormatting": false
+        },
+        "type": "chart"
+      },
+      "link_Home": {
+        "parameters": {
+          "destination": "${App.Dashboards['Service Analytics Overview'].Id}",
+          "destinationType": "dashboard",
+          "fontSize": 12,
+          "includeState": false,
+          "text": "Overview",
+          "textAlignment": "center",
+          "textColor": "#091A3E"
+        },
+        "type": "link"
+      },
+      "chart_case_owner_by_csat": {
+        "parameters": {
+          "autoFitMode": "none",
+          "showValues": true,
+          "bins": {
+            "breakpoints": {
+              "high": 100,
+              "low": 0
+            },
+            "bands": {
+              "high": {
+                "color": "#008000",
+                "label": ""
+              },
+              "low": {
+                "color": "#B22222",
+                "label": ""
+              },
+              "medium": {
+                "color": "#ffa500",
+                "label": ""
+              }
+            }
+          },
+          "legend": {
+            "descOrder": false,
+            "showHeader": true,
+            "show": false,
+            "customSize": "auto",
+            "position": "right-top",
+            "inside": false
+          },
+          "axisMode": "multi",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "hbar",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "",
+            "align": "left",
+            "subtitleLabel": ""
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "binValues": false,
+          "showActionMenu": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": false,
+            "showAxis": false,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "step": "case_owner_by_csat",
+          "theme": "light",
+          "dimensionAxis": {
+            "showTitle": false,
+            "customSize": 30,
+            "showAxis": true,
+            "title": "",
+            "icons": {
+              "useIcons": false,
+              "iconProps": {
+                "fit": "cover",
+                "column": "",
+                "type": "round",
+                "parameters": {}
+              }
+            }
+          },
+          "applyConditionalFormatting": false
+        },
+        "type": "chart"
+      },
+      "text_Closed_Case_Details": {
+        "parameters": {
+          "content": {
+            "displayTemplate": "Closed Case Details"
+          },
+          "fontSize": 16,
+          "showActionMenu": true,
+          "textAlignment": "left",
+          "textColor": "#091A3E"
+        },
+        "type": "text"
+      },
+      "listselector_Static_Duration": {
+        "parameters": {
+          "compact": false,
+          "displayMode": "combo",
+          "expanded": true,
+          "exploreLink": false,
+          "filterStyle": {
+            "titleColor": "#091A3E",
+            "valueColor": "#17324D"
+          },
+          "instant": true,
+          "showActionMenu": false,
+          "step": "Static_Duration",
+          "title": "Duration"
+        },
+        "type": "listselector"
+      },
+      "globalfitlerpanel_mobile": {
+        "parameters": {
+          "filterItemOptions": {
+            "backgroundColor": "#FFFFFF",
+            "borderColor": "#E6ECF2",
+            "borderRadius": 4,
+            "borderWidth": 1,
+            "propertyColor": "#54698D",
+            "valueColor": "#16325C"
+          },
+          "filters": [],
+          "itemsPerRow": 3,
+          "showAllFilters": true,
+          "title": {
+            "separatorColor": "#E6ECF2",
+            "text": {
+              "align": "left",
+              "color": "#091A3E",
+              "fontSize": 16,
+              "label": "Filters"
+            },
+            "visible": true
+          }
+        },
+        "type": "filterpanel"
+      },
+      "link_Constants_CaseCustomerSatLabel": {
+        "parameters": {
+          "destination": "${App.Dashboards['Service Customer Satisfaction'].Id}",
+          "destinationType": "dashboard",
+          "fontSize": 12,
+          "includeState": false,
+          "text": "CSAT",
+          "textAlignment": "center",
+          "textColor": "rgb(89, 65, 149)"
+        },
+        "type": "link"
+      },
+      "chart_case_reason_by_csat": {
+        "parameters": {
+          "autoFitMode": "none",
+          "showValues": true,
+          "bins": {
+            "breakpoints": {
+              "high": 100,
+              "low": 0
+            },
+            "bands": {
+              "high": {
+                "color": "#008000",
+                "label": ""
+              },
+              "low": {
+                "color": "#B22222",
+                "label": ""
+              },
+              "medium": {
+                "color": "#ffa500",
+                "label": ""
+              }
+            }
+          },
+          "legend": {
+            "descOrder": false,
+            "showHeader": true,
+            "show": false,
+            "customSize": "auto",
+            "position": "right-top",
+            "inside": false
+          },
+          "axisMode": "multi",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "hbar",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "",
+            "align": "left",
+            "subtitleLabel": ""
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "binValues": false,
+          "showActionMenu": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": false,
+            "showAxis": false,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "step": "case_reason_by_csat",
+          "theme": "light",
+          "dimensionAxis": {
+            "showTitle": false,
+            "customSize": 30,
+            "showAxis": true,
+            "title": "",
+            "icons": {
+              "useIcons": false,
+              "iconProps": {
+                "fit": "cover",
+                "column": "",
+                "type": "round",
+                "parameters": {}
+              }
+            }
+          },
+          "applyConditionalFormatting": false
+        },
+        "type": "chart"
+      },
+      "listselector_Grouping_Bubble_Select": {
+        "parameters": {
+          "compact": false,
+          "displayMode": "combo",
+          "expanded": true,
+          "exploreLink": false,
+          "filterStyle": {
+            "titleColor": "#091A3E",
+            "valueColor": "#17324D"
+          },
+          "instant": true,
+          "showActionMenu": false,
+          "step": "Grouping_Bubble_Select",
+          "title": ""
+        },
+        "type": "listselector"
+      },
+      "globalfilterpanel": {
+        "parameters": {
+          "filterItemOptions": {
+            "backgroundColor": "#FFFFFF",
+            "borderColor": "#E6ECF2",
+            "borderRadius": 4,
+            "borderWidth": 1,
+            "propertyColor": "#54698D",
+            "valueColor": "#16325C"
+          },
+          "filters": [],
+          "itemsPerRow": 7,
+          "showAllFilters": true,
+          "title": {
+            "separatorColor": "#E6ECF2",
+            "text": {
+              "align": "left",
+              "color": "#091A3E",
+              "fontSize": 16,
+              "label": ""
+            },
+            "visible": true
+          }
+        },
+        "type": "filterpanel"
+      },
+      "number_CSAT_PrevPeriod": {
+        "parameters": {
+          "compact": false,
+          "exploreLink": true,
+          "measureField": "perc_Percent",
+          "numberColor": "#FFFFFF",
+          "numberSize": 12,
+          "showActionMenu": true,
+          "step": "CSAT_PrevPeriod",
+          "textAlignment": "right",
+          "title": "{{cell(Time_Selection.selection, 0, \"text_display\").asString()}}",
+          "titleColor": "#E6ECF2",
+          "titleSize": 12
+        },
+        "type": "number"
+      },
+      "text_Customer_Satisfaction": {
+        "parameters": {
+          "content": {
+            "displayTemplate": "Customer Satisfaction"
+          },
+          "fontSize": 24,
+          "showActionMenu": true,
+          "textAlignment": "left",
+          "textColor": "rgb(9, 26, 62)"
+        },
+        "type": "text"
+      },
+      "number_kpi_bottom_quartile": {
+        "parameters": {
+          "compact": false,
+          "exploreLink": true,
+          "measureField": "per_CSAT",
+          "numberColor": "#FFFFFF",
+          "numberSize": 24,
+          "showActionMenu": true,
+          "step": "kpi_bottom_quartile",
+          "textAlignment": "left",
+          "title": "Bottom Quartile CSAT Score",
+          "titleColor": "#C5D3E0",
+          "titleSize": 12
+        },
+        "type": "number"
+      },
+      "listselector_Time_Selection": {
+        "parameters": {
+          "compact": false,
+          "displayMode": "combo",
+          "expanded": true,
+          "exploreLink": false,
+          "filterStyle": {
+            "titleColor": "#091A3E",
+            "valueColor": "#17324D"
+          },
+          "instant": true,
+          "showActionMenu": false,
+          "step": "Time_Selection",
+          "title": "Date Range"
+        },
+        "type": "listselector"
+      },
+      "chart_case_account_by_csat": {
+        "parameters": {
+          "autoFitMode": "none",
+          "showValues": true,
+          "bins": {
+            "breakpoints": {
+              "high": 100,
+              "low": 0
+            },
+            "bands": {
+              "high": {
+                "color": "#008000",
+                "label": ""
+              },
+              "low": {
+                "color": "#B22222",
+                "label": ""
+              },
+              "medium": {
+                "color": "#ffa500",
+                "label": ""
+              }
+            }
+          },
+          "legend": {
+            "descOrder": false,
+            "showHeader": true,
+            "show": false,
+            "customSize": "auto",
+            "position": "right-top",
+            "inside": false
+          },
+          "axisMode": "multi",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "hbar",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "",
+            "align": "center",
+            "subtitleLabel": ""
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "binValues": false,
+          "showActionMenu": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": false,
+            "showAxis": false,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "step": "case_account_by_csat",
+          "theme": "light",
+          "dimensionAxis": {
+            "showTitle": false,
+            "customSize": 30,
+            "showAxis": true,
+            "title": "",
+            "icons": {
+              "useIcons": false,
+              "iconProps": {
+                "fit": "cover",
+                "column": "",
+                "type": "round",
+                "parameters": {}
+              }
+            }
+          },
+          "applyConditionalFormatting": false
+        },
+        "type": "chart"
+      },
+      "listselector_2": {
+        "parameters": {
+          "displayMode": "combo",
+          "filterStyle": {
+            "titleColor": "#091A3E",
+            "valueColor": "#17324D"
+          },
+          "showActionMenu": true
+        },
+        "type": "listselector"
+      },
+      "text_Case_Segmentation": {
+        "parameters": {
+          "content": {
+            "displayTemplate": "Case Segmentation"
+          },
+          "fontSize": 16,
+          "showActionMenu": true,
+          "textAlignment": "left",
+          "textColor": "#091A3E"
+        },
+        "type": "text"
+      },
+      "table_lens_table": {
+        "parameters": {
+          "borderColor": "#e0e5ee",
+          "borderWidth": 1,
+          "cell": {
+            "backgroundColor": "#ffffff",
+            "fontColor": "#16325c",
+            "fontSize": 12
+          },
+          "columnProperties": {},
+          "columns": [],
+          "customBulkActions": [],
+          "exploreLink": false,
+          "header": {
+            "backgroundColor": "#f4f6f9",
+            "fontColor": "#16325c",
+            "fontSize": 12
+          },
+          "innerMajorBorderColor": "#a8b7c7",
+          "innerMinorBorderColor": "#e0e5ee",
+          "maxColumnWidth": 300,
+          "minColumnWidth": 40,
+          "mode": "variable",
+          "numberOfLines": 1,
+          "showActionMenu": true,
+          "step": "lens_table",
+          "verticalPadding": 8
+        },
+        "type": "table"
+      },
+      "chart_csat_over_time": {
+        "parameters": {
+          "showPoints": true,
+          "legend": {
+            "descOrder": false,
+            "showHeader": true,
+            "show": true,
+            "customSize": "auto",
+            "position": "right-top",
+            "inside": false
+          },
+          "axisMode": "multi",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "time",
+          "missingValue": "connect",
+          "dashLine": {
+            "measures": "",
+            "showDashLine": false
+          },
+          "timeAxis": {
+            "showTitle": false,
+            "showAxis": true,
+            "title": ""
+          },
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "",
+            "align": "center",
+            "subtitleLabel": ""
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "fillArea": true,
+          "showActionMenu": true,
+          "showZero": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": false,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "valueType": "none",
+          "step": "csat_over_time",
+          "theme": "dark",
+          "applyConditionalFormatting": false,
+          "drawArea": {
+            "measure": "",
+            "showDrawArea": false,
+            "bounding1": "",
+            "bounding2": ""
+          }
+        },
+        "type": "chart"
+      },
+      "chart_case_product_by_csat": {
+        "parameters": {
+          "autoFitMode": "none",
+          "showValues": true,
+          "bins": {
+            "breakpoints": {
+              "high": 100,
+              "low": 0
+            },
+            "bands": {
+              "high": {
+                "color": "#008000",
+                "label": ""
+              },
+              "low": {
+                "color": "#B22222",
+                "label": ""
+              },
+              "medium": {
+                "color": "#ffa500",
+                "label": ""
+              }
+            }
+          },
+          "legend": {
+            "descOrder": false,
+            "showHeader": true,
+            "show": false,
+            "customSize": "auto",
+            "position": "right-top",
+            "inside": false
+          },
+          "axisMode": "multi",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "hbar",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "",
+            "align": "left",
+            "subtitleLabel": ""
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "binValues": false,
+          "showActionMenu": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": false,
+            "showAxis": false,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "step": "case_product_by_csat",
+          "theme": "light",
+          "dimensionAxis": {
+            "showTitle": false,
+            "customSize": 30,
+            "showAxis": true,
+            "title": "",
+            "icons": {
+              "useIcons": false,
+              "iconProps": {
+                "fit": "cover",
+                "column": "",
+                "type": "round",
+                "parameters": {}
+              }
+            }
+          },
+          "applyConditionalFormatting": false
+        },
+        "type": "chart"
+      },
+      "number_kpi_response_rate": {
+        "parameters": {
+          "compact": false,
+          "exploreLink": true,
+          "measureField": "C",
+          "numberColor": "#FFFFFF",
+          "numberSize": 24,
+          "showActionMenu": true,
+          "step": "kpi_response_rate",
+          "textAlignment": "left",
+          "title": "Response Rate",
+          "titleColor": "#C5D3E0",
+          "titleSize": 12
+        },
+        "type": "number"
+      },
+      "number_kpi_bottom_quartile_per": {
+        "parameters": {
+          "compact": false,
+          "exploreLink": true,
+          "measureField": "count",
+          "numberColor": "#FFFFFF",
+          "numberSize": 24,
+          "showActionMenu": true,
+          "step": "kpi_bottom_quartile_per",
+          "textAlignment": "left",
+          "title": "# Cases in Bottom Quartile",
+          "titleColor": "#C5D3E0",
+          "titleSize": 12
+        },
+        "type": "number"
+      },
+      "chart_case_origin_by_csat": {
+        "parameters": {
+          "autoFitMode": "none",
+          "showValues": true,
+          "bins": {
+            "breakpoints": {
+              "high": 100,
+              "low": 0
+            },
+            "bands": {
+              "high": {
+                "color": "#008000",
+                "label": ""
+              },
+              "low": {
+                "color": "#B22222",
+                "label": ""
+              },
+              "medium": {
+                "color": "#ffa500",
+                "label": ""
+              }
+            }
+          },
+          "legend": {
+            "descOrder": false,
+            "showHeader": true,
+            "show": false,
+            "customSize": "auto",
+            "position": "right-top",
+            "inside": false
+          },
+          "axisMode": "multi",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "hbar",
+          "exploreLink": true,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "",
+            "align": "center",
+            "subtitleLabel": ""
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "binValues": false,
+          "showActionMenu": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": false,
+            "showAxis": false,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "step": "case_origin_by_csat",
+          "theme": "light",
+          "dimensionAxis": {
+            "showTitle": false,
+            "customSize": 30,
+            "showAxis": true,
+            "title": "",
+            "icons": {
+              "useIcons": false,
+              "iconProps": {
+                "fit": "cover",
+                "column": "",
+                "type": "round",
+                "parameters": {}
+              }
+            }
+          },
+          "applyConditionalFormatting": false
+        },
+        "type": "chart"
+      }
+    }
+  }
+}
