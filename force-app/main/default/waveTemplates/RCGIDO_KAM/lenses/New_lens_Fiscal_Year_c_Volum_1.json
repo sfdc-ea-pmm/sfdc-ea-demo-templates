@@ -1,0 +1,109 @@
+{
+  "name" : "New_lens_Fiscal_Year_c_Volum_1_tp",
+  "label" : "New lens: Fiscal_Year__c_Volum_1",
+  "folder" : {
+    "id" : "${App.Folder.Id}"
+  },
+  "visualizationType" : "pivottable",
+  "dateVersion" : 1,
+  "datasets" : [
+    {
+      "id" : "${App.Datasets.Volume_Forecast_Data_V2_tp.Id}"
+    }
+  ],
+  "xmd" : {
+    "measures" : [ ],
+    "derivedDimensions" : [ ],
+    "organizations" : [ ],
+    "showDetailsDefaultFields" : [ ],
+    "dates" : [ ],
+    "derivedMeasures" : [ ],
+    "dimensions" : [ ]
+  },
+  "state" : {
+    "dataSourceLinks" : [ ],
+    "filters" : [ ],
+    "gridLayouts" : [ ],
+    "layouts" : [ ],
+    "steps" : {
+      "aggregateflex" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.Volume_Forecast_Data_V2_tp.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "Fiscal_Year__c_Volum_1",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "sum",
+                "TotalVolume_NEW"
+              ]
+            ],
+            "groups" : [
+              "Fiscal_Year_c_NEW",
+              "Category_c_Cluster_c_New",
+              "VolumeType__c",
+              "Month_Calc__c_Month"
+            ],
+            "filters" : [
+              [
+                "Period__c",
+                [
+                  "Current Forecast"
+                ],
+                "in"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+         "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "multi",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "pivottable"
+        }
+      }
+    },
+    "widgets" : {
+      "aggregateflex_table" : {
+        "parameters" : {
+          "borderColor" : "#54698d",
+          "borderWidth" : 1,
+          "cell" : {
+            "backgroundColor" : "#091A3E",
+            "fontColor" : "#ffffff",
+            "fontSize" : 12
+          },
+          "columnProperties" : { },
+          "columns" : [ ],
+          "customBulkActions" : [ ],
+          "exploreLink" : true,
+          "fixedColumnWidth" : 100,
+          "header" : {
+            "backgroundColor" : "#000000",
+            "fontColor" : "#ffffff",
+            "fontSize" : 12
+          },
+          "innerMajorBorderColor" : "#54698d",
+          "innerMinorBorderColor" : "#54698d",
+          "mode" : "fixed",
+          "numberOfLines" : 1,
+          "pivoted" : true,
+          "step" : "aggregateflex",
+          "verticalPadding" : 8
+        },
+        "type" : "table"
+      }
+    }
+  }
+}

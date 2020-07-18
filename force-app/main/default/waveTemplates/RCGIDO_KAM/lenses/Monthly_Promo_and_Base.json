@@ -1,0 +1,161 @@
+{
+  "name" : "Monthly_Promo_and_Base_tp",
+  "label" : "Monthly Promo and Base",
+  "folder" : {
+    "id" : "${App.Folder.Id}"
+  },
+  "visualizationType" : "stackvbar",
+  "dateVersion" : 1,
+  "datasets" : [
+    {
+      "id" : "${App.Datasets.Volume_Forecast_Data_tp.Id}"
+    }
+  ],
+  "xmd" : {
+    "measures" : [ ],
+    "derivedDimensions" : [ ],
+    "organizations" : [ ],
+    "showDetailsDefaultFields" : [ ],
+    "dates" : [ ],
+    "derivedMeasures" : [ ],
+    "dimensions" : [ ]
+  },
+  "state" : {
+    "dataSourceLinks" : [ ],
+    "filters" : [ ],
+    "gridLayouts" : [ ],
+    "layouts" : [ ],
+    "steps" : {
+      "aggregateflex" : {
+        "broadcastFacet" : false,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.Volume_Forecast_Data_tp.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "sum",
+                "Total_Volume__c"
+              ]
+            ],
+            "groups" : [
+              "Month_Calc__c_Month",
+              "Fiscal_Year__c",
+              "VolumeType__c"
+            ]
+          },
+          "version" : -1.0
+        },
+         "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "multi",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "stackvbar"
+        }
+      }
+    },
+    "widgets" : {
+      "aggregateflex_chart" : {
+        "parameters" : {
+          "autoFitMode" : "none",
+          "showValues" : true,
+          "legend" : {
+            "showHeader" : true,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "stackvbar",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "chartsPerLine" : 4
+          },
+          "columnMap" : {
+            "split" : [
+              "VolumeType__c"
+            ],
+            "trellis" : [ ],
+            "dimensionAxis" : [
+              "Month_Calc__c_Month",
+              "Fiscal_Year__c"
+            ],
+            "plots" : [
+              "sum_Total_Volume__c"
+            ]
+          },
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "normalize" : false,
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "theme" : "wave",
+          "step" : "aggregateflex",
+          "dimensionAxis" : {
+            "showTitle" : true,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round"
+              }
+            }
+          }
+        },
+        "type" : "chart"
+      }
+    }
+  }
+}
