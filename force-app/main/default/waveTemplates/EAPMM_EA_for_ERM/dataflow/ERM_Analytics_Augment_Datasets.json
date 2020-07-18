@@ -1,0 +1,114 @@
+{
+  "notificationLevel": "",
+  "workflowDefinition": {
+    "ERM_Account": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.ERM_Account_tp.FullyQualifiedName}"
+      }
+    },
+    "ERM_Contact": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.ERM_Contact_tp.FullyQualifiedName}"
+      }
+    },
+    "Augment_Account": {
+      "action": "augment",
+      "parameters": {
+        "operation": "LookupSingleValue",
+        "relationship": "Contact",
+        "left": "ERM_Account",
+        "right": "ERM_Contact",
+        "left_key": ["Contact_Id"],
+        "right_key": ["Id"],
+        "right_select": [
+          "Name",
+          "MailingCity",
+          "MailingState",
+          "ConditionStatus",
+          "Gender",
+          "Age_Bucket",
+          "Age_Text",
+          "Age",
+          "Monitored_at_Home",
+          "Testing_Status",
+          "Email",
+          "Phone"
+        ]
+      }
+    },
+    "Register_Account_Augmented": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "ERM_Account",
+        "alias": "${App.Datasets.ERM_Account_tp.FullyQualifiedName}",
+        "rowLevelSecurityFilter": "",
+        "source": "Augment_Account"
+      }
+    },
+    "ERM_EmergencyRequest": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.ERM_EmergencyRequest_tp.FullyQualifiedName}"
+      }
+    },
+    "Aument_Request": {
+      "action": "augment",
+      "parameters": {
+        "operation": "LookupSingleValue",
+        "left": "ERM_EmergencyRequest",
+        "relationship": "Account",
+        "right": "Augment_Account",
+        "left_key": ["AccountId"],
+        "right_key": ["Id"],
+        "right_select": ["Contact.Name", "Contact.Phone", "Contact.Email"]
+      }
+    },
+    "ERM_Visit": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.ERM_Visit_tp.FullyQualifiedName}"
+      }
+    },
+    "Augment_Visit": {
+      "action": "augment",
+      "parameters": {
+        "operation": "LookupSingleValue",
+        "left": "ERM_Visit",
+        "left_key": ["AccountId"],
+        "relationship": "Account",
+        "right": "Augment_Account",
+        "right_key": ["Id"],
+        "right_select": ["Contact.Name"]
+      }
+    },
+    "Register_Request_Augmented": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "ERM_EmergencyRequest",
+        "alias": "${App.Datasets.ERM_EmergencyRequest_tp.FullyQualifiedName}",
+        "source": "Aument_Request"
+      }
+    },
+    "Register_Visit_Augmented": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "alias": "${App.Datasets.ERM_Visit_tp.FullyQualifiedName}",
+        "name": "ERM_Visit",
+        "source": "Augment_Visit"
+      }
+    }
+  },
+  "_type": "dataflow",
+  "description": "ERM_Analytics_Augment_Datasets",
+  "MasterLabel": "ERM_Analytics_Augment_Datasets",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive",
+  "isDeletable": true,
+  "longRunningAlertInMins": "",
+  "DataflowType": "USER",
+  "name": "ERM_Analytics_Augment_Datasets",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": ""
+}
