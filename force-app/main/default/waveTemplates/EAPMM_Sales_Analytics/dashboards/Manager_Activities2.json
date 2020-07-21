@@ -20,16 +20,16 @@
       {
         "fields" : [
           {
-            "dataSourceName" : "${App.Datasets.user_tp.Name}",
+            "dataSourceName" : "${App.Datasets.user1_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
-            "fieldName" : "Role.RoleNames"
+            "fieldName" : "Role_RoleNames"
           },
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.activity1_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
-            "fieldName" : "Owner.Role.RoleNames"
+            "fieldName" : "Owner_Role_RoleNames"
           }
         ],
         "label" : "RoleNames",
@@ -38,16 +38,16 @@
       {
         "fields" : [
           {
-            "dataSourceName" : "${App.Datasets.user_tp.Name}",
+            "dataSourceName" : "${App.Datasets.user1_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "UniqueUserName"
           },
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.activity1_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
-            "fieldName" : "Owner.UniqueUserName"
+            "fieldName" : "Owner_UniqueUserName"
           }
         ],
         "label" : "Unique User",
@@ -61,7 +61,7 @@
             "fieldName" : "overdue"
           },
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.activity1_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "IsOverdue"
@@ -74,11 +74,11 @@
     "filters" : [
       {
         "dataset" : {
-          "name" : "${App.Datasets.activity_tp.Name}"
+          "name" : "${App.Datasets.activity1_tp.Name}"
         },
         "dependent" : false,
         "fields" : [
-          "Owner.Role.RoleNames"
+          "Owner_Role_RoleNames"
         ],
         "label" : "View As",
         "locked" : false,
@@ -86,11 +86,11 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.activity_tp.Name}"
+          "name" : "${App.Datasets.activity1_tp.Name}"
         },
         "dependent" : false,
         "fields" : [
-          "Owner.UniqueUserName"
+          "Owner_UniqueUserName"
         ],
         "label" : "Activity Owner",
         "locked" : false,
@@ -98,11 +98,11 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.activity_tp.Name}"
+          "name" : "${App.Datasets.activity1_tp.Name}"
         },
         "dependent" : false,
         "fields" : [
-          "Account.Name"
+          "Account_Name"
         ],
         "label" : "Account Name",
         "locked" : false,
@@ -110,7 +110,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.activity_tp.Name}"
+          "name" : "${App.Datasets.activity1_tp.Name}"
         },
         "dependent" : false,
         "fields" : [
@@ -1352,7 +1352,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1396,7 +1396,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1440,7 +1440,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1486,7 +1486,7 @@
         "numbers" : [
           "sum_percent"
         ],
-        "query" : "a = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"true\"; p = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; p = filter p by 'IsClosed' == \"true\"; z = group a by all full, p by all; z = foreach z generate coalesce(count(a) - count(p),0)/coalesce(count(p),1) as 'diff_to_last_period'; z = group z by all; z = foreach z generate coalesce(avg('diff_to_last_period'),0) as 'sum_percent', (case when avg('diff_to_last_period') > 0 then \"#4ED469\" when avg('diff_to_last_period') < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when avg('diff_to_last_period') < 0 then \"▼\" when avg('diff_to_last_period') > 0 then \"▲\" else \"◄ ►\" end) as 'diff_arrow';",
+        "query" : "a = load \"${App.Datasets.activity1_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"true\"; p = load \"${App.Datasets.activity1_tp.FullyQualifiedName}\"; p = filter p by 'IsClosed' == \"true\"; z = group a by all full, p by all; z = foreach z generate coalesce(count(a) - count(p),0)/coalesce(count(p),1) as 'diff_to_last_period'; z = group z by all; z = foreach z generate coalesce(avg('diff_to_last_period'),0) as 'sum_percent', (case when avg('diff_to_last_period') > 0 then \"#4ED469\" when avg('diff_to_last_period') < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when avg('diff_to_last_period') < 0 then \"▼\" when avg('diff_to_last_period') > 0 then \"▲\" else \"◄ ►\" end) as 'diff_arrow';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1500,7 +1500,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1532,7 +1532,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1568,19 +1568,19 @@
       "hbar_sales_reps" : {
         "broadcastFacet" : true,
         "groups" : [
-          "Owner.UniqueUserName"
+          "Owner_UniqueUserName"
         ],
         "numbers" : [
           "sum_total_activities"
         ],
-        "query" : "e = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; z = group e by 'Owner.UniqueUserName'; z = foreach z generate first('Owner.SmallPhotoUrl') as 'Chatter_Image', 'Owner.UniqueUserName' as 'Owner.UniqueUserName', coalesce(count(),0) as 'sum_total_activities';z = order z by 'sum_total_activities' desc;",
+        "query" : "e = load \"${App.Datasets.activity1_tp.FullyQualifiedName}\"; z = group e by 'Owner_UniqueUserName'; z = foreach z generate first('Owner_SmallPhotoUrl') as 'Chatter_Image', 'Owner_UniqueUserName' as 'Owner_UniqueUserName', coalesce(count(),0) as 'sum_total_activities';z = order z by 'sum_total_activities' desc;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
         },
         "selectMode" : "single",
         "strings" : [
-          "Owner.UniqueUserName",
+          "Owner_UniqueUserName",
           "Chatter_Image"
         ],
         "type" : "saql",
@@ -1607,7 +1607,7 @@
         "broadcastFacet" : false,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1619,7 +1619,7 @@
                 "activities_completed"
               ]
             ],
-            "pigql" : "a = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; a = filter a by 'EventSubtype' == \"Event\"; a = group a by all; a = foreach a generate count() as 'count'; u = load \"${App.Datasets.user_tp.FullyQualifiedName}\"; b = group u by all full, a by all; b = foreach b generate coalesce(round(sum(a['count']) / count(u),2),0) as 'avg_activities_completed';"
+            "pigql" : "a = load \"${App.Datasets.activity1_tp.FullyQualifiedName}\"; a = filter a by 'EventSubtype' == \"Event\"; a = group a by all; a = foreach a generate count() as 'count'; u = load \"${App.Datasets.user1_tp.FullyQualifiedName}\"; b = group u by all full, a by all; b = foreach b generate coalesce(round(sum(a['count']) / count(u),2),0) as 'avg_activities_completed';"
           },
           "version" : -1.0
         },
@@ -1639,7 +1639,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1683,7 +1683,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1726,7 +1726,7 @@
         "broadcastFacet" : false,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1738,7 +1738,7 @@
                 "activities_completed"
               ]
             ],
-            "pigql" : "a = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; a = filter a by 'EventSubtype' == \"Task\"; a = group a by all; a = foreach a generate count() as 'count'; u = load \"${App.Datasets.user_tp.FullyQualifiedName}\"; b = group u by all full, a by all; b = foreach b generate coalesce(round(sum(a['count']) / count(u),2),0) as 'avg_activities_completed';"
+            "pigql" : "a = load \"${App.Datasets.activity1_tp.FullyQualifiedName}\"; a = filter a by 'EventSubtype' == \"Task\"; a = group a by all; a = foreach a generate count() as 'count'; u = load \"${App.Datasets.user1_tp.FullyQualifiedName}\"; b = group u by all full, a by all; b = foreach b generate coalesce(round(sum(a['count']) / count(u),2),0) as 'avg_activities_completed';"
           },
           "version" : -1.0
         },
@@ -1758,7 +1758,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1796,7 +1796,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1847,7 +1847,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1884,7 +1884,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1928,7 +1928,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1979,7 +1979,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2022,7 +2022,7 @@
       "table_Details" : {
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isFacet" : true,
@@ -2030,13 +2030,13 @@
         "query" : {
           "query" : {
             "values" : [
-              "Account.Name",
+              "Account_Name",
               "EventSubtype",
               "Subject",
-              "AssignedTo.UniqueUserName",
+              "AssignedTo_UniqueUserName",
               "Status",
-              "Opportunity.Name",
-              "Opportunity.Type",
+              "Opportunity_Name",
+              "Opportunity_Type",
               "ActivityDate",
               "DaysOverdue",
               "IsClosed"
@@ -2088,7 +2088,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2125,7 +2125,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2137,7 +2137,7 @@
                 "*"
               ]
             ],
-            "pigql" : "a = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; a = filter a by 'IsOverdue' == \"true\"; a = group a by all; a = foreach a generate count() as 'count';"
+            "pigql" : "a = load \"${App.Datasets.activity1_tp.FullyQualifiedName}\"; a = filter a by 'IsOverdue' == \"true\"; a = group a by all; a = foreach a generate count() as 'count';"
           },
           "version" : -1.0
         },
@@ -2157,7 +2157,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2199,7 +2199,7 @@
         "numbers" : [
           "sum_percent"
         ],
-        "query" : "owner = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; owner = filter owner by {{column(hbar_sales_reps.selection, [\"Owner.UniqueUserName\"]).asEquality(\"Owner.UniqueUserName\")}}; owner = group owner by all; owner = foreach owner generate coalesce(count(),0) as 'avg_act'; a = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; a = group a by all; a = foreach a generate count() as 'count'; u = load \"${App.Datasets.user_tp.FullyQualifiedName}\"; b = group u by all full, a by all; b = foreach b generate coalesce(sum(a['count']) / count(u),0) as 'avg_activities_completed'; z = group owner by all, b by all; z = foreach z generate (case when (\"{{cell(hbar_sales_reps.selection, 0, \"Owner.UniqueUserName\").asString()}}\" == \"null\") then 0 else coalesce((sum(owner['avg_act']) - sum(b['avg_activities_completed']))/sum(b['avg_activities_completed']),0) end) as 'sum_percent'; z = foreach z generate 'sum_percent', (case when 'sum_percent' > 0 then \"#4ED469\" when 'sum_percent' < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'sum_percent' < 0 then \"▼\" when 'sum_percent' > 0 then \"▲\" else \"◄ ►\"  end) as 'diff_arrow';",
+        "query" : "owner = load \"${App.Datasets.activity1_tp.FullyQualifiedName}\"; owner = filter owner by {{column(hbar_sales_reps.selection, [\"Owner_UniqueUserName\"]).asEquality(\"Owner_UniqueUserName\")}}; owner = group owner by all; owner = foreach owner generate coalesce(count(),0) as 'avg_act'; a = load \"${App.Datasets.activity1_tp.FullyQualifiedName}\"; a = group a by all; a = foreach a generate count() as 'count'; u = load \"${App.Datasets.user1_tp.FullyQualifiedName}\"; b = group u by all full, a by all; b = foreach b generate coalesce(sum(a['count']) / count(u),0) as 'avg_activities_completed'; z = group owner by all, b by all; z = foreach z generate (case when (\"{{cell(hbar_sales_reps.selection, 0, \"Owner_UniqueUserName\").asString()}}\" == \"null\") then 0 else coalesce((sum(owner['avg_act']) - sum(b['avg_activities_completed']))/sum(b['avg_activities_completed']),0) end) as 'sum_percent'; z = foreach z generate 'sum_percent', (case when 'sum_percent' > 0 then \"#4ED469\" when 'sum_percent' < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'sum_percent' < 0 then \"▼\" when 'sum_percent' > 0 then \"▲\" else \"◄ ►\"  end) as 'diff_arrow';",
         "receiveFacetSource" : {
           "mode" : "none",
           "steps" : [ ]
@@ -2213,7 +2213,7 @@
         "broadcastFacet" : false,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2225,7 +2225,7 @@
                 "activities_completed"
               ]
             ],
-            "pigql" : "a = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; a = filter a by 'EventSubtype' == \"Call\"; a = group a by all; a = foreach a generate count() as 'count'; u = load \"${App.Datasets.user_tp.FullyQualifiedName}\"; b = group u by all full, a by all; b = foreach b generate coalesce(round(sum(a['count']) / count(u),2),0) as 'avg_activities_completed';"
+            "pigql" : "a = load \"${App.Datasets.activity1_tp.FullyQualifiedName}\"; a = filter a by 'EventSubtype' == \"Call\"; a = group a by all; a = foreach a generate count() as 'count'; u = load \"${App.Datasets.user1_tp.FullyQualifiedName}\"; b = group u by all full, a by all; b = foreach b generate coalesce(round(sum(a['count']) / count(u),2),0) as 'avg_activities_completed';"
           },
           "version" : -1.0
         },
@@ -2245,7 +2245,7 @@
         "broadcastFacet" : false,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2257,7 +2257,7 @@
                 "activities_completed"
               ]
             ],
-            "pigql" : "a = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; a = filter a by 'EventSubtype' == \"Email\"; a = group a by all; a = foreach a generate count() as 'count'; u = load \"${App.Datasets.user_tp.FullyQualifiedName}\"; b = group u by all full, a by all; b = foreach b generate coalesce(round(sum(a['count']) / count(u),2),0) as 'avg_activities_completed';"
+            "pigql" : "a = load \"${App.Datasets.activity1_tp.FullyQualifiedName}\"; a = filter a by 'EventSubtype' == \"Email\"; a = group a by all; a = foreach a generate count() as 'count'; u = load \"${App.Datasets.user1_tp.FullyQualifiedName}\"; b = group u by all full, a by all; b = foreach b generate coalesce(round(sum(a['count']) / count(u),2),0) as 'avg_activities_completed';"
           },
           "version" : -1.0
         },
@@ -2277,7 +2277,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2320,7 +2320,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2365,7 +2365,7 @@
         "numbers" : [
           "sum_percent"
         ],
-        "query" : "a = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; p = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; z = group a by all full, p by all; z = foreach z generate coalesce(count(a) - count(p),0)/coalesce(count(p),1) as 'diff_to_last_period'; z = group z by all; z = foreach z generate coalesce(avg('diff_to_last_period'),0) as 'sum_percent', (case when avg('diff_to_last_period') > 0 then \"#4ED469\" when avg('diff_to_last_period') < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when avg('diff_to_last_period') < 0 then \"▼\" when avg('diff_to_last_period') > 0 then \"▲\" else \"◄ ►\" end) as 'diff_arrow';",
+        "query" : "a = load \"${App.Datasets.activity1_tp.FullyQualifiedName}\"; p = load \"${App.Datasets.activity1_tp.FullyQualifiedName}\"; z = group a by all full, p by all; z = foreach z generate coalesce(count(a) - count(p),0)/coalesce(count(p),1) as 'diff_to_last_period'; z = group z by all; z = foreach z generate coalesce(avg('diff_to_last_period'),0) as 'sum_percent', (case when avg('diff_to_last_period') > 0 then \"#4ED469\" when avg('diff_to_last_period') < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when avg('diff_to_last_period') < 0 then \"▼\" when avg('diff_to_last_period') > 0 then \"▲\" else \"◄ ►\" end) as 'diff_arrow';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2381,7 +2381,7 @@
         "numbers" : [
           "sum_percent"
         ],
-        "query" : "owner = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; owner = filter owner by {{column(hbar_sales_reps.selection, [\"Owner.UniqueUserName\"]).asEquality(\"Owner.UniqueUserName\")}}; owner = filter owner by 'IsOverdue' == \"true\"; a = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; a = filter a by 'IsOverdue' == \"true\"; a = group a by all; a = foreach a generate count() as 'count'; u = load \"${App.Datasets.user_tp.FullyQualifiedName}\"; b = group u by all full, a by all; b = foreach b generate coalesce(sum(a['count'])/count(u),0) as avg_completed; z = group owner by all full, b by all; z = foreach z generate (case when (\"{{cell(hbar_sales_reps.selection, 0, \"Owner.UniqueUserName\").asString()}}\" == \"null\") then 0 else coalesce((count(owner) - sum(b['avg_completed']))/sum(b['avg_completed']),0) end) as 'sum_percent'; z = foreach z generate 'sum_percent', (case when 'sum_percent' > 0 then \"#4ED469\" when 'sum_percent' < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'sum_percent' < 0 then \"▼\" when 'sum_percent' > 0 then \"▲\" else \"◄ ►\"  end) as 'diff_arrow';",
+        "query" : "owner = load \"${App.Datasets.activity1_tp.FullyQualifiedName}\"; owner = filter owner by {{column(hbar_sales_reps.selection, [\"Owner_UniqueUserName\"]).asEquality(\"Owner_UniqueUserName\")}}; owner = filter owner by 'IsOverdue' == \"true\"; a = load \"${App.Datasets.activity1_tp.FullyQualifiedName}\"; a = filter a by 'IsOverdue' == \"true\"; a = group a by all; a = foreach a generate count() as 'count'; u = load \"${App.Datasets.user1_tp.FullyQualifiedName}\"; b = group u by all full, a by all; b = foreach b generate coalesce(sum(a['count'])/count(u),0) as avg_completed; z = group owner by all full, b by all; z = foreach z generate (case when (\"{{cell(hbar_sales_reps.selection, 0, \"Owner_UniqueUserName\").asString()}}\" == \"null\") then 0 else coalesce((count(owner) - sum(b['avg_completed']))/sum(b['avg_completed']),0) end) as 'sum_percent'; z = foreach z generate 'sum_percent', (case when 'sum_percent' > 0 then \"#4ED469\" when 'sum_percent' < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'sum_percent' < 0 then \"▼\" when 'sum_percent' > 0 then \"▲\" else \"◄ ►\"  end) as 'diff_arrow';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2397,7 +2397,7 @@
         "numbers" : [
           "sum_percent"
         ],
-        "query" : "owner = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; owner = filter owner by {{column(hbar_sales_reps.selection, [\"Owner.UniqueUserName\"]).asEquality(\"Owner.UniqueUserName\")}}; owner = filter owner by 'IsClosed' == \"true\"; a = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"true\"; a = group a by all; a = foreach a generate count() as 'count'; u = load \"${App.Datasets.user_tp.FullyQualifiedName}\"; b = group u by all full, a by all; b = foreach b generate coalesce(sum(a['count'])/count(u),0) as avg_completed; z = group owner by all full, b by all; z = foreach z generate (case when (\"{{cell(hbar_sales_reps.selection, 0, \"Owner.UniqueUserName\").asString()}}\" == \"null\") then 0 else coalesce((count(owner) - sum(b['avg_completed']))/sum(b['avg_completed']),0) end) as 'sum_percent'; z = foreach z generate 'sum_percent', (case when 'sum_percent' > 0 then \"#4ED469\" when 'sum_percent' < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'sum_percent' < 0 then \"▼\" when 'sum_percent' > 0 then \"▲\" else \"◄ ►\"  end) as 'diff_arrow';",
+        "query" : "owner = load \"${App.Datasets.activity1_tp.FullyQualifiedName}\"; owner = filter owner by {{column(hbar_sales_reps.selection, [\"Owner_UniqueUserName\"]).asEquality(\"Owner_UniqueUserName\")}}; owner = filter owner by 'IsClosed' == \"true\"; a = load \"${App.Datasets.activity1_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"true\"; a = group a by all; a = foreach a generate count() as 'count'; u = load \"${App.Datasets.user1_tp.FullyQualifiedName}\"; b = group u by all full, a by all; b = foreach b generate coalesce(sum(a['count'])/count(u),0) as avg_completed; z = group owner by all full, b by all; z = foreach z generate (case when (\"{{cell(hbar_sales_reps.selection, 0, \"Owner_UniqueUserName\").asString()}}\" == \"null\") then 0 else coalesce((count(owner) - sum(b['avg_completed']))/sum(b['avg_completed']),0) end) as 'sum_percent'; z = foreach z generate 'sum_percent', (case when 'sum_percent' > 0 then \"#4ED469\" when 'sum_percent' < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'sum_percent' < 0 then \"▼\" when 'sum_percent' > 0 then \"▲\" else \"◄ ►\"  end) as 'diff_arrow';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2411,7 +2411,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,

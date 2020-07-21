@@ -29,16 +29,16 @@
       {
         "fields" : [
           {
-            "dataSourceName" : "${App.Datasets.opportunity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.opportunity1_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
-            "fieldName" : "Product.Product.Name"
+            "fieldName" : "Product_Product_Name"
           },
           {
-            "dataSourceName" : "${App.Datasets.opportunity_products_tp.Name}",
+            "dataSourceName" : "${App.Datasets.opportunity_products1_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
-            "fieldName" : "Product.Name"
+            "fieldName" : "Product_Name"
           }
         ],
         "label" : "Product Name",
@@ -47,16 +47,16 @@
       {
         "fields" : [
           {
-            "dataSourceName" : "${App.Datasets.opportunity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.opportunity1_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
-            "fieldName" : "Account.Parent.AccountParents"
+            "fieldName" : "Account_Parent_AccountParents"
           },
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.activity1_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
-            "fieldName" : "Opportunity.Account.Parent.AccountParents"
+            "fieldName" : "Opportunity_Account_Parent_AccountParents"
           }
         ],
         "label" : "Activities Account Id",
@@ -65,16 +65,16 @@
       {
         "fields" : [
           {
-            "dataSourceName" : "${App.Datasets.opportunity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.opportunity1_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
-            "fieldName" : "Account.Parent.AccountParents"
+            "fieldName" : "Account_Parent_AccountParents"
           },
           {
-            "dataSourceName" : "${App.Datasets.opportunity_products_tp.Name}",
+            "dataSourceName" : "${App.Datasets.opportunity_products1_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
-            "fieldName" : "Opportunity.Account.Parent.AccountParents"
+            "fieldName" : "Opportunity_Account_Parent_AccountParents"
           }
         ],
         "label" : "Products Account Id",
@@ -83,16 +83,16 @@
       {
         "fields" : [
           {
-            "dataSourceName" : "${App.Datasets.opportunity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.opportunity1_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
-            "fieldName" : "Account.Parent.AccountParents"
+            "fieldName" : "Account_Parent_AccountParents"
           },
           {
-            "dataSourceName" : "${App.Datasets.case_tp.Name}",
+            "dataSourceName" : "${App.Datasets.case1_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
-            "fieldName" : "Account.Parent.AccountParents"
+            "fieldName" : "Account_Parent_AccountParents"
           }
         ],
         "label" : "Cases Account Id",
@@ -955,7 +955,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_tp.Name}"
+            "name" : "${App.Datasets.opportunity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1022,7 +1022,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_tp.Name}"
+            "name" : "${App.Datasets.opportunity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1043,7 +1043,7 @@
                 "in"
               ],
               [
-                "Stage.IsPushed",
+                "Stage_IsPushed",
                 [
                   [
                     1
@@ -1161,13 +1161,13 @@
           {
             "display" : "Product",
             "value" : [
-              "Product.Name"
+              "Product_Name"
             ]
           },
           {
             "display" : "Lead Source",
             "value" : [
-              "Opportunity.LeadSource"
+              "Opportunity_LeadSource"
             ]
           }
         ]
@@ -1176,7 +1176,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_tp.Name}"
+            "name" : "${App.Datasets.opportunity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1207,7 +1207,7 @@
                       "CloseDate_Day"
                     ],
                     "ForecastCategoryName",
-                    "Owner.UniqueUserName"
+                    "Owner_UniqueUserName"
                   ],
                   "filters" : [ ],
                   "order" : [
@@ -1229,7 +1229,7 @@
                 "CloseDate_Month",
                 "CloseDate_Day"
               ],
-              "Owner.UniqueUserName",
+              "Owner_UniqueUserName",
               "ForecastCategoryName"
             ]
           },
@@ -1260,7 +1260,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_products_tp.Name}"
+            "name" : "${App.Datasets.opportunity_products1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1337,7 +1337,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_tp.Name}"
+            "name" : "${App.Datasets.opportunity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1393,7 +1393,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1417,8 +1417,8 @@
                 "in"
               ],
               [
-                "Opportunity.Account.Name",
-                "{{column(account_name_filter.selection, [\"Account.Name\"]).asObject()}}"
+                "Opportunity_Account_Name",
+                "{{column(account_name_filter.selection, [\"Account_Name\"]).asObject()}}"
               ]
             ]
           },
@@ -1440,7 +1440,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_tp.Name}"
+            "name" : "${App.Datasets.opportunity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1565,7 +1565,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_tp.Name}"
+            "name" : "${App.Datasets.opportunity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1578,7 +1578,7 @@
               ]
             ],
             "groups" : [
-              "Account.Name"
+              "Account_Name"
             ]
           },
           "version" : -1.0
@@ -1600,7 +1600,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_products_tp.Name}"
+            "name" : "${App.Datasets.opportunity_products1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1616,7 +1616,7 @@
             "groups" : "{{cell(product_mix_dimension.selection, 0 , \"value\").asObject()}}",
             "filters" : [
               [
-                "Opportunity.IsWon",
+                "Opportunity_IsWon",
                 [
                   "true"
                 ],
@@ -1649,7 +1649,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1673,7 +1673,7 @@
                   ],
                   "groups" : [
                     "Subject",
-                    "AssignedTo.UniqueUserName",
+                    "AssignedTo_UniqueUserName",
                     "TaskSubtype",
                     [
                       "ActivityDate_Year",
@@ -1711,7 +1711,7 @@
             ],
             "groups" : [
               "Subject",
-              "AssignedTo.UniqueUserName",
+              "AssignedTo_UniqueUserName",
               "TaskSubtype",
               [
                 "ActivityDate_Year",
@@ -1747,7 +1747,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_tp.Name}"
+            "name" : "${App.Datasets.opportunity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1879,7 +1879,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_products_tp.Name}"
+            "name" : "${App.Datasets.opportunity_products1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1893,7 +1893,7 @@
               ]
             ],
             "groups" : [
-              "Product.Name"
+              "Product_Name"
             ],
             "filters" : [ ],
             "order" : [
@@ -2001,7 +2001,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_products_tp.Name}"
+            "name" : "${App.Datasets.opportunity_products1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2015,8 +2015,8 @@
               ]
             ],
             "groups" : [
-              "Opportunity.Name",
-              "Product.Name"
+              "Opportunity_Name",
+              "Product_Name"
             ],
             "filters" : [ ]
           },
@@ -2096,7 +2096,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_tp.Name}"
+            "name" : "${App.Datasets.opportunity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2214,7 +2214,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2228,7 +2228,7 @@
               ]
             ],
             "groups" : [
-              "AssignedTo.UniqueUserName"
+              "AssignedTo_UniqueUserName"
             ],
             "filters" : [ ]
           },
@@ -2328,7 +2328,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_tp.Name}"
+            "name" : "${App.Datasets.opportunity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2369,7 +2369,7 @@
         "broadcastFacet" : false,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_tp.Name}"
+            "name" : "${App.Datasets.opportunity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2381,7 +2381,7 @@
                 "win_rate"
               ]
             ],
-            "pigql" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; won = filter a by 'IsWon' == \"true\"; closed = filter a by 'IsClosed' == \"true\"; q = group won by all, closed by all; q = foreach q generate sum(won['Amount']) / sum(closed['Amount']) as 'avg_win_rate';",
+            "pigql" : "a = load \"${App.Datasets.opportunity1_tp.FullyQualifiedName}\"; won = filter a by 'IsWon' == \"true\"; closed = filter a by 'IsClosed' == \"true\"; q = group won by all, closed by all; q = foreach q generate sum(won['Amount']) / sum(closed['Amount']) as 'avg_win_rate';",
             "groups" : [ ],
             "dimensions" : [ ],
             "order" : [ ]
@@ -2401,7 +2401,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_tp.Name}"
+            "name" : "${App.Datasets.opportunity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2519,7 +2519,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_tp.Name}"
+            "name" : "${App.Datasets.opportunity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2633,7 +2633,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.case_tp.Name}"
+            "name" : "${App.Datasets.case1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2707,7 +2707,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2832,7 +2832,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_tp.Name}"
+            "name" : "${App.Datasets.opportunity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2845,7 +2845,7 @@
               ]
             ],
             "groups" : [
-              "Account.Parent.AccountParents"
+              "Account_Parent_AccountParents"
             ]
           },
           "version" : -1.0
@@ -2867,7 +2867,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_tp.Name}"
+            "name" : "${App.Datasets.opportunity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2919,7 +2919,7 @@
         "broadcastFacet" : false,
         "datasets" : [
           {
-            "name" : "${App.Datasets.case_tp.Name}"
+            "name" : "${App.Datasets.case1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2956,7 +2956,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.activity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2979,9 +2979,9 @@
                     ]
                   ],
                   "groups" : [
-                    "Opportunity.Name",
+                    "Opportunity_Name",
                     "Subject",
-                    "AssignedTo.UniqueUserName",
+                    "AssignedTo_UniqueUserName",
                     [
                       "ActivityDate_Year",
                       "ActivityDate_Month",
@@ -2993,9 +2993,9 @@
               }
             ],
             "groups" : [
-              "Opportunity.Name",
+              "Opportunity_Name",
               "Subject",
-              "AssignedTo.UniqueUserName",
+              "AssignedTo_UniqueUserName",
               [
                 "ActivityDate_Year",
                 "ActivityDate_Month",
@@ -3030,7 +3030,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_tp.Name}"
+            "name" : "${App.Datasets.opportunity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -3070,7 +3070,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.case_tp.Name}"
+            "name" : "${App.Datasets.case1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -3121,7 +3121,7 @@
         "broadcastFacet" : false,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_tp.Name}"
+            "name" : "${App.Datasets.opportunity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -3150,7 +3150,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_tp.Name}"
+            "name" : "${App.Datasets.opportunity1_tp.Name}"
           }
         ],
         "isGlobal" : false,
