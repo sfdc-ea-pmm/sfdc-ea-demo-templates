@@ -28,7 +28,7 @@
     "filters" : [
       {
         "dataset" : {
-          "name" : "${App.Datasets.opportunity_products1_tp.Name}"
+          "name" : "${App.Datasets.opportunity_products_tp.Name}"
         },
         "dependent" : false,
         "fields" : [
@@ -40,7 +40,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.opportunity_products1_tp.Name}"
+          "name" : "${App.Datasets.opportunity_products_tp.Name}"
         },
         "dependent" : false,
         "fields" : [
@@ -52,7 +52,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.opportunity_products1_tp.Name}"
+          "name" : "${App.Datasets.opportunity_products_tp.Name}"
         },
         "dependent" : false,
         "fields" : [
@@ -64,7 +64,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.opportunity_products1_tp.Name}"
+          "name" : "${App.Datasets.opportunity_products_tp.Name}"
         },
         "dependent" : false,
         "fields" : [
@@ -76,7 +76,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.opportunity_products1_tp.Name}"
+          "name" : "${App.Datasets.opportunity_products_tp.Name}"
         },
         "dependent" : false,
         "fields" : [
@@ -88,7 +88,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.opportunity_products1_tp.Name}"
+          "name" : "${App.Datasets.opportunity_products_tp.Name}"
         },
         "dependent" : false,
         "fields" : [
@@ -100,7 +100,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.opportunity_products1_tp.Name}"
+          "name" : "${App.Datasets.opportunity_products_tp.Name}"
         },
         "dependent" : false,
         "fields" : [
@@ -900,7 +900,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_products1_tp.Name}"
+            "name" : "${App.Datasets.opportunity_products_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -939,7 +939,7 @@
       "details_table" : {
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_products1_tp.Name}"
+            "name" : "${App.Datasets.opportunity_products_tp.Name}"
           }
         ],
         "isFacet" : true,
@@ -1004,13 +1004,13 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_products1_tp.Name}"
+            "name" : "${App.Datasets.opportunity_products_tp.Name}"
           }
         ],
         "isGlobal" : false,
         "query" : {
           "query" : {
-            "pigql" : "q = load \"${App.Datasets.opportunity_products1_tp.FullyQualifiedName}\"; q = filter q by 'Opportunity_IsWon' == \"true\"; q = group q by {{cell(dropdown_product_level_group.selection, 0, \"value\").asGrouping()}}; FINAL = foreach q generate {{cell(dropdown_product_level_group.selection, 0, \"value\").asGrouping()}} as {{cell(dropdown_product_level_group.selection, 0, \"value\").asGrouping()}}, coalesce(sum('TotalPrice'), 0) as 'sum_TotalPrice'; FINAL = order FINAL by 'sum_TotalPrice' desc;",
+            "pigql" : "q = load \"${App.Datasets.opportunity_products_tp.FullyQualifiedName}\"; q = filter q by 'Opportunity_IsWon' == \"true\"; q = group q by {{cell(dropdown_product_level_group.selection, 0, \"value\").asGrouping()}}; FINAL = foreach q generate {{cell(dropdown_product_level_group.selection, 0, \"value\").asGrouping()}} as {{cell(dropdown_product_level_group.selection, 0, \"value\").asGrouping()}}, coalesce(sum('TotalPrice'), 0) as 'sum_TotalPrice'; FINAL = order FINAL by 'sum_TotalPrice' desc;",
             "measures" : [
               [
                 "sum",
@@ -1042,7 +1042,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_products1_tp.Name}"
+            "name" : "${App.Datasets.opportunity_products_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1268,7 +1268,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_products1_tp.Name}"
+            "name" : "${App.Datasets.opportunity_products_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1319,7 +1319,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_products1_tp.Name}"
+            "name" : "${App.Datasets.opportunity_products_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1450,7 +1450,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_products1_tp.Name}"
+            "name" : "${App.Datasets.opportunity_products_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1497,7 +1497,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_products1_tp.Name}"
+            "name" : "${App.Datasets.opportunity_products_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1546,13 +1546,13 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.opportunity_products1_tp.Name}"
+            "name" : "${App.Datasets.opportunity_products_tp.Name}"
           }
         ],
         "isGlobal" : false,
         "query" : {
           "query" : {
-            "pigql" : "q = load \"${App.Datasets.opportunity_products1_tp.FullyQualifiedName}\"; q = filter q by 'Opportunity_IsWon' == \"true\"; q = group q by ('Opportunity_CloseDate_Year', 'Opportunity_CloseDate_Quarter'); q = foreach q generate 'Opportunity_CloseDate_Year' + \"~~~\" + 'Opportunity_CloseDate_Quarter' as 'Opportunity_CloseDate_Year~~~Opportunity_CloseDate_Quarter', sum('TotalPrice') as 'TotalPrice', sum(sum('TotalPrice')) over ([ - 4.. - 4] partition by all order by ('Opportunity_CloseDate_Year', 'Opportunity_CloseDate_Quarter')) as 'last'; q = foreach q generate 'Opportunity_CloseDate_Year~~~Opportunity_CloseDate_Quarter' as'Opportunity_CloseDate_Year~~~Opportunity_CloseDate_Quarter', (sum('TotalPrice') - sum('last')) / sum('last') as 'sum_QoQ'; q = offset q 4;",
+            "pigql" : "q = load \"${App.Datasets.opportunity_products_tp.FullyQualifiedName}\"; q = filter q by 'Opportunity_IsWon' == \"true\"; q = group q by ('Opportunity_CloseDate_Year', 'Opportunity_CloseDate_Quarter'); q = foreach q generate 'Opportunity_CloseDate_Year' + \"~~~\" + 'Opportunity_CloseDate_Quarter' as 'Opportunity_CloseDate_Year~~~Opportunity_CloseDate_Quarter', sum('TotalPrice') as 'TotalPrice', sum(sum('TotalPrice')) over ([ - 4.. - 4] partition by all order by ('Opportunity_CloseDate_Year', 'Opportunity_CloseDate_Quarter')) as 'last'; q = foreach q generate 'Opportunity_CloseDate_Year~~~Opportunity_CloseDate_Quarter' as'Opportunity_CloseDate_Year~~~Opportunity_CloseDate_Quarter', (sum('TotalPrice') - sum('last')) / sum('last') as 'sum_QoQ'; q = offset q 4;",
             "measures" : [
               [
                 "sum",
