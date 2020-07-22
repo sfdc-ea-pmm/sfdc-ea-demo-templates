@@ -26,7 +26,7 @@
             "fieldName" : "UniqueUserName"
           },
           {
-            "dataSourceName" : "${App.Datasets.account_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Account_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "Owner_UniqueUserName"
@@ -38,7 +38,7 @@
             "fieldName" : "Owner_UniqueUserName"
           },
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Activity_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "Owner_UniqueUserName"
@@ -68,7 +68,7 @@
             "fieldName" : "Type"
           },
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Activity_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "Opportunity_Type"
@@ -92,7 +92,7 @@
             "fieldName" : "RecordType_Name"
           },
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Activity_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "Opportunity_RecordType_Name"
@@ -116,7 +116,7 @@
             "fieldName" : "ForecastCategoryName"
           },
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Activity_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "Opportunity_ForecastCategoryName"
@@ -140,7 +140,7 @@
             "fieldName" : "StageName"
           },
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Activity_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "Opportunity_StageName"
@@ -170,7 +170,7 @@
             "fieldName" : "CloseDate"
           },
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Activity_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "ActivityDate"
@@ -1172,7 +1172,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.Activity_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1824,7 +1824,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.Activity_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1836,7 +1836,7 @@
                 "percent"
               ]
             ],
-            "pigql" : "a = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"true\"; today = filter a by date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day') in [\"7 days ago\"..\"current day\"]; last_week = filter a by date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day') in [\"15 days ago\"..\"8 days ago\"]; q = group today by all full, last_week by all; q = foreach q generate coalesce(count('today'), 0) as 'today', coalesce(count('last_week'), 0) as 'last_week'; q = foreach q generate (case when coalesce(sum('last_week'), 0) == 0 && coalesce(sum('today'), 0) > 0 then 1.0 else coalesce((coalesce(sum('today'), 0) - coalesce(sum('last_week'), 0)) / coalesce(sum('last_week'), 0), 0) end) as 'sum_percent';"
+            "pigql" : "a = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"true\"; today = filter a by date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day') in [\"7 days ago\"..\"current day\"]; last_week = filter a by date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day') in [\"15 days ago\"..\"8 days ago\"]; q = group today by all full, last_week by all; q = foreach q generate coalesce(count('today'), 0) as 'today', coalesce(count('last_week'), 0) as 'last_week'; q = foreach q generate (case when coalesce(sum('last_week'), 0) == 0 && coalesce(sum('today'), 0) > 0 then 1.0 else coalesce((coalesce(sum('today'), 0) - coalesce(sum('last_week'), 0)) / coalesce(sum('last_week'), 0), 0) end) as 'sum_percent';"
           },
           "version" : -1.0
         },
@@ -1890,7 +1890,7 @@
         "broadcastFacet" : false,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.Activity_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2272,7 +2272,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.Activity_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2284,7 +2284,7 @@
                 "percent"
               ]
             ],
-            "pigql" : "a = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; a = filter a by {{column(dropdown_parent_id_hidden.result, [\"Role_DeveloperName\"]).asEquality(\"Owner_Role_DeveloperName\")}}; a = filter a by 'IsClosed' == \"true\"; a = group a by 'OwnerId'; a = foreach a generate count() as 'owner_count', 'OwnerId' as 'OwnerId'; a = group a by all; a = foreach a generate coalesce(sum('owner_count')/unique('OwnerId'), 0) as 'team_avg'; a = foreach a generate coalesce(({{coalesce(cell(kpi_activities_completed.result, 0, \"count\"), 0).asObject()}} - sum('team_avg')) / sum('team_avg'), 0) as 'sum_percent';"
+            "pigql" : "a = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; a = filter a by {{column(dropdown_parent_id_hidden.result, [\"Role_DeveloperName\"]).asEquality(\"Owner_Role_DeveloperName\")}}; a = filter a by 'IsClosed' == \"true\"; a = group a by 'OwnerId'; a = foreach a generate count() as 'owner_count', 'OwnerId' as 'OwnerId'; a = group a by all; a = foreach a generate coalesce(sum('owner_count')/unique('OwnerId'), 0) as 'team_avg'; a = foreach a generate coalesce(({{coalesce(cell(kpi_activities_completed.result, 0, \"count\"), 0).asObject()}} - sum('team_avg')) / sum('team_avg'), 0) as 'sum_percent';"
           },
           "version" : -1.0
         },
@@ -2319,7 +2319,7 @@
         "broadcastFacet" : false,
         "datasets" : [
           {
-            "name" : "${App.Datasets.account_tp.Name}"
+            "name" : "${App.Datasets.Account_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2856,7 +2856,7 @@
       "text_5" : {
         "parameters" : {
           "content" : {
-            "displayTemplate" : "* Opportunities with no activity in the past 60 days."
+            "displayTemplate" : "* Opportunities with no Activity in the past 60 days."
           },
           "fontSize" : 12,
           "showActionMenu" : true,

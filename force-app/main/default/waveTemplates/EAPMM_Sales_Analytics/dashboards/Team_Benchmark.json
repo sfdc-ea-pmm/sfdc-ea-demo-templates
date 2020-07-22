@@ -35,7 +35,7 @@
             "fieldName" : "RecordType_Name"
           },
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Activity_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "Opportunity_RecordType_Name"
@@ -53,7 +53,7 @@
             "fieldName" : "Opportunity_Type"
           },
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Activity_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "Opportunity_Type"
@@ -77,7 +77,7 @@
             "fieldName" : "StartDate"
           },
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Activity_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "ActivityDate"
@@ -89,7 +89,7 @@
       {
         "fields" : [
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Activity_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "Owner_Role_RoleNames"
@@ -131,7 +131,7 @@
             "fieldName" : "Owner_UniqueUserName"
           },
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Activity_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "Owner_UniqueUserName"
@@ -1279,7 +1279,7 @@
         "broadcastFacet" : true,
         "groups" : [ ],
         "numbers" : [ ],
-        "query" : "u = load \"${App.Datasets.user_tp.FullyQualifiedName}\"; a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; q = filter a by 'IsWon' == \"true\"; r = filter a by 'IsClosed' == \"true\"; Avg_Day = filter a by 'IsClosed' == \"true\" && 'IsWon' == \"true\"; OpptyCount_Left = filter a by  {{cell(dropdown_measure_one.selection,0, \"filter\").asObject()}}; OpptyCount_Right = filter a by {{cell(dropdown_measure_two.selection,0, \"filter\").asObject()}}; AvgDeal_Left = filter a by  {{cell(dropdown_measure_one.selection,0, \"filter\").asObject()}}; AvgDeal_Right = filter a by {{cell(dropdown_measure_two.selection,0, \"filter\").asObject()}}; leftpipe = filter a by  {{cell(dropdown_measure_one.selection,0, \"filter\").asObject()}}; rightpipe = filter a by {{cell(dropdown_measure_two.selection,0, \"filter\").asObject()}}; Activities = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; Activities = group Activities by ('Owner_UniqueUserName', 'IsClosed'); Activities = foreach Activities generate 'Owner_UniqueUserName' as 'Owner_UniqueUserName', 'IsClosed' as 'IsClosed', count() as 'count'; Completed_Activities = filter Activities by 'IsClosed' == \"true\"; Percentage = group Completed_Activities by 'Owner_UniqueUserName' full, Activities by 'Owner_UniqueUserName'; Percentage = foreach Percentage generate Activities['Owner_UniqueUserName'] as 'Owner_UniqueUserName', coalesce( sum(Completed_Activities['count']) / sum(Activities['count']), 0) as 'CompletedRate'; Percentage_Left = group Completed_Activities by 'Owner_UniqueUserName' full, Activities by 'Owner_UniqueUserName'; Percentage_Left = foreach Percentage_Left generate Activities['Owner_UniqueUserName'] as 'Owner_UniqueUserName', coalesce( sum(Completed_Activities['count']) / sum(Activities['count']), 0) as 'CompletedRate_Left'; quota = load \"${App.Datasets.quota_tp.FullyQualifiedName}\"; u = filter u by 'IsActive' == \"true\"; c = group u by 'UniqueUserName' full, OpptyCount_Left by 'Owner_UniqueUserName' full, OpptyCount_Right by 'Owner_UniqueUserName' full, AvgDeal_Right by 'Owner_UniqueUserName' full, AvgDeal_Left by 'Owner_UniqueUserName' full ,q by 'Owner_UniqueUserName' full, r by 'Owner_UniqueUserName' full, quota by 'User_UniqueUserName' full, Avg_Day by 'Owner_UniqueUserName' full, leftpipe by 'Owner_UniqueUserName' full, rightpipe by 'Owner_UniqueUserName' full, Percentage by 'Owner_UniqueUserName' full, Percentage_Left by 'Owner_UniqueUserName'; c = foreach c generate coalesce(first(u['UniqueUserName']), first(q['Owner_UniqueUserName']), first(AvgDeal_Left['Owner_UniqueUserName']),  first(AvgDeal_Right['Owner_UniqueUserName']), first(OpptyCount_Right['Owner_UniqueUserName']), first(OpptyCount_Left['Owner_UniqueUserName']), first(r['Owner_UniqueUserName']), first(quota['User_UniqueUserName']), first(Avg_Day['Owner_UniqueUserName']), first(Percentage['Owner_UniqueUserName']), first(Percentage_Left['Owner_UniqueUserName'])) as 'UniqueUserName',  coalesce(sum(q['Amount']),0) as 'sum_Amount',   (coalesce(sum(AvgDeal_Left['Amount']),0) / coalesce(count(OpptyCount_Left),0))  as 'sum_left_DealAmount',  (coalesce(sum(AvgDeal_Right['Amount']),0) / coalesce(count(OpptyCount_Right),0)) as 'sum_right_DealAmount', coalesce(count(OpptyCount_Left),0) as 'sum_left_count', coalesce(count(OpptyCount_Right),0) as 'sum_right_count', coalesce(sum(leftpipe['Amount']),0) as 'sum_pipe', coalesce(sum(rightpipe['Amount']),0) as 'sum_pipe_right', coalesce((sum(Avg_Day['CloseDate_day_epoch']) - sum(Avg_Day['CreatedDate_day_epoch']))/count(Avg_Day),0) as 'sum_DaysOpen',  coalesce(sum(q['Amount']) / sum(r['Amount']),0) as 'sum_win_rate', coalesce(sum(Percentage_Left['CompletedRate_Left']),0) as 'sum_LeftActivity', coalesce(sum(Percentage['CompletedRate']),0) as 'sum_RightActivity',   coalesce(sum(q['Amount']) / sum(quota['QuotaAmount']),0) as 'sum_QuotaAmount'; c = foreach c generate 'UniqueUserName' as 'UniqueUserName', {{cell(dropdown_measure_one.selection,0, \"first_f\").asObject()}}, {{cell(dropdown_measure_two.selection,0, \"first_f\").asObject()}}; c = order c by ('{{cell(dropdown_measure_one.selection,0, \"left\").asObject()}}' desc nulls last, '{{cell(dropdown_measure_two.selection,0, \"right\").asObject()}}' desc nulls last);",
+        "query" : "u = load \"${App.Datasets.user_tp.FullyQualifiedName}\"; a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; q = filter a by 'IsWon' == \"true\"; r = filter a by 'IsClosed' == \"true\"; Avg_Day = filter a by 'IsClosed' == \"true\" && 'IsWon' == \"true\"; OpptyCount_Left = filter a by  {{cell(dropdown_measure_one.selection,0, \"filter\").asObject()}}; OpptyCount_Right = filter a by {{cell(dropdown_measure_two.selection,0, \"filter\").asObject()}}; AvgDeal_Left = filter a by  {{cell(dropdown_measure_one.selection,0, \"filter\").asObject()}}; AvgDeal_Right = filter a by {{cell(dropdown_measure_two.selection,0, \"filter\").asObject()}}; leftpipe = filter a by  {{cell(dropdown_measure_one.selection,0, \"filter\").asObject()}}; rightpipe = filter a by {{cell(dropdown_measure_two.selection,0, \"filter\").asObject()}}; Activities = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; Activities = group Activities by ('Owner_UniqueUserName', 'IsClosed'); Activities = foreach Activities generate 'Owner_UniqueUserName' as 'Owner_UniqueUserName', 'IsClosed' as 'IsClosed', count() as 'count'; Completed_Activities = filter Activities by 'IsClosed' == \"true\"; Percentage = group Completed_Activities by 'Owner_UniqueUserName' full, Activities by 'Owner_UniqueUserName'; Percentage = foreach Percentage generate Activities['Owner_UniqueUserName'] as 'Owner_UniqueUserName', coalesce( sum(Completed_Activities['count']) / sum(Activities['count']), 0) as 'CompletedRate'; Percentage_Left = group Completed_Activities by 'Owner_UniqueUserName' full, Activities by 'Owner_UniqueUserName'; Percentage_Left = foreach Percentage_Left generate Activities['Owner_UniqueUserName'] as 'Owner_UniqueUserName', coalesce( sum(Completed_Activities['count']) / sum(Activities['count']), 0) as 'CompletedRate_Left'; quota = load \"${App.Datasets.quota_tp.FullyQualifiedName}\"; u = filter u by 'IsActive' == \"true\"; c = group u by 'UniqueUserName' full, OpptyCount_Left by 'Owner_UniqueUserName' full, OpptyCount_Right by 'Owner_UniqueUserName' full, AvgDeal_Right by 'Owner_UniqueUserName' full, AvgDeal_Left by 'Owner_UniqueUserName' full ,q by 'Owner_UniqueUserName' full, r by 'Owner_UniqueUserName' full, quota by 'User_UniqueUserName' full, Avg_Day by 'Owner_UniqueUserName' full, leftpipe by 'Owner_UniqueUserName' full, rightpipe by 'Owner_UniqueUserName' full, Percentage by 'Owner_UniqueUserName' full, Percentage_Left by 'Owner_UniqueUserName'; c = foreach c generate coalesce(first(u['UniqueUserName']), first(q['Owner_UniqueUserName']), first(AvgDeal_Left['Owner_UniqueUserName']),  first(AvgDeal_Right['Owner_UniqueUserName']), first(OpptyCount_Right['Owner_UniqueUserName']), first(OpptyCount_Left['Owner_UniqueUserName']), first(r['Owner_UniqueUserName']), first(quota['User_UniqueUserName']), first(Avg_Day['Owner_UniqueUserName']), first(Percentage['Owner_UniqueUserName']), first(Percentage_Left['Owner_UniqueUserName'])) as 'UniqueUserName',  coalesce(sum(q['Amount']),0) as 'sum_Amount',   (coalesce(sum(AvgDeal_Left['Amount']),0) / coalesce(count(OpptyCount_Left),0))  as 'sum_left_DealAmount',  (coalesce(sum(AvgDeal_Right['Amount']),0) / coalesce(count(OpptyCount_Right),0)) as 'sum_right_DealAmount', coalesce(count(OpptyCount_Left),0) as 'sum_left_count', coalesce(count(OpptyCount_Right),0) as 'sum_right_count', coalesce(sum(leftpipe['Amount']),0) as 'sum_pipe', coalesce(sum(rightpipe['Amount']),0) as 'sum_pipe_right', coalesce((sum(Avg_Day['CloseDate_day_epoch']) - sum(Avg_Day['CreatedDate_day_epoch']))/count(Avg_Day),0) as 'sum_DaysOpen',  coalesce(sum(q['Amount']) / sum(r['Amount']),0) as 'sum_win_rate', coalesce(sum(Percentage_Left['CompletedRate_Left']),0) as 'sum_LeftActivity', coalesce(sum(Percentage['CompletedRate']),0) as 'sum_RightActivity',   coalesce(sum(q['Amount']) / sum(quota['QuotaAmount']),0) as 'sum_QuotaAmount'; c = foreach c generate 'UniqueUserName' as 'UniqueUserName', {{cell(dropdown_measure_one.selection,0, \"first_f\").asObject()}}, {{cell(dropdown_measure_two.selection,0, \"first_f\").asObject()}}; c = order c by ('{{cell(dropdown_measure_one.selection,0, \"left\").asObject()}}' desc nulls last, '{{cell(dropdown_measure_two.selection,0, \"right\").asObject()}}' desc nulls last);",
         "receiveFacetSource" : {
           "mode" : "none",
           "steps" : [ ]
@@ -1465,8 +1465,8 @@
           },
           {
             "display" : "Activities (Based on % Completed)",
-            "first_f" : "sum('sum_LeftActivity') as 'measure_left_activity'",
-            "left" : "measure_left_activity",
+            "first_f" : "sum('sum_LeftActivity') as 'measure_left_Activity'",
+            "left" : "measure_left_Activity",
             "filter" : "'IsClosed' == \"true\""
           }
         ]
@@ -1540,8 +1540,8 @@
           },
           {
             "display" : "Activities (Based on % Completed)",
-            "first_f" : "sum('sum_RightActivity') as 'measure_right_activity'",
-            "right" : "measure_right_activity",
+            "first_f" : "sum('sum_RightActivity') as 'measure_right_Activity'",
+            "right" : "measure_right_Activity",
             "filter" : "'IsClosed' == \"true\""
           }
         ]

@@ -41,7 +41,7 @@
             "fieldName" : "User_Role_RoleNames"
           },
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Activity_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "Owner_Role_RoleNames"
@@ -65,7 +65,7 @@
             "fieldName" : "User_UniqueUserName"
           },
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Activity_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "Owner_UniqueUserName"
@@ -89,7 +89,7 @@
       {
         "fields" : [
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Activity_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "Opportunity_ForecastCategoryName"
@@ -107,7 +107,7 @@
       {
         "fields" : [
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Activity_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "Opportunity_Type"
@@ -125,7 +125,7 @@
       {
         "fields" : [
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Activity_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "Opportunity_RecordType_Name"
@@ -149,7 +149,7 @@
             "fieldName" : "CloseDate"
           },
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Activity_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "ActivityDate"
@@ -173,7 +173,7 @@
             "fieldName" : "CreatedDate"
           },
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Activity_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "CreatedDate"
@@ -1390,7 +1390,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.Activity_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1402,7 +1402,7 @@
                 "YoY"
               ]
             ],
-            "pigql" : "c = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; c = filter c by 'IsClosed' == \"true\"; c = foreach c generate coalesce(count() / {{coalesce(cell(kpi_team_count.result, 0, \"count\"),0).asObject()}},0) as 'avg_activities_completed'; c1 = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; c1 = filter c1 by 'IsClosed' == \"true\"; c1 = foreach c1 generate coalesce(count() / {{coalesce(cell(kpi_team_count.result, 0, \"count\"),0).asObject()}},0) as 'avg_activities_completed'; d = group c by all full, c1 by all; d = foreach d generate coalesce((sum(c['avg_activities_completed']) - sum(c1['avg_activities_completed'])) / sum(c1['avg_activities_completed']),0) as 'sum_YoY'; d = foreach d generate 'sum_YoY', (case when 'sum_YoY' > 0 then \"#4ED469\" when 'sum_YoY' < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'sum_YoY' < 0 then \"▼\" when 'sum_YoY' > 0 then \"▲\" else \"◄ ►\" end) as 'diff_arrow';",
+            "pigql" : "c = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; c = filter c by 'IsClosed' == \"true\"; c = foreach c generate coalesce(count() / {{coalesce(cell(kpi_team_count.result, 0, \"count\"),0).asObject()}},0) as 'avg_activities_completed'; c1 = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; c1 = filter c1 by 'IsClosed' == \"true\"; c1 = foreach c1 generate coalesce(count() / {{coalesce(cell(kpi_team_count.result, 0, \"count\"),0).asObject()}},0) as 'avg_activities_completed'; d = group c by all full, c1 by all; d = foreach d generate coalesce((sum(c['avg_activities_completed']) - sum(c1['avg_activities_completed'])) / sum(c1['avg_activities_completed']),0) as 'sum_YoY'; d = foreach d generate 'sum_YoY', (case when 'sum_YoY' > 0 then \"#4ED469\" when 'sum_YoY' < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'sum_YoY' < 0 then \"▼\" when 'sum_YoY' > 0 then \"▲\" else \"◄ ►\" end) as 'diff_arrow';",
             "autoFilter" : true
           },
           "version" : -1.0
@@ -1629,7 +1629,7 @@
         "groups" : [ ],
         "label" : "Leaderboard",
         "numbers" : [ ],
-        "query" : "opp = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter opp by 'IsWon' == \"true\"; b = load \"${App.Datasets.quota_tp.FullyQualifiedName}\"; d = filter opp by 'IsClosed'== \"true\"; d = filter d by 'IsWon' == \"true\"; e = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; e = filter e by 'IsClosed' == \"true\"; g = filter opp by 'IsClosed' == \"false\"; u = load \"${App.Datasets.user_tp.FullyQualifiedName}\"; u = filter u by 'IsActive' == \"true\"; z = group u by 'UniqueUserName' full, a by 'Owner_UniqueUserName' full, b by 'User_UniqueUserName' full, opp by 'Owner_UniqueUserName' full, d by 'Owner_UniqueUserName' full, e by 'Owner_UniqueUserName' full, g by 'Owner_UniqueUserName'; z = foreach z generate  coalesce(u['UniqueUserName'], a['Owner_UniqueUserName'], b['User_UniqueUserName'], opp['Owner_UniqueUserName'], d['Owner_UniqueUserName'], e['Owner_UniqueUserName'], g['Owner_UniqueUserName']) as 'Owner_UniqueUserName',coalesce(first(u['SmallPhotoUrl']), first(a['Owner_SmallPhotoUrl']), first(b['User_SmallPhotoUrl']), first(opp['Owner_SmallPhotoUrl']), first(d['Owner_SmallPhotoUrl']), first(e['Owner_SmallPhotoUrl']), first(g['Owner_SmallPhotoUrl'])) as 'ChatterImage', {{cell(metric_dropdown.selection, 0, \"calc\").asObject()}} as '{{cell(metric_dropdown.selection, 0, \"projection\").asString()}}'; z = order z by '{{cell(metric_dropdown.selection, 0, \"projection\").asString()}}' {{cell(metric_dropdown.selection, 0, \"order\").asString()}};",
+        "query" : "opp = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter opp by 'IsWon' == \"true\"; b = load \"${App.Datasets.quota_tp.FullyQualifiedName}\"; d = filter opp by 'IsClosed'== \"true\"; d = filter d by 'IsWon' == \"true\"; e = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; e = filter e by 'IsClosed' == \"true\"; g = filter opp by 'IsClosed' == \"false\"; u = load \"${App.Datasets.user_tp.FullyQualifiedName}\"; u = filter u by 'IsActive' == \"true\"; z = group u by 'UniqueUserName' full, a by 'Owner_UniqueUserName' full, b by 'User_UniqueUserName' full, opp by 'Owner_UniqueUserName' full, d by 'Owner_UniqueUserName' full, e by 'Owner_UniqueUserName' full, g by 'Owner_UniqueUserName'; z = foreach z generate  coalesce(u['UniqueUserName'], a['Owner_UniqueUserName'], b['User_UniqueUserName'], opp['Owner_UniqueUserName'], d['Owner_UniqueUserName'], e['Owner_UniqueUserName'], g['Owner_UniqueUserName']) as 'Owner_UniqueUserName',coalesce(first(u['SmallPhotoUrl']), first(a['Owner_SmallPhotoUrl']), first(b['User_SmallPhotoUrl']), first(opp['Owner_SmallPhotoUrl']), first(d['Owner_SmallPhotoUrl']), first(e['Owner_SmallPhotoUrl']), first(g['Owner_SmallPhotoUrl'])) as 'ChatterImage', {{cell(metric_dropdown.selection, 0, \"calc\").asObject()}} as '{{cell(metric_dropdown.selection, 0, \"projection\").asString()}}'; z = order z by '{{cell(metric_dropdown.selection, 0, \"projection\").asString()}}' {{cell(metric_dropdown.selection, 0, \"order\").asString()}};",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1643,7 +1643,7 @@
         "broadcastFacet" : true,
         "groups" : [ ],
         "numbers" : [ ],
-        "query" : "a = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"true\";  u = load \"${App.Datasets.user_tp.FullyQualifiedName}\"; u = filter u by 'IsActive' == \"true\"; b = group u by 'Id' full, a by 'OwnerId'; b = foreach b generate coalesce(u['Id'], a['OwnerId']) as 'Id'; b = group b by all; b = foreach b generate count() as 'count';",
+        "query" : "a = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"true\";  u = load \"${App.Datasets.user_tp.FullyQualifiedName}\"; u = filter u by 'IsActive' == \"true\"; b = group u by 'Id' full, a by 'OwnerId'; b = foreach b generate coalesce(u['Id'], a['OwnerId']) as 'Id'; b = group b by all; b = foreach b generate count() as 'count';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1863,7 +1863,7 @@
         "broadcastFacet" : false,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.Activity_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1875,7 +1875,7 @@
                 "activities_completed"
               ]
             ],
-            "pigql" : "a = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"true\"; a = group a by all; a = foreach a generate coalesce(count() / {{coalesce(cell(kpi_team_count.result, 0, \"count\"),0).asObject()}},0) as 'avg_activities_completed';",
+            "pigql" : "a = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"true\"; a = group a by all; a = foreach a generate coalesce(count() / {{coalesce(cell(kpi_team_count.result, 0, \"count\"),0).asObject()}},0) as 'avg_activities_completed';",
             "autoFilter" : true
           },
           "version" : -1.0
@@ -2134,13 +2134,13 @@
         "broadcastFacet" : false,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.Activity_tp.Name}"
           }
         ],
         "isGlobal" : false,
         "query" : {
           "query" : {
-            "pigql" : "a = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"true\";  a = group a by ('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day'); a = foreach a generate 'ActivityDate_Year' + \"~~~\" + 'ActivityDate_Month' + \"~~~\" + 'ActivityDate_Day' as 'ActivityDate_Year~~~ActivityDate_Month~~~ActivityDate_Day', coalesce(count() / {{coalesce(cell(kpi_team_count.result, 0, \"count\"),0).asObject()}},0) as 'avg_activities_completed';",
+            "pigql" : "a = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"true\";  a = group a by ('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day'); a = foreach a generate 'ActivityDate_Year' + \"~~~\" + 'ActivityDate_Month' + \"~~~\" + 'ActivityDate_Day' as 'ActivityDate_Year~~~ActivityDate_Month~~~ActivityDate_Day', coalesce(count() / {{coalesce(cell(kpi_team_count.result, 0, \"count\"),0).asObject()}},0) as 'avg_activities_completed';",
             "measures" : [
               [
                 "avg",
@@ -2288,7 +2288,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.Activity_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2300,7 +2300,7 @@
                 "YoY"
               ]
             ],
-            "pigql" : "a = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"true\"; a = filter a by {{column(hbar_sales_reps.selection, [\"Owner_UniqueUserName\"]).asEquality(\"Owner_UniqueUserName\")}}; u = load \"${App.Datasets.user_tp.FullyQualifiedName}\"; u = filter u by {{column(hbar_sales_reps.selection, [\"Owner_UniqueUserName\"]).asEquality(\"UniqueUserName\")}}; c = group u by all full, a by all; c = foreach c generate coalesce(count(a) / count(u),0) as 'avg_activities_completed'; a1 = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; a1 = filter a1 by 'IsClosed' == \"true\"; u1 = load \"${App.Datasets.user_tp.FullyQualifiedName}\"; u1 = filter u1 by {{column(hbar_sales_reps.selection, [\"Owner_UniqueUserName\"]).asEquality(\"UniqueUserName\")}}; c1 = group u1 by all full, a1 by all; c1 = foreach c1 generate coalesce(count(a1) / count(u1),0) as 'avg_activities_completed'; d = group c by all full, c1 by all; d = foreach d generate coalesce((sum(c['avg_activities_completed']) - sum(c1['avg_activities_completed'])) / sum(c1['avg_activities_completed']),0) as 'sum_YoY'; d = foreach d generate 'sum_YoY', (case when 'sum_YoY' > 0 then \"#4ED469\" when 'sum_YoY' < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'sum_YoY' < 0 then \"▼\" when 'sum_YoY' > 0 then \"▲\" else \"◄ ►\" end) as 'diff_arrow';",
+            "pigql" : "a = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"true\"; a = filter a by {{column(hbar_sales_reps.selection, [\"Owner_UniqueUserName\"]).asEquality(\"Owner_UniqueUserName\")}}; u = load \"${App.Datasets.user_tp.FullyQualifiedName}\"; u = filter u by {{column(hbar_sales_reps.selection, [\"Owner_UniqueUserName\"]).asEquality(\"UniqueUserName\")}}; c = group u by all full, a by all; c = foreach c generate coalesce(count(a) / count(u),0) as 'avg_activities_completed'; a1 = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; a1 = filter a1 by 'IsClosed' == \"true\"; u1 = load \"${App.Datasets.user_tp.FullyQualifiedName}\"; u1 = filter u1 by {{column(hbar_sales_reps.selection, [\"Owner_UniqueUserName\"]).asEquality(\"UniqueUserName\")}}; c1 = group u1 by all full, a1 by all; c1 = foreach c1 generate coalesce(count(a1) / count(u1),0) as 'avg_activities_completed'; d = group c by all full, c1 by all; d = foreach d generate coalesce((sum(c['avg_activities_completed']) - sum(c1['avg_activities_completed'])) / sum(c1['avg_activities_completed']),0) as 'sum_YoY'; d = foreach d generate 'sum_YoY', (case when 'sum_YoY' > 0 then \"#4ED469\" when 'sum_YoY' < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'sum_YoY' < 0 then \"▼\" when 'sum_YoY' > 0 then \"▲\" else \"◄ ►\" end) as 'diff_arrow';",
             "autoFilter" : true
           },
           "version" : -1.0

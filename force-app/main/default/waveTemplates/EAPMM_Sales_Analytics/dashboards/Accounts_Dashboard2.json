@@ -50,7 +50,7 @@
             "fieldName" : "Opportunity_CloseDate"
           },
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Activity_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "ActivityDate"
@@ -68,13 +68,13 @@
       {
         "fields" : [
           {
-            "dataSourceName" : "${App.Datasets.account_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Account_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "Parent_ParentAccount_Name"
           },
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Activity_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "Opportunity_Account_Parent_ParentAccount_Name"
@@ -99,12 +99,12 @@
           }
         ],
         "label" : "Parent Account",
-        "name" : "connection_parent_account"
+        "name" : "connection_parent_Account"
       },
       {
         "fields" : [
           {
-            "dataSourceName" : "${App.Datasets.account_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Account_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "Industry"
@@ -122,7 +122,7 @@
             "fieldName" : "Opportunity_Account_Industry"
           },
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Activity_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "Account_Industry"
@@ -140,7 +140,7 @@
       {
         "fields" : [
           {
-            "dataSourceName" : "${App.Datasets.account_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Account_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "Name"
@@ -152,7 +152,7 @@
             "fieldName" : "Opportunity_Account_Name"
           },
           {
-            "dataSourceName" : "${App.Datasets.activity_tp.Name}",
+            "dataSourceName" : "${App.Datasets.Activity_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "saql",
             "fieldName" : "Account_Name"
@@ -171,7 +171,7 @@
           }
         ],
         "label" : "Account Name",
-        "name" : "connection_account_name"
+        "name" : "connection_Account_name"
       },
       {
         "fields" : [
@@ -282,7 +282,7 @@
     "filters" : [
       {
         "dataset" : {
-          "name" : "${App.Datasets.account_tp.Name}"
+          "name" : "${App.Datasets.Account_tp.Name}"
         },
         "dependent" : false,
         "fields" : [
@@ -295,7 +295,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.account_tp.Name}"
+          "name" : "${App.Datasets.Account_tp.Name}"
         },
         "dependent" : false,
         "fields" : [
@@ -307,7 +307,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.account_tp.Name}"
+          "name" : "${App.Datasets.Account_tp.Name}"
         },
         "dependent" : false,
         "fields" : [
@@ -1616,11 +1616,11 @@
           "type" : "chart"
         }
       },
-      "average_last_activity" : {
+      "average_last_Activity" : {
         "broadcastFacet" : false,
         "groups" : [ ],
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = group q by all; a = foreach a generate round(min('DaysSinceLastActivity'),2) as 'avg_activity'; b = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; b = foreach b generate {{coalesce(cell(days_since_last_activity.result, 0, \"min_DaysSinceLastActivity\"), 0).asObject()}} as 'avg_account_days'; c = group a by all full, b by all; c = foreach c generate coalesce(round((avg(b['avg_account_days']) - avg(a['avg_activity']))/ avg(a['avg_activity']), 2),0) as 'unique_percent'; c = foreach c generate 'unique_percent', (case when 'unique_percent' < 0 then \"#4ED469\" when 'unique_percent' > 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'unique_percent' < 0 then \"▼\" when 'unique_percent' > 0 then \"▲\" else \"◄ ►\"  end) as 'diff_arrow';",
+        "query" : "q = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = group q by all; a = foreach a generate round(min('DaysSinceLastActivity'),2) as 'avg_Activity'; b = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; b = foreach b generate {{coalesce(cell(days_since_last_Activity.result, 0, \"min_DaysSinceLastActivity\"), 0).asObject()}} as 'avg_Account_days'; c = group a by all full, b by all; c = foreach c generate coalesce(round((avg(b['avg_Account_days']) - avg(a['avg_Activity']))/ avg(a['avg_Activity']), 2),0) as 'unique_percent'; c = foreach c generate 'unique_percent', (case when 'unique_percent' < 0 then \"#4ED469\" when 'unique_percent' > 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'unique_percent' < 0 then \"▼\" when 'unique_percent' > 0 then \"▲\" else \"◄ ►\"  end) as 'diff_arrow';",
         "receiveFacetSource" : {
           "mode" : "none",
           "steps" : [ ]
@@ -1661,7 +1661,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.Activity_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1924,12 +1924,12 @@
           "visualizationType" : "hbar"
         }
       },
-      "top_accounts" : {
+      "top_Accounts" : {
         "broadcastFacet" : true,
         "groups" : [ ],
         "label" : "Top Accounts",
         "numbers" : [ ],
-        "query" : "opp = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; won = filter opp by 'IsWon' == \"true\"; sales_cycle = filter opp by 'IsClosed'== \"true\"; sales_cycle = filter sales_cycle by 'IsWon' == \"true\"; activity = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; activity = filter activity by 'IsClosed' == \"true\"; open = filter opp by 'IsClosed' == \"false\"; accounts = load \"${App.Datasets.account_tp.FullyQualifiedName}\"; z = group accounts by 'Name' full, won by 'Account_Name' full, sales_cycle by 'Account_Name' full, activity by 'Account_Name' full, open by 'Account_Name'; z = foreach z generate coalesce(first(accounts['Name']), first(won['Account_Name']), first(sales_cycle['Account_Name']), first(activity['Account_Name']), first(open['Account_Name'])) as 'Account_Name', coalesce(sum(won['Amount']),0) as 'sum_closed_won', coalesce(avg(sales_cycle['OpportunityAge']),0) as 'avg_sales_cycle', coalesce(count(activity),0) as 'sum_activities_completed', coalesce(sum(open['Amount']),0) as sum_open_pipe; z = group z by 'Account_Name'; z = foreach z generate 'Account_Name' as 'Account_Name', sum('{{cell(metric_dropdown.selection, 0, \"projection\").asString()}}') as '{{cell(metric_dropdown.selection, 0, \"projection\").asString()}}'; z = order z by '{{cell(metric_dropdown.selection, 0, \"projection\").asString()}}' {{cell(metric_dropdown.selection, 0, \"order\").asString()}}; z = limit z 50;",
+        "query" : "opp = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; won = filter opp by 'IsWon' == \"true\"; sales_cycle = filter opp by 'IsClosed'== \"true\"; sales_cycle = filter sales_cycle by 'IsWon' == \"true\"; Activity = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; Activity = filter Activity by 'IsClosed' == \"true\"; open = filter opp by 'IsClosed' == \"false\"; Accounts = load \"${App.Datasets.Account_tp.FullyQualifiedName}\"; z = group Accounts by 'Name' full, won by 'Account_Name' full, sales_cycle by 'Account_Name' full, Activity by 'Account_Name' full, open by 'Account_Name'; z = foreach z generate coalesce(first(Accounts['Name']), first(won['Account_Name']), first(sales_cycle['Account_Name']), first(Activity['Account_Name']), first(open['Account_Name'])) as 'Account_Name', coalesce(sum(won['Amount']),0) as 'sum_closed_won', coalesce(avg(sales_cycle['OpportunityAge']),0) as 'avg_sales_cycle', coalesce(count(Activity),0) as 'sum_activities_completed', coalesce(sum(open['Amount']),0) as sum_open_pipe; z = group z by 'Account_Name'; z = foreach z generate 'Account_Name' as 'Account_Name', sum('{{cell(metric_dropdown.selection, 0, \"projection\").asString()}}') as '{{cell(metric_dropdown.selection, 0, \"projection\").asString()}}'; z = order z by '{{cell(metric_dropdown.selection, 0, \"projection\").asString()}}' {{cell(metric_dropdown.selection, 0, \"order\").asString()}}; z = limit z 50;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2751,7 +2751,7 @@
         "broadcastFacet" : false,
         "groups" : [ ],
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.case_tp.FullyQualifiedName}\"; a = group q by all; a = foreach a generate count() as avg_cases; b = load \"${App.Datasets.case_tp.FullyQualifiedName}\"; b = foreach b generate {{coalesce(cell(kpi_open_cases.result, 0, \"count\"), 0).asObject()}} as 'avg_account_cases'; c = group a by all full, b by all; c = foreach c generate coalesce(round((avg(b['avg_account_cases']) - avg(a['avg_cases'])) / avg(a['avg_cases']),2),0) as 'unique_percent'; c = foreach c generate 'unique_percent', (case when 'unique_percent' < 0 then \"#4ED469\" when 'unique_percent' > 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'unique_percent' < 0 then \"▼\" when 'unique_percent' > 0 then \"▲\" else \"◄ ►\"  end) as 'diff_arrow'",
+        "query" : "q = load \"${App.Datasets.case_tp.FullyQualifiedName}\"; a = group q by all; a = foreach a generate count() as avg_cases; b = load \"${App.Datasets.case_tp.FullyQualifiedName}\"; b = foreach b generate {{coalesce(cell(kpi_open_cases.result, 0, \"count\"), 0).asObject()}} as 'avg_Account_cases'; c = group a by all full, b by all; c = foreach c generate coalesce(round((avg(b['avg_Account_cases']) - avg(a['avg_cases'])) / avg(a['avg_cases']),2),0) as 'unique_percent'; c = foreach c generate 'unique_percent', (case when 'unique_percent' < 0 then \"#4ED469\" when 'unique_percent' > 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'unique_percent' < 0 then \"▼\" when 'unique_percent' > 0 then \"▲\" else \"◄ ►\"  end) as 'diff_arrow'",
         "receiveFacetSource" : {
           "mode" : "none",
           "steps" : [ ]
@@ -2765,7 +2765,7 @@
         "broadcastFacet" : false,
         "groups" : [ ],
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = group q by all; a = foreach a generate round(avg('OpportunityAge'),2) as 'avg_age'; b = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; b = foreach b generate {{coalesce(cell(opp_age.result, 0, \"avg_OpportunityAge\"), 0).asObject()}} as 'avg_account_age'; c = group a by all full, b by all; c = foreach c generate coalesce(round((avg(b['avg_account_age']) - avg(a['avg_age'])) / avg(a['avg_age']),2),0) as 'unique_percent'; c = foreach c generate 'unique_percent', (case when 'unique_percent' < 0 then \"#4ED469\" when 'unique_percent' > 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'unique_percent' < 0 then \"▼\" when 'unique_percent' > 0 then \"▲\" else \"◄ ►\"  end) as 'diff_arrow';",
+        "query" : "q = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = group q by all; a = foreach a generate round(avg('OpportunityAge'),2) as 'avg_age'; b = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; b = foreach b generate {{coalesce(cell(opp_age.result, 0, \"avg_OpportunityAge\"), 0).asObject()}} as 'avg_Account_age'; c = group a by all full, b by all; c = foreach c generate coalesce(round((avg(b['avg_Account_age']) - avg(a['avg_age'])) / avg(a['avg_age']),2),0) as 'unique_percent'; c = foreach c generate 'unique_percent', (case when 'unique_percent' < 0 then \"#4ED469\" when 'unique_percent' > 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'unique_percent' < 0 then \"▼\" when 'unique_percent' > 0 then \"▲\" else \"◄ ►\"  end) as 'diff_arrow';",
         "receiveFacetSource" : {
           "mode" : "none",
           "steps" : [ ]
@@ -2779,7 +2779,7 @@
         "broadcastFacet" : false,
         "groups" : [ ],
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; won = filter q by 'IsWon' == \"true\"; closed = filter q by 'IsClosed' == \"true\"; z = group won by all, closed by all; z = foreach z generate coalesce(sum(won['Amount']) / sum(closed['Amount']),0) as 'avg_percent'; b = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; b = foreach b generate {{coalesce(cell(win_rate.result, 0, \"avg_win_rate\"), 0).asObject()}} as 'avg_account_win_rate'; c = group z by all full, b by all; c = foreach c generate coalesce(round((avg(b['avg_account_win_rate']) - avg(z['avg_percent'])) / avg(z['avg_percent']),2),0) as 'unique_percent'; c = foreach c generate 'unique_percent', (case when 'unique_percent' > 0 then \"#4ED469\" when 'unique_percent' < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'unique_percent' < 0 then \"▼\" when 'unique_percent' > 0 then \"▲\" else \"◄ ►\"  end) as 'diff_arrow';",
+        "query" : "q = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; won = filter q by 'IsWon' == \"true\"; closed = filter q by 'IsClosed' == \"true\"; z = group won by all, closed by all; z = foreach z generate coalesce(sum(won['Amount']) / sum(closed['Amount']),0) as 'avg_percent'; b = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; b = foreach b generate {{coalesce(cell(win_rate.result, 0, \"avg_win_rate\"), 0).asObject()}} as 'avg_Account_win_rate'; c = group z by all full, b by all; c = foreach c generate coalesce(round((avg(b['avg_Account_win_rate']) - avg(z['avg_percent'])) / avg(z['avg_percent']),2),0) as 'unique_percent'; c = foreach c generate 'unique_percent', (case when 'unique_percent' > 0 then \"#4ED469\" when 'unique_percent' < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'unique_percent' < 0 then \"▼\" when 'unique_percent' > 0 then \"▲\" else \"◄ ►\"  end) as 'diff_arrow';",
         "receiveFacetSource" : {
           "mode" : "none",
           "steps" : [ ]
@@ -2859,7 +2859,7 @@
         "broadcastFacet" : false,
         "groups" : [ ],
         "numbers" : [ ],
-        "query" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"true\"; a = filter a by 'IsWon' == \"true\"; a = group a by all; a = foreach a generate avg('OpportunityAge') as 'avg_Days_Open'; b = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; b = foreach b generate {{coalesce(cell(avg_account_sales_cycle.result, 0, \"avg_OpportunityAge\"), 0).asObject()}} as 'account_avg_DaysOpen'; c = group a by all full, b by all; c = foreach c generate round((coalesce(avg(b['account_avg_DaysOpen']),0) - avg(a['avg_Days_Open'])) / avg(a['avg_Days_Open']),2) as 'unique_percent'; c = foreach c generate 'unique_percent', (case when 'unique_percent' < 0 then \"#4ED469\" when 'unique_percent' > 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'unique_percent' < 0 then \"▼\" when 'unique_percent' > 0 then \"▲\" else \"◄ ►\"  end) as 'diff_arrow';",
+        "query" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"true\"; a = filter a by 'IsWon' == \"true\"; a = group a by all; a = foreach a generate avg('OpportunityAge') as 'avg_Days_Open'; b = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; b = foreach b generate {{coalesce(cell(avg_Account_sales_cycle.result, 0, \"avg_OpportunityAge\"), 0).asObject()}} as 'Account_avg_DaysOpen'; c = group a by all full, b by all; c = foreach c generate round((coalesce(avg(b['Account_avg_DaysOpen']),0) - avg(a['avg_Days_Open'])) / avg(a['avg_Days_Open']),2) as 'unique_percent'; c = foreach c generate 'unique_percent', (case when 'unique_percent' < 0 then \"#4ED469\" when 'unique_percent' > 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'unique_percent' < 0 then \"▼\" when 'unique_percent' > 0 then \"▲\" else \"◄ ►\"  end) as 'diff_arrow';",
         "receiveFacetSource" : {
           "mode" : "none",
           "steps" : [ ]
@@ -2869,7 +2869,7 @@
         "type" : "saql",
         "useGlobal" : true
       },
-      "days_since_last_activity" : {
+      "days_since_last_Activity" : {
         "broadcastFacet" : true,
         "datasets" : [
           {
@@ -2921,7 +2921,7 @@
         "type" : "saql",
         "useGlobal" : true
       },
-      "avg_account_sales_cycle" : {
+      "avg_Account_sales_cycle" : {
         "broadcastFacet" : true,
         "datasets" : [
           {
@@ -3138,7 +3138,7 @@
           "numberColor" : "#FFFFFF",
           "numberSize" : 24,
           "showActionMenu" : true,
-          "step" : "avg_account_sales_cycle",
+          "step" : "avg_Account_sales_cycle",
           "textAlignment" : "left",
           "title" : "",
           "titleColor" : "#335779",
@@ -3162,7 +3162,7 @@
           "numberColor" : "#FFFFFF",
           "numberSize" : 18,
           "showActionMenu" : true,
-          "step" : "days_since_last_activity",
+          "step" : "days_since_last_Activity",
           "textAlignment" : "center",
           "title" : "Days Since Activity",
           "titleColor" : "#FFFFFF",
@@ -3325,7 +3325,7 @@
       "text_10" : {
         "parameters" : {
           "content" : {
-            "displayTemplate" : "ACCOUNTS"
+            "displayTemplate" : "AccountS"
           },
           "fontSize" : 12,
           "showActionMenu" : true,
@@ -3355,13 +3355,13 @@
           "compact" : false,
           "exploreLink" : true,
           "measureField" : "unique_percent",
-          "numberColor" : "{{coalesce(cell(average_last_activity.result, 0, \"color\"),\"#7D98B3\").asString()}}",
+          "numberColor" : "{{coalesce(cell(average_last_Activity.result, 0, \"color\"),\"#7D98B3\").asString()}}",
           "numberSize" : 14,
           "showActionMenu" : true,
-          "step" : "average_last_activity",
+          "step" : "average_last_Activity",
           "textAlignment" : "right",
-          "title" : "{{coalesce(cell(average_last_activity.result, 0, \"diff_arrow\"),\"◄ ►\").asString()}}",
-          "titleColor" : "{{coalesce(cell(average_last_activity.result, 0, \"color\"),\"#7D98B3\").asString()}}",
+          "title" : "{{coalesce(cell(average_last_Activity.result, 0, \"diff_arrow\"),\"◄ ►\").asString()}}",
+          "titleColor" : "{{coalesce(cell(average_last_Activity.result, 0, \"color\"),\"#7D98B3\").asString()}}",
           "titleSize" : 10
         },
         "type" : "number"
@@ -4332,7 +4332,7 @@
           "numberColor" : "#FFFFFF",
           "numberSize" : 20,
           "showActionMenu" : true,
-          "step" : "days_since_last_activity",
+          "step" : "days_since_last_Activity",
           "textAlignment" : "left",
           "title" : "",
           "titleColor" : "#FFFFFF",
@@ -4450,7 +4450,7 @@
           "numberColor" : "#FFFFFF",
           "numberSize" : 24,
           "showActionMenu" : true,
-          "step" : "avg_account_sales_cycle",
+          "step" : "avg_Account_sales_cycle",
           "textAlignment" : "left",
           "title" : "Avg Sales Cycle",
           "titleColor" : "#C5D3E0",
@@ -4753,7 +4753,7 @@
             }
           },
           "theme" : "dark",
-          "step" : "top_accounts",
+          "step" : "top_Accounts",
           "dimensionAxis" : {
             "showTitle" : false,
             "customSize" : "auto",
@@ -4998,7 +4998,7 @@
       "link_1" : {
         "parameters" : {
           "destinationLink" : {
-            "url" : "https://help.salesforce.com/articleView?id=bi_app_sales_analytics_dashboard_rep_accounts.htm&type=5"
+            "url" : "https://help.salesforce.com/articleView?id=bi_app_sales_analytics_dashboard_rep_Accounts.htm&type=5"
           },
           "destinationType" : "url",
           "fontSize" : 12,
@@ -5027,7 +5027,7 @@
       "text_26" : {
         "parameters" : {
           "content" : {
-            "displayTemplate" : "All comparisons are versus account average."
+            "displayTemplate" : "All comparisons are versus Account average."
           },
           "fontSize" : 12,
           "showActionMenu" : true,

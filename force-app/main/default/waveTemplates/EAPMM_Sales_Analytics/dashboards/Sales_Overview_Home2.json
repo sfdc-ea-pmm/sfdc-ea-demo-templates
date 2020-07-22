@@ -981,7 +981,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.Activity_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1259,7 +1259,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.Activity_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1272,7 +1272,7 @@
                 "percent"
               ]
             ],
-            "pigql" : "q = load \"${App.Datasets.activity_tp.FullyQualifiedName}\"; q = filter q by {{column(dropdown_id_hidden.selection, [\"UniqueUserName\"]).asEquality(\"Owner_UniqueUserName\")}}; q = filter q by 'IsClosed' == \"false\"; this_year = filter q by date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day') in [{{cell(time_dropdown.selection, 0, \"current\").asObject()}}]; last_year = filter q by date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day') in [{{cell(time_dropdown.selection, 0, \"prior\").asObject()}}]; this_year = foreach this_year generate count() as 'completed_activities'; last_year = foreach last_year generate count() as 'completed_activities'; result = group this_year by all full, last_year by all; result = foreach result generate coalesce((sum(this_year['completed_activities']) - sum(last_year['completed_activities']))/sum(last_year['completed_activities']),0) as 'sum_percent', sum(last_year['completed_activities']) as 'last_year'; result = foreach result generate 'sum_percent','last_year', (case when 'sum_percent' > 0 then \"#067D1E\" when 'sum_percent' < 0 then \"#E3193B\" else \"#7D98B3\" end) as 'color';"
+            "pigql" : "q = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; q = filter q by {{column(dropdown_id_hidden.selection, [\"UniqueUserName\"]).asEquality(\"Owner_UniqueUserName\")}}; q = filter q by 'IsClosed' == \"false\"; this_year = filter q by date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day') in [{{cell(time_dropdown.selection, 0, \"current\").asObject()}}]; last_year = filter q by date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day') in [{{cell(time_dropdown.selection, 0, \"prior\").asObject()}}]; this_year = foreach this_year generate count() as 'completed_activities'; last_year = foreach last_year generate count() as 'completed_activities'; result = group this_year by all full, last_year by all; result = foreach result generate coalesce((sum(this_year['completed_activities']) - sum(last_year['completed_activities']))/sum(last_year['completed_activities']),0) as 'sum_percent', sum(last_year['completed_activities']) as 'last_year'; result = foreach result generate 'sum_percent','last_year', (case when 'sum_percent' > 0 then \"#067D1E\" when 'sum_percent' < 0 then \"#E3193B\" else \"#7D98B3\" end) as 'color';"
           },
           "version" : -1.0
         },
@@ -1291,7 +1291,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.activity_tp.Name}"
+            "name" : "${App.Datasets.Activity_tp.Name}"
           }
         ],
         "isGlobal" : false,
