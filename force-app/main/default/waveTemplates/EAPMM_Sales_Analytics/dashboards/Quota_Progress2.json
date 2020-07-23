@@ -1,0 +1,3158 @@
+{
+  "name" : "Quota_Progress2_tp",
+  "label" : "Forecast",
+  "folder" : {
+    "id" : "${App.Folder.Id}"
+  },
+  "dateVersion" : 1,
+  "mobileDisabled" : false,
+  "xmd" : {
+    "measures" : [ ],
+    "derivedDimensions" : [ ],
+    "organizations" : [ ],
+    "showDetailsDefaultFields" : [ ],
+    "dates" : [ ],
+    "derivedMeasures" : [ ],
+    "dimensions" : [ ]
+  },
+  "state" : {
+    "dataSourceLinks" : [
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.opportunity_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Product_Product_Name"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.opportunity_products_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Product_Name"
+          }
+        ],
+        "label" : "Product Name",
+        "name" : "connection_product_name"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.opportunity_products_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Opportunity_RecordType_Name"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.pipeline_trending_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Opportunity_RecordType_Name"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.opportunity_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "RecordType_Name"
+          }
+        ],
+        "label" : "Record Type",
+        "name" : "connection_record_type"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.opportunity_products_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Opportunity_Type"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.pipeline_trending_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Opportunity_Type"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.opportunity_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Type"
+          }
+        ],
+        "label" : "Opp Type",
+        "name" : "connection_opp_type"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.opportunity_products_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Opportunity_StageName"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.pipeline_trending_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Opportunity_StageName"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.opportunity_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "StageName"
+          }
+        ],
+        "label" : "Stage Name",
+        "name" : "connection_stagename"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.opportunity_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Name"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.opportunity_products_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Opportunity_Name"
+          }
+        ],
+        "label" : "Product Opportunity Name",
+        "name" : "connection_product_opp_name"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.opportunity_products_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Opportunity_IsLost"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.pipeline_trending_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Opportunity_IsLost"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.opportunity_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "IsLost"
+          }
+        ],
+        "label" : "Is Lost",
+        "name" : "connection_lost"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.opportunity_products_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Opportunity_ForecastCategoryName"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.pipeline_trending_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "ForecastCategory_ForecastCategoryName"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.opportunity_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "ForecastCategoryName"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.forecasting_item_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "ForecastCategoryName"
+          }
+        ],
+        "label" : "Forecast Category",
+        "name" : "connection_forecast_category"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.opportunity_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "CloseDate"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.opportunity_products_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Opportunity_CloseDate"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.forecasting_item_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Period_StartDate"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.quota_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "StartDate"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.pipeline_trending_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "CloseDate"
+          }
+        ],
+        "label" : "Date",
+        "name" : "connection_date"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.opportunity_products_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Opportunity_Owner_Role_RoleNames"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.pipeline_trending_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Opportunity_Owner_Role_RoleNames"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.user_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Role_RoleNames"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.opportunity_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Owner_Role_RoleNames"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.quota_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "User_Role_RoleNames"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.forecasting_item_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "User_Role_RoleNames"
+          }
+        ],
+        "label" : "RoleNames",
+        "name" : "connection_rolenames"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.opportunity_products_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Opportunity_Owner_UniqueUserName"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.pipeline_trending_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Opportunity_Owner_UniqueUserName"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.user_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "UniqueUserName"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.opportunity_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Owner_UniqueUserName"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.quota_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "User_UniqueUserName"
+          }
+        ],
+        "label" : "Unique User",
+        "name" : "connection_uniqueusername"
+      }
+    ],
+    "filters" : [
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.opportunity_tp.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "Owner_Role_RoleNames"
+        ],
+        "label" : "View As",
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.opportunity_tp.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "Owner_UniqueUserName"
+        ],
+        "label" : "Opportunity Owner",
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.opportunity_tp.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "ForecastCategoryName"
+        ],
+        "label" : "Forecast Category",
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.opportunity_tp.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "Type"
+        ],
+        "label" : "Opportunity Type",
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.opportunity_tp.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "RecordType_Name"
+        ],
+        "label" : "Record Type",
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.opportunity_tp.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "CloseDate"
+        ],
+        "label" : "Time Period",
+        "locked" : false,
+        "operator" : ">=<=",
+        "value" : "[[[\"fiscal_quarter\",0],[\"fiscal_quarter\",0]]]"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.opportunity_tp.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "IsLost"
+        ],
+        "label" : "IsLost",
+        "locked" : true,
+        "operator" : "in",
+        "value" : "[\"No\"]"
+      }
+    ],
+    "gridLayouts" : [
+      {
+        "maxWidth" : 1240,
+        "name" : "Default",
+        "numColumns" : 48,
+        "pages" : [
+          {
+            "label" : "Untitled",
+            "name" : "68c351fe-bf57-4ae7-81de-b705776eeaa7",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 4,
+                "column" : 4,
+                "name" : "link_1",
+                "row" : 1,
+                "rowspan" : 5,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#FFFFFF",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 2
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 8,
+                "name" : "link_2",
+                "row" : 1,
+                "rowspan" : 5,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 20,
+                "name" : "link_3",
+                "row" : 1,
+                "rowspan" : 5,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 12,
+                "name" : "text_4",
+                "row" : 1,
+                "rowspan" : 5,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "rgb(60, 141, 225)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 2
+                }
+              },
+              {
+                "colspan" : 39,
+                "column" : 3,
+                "name" : "container_4",
+                "row" : 0,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "borderColor" : "rgb(230, 236, 242)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 42,
+                "name" : "list_manager_role",
+                "row" : 15,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 1,
+                "name" : "number_1",
+                "row" : 19,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(9, 26, 62, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 1,
+                "name" : "ui_kpi_open_pipe",
+                "row" : 41,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(9, 26, 62, 0)",
+                  "borderColor" : "rgba(51, 87, 121, 0.5)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 9,
+                "name" : "ui_percent_open_pipe",
+                "row" : 47,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(0, 0, 0, 0)",
+                  "borderColor" : "rgba(51, 87, 121, 0.5)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 15,
+                "column" : 0,
+                "name" : "container_5",
+                "row" : 13,
+                "rowspan" : 46,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(5, 16, 39, 0.99)",
+                  "borderColor" : "rgb(5, 16, 39)",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 1,
+                "name" : "number_6",
+                "row" : 35,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(9, 26, 62, 0)",
+                  "borderColor" : "rgba(51, 87, 121, 0.5)",
+                  "borderEdges" : [
+                    "bottom"
+                  ]
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 1,
+                "name" : "number_9",
+                "row" : 29,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(9, 26, 62, 0)",
+                  "borderColor" : "rgba(51, 87, 121, 0.5)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 31,
+                "column" : 16,
+                "name" : "ui_time_chart_forecast",
+                "row" : 19,
+                "rowspan" : 29,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 33,
+                "column" : 15,
+                "name" : "container_closed_won",
+                "row" : 13,
+                "rowspan" : 46,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#091A3E",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 14,
+                "column" : 33,
+                "name" : "text_1",
+                "row" : 60,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 16,
+                "column" : 32,
+                "name" : "container_1",
+                "row" : 59,
+                "rowspan" : 33,
+                "widgetStyle" : {
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0
+                }
+              },
+              {
+                "colspan" : 14,
+                "column" : 1,
+                "name" : "text_2",
+                "row" : 60,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 14,
+                "column" : 1,
+                "name" : "ui_opportunity_amount_by_stage",
+                "row" : 66,
+                "rowspan" : 24,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 16,
+                "column" : 0,
+                "name" : "container_pipeline_coverage",
+                "row" : 59,
+                "rowspan" : 33,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 14,
+                "column" : 17,
+                "name" : "text_7",
+                "row" : 60,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 14,
+                "column" : 17,
+                "name" : "chart_1",
+                "row" : 66,
+                "rowspan" : 24,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 16,
+                "column" : 16,
+                "name" : "container_6",
+                "row" : 59,
+                "rowspan" : 33,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 1,
+                "name" : "text_6",
+                "row" : 94,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 0,
+                "name" : "container_7",
+                "row" : 92,
+                "rowspan" : 56,
+                "widgetStyle" : {
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 14,
+                "column" : 33,
+                "name" : "chart_5",
+                "row" : 66,
+                "rowspan" : 24,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 46,
+                "column" : 1,
+                "name" : "table_2",
+                "row" : 99,
+                "rowspan" : 38,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 31,
+                "column" : 16,
+                "name" : "chart_6",
+                "row" : 50,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(242, 246, 250, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 1,
+                "name" : "text_11",
+                "row" : 15,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 1,
+                "name" : "chart_8",
+                "row" : 23,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(255, 255, 255, 0)",
+                  "borderEdges" : [
+                    "top",
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 2
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 1,
+                "name" : "text_10",
+                "row" : 47,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(51, 87, 121, 0.5)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 16,
+                "name" : "link_7",
+                "row" : 1,
+                "rowspan" : 5,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 16,
+                "name" : "text_5",
+                "row" : 15,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 0,
+                "name" : "container_3",
+                "row" : 0,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "borderEdges" : [
+                    "bottom"
+                  ]
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 0,
+                "name" : "link_4",
+                "row" : 1,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 31,
+                "column" : 16,
+                "name" : "text_9",
+                "row" : 57,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 24,
+                "name" : "link_5",
+                "row" : 1,
+                "rowspan" : 5,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#FFFFFF",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 2
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 42,
+                "name" : "container_10",
+                "row" : 0,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 43,
+                "name" : "link_6",
+                "row" : 1,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 0,
+                "name" : "filterpanel_1",
+                "row" : 6,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "#F2F6FA",
+                  "borderColor" : "#F2F6FA",
+                  "borderEdges" : [
+                    "left"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 36,
+                "name" : "text_13",
+                "row" : 15,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#091A3E",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight" : "fine",
+        "selectors" : [ ],
+        "style" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "backgroundColor" : "#E6ECF2",
+          "cellSpacingX" : 0,
+          "cellSpacingY" : 0,
+          "documentId" : "",
+          "fit" : "original",
+          "gutterColor" : "#E6ECF2"
+        },
+        "version" : 1.0
+      },
+      {
+        "name" : "iPhone",
+        "numColumns" : 24,
+        "pages" : [
+          {
+            "label" : "Untitled",
+            "name" : "68c351fe-bf57-4ae7-81de-b705776eeaa7",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "ui_time_chart_forecast",
+                "row" : 16,
+                "rowspan" : 19,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 22,
+                "column" : 0,
+                "name" : "text_7",
+                "row" : 73,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "chart_1",
+                "row" : 76,
+                "rowspan" : 24,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "text_6",
+                "row" : 129,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "table_1",
+                "row" : 132,
+                "rowspan" : 24,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 10,
+                "column" : 1,
+                "name" : "number_2",
+                "row" : 11,
+                "rowspan" : 5,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "container_19",
+                "row" : 45,
+                "rowspan" : 27,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#F2F6FA",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "container_20",
+                "row" : 73,
+                "rowspan" : 27,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#F2F6FA",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "container_21",
+                "row" : 101,
+                "rowspan" : 27,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#F2F6FA",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 8,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "chart_3",
+                "row" : 48,
+                "rowspan" : 24,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 10,
+                "column" : 13,
+                "name" : "number_3",
+                "row" : 11,
+                "rowspan" : 5,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 1,
+                "name" : "number_4",
+                "row" : 35,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 10,
+                "column" : 13,
+                "name" : "number_5",
+                "row" : 35,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 10,
+                "column" : 13,
+                "name" : "number_11",
+                "row" : 41,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#091A3E",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "text_1",
+                "row" : 101,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "chart_5",
+                "row" : 104,
+                "rowspan" : 24,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "text_3",
+                "row" : 45,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "container_8",
+                "row" : 129,
+                "rowspan" : 27,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#F2F6FA",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "container_9",
+                "row" : 41,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#335779",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 6,
+                "name" : "list_manager_role",
+                "row" : 41,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#091A3E",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "container_13",
+                "row" : 0,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 0,
+                "name" : "image_4",
+                "row" : 0,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 21,
+                "column" : 3,
+                "name" : "text_14",
+                "row" : 0,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 0,
+                "name" : "text_13",
+                "row" : 41,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#091A3E",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 24,
+                "column" : 0,
+                "name" : "filterpanel_1",
+                "row" : 4,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "#F2F6FA",
+                  "borderColor" : "#C5D3E0",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight" : "fine",
+        "selectors" : [
+          "maxWidth(599)"
+        ],
+        "style" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "backgroundColor" : "#091A3E",
+          "cellSpacingX" : 0,
+          "cellSpacingY" : 0,
+          "documentId" : "",
+          "fit" : "original"
+        },
+        "version" : 1.0
+      }
+    ],
+    "layouts" : [ ],
+    "steps" : {
+      "percent_open_pipe" : {
+        "broadcastFacet" : false,
+        "groups" : [ ],
+        "label" : "",
+        "numbers" : [ ],
+        "query" : "opp_history = load \"${App.Datasets.pipeline_trending_tp.FullyQualifiedName}\"; today = filter opp_history by date('ValidToDate_Year', 'ValidToDate_Month', 'ValidToDate_Day') in [\"1 day ahead\"..]; today = foreach today generate sum('Amount') as 'Amount'; last_week = filter opp_history by date('ValidFromDate_Year', 'ValidFromDate_Month', 'ValidFromDate_Day') in [..\"8 days ago\"]; last_week = filter last_week by date('ValidToDate_Year', 'ValidToDate_Month', 'ValidToDate_Day') in [\"7 days ago\"..]; last_week = foreach last_week generate sum('Amount') as 'Amount'; s = group today by all full, last_week by all; s = foreach s generate (case when (coalesce(sum(last_week['Amount']), 0) == 0 && coalesce(sum(today['Amount']),0) > 0) then 1.0 else (coalesce(sum(today['Amount']),0) - coalesce(sum(last_week['Amount']),0)) / coalesce(sum(last_week['Amount']),1) end) as 'sum_percent';",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true
+      },
+      "manager_role" : {
+        "broadcastFacet" : false,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.user_tp.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "manager_role",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              "UniqueUserName"
+            ],
+            "filters" : [
+              [
+                "ForecastEnabled",
+                [
+                  "True"
+                ],
+                "in"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "kpi_forecast_adjustment" : {
+        "broadcastFacet" : false,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.forecasting_item_tp.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "sum",
+                "ForecastAmount"
+              ]
+            ],
+            "pigql" : "f = load \"${App.Datasets.forecasting_item_tp.FullyQualifiedName}\"; f = filter f by 'ForecastingType_DeveloperName' == \"OpportunityRevenue\"; h = filter f by {{column(manager_role.selection, [\"UniqueUserName\"]).asEquality(\"User_UniqueUserName\")}}; final = group h by all; final = foreach final generate (case when (\"{{cell(manager_role.selection, 0, \"UniqueUserName\").asString()}}\" == \"null\") then 0 else coalesce(sum('AmountWithoutManagerAdjustment'),0) end) as'sum_ForecastAmount';"
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "top_opportunities" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.opportunity_tp.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "sum",
+                "Amount"
+              ]
+            ],
+            "groups" : [
+              "Name"
+            ],
+            "filters" : [ ],
+            "order" : [
+              [
+                -1,
+                {
+                  "ascending" : false
+                }
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "raw_opportunities" : {
+        "broadcastFacet" : false,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.opportunity_tp.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "sum",
+                "Amount"
+              ]
+            ],
+            "groups" : [
+              "Account_Name",
+              "Name",
+              "Owner_UniqueUserName",
+              "CloseDate",
+              "ForecastCategoryName",
+              "StageName"
+            ],
+            "filters" : [ ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "none",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "kpi_quota" : {
+        "broadcastFacet" : false,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.quota_tp.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "sum",
+                "QuotaAmount"
+              ]
+            ],
+            "filters" : [ ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "forecast_barchart" : {
+        "broadcastFacet" : false,
+        "groups" : [ ],
+        "label" : "",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; q = filter q by 'IsLost' == \"No\"; q = group q by all; q = foreach q generate sum('Amount') as 'sum_Amount', \"Forecast No Adjustments\" as 'Legend'; f = load \"${App.Datasets.forecasting_item_tp.FullyQualifiedName}\"; f = foreach f generate {{coalesce(cell(kpi_forecast_adjustment.result, 0, \"sum_ForecastAmount\"), 0).asObject()}} as 'sum_Amount', \"Forecast including Adjustments\" as 'Legend'; u = union f, q;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true
+      },
+      "team_details_table" : {
+        "broadcastFacet" : false,
+        "groups" : [
+          "UniqueUserName"
+        ],
+        "label" : "",
+        "numbers" : [
+          "Quota Remaining",
+          "Won",
+          "Commit",
+          "Adjusted Commit",
+          "Best Case",
+          "Adjusted Best Case",
+          "Pipeline",
+          "Forecast"
+        ],
+        "query" : "opp_forecast = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; closed = filter opp_forecast by 'IsWon' == \"True\"; opp_commit = filter opp_forecast by 'ForecastCategory' ==\"Forecast\"; opp_bestcase =  filter opp_forecast by 'ForecastCategory' ==\"BestCase\"; opp_pipeline = filter opp_forecast by 'ForecastCategory' == \"Pipeline\"; f = load \"${App.Datasets.forecasting_item_tp.FullyQualifiedName}\"; f = filter f by 'ForecastingType_DeveloperName' == \"OpportunityRevenue\"; commit = filter f by 'ForecastingItemCategory' == \"CommitOnly\"; bestcase = filter f by 'ForecastingItemCategory' == \"BestCaseOnly\"; quota = load \"${App.Datasets.quota_tp.FullyQualifiedName}\"; c = group opp_forecast by 'Owner_Role_RoleNames' left, commit by 'User_UniqueUserName' left, bestcase by 'User_UniqueUserName' left, quota by 'User_UniqueUserName' left, opp_commit by 'Owner_Role_RoleNames' left, closed by 'Owner_Role_RoleNames' left, opp_bestcase by 'Owner_Role_RoleNames' left, opp_pipeline by 'Owner_Role_RoleNames'; c = foreach c generate coalesce(opp_forecast['Owner_Role_RoleNames'], commit['User_UniqueUserName'], bestcase['User_UniqueUserName'], quota['User_UniqueUserName'], opp_commit['Owner_Role_RoleNames'], opp_bestcase['Owner_Role_RoleNames'], opp_pipeline['Owner_Role_RoleNames']) as 'UniqueUserName', (case when (coalesce(sum(quota['QuotaAmount']),0) - coalesce(sum(closed['Amount']),0)) > 0  then (coalesce(sum(quota['QuotaAmount']),0) - coalesce(sum(closed['Amount']),0)) else 0 end) as 'Quota Remaining', sum(closed['Amount']) as 'Won', sum(opp_commit['Amount']) as 'Commit', (case when (\"{{cell(manager_role.selection, 0, \"UniqueUserName\").asString()}}\" == \"null\") then 0 when first(commit['User_UniqueUserName']) in [\"{{coalesce(column(manager_role.selection, [\"UniqueUserName\"]),\"0\").asObject()}}\"]  then sum(commit['AmountWithoutManagerAdjustment']) else sum(commit['ForecastAmount']) end) as 'Adjusted Commit', sum(opp_bestcase['Amount']) as 'Best Case', (case when (\"{{cell(manager_role.selection, 0, \"UniqueUserName\").asString()}}\" == \"null\") then 0 when first(bestcase['User_UniqueUserName']) in [\"{{coalesce(column(manager_role.selection, [\"UniqueUserName\"]),\"0\").asObject()}}\"] then sum(bestcase['AmountWithoutManagerAdjustment']) else sum(bestcase['ForecastAmount']) end) as 'Adjusted Best Case', sum(opp_pipeline['Amount']) as 'Pipeline', sum(opp_forecast['Amount']) as 'Forecast';",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "none",
+        "strings" : [
+          "UniqueUserName"
+        ],
+        "type" : "saql",
+        "useGlobal" : true
+      },
+      "view_all_text" : {
+        "broadcastFacet" : false,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.opportunity_tp.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "pigql" : "q = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; q = foreach q generate (case when (\"{{cell(manager_role.selection, 0, \"UniqueUserName\").asString()}}\" == \"null\") then \"Please select a person for Adjusted Forecast to populate.\" when (\"{{cell(manager_role.selection, 0, \"UniqueUserName\").asString()}}\" != \"null\") then \"Please note that adjusted forecasts may not be able to filter by Opportunity or Record Type and Opportunity Owner.\" else \" \" end) as 'list_text';",
+            "measures" : [
+              [
+                "list",
+                "text"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "none",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : false,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "opportunity_amount_by_stage" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.opportunity_tp.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "sum",
+                "Amount"
+              ]
+            ],
+            "pigql" : "q = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; q = group q by 'StageName'; q = foreach q generate 'StageName' as 'StageName', sum('Amount') as 'sum_Amount', max('Stage_SortOrder') as 'SortOrder'; q = order q by 'SortOrder';",
+            "autoFilter" : true,
+            "groups" : [
+              "StageName"
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "stackvbar"
+        }
+      },
+      "top_products" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.opportunity_products_tp.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "sum",
+                "TotalPrice"
+              ]
+            ],
+            "groups" : [
+              "Product_Name"
+            ],
+            "filters" : [ ],
+            "order" : [
+              [
+                -1,
+                {
+                  "ascending" : false
+                }
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "color_open_pipe" : {
+        "broadcastFacet" : false,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.opportunity_tp.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "sum",
+                "percent",
+                "color"
+              ]
+            ],
+            "pigql" : "q = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; q = group q by all; q = foreach q generate {{coalesce(cell(percent_open_pipe.result, 0, \"sum_percent\"), 0).asObject()}} as 'sum_percent'; q = foreach q generate (case when 'sum_percent' > 0 then \"#4ED469\" when 'sum_percent' < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color', 'sum_percent' as 'sum_percent';",
+            "autoFilter" : false
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "none",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : false,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "time_chart_forecast" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.opportunity_tp.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "pigql" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = group a by ('CloseDate_Year', 'CloseDate_Week'); a = foreach a generate 'CloseDate_Year' + \"~~~\" + 'CloseDate_Week' as 'CloseDate_Year~~~CloseDate_Week', sum(sum('Amount')) over([.. 0] partition by all order by ('CloseDate_Year', 'CloseDate_Week')) as 'sum_Amount';",
+            "measures" : [
+              [
+                "sum",
+                "Amount"
+              ]
+            ],
+            "groups" : [
+              [
+                "CloseDate_Year",
+                "CloseDate_Week"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "time"
+        }
+      },
+      "kpi_remaining_quota" : {
+        "broadcastFacet" : false,
+        "groups" : [ ],
+        "label" : "",
+        "numbers" : [ ],
+        "query" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by 'IsWon' == \"True\"; b = load \"${App.Datasets.quota_tp.FullyQualifiedName}\"; c = group a by all full, b by all; c = foreach c generate sum(b['QuotaAmount']) as 'quota', coalesce(sum(a['Amount']), 0) as 'amount'; c = foreach c generate (case when sum('quota') - sum('amount') > 0 then sum('quota') - sum('amount') else 0 end) as 'quota_remaining';",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true
+      },
+      "static_product_grouping" : {
+        "broadcastFacet" : false,
+        "columns" : { },
+        "isGlobal" : false,
+        "selectMode" : "singlerequired",
+        "type" : "staticflex",
+        "useGlobal" : false,
+        "values" : [
+          {
+            "display" : "Product Family",
+            "value" : "Product_Product_Family"
+          },
+          {
+            "display" : "Product Name",
+            "value" : "Product_Product_Name"
+          }
+        ]
+      },
+      "kpi_open_pipe" : {
+        "broadcastFacet" : false,
+        "groups" : [ ],
+        "label" : "",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; q = group q by all; q = foreach q generate coalesce(sum('Amount'), 0) as 'sum_Amount';",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true
+      },
+      "static_opportunity_grouping" : {
+        "broadcastFacet" : false,
+        "columns" : { },
+        "isGlobal" : false,
+        "selectMode" : "singlerequired",
+        "type" : "staticflex",
+        "useGlobal" : false,
+        "values" : [
+          {
+            "display" : "Sales Stage",
+            "grouping" : "StageName",
+            "grouping_column" : "Group"
+          },
+          {
+            "display" : "Forecast Category",
+            "grouping" : "ForecastCategoryName",
+            "grouping_column" : "Group"
+          }
+        ]
+      },
+      "kpi_pipe_coverage" : {
+        "broadcastFacet" : false,
+        "groups" : [ ],
+        "label" : "",
+        "numbers" : [ ],
+        "query" : "won = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; won = filter won by 'IsWon' == \"True\"; quota = load \"${App.Datasets.quota_tp.FullyQualifiedName}\"; remaining_quota = group won by all full, quota by all; remaining_quota = foreach remaining_quota generate sum(quota['QuotaAmount']) as 'quota', coalesce(sum(won['Amount']), 0) as 'amount'; remaining_quota = foreach remaining_quota generate (case when sum('quota') - sum('amount') > 0 then sum('quota') - sum('amount') else 0 end) as 'remaining_quota'; open = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; open = filter open by 'IsClosed' == \"False\"; coverage = group remaining_quota by all full, open by all; coverage = foreach coverage generate coalesce(sum(open['Amount']), 0) as 'amount', sum(remaining_quota['remaining_quota']) as 'remaining_quota'; coverage = foreach coverage generate round(coalesce(sum('amount') / sum('remaining_quota'), 0), 1) as 'sum_pipe_coverage'; f = filter coverage by 'sum_pipe_coverage' > 0;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true
+      },
+      "kpi_quota_attainment" : {
+        "broadcastFacet" : false,
+        "groups" : [ ],
+        "label" : "",
+        "numbers" : [ ],
+        "query" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by 'IsWon' == \"True\"; b = load \"${App.Datasets.quota_tp.FullyQualifiedName}\"; c = group a by all full, b by all; c = foreach c generate (case when sum(a['Amount']) / sum(b['QuotaAmount']) > 0 then sum(a['Amount']) / sum(b['QuotaAmount']) else 0 end) as 'sum_quota_attainment';",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true
+      }
+    },
+    "widgetStyle" : {
+      "backgroundColor" : "#FFFFFF",
+      "borderColor" : "#E6ECF2",
+      "borderEdges" : [ ],
+      "borderRadius" : 0,
+      "borderWidth" : 1
+    },
+    "widgets" : {
+      "container_19" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "documentId" : "",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "number_11" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "sum_ForecastAmount",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "kpi_forecast_adjustment",
+          "textAlignment" : "right",
+          "title" : "Adjusted Forecast",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 14
+        },
+        "type" : "number"
+      },
+      "ui_opportunity_amount_by_stage" : {
+        "parameters" : {
+          "totalValue" : "computeTotal",
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "sorting" : {
+              "order" : "asc"
+            },
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "showMeasureTitle" : false,
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "funnel",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "totalLabel" : "",
+          "showActionMenu" : true,
+          "valueType" : "compactNumber",
+          "showTotal" : false,
+          "step" : "opportunity_amount_by_stage",
+          "theme" : "light",
+          "stemSegments" : 0,
+          "applyConditionalFormatting" : false
+        },
+        "type" : "chart"
+      },
+      "container_13" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_14" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Dive into your deals set to close for improved forecast accuracy."
+          },
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#335779"
+        },
+        "type" : "text"
+      },
+      "text_13" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Forecast User"
+          },
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "textAlignment" : "right",
+          "textColor" : "#C5D3E0"
+        },
+        "type" : "text"
+      },
+      "text_10" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Forecast vs Last Week"
+          },
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_11" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Summary"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "container_1" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "documentId" : "",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_3" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "fitwidth",
+          "image" : {
+            "name" : "${App.Images['SalesWaveLogo50'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "type" : "container"
+      },
+      "list_manager_role" : {
+        "parameters" : {
+          "compact" : false,
+          "displayMode" : "combo",
+          "expanded" : true,
+          "exploreLink" : false,
+          "filterStyle" : {
+            "titleColor" : "#091A3E",
+            "valueColor" : "#17324D"
+          },
+          "instant" : true,
+          "measureField" : "none",
+          "showActionMenu" : false,
+          "step" : "manager_role",
+          "title" : ""
+        },
+        "type" : "listselector"
+      },
+      "container_4" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "documentId" : "",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_5" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "documentId" : "",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "ui_kpi_open_pipe" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "sum_Amount",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 24,
+          "showActionMenu" : true,
+          "step" : "kpi_open_pipe",
+          "textAlignment" : "left",
+          "title" : "Forecast",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 14
+        },
+        "type" : "number"
+      },
+      "container_6" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "documentId" : "",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "chart_6" : {
+        "parameters" : {
+          "autoFitMode" : "fit",
+          "totalValue" : "computeTotal",
+          "showValues" : true,
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "sorting" : {
+              "order" : "asc"
+            },
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "hbar",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "binValues" : false,
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "totalLabel" : "",
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : false,
+            "showAxis" : false,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "step" : "forecast_barchart",
+          "theme" : "dark",
+          "dimensionAxis" : {
+            "showTitle" : false,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : false
+        },
+        "type" : "chart"
+      },
+      "text_3" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Sales Stage"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text_2" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Opportunity Amount by Stage"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "container_7" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "documentId" : "",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_22" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "documentId" : "",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "chart_5" : {
+        "parameters" : {
+          "autoFitMode" : "none",
+          "totalValue" : "computeTotal",
+          "showValues" : true,
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "sorting" : {
+              "order" : "asc"
+            },
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "hbar",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "binValues" : false,
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "totalLabel" : "",
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : false,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "step" : "top_products",
+          "theme" : "light",
+          "dimensionAxis" : {
+            "showTitle" : false,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : false
+        },
+        "type" : "chart"
+      },
+      "container_21" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "documentId" : "",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "chart_8" : {
+        "parameters" : {
+          "totalValue" : "computeTotal",
+          "max" : 1,
+          "legend" : {
+            "showHeader" : true,
+            "sorting" : {
+              "order" : "asc"
+            },
+            "show" : false,
+            "position" : "right-top",
+            "inside" : false
+          },
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "flatgauge",
+          "exploreLink" : false,
+          "medium" : 0.33,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              150,
+              80
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "colors" : {
+            "mediumColor2" : "#F29946",
+            "mediumColor1" : "#FED444",
+            "lowColor1" : "#F71979",
+            "lowColor2" : "#CC203D",
+            "highColor1" : "#7BDE4E",
+            "highColor2" : "#169913"
+          },
+          "totalLabel" : "",
+          "high" : 0.66,
+          "min" : 0,
+          "showActionMenu" : true,
+          "valueType" : "none",
+          "step" : "kpi_quota_attainment",
+          "theme" : "dark",
+          "applyConditionalFormatting" : false
+        },
+        "type" : "chart"
+      },
+      "text_5" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Forecast"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "container_8" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_4" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "FORECAST"
+          },
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "textAlignment" : "center",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "container_20" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "documentId" : "",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_9" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_7" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Top Opportunities"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text_6" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Team Details"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "chart_1" : {
+        "parameters" : {
+          "autoFitMode" : "none",
+          "totalValue" : "computeTotal",
+          "showValues" : true,
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "sorting" : {
+              "order" : "asc"
+            },
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "hbar",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "binValues" : false,
+          "totalLabel" : "",
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : false,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "step" : "top_opportunities",
+          "theme" : "light",
+          "dimensionAxis" : {
+            "showTitle" : false,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : false
+        },
+        "type" : "chart"
+      },
+      "text_9" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "{{cell(view_all_text.result,0,\"list_text\").asString()}}"
+          },
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#C5D3E0"
+        },
+        "type" : "text"
+      },
+      "container_pipeline_coverage" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "documentId" : "",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "chart_3" : {
+        "parameters" : {
+          "totalValue" : "computeTotal",
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "showMeasureTitle" : false,
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "funnel",
+          "exploreLink" : false,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "totalLabel" : "",
+          "showActionMenu" : true,
+          "valueType" : "compactNumber",
+          "showTotal" : true,
+          "step" : "opportunity_amount_by_stage",
+          "theme" : "light",
+          "stemSegments" : 0,
+          "applyConditionalFormatting" : false
+        },
+        "type" : "chart"
+      },
+      "text_8" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Top Accounts"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "center",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "image_4" : {
+        "parameters" : {
+          "alignmentX" : "center",
+          "alignmentY" : "center",
+          "fit" : "fitheight",
+          "image" : {
+            "name" : "${App.Images['astro_binoculars14'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "type" : "image"
+      },
+      "ui_time_chart_forecast" : {
+        "parameters" : {
+          "totalValue" : "computeTotal",
+          "showPoints" : true,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "bottom-center",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "time",
+          "missingValue" : "connect",
+          "dashLine" : {
+            "measures" : "",
+            "showDashLine" : false
+          },
+          "timeAxis" : {
+            "showTitle" : false,
+            "predictiveLine" : {
+              "color" : "rgb(137, 50, 237)",
+              "label" : "TODAY"
+            },
+            "showAxis" : true,
+            "title" : ""
+          },
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "left",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "textColor" : "#FFFFFF",
+          "totalLabel" : "",
+          "fillArea" : true,
+          "showActionMenu" : true,
+          "showZero" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : false,
+            "showAxis" : true,
+            "referenceLines" : [
+              {
+                "color" : "#2EC2BA",
+                "label" : {
+                  "data" : "Quota = $ {{coalesce(cell(kpi_quota.result, 0, \"sum_QuotaAmount\"), 0).asObject()}}",
+                  "type" : "static"
+                },
+                "value" : {
+                  "data" : "{{coalesce(cell(kpi_quota.result, 0, \"sum_QuotaAmount\"), 0).asObject()}}",
+                  "type" : "static"
+                }
+              }
+            ],
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "valueType" : "none",
+          "step" : "time_chart_forecast",
+          "theme" : "dark",
+          "applyConditionalFormatting" : false,
+          "drawArea" : {
+            "measure" : "",
+            "showDrawArea" : false,
+            "bounding1" : "",
+            "bounding2" : ""
+          }
+        },
+        "type" : "chart"
+      },
+      "text_1" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Top Products"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "filterpanel_1" : {
+        "parameters" : {
+          "filterItemOptions" : {
+            "backgroundColor" : "#FFFFFF",
+            "borderColor" : "#E6ECF2",
+            "borderRadius" : 4,
+            "borderWidth" : 1,
+            "propertyColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "filters" : [ ],
+          "itemsPerRow" : 6,
+          "showAllFilters" : true,
+          "title" : {
+            "separatorColor" : "#E6ECF2",
+            "text" : {
+              "align" : "left",
+              "color" : "#091A3E",
+              "fontSize" : 16,
+              "label" : ""
+            },
+            "visible" : true
+          }
+        },
+        "type" : "filterpanel"
+      },
+      "number_5" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "sum_pipe_coverage",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 16,
+          "showActionMenu" : true,
+          "step" : "kpi_pipe_coverage",
+          "textAlignment" : "left",
+          "title" : "Pipe Coverage",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 14
+        },
+        "type" : "number"
+      },
+      "number_4" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "sum_QuotaAmount",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 16,
+          "showActionMenu" : true,
+          "step" : "kpi_quota",
+          "textAlignment" : "left",
+          "title" : "Quota",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 14
+        },
+        "type" : "number"
+      },
+      "number_3" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "quota_remaining",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "kpi_remaining_quota",
+          "textAlignment" : "left",
+          "title" : "Quota Remaining",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 14
+        },
+        "type" : "number"
+      },
+      "number_2" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "sum_quota_attainment",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "kpi_quota_attainment",
+          "textAlignment" : "left",
+          "title" : "Quota Attainment",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 14
+        },
+        "type" : "number"
+      },
+      "number_1" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "sum_quota_attainment",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 24,
+          "showActionMenu" : true,
+          "step" : "kpi_quota_attainment",
+          "textAlignment" : "left",
+          "title" : "Quota Attainment",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 14
+        },
+        "type" : "number"
+      },
+      "container_10" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "fitwidth",
+          "image" : {
+            "name" : "${App.Images['Info4'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "type" : "container"
+      },
+      "number_9" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "sum_pipe_coverage",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 24,
+          "showActionMenu" : true,
+          "step" : "kpi_pipe_coverage",
+          "textAlignment" : "right",
+          "title" : "Pipe Coverage",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 14
+        },
+        "type" : "number"
+      },
+      "number_7" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "sum_QuotaAmount",
+          "numberColor" : "#091A3E",
+          "numberSize" : 14,
+          "showActionMenu" : true,
+          "step" : "kpi_quota",
+          "textAlignment" : "right",
+          "title" : "Quota",
+          "titleColor" : "#335779",
+          "titleSize" : 12
+        },
+        "type" : "number"
+      },
+      "number_6" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "quota_remaining",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 24,
+          "showActionMenu" : true,
+          "step" : "kpi_remaining_quota",
+          "textAlignment" : "right",
+          "title" : "Quota Remaining",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 14
+        },
+        "type" : "number"
+      },
+      "listselector_3" : {
+        "parameters" : {
+          "compact" : false,
+          "displayMode" : "combo",
+          "exploreLink" : false,
+          "filterStyle" : {
+            "titleColor" : "#091A3E",
+            "valueColor" : "#17324D"
+          },
+          "instant" : true,
+          "measureField" : "count",
+          "showActionMenu" : false,
+          "step" : "static_product_grouping",
+          "title" : ""
+        },
+        "type" : "listselector"
+      },
+      "link_3" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "${App.Dashboards['Team Benchmark'].Name}",
+            "namespace" : "${Org.Namespace}"
+          },
+          "destinationType" : "dashboard",
+          "fontSize" : 12,
+          "includeState" : false,
+          "text" : "BENCHMARK",
+          "textAlignment" : "center",
+          "textColor" : "#5C7A99"
+        },
+        "type" : "link"
+      },
+      "link_4" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "${App.Dashboards['Sales Analytics Home'].Name}",
+            "namespace" : "${Org.Namespace}"
+          },
+          "destinationType" : "dashboard",
+          "fontSize" : 12,
+          "includeState" : false,
+          "text" : "",
+          "textAlignment" : "center",
+          "textColor" : "#091A3E"
+        },
+        "type" : "link"
+      },
+      "link_1" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "${App.Dashboards['Leaderboard'].Name}",
+            "namespace" : "${Org.Namespace}"
+          },
+          "destinationType" : "dashboard",
+          "fontSize" : 12,
+          "includeState" : false,
+          "text" : "LEADERBOARD",
+          "textAlignment" : "center",
+          "textColor" : "#5C7A99"
+        },
+        "type" : "link"
+      },
+      "link_2" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "${App.Dashboards['Team Trending'].Name}",
+            "namespace" : "${Org.Namespace}"
+          },
+          "destinationType" : "dashboard",
+          "fontSize" : 12,
+          "includeState" : false,
+          "text" : "TRENDING",
+          "textAlignment" : "center",
+          "textColor" : "#5C7A99"
+        },
+        "type" : "link"
+      },
+      "table_1" : {
+        "parameters" : {
+          "borderColor" : "#e0e5ee",
+          "borderWidth" : 1,
+          "cell" : {
+            "backgroundColor" : "#ffffff",
+            "fontColor" : "#16325c",
+            "fontSize" : 12
+          },
+          "columnProperties" : { },
+          "columns" : [ ],
+          "customBulkActions" : [ ],
+          "exploreLink" : true,
+          "header" : {
+            "backgroundColor" : "#f4f6f9",
+            "fontColor" : "#16325c",
+            "fontSize" : 12
+          },
+          "innerMajorBorderColor" : "#a8b7c7",
+          "innerMinorBorderColor" : "#e0e5ee",
+          "maxColumnWidth" : 300,
+          "minColumnWidth" : 40,
+          "mode" : "variable",
+          "numberOfLines" : 1,
+          "showActionMenu" : true,
+          "showRowIndexColumn" : false,
+          "step" : "team_details_table",
+          "verticalPadding" : 8
+        },
+        "type" : "table"
+      },
+      "table_2" : {
+        "parameters" : {
+          "borderColor" : "#e0e5ee",
+          "borderWidth" : 1,
+          "cell" : {
+            "backgroundColor" : "#ffffff",
+            "fontColor" : "#16325c",
+            "fontSize" : 12
+          },
+          "columnProperties" : { },
+          "columns" : [ ],
+          "customBulkActions" : [ ],
+          "exploreLink" : true,
+          "header" : {
+            "backgroundColor" : "#f4f6f9",
+            "fontColor" : "#16325c",
+            "fontSize" : 12
+          },
+          "innerMajorBorderColor" : "#a8b7c7",
+          "innerMinorBorderColor" : "#e0e5ee",
+          "mode" : "fittocontainer",
+          "numberOfLines" : 1,
+          "pivoted" : false,
+          "showActionMenu" : true,
+          "showRowIndexColumn" : false,
+          "step" : "team_details_table",
+          "verticalPadding" : 8
+        },
+        "type" : "table"
+      },
+      "link_7" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "${App.Dashboards['Team Whitespace'].Name}",
+            "namespace" : "${Org.Namespace}"
+          },
+          "destinationType" : "dashboard",
+          "fontSize" : 12,
+          "includeState" : false,
+          "text" : "WHITESPACE",
+          "textAlignment" : "center",
+          "textColor" : "#5C7A99"
+        },
+        "type" : "link"
+      },
+      "link_5" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "${App.Dashboards['Team Activities'].Name}",
+            "namespace" : "${Org.Namespace}"
+          },
+          "destinationType" : "dashboard",
+          "fontSize" : 12,
+          "includeState" : false,
+          "text" : "ACTIVITIES",
+          "textAlignment" : "center",
+          "textColor" : "#5C7A99"
+        },
+        "type" : "link"
+      },
+      "container_closed_won" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "documentId" : "",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "link_6" : {
+        "parameters" : {
+          "destinationLink" : {
+            "tooltip" : "Click for Help & Training",
+            "url" : "https://help.salesforce.com/articleView?id=bi_app_sales_analytics_dashboard_forecast.htm&type=5"
+          },
+          "destinationType" : "url",
+          "fontSize" : 12,
+          "includeState" : false,
+          "text" : "",
+          "textAlignment" : "center",
+          "textColor" : "#44A2F5"
+        },
+        "type" : "link"
+      },
+      "ui_percent_open_pipe" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "sum_percent",
+          "numberColor" : "{{coalesce(cell(color_open_pipe.result, 0, \"color\"), 0).asString()}}",
+          "numberSize" : 24,
+          "showActionMenu" : true,
+          "step" : "percent_open_pipe",
+          "textAlignment" : "right",
+          "title" : "",
+          "titleColor" : "#335779",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      }
+    }
+  }
+}
