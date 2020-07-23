@@ -1375,7 +1375,7 @@
               [
                 "IsClosed",
                 [
-                  "false"
+                  "False"
                 ],
                 "in"
               ]
@@ -1419,7 +1419,7 @@
               [
                 "IsClosed",
                 [
-                  "true"
+                  "True"
                 ],
                 "in"
               ]
@@ -1486,7 +1486,7 @@
         "numbers" : [
           "sum_percent"
         ],
-        "query" : "a = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"true\"; p = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; p = filter p by 'IsClosed' == \"true\"; z = group a by all full, p by all; z = foreach z generate coalesce(count(a) - count(p),0)/coalesce(count(p),1) as 'diff_to_last_period'; z = group z by all; z = foreach z generate coalesce(avg('diff_to_last_period'),0) as 'sum_percent', (case when avg('diff_to_last_period') > 0 then \"#4ED469\" when avg('diff_to_last_period') < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when avg('diff_to_last_period') < 0 then \"▼\" when avg('diff_to_last_period') > 0 then \"▲\" else \"◄ ►\" end) as 'diff_arrow';",
+        "query" : "a = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"True\"; p = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; p = filter p by 'IsClosed' == \"True\"; z = group a by all full, p by all; z = foreach z generate coalesce(count(a) - count(p),0)/coalesce(count(p),1) as 'diff_to_last_period'; z = group z by all; z = foreach z generate coalesce(avg('diff_to_last_period'),0) as 'sum_percent', (case when avg('diff_to_last_period') > 0 then \"#4ED469\" when avg('diff_to_last_period') < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when avg('diff_to_last_period') < 0 then \"▼\" when avg('diff_to_last_period') > 0 then \"▲\" else \"◄ ►\" end) as 'diff_arrow';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1596,7 +1596,7 @@
         "useGlobal" : false,
         "values" : [
           {
-            "overdue" : "true",
+            "overdue" : "True",
             "display" : "Overdue",
             "filter" : "overdue",
             "orderby" : "b = order b by 'Days Overdue' desc"
@@ -1662,7 +1662,7 @@
               [
                 "IsClosed",
                 [
-                  "true"
+                  "True"
                 ],
                 "in"
               ]
@@ -1812,7 +1812,7 @@
               [
                 "IsClosed",
                 [
-                  "false"
+                  "False"
                 ],
                 "in"
               ],
@@ -1907,7 +1907,7 @@
               [
                 "IsClosed",
                 [
-                  "false"
+                  "False"
                 ],
                 "in"
               ]
@@ -1944,7 +1944,7 @@
               [
                 "IsClosed",
                 [
-                  "false"
+                  "False"
                 ],
                 "in"
               ],
@@ -2137,7 +2137,7 @@
                 "*"
               ]
             ],
-            "pigql" : "a = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; a = filter a by 'IsOverdue' == \"true\"; a = group a by all; a = foreach a generate count() as 'count';"
+            "pigql" : "a = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; a = filter a by 'IsOverdue' == \"True\"; a = group a by all; a = foreach a generate count() as 'count';"
           },
           "version" : -1.0
         },
@@ -2173,7 +2173,7 @@
               [
                 "IsClosed",
                 [
-                  "true"
+                  "True"
                 ],
                 "in"
               ]
@@ -2381,7 +2381,7 @@
         "numbers" : [
           "sum_percent"
         ],
-        "query" : "owner = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; owner = filter owner by {{column(hbar_sales_reps.selection, [\"Owner_UniqueUserName\"]).asEquality(\"Owner_UniqueUserName\")}}; owner = filter owner by 'IsOverdue' == \"true\"; a = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; a = filter a by 'IsOverdue' == \"true\"; a = group a by all; a = foreach a generate count() as 'count'; u = load \"${App.Datasets.user_tp.FullyQualifiedName}\"; b = group u by all full, a by all; b = foreach b generate coalesce(sum(a['count'])/count(u),0) as avg_completed; z = group owner by all full, b by all; z = foreach z generate (case when (\"{{cell(hbar_sales_reps.selection, 0, \"Owner_UniqueUserName\").asString()}}\" == \"null\") then 0 else coalesce((count(owner) - sum(b['avg_completed']))/sum(b['avg_completed']),0) end) as 'sum_percent'; z = foreach z generate 'sum_percent', (case when 'sum_percent' > 0 then \"#4ED469\" when 'sum_percent' < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'sum_percent' < 0 then \"▼\" when 'sum_percent' > 0 then \"▲\" else \"◄ ►\"  end) as 'diff_arrow';",
+        "query" : "owner = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; owner = filter owner by {{column(hbar_sales_reps.selection, [\"Owner_UniqueUserName\"]).asEquality(\"Owner_UniqueUserName\")}}; owner = filter owner by 'IsOverdue' == \"True\"; a = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; a = filter a by 'IsOverdue' == \"True\"; a = group a by all; a = foreach a generate count() as 'count'; u = load \"${App.Datasets.user_tp.FullyQualifiedName}\"; b = group u by all full, a by all; b = foreach b generate coalesce(sum(a['count'])/count(u),0) as avg_completed; z = group owner by all full, b by all; z = foreach z generate (case when (\"{{cell(hbar_sales_reps.selection, 0, \"Owner_UniqueUserName\").asString()}}\" == \"null\") then 0 else coalesce((count(owner) - sum(b['avg_completed']))/sum(b['avg_completed']),0) end) as 'sum_percent'; z = foreach z generate 'sum_percent', (case when 'sum_percent' > 0 then \"#4ED469\" when 'sum_percent' < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'sum_percent' < 0 then \"▼\" when 'sum_percent' > 0 then \"▲\" else \"◄ ►\"  end) as 'diff_arrow';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2397,7 +2397,7 @@
         "numbers" : [
           "sum_percent"
         ],
-        "query" : "owner = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; owner = filter owner by {{column(hbar_sales_reps.selection, [\"Owner_UniqueUserName\"]).asEquality(\"Owner_UniqueUserName\")}}; owner = filter owner by 'IsClosed' == \"true\"; a = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"true\"; a = group a by all; a = foreach a generate count() as 'count'; u = load \"${App.Datasets.user_tp.FullyQualifiedName}\"; b = group u by all full, a by all; b = foreach b generate coalesce(sum(a['count'])/count(u),0) as avg_completed; z = group owner by all full, b by all; z = foreach z generate (case when (\"{{cell(hbar_sales_reps.selection, 0, \"Owner_UniqueUserName\").asString()}}\" == \"null\") then 0 else coalesce((count(owner) - sum(b['avg_completed']))/sum(b['avg_completed']),0) end) as 'sum_percent'; z = foreach z generate 'sum_percent', (case when 'sum_percent' > 0 then \"#4ED469\" when 'sum_percent' < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'sum_percent' < 0 then \"▼\" when 'sum_percent' > 0 then \"▲\" else \"◄ ►\"  end) as 'diff_arrow';",
+        "query" : "owner = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; owner = filter owner by {{column(hbar_sales_reps.selection, [\"Owner_UniqueUserName\"]).asEquality(\"Owner_UniqueUserName\")}}; owner = filter owner by 'IsClosed' == \"True\"; a = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"True\"; a = group a by all; a = foreach a generate count() as 'count'; u = load \"${App.Datasets.user_tp.FullyQualifiedName}\"; b = group u by all full, a by all; b = foreach b generate coalesce(sum(a['count'])/count(u),0) as avg_completed; z = group owner by all full, b by all; z = foreach z generate (case when (\"{{cell(hbar_sales_reps.selection, 0, \"Owner_UniqueUserName\").asString()}}\" == \"null\") then 0 else coalesce((count(owner) - sum(b['avg_completed']))/sum(b['avg_completed']),0) end) as 'sum_percent'; z = foreach z generate 'sum_percent', (case when 'sum_percent' > 0 then \"#4ED469\" when 'sum_percent' < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'sum_percent' < 0 then \"▼\" when 'sum_percent' > 0 then \"▲\" else \"◄ ►\"  end) as 'diff_arrow';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]

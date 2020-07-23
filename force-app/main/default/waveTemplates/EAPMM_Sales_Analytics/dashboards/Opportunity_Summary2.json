@@ -728,7 +728,7 @@
         "isGlobal" : false,
         "query" : {
           "query" : {
-            "pigql" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by {{column(oppty_name_filter.selection, [\"Name\"]).asEquality(\"Name\")}}; a = foreach a generate (case when 'IsClosed' == \"false\" then daysBetween(now(), toDate(CloseDate_Year + \"-\" + CloseDate_Month  + \"-\" + CloseDate_Day, \"yyyy-MM-dd\")) else 0 end) as 'sum_Days_Open';",
+            "pigql" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by {{column(oppty_name_filter.selection, [\"Name\"]).asEquality(\"Name\")}}; a = foreach a generate (case when 'IsClosed' == \"False\" then daysBetween(now(), toDate(CloseDate_Year + \"-\" + CloseDate_Month  + \"-\" + CloseDate_Day, \"yyyy-MM-dd\")) else 0 end) as 'sum_Days_Open';",
             "measures" : [
               [
                 "sum",
@@ -1212,13 +1212,13 @@
           {
             "display" : "Open",
             "value" : [
-              "false"
+              "False"
             ]
           },
           {
             "display" : "Completed",
             "value" : [
-              "true"
+              "True"
             ]
           }
         ]

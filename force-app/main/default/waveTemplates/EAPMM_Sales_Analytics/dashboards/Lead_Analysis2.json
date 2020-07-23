@@ -880,7 +880,7 @@
               [
                 "IsConverted",
                 [
-                  "false"
+                  "False"
                 ],
                 "in"
               ]
@@ -1113,7 +1113,7 @@
               [
                 "IsConverted",
                 [
-                  "true"
+                  "True"
                 ],
                 "in"
               ]
@@ -1173,7 +1173,7 @@
         "broadcastFacet" : true,
         "groups" : [ ],
         "numbers" : [ ],
-        "query" : "leads = load \"${App.Datasets.lead_tp.FullyQualifiedName}\"; converted = filter leads by 'IsConverted' == \"true\"; converted = group converted by all; converted = foreach converted generate count() as 'count_converted'; leads = group leads by all; leads = foreach leads generate count() as 'count_all'; q = group leads by all full, converted by all; q = foreach q generate sum(leads['count_all']) as 'count_all', sum(converted['count_converted']) as 'count_converted'; q = foreach q generate coalesce('count_converted' / 'count_all', 0) as 'sum_percent';",
+        "query" : "leads = load \"${App.Datasets.lead_tp.FullyQualifiedName}\"; converted = filter leads by 'IsConverted' == \"True\"; converted = group converted by all; converted = foreach converted generate count() as 'count_converted'; leads = group leads by all; leads = foreach leads generate count() as 'count_all'; q = group leads by all full, converted by all; q = foreach q generate sum(leads['count_all']) as 'count_all', sum(converted['count_converted']) as 'count_converted'; q = foreach q generate coalesce('count_converted' / 'count_all', 0) as 'sum_percent';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1210,7 +1210,7 @@
               [
                 "IsConverted",
                 [
-                  "true"
+                  "True"
                 ],
                 "in"
               ]

@@ -1308,7 +1308,7 @@
         "numbers" : [
           "sum_total"
         ],
-        "query" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by 'IsWon' == \"true\"; a = group a by all; a = foreach a generate sum('Amount') as 'sum_total', \"Closed Won\" as 'Forecast Group'; b = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; b = filter b by 'IsClosed' == \"false\"; b = group b by all; b = foreach b generate sum('Amount') as 'sum_total', \"Forecast\" as 'Forecast Group'; d = group a by all full, b by all; d = foreach d generate (case when coalesce({{cell(hidden_quota.result, 0, \"sum_QuotaAmount\").asString()}}, 0) - (coalesce(sum(a['sum_total']), 0) + coalesce(sum(b['sum_total']), 0)) > 0 then coalesce({{cell(hidden_quota.result, 0, \"sum_QuotaAmount\").asString()}}, 0) - (coalesce(sum(a['sum_total']), 0) + coalesce(sum(b['sum_total']), 0)) else 0 end) as 'sum_total', \"Remaining After Forecast\" as 'Forecast Group'; z = union a, b, d; fake = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; fake = group fake by all; fake1 = foreach fake generate 0 as 'sum_total', \"Closed Won\" as 'Forecast Group'; fake2 = foreach fake generate 0 as 'sum_total', \"Forecast\" as 'Forecast Group'; fake3 = foreach fake generate 0 as 'sum_total', \"Remaining After Forecast\" as 'Forecast Group'; final = union z, fake1, fake2, fake3; final = group final by 'Forecast Group'; final = foreach final generate 'Forecast Group' as 'Forecast Group', sum('sum_total') as 'sum_total';",
+        "query" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by 'IsWon' == \"True\"; a = group a by all; a = foreach a generate sum('Amount') as 'sum_total', \"Closed Won\" as 'Forecast Group'; b = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; b = filter b by 'IsClosed' == \"False\"; b = group b by all; b = foreach b generate sum('Amount') as 'sum_total', \"Forecast\" as 'Forecast Group'; d = group a by all full, b by all; d = foreach d generate (case when coalesce({{cell(hidden_quota.result, 0, \"sum_QuotaAmount\").asString()}}, 0) - (coalesce(sum(a['sum_total']), 0) + coalesce(sum(b['sum_total']), 0)) > 0 then coalesce({{cell(hidden_quota.result, 0, \"sum_QuotaAmount\").asString()}}, 0) - (coalesce(sum(a['sum_total']), 0) + coalesce(sum(b['sum_total']), 0)) else 0 end) as 'sum_total', \"Remaining After Forecast\" as 'Forecast Group'; z = union a, b, d; fake = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; fake = group fake by all; fake1 = foreach fake generate 0 as 'sum_total', \"Closed Won\" as 'Forecast Group'; fake2 = foreach fake generate 0 as 'sum_total', \"Forecast\" as 'Forecast Group'; fake3 = foreach fake generate 0 as 'sum_total', \"Remaining After Forecast\" as 'Forecast Group'; final = union z, fake1, fake2, fake3; final = group final by 'Forecast Group'; final = foreach final generate 'Forecast Group' as 'Forecast Group', sum('sum_total') as 'sum_total';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1405,7 +1405,7 @@
         "groups" : [ ],
         "label" : "",
         "numbers" : [ ],
-        "query" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by 'IsWon' == \"true\"; b = load \"${App.Datasets.quota_tp.FullyQualifiedName}\"; c = group a by all full, b by all; c = foreach c generate (case when coalesce(sum(b['QuotaAmount']), 0) - coalesce(sum(a['Amount']), 0) > 0 then round(coalesce(sum(b['QuotaAmount']), 0) - coalesce(sum(a['Amount']), 2), 0) else 0 end) as 'sum_quota_remaining';",
+        "query" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by 'IsWon' == \"True\"; b = load \"${App.Datasets.quota_tp.FullyQualifiedName}\"; c = group a by all full, b by all; c = foreach c generate (case when coalesce(sum(b['QuotaAmount']), 0) - coalesce(sum(a['Amount']), 0) > 0 then round(coalesce(sum(b['QuotaAmount']), 0) - coalesce(sum(a['Amount']), 2), 0) else 0 end) as 'sum_quota_remaining';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1463,7 +1463,7 @@
         "isGlobal" : false,
         "query" : {
           "query" : {
-            "pigql" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"false\"; a = group a by all; a = foreach a generate sum('Amount') as 'sum_Amount';",
+            "pigql" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"False\"; a = group a by all; a = foreach a generate sum('Amount') as 'sum_Amount';",
             "measures" : [
               [
                 "sum",
@@ -1524,7 +1524,7 @@
         "isGlobal" : false,
         "query" : {
           "query" : {
-            "pigql" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by 'IsWon' == \"true\"; a = group a by all; a = foreach a generate coalesce(sum('Amount'),0) as 'sum_Amount';",
+            "pigql" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by 'IsWon' == \"True\"; a = group a by all; a = foreach a generate coalesce(sum('Amount'),0) as 'sum_Amount';",
             "measures" : [
               [
                 "sum",
@@ -1628,7 +1628,7 @@
         "groups" : [ ],
         "label" : "",
         "numbers" : [ ],
-        "query" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by 'IsWon' == \"true\"; a = foreach a generate (case when \"{{cell(roles_rolled_up.selection, 0, \"Owner_Role_Hierarchy_RoleNames\").asString()}}\" == \"null\" && \"{{cell(forecast_toggle.selection, 0, \"display\").asObject()}}\" == \"Adjusted Forecast\" then 0 else coalesce(sum('Amount'),0) end) as 'sum_Amount';",
+        "query" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by 'IsWon' == \"True\"; a = foreach a generate (case when \"{{cell(roles_rolled_up.selection, 0, \"Owner_Role_Hierarchy_RoleNames\").asString()}}\" == \"null\" && \"{{cell(forecast_toggle.selection, 0, \"display\").asObject()}}\" == \"Adjusted Forecast\" then 0 else coalesce(sum('Amount'),0) end) as 'sum_Amount';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1688,7 +1688,7 @@
         "numbers" : [
           "sum_total"
         ],
-        "query" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by 'IsWon' == \"true\"; a = group a by all; a = foreach a generate (case when \"{{cell(roles_rolled_up.selection, 0, \"Owner_Role_Hierarchy_RoleNames\").asString()}}\" == \"null\" && \"{{cell(forecast_toggle.selection, 0, \"display\").asObject()}}\" == \"Adjusted Forecast\" then 0 else sum('Amount') end) as 'sum_total', \"Closed Won\" as 'Forecast Group'; c = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; c = filter c by 'IsClosed' == \"false\"; f = load \"${App.Datasets.forecasting_item_tp.FullyQualifiedName}\"; f = filter f by 'ForecastingType_DeveloperName' == \"OpportunityRevenue\"; g = filter f by {{column(roles_rolled_up.selection, [\"Owner_Role_Hierarchy_RoleNames\"]).asEquality(\"User_UniqueUserName\")}}; g = filter g by 'ForecastCategoryName' not in [\"Closed\", \"Omitted\"]; b = group c by all full, g by all; b = foreach b generate coalesce(sum(c['Amount']),0) as 'sum_Forecast',   (case when \"{{cell(roles_rolled_up.selection, 0, \"Owner_Role_Hierarchy_RoleNames\").asString()}}\" == \"null\" then 0  else coalesce(sum(g['AmountWithoutManagerAdjustment']),0) end) as 'sum_Adjusted_Forecast'; b = foreach b generate (case when \"{{cell(forecast_toggle.selection, 0, \"display\").asObject()}}\" == \"Forecast\" then 'sum_Forecast' else 'sum_Adjusted_Forecast' end) as 'sum_total', \"Forecast\" as 'Forecast Group'; d = group a by all full, b by all; d = foreach d generate (case when coalesce({{cell(hidden_quota.result, 0, \"sum_QuotaAmount\").asString()}}, 0) -  (coalesce(sum(a['sum_total']), 0) + coalesce(sum(b['sum_total']), 0)) > 0 then coalesce({{cell(hidden_quota.result, 0, \"sum_QuotaAmount\").asString()}}, 0) - (coalesce(sum(a['sum_total']), 0) + coalesce(sum(b['sum_total']), 0)) else 0 end) as 'sum_total', \"Remaining After Forecast\" as 'Forecast Group'; z = union a, b, d; fake = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; fake = group fake by all; fake1 = foreach fake generate 0 as 'sum_total', \"Closed Won\" as 'Forecast Group'; fake2 = foreach fake generate 0 as 'sum_total', \"Forecast\" as 'Forecast Group'; fake3 = foreach fake generate 0 as 'sum_total', \"Remaining After Forecast\" as 'Forecast Group'; final = union z, fake1, fake2, fake3; final = group final by 'Forecast Group'; final = foreach final generate 'Forecast Group' as 'Forecast Group', sum('sum_total') as 'sum_total';",
+        "query" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by 'IsWon' == \"True\"; a = group a by all; a = foreach a generate (case when \"{{cell(roles_rolled_up.selection, 0, \"Owner_Role_Hierarchy_RoleNames\").asString()}}\" == \"null\" && \"{{cell(forecast_toggle.selection, 0, \"display\").asObject()}}\" == \"Adjusted Forecast\" then 0 else sum('Amount') end) as 'sum_total', \"Closed Won\" as 'Forecast Group'; c = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; c = filter c by 'IsClosed' == \"False\"; f = load \"${App.Datasets.forecasting_item_tp.FullyQualifiedName}\"; f = filter f by 'ForecastingType_DeveloperName' == \"OpportunityRevenue\"; g = filter f by {{column(roles_rolled_up.selection, [\"Owner_Role_Hierarchy_RoleNames\"]).asEquality(\"User_UniqueUserName\")}}; g = filter g by 'ForecastCategoryName' not in [\"Closed\", \"Omitted\"]; b = group c by all full, g by all; b = foreach b generate coalesce(sum(c['Amount']),0) as 'sum_Forecast',   (case when \"{{cell(roles_rolled_up.selection, 0, \"Owner_Role_Hierarchy_RoleNames\").asString()}}\" == \"null\" then 0  else coalesce(sum(g['AmountWithoutManagerAdjustment']),0) end) as 'sum_Adjusted_Forecast'; b = foreach b generate (case when \"{{cell(forecast_toggle.selection, 0, \"display\").asObject()}}\" == \"Forecast\" then 'sum_Forecast' else 'sum_Adjusted_Forecast' end) as 'sum_total', \"Forecast\" as 'Forecast Group'; d = group a by all full, b by all; d = foreach d generate (case when coalesce({{cell(hidden_quota.result, 0, \"sum_QuotaAmount\").asString()}}, 0) -  (coalesce(sum(a['sum_total']), 0) + coalesce(sum(b['sum_total']), 0)) > 0 then coalesce({{cell(hidden_quota.result, 0, \"sum_QuotaAmount\").asString()}}, 0) - (coalesce(sum(a['sum_total']), 0) + coalesce(sum(b['sum_total']), 0)) else 0 end) as 'sum_total', \"Remaining After Forecast\" as 'Forecast Group'; z = union a, b, d; fake = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; fake = group fake by all; fake1 = foreach fake generate 0 as 'sum_total', \"Closed Won\" as 'Forecast Group'; fake2 = foreach fake generate 0 as 'sum_total', \"Forecast\" as 'Forecast Group'; fake3 = foreach fake generate 0 as 'sum_total', \"Remaining After Forecast\" as 'Forecast Group'; final = union z, fake1, fake2, fake3; final = group final by 'Forecast Group'; final = foreach final generate 'Forecast Group' as 'Forecast Group', sum('sum_total') as 'sum_total';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1759,7 +1759,7 @@
         "groups" : [ ],
         "label" : "",
         "numbers" : [ ],
-        "query" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"false\"; f = load \"${App.Datasets.forecasting_item_tp.FullyQualifiedName}\"; f = filter f by 'ForecastingType_DeveloperName' == \"OpportunityRevenue\"; f = filter f by 'ForecastCategoryName' != \"Closed\"; g = filter f by {{column(roles_rolled_up.selection, [\"Owner_Role_Hierarchy_RoleNames\"]).asEquality(\"User_UniqueUserName\")}}; v = group a by all full, g by all; v = foreach v generate coalesce(sum(a['Amount']),0) as 'sum_Forecast', (case when \"{{cell(roles_rolled_up.selection, 0, \"Owner_Role_Hierarchy_RoleNames\").asString()}}\" == \"null\" then 0 else coalesce(sum(g['AmountWithoutManagerAdjustment']),0) end) as 'sum_Adjusted_Forecast'; v = foreach v generate (case when \"{{cell(forecast_toggle.selection, 0, \"display\").asObject()}}\" == \"Forecast\" then 'sum_Forecast' else 'sum_Adjusted_Forecast' end) as 'sum_Amount';",
+        "query" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"False\"; f = load \"${App.Datasets.forecasting_item_tp.FullyQualifiedName}\"; f = filter f by 'ForecastingType_DeveloperName' == \"OpportunityRevenue\"; f = filter f by 'ForecastCategoryName' != \"Closed\"; g = filter f by {{column(roles_rolled_up.selection, [\"Owner_Role_Hierarchy_RoleNames\"]).asEquality(\"User_UniqueUserName\")}}; v = group a by all full, g by all; v = foreach v generate coalesce(sum(a['Amount']),0) as 'sum_Forecast', (case when \"{{cell(roles_rolled_up.selection, 0, \"Owner_Role_Hierarchy_RoleNames\").asString()}}\" == \"null\" then 0 else coalesce(sum(g['AmountWithoutManagerAdjustment']),0) end) as 'sum_Adjusted_Forecast'; v = foreach v generate (case when \"{{cell(forecast_toggle.selection, 0, \"display\").asObject()}}\" == \"Forecast\" then 'sum_Forecast' else 'sum_Adjusted_Forecast' end) as 'sum_Amount';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1774,7 +1774,7 @@
         "groups" : [ ],
         "label" : "",
         "numbers" : [ ],
-        "query" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by 'IsWon' == \"true\"; b = load \"${App.Datasets.quota_tp.FullyQualifiedName}\"; c = group a by all full, b by all; c = foreach c generate (case when sum(a['Amount']) / sum(b['QuotaAmount']) > 0 then round(sum(a['Amount']) / sum(b['QuotaAmount']), 2) else 0 end) as 'sum_quota_attainment';",
+        "query" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by 'IsWon' == \"True\"; b = load \"${App.Datasets.quota_tp.FullyQualifiedName}\"; c = group a by all full, b by all; c = foreach c generate (case when sum(a['Amount']) / sum(b['QuotaAmount']) > 0 then round(sum(a['Amount']) / sum(b['QuotaAmount']), 2) else 0 end) as 'sum_quota_attainment';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1789,7 +1789,7 @@
         "groups" : [ ],
         "label" : "",
         "numbers" : [ ],
-        "query" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by 'IsWon' == \"true\"; b = load \"${App.Datasets.quota_tp.FullyQualifiedName}\"; c = group a by all full, b by all; c = foreach c generate (case when coalesce(sum(b['QuotaAmount']), 0) - coalesce(sum(a['Amount']), 0) > 0 then round(coalesce(sum(b['QuotaAmount']), 0) - coalesce(sum(a['Amount']), 2), 0) else 0 end) as 'sum_quota_remaining'; d = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; d = filter d by 'IsClosed' == \"false\"; e = group c by all full, d by all; e = foreach e generate coalesce(sum(d['Amount']), 0) as 'amount', sum(c['sum_quota_remaining']) as 'remaining_quota'; e = foreach e generate round(coalesce(sum('amount') / sum('remaining_quota'), 0), 1) as 'sum_pipe_coverage';",
+        "query" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by 'IsWon' == \"True\"; b = load \"${App.Datasets.quota_tp.FullyQualifiedName}\"; c = group a by all full, b by all; c = foreach c generate (case when coalesce(sum(b['QuotaAmount']), 0) - coalesce(sum(a['Amount']), 0) > 0 then round(coalesce(sum(b['QuotaAmount']), 0) - coalesce(sum(a['Amount']), 2), 0) else 0 end) as 'sum_quota_remaining'; d = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; d = filter d by 'IsClosed' == \"False\"; e = group c by all full, d by all; e = foreach e generate coalesce(sum(d['Amount']), 0) as 'amount', sum(c['sum_quota_remaining']) as 'remaining_quota'; e = foreach e generate round(coalesce(sum('amount') / sum('remaining_quota'), 0), 1) as 'sum_pipe_coverage';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1881,42 +1881,42 @@
         "values" : [
           {
             "display" : "Open Pipeline",
-            "filter" : "'IsClosed' == \"false\"",
+            "filter" : "'IsClosed' == \"False\"",
             "order" : "desc",
             "calc" : "coalesce(sum(a['Amount']),0) ",
             "projection" : "sum_Amount"
           },
           {
             "display" : "Closed Won",
-            "filter" : "'IsWon' == \"true\"",
+            "filter" : "'IsWon' == \"True\"",
             "order" : "desc",
             "calc" : "coalesce(sum(a['Amount']), 0) ",
             "projection" : "sum_Amount"
           },
           {
             "display" : "Avg Deal Size (Closed Won)",
-            "filter" : "'IsWon' == \"true\"",
+            "filter" : "'IsWon' == \"True\"",
             "order" : "desc",
             "calc" : "coalesce(sum(a['Amount']) / unique(a['Id']), 0) ",
             "projection" : "avg_Amount"
           },
           {
             "display" : "Avg Deal Size (Open)",
-            "filter" : "'IsClosed' == \"false\"",
+            "filter" : "'IsClosed' == \"False\"",
             "order" : "desc",
             "calc" : "coalesce(sum(a['Amount']) / unique(a['Id']), 0) ",
             "projection" : "avg_Amount"
           },
           {
             "display" : "Opportunity Count (Closed Won)",
-            "filter" : "'IsWon' == \"true\"",
+            "filter" : "'IsWon' == \"True\"",
             "order" : "desc",
             "calc" : "coalesce(unique(a['Id']), 0) ",
             "projection" : "unique_Id"
           },
           {
             "display" : "Opportunity Count (Open)",
-            "filter" : "'IsClosed' == \"false\"",
+            "filter" : "'IsClosed' == \"False\"",
             "order" : "desc",
             "calc" : "coalesce(unique(a['Id']), 0) ",
             "projection" : "unique_Id"

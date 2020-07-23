@@ -1680,7 +1680,7 @@
               [
                 "IsClosed",
                 [
-                  "false"
+                  "False"
                 ],
                 "in"
               ]
@@ -1786,7 +1786,7 @@
               [
                 "IsClosed",
                 [
-                  "false"
+                  "False"
                 ],
                 "in"
               ]
@@ -1905,7 +1905,7 @@
               [
                 "IsClosed",
                 [
-                  "false"
+                  "False"
                 ],
                 "in"
               ]
@@ -1929,7 +1929,7 @@
         "groups" : [ ],
         "label" : "Top Accounts",
         "numbers" : [ ],
-        "query" : "opp = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; won = filter opp by 'IsWon' == \"true\"; sales_cycle = filter opp by 'IsClosed'== \"true\"; sales_cycle = filter sales_cycle by 'IsWon' == \"true\"; Activity = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; Activity = filter Activity by 'IsClosed' == \"true\"; open = filter opp by 'IsClosed' == \"false\"; Accounts = load \"${App.Datasets.Account_tp.FullyQualifiedName}\"; z = group Accounts by 'Name' full, won by 'Account_Name' full, sales_cycle by 'Account_Name' full, Activity by 'Account_Name' full, open by 'Account_Name'; z = foreach z generate coalesce(first(Accounts['Name']), first(won['Account_Name']), first(sales_cycle['Account_Name']), first(Activity['Account_Name']), first(open['Account_Name'])) as 'Account_Name', coalesce(sum(won['Amount']),0) as 'sum_closed_won', coalesce(avg(sales_cycle['OpportunityAge']),0) as 'avg_sales_cycle', coalesce(count(Activity),0) as 'sum_activities_completed', coalesce(sum(open['Amount']),0) as sum_open_pipe; z = group z by 'Account_Name'; z = foreach z generate 'Account_Name' as 'Account_Name', sum('{{cell(metric_dropdown.selection, 0, \"projection\").asString()}}') as '{{cell(metric_dropdown.selection, 0, \"projection\").asString()}}'; z = order z by '{{cell(metric_dropdown.selection, 0, \"projection\").asString()}}' {{cell(metric_dropdown.selection, 0, \"order\").asString()}}; z = limit z 50;",
+        "query" : "opp = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; won = filter opp by 'IsWon' == \"True\"; sales_cycle = filter opp by 'IsClosed'== \"True\"; sales_cycle = filter sales_cycle by 'IsWon' == \"True\"; Activity = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; Activity = filter Activity by 'IsClosed' == \"True\"; open = filter opp by 'IsClosed' == \"False\"; Accounts = load \"${App.Datasets.Account_tp.FullyQualifiedName}\"; z = group Accounts by 'Name' full, won by 'Account_Name' full, sales_cycle by 'Account_Name' full, Activity by 'Account_Name' full, open by 'Account_Name'; z = foreach z generate coalesce(first(Accounts['Name']), first(won['Account_Name']), first(sales_cycle['Account_Name']), first(Activity['Account_Name']), first(open['Account_Name'])) as 'Account_Name', coalesce(sum(won['Amount']),0) as 'sum_closed_won', coalesce(avg(sales_cycle['OpportunityAge']),0) as 'avg_sales_cycle', coalesce(count(Activity),0) as 'sum_activities_completed', coalesce(sum(open['Amount']),0) as sum_open_pipe; z = group z by 'Account_Name'; z = foreach z generate 'Account_Name' as 'Account_Name', sum('{{cell(metric_dropdown.selection, 0, \"projection\").asString()}}') as '{{cell(metric_dropdown.selection, 0, \"projection\").asString()}}'; z = order z by '{{cell(metric_dropdown.selection, 0, \"projection\").asString()}}' {{cell(metric_dropdown.selection, 0, \"order\").asString()}}; z = limit z 50;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1943,7 +1943,7 @@
         "broadcastFacet" : true,
         "groups" : [ ],
         "numbers" : [ ],
-        "query" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; won = filter a by 'IsWon' == \"true\"; closed = filter a by 'IsClosed' == \"true\"; q = group won by all, closed by all; q = foreach q generate coalesce(sum(won['Amount']) / sum(closed['Amount']),0) as 'avg_win_rate';",
+        "query" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; won = filter a by 'IsWon' == \"True\"; closed = filter a by 'IsClosed' == \"True\"; q = group won by all, closed by all; q = foreach q generate coalesce(sum(won['Amount']) / sum(closed['Amount']),0) as 'avg_win_rate';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1974,7 +1974,7 @@
               [
                 "IsClosed",
                 [
-                  "false"
+                  "False"
                 ],
                 "in"
               ]
@@ -2003,9 +2003,9 @@
         "useGlobal" : false,
         "values" : [
           {
-            "compact" : "true",
+            "compact" : "True",
             "display" : "Past Due",
-            "value" : "a = filter a by 'IsPastDue' == \"true\"",
+            "value" : "a = filter a by 'IsPastDue' == \"True\"",
             "title" : "Past Due -"
           }
         ]
@@ -2037,7 +2037,7 @@
               [
                 "IsClosed",
                 [
-                  "false"
+                  "False"
                 ],
                 "in"
               ]
@@ -2160,9 +2160,9 @@
         "useGlobal" : false,
         "values" : [
           {
-            "compact" : "true",
+            "compact" : "True",
             "display" : "Neglected",
-            "value" : "a = filter a by 'Neglected' == \"true\"",
+            "value" : "a = filter a by 'Neglected' == \"True\"",
             "title" : "Neglected"
           }
         ]
@@ -2194,7 +2194,7 @@
               [
                 "IsWon",
                 [
-                  "true"
+                  "True"
                 ],
                 "in"
               ]
@@ -2327,7 +2327,7 @@
               [
                 "IsWon",
                 [
-                  "true"
+                  "True"
                 ],
                 "in"
               ]
@@ -2674,7 +2674,7 @@
               [
                 "IsClosed",
                 [
-                  "false"
+                  "False"
                 ],
                 "in"
               ]
@@ -2741,7 +2741,7 @@
         "useGlobal" : false,
         "values" : [
           {
-            "compact" : "true",
+            "compact" : "True",
             "display" : "Pushed",
             "title" : "Pushed -"
           }
@@ -2779,7 +2779,7 @@
         "broadcastFacet" : false,
         "groups" : [ ],
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; won = filter q by 'IsWon' == \"true\"; closed = filter q by 'IsClosed' == \"true\"; z = group won by all, closed by all; z = foreach z generate coalesce(sum(won['Amount']) / sum(closed['Amount']),0) as 'avg_percent'; b = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; b = foreach b generate {{coalesce(cell(win_rate.result, 0, \"avg_win_rate\"), 0).asObject()}} as 'avg_Account_win_rate'; c = group z by all full, b by all; c = foreach c generate coalesce(round((avg(b['avg_Account_win_rate']) - avg(z['avg_percent'])) / avg(z['avg_percent']),2),0) as 'unique_percent'; c = foreach c generate 'unique_percent', (case when 'unique_percent' > 0 then \"#4ED469\" when 'unique_percent' < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'unique_percent' < 0 then \"▼\" when 'unique_percent' > 0 then \"▲\" else \"◄ ►\"  end) as 'diff_arrow';",
+        "query" : "q = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; won = filter q by 'IsWon' == \"True\"; closed = filter q by 'IsClosed' == \"True\"; z = group won by all, closed by all; z = foreach z generate coalesce(sum(won['Amount']) / sum(closed['Amount']),0) as 'avg_percent'; b = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; b = foreach b generate {{coalesce(cell(win_rate.result, 0, \"avg_win_rate\"), 0).asObject()}} as 'avg_Account_win_rate'; c = group z by all full, b by all; c = foreach c generate coalesce(round((avg(b['avg_Account_win_rate']) - avg(z['avg_percent'])) / avg(z['avg_percent']),2),0) as 'unique_percent'; c = foreach c generate 'unique_percent', (case when 'unique_percent' > 0 then \"#4ED469\" when 'unique_percent' < 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'unique_percent' < 0 then \"▼\" when 'unique_percent' > 0 then \"▲\" else \"◄ ►\"  end) as 'diff_arrow';",
         "receiveFacetSource" : {
           "mode" : "none",
           "steps" : [ ]
@@ -2836,7 +2836,7 @@
               [
                 "IsClosed",
                 [
-                  "false"
+                  "False"
                 ],
                 "in"
               ]
@@ -2859,7 +2859,7 @@
         "broadcastFacet" : false,
         "groups" : [ ],
         "numbers" : [ ],
-        "query" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"true\"; a = filter a by 'IsWon' == \"true\"; a = group a by all; a = foreach a generate avg('OpportunityAge') as 'avg_Days_Open'; b = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; b = foreach b generate {{coalesce(cell(avg_Account_sales_cycle.result, 0, \"avg_OpportunityAge\"), 0).asObject()}} as 'Account_avg_DaysOpen'; c = group a by all full, b by all; c = foreach c generate round((coalesce(avg(b['Account_avg_DaysOpen']),0) - avg(a['avg_Days_Open'])) / avg(a['avg_Days_Open']),2) as 'unique_percent'; c = foreach c generate 'unique_percent', (case when 'unique_percent' < 0 then \"#4ED469\" when 'unique_percent' > 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'unique_percent' < 0 then \"▼\" when 'unique_percent' > 0 then \"▲\" else \"◄ ►\"  end) as 'diff_arrow';",
+        "query" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"True\"; a = filter a by 'IsWon' == \"True\"; a = group a by all; a = foreach a generate avg('OpportunityAge') as 'avg_Days_Open'; b = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; b = foreach b generate {{coalesce(cell(avg_Account_sales_cycle.result, 0, \"avg_OpportunityAge\"), 0).asObject()}} as 'Account_avg_DaysOpen'; c = group a by all full, b by all; c = foreach c generate round((coalesce(avg(b['Account_avg_DaysOpen']),0) - avg(a['avg_Days_Open'])) / avg(a['avg_Days_Open']),2) as 'unique_percent'; c = foreach c generate 'unique_percent', (case when 'unique_percent' < 0 then \"#4ED469\" when 'unique_percent' > 0 then \"#ED3251\" else \"#7D98B3\" end) as 'color',(case when 'unique_percent' < 0 then \"▼\" when 'unique_percent' > 0 then \"▲\" else \"◄ ►\"  end) as 'diff_arrow';",
         "receiveFacetSource" : {
           "mode" : "none",
           "steps" : [ ]
@@ -2941,14 +2941,14 @@
               [
                 "IsClosed",
                 [
-                  "true"
+                  "True"
                 ],
                 "in"
               ],
               [
                 "IsWon",
                 [
-                  "true"
+                  "True"
                 ],
                 "in"
               ]

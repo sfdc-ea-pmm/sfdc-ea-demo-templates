@@ -1194,7 +1194,7 @@
               [
                 "IsClosed",
                 [
-                  "true"
+                  "True"
                 ],
                 "in"
               ]
@@ -1332,7 +1332,7 @@
                 "amount"
               ]
             ],
-            "pigql" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; b = filter a by 'IsWon' == \"true\" || 'IsClosed' == \"false\"; b = group b by all; b = foreach b generate \"Forecast\" as 'Group', coalesce(sum('Amount'), 0) as 'sum_amount'; c = filter a by 'IsWon' == \"true\"; c = group c by all; c = foreach c generate \"Won\" as 'Group', coalesce(sum('Amount'), 0) as 'sum_amount'; d = group a by all; d = foreach d generate coalesce({{cell(kpi_quota_forecast_hidden.result, 0, \"sum_QuotaAmount\").asString()}}, 0) as 'sum_amount', \"Quota\" as 'Group'; e = union c, b, d;",
+            "pigql" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; b = filter a by 'IsWon' == \"True\" || 'IsClosed' == \"False\"; b = group b by all; b = foreach b generate \"Forecast\" as 'Group', coalesce(sum('Amount'), 0) as 'sum_amount'; c = filter a by 'IsWon' == \"True\"; c = group c by all; c = foreach c generate \"Won\" as 'Group', coalesce(sum('Amount'), 0) as 'sum_amount'; d = group a by all; d = foreach d generate coalesce({{cell(kpi_quota_forecast_hidden.result, 0, \"sum_QuotaAmount\").asString()}}, 0) as 'sum_amount', \"Quota\" as 'Group'; e = union c, b, d;",
             "groups" : [
               "Group"
             ]
@@ -1367,7 +1367,7 @@
                 "percent"
               ]
             ],
-            "pigql" : "opp_history = load \"${App.Datasets.pipeline_trending_tp.FullyQualifiedName}\"; opp_history = filter opp_history by 'Stage_IsClosed' == \"false\"; today = filter opp_history by date('ValidFromDate_Year', 'ValidFromDate_Month', 'ValidFromDate_Day') in [..\"current day\"]; today = filter today by date('ValidToDate_Year', 'ValidToDate_Month', 'ValidToDate_Day') in [\"1 day ahead\"..]; today = foreach today generate coalesce(sum('Amount'), 0) as 'Amount'; last_week = filter opp_history by date('ValidFromDate_Year', 'ValidFromDate_Month', 'ValidFromDate_Day') in [..\"8 day ago\"]; last_week = filter last_week by date('ValidToDate_Year', 'ValidToDate_Month', 'ValidToDate_Day') in [\"7 days ago\"..]; last_week = foreach last_week generate coalesce(sum('Amount'), 0) as 'AmountP'; s = group today by all full, last_week by all; s = foreach s generate (case when coalesce(sum(last_week['AmountP']), 0) == 0 && coalesce(sum(today['Amount']), 0) > 0 then 1.0 else coalesce((coalesce(sum(today['Amount']), 0) - coalesce(sum(last_week['AmountP']), 0)) / coalesce(sum(last_week['AmountP']), 0), 0) end) as 'sum_percent';"
+            "pigql" : "opp_history = load \"${App.Datasets.pipeline_trending_tp.FullyQualifiedName}\"; opp_history = filter opp_history by 'Stage_IsClosed' == \"False\"; today = filter opp_history by date('ValidFromDate_Year', 'ValidFromDate_Month', 'ValidFromDate_Day') in [..\"current day\"]; today = filter today by date('ValidToDate_Year', 'ValidToDate_Month', 'ValidToDate_Day') in [\"1 day ahead\"..]; today = foreach today generate coalesce(sum('Amount'), 0) as 'Amount'; last_week = filter opp_history by date('ValidFromDate_Year', 'ValidFromDate_Month', 'ValidFromDate_Day') in [..\"8 day ago\"]; last_week = filter last_week by date('ValidToDate_Year', 'ValidToDate_Month', 'ValidToDate_Day') in [\"7 days ago\"..]; last_week = foreach last_week generate coalesce(sum('Amount'), 0) as 'AmountP'; s = group today by all full, last_week by all; s = foreach s generate (case when coalesce(sum(last_week['AmountP']), 0) == 0 && coalesce(sum(today['Amount']), 0) > 0 then 1.0 else coalesce((coalesce(sum(today['Amount']), 0) - coalesce(sum(last_week['AmountP']), 0)) / coalesce(sum(last_week['AmountP']), 0), 0) end) as 'sum_percent';"
           },
           "version" : -1.0
         },
@@ -1399,7 +1399,7 @@
                 "percent"
               ]
             ],
-            "pigql" : "opp = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; opp = filter opp by 'IsWon' == \"true\"; today = filter opp by date('CloseDate_Year', 'CloseDate_Month', 'CloseDate_Day') in [..\"current day\"]; last_week = filter opp by date('CloseDate_Year', 'CloseDate_Month', 'CloseDate_Day') in [..\"7 days ago\"]; s = group today by all full, last_week by all; s = foreach s generate (case when coalesce(sum(last_week['Amount']), 0) == 0 && coalesce(sum(today['Amount']), 0) > 0 then 1.0 else coalesce((coalesce(sum(today['Amount']), 0) - coalesce(sum(last_week['Amount']), 0)) / coalesce(sum(last_week['Amount']), 0), 0) end) as 'sum_percent';"
+            "pigql" : "opp = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; opp = filter opp by 'IsWon' == \"True\"; today = filter opp by date('CloseDate_Year', 'CloseDate_Month', 'CloseDate_Day') in [..\"current day\"]; last_week = filter opp by date('CloseDate_Year', 'CloseDate_Month', 'CloseDate_Day') in [..\"7 days ago\"]; s = group today by all full, last_week by all; s = foreach s generate (case when coalesce(sum(last_week['Amount']), 0) == 0 && coalesce(sum(today['Amount']), 0) > 0 then 1.0 else coalesce((coalesce(sum(today['Amount']), 0) - coalesce(sum(last_week['Amount']), 0)) / coalesce(sum(last_week['Amount']), 0), 0) end) as 'sum_percent';"
           },
           "version" : -1.0
         },
@@ -1465,7 +1465,7 @@
                 "percent"
               ]
             ],
-            "pigql" : "team_opptys = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; team_opptys = filter team_opptys by {{column(dropdown_parent_id_hidden.result, [\"Role_DeveloperName\"]).asEquality(\"Owner_Role_DeveloperName\")}}; team_opptys = filter team_opptys by 'IsWon' == \"true\"; team_opptys = group team_opptys by 'Owner_UniqueUserName'; team_opptys = foreach team_opptys generate 'Owner_UniqueUserName' as 'Owner_UniqueUserName', coalesce(sum('Amount'), 0) as 'owner_amount'; team_opptys = group team_opptys by all; team_opptys = foreach team_opptys generate coalesce(coalesce(sum('owner_amount'), 0) / unique('Owner_UniqueUserName'), 0) as 'team_avg'; team_opptys = foreach team_opptys generate coalesce(({{coalesce(cell(kpi_closed_won.result, 0, \"sum_Amount\"), 0).asObject()}} - coalesce(sum('team_avg'), 0)) / coalesce(sum('team_avg'), 0), 0) as 'sum_percent';"
+            "pigql" : "team_opptys = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; team_opptys = filter team_opptys by {{column(dropdown_parent_id_hidden.result, [\"Role_DeveloperName\"]).asEquality(\"Owner_Role_DeveloperName\")}}; team_opptys = filter team_opptys by 'IsWon' == \"True\"; team_opptys = group team_opptys by 'Owner_UniqueUserName'; team_opptys = foreach team_opptys generate 'Owner_UniqueUserName' as 'Owner_UniqueUserName', coalesce(sum('Amount'), 0) as 'owner_amount'; team_opptys = group team_opptys by all; team_opptys = foreach team_opptys generate coalesce(coalesce(sum('owner_amount'), 0) / unique('Owner_UniqueUserName'), 0) as 'team_avg'; team_opptys = foreach team_opptys generate coalesce(({{coalesce(cell(kpi_closed_won.result, 0, \"sum_Amount\"), 0).asObject()}} - coalesce(sum('team_avg'), 0)) / coalesce(sum('team_avg'), 0), 0) as 'sum_percent';"
           },
           "version" : -1.0
         },
@@ -1507,7 +1507,7 @@
               [
                 "IsWon",
                 [
-                  "true"
+                  "True"
                 ],
                 "in"
               ]
@@ -1645,7 +1645,7 @@
                 "percent"
               ]
             ],
-            "pigql" : "team_opptys = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; team_opptys = filter team_opptys by {{column(dropdown_parent_id_hidden.result, [\"Role_DeveloperName\"]).asEquality(\"Owner_Role_DeveloperName\")}}; team_opptys = filter team_opptys by 'IsClosed' == \"false\"; team_opptys = group team_opptys by 'Owner_UniqueUserName'; team_opptys = foreach team_opptys generate 'Owner_UniqueUserName' as 'Owner_UniqueUserName', coalesce(sum('Amount'), 0) as 'owner_amount'; team_opptys = group team_opptys by all; team_opptys = foreach team_opptys generate coalesce(coalesce(sum('owner_amount'), 0) / unique('Owner_UniqueUserName'), 0) as 'team_avg'; team_opptys = foreach team_opptys generate coalesce(({{coalesce(cell(kpi_open_pipe.result, 0, \"sum_Amount\"), 0).asObject()}} - coalesce(sum('team_avg'), 0)) / coalesce(sum('team_avg'), 0), 0) as 'sum_percent';"
+            "pigql" : "team_opptys = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; team_opptys = filter team_opptys by {{column(dropdown_parent_id_hidden.result, [\"Role_DeveloperName\"]).asEquality(\"Owner_Role_DeveloperName\")}}; team_opptys = filter team_opptys by 'IsClosed' == \"False\"; team_opptys = group team_opptys by 'Owner_UniqueUserName'; team_opptys = foreach team_opptys generate 'Owner_UniqueUserName' as 'Owner_UniqueUserName', coalesce(sum('Amount'), 0) as 'owner_amount'; team_opptys = group team_opptys by all; team_opptys = foreach team_opptys generate coalesce(coalesce(sum('owner_amount'), 0) / unique('Owner_UniqueUserName'), 0) as 'team_avg'; team_opptys = foreach team_opptys generate coalesce(({{coalesce(cell(kpi_open_pipe.result, 0, \"sum_Amount\"), 0).asObject()}} - coalesce(sum('team_avg'), 0)) / coalesce(sum('team_avg'), 0), 0) as 'sum_percent';"
           },
           "version" : -1.0
         },
@@ -1728,7 +1728,7 @@
               [
                 "IsClosed",
                 [
-                  "false"
+                  "False"
                 ],
                 "in"
               ]
@@ -1800,7 +1800,7 @@
               [
                 "IsWon",
                 [
-                  "true"
+                  "True"
                 ],
                 "in"
               ]
@@ -1836,7 +1836,7 @@
                 "percent"
               ]
             ],
-            "pigql" : "a = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"true\"; today = filter a by date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day') in [\"7 days ago\"..\"current day\"]; last_week = filter a by date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day') in [\"15 days ago\"..\"8 days ago\"]; q = group today by all full, last_week by all; q = foreach q generate coalesce(count('today'), 0) as 'today', coalesce(count('last_week'), 0) as 'last_week'; q = foreach q generate (case when coalesce(sum('last_week'), 0) == 0 && coalesce(sum('today'), 0) > 0 then 1.0 else coalesce((coalesce(sum('today'), 0) - coalesce(sum('last_week'), 0)) / coalesce(sum('last_week'), 0), 0) end) as 'sum_percent';"
+            "pigql" : "a = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; a = filter a by 'IsClosed' == \"True\"; today = filter a by date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day') in [\"7 days ago\"..\"current day\"]; last_week = filter a by date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day') in [\"15 days ago\"..\"8 days ago\"]; q = group today by all full, last_week by all; q = foreach q generate coalesce(count('today'), 0) as 'today', coalesce(count('last_week'), 0) as 'last_week'; q = foreach q generate (case when coalesce(sum('last_week'), 0) == 0 && coalesce(sum('today'), 0) > 0 then 1.0 else coalesce((coalesce(sum('today'), 0) - coalesce(sum('last_week'), 0)) / coalesce(sum('last_week'), 0), 0) end) as 'sum_percent';"
           },
           "version" : -1.0
         },
@@ -1906,7 +1906,7 @@
               [
                 "IsClosed",
                 [
-                  "true"
+                  "True"
                 ],
                 "in"
               ]
@@ -1949,14 +1949,14 @@
               [
                 "IsClosed",
                 [
-                  "false"
+                  "False"
                 ],
                 "in"
               ],
               [
                 "Neglected",
                 [
-                  "true"
+                  "True"
                 ],
                 "in"
               ]
@@ -2102,7 +2102,7 @@
                 "amount"
               ]
             ],
-            "pigql" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; b = filter a by 'IsWon' == \"true\" || 'IsClosed' == \"false\"; b = group b by all; b = foreach b generate \"Forecast\" as 'Group', coalesce(sum('Amount'), 0) as 'sum_amount'; c = filter a by 'IsWon' == \"true\"; c = group c by all; c = foreach c generate \"Won\" as 'Group', coalesce(sum('Amount'), 0) as 'sum_amount'; e = union c, b;",
+            "pigql" : "a = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; b = filter a by 'IsWon' == \"True\" || 'IsClosed' == \"False\"; b = group b by all; b = foreach b generate \"Forecast\" as 'Group', coalesce(sum('Amount'), 0) as 'sum_amount'; c = filter a by 'IsWon' == \"True\"; c = group c by all; c = foreach c generate \"Won\" as 'Group', coalesce(sum('Amount'), 0) as 'sum_amount'; e = union c, b;",
             "groups" : [
               "Group"
             ]
@@ -2178,7 +2178,7 @@
               [
                 "hasOpportunity",
                 [
-                  "true"
+                  "True"
                 ],
                 "in"
               ]
@@ -2284,7 +2284,7 @@
                 "percent"
               ]
             ],
-            "pigql" : "a = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; a = filter a by {{column(dropdown_parent_id_hidden.result, [\"Role_DeveloperName\"]).asEquality(\"Owner_Role_DeveloperName\")}}; a = filter a by 'IsClosed' == \"true\"; a = group a by 'OwnerId'; a = foreach a generate count() as 'owner_count', 'OwnerId' as 'OwnerId'; a = group a by all; a = foreach a generate coalesce(sum('owner_count')/unique('OwnerId'), 0) as 'team_avg'; a = foreach a generate coalesce(({{coalesce(cell(kpi_activities_completed.result, 0, \"count\"), 0).asObject()}} - sum('team_avg')) / sum('team_avg'), 0) as 'sum_percent';"
+            "pigql" : "a = load \"${App.Datasets.Activity_tp.FullyQualifiedName}\"; a = filter a by {{column(dropdown_parent_id_hidden.result, [\"Role_DeveloperName\"]).asEquality(\"Owner_Role_DeveloperName\")}}; a = filter a by 'IsClosed' == \"True\"; a = group a by 'OwnerId'; a = foreach a generate count() as 'owner_count', 'OwnerId' as 'OwnerId'; a = group a by all; a = foreach a generate coalesce(sum('owner_count')/unique('OwnerId'), 0) as 'team_avg'; a = foreach a generate coalesce(({{coalesce(cell(kpi_activities_completed.result, 0, \"count\"), 0).asObject()}} - sum('team_avg')) / sum('team_avg'), 0) as 'sum_percent';"
           },
           "version" : -1.0
         },
@@ -2305,7 +2305,7 @@
         "groups" : [ ],
         "label" : "",
         "numbers" : [ ],
-        "query" : "won = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; won = filter won by 'IsWon' == \"true\"; won = foreach won generate coalesce(sum('Amount'), 0) as 'sum_Amount'; quota = load \"${App.Datasets.quota_tp.FullyQualifiedName}\"; quota = group quota by all; quota = foreach quota generate coalesce(sum('QuotaAmount'), 0) as 'sum_quota'; remain = group won by all full, quota by all; remain = foreach remain generate coalesce(sum(quota['sum_quota']), 0) - coalesce(sum(won['sum_Amount']), 0) as 'sum_quota_remaining'; remain = foreach remain generate (case when sum('sum_quota_remaining') > 0 then sum('sum_quota_remaining') else 0 end) as 'sum_quota_remaining';",
+        "query" : "won = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; won = filter won by 'IsWon' == \"True\"; won = foreach won generate coalesce(sum('Amount'), 0) as 'sum_Amount'; quota = load \"${App.Datasets.quota_tp.FullyQualifiedName}\"; quota = group quota by all; quota = foreach quota generate coalesce(sum('QuotaAmount'), 0) as 'sum_quota'; remain = group won by all full, quota by all; remain = foreach remain generate coalesce(sum(quota['sum_quota']), 0) - coalesce(sum(won['sum_Amount']), 0) as 'sum_quota_remaining'; remain = foreach remain generate (case when sum('sum_quota_remaining') > 0 then sum('sum_quota_remaining') else 0 end) as 'sum_quota_remaining';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2340,7 +2340,7 @@
               [
                 "hasOpportunity",
                 [
-                  "false"
+                  "False"
                 ],
                 "in"
               ]
@@ -2477,7 +2477,7 @@
         "groups" : [ ],
         "label" : "",
         "numbers" : [ ],
-        "query" : "won = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; won = filter won by 'IsWon' == \"true\"; q = load \"${App.Datasets.quota_tp.FullyQualifiedName}\"; attainment = group won by all full, q by all; attainment = foreach attainment generate (case when sum(won['Amount']) / sum(q['QuotaAmount']) > 0 then sum(won['Amount']) / sum(q['QuotaAmount']) else 0 end) as 'sum_quota_attainment';",
+        "query" : "won = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; won = filter won by 'IsWon' == \"True\"; q = load \"${App.Datasets.quota_tp.FullyQualifiedName}\"; attainment = group won by all full, q by all; attainment = foreach attainment generate (case when sum(won['Amount']) / sum(q['QuotaAmount']) > 0 then sum(won['Amount']) / sum(q['QuotaAmount']) else 0 end) as 'sum_quota_attainment';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2492,7 +2492,7 @@
         "groups" : [ ],
         "label" : "",
         "numbers" : [ ],
-        "query" : "won = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; won = filter won by 'IsWon' == \"true\"; quota = load \"${App.Datasets.quota_tp.FullyQualifiedName}\"; quota_remaining = group won by all full, quota by all; quota_remaining = foreach quota_remaining generate sum(quota['QuotaAmount']) as 'quota', coalesce(sum(won['Amount']), 0) as 'amount'; quota_remaining = foreach quota_remaining generate (case when sum('quota') - sum('amount') > 0 then sum('quota') - sum('amount') else 0 end) as 'quota_remaining'; open = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; open = filter open by 'IsClosed' == \"false\"; coverage = group quota_remaining by all full, open by all; coverage = foreach coverage generate coalesce(sum(open['Amount']), 0) as 'amount', sum(quota_remaining['quota_remaining']) as 'quota_remaining'; coverage = foreach coverage generate round(coalesce(sum('amount') / sum('quota_remaining'), 0), 1) as 'sum_pipe_coverage'; f = filter coverage by 'sum_pipe_coverage' > 0;",
+        "query" : "won = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; won = filter won by 'IsWon' == \"True\"; quota = load \"${App.Datasets.quota_tp.FullyQualifiedName}\"; quota_remaining = group won by all full, quota by all; quota_remaining = foreach quota_remaining generate sum(quota['QuotaAmount']) as 'quota', coalesce(sum(won['Amount']), 0) as 'amount'; quota_remaining = foreach quota_remaining generate (case when sum('quota') - sum('amount') > 0 then sum('quota') - sum('amount') else 0 end) as 'quota_remaining'; open = load \"${App.Datasets.opportunity_tp.FullyQualifiedName}\"; open = filter open by 'IsClosed' == \"False\"; coverage = group quota_remaining by all full, open by all; coverage = foreach coverage generate coalesce(sum(open['Amount']), 0) as 'amount', sum(quota_remaining['quota_remaining']) as 'quota_remaining'; coverage = foreach coverage generate round(coalesce(sum('amount') / sum('quota_remaining'), 0), 1) as 'sum_pipe_coverage'; f = filter coverage by 'sum_pipe_coverage' > 0;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2526,7 +2526,7 @@
               [
                 "IsClosed",
                 [
-                  "false"
+                  "False"
                 ],
                 "in"
               ]
