@@ -1,0 +1,95 @@
+{
+  "templateType": "app",
+  "label": "Tour | Lead Trending Analytics",
+  "name": "EAPMM_Lead_Trending_Analytics",
+  "description": "Harbor Tour version of Lead Trending Analytics",
+  "customAttributes": [
+    {
+      "label": "Author(s)",
+      "values": ["EA PMM"]
+    },
+    {
+      "label": "Demo Version",
+      "values": ["v2020.31"]
+    },
+    {
+      "label": "Source Version",
+      "values": ["v226"]
+    }
+  ],
+  "tags": ["Harbor Tour", "Demo", "Sales", "Leads"],
+  "assetVersion": 49.0,
+  "variableDefinition": "variables.json",
+  "uiDefinition": "ui.json",
+  "rules": [
+    {
+      "type": "templateToApp",
+      "file": "template-to-app-rules.json"
+    },
+    {
+      "type": "appToTemplate",
+      "file": "app-to-template-rules.json"
+    }
+  ],
+  "releaseInfo": {
+    "templateVersion": "1.0",
+    "notesFile": "releaseNotes.html"
+  },
+  "folderDefinition": "folder.json",
+  "externalFiles": [
+    {
+      "label": "LeadHistory",
+      "name": "LeadHistory_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/LeadHistory_XMD.json",
+      "file": "external_files/LeadHistory.csv",
+      "type": "CSV",
+      "schema": "external_files/LeadHistory.json"
+    },
+    {
+      "label": "Lead",
+      "name": "Leads_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/Leads_XMD.json",
+      "file": "external_files/Leads.csv",
+      "type": "CSV",
+      "schema": "external_files/Leads.json"
+    }
+  ],
+  "lenses": [],
+  "dashboards": [
+    {
+      "label": "Lead Trending Analytics",
+      "name": "Lead_Trending6_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Lead_Trending6.json"
+    }
+  ],
+  "eltDataflows": [],
+  "recipes": [],
+  "datasetFiles": [],
+  "storedQueries": [],
+  "imageFiles": [],
+  "extendedTypes": {},
+  "templateDependencies": [],
+  "icons": {
+    "appBadge": {
+      "name": "16.png"
+    },
+    "templateBadge": {
+      "name": "analytics_icon"
+    },
+    "templatePreviews": [
+      {
+        "name": "einstein_scene",
+        "label": "",
+        "description": ""
+      },
+      {
+        "name": "demo_template_guide_0",
+        "label": "How to Use this Template",
+        "description": "This demo template is decoupled from core objects and does not require any additional licenses (only EA+). To customize the data you will need to download the datasets, modify and update. This template includes full sample data."
+      }
+    ]
+  }
+}
