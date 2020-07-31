@@ -1,0 +1,180 @@
+{
+  "notificationLevel": "",
+  "workflowDefinition": {
+    "compute-CG_OrderItem-AF_ID": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "slice-CG_OrderItem-AF_ID",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "saqlExpression": "\"0YQB0000000PAsIOAW\"",
+            "name": "AF_ID",
+            "label": "AF_ID",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "compute-CG_Visit-AF_ID": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "slice-CG_Visit-AF_ID",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "AF_ID",
+            "saqlExpression": "\"0YQB0000000PAsIOAW\"",
+            "label": "AF_ID",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "slice-CG-RetailVisitKpi": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "extract-CG_RetailVisitKpi",
+        "fields": [
+          {
+            "name": "AF_ID"
+          }
+        ]
+      }
+    },
+    "register-CG_Visit": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_Visit",
+        "alias": "${App.Datasets.CG_Visit36_tp.FullyQualifiedName}",
+        "source": "compute-CG_Visit-AF_ID"
+      }
+    },
+    "register-CG_OrderItem": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_OrderItem",
+        "alias": "${App.Datasets.CG_OrderItem36_tp.FullyQualifiedName}",
+        "source": "compute-CG_OrderItem-AF_ID"
+      }
+    },
+    "extract-CG_OrderItem": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.CG_OrderItem36_tp.FullyQualifiedName}"
+      }
+    },
+    "extract-CG_RetailVisitKpi": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.CG_RetailVisitKpi37_tp.FullyQualifiedName}"
+      }
+    },
+    "slice-CG_Visit-AF_ID": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "extract-CG_Visit",
+        "fields": [
+          {
+            "name": "AF_ID"
+          }
+        ]
+      }
+    },
+    "extract-CG_Case": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.CG_Case36_tp.FullyQualifiedName}"
+      }
+    },
+    "slice-CG_OrderItem-AF_ID": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "extract-CG_OrderItem",
+        "fields": [
+          {
+            "name": "AF_ID"
+          }
+        ]
+      }
+    },
+    "compute-CG_Case-AF_ID": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "slice-CG_Case-AF_ID",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "saqlExpression": "\"0YQB0000000PAsIOAW\"",
+            "name": "AF_ID",
+            "label": "AF_ID",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "register-CG_Case": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_Case",
+        "alias": "${App.Datasets.CG_Case36_tp.FullyQualifiedName}",
+        "source": "compute-CG_Case-AF_ID"
+      }
+    },
+    "compute-CG_RetailVisitKpi-AF_ID": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "slice-CG-RetailVisitKpi",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "saqlExpression": "\"0YQB0000000PAsIOAW\"",
+            "name": "AF_ID",
+            "label": "AF_ID",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "extract-CG_Visit": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.CG_Visit36_tp.FullyQualifiedName}"
+      }
+    },
+    "register-CG_RetailVisitKpi": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_RetailVisitKpi",
+        "alias": "${App.Datasets.CG_RetailVisitKpi37_tp.FullyQualifiedName}",
+        "source": "compute-CG_RetailVisitKpi-AF_ID"
+      }
+    },
+    "slice-CG_Case-AF_ID": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "extract-CG_Case",
+        "fields": [
+          {
+            "name": "AF_ID"
+          }
+        ]
+      }
+    }
+  },
+  "_type": "dataflow",
+  "description": "EA_for_CG_Action_Framework_Fix",
+  "MasterLabel": "EA_for_CG_Action_Framework_Fix",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive",
+  "isDeletable": true,
+  "longRunningAlertInMins": "",
+  "DataflowType": "USER",
+  "name": "EA_for_CG_Action_Framework_Fix",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": ""
+}

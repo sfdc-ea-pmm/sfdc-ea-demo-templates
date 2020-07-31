@@ -1,0 +1,207 @@
+{
+  "name" : "Demo_Charge_vs_Capacite_tp",
+  "label" : "Demo Charge vs Capacite",
+  "folder" : {
+    "id" : "${App.Folder.Id}"
+  },
+  "visualizationType" : "combo",
+  "dateVersion" : 1,
+  "datasets" : [
+    {
+      "id" : "${App.Datasets.CAPACITE_tp.Id}"
+    },
+    {
+      "id" : "${App.Datasets.CHARGE_tp.Id}"
+    }
+  ],
+  "xmd" : {
+    "measures" : [ ],
+    "derivedDimensions" : [ ],
+    "organizations" : [ ],
+    "showDetailsDefaultFields" : [ ],
+    "dates" : [ ],
+    "derivedMeasures" : [ ],
+    "dimensions" : [ ]
+  },
+  "state" : {
+    "dataSourceLinks" : [ ],
+    "filters" : [ ],
+    "gridLayouts" : [ ],
+    "layouts" : [ ],
+    "steps" : {
+      "aggregateflex" : {
+        "broadcastFacet" : false,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.CHARGE_tp.Name}"
+          },
+          {
+            "name" : "${App.Datasets.CAPACITE_tp.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "aggregateFilters" : [ ],
+          "orders" : [ ],
+          "sourceFilters" : { },
+          "sources" : [
+            {
+              "cogroupType" : "inner",
+              "columns" : [
+                {
+                  "field" : [
+                    "sum",
+                    "Charge"
+                  ],
+                  "name" : "A"
+                }
+              ],
+              "groups" : [
+                "Secteur",
+                "Date_Week"
+              ],
+              "name" : "CHARGE"
+            },
+            {
+              "columns" : [
+                {
+                  "field" : [
+                    "sum",
+                    "Capacite"
+                  ],
+                  "name" : "B"
+                }
+              ],
+              "groups" : [
+                "Secteur",
+                "Date_Week"
+              ],
+              "name" : "CAPACITE"
+            }
+          ]
+        },
+        "receiveFacetSource" : {
+          "mode" : "none",
+          "steps" : [ ]
+        },
+        "selectMode" : "multi",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "visualizationType" : "combo"
+        }
+      }
+    },
+    "widgets" : {
+      "aggregateflex_chart" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showValues" : true,
+          "stack" : false,
+          "showPoints" : true,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "sync",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "combo",
+          "missingValue" : "connect",
+          "showValuesOnLine" : false,
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "chartsPerLine" : 4
+          },
+          "plots" : [
+            {
+              "column" : [
+                "A"
+              ]
+            },
+            {
+              "column" : [
+                "B"
+              ]
+            }
+          ],
+          "columnMap" : {
+            "trellis" : [ ],
+            "dimensionAxis" : [
+              "Secteur",
+              "Date_Week"
+            ],
+            "plots" : [
+              "A",
+              "B"
+            ]
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "theme" : "wave",
+          "step" : "aggregateflex",
+          "dimensionAxis" : {
+            "showTitle" : true,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round"
+              }
+            }
+          },
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      }
+    }
+  }
+}

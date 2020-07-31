@@ -1,0 +1,494 @@
+{
+  "templateType": "app",
+  "label": "Demo | Sales Analytics",
+  "name": "EAPMM_Sales_Analytics",
+  "description": "Demo version of Sales Analytics.",
+  "customAttributes": [
+    {
+      "label": "Author(s)",
+      "values": ["EA PMM"]
+    },
+    {
+      "label": "Demo Version",
+      "values": ["v2020.31"]
+    },
+    {
+      "label": "Source Version",
+      "values": ["v226"]
+    }
+  ],
+  "tags": ["Demo", "Sales"],
+  "assetVersion": 49.0,
+  "variableDefinition": "variables.json",
+  "uiDefinition": "ui.json",
+  "rules": [
+    {
+      "type": "templateToApp",
+      "file": "template-to-app-rules.json"
+    },
+    {
+      "type": "appToTemplate",
+      "file": "app-to-template-rules.json"
+    }
+  ],
+  "releaseInfo": {
+    "templateVersion": "1.0",
+    "notesFile": "releaseNotes.html"
+  },
+  "folderDefinition": "folder.json",
+  "externalFiles": [
+    {
+      "label": "Accounts",
+      "name": "Account_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/Account_XMD.json",
+      "file": "external_files/Account.csv",
+      "type": "CSV",
+      "schema": "external_files/Account.json"
+    },
+    {
+      "label": "Activities",
+      "name": "Activity_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/Activity_XMD.json",
+      "file": "external_files/Activity.csv",
+      "type": "CSV",
+      "schema": "external_files/Activity.json"
+    },
+    {
+      "label": "Cases",
+      "name": "case_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/case_XMD.json",
+      "file": "external_files/case.csv",
+      "type": "CSV",
+      "schema": "external_files/case.json"
+    },
+    {
+      "label": "ForecastingItem",
+      "name": "forecasting_item_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/forecasting_item_XMD.json",
+      "file": "external_files/forecasting_item.csv",
+      "type": "CSV",
+      "schema": "external_files/forecasting_item.json"
+    },
+    {
+      "label": "Leads",
+      "name": "lead_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/lead_XMD.json",
+      "file": "external_files/lead.csv",
+      "type": "CSV",
+      "schema": "external_files/lead.json"
+    },
+    {
+      "label": "Opportunities",
+      "name": "opportunity_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/opportunity_XMD.json",
+      "file": "external_files/opportunity.csv",
+      "type": "CSV",
+      "schema": "external_files/opportunity.json"
+    },
+    {
+      "label": "Opportunity ED Causes",
+      "name": "Opportunity_ED_Causes_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/Opportunity_ED_Causes_XMD.json",
+      "file": "external_files/Opportunity_ED_Causes.csv",
+      "type": "CSV",
+      "schema": "external_files/Opportunity_ED_Causes.json"
+    },
+    {
+      "label": "Oppty Products",
+      "name": "opportunity_products_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/opportunity_products_XMD.json",
+      "file": "external_files/opportunity_products.csv",
+      "type": "CSV",
+      "schema": "external_files/opportunity_products.json"
+    },
+    {
+      "label": "Pipeline Trending",
+      "name": "pipeline_trending_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/pipeline_trending_XMD.json",
+      "file": "external_files/pipeline_trending.csv",
+      "type": "CSV",
+      "schema": "external_files/pipeline_trending.json"
+    },
+    {
+      "label": "Products",
+      "name": "product_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/product_XMD.json",
+      "file": "external_files/product.csv",
+      "type": "CSV",
+      "schema": "external_files/product.json"
+    },
+    {
+      "label": "User Allocation",
+      "name": "quota_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/quota_XMD.json",
+      "file": "external_files/quota.csv",
+      "type": "CSV",
+      "schema": "external_files/quota.json"
+    },
+    {
+      "label": "Sample - Superstore with Goals",
+      "name": "Sample_Superstore_with_Goals_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/Sample_Superstore_with_Goals_XMD.json",
+      "file": "external_files/Sample_Superstore_with_Goals.csv",
+      "type": "CSV",
+      "schema": "external_files/Sample_Superstore_with_Goals.json"
+    },
+    {
+      "label": "Users",
+      "name": "user_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/user_XMD.json",
+      "file": "external_files/user.csv",
+      "type": "CSV",
+      "schema": "external_files/user.json"
+    },
+    {
+      "label": "Roles",
+      "name": "user_role_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/user_role_XMD.json",
+      "file": "external_files/user_role.csv",
+      "type": "CSV",
+      "schema": "external_files/user_role.json"
+    }
+  ],
+  "lenses": [
+    {
+      "label": "Explore Opportunities",
+      "name": "Explore_Opportunities2_tp",
+      "condition": "${Variables.Overrides.createAllLenses}",
+      "file": "lenses/Explore_Opportunities2.json"
+    },
+    {
+      "label": "Historical Pipeline By Forecast",
+      "name": "Historical_Pipeline_By_Forecast2_tp",
+      "condition": "${Variables.Overrides.createAllLenses}",
+      "file": "lenses/Historical_Pipeline_By_Forecast2.json"
+    },
+    {
+      "label": "Historical Pipeline By Stage",
+      "name": "Historical_Pipeline_By_Stage2_tp",
+      "condition": "${Variables.Overrides.createAllLenses}",
+      "file": "lenses/Historical_Pipeline_By_Stage2.json"
+    },
+    {
+      "label": "Historical Pipeline Forecast by Quarter",
+      "name": "Historical_Pipeline_Forecast_By_Quarter2_tp",
+      "condition": "${Variables.Overrides.createAllLenses}",
+      "file": "lenses/Historical_Pipeline_Forecast_By_Quarter2.json"
+    },
+    {
+      "label": "Historical Pipeline Stage by Quarter",
+      "name": "Historical_Pipeline_Stage_By_Quarter2_tp",
+      "condition": "${Variables.Overrides.createAllLenses}",
+      "file": "lenses/Historical_Pipeline_Stage_By_Quarter2.json"
+    },
+    {
+      "label": "New lens: Deals_TTC_1",
+      "name": "New_lens_Deals_TTC_11_tp",
+      "condition": "${Variables.Overrides.createAllLenses}",
+      "file": "lenses/New_lens_Deals_TTC_11.json"
+    },
+    {
+      "label": "New lens: Deals_TTC_1 [2]",
+      "name": "New_lens_Deals_TTC_12_tp",
+      "condition": "${Variables.Overrides.createAllLenses}",
+      "file": "lenses/New_lens_Deals_TTC_12.json"
+    },
+    {
+      "label": "Sales Stage Details",
+      "name": "Sales_Stage_Details2_tp",
+      "condition": "${Variables.Overrides.createAllLenses}",
+      "file": "lenses/Sales_Stage_Details2.json"
+    },
+    {
+      "label": "Z-exploration",
+      "name": "Z_exploration_tp",
+      "condition": "${Variables.Overrides.createAllLenses}",
+      "file": "lenses/Z_exploration.json"
+    },
+    {
+      "label": "Z-exploration1",
+      "name": "Z_exploration1_tp",
+      "condition": "${Variables.Overrides.createAllLenses}",
+      "file": "lenses/Z_exploration1.json"
+    },
+    {
+      "label": "Z-exploring more",
+      "name": "Z_exploring_more_tp",
+      "condition": "${Variables.Overrides.createAllLenses}",
+      "file": "lenses/Z_exploring_more.json"
+    }
+  ],
+  "dashboards": [
+    {
+      "label": "Accounts",
+      "name": "Accounts_Dashboard2_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Accounts_Dashboard2.json"
+    },
+    {
+      "label": "Business Overview - Embedded",
+      "name": "Business_Overview_Embedded_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Business_Overview_Embedded.json"
+    },
+    {
+      "label": "Company Overview",
+      "name": "Sales_Ops_Manager_Overview2_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Sales_Ops_Manager_Overview2.json"
+    },
+    {
+      "label": "Company Trending",
+      "name": "Sales_Ops_Pipeline_Changes2_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Sales_Ops_Pipeline_Changes2.json"
+    },
+    {
+      "label": "Executive Overview",
+      "name": "Exec_Overview_Pipeline_Performance2_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Exec_Overview_Pipeline_Performance2.json"
+    },
+    {
+      "label": "Forecast",
+      "name": "Quota_Progress2_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Quota_Progress2.json"
+    },
+    {
+      "label": "Lead Analysis",
+      "name": "Lead_Analysis2_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Lead_Analysis2.json"
+    },
+    {
+      "label": "Leaderboard",
+      "name": "Manager_Overview2_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Manager_Overview2.json"
+    },
+    {
+      "label": "Opportunity - Embed",
+      "name": "Copy_of_Cards_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Copy_of_Cards.json"
+    },
+    {
+      "label": "Oppty Homepage Embedded",
+      "name": "Oppty_Homepage_Embedded_NEW_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Oppty_Homepage_Embedded_NEW.json"
+    },
+    {
+      "label": "Sales Analytics Home",
+      "name": "About_Wave_for_Sales2_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/About_Wave_for_Sales2.json"
+    },
+    {
+      "label": "Sales Overview Home",
+      "name": "Sales_Overview_Home2_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Sales_Overview_Home2.json"
+    },
+    {
+      "label": "Sales Performance New",
+      "name": "Sales_Performance2_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Sales_Performance2.json"
+    },
+    {
+      "label": "Sales Rep Overview",
+      "name": "Sales_Rep_Overview2_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Sales_Rep_Overview2.json"
+    },
+    {
+      "label": "Sales Rep Whitespace",
+      "name": "Opportunity_Discovery2_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Opportunity_Discovery2.json"
+    },
+    {
+      "label": "Sales Stage Analysis",
+      "name": "Sales_Stage_Analysis2_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Sales_Stage_Analysis2.json"
+    },
+    {
+      "label": "Summary of Account",
+      "name": "Account_Summary2_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Account_Summary2.json"
+    },
+    {
+      "label": "Summary of Account_TwobyThreeGrid",
+      "name": "Copy_of_Summary_of_Account_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Copy_of_Summary_of_Account.json"
+    },
+    {
+      "label": "Summary of Opportunity",
+      "name": "Opportunity_Summary2_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Opportunity_Summary2.json"
+    },
+    {
+      "label": "Team Activities",
+      "name": "Manager_Activities2_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Manager_Activities2.json"
+    },
+    {
+      "label": "Team Benchmark",
+      "name": "Team_Benchmark_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Team_Benchmark.json"
+    },
+    {
+      "label": "Team Trending",
+      "name": "Pipeline_Changes2_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Pipeline_Changes2.json"
+    },
+    {
+      "label": "Team Whitespace",
+      "name": "Manager_Opportunity_Discovery2_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Manager_Opportunity_Discovery2.json"
+    },
+    {
+      "label": "Trending",
+      "name": "Sales_Rep_Pipeline_Changes2_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Sales_Rep_Pipeline_Changes2.json"
+    }
+  ],
+  "eltDataflows": [],
+  "recipes": [],
+  "datasetFiles": [],
+  "storedQueries": [],
+  "imageFiles": [
+    {
+      "name": "CardsBackGroundpng",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/CardsBackGround.png"
+    },
+    {
+      "name": "bluetexturebackground768x512jpg",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/blue-texture-background-768x512.jpg"
+    },
+    {
+      "name": "sfxuxcmascoteinstein6512png",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/sfx-uxc-mascot-einstein6-512.png"
+    },
+    {
+      "name": "medallia_logopng",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/medallia_logo.png"
+    },
+    {
+      "name": "imagespng",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/images.png"
+    },
+    {
+      "name": "spherepng",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/sphere.png"
+    },
+    {
+      "name": "small_spherepng",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/small_sphere.png"
+    },
+    {
+      "name": "small_circlepng",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/small_circle.png"
+    },
+    {
+      "name": "hiclipartcompng",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/hiclipart.com.png"
+    },
+    {
+      "name": "Snowflakepng",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/Snowflake.png"
+    },
+    {
+      "name": "SalesWaveLogo50",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/SalesWaveLogo.png"
+    },
+    {
+      "name": "OpportunityLogo50",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/OpportunityLogo.png"
+    },
+    {
+      "name": "astro_binoculars14",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/astro_binoculars.png"
+    },
+    {
+      "name": "Info4",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/Info.png"
+    },
+    {
+      "name": "media20171016_1png2png1",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/media20171016_1png2.png"
+    },
+    {
+      "name": "SalesWaveLogo137",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/SalesWaveLogo.png"
+    },
+    {
+      "name": "Info82",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/Info.png"
+    }
+  ],
+  "extendedTypes": {},
+  "templateDependencies": [],
+  "icons": {
+    "appBadge": {
+      "name": "16.png"
+    },
+    "templateBadge": {
+      "name": "analytics_icon"
+    },
+    "templatePreviews": [
+      {
+        "name": "einstein_scene",
+        "label": "",
+        "description": ""
+      },
+      {
+        "name": "demo_template_guide_0",
+        "label": "How to Use this Template",
+        "description": "This demo template is decoupled from core objects and does not require any additional licenses (only EA+). To customize the data you will need to download the datasets, modify and update. This template includes limited sample data, for more data download the CSVs and schema files from here (https://ac-sdo-repo.s3-us-west-2.amazonaws.com/demo-template-csv/EAPMM_Sales_Analytics.zip) and update the corresponding datasets after app creation."
+      }
+    ]
+  }
+}
