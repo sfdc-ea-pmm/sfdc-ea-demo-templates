@@ -1,0 +1,5129 @@
+{
+  "name" : "Customer_Journey_Map_for_CSAT_Stage_Analysis_tp",
+  "label" : "Customer Journey Map for CSAT - Stage Analysis",
+  "folder" : {
+    "id" : "${App.Folder.Id}"
+  },
+  "dateVersion" : 1,
+  "mobileDisabled" : false,
+  "xmd" : {
+    "measures" : [ ],
+    "derivedDimensions" : [ ],
+    "organizations" : [ ],
+    "showDetailsDefaultFields" : [ ],
+    "dates" : [ ],
+    "derivedMeasures" : [ ],
+    "dimensions" : [ ]
+  },
+  "state" : {
+    "dataSourceLinks" : [
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.SurveyQuestionResponsewithDetails.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "SurveyVersion_Survey_Id"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.SurveyInvitation.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "SurveyId"
+          }
+        ],
+        "label" : "Survey ID connection",
+        "name" : "Link_991"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.SurveyQuestionResponsewithDetails.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "SurveyVersion_Survey_Name"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.SurveyInvitation.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Survey_Name"
+          }
+        ],
+        "label" : "Survey Name connection",
+        "name" : "Link_1010"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.SurveyInvitation.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "OptionsAllowGuestUserResponse"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.SurveyQuestionResponsewithDetails.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Invitation_OptionsAllowGuestUserResponse"
+          }
+        ],
+        "label" : "allow guest response",
+        "name" : "Link_884"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.SurveyInvitation.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "OptionsCollectAnonymousResponse"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.SurveyQuestionResponsewithDetails.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Invitation_OptionsCollectAnonymous"
+          }
+        ],
+        "label" : "Anonymous response",
+        "name" : "Link_903"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.Journey_Survey_Question_Config_Metadata.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Journey"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.SurveyQuestionResponsewithDetails.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "JourneyConfig_Journey"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.SurveyInvitation.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "JourneyDetails_Journey"
+          }
+        ],
+        "label" : "Journey Connection",
+        "name" : "Link_164"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.Journey_Survey_Question_Config_Metadata.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Stage"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.SurveyQuestionResponsewithDetails.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "JourneyConfig_Stage"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.SurveyInvitation.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "JourneyDetails_Stage"
+          }
+        ],
+        "label" : "Stage Connection",
+        "name" : "Link_1513"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.SurveyInvitation.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Participant_Name"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.SurveyQuestionResponsewithDetails.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Invitation_Participant_Name"
+          }
+        ],
+        "label" : "Participant name connection",
+        "name" : "Link_5856"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.SurveyInvitation.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Subject_SubjectEntityType"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.SurveyQuestionResponsewithDetails.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Invitation_Subject_SubjectEntityType"
+          }
+        ],
+        "label" : "Subject type connection",
+        "name" : "Link_5882"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.SurveyInvitation.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "MassInvite"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.SurveyQuestionResponsewithDetails.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Invitation_MassInvite"
+          }
+        ],
+        "label" : "Mass Invite Connection",
+        "name" : "Link_5909"
+      }
+    ],
+    "filters" : [
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.SurveyQuestionResponsewithDetails.Name}"
+        },
+        "dependent" : true,
+        "fields" : [
+          "Invitation_OptionsCollectAnonymous"
+        ],
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.SurveyQuestionResponsewithDetails.Name}"
+        },
+        "dependent" : true,
+        "fields" : [
+          "Invitation_OptionsAllowGuestUserResponse"
+        ],
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.SurveyQuestionResponsewithDetails.Name}"
+        },
+        "dependent" : true,
+        "fields" : [
+          "Invitation_Participant_Name"
+        ],
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.SurveyQuestionResponsewithDetails.Name}"
+        },
+        "dependent" : true,
+        "fields" : [
+          "Invitation_Subject_SubjectEntityType"
+        ],
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.SurveyQuestionResponsewithDetails.Name}"
+        },
+        "dependent" : true,
+        "fields" : [
+          "Invitation_MassInvite"
+        ],
+        "locked" : false,
+        "operator" : "in"
+      }
+    ],
+    "gridLayouts" : [
+      {
+        "maxWidth" : 1500,
+        "name" : "Default",
+        "numColumns" : 50,
+        "pages" : [
+          {
+            "label" : "Stage Analysis Over Time",
+            "name" : "37602e4e-d621-469e-8cc0-1aa336f89319",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_1",
+                "row" : 0,
+                "rowspan" : 8,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(255, 255, 255)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_2",
+                "row" : 14,
+                "rowspan" : 73,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(240, 245, 249)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 26,
+                "column" : 4,
+                "name" : "text_1",
+                "row" : 3,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 1,
+                "name" : "text_2",
+                "row" : 21,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 1,
+                "name" : "number_1",
+                "row" : 24,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 1,
+                "name" : "text_3",
+                "row" : 35,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 13,
+                "name" : "dateselector_1",
+                "row" : 9,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#335779",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 2,
+                "name" : "number_2",
+                "row" : 59,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(230, 236, 242, 0)",
+                  "borderColor" : "rgb(198, 211, 225)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 4,
+                "name" : "text_6",
+                "row" : 59,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(230, 236, 242, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 2,
+                "name" : "number_3",
+                "row" : 56,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(230, 236, 242, 0)",
+                  "borderColor" : "rgb(232, 150, 59)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 4,
+                "name" : "text_11",
+                "row" : 56,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(230, 236, 242, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 0,
+                "name" : "chart_3",
+                "row" : 38,
+                "rowspan" : 18,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(230, 236, 242, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 38,
+                "column" : 11,
+                "name" : "text_7",
+                "row" : 40,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(230, 236, 242, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 38,
+                "column" : 11,
+                "name" : "text_8",
+                "row" : 59,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(230, 236, 242, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_3",
+                "row" : 87,
+                "rowspan" : 36,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(241, 244, 248)",
+                  "borderColor" : "#C6D3E1",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 23,
+                "column" : 1,
+                "name" : "text_9",
+                "row" : 88,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 7,
+                "name" : "listselector_2",
+                "row" : 9,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "chart_6",
+                "row" : 92,
+                "rowspan" : 30,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(241, 244, 248)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_4",
+                "row" : 123,
+                "rowspan" : 35,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(241, 244, 248)",
+                  "borderColor" : "#C6D3E1",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 18,
+                "column" : 1,
+                "name" : "text_12",
+                "row" : 125,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(230, 236, 242, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 37,
+                "name" : "pillbox_1",
+                "row" : 125,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#7D98B3",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_5",
+                "row" : 158,
+                "rowspan" : 29,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "#C6D3E1",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "table_1",
+                "row" : 162,
+                "rowspan" : 23,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 1,
+                "name" : "text_13",
+                "row" : 159,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "chart_5",
+                "row" : 128,
+                "rowspan" : 26,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 40,
+                "name" : "text_14",
+                "row" : 154,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 31,
+                "name" : "link_1",
+                "row" : 5,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 38,
+                "column" : 11,
+                "name" : "chart_7",
+                "row" : 18,
+                "rowspan" : 21,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 38,
+                "column" : 11,
+                "name" : "chart_8",
+                "row" : 42,
+                "rowspan" : 17,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 38,
+                "column" : 11,
+                "name" : "chart_9",
+                "row" : 61,
+                "rowspan" : 24,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 10,
+                "column" : 40,
+                "name" : "link_3",
+                "row" : 5,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "rgb(0, 112, 210)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 2
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 13,
+                "name" : "container_6",
+                "row" : 9,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 19,
+                "name" : "filterpanel_1",
+                "row" : 9,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 25,
+                "name" : "filterpanel_2",
+                "row" : 9,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 31,
+                "name" : "filterpanel_3",
+                "row" : 9,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 37,
+                "name" : "filterpanel_4",
+                "row" : 9,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 43,
+                "name" : "filterpanel_5",
+                "row" : 9,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 1,
+                "name" : "text_15",
+                "row" : 57,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(232, 150, 59)",
+                  "borderEdges" : [
+                    "right"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 1,
+                "name" : "text_16",
+                "row" : 60,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(198, 211, 225)",
+                  "borderEdges" : [
+                    "right"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 30,
+                "column" : 11,
+                "name" : "text_17",
+                "row" : 14,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 1,
+                "name" : "listselector_3",
+                "row" : 9,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 1,
+                "name" : "image_3",
+                "row" : 1,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              }
+            ]
+          },
+          {
+            "label" : "Stage Analysis By Surveys",
+            "name" : "ac9c8578-0873-4623-ba65-b236dfe2b064",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_1",
+                "row" : 0,
+                "rowspan" : 8,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(255, 255, 255)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_2",
+                "row" : 14,
+                "rowspan" : 69,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(240, 245, 249)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 19,
+                "column" : 4,
+                "name" : "text_1",
+                "row" : 2,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 0,
+                "name" : "image_1",
+                "row" : 1,
+                "rowspan" : 5,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#FFFFFF",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 1,
+                "name" : "text_2",
+                "row" : 40,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 1,
+                "name" : "number_1",
+                "row" : 43,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 1,
+                "name" : "text_3",
+                "row" : 51,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 1,
+                "name" : "dateselector_1",
+                "row" : 33,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#335779",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 1,
+                "name" : "text_4",
+                "row" : 30,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 1,
+                "name" : "text_5",
+                "row" : 16,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 1,
+                "name" : "listselector_1",
+                "row" : 19,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 1,
+                "name" : "number_2",
+                "row" : 74,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(230, 236, 242, 0)",
+                  "borderColor" : "rgb(198, 211, 225)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 3,
+                "name" : "text_6",
+                "row" : 74,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(230, 236, 242, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 1,
+                "name" : "number_3",
+                "row" : 70,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(230, 236, 242, 0)",
+                  "borderColor" : "rgb(232, 150, 59)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 3,
+                "name" : "text_11",
+                "row" : 70,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(230, 236, 242, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 1,
+                "name" : "chart_3",
+                "row" : 54,
+                "rowspan" : 16,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(230, 236, 242, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 38,
+                "column" : 11,
+                "name" : "chart_2",
+                "row" : 40,
+                "rowspan" : 16,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(230, 236, 242, 0)",
+                  "borderColor" : "#7D98B3",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 2
+                }
+              },
+              {
+                "colspan" : 38,
+                "column" : 11,
+                "name" : "text_7",
+                "row" : 38,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(230, 236, 242, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 38,
+                "column" : 11,
+                "name" : "text_8",
+                "row" : 56,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(230, 236, 242, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 38,
+                "column" : 11,
+                "name" : "chart_4",
+                "row" : 58,
+                "rowspan" : 24,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(230, 236, 242, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_3",
+                "row" : 83,
+                "rowspan" : 36,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(241, 244, 248)",
+                  "borderColor" : "#C6D3E1",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 16,
+                "column" : 1,
+                "name" : "text_9",
+                "row" : 84,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 1,
+                "name" : "text_10",
+                "row" : 23,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 1,
+                "name" : "listselector_2",
+                "row" : 26,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "chart_6",
+                "row" : 88,
+                "rowspan" : 30,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(241, 244, 248)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_4",
+                "row" : 119,
+                "rowspan" : 35,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(241, 244, 248)",
+                  "borderColor" : "#C6D3E1",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 18,
+                "column" : 1,
+                "name" : "text_12",
+                "row" : 121,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(230, 236, 242, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 37,
+                "name" : "pillbox_1",
+                "row" : 121,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#7D98B3",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 38,
+                "column" : 11,
+                "name" : "chart_1",
+                "row" : 18,
+                "rowspan" : 20,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(230, 236, 242, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_5",
+                "row" : 154,
+                "rowspan" : 29,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "#C6D3E1",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "table_1",
+                "row" : 158,
+                "rowspan" : 23,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 1,
+                "name" : "text_13",
+                "row" : 155,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "chart_5",
+                "row" : 124,
+                "rowspan" : 26,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 40,
+                "name" : "text_14",
+                "row" : 150,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 18,
+                "column" : 31,
+                "name" : "navigation_1",
+                "row" : 14,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "#C6D3E1",
+                  "borderEdges" : [
+                    "all"
+                  ]
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 31,
+                "name" : "link_1",
+                "row" : 5,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 10,
+                "column" : 40,
+                "name" : "link_3",
+                "row" : 5,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "rgb(0, 112, 210)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 2
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight" : "fine",
+        "selectors" : [ ],
+        "style" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "backgroundColor" : "rgb(228, 234, 240)",
+          "cellSpacingX" : 0,
+          "cellSpacingY" : 0,
+          "fit" : "original",
+          "gutterColor" : "#C5D3E0"
+        },
+        "version" : 1.0
+      }
+    ],
+    "layouts" : [ ],
+    "steps" : {
+      "Customer_CSAT_Journey" : {
+        "broadcastFacet" : false,
+        "groups" : [ ],
+        "label" : "Customer CSAT Journey",
+        "numbers" : [ ],
+        "query" : "config = load \"${App.Datasets.Journey_Survey_Question_Config_Metadata.FullyQualifiedName}\";\nconfig = filter config by 'Context' == \"Customer CSAT\"; \nconfig = filter config by 'QuestionType' == \"Rating\";\n\nq = load \"${App.Datasets.SurveyQuestionResponsewithDetails.FullyQualifiedName}\"; \nq = filter q by 'Question_QuestionType' == \"Rating\"; q = group q by ('Id', 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'QuestionChoices_Name', 'JourneyConfig_Stage'); q = foreach q generate 'Id' , 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'QuestionChoices_Name' as 'QuestionChoices_Name', 'JourneyConfig_Stage', first('CreatedDate_sec_epoch') as 'CreatedDate_sec_epoch',  first('NumberValue') as 'NumberValue', first('SurveyVersion_Survey_Name') as 'SurveyVersion_Survey_Name'; q = order q by ('SurveyVersion_Survey_Id' asc, 'SurveyVersionId' asc, 'QuestionId' asc, 'QuestionChoices_Name' asc); q = group q by ('Id', 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'JourneyConfig_Stage'); q = foreach q generate 'Id' , 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'JourneyConfig_Stage', string_to_number(last('QuestionChoices_Name')) as 'Max Rating', round(first('NumberValue')/string_to_number(last('QuestionChoices_Name')),5) as 'Rating%',  first('NumberValue') as 'NumberValue', first('SurveyVersion_Survey_Name') as 'SurveyVersion_Survey_Name'; journey = group config by ('SurveyID','SurveyName') left, q by ('SurveyVersion_Survey_Id', 'SurveyVersion_Survey_Name');\njourney = foreach journey generate config.'SurveyName' as 'SurveyName', round((sum(q.'Rating%') * first(config.'Scale'))/count(q),2) as 'CSAT', min(q.'Rating%')* first(config.'Scale') as 'Min Rating', max(q.'Rating%')* first(config.'Scale') as 'Max Rating';",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "multi",
+        "start" : [ ],
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "stack" : false,
+            "showPoints" : true,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "sync",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "combo",
+            "missingValue" : "connect",
+            "showValuesOnLine" : false,
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimensionAxis" : [
+                "SurveyName"
+              ],
+              "plots" : [
+                "CSAT",
+                "Min Rating",
+                "Max Rating"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Responsive_customer__1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Responsive customer Vs Customer Base",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.SurveyQuestionResponsewithDetails.FullyQualifiedName}\";q = filter q by {{column(Customer_CSAT_Journey.selection,[\"SurveyName\"]).asEquality(\"SurveyVersion_Survey_Name\")}} && {{column(Responses_by_stage_1.selection,[\"SurveyName\"]).asEquality(\"SurveyVersion_Survey_Name\")}} && {{column(CSAT___Customer_Journ_4.selection,[\"SurveyName\"]).asEquality(\"SurveyVersion_Survey_Name\")}};\nconfig = load \"${App.Datasets.Journey_Survey_Question_Config_Metadata.FullyQualifiedName}\";\nconfig = filter config by 'Context' == \"Customer CSAT\";\n\nresponsive = group config by all left, q by all;\nresponsive = foreach responsive generate \"Responsive\" as 'Customer Type', coalesce(unique(q.'Invitation_ParticipantId'),0) as 'Count';\ncontacts = load \"${App.Datasets.Contacts.FullyQualifiedName}\";\npassive = group config by all left, q by all left, contacts by all;\npassive = foreach passive generate \"Untapped\" as 'Customer Type', count(contacts) - coalesce(unique(q.'Invitation_ParticipantId'),0) as 'Count';\n\nresult = union responsive, passive;\nresult = group result by 'Customer Type';\nresult = foreach result generate 'Customer Type', sum('Count') as 'Count';",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "none",
+        "start" : [ ],
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "centerText" : "",
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "showMeasureTitle" : true,
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "pie",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "inner" : 60,
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimension" : [
+                "Customer Type"
+              ],
+              "plots" : [
+                "Count"
+              ]
+            },
+            "showActionMenu" : true,
+            "centerValueType" : "number",
+            "valueType" : "compactNumber",
+            "theme" : "wave",
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Scale_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.Journey_Survey_Question_Config_Metadata.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "Scale",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "sum",
+                "Scale"
+              ]
+            ],
+            "groups" : [
+              "Journey",
+              "Stage",
+              "SurveyID",
+              "SurveyVersionID"
+            ],
+            "filters" : [
+              [
+                "QuestionType",
+                [
+                  "Rating"
+                ],
+                "in"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "start" : [ ],
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimensionAxis" : [
+                "Journey",
+                "Stage",
+                "SurveyID",
+                "SurveyVersionID"
+              ],
+              "plots" : [
+                "sum_Scale"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Journey_Filter_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.Journey_Survey_Question_Config_Metadata.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "Journey Filter",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              "Journey"
+            ],
+            "filters" : [
+              [
+                "Context",
+                [
+                  "Customer CSAT"
+                ],
+                "in"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "singlerequired",
+        "start" : [
+          "Customer CSAT Journey 1"
+        ],
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimensionAxis" : [
+                "Journey"
+              ],
+              "plots" : [
+                "count"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "promoters_passives_d_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "promoters-passives-detractors over time",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.SurveyQuestionResponsewithDetails.FullyQualifiedName}\";\nq = filter q by 'Question_QuestionType' == \"Rating\";\nq = group q by ('Id', 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'QuestionChoices_Name', 'JourneyConfig_Stage');\nq = foreach q generate 'Id' , 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'QuestionChoices_Name' as 'QuestionChoices_Name', 'JourneyConfig_Stage', first('SurveyVersion_Survey_Name') as 'SurveyVersion_Survey_Name', first('CreatedDate_sec_epoch') as 'CreatedDate_sec_epoch',  first('NumberValue') as 'NumberValue', first('CreatedDate_Year') as 'CreatedDate_Year', first('CreatedDate_Month') as 'CreatedDate_Month';\nq = order q by ('SurveyVersion_Survey_Id' asc, 'SurveyVersionId' asc, 'QuestionId' asc, 'QuestionChoices_Name' asc);\nq = group q by ('Id', 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'JourneyConfig_Stage');\nq = foreach q generate 'Id' , 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'JourneyConfig_Stage', first('SurveyVersion_Survey_Name') as 'SurveyVersion_Survey_Name', string_to_number(last('QuestionChoices_Name')) as 'Max Rating', round(first('NumberValue')/string_to_number(last('QuestionChoices_Name')),4) as 'Rating%',  first('NumberValue') as 'NumberValue', first('CreatedDate_Year') as 'CreatedDate_Year', first('CreatedDate_Month') as 'CreatedDate_Month';\npromoters = filter q by 'Rating%' > 0.8;\npassive = filter q by 'Rating%' <= 0.8 && 'Rating%' >= 0.7;\ndetractors = filter q by 'Rating%' < 0.7;\njourney = group passive by ('CreatedDate_Year', 'CreatedDate_Month') full,  promoters by ('CreatedDate_Year', 'CreatedDate_Month') full, detractors by ('CreatedDate_Year', 'CreatedDate_Month');\njourney = foreach journey generate coalesce(passive.'CreatedDate_Year', promoters.'CreatedDate_Year', detractors.'CreatedDate_Year')+ \"~~~\" + coalesce(passive.'CreatedDate_Month', promoters.'CreatedDate_Month', detractors.'CreatedDate_Month') as 'CreatedDate_Year~~~CreatedDate_Month', count(promoters) as '>80% Rating', count(passive) as '70% to 80% Rating', count(detractors) as '<70% Rating';\njourney = order journey by ('CreatedDate_Year~~~CreatedDate_Month' asc);",
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "Invites_and_response_1",
+            "CSAT_Ratings_over_ti_1"
+          ]
+        },
+        "selectMode" : "single",
+        "start" : [ ],
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "sync",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "vbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimensionAxis" : [
+                "CreatedDate_Year~~~CreatedDate_Month"
+              ],
+              "plots" : [
+                ">80% Rating",
+                "70% to 80% Rating",
+                "<70% Rating"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Participant_Responsi_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Participant Responsiveness",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.SurveyQuestionResponsewithDetails.FullyQualifiedName}\";q = filter q by {{column(Customer_CSAT_Journey.selection,[\"SurveyName\"]).asEquality(\"SurveyVersion_Survey_Name\")}} && {{column(Responses_by_stage_1.selection,[\"SurveyName\"]).asEquality(\"SurveyVersion_Survey_Name\")}} && {{column(CSAT___Customer_Journ_4.selection,[\"SurveyName\"]).asEquality(\"SurveyVersion_Survey_Name\")}};\nrating = filter q by 'Question_QuestionType' == \"Rating\";\n\nrating = group rating by ('Id', 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'QuestionChoices_Name');\nrating = foreach rating generate 'Id' , 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'QuestionChoices_Name' as 'QuestionChoices_Name', first('CreatedDate_sec_epoch') as 'CreatedDate_sec_epoch',  first('NumberValue') as 'NumberValue', first('Invitation_Participant_Id') as 'Invitation_Participant_Id', first('Invitation_Participant_Name') as 'Invitation_Participant_Name';\nrating = order rating by ('SurveyVersion_Survey_Id' asc, 'SurveyVersionId' asc, 'QuestionId' asc, 'QuestionChoices_Name' asc);\nrating = group rating by ('Id', 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId');\nrating = foreach rating generate 'Id' , 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', first('NumberValue')/string_to_number(last('QuestionChoices_Name')) * 5 as 'Rating' , first('Invitation_Participant_Id') as 'Invitation_Participant_Id', first('Invitation_Participant_Name') as 'Invitation_Participant_Name';\n\nq = group rating by 'Invitation_Participant_Name';\nq = foreach q generate 'Invitation_Participant_Name' as 'Invitation_Participant_Name', count() as 'Responses', {{cell(Max_Min_Toggle_1.selection,0,\"Text2\").asObject()}}('Rating') as 'NumberValue';\nq = order q by 'NumberValue' {{cell(Max_Min_Toggle_1.selection,0,\"Sort_type\").asObject()}};\nq = limit q 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "start" : [ ],
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "showMeasureTitle" : true,
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "pyramid",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showMeasure" : true,
+            "columnMap" : {
+              "measureAxis2" : [
+                "NumberValue"
+              ],
+              "measureAxis1" : [
+                "Responses"
+              ],
+              "trellis" : [ ],
+              "dimensionAxis" : [
+                "Invitation_Participant_Name"
+              ],
+              "plots" : [
+                "Responses",
+                "NumberValue"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "rightColor" : "#e16032",
+            "leftColor" : "#52b7d8",
+            "dimensionAxis" : {
+              "customSize" : "auto",
+              "showAxis" : true
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Date_Parser_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Date Parser",
+        "numbers" : [
+          "Min",
+          "Max",
+          "Compare Min",
+          "Compare Max"
+        ],
+        "query" : "q = load \"${App.Datasets.SurveyQuestionResponsewithDetails.FullyQualifiedName}\";\nq = group q by all;\nq = foreach q generate toDate(date_to_epoch(now()) - (date_to_epoch(now())- (86400 * floor(date_to_epoch(now())/86400)))) as 'First Second', case when \"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\" matches \"year\" then toDate( ( number_to_string(string_to_number(toString (now(), \"yyyy\")) + string_to_number(substr(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\", index_of(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\", \"year\")+5 )),\"#\")+\"-01-01\"), \"yyyy-MM-dd\") when \"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\" matches \"quarter\" then toDate(date_to_epoch(quarter_last_day(toDate(date_to_epoch(quarter_last_day(now())) - 1036800 + ((string_to_number(substr(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\", index_of(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\", \"quarter\")+8 ))-1) * 7948800)))) + 86400) when \"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\" matches \"month\" then toDate(date_to_epoch(month_last_day(toDate(date_to_epoch(month_last_day(now())) - 1036800 + ((string_to_number(substr(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\", index_of(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\", \"month\")+6 ))-1) * 2678400)))) + 86400) when \"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\" matches \"week\" then toDate(date_to_epoch(week_last_day(toDate(date_to_epoch(week_last_day(now())) + ((string_to_number(substr(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\", index_of(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\", \"week\")+5 ))-1) * 604800)))) + 86400) when \"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\" matches \"day\" then toDate((date_to_epoch(now()) - (date_to_epoch(now())- (86400 * floor(date_to_epoch(now())/86400)))) + (string_to_number(substr(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\", index_of(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\", \"day\")+4 )) * 86400)) when !(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\" matches \"All\") then toDate(string_to_number(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\")/1000) else toDate(1) end as 'Min', case when \"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\" matches \"year\" then  year_last_day(toDate( ( number_to_string(string_to_number(toString (now(), \"yyyy\")) + string_to_number(substr(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\", index_of(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\", \"year\")+5 )),\"#\")+\"-01-01\"), \"yyyy-MM-dd\")) when \"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\" matches \"quarter\" then quarter_last_day(toDate(date_to_epoch(quarter_last_day(toDate(date_to_epoch(quarter_last_day(now())) - 1036800 + ((string_to_number(substr(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\", index_of(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\", \"quarter\")+8 ))-1) * 7948800)))) + 86400)) when \"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\" matches \"month\" then month_last_day(toDate(date_to_epoch(month_last_day(toDate(date_to_epoch(month_last_day(now())) - 1036800 + ((string_to_number(substr(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\", index_of(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\", \"month\")+6 ))-1) * 2678400)))) + 86400)) when \"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\" matches \"week\" then week_last_day(toDate(date_to_epoch(week_last_day(toDate(date_to_epoch(week_last_day(now())) + ((string_to_number(substr(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\", index_of(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\", \"week\")+5 ))-1) * 604800)))) + 86400)) when \"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\" matches \"day\" then toDate((date_to_epoch(now()) - (date_to_epoch(now())- (86400 * floor(date_to_epoch(now())/86400)))) + (string_to_number(substr(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\", index_of(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\", \"day\")+4 )) * 86400)) when !(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\" matches \"All\") then toDate(string_to_number(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\")/1000) else toDate(5707696000) end as 'Max'; q = foreach q generate 'First Second' as 'First Second', 'Min' as 'Min Date', 'Max' as 'Max Date', date_to_epoch('Min')*1000 as 'Min', (date_to_epoch('Max')+86399)*1000 as 'Max', (date_to_epoch('Min')-((date_to_epoch('Max')+86399)-date_to_epoch('Min')))*1000 as 'Compare Min', ((date_to_epoch('Max')+86399)-((date_to_epoch('Max')+86399)-date_to_epoch('Min')))*1000 as 'Compare Max';",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [
+          "First Second",
+          "Min Date",
+          "Max Date"
+        ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "showRowIndexColumn" : true,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "Stages_Filter_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.Journey_Survey_Question_Config_Metadata.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "Stages Filter",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              "Stage"
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "multi",
+        "start" : [ ],
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimensionAxis" : [
+                "Stage"
+              ],
+              "plots" : [
+                "count"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Response_Details_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Response Details",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.SurveyQuestionResponsewithDetails.FullyQualifiedName}\";q = filter q by {{column(Customer_CSAT_Journey.selection,[\"SurveyName\"]).asEquality(\"SurveyVersion_Survey_Name\")}} && {{column(Responses_by_stage_1.selection,[\"SurveyName\"]).asEquality(\"SurveyVersion_Survey_Name\")}} && {{column(CSAT___Customer_Journ_4.selection,[\"SurveyName\"]).asEquality(\"SurveyVersion_Survey_Name\")}}; \nconfig = load \"${App.Datasets.Journey_Survey_Question_Config_Metadata.FullyQualifiedName}\";\nconfig = filter config by 'Context' == \"Customer CSAT\";\nconfig = filter config by 'QuestionType' == \"Rating\";config = filter config by {{column(Customer_CSAT_Journey.selection,[\"SurveyName\"]).asEquality(\"SurveyName\")}} && {{column(Responses_by_stage_1.selection,[\"SurveyName\"]).asEquality(\"SurveyName\")}} && {{column(CSAT___Customer_Journ_4.selection,[\"SurveyName\"]).asEquality(\"SurveyName\")}};\ninvitations = load \"${App.Datasets.SurveyInvitation.FullyQualifiedName}\"; invitations = filter invitations by {{row(Response_date_filter_1.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day')\")}};\nresult = group config by ('SurveyID', 'SurveyName') left, q by ('SurveyVersion_Survey_Id', 'SurveyVersion_Survey_Name') left, invitations by ('SurveyId', 'Survey_Name');\nresult = foreach result generate first(config.'Journey') as 'JourneyConfig_Journey', first(config.'Stage') as 'JourneyConfig_Stage', coalesce(config.'SurveyName', invitations.'Survey_Name') as 'SurveyVersion_Survey_Name', count(invitations) as 'Invitations', count(q) as 'Responses', unique(q.'Invitation_ParticipantId') as 'Participants';\nresult = order result by ('JourneyConfig_Journey' asc, 'JourneyConfig_Stage' asc, 'SurveyVersion_Survey_Name' asc);\nresult = limit result 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "start" : [ ],
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "showRowIndexColumn" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "Max_Min_Toggle_1" : {
+        "broadcastFacet" : true,
+        "columns" : {
+          "Sort_type" : {
+            "type" : "string"
+          },
+          "Sort" : {
+            "type" : "string"
+          },
+          "Text2" : {
+            "type" : "string"
+          },
+          "Display" : {
+            "type" : "string"
+          }
+        },
+        "label" : "Max/Min Toggle",
+        "selectMode" : "singlerequired",
+        "start" : {
+          "Display" : [
+            "Maximum Score"
+          ]
+        },
+        "type" : "staticflex",
+        "values" : [
+          {
+            "Display" : "Maximum Score",
+            "Text2" : "max",
+            "Sort" : "max_NumberValue",
+            "Sort_type" : "desc"
+          },
+          {
+            "Display" : "Minimum Score",
+            "Text2" : "min",
+            "Sort" : "min_NumberValue",
+            "Sort_type" : "asc"
+          }
+        ]
+      },
+      "Responses_by_stage_1" : {
+        "broadcastFacet" : false,
+        "groups" : [ ],
+        "label" : "Responses by stage",
+        "numbers" : [ ],
+        "query" : "config = load \"${App.Datasets.Journey_Survey_Question_Config_Metadata.FullyQualifiedName}\";\nconfig = filter config by 'Context' == \"Customer CSAT\";\nconfig = filter config by 'QuestionType' == \"Rating\";\nq = load \"${App.Datasets.SurveyQuestionResponsewithDetails.FullyQualifiedName}\";\nq = filter q by 'Question_QuestionType' == \"Rating\"; invites = load \"${App.Datasets.SurveyInvitation.FullyQualifiedName}\"; invites = filter invites by {{row(Response_date_filter_1.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day')\")}};\njourney = group config by ('SurveyID', 'SurveyName') left, q by ('SurveyVersion_Survey_Id', 'SurveyVersion_Survey_Name') left, invites by ('SurveyId', 'Survey_Name');\njourney = foreach journey generate config.'SurveyName' as 'SurveyName', first(config.'StageOrder') as 'StageOrder', count(q) as 'Responses', count(invites) as 'Invites';\njourney = order journey by 'StageOrder' asc;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "multi",
+        "start" : [ ],
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showPoints" : false,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "line",
+            "dashLine" : {
+              "measures" : "",
+              "showDashLine" : false
+            },
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "split" : [ ],
+              "trellis" : [ ],
+              "dimensionAxis" : [
+                "SurveyName"
+              ],
+              "plots" : [
+                "Responses",
+                "Invites"
+              ]
+            },
+            "fillArea" : true,
+            "showActionMenu" : true,
+            "showZero" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "valueType" : "none",
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true,
+            "drawArea" : {
+              "measure" : "",
+              "showDrawArea" : false,
+              "bounding1" : "",
+              "bounding2" : ""
+            }
+          },
+          "type" : "chart"
+        }
+      },
+      "Response_date_filter_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.SurveyQuestionResponsewithDetails.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "Response date filter",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              [
+                "CreatedDate_Year",
+                "CreatedDate_Month",
+                "CreatedDate_Day"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "start" : [ ],
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimensionAxis" : [
+                "CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day"
+              ],
+              "plots" : [
+                "count"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Customer_Base_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.Contacts.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "Customer Base",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimensionAxis" : [ ],
+              "plots" : [
+                "count"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "CSAT___Customer_Journ_3" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "CSAT - Customer Journey Unique Participants",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.SurveyQuestionResponsewithDetails.FullyQualifiedName}\"; q = filter q by {{column(Customer_CSAT_Journey.selection,[\"SurveyName\"]).asEquality(\"SurveyVersion_Survey_Name\")}} && {{column(Responses_by_stage_1.selection,[\"SurveyName\"]).asEquality(\"SurveyVersion_Survey_Name\")}} && {{column(CSAT___Customer_Journ_4.selection,[\"SurveyName\"]).asEquality(\"SurveyVersion_Survey_Name\")}};\nconfig = load \"${App.Datasets.Journey_Survey_Question_Config_Metadata.FullyQualifiedName}\";\nconfig = filter config by 'Context' == \"Customer CSAT\";\nq = group config by all left, q by all;\nq = foreach q generate unique(q.'Invitation_ParticipantId') as 'unique_Invitation_ParticipantId';\nq = limit q 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "CSAT___Customer_Journ_2" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "CSAT - Customer Journey KPI",
+        "numbers" : [ ],
+        "query" : "config = load \"${App.Datasets.Journey_Survey_Question_Config_Metadata.FullyQualifiedName}\";\nconfig = filter config by 'Context' == \"Customer CSAT\"; \nconfig = filter config by 'QuestionType' == \"Rating\";\n\nq = load \"${App.Datasets.SurveyQuestionResponsewithDetails.FullyQualifiedName}\"; q = filter q by {{column(Customer_CSAT_Journey.selection,[\"SurveyName\"]).asEquality(\"SurveyVersion_Survey_Name\")}} && {{column(Responses_by_stage_1.selection,[\"SurveyName\"]).asEquality(\"SurveyVersion_Survey_Name\")}} && {{column(CSAT___Customer_Journ_4.selection,[\"SurveyName\"]).asEquality(\"SurveyVersion_Survey_Name\")}};\nq = filter q by 'Question_QuestionType' == \"Rating\";q = group q by ('Id', 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'QuestionChoices_Name', 'JourneyConfig_Stage'); \nq = foreach q generate 'Id' , 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'QuestionChoices_Name' as 'QuestionChoices_Name', 'JourneyConfig_Stage', first('CreatedDate_sec_epoch') as 'CreatedDate_sec_epoch',  first('NumberValue') as 'NumberValue'; \nq = order q by ('SurveyVersion_Survey_Id' asc, 'SurveyVersionId' asc, 'QuestionId' asc, 'QuestionChoices_Name' asc); \nq = group q by ('Id', 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'JourneyConfig_Stage'); \nq = foreach q generate 'Id' , 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'JourneyConfig_Stage', string_to_number(last('QuestionChoices_Name')) as 'Max Rating', round(first('NumberValue')/string_to_number(last('QuestionChoices_Name')),4) as 'Rating%',  first('NumberValue') as 'NumberValue'; \n\n\njourney = group config by all left, q by all;\njourney = foreach journey generate round((sum(q.'Rating%') * first(config.'Scale'))/count(q),2) * 20 as 'CSAT', count(q) as 'Total Responses';",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Invites_and_response_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Invites and responses over time",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.SurveyQuestionResponsewithDetails.FullyQualifiedName}\";\nq = filter q by 'Question_QuestionType' == \"Rating\";\ninvites = load \"${App.Datasets.SurveyInvitation.FullyQualifiedName}\"; invites = filter invites by {{row(Response_date_filter_1.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day')\")}}; journey = group q by ('SurveyVersion_Survey_Id', 'SurveyVersion_Survey_Name', 'CreatedDate_Year', 'CreatedDate_Month') full, invites by ('SurveyId', 'Survey_Name', 'CreatedDate_Year', 'CreatedDate_Month');\njourney = foreach journey generate coalesce(q.'CreatedDate_Year', invites.'CreatedDate_Year') as 'CreatedDate_Year', coalesce(q.'CreatedDate_Month', invites.'CreatedDate_Month') as 'CreatedDate_Month', count(q) as 'Responses', count(invites) as 'Invites';\njourney = group journey by ('CreatedDate_Year', 'CreatedDate_Month');\njourney = foreach journey generate 'CreatedDate_Year'+\"~~~\"+'CreatedDate_Month' as 'CreatedDate_Year~~~CreatedDate_Month', sum('Responses') as 'Responses', sum('Invites')*1.4 as 'Invites';\njourney = order journey by ('CreatedDate_Year~~~CreatedDate_Month' asc);",
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "promoters_passives_d_1",
+            "CSAT_Ratings_over_ti_1"
+          ]
+        },
+        "selectMode" : "single",
+        "start" : [ ],
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "showPoints" : false,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : true
+            },
+            "axisMode" : "sync",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "time",
+            "missingValue" : "connect",
+            "dashLine" : {
+              "measures" : "",
+              "showDashLine" : false
+            },
+            "timeAxis" : {
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : ""
+            },
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "split" : [ ],
+              "timeAxis" : [
+                "CreatedDate_Year~~~CreatedDate_Month"
+              ],
+              "trellis" : [ ],
+              "plots" : [
+                "Responses",
+                "Invites"
+              ]
+            },
+            "fillArea" : true,
+            "showActionMenu" : true,
+            "showZero" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "valueType" : "none",
+            "theme" : "wave",
+            "applyConditionalFormatting" : true,
+            "drawArea" : {
+              "measure" : "",
+              "showDrawArea" : false,
+              "bounding1" : "",
+              "bounding2" : ""
+            }
+          },
+          "type" : "chart"
+        }
+      },
+      "CSAT___Customer_Journ_4" : {
+        "broadcastFacet" : false,
+        "groups" : [ ],
+        "label" : "CSAT - Customer Journey - Promoters/Detractors/Passives",
+        "numbers" : [ ],
+        "query" : "config = load \"${App.Datasets.Journey_Survey_Question_Config_Metadata.FullyQualifiedName}\";\nconfig = filter config by 'Context' == \"Customer CSAT\";\nconfig = filter config by 'QuestionType' == \"Rating\";\nq = load \"${App.Datasets.SurveyQuestionResponsewithDetails.FullyQualifiedName}\";\nq = filter q by 'Question_QuestionType' == \"Rating\"; q = group q by ('Id', 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'QuestionChoices_Name', 'JourneyConfig_Stage'); q = foreach q generate 'Id' , 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'QuestionChoices_Name' as 'QuestionChoices_Name', 'JourneyConfig_Stage', first('SurveyVersion_Survey_Name') as 'SurveyVersion_Survey_Name', first('CreatedDate_sec_epoch') as 'CreatedDate_sec_epoch',  first('NumberValue') as 'NumberValue'; q = order q by ('SurveyVersion_Survey_Id' asc, 'SurveyVersionId' asc, 'QuestionId' asc, 'QuestionChoices_Name' asc); \nq = group q by ('Id', 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'JourneyConfig_Stage'); \nq = foreach q generate 'Id' , 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'JourneyConfig_Stage', first('SurveyVersion_Survey_Name') as 'SurveyVersion_Survey_Name', string_to_number(last('QuestionChoices_Name')) as 'Max Rating', round(first('NumberValue')/string_to_number(last('QuestionChoices_Name')),4) as 'Rating%',  first('NumberValue') as 'NumberValue'; promoters = filter q by 'Rating%' > 0.8; passive = filter q by 'Rating%' <= 0.8 && 'Rating%' >= 0.7; detractors = filter q by 'Rating%' < 0.7; journey = group config by ('SurveyID', 'SurveyName') left, passive by ('SurveyVersion_Survey_Id', 'SurveyVersion_Survey_Name') left,  promoters by ('SurveyVersion_Survey_Id', 'SurveyVersion_Survey_Name') left, detractors by ('SurveyVersion_Survey_Id', 'SurveyVersion_Survey_Name'); journey = foreach journey generate config.'SurveyName' as 'SurveyName', first(config.'StageOrder') as 'StageOrder', count(promoters) as '>80% Rating', count(passive) as '70% to 80% Rating', count(detractors) as '<70% Rating'; journey = order journey by 'StageOrder' asc;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "multi",
+        "start" : [ ],
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "sync",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "vbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimensionAxis" : [
+                "SurveyName"
+              ],
+              "plots" : [
+                ">80% Rating",
+                "70% to 80% Rating",
+                "<70% Rating"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "CSAT___Customer_Journey_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.SurveyQuestionResponsewithDetails.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "CSAT - Customer Journey",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              "JourneyConfig_Journey"
+            ],
+            "filters" : [
+              [
+                "Question_QuestionType",
+                [
+                  "Rating"
+                ],
+                "in"
+              ],
+              [
+                "JourneyConfig_Context",
+                [
+                  "Customer CSAT"
+                ],
+                "in"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "include",
+          "steps" : [
+            "Journey_Filter_1"
+          ]
+        },
+        "selectMode" : "singlerequired",
+        "type" : "aggregateflex",
+        "useGlobal" : false,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimensionAxis" : [
+                "JourneyConfig_Journey"
+              ],
+              "plots" : [
+                "count"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "CSAT_Ratings_over_ti_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "CSAT Ratings over time",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.SurveyQuestionResponsewithDetails.FullyQualifiedName}\";\nq = filter q by 'Question_QuestionType' == \"Rating\";\nq = group q by ('Id', 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'QuestionChoices_Name', 'JourneyConfig_Stage');\nq = foreach q generate 'Id' , 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'QuestionChoices_Name' as 'QuestionChoices_Name', 'JourneyConfig_Stage', first('CreatedDate_sec_epoch') as 'CreatedDate_sec_epoch',  first('NumberValue') as 'NumberValue', first('SurveyVersion_Survey_Name') as 'SurveyVersion_Survey_Name', first('CreatedDate_Year') as 'CreatedDate_Year', first('CreatedDate_Month') as 'CreatedDate_Month';\nq = order q by ('SurveyVersion_Survey_Id' asc, 'SurveyVersionId' asc, 'QuestionId' asc, 'QuestionChoices_Name' asc);\nq = group q by ('Id', 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'JourneyConfig_Stage');\nq = foreach q generate 'Id' , 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'JourneyConfig_Stage', string_to_number(last('QuestionChoices_Name')) as 'Max Rating', round(first('NumberValue')/string_to_number(last('QuestionChoices_Name')),5) as 'Rating%',  first('NumberValue') as 'NumberValue', first('SurveyVersion_Survey_Name') as 'SurveyVersion_Survey_Name', first('CreatedDate_Year') as 'CreatedDate_Year', first('CreatedDate_Month') as 'CreatedDate_Month';\n\njourney = group q by ('CreatedDate_Year', 'CreatedDate_Month');\njourney = foreach journey generate 'CreatedDate_Year'+\"~~~\"+ 'CreatedDate_Month' as 'CreatedDate_Year~~~CreatedDate_Month', round((sum(q.'Rating%') * {{cell(Scale_1.result, 0, \"sum_Scale\").asObject()}})/count(q),2) * 20 as 'CSAT', min(q.'Rating%') * {{cell(Scale_1.result, 0, \"sum_Scale\").asObject()}} * 20 as 'Min Rating', max(q.'Rating%') * {{cell(Scale_1.result, 0, \"sum_Scale\").asObject()}} * 20 as 'Max Rating';",
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "Invites_and_response_1",
+            "promoters_passives_d_1"
+          ]
+        },
+        "selectMode" : "single",
+        "start" : [ ],
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "stack" : false,
+            "showPoints" : true,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "sync",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "combo",
+            "missingValue" : "connect",
+            "showValuesOnLine" : false,
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimensionAxis" : [
+                "CreatedDate_Year~~~CreatedDate_Month"
+              ],
+              "plots" : [
+                "CSAT",
+                "Min Rating",
+                "Max Rating"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "CSAT_score_change_ana_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "CSAT score change analysis",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.SurveyQuestionResponsewithDetails.FullyQualifiedName}\";\nq = filter q by 'Question_QuestionType' == \"Rating\";q = filter q by {{column(Customer_CSAT_Journey.selection,[\"SurveyName\"]).asEquality(\"SurveyVersion_Survey_Name\")}} && {{column(Responses_by_stage_1.selection,[\"SurveyName\"]).asEquality(\"SurveyVersion_Survey_Name\")}} && {{column(CSAT___Customer_Journ_4.selection,[\"SurveyName\"]).asEquality(\"SurveyVersion_Survey_Name\")}}; q = group q by ('Id', 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'QuestionChoices_Name', 'JourneyConfig_Stage'); q = foreach q generate 'Id' , 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'QuestionChoices_Name' as 'QuestionChoices_Name', 'JourneyConfig_Stage', first('CreatedDate_Year') as 'CreatedDate_Year', first('CreatedDate_Month') as 'CreatedDate_Month', first('CreatedDate_Day') as 'CreatedDate_Day',  first('NumberValue') as 'NumberValue'; q = order q by ('SurveyVersion_Survey_Id' asc, 'SurveyVersionId' asc, 'QuestionId' asc, 'QuestionChoices_Name' asc); q = group q by ('Id', 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'JourneyConfig_Stage'); q = foreach q generate 'Id' , 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'JourneyConfig_Stage', first('CreatedDate_Year') as 'CreatedDate_Year', first('CreatedDate_Month') as 'CreatedDate_Month', first('CreatedDate_Day') as 'CreatedDate_Day', string_to_number(last('QuestionChoices_Name')) as 'Max Rating', round(first('NumberValue')/string_to_number(last('QuestionChoices_Name')),5) as 'Rating%',  first('NumberValue') as 'NumberValue'; q = group q by ('CreatedDate_Year', 'CreatedDate_Month'); q = foreach q generate 'CreatedDate_Year' as 'CreatedDate_Year', 'CreatedDate_Month' as 'CreatedDate_Month', round((sum(sum('Rating%')) over ([..0] partition by all order by ('CreatedDate_Year','CreatedDate_Month'))/sum(count()) over ([..0] partition by all order by ('CreatedDate_Year','CreatedDate_Month')))*{{cell(Scale_1.result, 0, \"sum_Scale\").asObject()}},2)*20 as 'CSAT Score'; changes = group q by ('CreatedDate_Year', 'CreatedDate_Month'); changes = foreach changes generate 'CreatedDate_Year' + \"~~~\" +'CreatedDate_Month' as 'CreatedDate_Year~~~CreatedDate_Month', sum('CSAT Score') - coalesce(sum(sum('CSAT Score')) over ([-1..-1] partition by all order by ('CreatedDate_Year','CreatedDate_Month')),0) as 'Change of CSAT Score';",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "start" : [ ],
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "totalValue" : "computeTotal",
+            "showValues" : true,
+            "positiveColor" : "#0BA976",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "waterfall",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "startColor" : "#1674D9",
+            "totalLabel" : "",
+            "columnMap" : {
+              "measureAxis1" : [
+                "Change of CSAT Score"
+              ],
+              "trellis" : [ ],
+              "dimensionAxis" : [
+                "CreatedDate_Year~~~CreatedDate_Month"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "totalColor" : "#1674D9",
+            "theme" : "wave",
+            "negativeColor" : "#E41E42",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : ""
+            }
+          },
+          "type" : "chart"
+        }
+      }
+    },
+    "widgetStyle" : {
+      "backgroundColor" : "#FFFFFF",
+      "borderColor" : "#E6ECF2",
+      "borderEdges" : [ ],
+      "borderRadius" : 0,
+      "borderWidth" : 1
+    },
+    "widgets" : {
+      "text_17" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "How did the CSAT score across stages trend over time?"
+          },
+          "fontSize" : 18,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text_14" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "* Score normalized to score out of 5"
+          },
+          "fontSize" : 10,
+          "showActionMenu" : true,
+          "textAlignment" : "right",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text_13" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "SURVEY DETAILS"
+          },
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text_16" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : ""
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text_15" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : ""
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text_10" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Stage"
+          },
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#335779"
+        },
+        "type" : "text"
+      },
+      "text_12" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "How satisfied are my customers?"
+          },
+          "fontSize" : 18,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text_11" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Responsive Customers"
+          },
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "container_1" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_2" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_3" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "chart_9" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showValues" : true,
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "bottom-center",
+            "inside" : false
+          },
+          "axisMode" : "sync",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "vbar",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "binValues" : false,
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "columnMap" : {
+            "trellis" : [ ],
+            "dimensionAxis" : [
+              "CreatedDate_Year~~~CreatedDate_Month"
+            ],
+            "plots" : [
+              ">80% Rating",
+              "70% to 80% Rating",
+              "<70% Rating"
+            ]
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "Responses",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "theme" : "wave",
+          "step" : "promoters_passives_d_1",
+          "dimensionAxis" : {
+            "showTitle" : true,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "Period (Year-Month)",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "container_4" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_5" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_3" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "CUSTOMER ENGAGEMENT"
+          },
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "chart_6" : {
+        "parameters" : {
+          "totalValue" : "computeTotal",
+          "showValues" : true,
+          "positiveColor" : "rgb(26, 133, 55)",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "waterfall",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "startColor" : "rgb(31, 183, 238)",
+          "totalLabel" : "Final Score",
+          "columnMap" : {
+            "measureAxis1" : [
+              "Change of CSAT Score"
+            ],
+            "trellis" : [ ],
+            "dimensionAxis" : [
+              "CreatedDate_Year~~~CreatedDate_Month"
+            ]
+          },
+          "showActionMenu" : true,
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "CSAT Score",
+            "customDomain" : {
+              "high" : 90,
+              "low" : 30,
+              "showDomain" : true
+            }
+          },
+          "totalColor" : "rgb(31, 183, 238)",
+          "theme" : "wave",
+          "step" : "CSAT_score_change_ana_1",
+          "negativeColor" : "#B50E03",
+          "dimensionAxis" : {
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "Period (Year-Month)"
+          },
+          "applyConditionalFormatting" : false
+        },
+        "type" : "chart"
+      },
+      "container_6" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_2" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "AVERAGE CSAT SCORE"
+          },
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "chart_5" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showValues" : true,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "showMeasureTitle" : true,
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "pyramid",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "showMeasure" : true,
+          "columnMap" : {
+            "measureAxis2" : [
+              "NumberValue"
+            ],
+            "measureAxis1" : [
+              "Responses"
+            ],
+            "trellis" : [ ],
+            "dimensionAxis" : [
+              "Invitation_Participant_Name"
+            ],
+            "plots" : [
+              "Responses",
+              "NumberValue"
+            ]
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "theme" : "wave",
+          "rightColor" : "#e16032",
+          "step" : "Participant_Responsi_1",
+          "leftColor" : "#52b7d8",
+          "dimensionAxis" : {
+            "customSize" : "auto",
+            "showAxis" : true
+          },
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "text_5" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Journey"
+          },
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#335779"
+        },
+        "type" : "text"
+      },
+      "chart_8" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showPoints" : false,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : true
+          },
+          "axisMode" : "sync",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "line",
+          "dashLine" : {
+            "measures" : "",
+            "showDashLine" : false
+          },
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "fillArea" : true,
+          "columnMap" : {
+            "split" : [ ],
+            "trellis" : [ ],
+            "dimensionAxis" : [
+              "CreatedDate_Year~~~CreatedDate_Month"
+            ],
+            "plots" : [
+              "Responses",
+              "Invites"
+            ]
+          },
+          "showActionMenu" : true,
+          "showZero" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "valueType" : "none",
+          "theme" : "wave",
+          "step" : "Invites_and_response_1",
+          "applyConditionalFormatting" : true,
+          "dimensionAxis" : {
+            "showTitle" : false,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "drawArea" : {
+            "measure" : "",
+            "showDrawArea" : false,
+            "bounding1" : "",
+            "bounding2" : ""
+          }
+        },
+        "type" : "chart"
+      },
+      "text_4" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Responses Considered"
+          },
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#335779"
+        },
+        "type" : "text"
+      },
+      "chart_7" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showValues" : true,
+          "stack" : false,
+          "showPoints" : true,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : true
+          },
+          "axisMode" : "sync",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "combo",
+          "missingValue" : "connect",
+          "showValuesOnLine" : false,
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "columnMap" : {
+            "trellis" : [ ],
+            "dimensionAxis" : [
+              "CreatedDate_Year~~~CreatedDate_Month"
+            ],
+            "plots" : [
+              "CSAT",
+              "Min Rating",
+              "Max Rating"
+            ]
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "high" : 100,
+              "low" : 0,
+              "showDomain" : true
+            }
+          },
+          "theme" : "wave",
+          "step" : "CSAT_Ratings_over_ti_1",
+          "dimensionAxis" : {
+            "showTitle" : false,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "chart_2" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showPoints" : true,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : true
+          },
+          "axisMode" : "sync",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "line",
+          "dashLine" : {
+            "measures" : "",
+            "showDashLine" : false
+          },
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "fillArea" : true,
+          "columnMap" : {
+            "split" : [ ],
+            "trellis" : [ ],
+            "dimensionAxis" : [
+              "SurveyName"
+            ],
+            "plots" : [
+              "Responses",
+              "Invites"
+            ]
+          },
+          "showActionMenu" : true,
+          "showZero" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "Responses",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "valueType" : "compactNumber",
+          "theme" : "light",
+          "step" : "Responses_by_stage_1",
+          "dimensionAxis" : {
+            "showTitle" : false,
+            "customSize" : "auto",
+            "showAxis" : false,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : true,
+          "drawArea" : {
+            "measure" : "",
+            "showDrawArea" : false,
+            "bounding1" : "",
+            "bounding2" : ""
+          }
+        },
+        "type" : "chart"
+      },
+      "text_7" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : ""
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text_6" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Customer Base"
+          },
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "chart_1" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showValues" : true,
+          "stack" : false,
+          "showPoints" : true,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : true
+          },
+          "axisMode" : "sync",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "combo",
+          "missingValue" : "connect",
+          "showValuesOnLine" : false,
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "columnMap" : {
+            "trellis" : [ ],
+            "dimensionAxis" : [
+              "SurveyName"
+            ],
+            "plots" : [
+              "CSAT",
+              "Min Rating",
+              "Max Rating"
+            ]
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "high" : 10,
+              "low" : 0,
+              "showDomain" : true
+            }
+          },
+          "theme" : "wave",
+          "step" : "Customer_CSAT_Journey",
+          "dimensionAxis" : {
+            "showTitle" : false,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "chart_4" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showValues" : true,
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "bottom-center",
+            "inside" : false
+          },
+          "axisMode" : "sync",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "vbar",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "binValues" : false,
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "columnMap" : {
+            "trellis" : [ ],
+            "dimensionAxis" : [
+              "SurveyName"
+            ],
+            "plots" : [
+              ">80% Rating",
+              "70% to 80% Rating",
+              "<70% Rating"
+            ]
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "theme" : "wave",
+          "step" : "CSAT___Customer_Journ_4",
+          "dimensionAxis" : {
+            "showTitle" : true,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "text_9" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "What’s the change in CSAT Score for the selected period?"
+          },
+          "fontSize" : 18,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "chart_3" : {
+        "parameters" : {
+          "centerText" : "",
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "showMeasureTitle" : false,
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "pie",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "inner" : 70,
+          "columnMap" : {
+            "trellis" : [ ],
+            "dimension" : [
+              "Customer Type"
+            ],
+            "plots" : [
+              "Count"
+            ]
+          },
+          "showActionMenu" : true,
+          "centerValueType" : "number",
+          "valueType" : "compactNumber",
+          "theme" : "light",
+          "step" : "Responsive_customer__1",
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "text_8" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : ""
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "dateselector_1" : {
+        "parameters" : {
+          "absoluteModeEnabled" : true,
+          "calendarTypeSwitchingAllowed" : true,
+          "defaultFiscalMode" : false,
+          "displayMode" : "filter",
+          "filterStyle" : {
+            "titleColor" : "#54698D",
+            "valueColor" : "#091A3E"
+          },
+          "instant" : false,
+          "presetsEnabled" : true,
+          "relativeModeEnabled" : true,
+          "showActionMenu" : false,
+          "step" : "Response_date_filter_1",
+          "title" : "Response Period"
+        },
+        "type" : "dateselector"
+      },
+      "text_1" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "CUSTOMER SATISFACTION JOURNEY MAP STAGE ANALYSIS"
+          },
+          "fontSize" : 20,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "filterpanel_2" : {
+        "parameters" : {
+          "filterItemOptions" : {
+            "propertyColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "filters" : [
+            {
+              "dataset" : {
+                "name" : "${App.Datasets.SurveyQuestionResponsewithDetails.Name}"
+              },
+              "field" : "Invitation_OptionsAllowGuestUserResponse"
+            }
+          ],
+          "showAllFilters" : false
+        },
+        "type" : "filterpanel"
+      },
+      "filterpanel_1" : {
+        "parameters" : {
+          "filterItemOptions" : {
+            "propertyColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "filters" : [
+            {
+              "dataset" : {
+                "name" : "${App.Datasets.SurveyQuestionResponsewithDetails.Name}"
+              },
+              "field" : "Invitation_OptionsCollectAnonymous"
+            }
+          ],
+          "showAllFilters" : false
+        },
+        "type" : "filterpanel"
+      },
+      "number_3" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "unique_Invitation_ParticipantId",
+          "numberColor" : "#091A3E",
+          "numberSize" : 16,
+          "showActionMenu" : false,
+          "step" : "CSAT___Customer_Journ_3",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "number_2" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "count",
+          "numberColor" : "#091A3E",
+          "numberSize" : 16,
+          "showActionMenu" : false,
+          "step" : "Customer_Base_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "number_1" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "CSAT",
+          "numberColor" : "#091A3E",
+          "numberSize" : 24,
+          "showActionMenu" : true,
+          "step" : "CSAT___Customer_Journ_2",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "image_1" : {
+        "parameters" : {
+          "alignmentX" : "center",
+          "alignmentY" : "center",
+          "fit" : "fitheight",
+          "image" : {
+            "name" : "${App.Images['surveyslciconjpg1898jpg14jpg'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "type" : "image"
+      },
+      "image_3" : {
+        "parameters" : {
+          "alignmentX" : "center",
+          "alignmentY" : "center",
+          "fit" : "fitheight",
+          "image" : {
+            "name" : "${App.Images['surveyslciconjpg1898jpg14jpg1'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "type" : "image"
+      },
+      "filterpanel_5" : {
+        "parameters" : {
+          "filterItemOptions" : {
+            "propertyColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "filters" : [
+            {
+              "dataset" : {
+                "name" : "${App.Datasets.SurveyQuestionResponsewithDetails.Name}"
+              },
+              "field" : "Invitation_MassInvite"
+            }
+          ],
+          "showAllFilters" : false
+        },
+        "type" : "filterpanel"
+      },
+      "filterpanel_4" : {
+        "parameters" : {
+          "filterItemOptions" : {
+            "propertyColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "filters" : [
+            {
+              "dataset" : {
+                "name" : "${App.Datasets.SurveyQuestionResponsewithDetails.Name}"
+              },
+              "field" : "Invitation_Subject_SubjectEntityType"
+            }
+          ],
+          "showAllFilters" : false
+        },
+        "type" : "filterpanel"
+      },
+      "filterpanel_3" : {
+        "parameters" : {
+          "filterItemOptions" : {
+            "propertyColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "filters" : [
+            {
+              "dataset" : {
+                "name" : "${App.Datasets.SurveyQuestionResponsewithDetails.Name}"
+              },
+              "field" : "Invitation_Participant_Name"
+            }
+          ],
+          "showAllFilters" : false
+        },
+        "type" : "filterpanel"
+      },
+      "listselector_3" : {
+        "parameters" : {
+          "compact" : false,
+          "displayMode" : "filter",
+          "exploreLink" : false,
+          "filterStyle" : {
+            "titleColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "instant" : true,
+          "measureField" : "none",
+          "showActionMenu" : false,
+          "step" : "Journey_Filter_1",
+          "title" : "Journey"
+        },
+        "type" : "listselector"
+      },
+      "listselector_2" : {
+        "parameters" : {
+          "compact" : false,
+          "displayMode" : "filter",
+          "exploreLink" : false,
+          "filterStyle" : {
+            "titleColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "instant" : true,
+          "measureField" : "none",
+          "showActionMenu" : false,
+          "step" : "Stages_Filter_1",
+          "title" : "Stage"
+        },
+        "type" : "listselector"
+      },
+      "link_3" : {
+        "parameters" : {
+          "destinationType" : "lens",
+          "fontSize" : 14,
+          "includeState" : false,
+          "text" : "STAGE ANALYSIS",
+          "textAlignment" : "center",
+          "textColor" : "#0070D2"
+        },
+        "type" : "link"
+      },
+      "link_1" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "${App.Dashboards['Customer Journey Map for CSAT'].Name}",
+            "namespace" : "${Org.Namespace}"
+          },
+          "destinationType" : "dashboard",
+          "fontSize" : 14,
+          "includeState" : false,
+          "text" : "JOURNEY ANALYSIS",
+          "textAlignment" : "center",
+          "textColor" : "#091A3E"
+        },
+        "type" : "link"
+      },
+      "navigation_1" : {
+        "parameters" : {
+          "fontSize" : 16,
+          "selectedTab" : {
+            "backgroundColor" : "rgb(0, 112, 210)",
+            "borderColor" : "#0070D2",
+            "borderEdges" : [
+              "bottom"
+            ],
+            "borderWidth" : 2,
+            "textColor" : "#FFFFFF"
+          },
+          "tabCount" : 5,
+          "textColor" : "#54698D"
+        },
+        "type" : "navigation"
+      },
+      "table_1" : {
+        "parameters" : {
+          "borderColor" : "#e0e5ee",
+          "borderWidth" : 1,
+          "cell" : {
+            "backgroundColor" : "rgb(240, 243, 247)",
+            "fontColor" : "#16325c",
+            "fontSize" : 12
+          },
+          "columnProperties" : { },
+          "columns" : [ ],
+          "customBulkActions" : [ ],
+          "exploreLink" : true,
+          "header" : {
+            "backgroundColor" : "#C6D3E1",
+            "fontColor" : "#16325c",
+            "fontSize" : 12
+          },
+          "innerMajorBorderColor" : "#a8b7c7",
+          "innerMinorBorderColor" : "#e0e5ee",
+          "mode" : "fittocontainer",
+          "numberOfLines" : 1,
+          "pivoted" : false,
+          "showActionMenu" : true,
+          "showRowIndexColumn" : true,
+          "step" : "Response_Details_1",
+          "verticalPadding" : 8
+        },
+        "type" : "table"
+      },
+      "pillbox_1" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : false,
+          "fontSize" : 14,
+          "selectedTab" : {
+            "backgroundColor" : "#0070D2",
+            "borderColor" : "#C6D3E1",
+            "borderEdges" : [
+              "all"
+            ],
+            "borderWidth" : 1,
+            "textColor" : "#FFFFFF"
+          },
+          "showActionMenu" : true,
+          "step" : "Max_Min_Toggle_1",
+          "textColor" : "#0070D2"
+        },
+        "type" : "pillbox"
+      },
+      "listselector_1" : {
+        "parameters" : {
+          "compact" : false,
+          "displayMode" : "filter",
+          "exploreLink" : false,
+          "filterStyle" : {
+            "titleColor" : "#54698D",
+            "valueColor" : "#091A3E"
+          },
+          "instant" : false,
+          "measureField" : "none",
+          "showActionMenu" : false,
+          "step" : "CSAT___Customer_Journey_1",
+          "title" : "Journey"
+        },
+        "type" : "listselector"
+      }
+    }
+  }
+}

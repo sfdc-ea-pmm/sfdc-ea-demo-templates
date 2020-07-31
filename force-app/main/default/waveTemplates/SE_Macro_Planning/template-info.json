@@ -1,0 +1,203 @@
+{
+  "templateType": "app",
+  "label": "Demo | Macro Planning",
+  "name": "SE_Macro_Planning",
+  "description": "Macro Planning for FSL: Resource Management and Capacity Planning.",
+  "customAttributes": [
+    {
+      "label": "Author(s)",
+      "values": [
+        "Marc Schlesser (mschlesser@salesforce.com)",
+        "Léonce Ogoussan (logoussan@salesforce.com)"
+      ]
+    },
+    {
+      "label": "Demo Version",
+      "values": ["v2020.31"]
+    },
+    {
+      "label": "Source Version",
+      "values": ["Custom"]
+    }
+  ],
+  "tags": ["Demo", "SE Demo", "FSL"],
+  "assetVersion": 49.0,
+  "variableDefinition": "variables.json",
+  "uiDefinition": "ui.json",
+  "rules": [
+    {
+      "type": "templateToApp",
+      "file": "template-to-app-rules.json"
+    },
+    {
+      "type": "appToTemplate",
+      "file": "app-to-template-rules.json"
+    }
+  ],
+  "releaseInfo": {
+    "templateVersion": "1.0",
+    "notesFile": "releaseNotes.html"
+  },
+  "folderDefinition": "folder.json",
+  "externalFiles": [
+    {
+      "label": "AGGR_BY_PROFIL",
+      "name": "AGGR_BY_PROFIL_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/AGGR_BY_PROFIL_XMD.json",
+      "file": "external_files/AGGR_BY_PROFIL.csv",
+      "type": "CSV",
+      "schema": "external_files/AGGR_BY_PROFIL.json"
+    },
+    {
+      "label": "AGGR_STATION_RESEAU",
+      "name": "AGGR_STATION_RESEAU_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/AGGR_STATION_RESEAU_XMD.json",
+      "file": "external_files/AGGR_STATION_RESEAU.csv",
+      "type": "CSV",
+      "schema": "external_files/AGGR_STATION_RESEAU.json"
+    },
+    {
+      "label": "CAPACITE",
+      "name": "CAPACITE_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/CAPACITE_XMD.json",
+      "file": "external_files/CAPACITE.csv",
+      "type": "CSV",
+      "schema": "external_files/CAPACITE.json"
+    },
+    {
+      "label": "CAPACITE_RESEAU",
+      "name": "CAPACITE_RESEAU_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/CAPACITE_RESEAU_XMD.json",
+      "file": "external_files/CAPACITE_RESEAU.csv",
+      "type": "CSV",
+      "schema": "external_files/CAPACITE_RESEAU.json"
+    },
+    {
+      "label": "CAPACITE_STATION",
+      "name": "CAPACITE_STATION_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/CAPACITE_STATION_XMD.json",
+      "file": "external_files/CAPACITE_STATION.csv",
+      "type": "CSV",
+      "schema": "external_files/CAPACITE_STATION.json"
+    },
+    {
+      "label": "CHARGE",
+      "name": "CHARGE_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/CHARGE_XMD.json",
+      "file": "external_files/CHARGE.csv",
+      "type": "CSV",
+      "schema": "external_files/CHARGE.json"
+    },
+    {
+      "label": "ED_CHARGE_CAPACITE",
+      "name": "ED_CHARGE_CAPACITE_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/ED_CHARGE_CAPACITE_XMD.json",
+      "file": "external_files/ED_CHARGE_CAPACITE.csv",
+      "type": "CSV",
+      "schema": "external_files/ED_CHARGE_CAPACITE.json"
+    },
+    {
+      "label": "ED_DATASET",
+      "name": "ED_DATASET_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/ED_DATASET_XMD.json",
+      "file": "external_files/ED_DATASET.csv",
+      "type": "CSV",
+      "schema": "external_files/ED_DATASET.json"
+    },
+    {
+      "label": "Intelligence Demo",
+      "name": "Intelligence_Demo_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/Intelligence_Demo_XMD.json",
+      "file": "external_files/Intelligence_Demo.csv",
+      "type": "CSV",
+      "schema": "external_files/Intelligence_Demo.json"
+    },
+    {
+      "label": "INTELLIGENT_MACRO_PLANNING",
+      "name": "INTELLIGENT_MACRO_PLANNING_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/INTELLIGENT_MACRO_PLANNING_XMD.json",
+      "file": "external_files/INTELLIGENT_MACRO_PLANNING.csv",
+      "type": "CSV",
+      "schema": "external_files/INTELLIGENT_MACRO_PLANNING.json"
+    },
+    {
+      "label": "VARIABLES",
+      "name": "VARIABLES_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/VARIABLES_XMD.json",
+      "file": "external_files/VARIABLES.csv",
+      "type": "CSV",
+      "schema": "external_files/VARIABLES.json"
+    }
+  ],
+  "lenses": [
+    {
+      "label": "Demo Charge vs Capacite",
+      "name": "Demo_Charge_vs_Capacite_tp",
+      "condition": "${Variables.Overrides.createAllLenses}",
+      "file": "lenses/Demo_Charge_vs_Capacite.json"
+    }
+  ],
+  "dashboards": [
+    {
+      "label": "Saur Macroplanning - Preparation",
+      "name": "Macroplanning_Preparation_24_05_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Macroplanning_Preparation_24_05.json"
+    },
+    {
+      "label": "Saur Macroplanning - Preparation (EN)",
+      "name": "Saur_Macroplanning_Preparation_Backup_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Saur_Macroplanning_Preparation_Backup.json"
+    }
+  ],
+  "eltDataflows": [],
+  "recipes": [],
+  "datasetFiles": [],
+  "storedQueries": [],
+  "imageFiles": [
+    {
+      "name": "QuotingLogo",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/QuotingLogo.png"
+    },
+    {
+      "name": "Example_12xpng7png",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/Example_12xpng7.png"
+    }
+  ],
+  "extendedTypes": {},
+  "templateDependencies": [],
+  "icons": {
+    "appBadge": {
+      "name": "16.png"
+    },
+    "templateBadge": {
+      "name": "analytics_icon"
+    },
+    "templatePreviews": [
+      {
+        "name": "einstein_scene",
+        "label": "Description",
+        "description": "How can I compare future Work Order workload against human capacity? How I can simulate a long term capacity planning and anticipate any actions? How Einstein can provide son insights to take the right action à the right time?"
+      },
+      {
+        "name": "demo_template_guide_0",
+        "label": "How to Use this Template",
+        "description": "This template uses external files to load meaningful data for dashboards. If further customization is required, these would have to be downloaded, updated and re-uploaded."
+      }
+    ]
+  }
+}
