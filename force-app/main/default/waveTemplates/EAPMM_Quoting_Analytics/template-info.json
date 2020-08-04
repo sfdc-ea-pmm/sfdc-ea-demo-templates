@@ -1,0 +1,121 @@
+{
+  "templateType": "app",
+  "label": "Tour | Quoting Analytics",
+  "name": "EAPMM_Quoting_Analytics",
+  "description": "Harbor Tour version of Quoting Analytics",
+  "customAttributes": [
+    {
+      "label": "Author(s)",
+      "values": ["EA PMM"]
+    },
+    {
+      "label": "Demo Version",
+      "values": ["v2020.31"]
+    },
+    {
+      "label": "Source Version",
+      "values": ["v226"]
+    }
+  ],
+  "tags": ["Harbor Tour", "Demo", "Quoting", "Sales", "CPQ"],
+  "assetVersion": 49.0,
+  "variableDefinition": "variables.json",
+  "uiDefinition": "ui.json",
+  "rules": [
+    {
+      "type": "templateToApp",
+      "file": "template-to-app-rules.json"
+    },
+    {
+      "type": "appToTemplate",
+      "file": "app-to-template-rules.json"
+    }
+  ],
+  "releaseInfo": {
+    "templateVersion": "1.0",
+    "notesFile": "releaseNotes.html"
+  },
+  "folderDefinition": "folder.json",
+  "externalFiles": [
+    {
+      "label": "Quote Approval",
+      "name": "Quote_Approval",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/Quote_Approval_XMD.json",
+      "file": "external_files/Quote_Approval.csv",
+      "type": "CSV",
+      "schema": "external_files/Quote_Approval.json"
+    },
+    {
+      "label": "Quote History",
+      "name": "Quote_History",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/Quote_History_XMD.json",
+      "file": "external_files/Quote_History.csv",
+      "type": "CSV",
+      "schema": "external_files/Quote_History.json"
+    },
+    {
+      "label": "Quote Line Item",
+      "name": "Quote_Line_Item",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/Quote_Line_Item_XMD.json",
+      "file": "external_files/Quote_Line_Item.csv",
+      "type": "CSV",
+      "schema": "external_files/Quote_Line_Item.json"
+    }
+  ],
+  "lenses": [],
+  "dashboards": [
+    {
+      "label": "Quote Effectiveness",
+      "name": "Quote_Effectiveness_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Quote_Effectiveness.json"
+    },
+    {
+      "label": "Quote Efficiency",
+      "name": "Quote_Efficiency_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Quote_Efficiency.json"
+    }
+  ],
+  "eltDataflows": [],
+  "recipes": [],
+  "datasetFiles": [],
+  "storedQueries": [],
+  "imageFiles": [
+    {
+      "name": "QuotingLogo2",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/QuotingLogo.png"
+    },
+    {
+      "name": "QuotingLogo1png3",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/QuotingLogo1.png"
+    }
+  ],
+  "extendedTypes": {},
+  "templateDependencies": [],
+  "icons": {
+    "appBadge": {
+      "name": "16.png"
+    },
+    "templateBadge": {
+      "name": "analytics_icon"
+    },
+    "templatePreviews": [
+      {
+        "name": "einstein_scene",
+        "label": "",
+        "description": ""
+      },
+      {
+        "name": "demo_template_guide_0",
+        "label": "How to Use this Template",
+        "description": "This demo template is decoupled from core objects and does not require any additional licenses (only EA+). To customize the data you will need to download the datasets, modify and update. This template includes full sample data."
+      }
+    ]
+  }
+}
