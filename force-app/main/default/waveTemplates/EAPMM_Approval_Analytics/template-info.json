@@ -1,0 +1,92 @@
+{
+  "templateType": "app",
+  "label": "Tour | Approval Analytics",
+  "name": "EAPMM_Approval_Analytics",
+  "description": "Harbor Tour version of Approval Analytics",
+  "customAttributes": [
+    {
+      "label": "Author(s)",
+      "values": ["EA PMM"]
+    },
+    {
+      "label": "Demo Version",
+      "values": ["v2020.32"]
+    },
+    {
+      "label": "Source Version",
+      "values": ["v226"]
+    }
+  ],
+  "tags": ["Harbor Tour", "Demo", "Sales", "Service", "Marketing"],
+  "assetVersion": 49.0,
+  "variableDefinition": "variables.json",
+  "uiDefinition": "ui.json",
+  "rules": [
+    {
+      "type": "templateToApp",
+      "file": "template-to-app-rules.json"
+    },
+    {
+      "type": "appToTemplate",
+      "file": "app-to-template-rules.json"
+    }
+  ],
+  "releaseInfo": {
+    "templateVersion": "1.1",
+    "notesFile": "releaseNotes.html"
+  },
+  "folderDefinition": "folder.json",
+  "externalFiles": [
+    {
+      "label": "Approval",
+      "name": "Approval",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/Approval_XMD.json",
+      "file": "external_files/Approval.csv",
+      "type": "CSV",
+      "schema": "external_files/Approval.json"
+    }
+  ],
+  "lenses": [],
+  "dashboards": [
+    {
+      "label": "Approval Analytics",
+      "name": "Approval_Analytics",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Approval_Analytics.json"
+    }
+  ],
+  "eltDataflows": [],
+  "recipes": [],
+  "datasetFiles": [],
+  "storedQueries": [],
+  "imageFiles": [
+    {
+      "name": "ApprovalLogo3",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/Approval.jpg"
+    }
+  ],
+  "extendedTypes": {},
+  "templateDependencies": [],
+  "icons": {
+    "appBadge": {
+      "name": "16.png"
+    },
+    "templateBadge": {
+      "name": "analytics_icon"
+    },
+    "templatePreviews": [
+      {
+        "name": "einstein_scene",
+        "label": "",
+        "description": ""
+      },
+      {
+        "name": "demo_template_guide_0",
+        "label": "How to Use this Template",
+        "description": "This demo template is decoupled from core objects and does not require any additional licenses (only EA+). To customize the data you will need to download the datasets, modify and update. This template includes full sample data."
+      }
+    ]
+  }
+}
