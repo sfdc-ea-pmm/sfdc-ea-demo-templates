@@ -1,19 +1,18 @@
 {
-  "notificationLevel": "",
+  "isDeletable": true,
+  "notificationLevel": "Never",
   "workflowDefinition": {
     "compute-CG_OrderItem-AF_ID": {
       "action": "computeExpression",
       "parameters": {
         "source": "slice-CG_OrderItem-AF_ID",
         "mergeWithSource": true,
-        "computedFields": [
-          {
-            "saqlExpression": "\"0YQB0000000PAsIOAW\"",
-            "name": "AF_ID",
-            "label": "AF_ID",
-            "type": "Text"
-          }
-        ]
+        "computedFields": [{
+          "saqlExpression": "\"0YQB0000000PAsIOAW\"",
+          "name": "AF_ID",
+          "label": "AF_ID",
+          "type": "Text"
+        }]
       }
     },
     "compute-CG_Visit-AF_ID": {
@@ -21,14 +20,12 @@
       "parameters": {
         "source": "slice-CG_Visit-AF_ID",
         "mergeWithSource": true,
-        "computedFields": [
-          {
-            "name": "AF_ID",
-            "saqlExpression": "\"0YQB0000000PAsIOAW\"",
-            "label": "AF_ID",
-            "type": "Text"
-          }
-        ]
+        "computedFields": [{
+          "name": "AF_ID",
+          "saqlExpression": "\"0YQ3A0000004CPfWAM\"",
+          "label": "AF_ID",
+          "type": "Text"
+        }]
       }
     },
     "slice-CG-RetailVisitKpi": {
@@ -36,11 +33,7 @@
       "parameters": {
         "mode": "drop",
         "source": "extract-CG_RetailVisitKpi",
-        "fields": [
-          {
-            "name": "AF_ID"
-          }
-        ]
+        "fields": [{"name": "AF_ID"}]
       }
     },
     "register-CG_Visit": {
@@ -61,44 +54,30 @@
     },
     "extract-CG_OrderItem": {
       "action": "edgemart",
-      "parameters": {
-        "alias": "${App.Datasets.CG_OrderItem36_tp.FullyQualifiedName}"
-      }
+      "parameters": {"alias": "${App.Datasets.CG_OrderItem36_tp.FullyQualifiedName}"}
     },
     "extract-CG_RetailVisitKpi": {
       "action": "edgemart",
-      "parameters": {
-        "alias": "${App.Datasets.CG_RetailVisitKpi37_tp.FullyQualifiedName}"
-      }
+      "parameters": {"alias": "${App.Datasets.CG_RetailVisitKpi37_tp.FullyQualifiedName}"}
     },
     "slice-CG_Visit-AF_ID": {
       "action": "sliceDataset",
       "parameters": {
         "mode": "drop",
         "source": "extract-CG_Visit",
-        "fields": [
-          {
-            "name": "AF_ID"
-          }
-        ]
+        "fields": [{"name": "AF_ID"}]
       }
     },
     "extract-CG_Case": {
       "action": "edgemart",
-      "parameters": {
-        "alias": "${App.Datasets.CG_Case36_tp.FullyQualifiedName}"
-      }
+      "parameters": {"alias": "${App.Datasets.CG_Case36_tp.FullyQualifiedName}"}
     },
     "slice-CG_OrderItem-AF_ID": {
       "action": "sliceDataset",
       "parameters": {
         "mode": "drop",
         "source": "extract-CG_OrderItem",
-        "fields": [
-          {
-            "name": "AF_ID"
-          }
-        ]
+        "fields": [{"name": "AF_ID"}]
       }
     },
     "compute-CG_Case-AF_ID": {
@@ -106,14 +85,12 @@
       "parameters": {
         "source": "slice-CG_Case-AF_ID",
         "mergeWithSource": true,
-        "computedFields": [
-          {
-            "saqlExpression": "\"0YQB0000000PAsIOAW\"",
-            "name": "AF_ID",
-            "label": "AF_ID",
-            "type": "Text"
-          }
-        ]
+        "computedFields": [{
+          "saqlExpression": "\"0YQ3A0000004CPfWAM\"",
+          "name": "AF_ID",
+          "label": "AF_ID",
+          "type": "Text"
+        }]
       }
     },
     "register-CG_Case": {
@@ -129,21 +106,17 @@
       "parameters": {
         "source": "slice-CG-RetailVisitKpi",
         "mergeWithSource": true,
-        "computedFields": [
-          {
-            "saqlExpression": "\"0YQB0000000PAsIOAW\"",
-            "name": "AF_ID",
-            "label": "AF_ID",
-            "type": "Text"
-          }
-        ]
+        "computedFields": [{
+          "saqlExpression": "\"0YQ3A0000004CPfWAM\"",
+          "name": "AF_ID",
+          "label": "AF_ID",
+          "type": "Text"
+        }]
       }
     },
     "extract-CG_Visit": {
       "action": "edgemart",
-      "parameters": {
-        "alias": "${App.Datasets.CG_Visit36_tp.FullyQualifiedName}"
-      }
+      "parameters": {"alias": "${App.Datasets.CG_Visit36_tp.FullyQualifiedName}"}
     },
     "register-CG_RetailVisitKpi": {
       "action": "sfdcRegister",
@@ -158,23 +131,17 @@
       "parameters": {
         "mode": "drop",
         "source": "extract-CG_Case",
-        "fields": [
-          {
-            "name": "AF_ID"
-          }
-        ]
+        "fields": [{"name": "AF_ID"}]
       }
     }
   },
-  "_type": "dataflow",
-  "description": "EA_for_CG_Action_Framework_Fix",
-  "MasterLabel": "EA_for_CG_Action_Framework_Fix",
-  "nextRun": "",
-  "WorkflowStatus": "Inactive",
-  "isDeletable": true,
-  "longRunningAlertInMins": "",
   "DataflowType": "USER",
+  "_type": "dataflow",
   "name": "EA_for_CG_Action_Framework_Fix",
+  "description": "EA for CG - Action Framework Fix",
+  "MasterLabel": "EA for CG - Action Framework Fix",
   "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
-  "_uid": ""
+  "_uid": "",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive"
 }
