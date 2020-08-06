@@ -1,0 +1,101 @@
+{
+  "templateType": "app",
+  "label": "Tour | Social Case Analytics",
+  "name": "EAPMM_Social_Case_Analytics",
+  "description": "Harbor Tour version of Social Case Analytics.",
+  "customAttributes": [
+    {
+      "label": "Author(s)",
+      "values": ["EA PMM"]
+    },
+    {
+      "label": "Demo Version",
+      "values": ["v2020.32"]
+    },
+    {
+      "label": "Source Version",
+      "values": ["v226"]
+    }
+  ],
+  "tags": ["Harbor Tour", "Demo", "Service", "Social"],
+  "assetVersion": 49.0,
+  "variableDefinition": "variables.json",
+  "uiDefinition": "ui.json",
+  "rules": [
+    {
+      "type": "templateToApp",
+      "file": "template-to-app-rules.json"
+    },
+    {
+      "type": "appToTemplate",
+      "file": "app-to-template-rules.json"
+    }
+  ],
+  "releaseInfo": {
+    "templateVersion": "1.0",
+    "notesFile": "releaseNotes.html"
+  },
+  "folderDefinition": "folder.json",
+  "externalFiles": [
+    {
+      "label": "ServiceSocialPersona",
+      "name": "ServiceSocialPersona_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/ServiceSocialPersona_XMD.json",
+      "file": "external_files/ServiceSocialPersona.csv",
+      "type": "CSV",
+      "schema": "external_files/ServiceSocialPersona.json"
+    },
+    {
+      "label": "ServiceSocialPost",
+      "name": "ServiceSocialPost_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/ServiceSocialPost_XMD.json",
+      "file": "external_files/ServiceSocialPost.csv",
+      "type": "CSV",
+      "schema": "external_files/ServiceSocialPost.json"
+    }
+  ],
+  "lenses": [],
+  "dashboards": [
+    {
+      "label": "Social Case Analytics",
+      "name": "SocialCase_Analytics_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/SocialCase_Analytics.json"
+    }
+  ],
+  "eltDataflows": [],
+  "recipes": [],
+  "datasetFiles": [],
+  "storedQueries": [],
+  "imageFiles": [
+    {
+      "name": "SocialLogo10",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/Social_logo.png"
+    }
+  ],
+  "extendedTypes": {},
+  "templateDependencies": [],
+  "icons": {
+    "appBadge": {
+      "name": "16.png"
+    },
+    "templateBadge": {
+      "name": "analytics_icon"
+    },
+    "templatePreviews": [
+      {
+        "name": "einstein_scene",
+        "label": "",
+        "description": ""
+      },
+      {
+        "name": "demo_template_guide_0",
+        "label": "How to Use this Template",
+        "description": "This demo template is decoupled from core objects and does not require any additional licenses (only EA+). To customize the data you will need to download the datasets, modify and update. This template includes full sample data."
+      }
+    ]
+  }
+}
