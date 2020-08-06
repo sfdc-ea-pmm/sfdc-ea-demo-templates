@@ -1,0 +1,97 @@
+{
+  "templateType": "app",
+  "label": "Tour | Patient Risk Stratification",
+  "name": "EAPMM_Patient_Risk_Stratification",
+  "description": "Harbor Tour version of Patient Risk Stratification.",
+  "customAttributes": [
+    {
+      "label": "Author(s)",
+      "values": ["EA PMM"]
+    },
+    {
+      "label": "Demo Version",
+      "values": ["v2020.32"]
+    },
+    {
+      "label": "Source Version",
+      "values": ["v226"]
+    }
+  ],
+  "tags": ["Harbor Tour", "Demo", "Health", "Patient"],
+  "assetVersion": 49.0,
+  "variableDefinition": "variables.json",
+  "uiDefinition": "ui.json",
+  "rules": [
+    {
+      "type": "templateToApp",
+      "file": "template-to-app-rules.json"
+    },
+    {
+      "type": "appToTemplate",
+      "file": "app-to-template-rules.json"
+    }
+  ],
+  "releaseInfo": {
+    "templateVersion": "1.0",
+    "notesFile": "releaseNotes.html"
+  },
+  "folderDefinition": "folder.json",
+  "externalFiles": [
+    {
+      "label": "HealthCloud_RiskStratification",
+      "name": "HealthCloud_RiskStratification_tp",
+      "condition": "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd": "external_files/HealthCloud_RiskStratification_XMD.json",
+      "file": "external_files/HealthCloud_RiskStratification.csv",
+      "type": "CSV",
+      "schema": "external_files/HealthCloud_RiskStratification.json"
+    }
+  ],
+  "lenses": [],
+  "dashboards": [
+    {
+      "label": "Patient Care Risk Stratification",
+      "name": "HealthCloud_Analytics_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/HealthCloud_Analytics.json"
+    }
+  ],
+  "eltDataflows": [],
+  "recipes": [],
+  "datasetFiles": [],
+  "storedQueries": [],
+  "imageFiles": [
+    {
+      "name": "health_logo",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/health_logo.png"
+    },
+    {
+      "name": "tile_bgp",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/tile_bg.png"
+    }
+  ],
+  "extendedTypes": {},
+  "templateDependencies": [],
+  "icons": {
+    "appBadge": {
+      "name": "16.png"
+    },
+    "templateBadge": {
+      "name": "analytics_icon"
+    },
+    "templatePreviews": [
+      {
+        "name": "einstein_scene",
+        "label": "",
+        "description": ""
+      },
+      {
+        "name": "demo_template_guide_0",
+        "label": "How to Use this Template",
+        "description": "This demo template is decoupled from core objects and does not require any additional licenses (only EA+). To customize the data you will need to download the datasets, modify and update. This template includes full sample data."
+      }
+    ]
+  }
+}
