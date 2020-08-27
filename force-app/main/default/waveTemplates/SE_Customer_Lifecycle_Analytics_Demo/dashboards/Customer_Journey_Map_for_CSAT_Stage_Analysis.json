@@ -568,7 +568,7 @@
                 "column" : 0,
                 "name" : "container_5",
                 "row" : 158,
-                "rowspan" : 29,
+                "rowspan" : 28,
                 "widgetStyle" : {
                   "backgroundColor" : "#E6ECF2",
                   "borderColor" : "#C6D3E1",
@@ -864,7 +864,7 @@
               {
                 "colspan" : 3,
                 "column" : 1,
-                "name" : "image_3",
+                "name" : "image_2",
                 "row" : 1,
                 "rowspan" : 6,
                 "widgetStyle" : {
@@ -919,21 +919,6 @@
                 "widgetStyle" : {
                   "backgroundColor" : "rgba(255, 255, 255, 0)",
                   "borderEdges" : [ ]
-                }
-              },
-              {
-                "colspan" : 3,
-                "column" : 0,
-                "name" : "image_1",
-                "row" : 1,
-                "rowspan" : 5,
-                "widgetStyle" : {
-                  "backgroundColor" : "rgba(255, 255, 255, 0)",
-                  "borderColor" : "#FFFFFF",
-                  "borderEdges" : [
-                    "all"
-                  ],
-                  "borderWidth" : 4
                 }
               },
               {
@@ -2153,60 +2138,6 @@
             "applyConditionalFormatting" : true
           },
           "type" : "chart"
-        }
-      },
-      "Date_Parser_1" : {
-        "broadcastFacet" : true,
-        "groups" : [ ],
-        "label" : "Date Parser",
-        "numbers" : [
-          "Min",
-          "Max",
-          "Compare Min",
-          "Compare Max"
-        ],
-        "query" : "q = load \"${App.Datasets.SurveyQuestionResponsewithDetails.FullyQualifiedName}\";\nq = group q by all;\nq = foreach q generate toDate(date_to_epoch(now()) - (date_to_epoch(now())- (86400 * floor(date_to_epoch(now())/86400)))) as 'First Second', case when \"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\" matches \"year\" then toDate( ( number_to_string(string_to_number(toString (now(), \"yyyy\")) + string_to_number(substr(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\", index_of(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\", \"year\")+5 )),\"#\")+\"-01-01\"), \"yyyy-MM-dd\") when \"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\" matches \"quarter\" then toDate(date_to_epoch(quarter_last_day(toDate(date_to_epoch(quarter_last_day(now())) - 1036800 + ((string_to_number(substr(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\", index_of(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\", \"quarter\")+8 ))-1) * 7948800)))) + 86400) when \"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\" matches \"month\" then toDate(date_to_epoch(month_last_day(toDate(date_to_epoch(month_last_day(now())) - 1036800 + ((string_to_number(substr(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\", index_of(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\", \"month\")+6 ))-1) * 2678400)))) + 86400) when \"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\" matches \"week\" then toDate(date_to_epoch(week_last_day(toDate(date_to_epoch(week_last_day(now())) + ((string_to_number(substr(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\", index_of(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\", \"week\")+5 ))-1) * 604800)))) + 86400) when \"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\" matches \"day\" then toDate((date_to_epoch(now()) - (date_to_epoch(now())- (86400 * floor(date_to_epoch(now())/86400)))) + (string_to_number(substr(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\", index_of(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\", \"day\")+4 )) * 86400)) when !(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\" matches \"All\") then toDate(string_to_number(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"min\"),\"All\").asObject()}}\")/1000) else toDate(1) end as 'Min', case when \"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\" matches \"year\" then  year_last_day(toDate( ( number_to_string(string_to_number(toString (now(), \"yyyy\")) + string_to_number(substr(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\", index_of(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\", \"year\")+5 )),\"#\")+\"-01-01\"), \"yyyy-MM-dd\")) when \"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\" matches \"quarter\" then quarter_last_day(toDate(date_to_epoch(quarter_last_day(toDate(date_to_epoch(quarter_last_day(now())) - 1036800 + ((string_to_number(substr(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\", index_of(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\", \"quarter\")+8 ))-1) * 7948800)))) + 86400)) when \"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\" matches \"month\" then month_last_day(toDate(date_to_epoch(month_last_day(toDate(date_to_epoch(month_last_day(now())) - 1036800 + ((string_to_number(substr(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\", index_of(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\", \"month\")+6 ))-1) * 2678400)))) + 86400)) when \"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\" matches \"week\" then week_last_day(toDate(date_to_epoch(week_last_day(toDate(date_to_epoch(week_last_day(now())) + ((string_to_number(substr(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\", index_of(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\", \"week\")+5 ))-1) * 604800)))) + 86400)) when \"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\" matches \"day\" then toDate((date_to_epoch(now()) - (date_to_epoch(now())- (86400 * floor(date_to_epoch(now())/86400)))) + (string_to_number(substr(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\", index_of(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\", \"day\")+4 )) * 86400)) when !(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\" matches \"All\") then toDate(string_to_number(\"{{coalesce(cell(Response_date_filter_1.selection,0,\"max\"),\"All\").asObject()}}\")/1000) else toDate(5707696000) end as 'Max'; q = foreach q generate 'First Second' as 'First Second', 'Min' as 'Min Date', 'Max' as 'Max Date', date_to_epoch('Min')*1000 as 'Min', (date_to_epoch('Max')+86399)*1000 as 'Max', (date_to_epoch('Min')-((date_to_epoch('Max')+86399)-date_to_epoch('Min')))*1000 as 'Compare Min', ((date_to_epoch('Max')+86399)-((date_to_epoch('Max')+86399)-date_to_epoch('Min')))*1000 as 'Compare Max';",
-        "receiveFacetSource" : {
-          "mode" : "all",
-          "steps" : [ ]
-        },
-        "selectMode" : "single",
-        "strings" : [
-          "First Second",
-          "Min Date",
-          "Max Date"
-        ],
-        "type" : "saql",
-        "useGlobal" : true,
-        "visualizationParameters" : {
-          "parameters" : {
-            "borderColor" : "#e0e5ee",
-            "borderWidth" : 1,
-            "cell" : {
-              "backgroundColor" : "#ffffff",
-              "fontColor" : "#16325c",
-              "fontSize" : 12
-            },
-            "columnProperties" : { },
-            "columns" : [ ],
-            "customBulkActions" : [ ],
-            "header" : {
-              "backgroundColor" : "#f4f6f9",
-              "fontColor" : "#16325c",
-              "fontSize" : 12
-            },
-            "innerMajorBorderColor" : "#a8b7c7",
-            "innerMinorBorderColor" : "#e0e5ee",
-            "maxColumnWidth" : 300,
-            "minColumnWidth" : 40,
-            "mode" : "variable",
-            "numberOfLines" : 1,
-            "showActionMenu" : true,
-            "showRowIndexColumn" : true,
-            "totals" : true,
-            "verticalPadding" : 8
-          },
-          "type" : "table"
         }
       },
       "Stages_Filter_1" : {
@@ -4902,25 +4833,13 @@
         },
         "type" : "number"
       },
-      "image_1" : {
+      "image_2" : {
         "parameters" : {
-          "alignmentX" : "center",
-          "alignmentY" : "center",
+          "alignmentX" : "left",
+          "alignmentY" : "top",
           "fit" : "fitheight",
           "image" : {
-            "name" : "${App.Images['surveyslciconjpg1898jpg14jpg'].Name}",
-            "namespace" : "${Org.Namespace}"
-          }
-        },
-        "type" : "image"
-      },
-      "image_3" : {
-        "parameters" : {
-          "alignmentX" : "center",
-          "alignmentY" : "center",
-          "fit" : "fitheight",
-          "image" : {
-            "name" : "${App.Images['surveyslciconjpg1898jpg14jpg1'].Name}",
+            "name" : "${App.Images['surveyslconjpg1'].Name}",
             "namespace" : "${Org.Namespace}"
           }
         },
