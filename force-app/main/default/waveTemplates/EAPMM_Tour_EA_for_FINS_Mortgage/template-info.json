@@ -1,0 +1,105 @@
+{
+  "templateType" : "app",
+  "label" : "Tour | EA for Mortgage",
+  "name" : "EAPMM_Tour_EA_for_FINS_Mortgage",
+  "description": "Harbor Tour version of EA for FINS: Mortgage",
+  "customAttributes": [
+    {
+      "label": "Author(s)",
+      "values": [
+        "EA PMM"
+      ]
+    },
+    {
+      "label": "Demo Version",
+      "values": ["v2020.38"]
+    },
+    {
+      "label": "Source Version",
+      "values": ["v228"]
+    }
+  ],
+  "tags": ["Harbor Tour", "Demo", "Mortgage", "Featured"],
+  "assetVersion" : 49.0,
+  "variableDefinition" : "variables.json",
+  "uiDefinition" : "ui.json",
+  "rules" : [
+    {
+      "type" : "templateToApp",
+      "file" : "template-to-app-rules.json"
+    },
+    {
+      "type" : "appToTemplate",
+      "file" : "app-to-template-rules.json"
+    }
+  ],
+  "releaseInfo" : {
+    "templateVersion" : "1.0",
+    "notesFile" : "releaseNotes.html"
+  },
+  "folderDefinition" : "folder.json",
+  "externalFiles" : [
+    {
+      "label" : "Mortgage_Leads",
+      "name" : "Mortgage_Leads",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/Mortgage_Leads.csv",
+      "type" : "CSV",
+      "schema" : "external_files/Mortgage_Leads.json",
+      "userXmd" : "external_files/Mortgage_Leads_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "FSC_Mortgage_ResidentialLoanApplication",
+      "name" : "FSC_Mortgage_ResidentialLoanApplication7_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd" : "external_files/FSC_Mortgage_ResidentialLoanApplication7_XMD.json",
+      "file" : "external_files/FSC_Mortgage_ResidentialLoanApplication7.csv",
+      "type" : "CSV",
+      "schema" : "external_files/FSC_Mortgage_ResidentialLoanApplication7.json",
+      "rows" : 5
+    }
+  ],
+  "lenses" : [ ],
+  "dashboards" : [
+    {
+      "label" : "Loan Application Overview",
+      "name" : "Loan_Application_Overview_1v3_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Loan_Application_Overview_1v3.json"
+    },
+    {
+      "label" : "Manager Overview",
+      "name" : "Manager_Overview_1v3_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Manager_Overview_1v3.json"
+    }
+  ],
+  "eltDataflows" : [ ],
+  "recipes" : [ ],
+  "datasetFiles" : [ ],
+  "storedQueries" : [ ],
+  "imageFiles" : [ ],
+  "extendedTypes" : { },
+  "templateDependencies" : [ ],
+  "icons": {
+    "appBadge": {
+      "name": "16.png"
+    },
+    "templateBadge": {
+      "name": "analytics_icon"
+    },
+    "templatePreviews": [
+      {
+        "name": "einstein_scene",
+        "label": "",
+      "description": ""
+    },
+    {
+      "name": "demo_template_guide_0",
+      "label": "How to Use this Template",
+        "description": "This demo template is decoupled from core objects and does not require any additional licenses (only EA+). To customize the data you will need to download the datasets, modify and update. This template includes full sample data."
+      }
+    ]
+  }
+}
