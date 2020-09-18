@@ -80,7 +80,7 @@
         "conditionalFormatting" : { },
         "defaultAction" : "openSfdcRecord",
         "salesforceActions" : [ ],
-        "field" : "Details_Table.User.Name",
+        "field" : "Details_Table.User_Name",
         "members" : [ ],
         "customActions" : [ ]
       },
@@ -98,7 +98,7 @@
         "conditionalFormatting" : { },
         "defaultAction" : "openSfdcRecord",
         "salesforceActions" : [ ],
-        "field" : "Details_Table.Account.Name",
+        "field" : "Details_Table.Account_Name",
         "members" : [ ],
         "customActions" : [ ]
       },
@@ -162,13 +162,13 @@
             "dataSourceName" : "${App.Datasets.opportunity_snapshot6.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
-            "fieldName" : "User.UniqueUserName"
+            "fieldName" : "User_UniqueUserName"
           },
           {
             "dataSourceName" : "${App.Datasets.forecastingquota6_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
-            "fieldName" : "Quota.UniqueUserName"
+            "fieldName" : "Quota_UniqueUserName"
           }
         ],
         "label" : "Owner Name",
@@ -205,7 +205,7 @@
         },
         "dependent" : true,
         "fields" : [
-          "User.UniqueUserName"
+          "User_UniqueUserName"
         ],
         "label" : "Owner Name",
         "locked" : false,
@@ -4083,14 +4083,14 @@
       "Team_Performance_Current_User" : {
         "broadcastFacet" : false,
         "groups" : [
-          "User.UniqueUserName"
+          "User_UniqueUserName"
         ],
         "numbers" : [
           "sum_Amount",
           "sum_QuotaAmount",
           "sum_quota_attainment"
         ],
-        "query" : "q1 = load \"${App.Datasets.opportunity_snapshot6.FullyQualifiedName}\";\nq2 = load \"${App.Datasets.forecastingquota6_tp.FullyQualifiedName}\";\nq1 = filter q1 by {{cell(Current_User.result, 0, \"User.Name\").asEquality('User.Name')}};\nq1 = filter q1 by {{column(static_1.selection, [\"Display\"]).asEquality(\"ForecastCategoryName\")}};\nq = cogroup q1 by 'User.UniqueUserName' left, q2 by 'Quota.UniqueUserName';\nq = foreach q generate coalesce(q1.'User.UniqueUserName', q2.'Quota.UniqueUserName') as 'User.UniqueUserName', first(q1.'User.SmallPhotoUrl') as 'Photo', sum(q1.'Amount') as 'sum_Amount', sum(q2.'QuotaAmount') as 'sum_QuotaAmount', sum(q1.'Amount')/sum(q2.'QuotaAmount')*100 as 'sum_quota_attainment';\nq = order q by 'User.UniqueUserName' asc;",
+        "query" : "q1 = load \"${App.Datasets.opportunity_snapshot6.FullyQualifiedName}\";\nq2 = load \"${App.Datasets.forecastingquota6_tp.FullyQualifiedName}\";\nq1 = filter q1 by {{cell(Current_User.result, 0, \"User_Name\").asEquality('User_Name')}};\nq1 = filter q1 by {{column(static_1.selection, [\"Display\"]).asEquality(\"ForecastCategoryName\")}};\nq = cogroup q1 by 'User_UniqueUserName' left, q2 by 'Quota_UniqueUserName';\nq = foreach q generate coalesce(q1.'User_UniqueUserName', q2.'Quota_UniqueUserName') as 'User_UniqueUserName', first(q1.'User_SmallPhotoUrl') as 'Photo', sum(q1.'Amount') as 'sum_Amount', sum(q2.'QuotaAmount') as 'sum_QuotaAmount', sum(q1.'Amount')/sum(q2.'QuotaAmount')*100 as 'sum_quota_attainment';\nq = order q by 'User_UniqueUserName' asc;",
         "receiveFacetSource" : {
           "mode" : "exclude",
           "steps" : [
@@ -4100,7 +4100,7 @@
         "selectMode" : "none",
         "start" : [ ],
         "strings" : [
-          "User.UniqueUserName",
+          "User_UniqueUserName",
           "Photo"
         ],
         "type" : "saql",
@@ -4171,7 +4171,7 @@
             "columnMap" : {
               "trellis" : [ ],
               "dimensionAxis" : [
-                "User.UniqueUserName"
+                "User_UniqueUserName"
               ],
               "plots" : [
                 "sum_quota_attainment"
@@ -4231,14 +4231,14 @@
       "Team_Performance_Current_User_Pic" : {
         "broadcastFacet" : false,
         "groups" : [
-          "User.UniqueUserName"
+          "User_UniqueUserName"
         ],
         "numbers" : [
           "sum_Amount",
           "sum_QuotaAmount",
           "sum_quota_attainment"
         ],
-        "query" : "q1 = load \"${App.Datasets.opportunity_snapshot6.FullyQualifiedName}\";\nq2 = load \"${App.Datasets.forecastingquota6_tp.FullyQualifiedName}\";\nq1 = filter q1 by {{cell(Current_User.result, 0, \"User.Name\").asEquality('User.Name')}};\nq = cogroup q1 by 'User.UniqueUserName' left, q2 by 'Quota.UniqueUserName';\nq = foreach q generate coalesce(q1.'User.UniqueUserName', q2.'Quota.UniqueUserName') as 'User.UniqueUserName', first(q1.'User.SmallPhotoUrl') as 'Photo', sum(q1.'Amount') as 'sum_Amount', sum(q2.'QuotaAmount') as 'sum_QuotaAmount', sum(q1.'Amount')/sum(q2.'QuotaAmount') as 'sum_quota_attainment';\nq = order q by 'User.UniqueUserName' asc;",
+        "query" : "q1 = load \"${App.Datasets.opportunity_snapshot6.FullyQualifiedName}\";\nq2 = load \"${App.Datasets.forecastingquota6_tp.FullyQualifiedName}\";\nq1 = filter q1 by {{cell(Current_User.result, 0, \"User_Name\").asEquality('User_Name')}};\nq = cogroup q1 by 'User_UniqueUserName' left, q2 by 'Quota_UniqueUserName';\nq = foreach q generate coalesce(q1.'User_UniqueUserName', q2.'Quota_UniqueUserName') as 'User_UniqueUserName', first(q1.'User_SmallPhotoUrl') as 'Photo', sum(q1.'Amount') as 'sum_Amount', sum(q2.'QuotaAmount') as 'sum_QuotaAmount', sum(q1.'Amount')/sum(q2.'QuotaAmount') as 'sum_quota_attainment';\nq = order q by 'User_UniqueUserName' asc;",
         "receiveFacetSource" : {
           "mode" : "include",
           "steps" : [
@@ -4248,7 +4248,7 @@
         "selectMode" : "none",
         "start" : [ ],
         "strings" : [
-          "User.UniqueUserName",
+          "User_UniqueUserName",
           "Photo"
         ],
         "type" : "saql",
@@ -4617,8 +4617,8 @@
           "query" : {
             "values" : [
               "Name",
-              "User.Name",
-              "Account.Name",
+              "User_Name",
+              "Account_Name",
               "ForecastCategoryName",
               "CloseDate",
               "Amount"
@@ -4652,7 +4652,7 @@
               "fontSize" : 12
             },
             "columnProperties" : {
-              "User.Name" : {
+              "User_Name" : {
                 "parameters" : {
                   "alignment" : "left",
                   "styles" : {
@@ -4661,7 +4661,7 @@
                 },
                 "type" : "text"
               },
-              "Account.Name" : {
+              "Account_Name" : {
                 "parameters" : {
                   "alignment" : "left",
                   "styles" : {
@@ -5070,7 +5070,7 @@
               ]
             ],
             "groups" : [
-              "User.Role.Name"
+              "User_Role_Name"
             ]
           },
           "version" : -1.0
@@ -5151,7 +5151,7 @@
             "columnMap" : {
               "trellis" : [ ],
               "dimensionAxis" : [
-                "User.Role.Name"
+                "User_Role_Name"
               ],
               "plots" : [
                 "count"
@@ -5848,7 +5848,7 @@
               ]
             ],
             "groups" : [
-              "User.Name"
+              "User_Name"
             ]
           },
           "version" : -1.0
@@ -5929,7 +5929,7 @@
             "columnMap" : {
               "trellis" : [ ],
               "dimensionAxis" : [
-                "User.Name"
+                "User_Name"
               ],
               "plots" : [
                 "count"
@@ -6112,7 +6112,7 @@
       "Team_Performance_Directs" : {
         "broadcastFacet" : true,
         "groups" : [
-          "User.UniqueUserName"
+          "User_UniqueUserName"
         ],
         "numbers" : [
           "sum_Amount",
@@ -6120,7 +6120,7 @@
           "sum_user_prediction",
           "sum_quota_attainment"
         ],
-        "query" : "opp = load \"${App.Datasets.opportunity_snapshot6.FullyQualifiedName}\"; quota = load \"${App.Datasets.forecastingquota6_tp.FullyQualifiedName}\"; opp = filter opp by {{column(static_1.selection, [\"Display\"]).asEquality(\"ForecastCategoryName\")}}; c = group opp by ('CloseDate_Year', 'CloseDate_Week','User.UniqueUserName'); c = foreach c generate 'CloseDate_Year', 'CloseDate_Week', c.'CloseDate_Year' + \"~~~\" + c.'CloseDate_Week' as 'CloseDate_Year~~~CloseDate_Week', 'User.UniqueUserName', sum(c.'Amount') as 'A'; c = group c by ('CloseDate_Year~~~CloseDate_Week', 'User.UniqueUserName'); c = foreach c generate 'CloseDate_Year~~~CloseDate_Week', 'User.UniqueUserName', first(A) as 'A', first('CloseDate_Year') as 'CloseDate_Year', first('CloseDate_Week') as 'CloseDate_Week', sum(sum(A)) over ([..0] partition by 'User.UniqueUserName' order by ('CloseDate_Year~~~CloseDate_Week')) as 'sum_Amount'; c = fill c by (dateCols=('CloseDate_Year','CloseDate_Week', \"Y-W\"), partition='User.UniqueUserName'); c = timeseries c generate 'sum_Amount' as 'estimate' with (partition='User.UniqueUserName',length=12, predictionInterval=95, ignoreLast=true, dateCols=('CloseDate_Year','CloseDate_Week', \"Y-W\")); c = foreach c generate 'CloseDate_Year' + \"~~~\" + 'CloseDate_Week' as 'CloseDate_Year~~~CloseDate_Week', 'User.UniqueUserName', estimate, estimate_high_95, estimate_low_95; c = group c by 'User.UniqueUserName'; c = foreach c generate 'User.UniqueUserName', last('estimate') as 'sum_prediction'; q = cogroup opp by 'User.UniqueUserName' full, quota by 'Quota.UniqueUserName' full, c by 'User.UniqueUserName'; q = foreach q generate coalesce(opp.'User.UniqueUserName', quota.'Quota.UniqueUserName', c.'User.UniqueUserName') as 'User.UniqueUserName', first(opp.'User.SmallPhotoUrl') as 'Photo', sum(opp.'Amount') as 'sum_Amount', sum(quota.'QuotaAmount') as 'sum_QuotaAmount', sum(opp.'Amount')/sum(quota.'QuotaAmount')*100 as 'sum_quota_attainment', sum(c.'sum_prediction')/sum(quota.'QuotaAmount')*100 as 'sum_user_prediction'; q = order q by 'sum_user_prediction' desc nulls last;",
+        "query" : "opp = load \"${App.Datasets.opportunity_snapshot6.FullyQualifiedName}\"; quota = load \"${App.Datasets.forecastingquota6_tp.FullyQualifiedName}\"; opp = filter opp by {{column(static_1.selection, [\"Display\"]).asEquality(\"ForecastCategoryName\")}}; c = group opp by ('CloseDate_Year', 'CloseDate_Week','User_UniqueUserName'); c = foreach c generate 'CloseDate_Year', 'CloseDate_Week', c.'CloseDate_Year' + \"~~~\" + c.'CloseDate_Week' as 'CloseDate_Year~~~CloseDate_Week', 'User_UniqueUserName', sum(c.'Amount') as 'A'; c = group c by ('CloseDate_Year~~~CloseDate_Week', 'User_UniqueUserName'); c = foreach c generate 'CloseDate_Year~~~CloseDate_Week', 'User_UniqueUserName', first(A) as 'A', first('CloseDate_Year') as 'CloseDate_Year', first('CloseDate_Week') as 'CloseDate_Week', sum(sum(A)) over ([..0] partition by 'User_UniqueUserName' order by ('CloseDate_Year~~~CloseDate_Week')) as 'sum_Amount'; c = fill c by (dateCols=('CloseDate_Year','CloseDate_Week', \"Y-W\"), partition='User_UniqueUserName'); c = timeseries c generate 'sum_Amount' as 'estimate' with (partition='User_UniqueUserName',length=12, predictionInterval=95, ignoreLast=true, dateCols=('CloseDate_Year','CloseDate_Week', \"Y-W\")); c = foreach c generate 'CloseDate_Year' + \"~~~\" + 'CloseDate_Week' as 'CloseDate_Year~~~CloseDate_Week', 'User_UniqueUserName', estimate, estimate_high_95, estimate_low_95; c = group c by 'User_UniqueUserName'; c = foreach c generate 'User_UniqueUserName', last('estimate') as 'sum_prediction'; q = cogroup opp by 'User_UniqueUserName' full, quota by 'Quota_UniqueUserName' full, c by 'User_UniqueUserName'; q = foreach q generate coalesce(opp.'User_UniqueUserName', quota.'Quota_UniqueUserName', c.'User_UniqueUserName') as 'User_UniqueUserName', first(opp.'User_SmallPhotoUrl') as 'Photo', sum(opp.'Amount') as 'sum_Amount', sum(quota.'QuotaAmount') as 'sum_QuotaAmount', sum(opp.'Amount')/sum(quota.'QuotaAmount')*100 as 'sum_quota_attainment', sum(c.'sum_prediction')/sum(quota.'QuotaAmount')*100 as 'sum_user_prediction'; q = order q by 'sum_user_prediction' desc nulls last;",
         "receiveFacetSource" : {
           "mode" : "exclude",
           "steps" : [
@@ -6130,7 +6130,7 @@
         "selectMode" : "single",
         "start" : [ ],
         "strings" : [
-          "User.UniqueUserName",
+          "User_UniqueUserName",
           "Photo"
         ],
         "type" : "saql",
@@ -6201,7 +6201,7 @@
             "columnMap" : {
               "trellis" : [ ],
               "dimensionAxis" : [
-                "User.UniqueUserName"
+                "User_UniqueUserName"
               ],
               "plots" : [
                 "sum_quota_attainment"
@@ -6719,7 +6719,7 @@
           "columnMap" : {
             "trellis" : [ ],
             "dimensionAxis" : [
-              "User.UniqueUserName"
+              "User_UniqueUserName"
             ],
             "plots" : [
               "sum_quota_attainment"
@@ -6791,7 +6791,7 @@
             "displayTemplate" : "[User_Name]",
             "values" : {
               "User_Name" : {
-                "field" : "User.Name",
+                "field" : "User_Name",
                 "sourceType" : "result",
                 "step" : "Current_User"
               }
@@ -6902,7 +6902,7 @@
           "columnMap" : {
             "trellis" : [ ],
             "dimensionAxis" : [
-              "User.UniqueUserName"
+              "User_UniqueUserName"
             ],
             "plots" : [
               "sum_user_prediction",
@@ -7163,7 +7163,7 @@
             "displayTemplate" : "Welcome, [User_Name]",
             "values" : {
               "User_Name" : {
-                "field" : "User.Name",
+                "field" : "User_Name",
                 "sourceType" : "result",
                 "step" : "Current_User"
               }
@@ -8117,7 +8117,7 @@
           "columnMap" : {
             "trellis" : [ ],
             "dimensionAxis" : [
-              "User.UniqueUserName"
+              "User_UniqueUserName"
             ],
             "plots" : [
               "sum_quota_attainment"
@@ -8223,7 +8223,7 @@
           },
           "columnMap" : {
             "trellis" : [
-              "User.UniqueUserName"
+              "User_UniqueUserName"
             ],
             "plots" : [
               "sum_quota_attainment"
@@ -8808,7 +8808,7 @@
             "displayTemplate" : "[User_Role_Name]",
             "values" : {
               "User_Role_Name" : {
-                "field" : "User.Role.Name",
+                "field" : "User_Role_Name",
                 "sourceType" : "result",
                 "step" : "Current_Role"
               }
@@ -8855,7 +8855,7 @@
             "fontSize" : 12
           },
           "columnProperties" : {
-            "User.Name" : {
+            "User_Name" : {
               "parameters" : {
                 "alignment" : "left",
                 "styles" : {
@@ -8864,7 +8864,7 @@
               },
               "type" : "text"
             },
-            "Account.Name" : {
+            "Account_Name" : {
               "parameters" : {
                 "alignment" : "left",
                 "styles" : {
