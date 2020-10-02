@@ -1,0 +1,259 @@
+{
+  "isDeletable": true,
+  "notificationLevel": "Never",
+  "workflowDefinition": {
+    "Compute_RemoveDataFlag_Forecast": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Edgemart_Snapshot_Forecast",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "RemoveDataFlag",
+          "saqlExpression": "case when 'SnapshotTextDate' == date_to_string(now(),\"yyyy-MM-dd\") || 'SnapshotTextDate' == \"1900-01-01\" then \"true\" else \"false\" end",
+          "label": "RemoveDataFlag",
+          "type": "Text"
+        }]
+      }
+    },
+    "Filter_Duplicate_Snapshot_Dates_Forecast": {
+      "action": "filter",
+      "parameters": {
+        "filter": "RemoveDataFlag:EQ:false",
+        "source": "Compute_RemoveDataFlag_Forecast"
+      }
+    },
+    "Compute_Additional_Flags_Forecast": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Compute_SnapshotDate_Forecast",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "SnapshotTextDate",
+            "saqlExpression": "toString(toDate('SnapshotDate_sec_epoch'),\"yyyy-MM-dd\")",
+            "label": "Snapshot Text Date",
+            "type": "Text"
+          },
+          {
+            "name": "CustomSnapshotFilter",
+            "saqlExpression": "\"true\"",
+            "label": "CustomSnapshotFilter",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "Filter_Source_Data_Opportunity": {
+      "action": "filter",
+      "parameters": {
+        "filter": "CustomSnapshotFilter:EQ:true",
+        "source": "Compute_Additional_Flags_Opportunity"
+      }
+    },
+    "Compute_Additional_Flags_Opportunity": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Compute_SnapshotDate_Opportunity",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "SnapshotTextDate",
+            "saqlExpression": "toString(toDate('SnapshotDate_sec_epoch'),\"yyyy-MM-dd\")",
+            "label": "Snapshot Text Date",
+            "type": "Text"
+          },
+          {
+            "name": "CustomSnapshotFilter",
+            "saqlExpression": "\"true\"",
+            "label": "CustomSnapshotFilter",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "Register_Opportunity_Snapshot": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Opportunity Snapshot",
+        "alias": "${App.Datasets.opportunity_snapshot.FullyQualifiedName}",
+        "source": "Slice_Flag_Fields_Opportunity"
+      }
+    },
+    "Append_Latest_Snapshot_Forecast": {
+      "action": "append",
+      "parameters": {
+        "enableDisjointedSchemaMerge": true,
+        "sources": [
+          "Filter_Source_Data_Forecast",
+          "Filter_Duplicate_Snapshot_Dates_Forecast"
+        ]
+      }
+    },
+    "Compute_SnapshotDate_Opportunity": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Edgemart_Opportunity",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "fiscalMonthOffset": 0,
+          "firstDayOfWeek": 0,
+          "name": "SnapshotDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate(date_to_string(now(),\"yyyy-MM-dd\"),\"yyyy-MM-dd\")",
+          "label": "Snapshot Date",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Filter_Source_Data_Forecast": {
+      "action": "filter",
+      "parameters": {
+        "filter": "CustomSnapshotFilter:EQ:true",
+        "source": "Compute_Additional_Flags_Forecast"
+      }
+    },
+    "Edgemart_Snapshot_Opportunity": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.opportunity_snapshot.FullyQualifiedName}"}
+    },
+    "Edgemart_Snapshot_Forecast": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.forecast_snapshot.FullyQualifiedName}"}
+    },
+    "Register_Forecast_Snapshot": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Forecast Snapshot",
+        "alias": "${App.Datasets.forecast_snapshot.FullyQualifiedName}",
+        "source": "Slice_Flag_Fields_Forecast"
+      }
+    },
+    "Compute_Snapshot_Filter_Forecast": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Append_Latest_Snapshot_Forecast",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "SnapshotFilter",
+          "saqlExpression": "case when date_diff(\"day\", toDate(SnapshotDate_sec_epoch), now()) > 732 then \"false\" else \"true\" end",
+          "label": "SnapshotFilter",
+          "type": "Text"
+        }]
+      }
+    },
+    "Filter_Duplicate_Snapshot_Dates_Opportunity": {
+      "action": "filter",
+      "parameters": {
+        "filter": "RemoveDataFlag:EQ:false",
+        "source": "Compute_RemoveDataFlag_Opportunity"
+      }
+    },
+    "Edgemart_Forecast": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.forecast.FullyQualifiedName}"}
+    },
+    "Edgemart_Opportunity": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.opportunity.FullyQualifiedName}"}
+    },
+    "Compute_RemoveDataFlag_Opportunity": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Edgemart_Snapshot_Opportunity",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "RemoveDataFlag",
+          "saqlExpression": "case when 'SnapshotTextDate' == date_to_string(now(),\"yyyy-MM-dd\") || 'SnapshotTextDate' == \"1900-01-01\" then \"true\" else \"false\" end",
+          "label": "RemoveDataFlag",
+          "type": "Text"
+        }]
+      }
+    },
+    "Filter_Snapshot_Data_Opportunity": {
+      "action": "filter",
+      "parameters": {
+        "filter": "SnapshotFilter:EQ:true",
+        "source": "Compute_Snapshot_Filter_Opportunity"
+      }
+    },
+    "Slice_Flag_Fields_Forecast": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Filter_Snapshot_Data_Forecast",
+        "fields": [
+          {"name": "RemoveDataFlag"},
+          {"name": "SnapshotFilter"}
+        ]
+      }
+    },
+    "Slice_Flag_Fields_Opportunity": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Filter_Snapshot_Data_Opportunity",
+        "fields": [
+          {"name": "RemoveDataFlag"},
+          {"name": "SnapshotFilter"}
+        ]
+      }
+    },
+    "Compute_SnapshotDate_Forecast": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Edgemart_Forecast",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "fiscalMonthOffset": 0,
+          "firstDayOfWeek": 0,
+          "name": "SnapshotDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate(date_to_string(now(),\"yyyy-MM-dd\"),\"yyyy-MM-dd\")",
+          "label": "Snapshot Date",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Append_Latest_Snapshot_Opportunity": {
+      "action": "append",
+      "parameters": {
+        "enableDisjointedSchemaMerge": true,
+        "sources": [
+          "Filter_Source_Data_Opportunity",
+          "Filter_Duplicate_Snapshot_Dates_Opportunity"
+        ]
+      }
+    },
+    "Compute_Snapshot_Filter_Opportunity": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Append_Latest_Snapshot_Opportunity",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "SnapshotFilter",
+          "saqlExpression": "case when date_diff(\"day\", toDate(SnapshotDate_sec_epoch), now()) > 732 then \"false\" else \"true\" end",
+          "label": "SnapshotFilter",
+          "type": "Text"
+        }]
+      }
+    },
+    "Filter_Snapshot_Data_Forecast": {
+      "action": "filter",
+      "parameters": {
+        "filter": "SnapshotFilter:EQ:true",
+        "source": "Compute_Snapshot_Filter_Forecast"
+      }
+    }
+  },
+  "DataflowType": "USER",
+  "_type": "dataflow",
+  "name": "Demo_Revenue_Operations_std_Snapshots",
+  "description": "Dataflow for Revenue Operations standard snapshots.",
+  "MasterLabel": "Demo | Revenue Operations std Snapshots",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": "",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive"
+}

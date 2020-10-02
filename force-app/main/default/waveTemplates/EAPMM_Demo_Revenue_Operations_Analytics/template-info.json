@@ -1,0 +1,124 @@
+{
+  "templateType" : "app",
+  "label" : "EAPMM Demo Revenue Operations Analytics",
+  "name" : "EAPMM_Demo_Revenue_Operations_Analytics",
+  "description" : "Demo version of EA for Revenue Operations",
+  "customAttributes": [
+    {
+      "label": "Author(s)",
+      "values": [
+        "EA PMM"
+      ]
+    },
+    {
+      "label": "Demo Version",
+      "values": ["v2020.40"]
+    },
+    {
+      "label": "Source Version",
+      "values": ["v228"]
+    }
+  ],
+  "tags": ["Demo", "Sales", "Revenue Operations", "Featured"],
+  "assetVersion" : 50.0,
+  "variableDefinition" : "variables.json",
+  "uiDefinition" : "ui.json",
+  "rules" : [
+    {
+      "type" : "templateToApp",
+      "file" : "template-to-app-rules.json"
+    },
+    {
+      "type" : "appToTemplate",
+      "file" : "app-to-template-rules.json"
+    }
+  ],
+  "releaseInfo" : {
+    "templateVersion" : "1.0",
+    "notesFile" : "releaseNotes.html"
+  },
+  "folderDefinition" : "folder.json",
+  "externalFiles" : [
+    {
+      "label" : "forecast_snapshot",
+      "name" : "forecast_snapshot",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/forecast_snapshot.csv",
+      "type" : "CSV",
+      "schema" : "external_files/forecast_snapshot.json",
+      "userXmd" : "external_files/forecast_snapshot_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "opportunity_snapshot",
+      "name" : "opportunity_snapshot",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/opportunity_snapshot.csv",
+      "type" : "CSV",
+      "schema" : "external_files/opportunity_snapshot.json",
+      "userXmd" : "external_files/opportunity_snapshot_XMD.json",
+      "rows" : 5
+    }
+  ],
+  "lenses" : [ ],
+  "dashboards" : [
+    {
+      "label" : "Revenue Forecasting",
+      "name" : "Revenue_Forecasting_w_closer_Prediction_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Revenue_Forecasting_w_closer_Prediction.json"
+    }
+  ],
+  "eltDataflows" : [
+    {
+      "label" : "Demo | Revenue Operations - Generate Snapshots",
+      "name" : "Demo_Revenue_Operations_Generate_Snapshots",
+      "condition" : "${Variables.Overrides.createDataflow}",
+      "file" : "dataflow/Revenue_Operations_Generate_Snapshots.json"
+    },
+    {
+      "label" : "Demo | Revenue Operations std Snapshots",
+      "name" : "Demo_Revenue_Operations_std_Snapshots",
+      "condition" : "${Variables.Overrides.createDataflow}",
+      "file" : "dataflow/Revenue_Operations_std_Snapshots.json"
+    },
+    {
+      "label" : "Demo | Revenue Operations",
+      "name" : "Demo_Revenue_Operations",
+      "condition" : "${Variables.Overrides.createDataflow}",
+      "file" : "dataflow/Revenue_Operations.json"
+    }
+  ],
+  "recipes" : [ ],
+  "datasetFiles" : [ ],
+  "storedQueries" : [ ],
+  "imageFiles" : [
+    {
+      "name" : "Coaching4",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/coaching.png"
+    }
+  ],
+  "extendedTypes" : { },
+  "templateDependencies" : [ ],
+  "icons": {
+    "appBadge": {
+      "name": "16.png"
+    },
+    "templateBadge": {
+      "name": "analytics_icon"
+    },
+    "templatePreviews": [
+      {
+        "name": "einstein_scene",
+        "label": "",
+        "description": ""
+      },
+      {
+        "name": "demo_template_guide_0",
+        "label": "How to Use this Template",
+        "description": "This demo template is decoupled from core objects and does not require any additional licenses (only EA+). To customize the data you will need to download the datasets, modify and update. This template includes limited sample data, for more data download the CSVs and schema files from here (https://ac-sdo-repo.s3-us-west-2.amazonaws.com/demo-template-csv/EAPMM_Demo_Revenue_Operations_Analytics.zip) and update the corresponding datasets after app creation."
+      }
+    ]
+  }
+}

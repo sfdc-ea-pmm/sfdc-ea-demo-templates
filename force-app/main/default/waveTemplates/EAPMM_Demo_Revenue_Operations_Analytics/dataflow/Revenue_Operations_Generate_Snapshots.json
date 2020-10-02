@@ -1,0 +1,214 @@
+{
+  "isDeletable": true,
+  "notificationLevel": "Never",
+  "workflowDefinition": {
+    "set_5th_month_amount": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "set_4th_month_amount",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "precision": 16,
+          "name": "AmountAux5",
+          "saqlExpression": "case 'User.UniqueUserName'\n\twhen \"Alicia Harrison\" then 'AmountAux4' * 1.3\n\twhen \"Alyssa Williams\" then 'AmountAux4' * 0.96\n\twhen \"Noah Kelly\" then 'AmountAux4' * 1.40\n\twhen \"Rachel Reilly\" then 'AmountAux4' * 1.12\n\twhen \"Sheri Nunez\" then 'AmountAux4' * 0.99\n\twhen \"Amy Shaw\" then 'AmountAux4' * 0.98\n\twhen \"Ann Jones\" then 'AmountAux4' * 0.99\n\telse 'AmountAux4' * 1.01\nend",
+          "scale": 2,
+          "label": "AmountAux5",
+          "type": "Numeric"
+        }]
+      }
+    },
+    "Drop_Renamed": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Rename_Amount",
+        "fields": [{"name": "AmountRenamed"}]
+      }
+    },
+    "Register_Opportunity_Snapshot": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Opportunity Snapshot",
+        "alias": "${App.Datasets.opportunity_snapshot.FullyQualifiedName}",
+        "source": "Drop_Renamed"
+      }
+    },
+    "Append_Previous_Snapshots": {
+      "action": "append",
+      "parameters": {
+        "enableDisjointedSchemaMerge": true,
+        "sources": [
+          "set_1st_month_amount",
+          "set_2nd_month_amount",
+          "set_3rd_month_amount",
+          "set_4th_month_amount",
+          "set_5th_month_amount"
+        ]
+      }
+    },
+    "Rename_Amount": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Fields",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "precision": 16,
+          "name": "Amount",
+          "saqlExpression": "'AmountRenamed'",
+          "scale": 2,
+          "label": "Amount",
+          "type": "Numeric"
+        }]
+      }
+    },
+    "set_1st_month_amount": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Edgemart_Opportunity",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "defaultValue": "0",
+          "precision": 16,
+          "name": "AmountAux1",
+          "saqlExpression": "'Amount'",
+          "scale": 2,
+          "label": "AmountAux1",
+          "type": "Numeric"
+        }]
+      }
+    },
+    "FilterOldSnapshots": {
+      "action": "filter",
+      "parameters": {
+        "filter": "SnapshotFilterOld:EQ:true",
+        "source": "Compute_Snapshot_Aux"
+      }
+    },
+    "Compute_SnapshotTextDate": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "FilterOldSnapshots",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "saqlExpression": "toString(toDate('SnapshotDate_sec_epoch'),\"yyyy-MM-dd\")",
+          "name": "SnapshotTextDate",
+          "label": "SnapshotTextDate",
+          "type": "Text"
+        }]
+      }
+    },
+    "Compute_Snaphsot_Date": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Append_Previous_Snapshots",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "fiscalMonthOffset": 0,
+          "firstDayOfWeek": 0,
+          "name": "SnapshotDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "case\n\twhen (AmountAux5 is not null and AmountAux5 != 0) \n\t\tthen toDate(date_to_epoch(now()))\n\t\n\twhen ((AmountAux5 is null or AmountAux5 == 0) and (AmountAux4 is not null and AmountAux4 != 0)) \t\n\t\tthen toDate(date_to_epoch(now()) - 2592000)\n\n\twhen ((AmountAux4 is null or AmountAux4 == 0) and (AmountAux3 is not null and AmountAux3 != 0)) \t\n\t\tthen toDate(date_to_epoch(now()) - 2 * 2592000)\n\n\twhen ((AmountAux3 is null or AmountAux3 == 0) and (AmountAux2 is not null and AmountAux2 != 0)) \t\n\t\tthen toDate(date_to_epoch(now()) - 3 * 2592000)\n\n\twhen ((AmountAux2 is null or AmountAux2 == 0) and (AmountAux1 is not null and AmountAux1 != 0)) \t\n\t\tthen toDate(date_to_epoch(now()) - 4 * 2592000)\nend",
+          "label": "Snapshot Date",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Edgemart_Opportunity": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.opportunity.FullyQualifiedName}"}
+    },
+    "set_2nd_month_amount": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "set_1st_month_amount",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "precision": 16,
+          "saqlExpression": "case 'User.UniqueUserName'\n\twhen \"Alicia Harrison\" then 'AmountAux1' * 0.72\n\twhen \"Alyssa Williams\" then 'AmountAux1' * 1.30\n\twhen \"Noah Kelly\" then 'AmountAux1' * 1.50\n\twhen \"Rachel Reilly\" then 'AmountAux1' * 0.85\n\twhen \"Sheri Nunez\" then 'AmountAux1' * 0.75\n\twhen \"Amy Shaw\" then 'AmountAux1' * 0.60\n\twhen \"Ann Jones\" then 'AmountAux1' * 0.80\n\telse 'AmountAux1' * 1.01\nend",
+          "name": "AmountAux2",
+          "scale": 2,
+          "label": "AmountAux2",
+          "type": "Numeric"
+        }]
+      }
+    },
+    "set_4th_month_amount": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "set_3rd_month_amount",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "precision": 16,
+          "saqlExpression": "case 'User.UniqueUserName'\n\twhen \"Alicia Harrison\" then 'AmountAux3' * 0.96\n\twhen \"Alyssa Williams\" then 'AmountAux3' * 0.93\n\twhen \"Noah Kelly\" then 'AmountAux3' * 1.44\n\twhen \"Rachel Reilly\" then 'AmountAux3' * 1.05\n\twhen \"Sheri Nunez\" then 'AmountAux3' * 0.88\n\twhen \"Amy Shaw\" then 'AmountAux3' * 0.78\n\twhen \"Ann Jones\" then 'AmountAux3' * 0.85\n\telse 'AmountAux3' * 1.01\nend",
+          "name": "AmountAux4",
+          "scale": 2,
+          "label": "AmountAux4",
+          "type": "Numeric"
+        }]
+      }
+    },
+    "set_3rd_month_amount": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "set_2nd_month_amount",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "precision": 16,
+          "name": "AmountAux3",
+          "saqlExpression": "case 'User.UniqueUserName'\n\twhen \"Alicia Harrison\" then 'AmountAux2' * 0.88\n\twhen \"Alyssa Williams\" then 'AmountAux2' * 1.00\n\twhen \"Noah Kelly\" then 'AmountAux2' * 1.46\n\twhen \"Rachel Reilly\" then 'AmountAux2' * 0.9\n\twhen \"Sheri Nunez\" then 'AmountAux2' * 0.75\n\twhen \"Amy Shaw\" then 'AmountAux2' * 0.77\n\twhen \"Ann Jones\" then 'AmountAux2' * 0.9\n\telse 'AmountAux2' * 1.01\nend",
+          "scale": 2,
+          "label": "AmountAux3",
+          "type": "Numeric"
+        }]
+      }
+    },
+    "Drop_Fields": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_SnapshotTextDate",
+        "fields": [
+          {"name": "AmountAux1"},
+          {"name": "AmountAux2"},
+          {"name": "AmountAux3"},
+          {"name": "AmountAux4"},
+          {"name": "AmountAux5"},
+          {"name": "Amount"}
+        ]
+      }
+    },
+    "Compute_Snapshot_Aux": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Compute_Snaphsot_Date",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "saqlExpression": "case when date_diff(\"day\", toDate(SnapshotDate_sec_epoch), now()) > 732 then \"false\" else \"true\" end",
+            "name": "SnapshotFilterOld",
+            "label": "SnapshotFilterOld",
+            "type": "Text"
+          },
+          {
+            "precision": 16,
+            "name": "AmountRenamed",
+            "saqlExpression": "case\n\twhen (AmountAux5 is not null and AmountAux5 != 0) \n\t\tthen 'AmountAux5'\n\t\n\twhen ((AmountAux5 is null or AmountAux5 == 0) and (AmountAux4 is not null and AmountAux4 != 0)) \t\n\t\tthen 'AmountAux4'\n\n\twhen ((AmountAux4 is null or AmountAux4 == 0) and (AmountAux3 is not null and AmountAux3 != 0)) \t\n\t\tthen 'AmountAux3'\n\n\twhen ((AmountAux3 is null or AmountAux3 == 0) and (AmountAux2 is not null and AmountAux2 != 0)) \t\n\t\tthen 'AmountAux2'\n\n\twhen ((AmountAux2 is null or AmountAux2 == 0) and (AmountAux1 is not null and AmountAux1 != 0)) \t\n\t\tthen 'AmountAux1'\nend",
+            "scale": 2,
+            "label": "AmountRenamed",
+            "type": "Numeric"
+          }
+        ]
+      }
+    }
+  },
+  "DataflowType": "USER",
+  "_type": "dataflow",
+  "name": "Demo_Revenue_Operations_Generate_Snapshots",
+  "description": "Revenue Operations - Generate Snapshots",
+  "MasterLabel": "Demo | Revenue Operations - Generate Snapshots",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": "",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive"
+}
