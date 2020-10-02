@@ -1,0 +1,747 @@
+{
+  "isDeletable": true,
+  "notificationLevel": "Never",
+  "workflowDefinition": {
+    "Join_ForecastUser_Role": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "Filter_ForecastUsers",
+        "left_key": ["UserRoleId"],
+        "right_select": [
+          "ForecastManager.Name",
+          "ForecastManager.UniqueUserName",
+          "Name",
+          "ParentRole.Name",
+          "ParentRoleId",
+          "ParentRole.ParentRoleId",
+          "ParentRole.ForecastManager.ForecastEnabled",
+          "ParentRole.ForecastManager.Name",
+          "ParentRole.ForecastManager.UniqueUserName"
+        ],
+        "right": "Add_ParentRole_Name",
+        "relationship": "Role",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Register_Quota_with_Roles": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Forecasting Quota",
+        "alias": "${App.Datasets.forecastingquota.FullyQualifiedName}",
+        "source": "Join_ForecastingQuota_UserRoles"
+      }
+    },
+    "Register_UserRoles": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "User Roles",
+        "alias": "${App.Datasets.userroles.FullyQualifiedName}",
+        "source": "Join_User_Roles"
+      }
+    },
+    "Extract_Opportunity": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {"name": "Amount"},
+          {
+            "fiscalMonthOffset": 0,
+            "firstDayOfWeek": 0,
+            "name": "CloseDate"
+          },
+          {"name": "CreatedDate"},
+          {"name": "ForecastCategoryName"},
+          {"name": "HasOpportunityLineItem"},
+          {"name": "Id"},
+          {"name": "IsClosed"},
+          {"name": "IsWon"},
+          {"name": "LastActivityDate"},
+          {"name": "LeadSource"},
+          {"name": "Name"},
+          {"name": "OwnerId"},
+          {"name": "Probability"},
+          {"name": "StageName"},
+          {"name": "Type"},
+          {"name": "IqScore"}
+        ],
+        "object": "Opportunity"
+      }
+    },
+    "Compute_UniqueUserName": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Compute_DuplicateUsers",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "UniqueUserName",
+          "saqlExpression": "case when isDuplicate is null then 'Name' else 'Name' + \" (\" +'Username'+ \")\" end",
+          "label": "UniqueUserName",
+          "type": "Text"
+        }]
+      }
+    },
+    "Join_User_Roles": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "Join_User_ForecastHierarchy_Role",
+        "left_key": ["UserRoleId"],
+        "right_select": [
+          "DeveloperName",
+          "ForecastManager.Name",
+          "ForecastManager.ForecastEnabled",
+          "ForecastManager.UniqueUserName",
+          "Name",
+          "ParentRole.DeveloperName",
+          "ParentRole.ForecastManager.Name",
+          "ParentRole.ForecastManager.UniqueUserName",
+          "ParentRole.Name",
+          "ParentRoleId",
+          "RolePath",
+          "Roles"
+        ],
+        "right": "Add_ParentRole_Name",
+        "relationship": "Role",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Extract_User": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {"name": "FirstName"},
+          {"name": "ForecastEnabled"},
+          {"name": "Id"},
+          {"name": "IsActive"},
+          {"name": "LastName"},
+          {"name": "ManagerId"},
+          {"name": "Name"},
+          {"name": "SmallPhotoUrl"},
+          {"name": "Username"},
+          {"name": "UserRoleId"}
+        ],
+        "object": "User"
+      }
+    },
+    "Register_Account": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Account",
+        "alias": "${App.Datasets.account.FullyQualifiedName}",
+        "source": "Join_Account_User"
+      }
+    },
+    "Join_Opportunity_User": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "Join_Opp_Account",
+        "left_key": ["OwnerId"],
+        "right_select": [
+          "AccountId",
+          "ForecastEnabled",
+          "IsActive",
+          "Name",
+          "Role.DeveloperName",
+          "Role.ForecastManager.ForecastEnabled",
+          "Role.ForecastManager.Name",
+          "Role.ForecastManager.UniqueUserName",
+          "Role.Name",
+          "Role.ParentRole.DeveloperName",
+          "Role.ParentRole.ForecastManager.Name",
+          "Role.ParentRole.ForecastManager.UniqueUserName",
+          "Role.ParentRole.Name",
+          "Role.ParentRoleId",
+          "Role.RoleNames",
+          "Role.RoleNamesPath",
+          "Role.RolePath",
+          "Role.Roles",
+          "SmallPhotoUrl",
+          "UniqueUserName",
+          "Username",
+          "UserRoleId"
+        ],
+        "right": "Join_User_Roles",
+        "relationship": "User",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Add_ParentRole_Name": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "Flatten_UserRole",
+        "left_key": ["ParentRoleId"],
+        "right_select": [
+          "ForecastManager.ForecastEnabled",
+          "ForecastManager.Name",
+          "ForecastManager.UniqueUserName",
+          "DeveloperName",
+          "ParentRoleId",
+          "Name"
+        ],
+        "right": "Join_UserRole_ForecastUsers",
+        "relationship": "ParentRole",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Join_Opp_Account": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "Extract_Opportunity",
+        "left_key": ["AccountId"],
+        "right_select": [
+          "AccountSource",
+          "AnnualRevenue",
+          "BillingCountry",
+          "BillingState",
+          "CreatedDate",
+          "Industry",
+          "LastActivityDate",
+          "Name",
+          "NumberOfEmployees",
+          "OwnerId",
+          "Type",
+          "User.Role.ForecastManager.ForecastEnabled",
+          "User.Role.ForecastManager.Name",
+          "User.Role.DeveloperName",
+          "User.Role.ForecastManager.UniqueUserName",
+          "User.Role.Name",
+          "User.Role.ParentRole.DeveloperName",
+          "User.Role.ParentRole.ForecastManager.Name",
+          "User.Role.ParentRole.ForecastManager.UniqueUserName",
+          "User.Role.ParentRole.Name",
+          "User.Role.ParentRoleId",
+          "User.Role.RoleNames",
+          "User.Role.RoleNamesPath",
+          "User.Role.RolePath",
+          "User.Role.Roles",
+          "User.SmallPhotoUrl",
+          "User.UniqueUserName",
+          "User.Username",
+          "User.UserRoleId",
+          "User.Name",
+          "User.IsActive",
+          "User.ForecastEnabled"
+        ],
+        "right": "Join_Account_User",
+        "relationship": "Account",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Register_Forecasting": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Forecast",
+        "alias": "${App.Datasets.forecast.FullyQualifiedName}",
+        "source": "Join_ForecastingItem_UserRoles"
+      }
+    },
+    "Compute_DuplicateUsers": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["Name"],
+        "orderBy": [{
+          "name": "Id",
+          "direction": "asc"
+        }],
+        "source": "Extract_User",
+        "computedFields": [{
+          "expression": {
+            "sourceField": "Id",
+            "offset": "next()"
+          },
+          "name": "isDuplicate",
+          "label": "isDuplicate"
+        }]
+      }
+    },
+    "Join_UserRole_ForecastUsers": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "Extract_UserRole",
+        "left_key": ["ForecastUserId"],
+        "right_select": [
+          "Name",
+          "UniqueUserName",
+          "ForecastEnabled"
+        ],
+        "right": "Filter_ForecastUsers",
+        "relationship": "ForecastManager",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Extract_ForecastingQuota": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "ForecastingTypeId"},
+          {"name": "Id"},
+          {"name": "IsAmount"},
+          {"name": "PeriodId"},
+          {"name": "ProductFamily"},
+          {"name": "QuotaAmount"},
+          {"name": "QuotaOwnerId"},
+          {"name": "QuotaQuantity"},
+          {"name": "StartDate"}
+        ],
+        "object": "ForecastingQuota"
+      }
+    },
+    "Extract_OpportunitySplitType": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "DeveloperName"},
+          {"name": "Id"},
+          {"name": "MasterLabel"}
+        ],
+        "object": "OpportunitySplitType"
+      }
+    },
+    "Join_OpportunitySplit_UserRoles": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "Join_OpportunitySplit_Type",
+        "left_key": ["SplitOwnerId"],
+        "right_select": [
+          "FirstName",
+          "ForecastEnabled",
+          "AccountId",
+          "IsActive",
+          "LastName",
+          "Name",
+          "Role.DeveloperName",
+          "Role.ForecastManager.ForecastEnabled",
+          "Role.ForecastManager.Name",
+          "Role.ForecastManager.UniqueUserName",
+          "Role.Name",
+          "Role.ParentRole.DeveloperName",
+          "Role.ParentRole.ForecastManager.Name",
+          "Role.ParentRole.ForecastManager.UniqueUserName",
+          "Role.ParentRole.Name",
+          "Role.ParentRoleId",
+          "Role.RoleNames",
+          "Role.RoleNamesPath",
+          "Role.RolePath",
+          "Role.Roles",
+          "SmallPhotoUrl",
+          "UniqueUserName",
+          "Username",
+          "UserRoleId"
+        ],
+        "right": "Join_User_Roles",
+        "relationship": "User",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Extract_ForecastingItem": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AmountWithoutAdjustments"},
+          {"name": "AmountWithoutManagerAdjustment"},
+          {"name": "AmountWithoutOwnerAdjustment"},
+          {"name": "ForecastAmount"},
+          {"name": "ForecastCategoryName"},
+          {"name": "ForecastingTypeId"},
+          {"name": "HasAdjustment"},
+          {"name": "HasOwnerAdjustment"},
+          {"name": "Id"},
+          {"name": "IsAmount"},
+          {"name": "OwnerId"},
+          {"name": "PeriodId"}
+        ],
+        "object": "ForecastingItem"
+      }
+    },
+    "Extract_Period": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "EndDate"},
+          {"name": "Id"},
+          {"name": "IsForecastPeriod"},
+          {"name": "StartDate"},
+          {"name": "Type"}
+        ],
+        "object": "Period"
+      }
+    },
+    "Extract_OpportunitySplits": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "OpportunityId"},
+          {"name": "Split"},
+          {"name": "SplitAmount"},
+          {"name": "SplitOwnerId"},
+          {"name": "SplitPercentage"},
+          {"name": "SplitTypeId"}
+        ],
+        "object": "OpportunitySplit"
+      }
+    },
+    "Filter_ForecastUsers": {
+      "action": "filter",
+      "parameters": {
+        "filter": "ForecastEnabled:EQ:true",
+        "source": "Compute_UniqueUserName"
+      }
+    },
+    "Flatten_ParentName": {
+      "schema": {"objects": [{
+        "label": "Flatten_ParentName",
+        "fields": [
+          {
+            "name": "RoleNames",
+            "label": "RoleNames",
+            "isSystemField": false
+          },
+          {
+            "name": "RoleNamesPath",
+            "label": "RoleNamesPath",
+            "isSystemField": false
+          }
+        ]
+      }]},
+      "action": "flatten",
+      "parameters": {
+        "include_self_id": true,
+        "self_field": "UniqueUserName",
+        "multi_field": "RoleNames",
+        "parent_field": "Role.ParentRole.ForecastManager.UniqueUserName",
+        "path_field": "RoleNamesPath",
+        "source": "Join_ForecastUser_Role"
+      }
+    },
+    "Extract_Account": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountSource"},
+          {"name": "AnnualRevenue"},
+          {"name": "BillingCountry"},
+          {"name": "BillingState"},
+          {"name": "CreatedDate"},
+          {"name": "Industry"},
+          {"name": "Id"},
+          {"name": "LastActivityDate"},
+          {"name": "Name"},
+          {"name": "NumberOfEmployees"},
+          {"name": "OwnerId"},
+          {"name": "Type"}
+        ],
+        "object": "Account"
+      }
+    },
+    "Register_OpportunitySplits": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Opportunity Splits",
+        "alias": "${App.Datasets.opportunitysplits.FullyQualifiedName}",
+        "source": "Join_OpportunitySplit_Opportunity"
+      }
+    },
+    "Join_ForecastingItem_UserRoles": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "Join_ForecastingItem_Period",
+        "left_key": ["OwnerId"],
+        "right_select": [
+          "ForecastEnabled",
+          "Name",
+          "LastName",
+          "Role.DeveloperName",
+          "Role.ForecastManager.ForecastEnabled",
+          "Role.ForecastManager.Name",
+          "Role.ForecastManager.UniqueUserName",
+          "Role.Name",
+          "Role.ParentRole.DeveloperName",
+          "Role.ParentRole.ForecastManager.Name",
+          "Role.ParentRole.ForecastManager.UniqueUserName",
+          "Role.ParentRole.Name",
+          "Role.ParentRoleId",
+          "Role.RoleNames",
+          "Role.RoleNamesPath",
+          "Role.RolePath",
+          "Role.Roles",
+          "UniqueUserName",
+          "SmallPhotoUrl",
+          "Username",
+          "UserRoleId"
+        ],
+        "right": "Join_User_Roles",
+        "relationship": "User",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Join_OpportunitySplit_Type": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "Extract_OpportunitySplits",
+        "left_key": ["SplitTypeId"],
+        "right_select": [
+          "DeveloperName",
+          "MasterLabel"
+        ],
+        "right": "Extract_OpportunitySplitType",
+        "relationship": "SplitType",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Join_OpportunitySplit_Opportunity": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "Join_OpportunitySplit_UserRoles",
+        "left_key": ["OpportunityId"],
+        "right_select": [
+          "Account.BillingCountry",
+          "Account.BillingState",
+          "Account.Industry",
+          "Account.Name",
+          "Account.Type",
+          "AccountId",
+          "Amount",
+          "CloseDate",
+          "CreatedDate",
+          "ForecastCategoryName",
+          "HasOpportunityLineItem",
+          "IsClosed",
+          "IsWon",
+          "LastActivityDate",
+          "LeadSource",
+          "Name",
+          "Probability",
+          "StageName",
+          "Type",
+          "User.Name",
+          "User.Username",
+          "User.SmallPhotoUrl",
+          "User.AccountId",
+          "User.UserRoleId",
+          "User.UniqueUserName",
+          "User.Role.RoleNames",
+          "User.Role.RoleNamesPath",
+          "User.Role.Name",
+          "User.Role.DeveloperName",
+          "User.Role.ParentRoleId",
+          "User.Role.ForecastManager.ForecastEnabled",
+          "User.Role.ForecastManager.Name",
+          "User.Role.ForecastManager.UniqueUserName",
+          "User.Role.Roles",
+          "User.Role.RolePath",
+          "User.Role.ParentRole.Name",
+          "User.Role.ParentRole.DeveloperName",
+          "User.Role.ParentRole.ForecastManager.Name",
+          "User.Role.ParentRole.ForecastManager.UniqueUserName"
+        ],
+        "right": "Join_Opportunity_User",
+        "relationship": "Opportunity",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Join_ForecastingItem_Period": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "Join_ForecastingItem_Type",
+        "left_key": ["PeriodId"],
+        "right_select": [
+          "EndDate",
+          "IsForecastPeriod",
+          "StartDate",
+          "Type"
+        ],
+        "right": "Extract_Period",
+        "relationship": "Period",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Extract_UserRole": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "SFDCtoken": "SFDCtoken",
+        "fields": [
+          {"name": "Id"},
+          {"name": "Name"},
+          {"name": "DeveloperName"},
+          {"name": "ParentRoleId"},
+          {"name": "ForecastUserId"}
+        ],
+        "object": "UserRole"
+      }
+    },
+    "Join_ForecastingItem_Type": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "Extract_ForecastingItem",
+        "left_key": ["ForecastingTypeId"],
+        "right_select": [
+          "DeveloperName",
+          "IsActive",
+          "MasterLabel",
+          "IsAmount",
+          "IsQuantity"
+        ],
+        "right": "Extract_ForecastingType",
+        "relationship": "ForecastingType",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Join_ForecastingQuota_UserRoles": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "Extract_ForecastingQuota",
+        "left_key": ["QuotaOwnerId"],
+        "right_select": [
+          "FirstName",
+          "ForecastEnabled",
+          "IsActive",
+          "LastName",
+          "ManagerId",
+          "Name",
+          "Role.DeveloperName",
+          "Role.ForecastManager.ForecastEnabled",
+          "Role.ForecastManager.Name",
+          "Role.ForecastManager.UniqueUserName",
+          "Role.Name",
+          "Role.ParentRole.DeveloperName",
+          "Role.ParentRole.ForecastManager.Name",
+          "Role.ParentRole.ForecastManager.UniqueUserName",
+          "Role.ParentRole.Name",
+          "Role.ParentRoleId",
+          "Role.RoleNames",
+          "Role.RoleNamesPath",
+          "Role.RolePath",
+          "Role.Roles",
+          "UniqueUserName",
+          "Username",
+          "SmallPhotoUrl",
+          "UserRoleId"
+        ],
+        "right": "Join_User_Roles",
+        "relationship": "Quota",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Join_User_ForecastHierarchy_Role": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["UniqueUserName"],
+        "left": "Compute_UniqueUserName",
+        "left_key": ["UniqueUserName"],
+        "right_select": [
+          "RoleNames",
+          "RoleNamesPath"
+        ],
+        "right": "Flatten_ParentName",
+        "relationship": "Role",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Flatten_UserRole": {
+      "schema": {"objects": [{
+        "label": "Flatten_UserRole",
+        "fields": [
+          {
+            "name": "Roles",
+            "label": "Roles",
+            "isSystemField": false
+          },
+          {
+            "name": "RolePath",
+            "label": "RolePath",
+            "isSystemField": false
+          }
+        ]
+      }]},
+      "action": "flatten",
+      "parameters": {
+        "include_self_id": true,
+        "self_field": "Id",
+        "multi_field": "Roles",
+        "parent_field": "ParentRoleId",
+        "path_field": "RolePath",
+        "source": "Join_UserRole_ForecastUsers"
+      }
+    },
+    "Join_Account_User": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "Extract_Account",
+        "left_key": ["OwnerId"],
+        "right_select": [
+          "ForecastEnabled",
+          "IsActive",
+          "Name",
+          "Role.DeveloperName",
+          "Role.ForecastManager.ForecastEnabled",
+          "Role.ForecastManager.Name",
+          "Role.ForecastManager.UniqueUserName",
+          "Role.Name",
+          "Role.ParentRole.DeveloperName",
+          "Role.ParentRole.ForecastManager.Name",
+          "Role.ParentRole.ForecastManager.UniqueUserName",
+          "Role.ParentRole.Name",
+          "Role.ParentRoleId",
+          "Role.RoleNames",
+          "Role.RoleNamesPath",
+          "Role.RolePath",
+          "Role.Roles",
+          "SmallPhotoUrl",
+          "UniqueUserName",
+          "Username",
+          "UserRoleId"
+        ],
+        "right": "Join_User_Roles",
+        "relationship": "User",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Register_Opportunity": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Opportunity",
+        "alias": "${App.Datasets.opportunity.FullyQualifiedName}",
+        "source": "Join_Opportunity_User"
+      }
+    },
+    "Extract_ForecastingType": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "DeveloperName"},
+          {"name": "Id"},
+          {"name": "IsActive"},
+          {"name": "IsAmount"},
+          {"name": "IsQuantity"},
+          {"name": "MasterLabel"}
+        ],
+        "object": "ForecastingType"
+      }
+    }
+  },
+  "DataflowType": "USER",
+  "_type": "dataflow",
+  "name": "Demo_Revenue_Operations",
+  "description": "Dataflow for the Revenue Operations Analytics Application.",
+  "MasterLabel": "Demo | Revenue Operations",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": "",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive"
+}
