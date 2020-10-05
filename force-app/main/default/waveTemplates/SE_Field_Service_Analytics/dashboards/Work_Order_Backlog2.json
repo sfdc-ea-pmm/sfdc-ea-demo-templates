@@ -1,0 +1,2653 @@
+{
+  "name" : "Work_Order_Backlog2_tp",
+  "label" : "Work Order Backlog",
+  "folder" : {
+    "id" : "${App.Folder.Id}"
+  },
+  "dateVersion" : 1,
+  "mobileDisabled" : false,
+  "xmd" : {
+    "measures" : [ ],
+    "derivedDimensions" : [ ],
+    "organizations" : [ ],
+    "showDetailsDefaultFields" : [ ],
+    "dates" : [ ],
+    "derivedMeasures" : [ ],
+    "dimensions" : [ ]
+  },
+  "state" : {
+    "dataSourceLinks" : [
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.ServiceAppointment3_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "ServiceTerritoryId_Name"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.AssignedResource3_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "SA_ServiceTerritoryId_Name"
+          }
+        ],
+        "label" : "SA-AssignedResource Territory",
+        "name" : "Link_1190"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.ServiceAppointment3_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "ParentRecordId_AccountId_Name"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.AssignedResource3_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "SA_ParentRecordId_AccountId_Name"
+          }
+        ],
+        "label" : "SA-AssignedResource Account",
+        "name" : "Link_1053"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.ServiceAppointment3_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "ParentRecordId_Priority"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.AssignedResource3_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "SA_ParentRecordId_Priority"
+          }
+        ],
+        "label" : "SA-Assigned Resource Priority",
+        "name" : "Link_1207"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.ServiceAppointment3_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "ParentRecordId_WorkTypeId_Name"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.AssignedResource3_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "SA_ParentRecordId_WorkTypeId_Name"
+          }
+        ],
+        "label" : "SA-Assigned Resource WO Type",
+        "name" : "Link_1231"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.ServiceAppointment3_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "ParentRecordId_WorkTypeId_Name"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.SkillRequirement2_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "WorkType.Name"
+          }
+        ],
+        "label" : "SAWorkType-SkillRequirement",
+        "name" : "Link_842"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.ServiceResourceCapacity2_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "ServiceResourceId"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.ServiceResourceSkill2_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "ServiceResourceId"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.ServiceAppointment3_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "AssignedResource_ServiceResourceId"
+          }
+        ],
+        "label" : "ServiceResourceCapacity-ServiceResourceSkill",
+        "name" : "Link_955"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.SkillRequirement2_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "SkillId"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.ServiceResourceSkill2_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "SkillId"
+          }
+        ],
+        "label" : "SkillRequirement-ServiceResourceSkill",
+        "name" : "Link_859"
+      }
+    ],
+    "filters" : [
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.ServiceAppointment3_tp.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "ServiceTerritoryId_Name"
+        ],
+        "label" : "Territory",
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.ServiceAppointment3_tp.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "ParentRecordId_AccountId_Name"
+        ],
+        "label" : "Account",
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.ServiceAppointment3_tp.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "ParentRecordId_WorkTypeId_Name"
+        ],
+        "label" : "Work Type",
+        "locked" : false,
+        "operator" : "in"
+      }
+    ],
+    "gridLayouts" : [
+      {
+        "maxWidth" : 1360,
+        "name" : "Default",
+        "numColumns" : 48,
+        "pages" : [
+          {
+            "label" : "Untitled",
+            "name" : "e7d215e8-da15-47f4-a406-6d63b38e8790",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 5,
+                "column" : 42,
+                "name" : "listselector_Time_Selection",
+                "row" : 12,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 35,
+                "name" : "container_1",
+                "row" : 11,
+                "rowspan" : 8,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "#634F95",
+                  "borderEdges" : [
+                    "top"
+                  ]
+                }
+              },
+              {
+                "colspan" : 19,
+                "column" : 1,
+                "name" : "text_Backlog_Detail_Table",
+                "row" : 113,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 46,
+                "column" : 1,
+                "name" : "table_BacklogDetail_Table",
+                "row" : 117,
+                "rowspan" : 29,
+                "widgetStyle" : {
+                  "borderEdges" : [
+                    "left",
+                    "right",
+                    "bottom"
+                  ]
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 0,
+                "name" : "container_5",
+                "row" : 3,
+                "rowspan" : 8,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#634F95",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 14,
+                "column" : 1,
+                "name" : "text_Work_Order_Backlog1",
+                "row" : 3,
+                "rowspan" : 8,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 33,
+                "name" : "link_Technician_Performance",
+                "row" : 8,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#634F95",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 0,
+                "name" : "container_8",
+                "row" : 19,
+                "rowspan" : 92,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(9, 26, 62)",
+                  "borderColor" : "rgba(51, 87, 121, 0.5)",
+                  "borderEdges" : [
+                    "right"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 35,
+                "column" : 13,
+                "name" : "container_11",
+                "row" : 19,
+                "rowspan" : 35,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 0,
+                "name" : "container_13",
+                "row" : 111,
+                "rowspan" : 37,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 40,
+                "name" : "text_Work_Order_Backlog",
+                "row" : 8,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "rgb(99, 79, 149)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 2
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 24,
+                "name" : "link_Work_Order_Overview",
+                "row" : 8,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 32,
+                "column" : 1,
+                "name" : "filterpanel_1",
+                "row" : 13,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 35,
+                "column" : 0,
+                "name" : "container_2",
+                "row" : 11,
+                "rowspan" : 8,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "#634F95",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 0,
+                "name" : "number_JobsDue",
+                "row" : 21,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 6,
+                "name" : "number_JobsOverdue",
+                "row" : 21,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 0,
+                "name" : "chart_WorkOrderPriority",
+                "row" : 48,
+                "rowspan" : 20,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 0,
+                "name" : "chart_PartsBreakdown",
+                "row" : 71,
+                "rowspan" : 19,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 20,
+                "column" : 13,
+                "name" : "text__Capacity_Demand_Gap_Analysis_",
+                "row" : 21,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 35,
+                "column" : 13,
+                "name" : "text__Positive_means_you_have_enough_capacity_to_meet_demand_negative_means_you_need_to_staff_up_Shown_for_next_7_days_only_",
+                "row" : 24,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 35,
+                "column" : 13,
+                "name" : "container_3",
+                "row" : 54,
+                "rowspan" : 57,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 35,
+                "column" : 13,
+                "name" : "chart_JobsDueChart",
+                "row" : 82,
+                "rowspan" : 26,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 18,
+                "column" : 30,
+                "name" : "chart_CapacityBasedResources_Capacity",
+                "row" : 58,
+                "rowspan" : 24,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 34,
+                "column" : 13,
+                "name" : "chart_Capacity_Demand_Chart",
+                "row" : 27,
+                "rowspan" : 25,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 0,
+                "name" : "chart_StatusCategory",
+                "row" : 28,
+                "rowspan" : 20,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 13,
+                "name" : "text__Technician_Capacity",
+                "row" : 55,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 17,
+                "column" : 13,
+                "name" : "chart_FTE_Capacity",
+                "row" : 58,
+                "rowspan" : 24,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "right"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight" : "fine",
+        "selectors" : [ ],
+        "style" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "backgroundColor" : "#C5D3E0",
+          "cellSpacingX" : 0,
+          "cellSpacingY" : 0,
+          "fit" : "original",
+          "gutterColor" : "#C5D3E0"
+        },
+        "version" : 1.0
+      }
+    ],
+    "layouts" : [ ],
+    "steps" : {
+      "JobsOverdue" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.ServiceAppointment3_tp.FullyQualifiedName}\";\nq = filter q by {{row(Capacity_Demand_Chart.selection,[0],['eDate','eDate']).asDateRange(\"date('DueDate_Year','DueDate_Month','DueDate_Day')\")}};\nq = filter q by !('StatusCategory' in [\"Canceled\", \"Completed\"]) and date('DueDate_Year', 'DueDate_Month', 'DueDate_Day') in [..\"current day\"];\nq = group q by all;\nq = foreach q generate count() as 'count';\nq = limit q 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "none",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            }
+          },
+          "type" : "chart"
+        }
+      },
+      "JobsDueChart" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "JobsDueChart",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.ServiceAppointment3_tp.FullyQualifiedName}\";\nq = filter q by {{row(Capacity_Demand_Chart.selection,[0],['eDate','eDate']).asDateRange(\"date('DueDate_Year','DueDate_Month','DueDate_Day')\")}};\nq = filter q by !('StatusCategory' in [\"Canceled\", \"Completed\"]);\nq = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('DueDate_Year','DueDate_Month','DueDate_Day')\")}};\nq = group q by ('DueDate_Year', 'DueDate_Month', 'DueDate_Day', 'StatusCategory');\nq = foreach q generate 'StatusCategory' as 'StatusCategory', 'DueDate_Year' + \"~~~\" + 'DueDate_Month' + \"~~~\" + 'DueDate_Day' as 'DueDate_Year~~~DueDate_Month~~~DueDate_Day', count() as 'count';\nq = order q by ('DueDate_Year~~~DueDate_Month~~~DueDate_Day' asc, 'StatusCategory' asc);\nq = limit q 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "legend" : {
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "stackvbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "split" : [
+                "StatusCategory"
+              ],
+              "trellis" : [ ],
+              "dimensionAxis" : [
+                "DueDate_Year~~~DueDate_Month~~~DueDate_Day"
+              ],
+              "plots" : [
+                "count"
+              ]
+            },
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "normalize" : false,
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            }
+          },
+          "type" : "chart",
+          "visualizationType" : "stackvbar"
+        }
+      },
+      "CapacityBasedResources_Capacity" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Technician Qvail",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.ServiceResourceCapacity2_tp.FullyQualifiedName}\";\nq = filter q by {{row(Capacity_Demand_Chart.selection,[0],['eDate','eDate']).asDateRange(\"date('StartDate_Year','StartDate_Month','StartDate_Day')\")}};\nq = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('StartDate_Year','StartDate_Month','StartDate_Day')\")}};\nq = group q by ('StartDate_Year', 'StartDate_Month', 'StartDate_Day', 'ServiceResourceCapacity_User_Name');\nq = foreach q generate 'StartDate_Year' + \"-\" + 'StartDate_Month' + \"-\" + 'StartDate_Day' as 'StartDate', 'ServiceResourceCapacity_User_Name' as 'UserName', coalesce(sum('CapacityInHours')*60,0) as 'sum_CapacityInMins';\nq = order q by ('StartDate' asc, 'UserName' asc);\nq = limit q 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "columnMap" : {
+              "r" : [
+                "sum_CapacityInHours"
+              ],
+              "color" : [
+                "sum_CapacityInHours"
+              ],
+              "x" : [
+                "StartDate_Year~~~StartDate_Month~~~StartDate_Day"
+              ],
+              "y" : [
+                "ServiceResourceCapacity_User_Name"
+              ]
+            },
+            "legend" : {
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "highColor" : "#009DDF",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "lowColor" : "#E2F4FC",
+            "x" : {
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : ""
+            },
+            "visualizationType" : "matrix",
+            "y" : {
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : ""
+            },
+            "theme" : "wave",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            }
+          },
+          "type" : "chart",
+          "visualizationType" : "matrix"
+        }
+      },
+      "ActualTravelTime_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "ActualTravelTime_1",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.AssignedResource3_tp.FullyQualifiedName}\";\nq = filter q by 'ActualTravelTime' > 0;\nq = group q by all;\nq = foreach q generate avg('ActualTravelTime') as 'avg_ActualTravelTime';\nq = limit q 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimensionAxis" : [ ],
+              "plots" : [
+                "avg_ActualTravelTime"
+              ]
+            },
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            }
+          },
+          "type" : "chart",
+          "visualizationType" : "hbar"
+        }
+      },
+      "StatusCategory" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "StatusCategory",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.ServiceAppointment3_tp.FullyQualifiedName}\";\nq = filter q by {{row(Capacity_Demand_Chart.selection,[0],['eDate','eDate']).asDateRange(\"date('DueDate_Year','DueDate_Month','DueDate_Day')\")}};\nq = filter q by !('StatusCategory' in [\"Canceled\", \"Completed\"]);\nq = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('DueDate_Year','DueDate_Month','DueDate_Day')\")}};\nq = group q by 'StatusCategory';\nq = foreach q generate 'StatusCategory' as 'StatusCategory', count() as 'count';\nq = order q by 'StatusCategory' asc;\nq = limit q 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "multi",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "parameters" : {
+            "centerText" : "",
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimension" : [
+                "StatusCategory"
+              ],
+              "plots" : [
+                "count"
+              ]
+            },
+            "centerValueType" : "number",
+            "legend" : {
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "showMeasureTitle" : true,
+            "valueType" : "compactNumber",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "pie",
+            "theme" : "wave",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "inner" : 60
+          },
+          "type" : "chart",
+          "visualizationType" : "pie"
+        }
+      },
+      "Capacity_Demand_Chart" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Capacity_Demand_Chart",
+        "numbers" : [ ],
+        "query" : "n0 = load \"${App.Datasets.ServiceAppointment3_tp.FullyQualifiedName}\";\nq = filter n0 by !('StatusCategory' in [\"Canceled\", \"Completed\"]);\nq = group q by ('DueDate_Year', 'DueDate_Month', 'DueDate_Day', 'StatusCategory');\nq = foreach q generate 'DueDate_Year' + \"~~~\" + 'DueDate_Month' + \"~~~\" + 'DueDate_Day' as 'DueDate_Year~~~DueDate_Month~~~DueDate_Day', 'StatusCategory' as 'StatusCategory', sum('DurationInMinutes') as 'sum_DurationInMinutes', count()*{{cell(ActualTravelTime_1.result, 0, \"avg_ActualTravelTime\").asString()}} as count;\nsrc = load \"${App.Datasets.ServiceResourceCapacity2_tp.FullyQualifiedName}\";\nsrc = group src by ('StartDate_Year', 'StartDate_Month', 'StartDate_Day', 'TimePeriod');\nsrc = foreach src generate 'StartDate_Year' + \"~~~\" + 'StartDate_Month' + \"~~~\" + 'StartDate_Day' as 'StartDate_Year~~~StartDate_Month~~~StartDate_Day', sum('CapacityInHours') as 'sum_CapacityInHours';\nra = load \"${App.Datasets.ResourceAbsence3_tp.FullyQualifiedName}\";ra = group ra by ('Start_Year', 'Start_Month', 'Start_Day');\nra = foreach ra generate 'Start_Year' + \"~~~\" + 'Start_Month' + \"~~~\" + 'Start_Day' as 'Start_Year~~~Start_Month~~~Start_Day', sum('AbsenceMinutes') as 'sum_AbsenceMinutes';\nz = group q by ('DueDate_Year~~~DueDate_Month~~~DueDate_Day') left, src by ('StartDate_Year~~~StartDate_Month~~~StartDate_Day') left, ra by ('Start_Year~~~Start_Month~~~Start_Day');\nz = foreach z generate coalesce((sum(src['sum_CapacityInHours']) * 60),0) - coalesce(sum(q['sum_DurationInMinutes']),0) - coalesce(sum(ra['sum_AbsenceMinutes']),0) - coalesce(sum(q['count']),0) as 'sum_Availability in minutes', q['DueDate_Year~~~DueDate_Month~~~DueDate_Day'] as 'DueDate_Year~~~DueDate_Month~~~DueDate_Day', day_in_week(toDate(q['DueDate_Year~~~DueDate_Month~~~DueDate_Day'], \"yyyy~~~MM~~~dd\")) as DayInWeek, toDate(q['DueDate_Year~~~DueDate_Month~~~DueDate_Day'], \"yyyy~~~MM~~~dd\") as 'next7Days';\nn1 = foreach n0 generate (case when toString(now(), \"HH\") >= \"08\" then toDate((daysBetween(toDate(\"1970-01-01\", \"yyyy-MM-dd\"), now())*86400) +(86400*1) ) else toDate((daysBetween(toDate(\"1970-01-01\", \"yyyy-MM-dd\"), now())*86400) ) end ) as 'the_date'; n1 = limit n1 1;\nn2 = foreach n0 generate (case when toString(now(), \"HH\") >= \"08\" then toDate((daysBetween(toDate(\"1970-01-01\", \"yyyy-MM-dd\"), now())*86400) +(86400*2) ) else toDate((daysBetween(toDate(\"1970-01-01\", \"yyyy-MM-dd\"), now())*86400) +(86400*1) ) end ) as 'the_date';\n n2 = limit n2 1;\nn3 = foreach n0 generate (case when toString(now(), \"HH\") >= \"08\" then toDate((daysBetween(toDate(\"1970-01-01\", \"yyyy-MM-dd\"), now())*86400) +(86400*3) ) else toDate((daysBetween(toDate(\"1970-01-01\", \"yyyy-MM-dd\"), now())*86400) +(86400*2) ) end ) as 'the_date';\n n3 = limit n3 1;\nn4 = foreach n0 generate (case when toString(now(), \"HH\") >= \"08\" then toDate((daysBetween(toDate(\"1970-01-01\", \"yyyy-MM-dd\"), now())*86400) +(86400*4) ) else toDate((daysBetween(toDate(\"1970-01-01\", \"yyyy-MM-dd\"), now())*86400) +(86400*3) ) end ) as 'the_date';\n n4 = limit n4 1;\nn5 = foreach n0 generate (case when toString(now(), \"HH\") >= \"08\" then toDate((daysBetween(toDate(\"1970-01-01\", \"yyyy-MM-dd\"), now())*86400) +(86400*5) ) else toDate((daysBetween(toDate(\"1970-01-01\", \"yyyy-MM-dd\"), now())*86400) +(86400*4) ) end ) as 'the_date';\n n5 = limit n5 1;\nn6 = foreach n0 generate (case when toString(now(), \"HH\") >= \"08\" then toDate((daysBetween(toDate(\"1970-01-01\", \"yyyy-MM-dd\"), now())*86400) +(86400*6) ) else toDate((daysBetween(toDate(\"1970-01-01\", \"yyyy-MM-dd\"), now())*86400) +(86400*5) ) end ) as 'the_date';\n n6 = limit n6 1;\nn7 = foreach n0 generate (case when toString(now(), \"HH\") >= \"08\" then toDate((daysBetween(toDate(\"1970-01-01\", \"yyyy-MM-dd\"), now())*86400) +(86400*7) ) else toDate((daysBetween(toDate(\"1970-01-01\", \"yyyy-MM-dd\"), now())*86400) +(86400*6) ) end ) as 'the_date';\n n7 = limit n7 1;\n nu = union n1,n2,n3,n4,n5,n6,n7;\nnu = group nu by the_date;\nnu = foreach nu generate the_date as next7Days, (case when day_in_week(the_date) == 1 then \"Sunday\" when day_in_week(the_date) == 2 then \"Monday\" when day_in_week(the_date) == 3 then \"Tuesday\" when day_in_week(the_date) == 4 then \"Wednesday\" when day_in_week(the_date) == 5 then \"Thursday\" when day_in_week(the_date) == 6 then \"Friday\" when day_in_week(the_date) == 7 then \"Saturday\" else \"yo\" end)  as DayOfWeek;\nt = load \"${App.Datasets.TimeSlot3_tp.FullyQualifiedName}\";\nt = group t by ('DayOfWeek', 'STM_ServiceResource_User_Name');\nt = foreach t generate 'DayOfWeek' as DayOfWeek, coalesce(sum('AvailableTime'),0) as 'sum_AvailableTime';\ntnu = union t,nu;\ntnu = group tnu by DayOfWeek;\ntnu = foreach tnu generate first(next7Days) as next7Days, DayOfWeek as DayOfWeek, sum(sum_AvailableTime) as sum_sum_AvailableTime; tnu = order tnu by next7Days asc;\nzzz = union tnu,z;\nzzz = group zzz by next7Days;\nzzz = foreach zzz generate date_to_string(next7Days, \"yyyy-MM-dd\") as 'DueDate', date_to_epoch(next7Days) as eDate, first(DayOfWeek) as DayOfWeek, coalesce(sum('sum_Availability in minutes')/60,0) + coalesce(sum('sum_sum_AvailableTime')/60,0) as sum_Availability;\nzzz = filter zzz by DayOfWeek is not null;\nzzz = limit zzz 7; zq = group zzz by 'DueDate'; zq = foreach zq generate 'DueDate' as 'DueDate_', (case when toString(now(), \"HH\") >= \"08\" then first('eDate')*1000 else (first('eDate')-86400)*1000 end ) as 'eDate', sum('sum_Availability')*60 as sum_sum_Availability; zq = order zq by 'DueDate_' asc; ",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "vbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimensionAxis" : [ ],
+              "plots" : [
+                "count"
+              ]
+            },
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            }
+          },
+          "type" : "chart",
+          "visualizationType" : "vbar"
+        }
+      },
+      "PartsBreakdown" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.ServiceAppointment3_tp.FullyQualifiedName}\";\nq = filter q by {{row(Capacity_Demand_Chart.selection,[0],['eDate','eDate']).asDateRange(\"date('DueDate_Year','DueDate_Month','DueDate_Day')\")}};\nq = filter q by !('StatusCategory' in [\"Canceled\", \"Completed\"]);\nq = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('DueDate_Year','DueDate_Month','DueDate_Day')\")}};\nq = group q by 'ProductRequired_ProductName';\nq = foreach q generate 'ProductRequired_ProductName' as 'ProductRequired_ProductName', count() as 'count';\nq = limit q 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "none",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            }
+          },
+          "type" : "chart"
+        }
+      },
+      "Time_Selection" : {
+        "broadcastFacet" : false,
+        "columns" : { },
+        "isGlobal" : false,
+        "selectMode" : "singlerequired",
+        "start" : {
+          "display" : [
+            "Next 7 Days"
+          ]
+        },
+        "type" : "staticflex",
+        "useGlobal" : false,
+        "values" : [
+          {
+            "display" : "Next 7 Days",
+            "text_display" : "vs next 7 days",
+            "BacklogCompare" : [
+              "current day + 1 week",
+              "current day"
+            ],
+            "BacklogLabel" : "Backlog Last 7 Days",
+            "ClosedField" : "'ClosedDate_Month','ClosedDate_Day'",
+            "CoGroup" : "('EarliestStartTime_Month','EarliestStartTime_Day')",
+            "Compact" : [
+              [
+                "day",
+                0
+              ],
+              [
+                "day",
+                7
+              ]
+            ],
+            "CreatedField" : "'EarliestStartTime_Month','EarliestStartTime_Day'",
+            "CreatedProjection" : "created['EarliestStartTime_Month'] +\"~~~\" + created['EarliestStartTime_Day']",
+            "Current" : [
+              "1 day ahead",
+              "7 days ahead"
+            ],
+            "Next7Days" : [
+              "1 day ahead",
+              "7 days ahead"
+            ],
+            "FullGroup" : "EarliestStartTime_Year~~~EarliestStartTime_Month~~~EarliestStartTime_Day",
+            "GenerateClosedDate" : "'ClosedDate_Year'+\"~~~\"+'ClosedDate_Month'+\"~~~\"+'ClosedDate_Day' as 'EarliestStartTime_Year~~~EarliestStartTime_Month~~~EarliestStartTime_Day'",
+            "GenerateCoGroupDate" : "created['EarliestStartTime_Year']+\"~~~\"+created['EarliestStartTime_Month']+\"~~~\"+created['EarliestStartTime_Day'] as 'EarliestStartTime_Year~~~EarliestStartTime_Month~~~EarliestStartTime_Day'",
+            "GenerateEarliestStartTime" : "'EarliestStartTime_Year'+\"~~~\"+'EarliestStartTime_Month'+\"~~~\"+'EarliestStartTime_Day' as 'EarliestStartTime_Year~~~EarliestStartTime_Month~~~EarliestStartTime_Day'",
+            "cogroupGenerateEarliestStartTime" : "q['EarliestStartTime_Year']+\"~~~\"+q['EarliestStartTime_Month']+\"~~~\"+q['EarliestStartTime_Day'] as 'EarliestStartTime_Year~~~EarliestStartTime_Month~~~EarliestStartTime_Day'",
+            "SAGenerateEarliestStartTime" : "'SA_EarliestStartTime_Year'+\"~~~\"+'SA_EarliestStartTime_Month'+\"~~~\"+'SA_EarliestStartTime_Day' as 'SA_EarliestStartTime_Year~~~SA_EarliestStartTime_Month~~~SA_EarliestStartTime_Day'",
+            "GroupbyClosedDate" : "('ClosedDate_Year','ClosedDate_Month','ClosedDate_Day')",
+            "GroupbyEarliestStartTime" : "('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')",
+            "SAGroupbyEarliestStartTime" : "('SA_EarliestStartTime_Year','SA_EarliestStartTime_Month','SA_EarliestStartTime_Day')",
+            "Grouping" : "EarliestStartTime_Year~~~EarliestStartTime_Month~~~EarliestStartTime_Day",
+            "NextPeriodCompare" : [
+              "current day + 1 week",
+              "7 days ahead + 1 week"
+            ],
+            "NextYearCompare" : [
+              "current day + 1 year",
+              "1 year ahead + 1 year"
+            ],
+            "Measure" : [
+              "Backlog",
+              "Count",
+              null,
+              {
+                "display" : "Backlog Count at Start of Day"
+              }
+            ],
+            "compactGroup" : [
+              "EarliestStartTime_Year",
+              "EarliestStartTime_Month",
+              "EarliestStartTime_Day"
+            ],
+            "icompactGroup" : [
+              "i[EarliestStartTime_Year]",
+              "i[EarliestStartTime_Month]",
+              "i[EarliestStartTime_Day]"
+            ],
+            "SAcompactGroup" : [
+              "SA_EarliestStartTime_Year",
+              "SA_EarliestStartTime_Month",
+              "SA_EarliestStartTime_Day"
+            ],
+            "filter" : "week",
+            "queryCogroupNew" : "first(ThisYear['EarliestStartTime_Year'])+\"~~~\"+ThisYear['EarliestStartTime_Month']+\"~~~\"+ThisYear['EarliestStartTime_Day'] as 'EarliestStartTime_Year~~~EarliestStartTime_Month~~~EarliestStartTime_Day'",
+            "trendProjection" : "toString(now(), \"yyyy~~~MM\")+\"~~~\"+toString(now(), \"99\")"
+          },
+          {
+            "display" : "Next 30 Days",
+            "text_display" : "vs previous 30 days",
+            "Backlog30DayClose" : "[\"current day - 60 days\"..\"current day - 30 days\"]",
+            "BacklogCompare" : [
+              "current day - 30 days",
+              "current day"
+            ],
+            "BacklogLabel" : "Backlog Last 30 Days",
+            "ClosedField" : "'ClosedDate_Week'",
+            "CoGroup" : "('EarliestStartTime_Week')",
+            "Compact" : [
+              [
+                "day",
+                0
+              ],
+              [
+                "day",
+                30
+              ]
+            ],
+            "CreatedField" : "'EarliestStartTime_Week'",
+            "CreatedProjection" : "created['EarliestStartTime_Week']",
+            "Current" : [
+              "1 day ahead",
+              "30 days ahead"
+            ],
+            "FullGroup" : "EarliestStartTime_Year~~~EarliestStartTime_Week",
+            "GenerateClosedDate" : "'ClosedDate_Year'+\"~~~\"+'ClosedDate_Week' as 'EarliestStartTime_Year~~~EarliestStartTime_Week'",
+            "GenerateCoGroupDate" : "created['EarliestStartTime_Year']+\"~~~\"+created['EarliestStartTime_Week'] as 'EarliestStartTime_Year~~~EarliestStartTime_Week'",
+            "GenerateEarliestStartTime" : "'EarliestStartTime_Year'+\"~~~\"+'EarliestStartTime_Week' as 'EarliestStartTime_Year~~~EarliestStartTime_Week'",
+            "cogroupGenerateEarliestStartTime" : "q['EarliestStartTime_Year']+\"~~~\"+q['EarliestStartTime_Week'] as 'EarliestStartTime_Year~~~EarliestStartTime_Week'",
+            "SAGenerateEarliestStartTime" : "'SA_EarliestStartTime_Year'+\"~~~\"+'SA_EarliestStartTime_Week' as 'SA_EarliestStartTime_Year~~~SA_EarliestStartTime_Week'",
+            "GroupbyClosedDate" : "('ClosedDate_Year','ClosedDate_Week')",
+            "GroupbyEarliestStartTime" : "('EarliestStartTime_Year','EarliestStartTime_Week')",
+            "SAGroupbyEarliestStartTime" : "('SA_EarliestStartTime_Year','SA_EarliestStartTime_Week')",
+            "Grouping" : "EarliestStartTime_Year~~~EarliestStartTime_Week",
+            "LastPeriodCompare" : [
+              "current day + 30 days",
+              "30 days ahead + 30 days"
+            ],
+            "LastYearCompare" : [
+              "30 days ago - 1 year",
+              "current day - 1 year"
+            ],
+            "Measure" : [
+              "Backlog",
+              "Count",
+              null,
+              {
+                "display" : "Backlog Count at Start of Week"
+              }
+            ],
+            "compactGroup" : [
+              "EarliestStartTime_Year",
+              "EarliestStartTime_Week"
+            ],
+            "icompactGroup" : [
+              "i[EarliestStartTime_Year]",
+              "i[EarliestStartTime_Week]"
+            ],
+            "SAcompactGroup" : [
+              "SA_EarliestStartTime_Year",
+              "SA_EarliestStartTime_Week"
+            ],
+            "filter" : "month",
+            "queryCogroupNew" : "first(ThisYear['EarliestStartTime_Year'])+\"~~~\"+ThisYear['EarliestStartTime_Week'] as 'EarliestStartTime_Year~~~EarliestStartTime_Week'",
+            "trendProjection" : "toString(now(), \"yyyy~~~MM\")+\"~~~\"+toString(now(), \"99\")"
+          },
+          {
+            "display" : "Next 180 Days",
+            "text_display" : "vs previous 180 days",
+            "Backlog30DayClose" : "[\"current day - 240 days\"..\"current day - 180 days\"]",
+            "BacklogCompare" : [
+              "current day - 180 days",
+              "current day"
+            ],
+            "BacklogLabel" : "Backlog Last 180 Days",
+            "ClosedField" : "'ClosedDate_Month'",
+            "CoGroup" : "('EarliestStartTime_Month')",
+            "Compact" : [
+              [
+                "day",
+                0
+              ],
+              [
+                "day",
+                180
+              ]
+            ],
+            "CreatedField" : "'EarliestStartTime_Month'",
+            "CreatedProjection" : "created['EarliestStartTime_Month']",
+            "Current" : [
+              "1 day ahead",
+              "180 days ahead"
+            ],
+            "FullGroup" : "EarliestStartTime_Year~~~EarliestStartTime_Month",
+            "GenerateClosedDate" : "'ClosedDate_Year'+\"~~~\"+'ClosedDate_Month' as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "GenerateCoGroupDate" : "created['EarliestStartTime_Year']+\"~~~\"+created['EarliestStartTime_Month'] as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "GenerateEarliestStartTime" : "'EarliestStartTime_Year'+\"~~~\"+'EarliestStartTime_Month' as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "cogroupGenerateEarliestStartTime" : "q['EarliestStartTime_Year']+\"~~~\"+q['EarliestStartTime_Month'] as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "SAGenerateEarliestStartTime" : "'SA_EarliestStartTime_Year'+\"~~~\"+'SA_EarliestStartTime_Month' as 'SA_EarliestStartTime_Year~~~SA_EarliestStartTime_Month'",
+            "GroupbyClosedDate" : "('ClosedDate_Year','ClosedDate_Month')",
+            "GroupbyEarliestStartTime" : "('EarliestStartTime_Year','EarliestStartTime_Month')",
+            "SAGroupbyEarliestStartTime" : "('SA_EarliestStartTime_Year','SA_EarliestStartTime_Month')",
+            "Grouping" : "EarliestStartTime_Year~~~EarliestStartTime_Month",
+            "LastPeriodCompare" : [
+              "current day + 180 days",
+              "180 days ahead + 180 days"
+            ],
+            "LastYearCompare" : [
+              "180 days ago - 1 year",
+              "current day - 1 year"
+            ],
+            "Measure" : [
+              "Backlog",
+              "Count",
+              null,
+              {
+                "display" : "Backlog Count at Start of Month"
+              }
+            ],
+            "compactGroup" : [
+              "EarliestStartTime_Year",
+              "EarliestStartTime_Month"
+            ],
+            "icompactGroup" : [
+              "i[EarliestStartTime_Year]",
+              "i[EarliestStartTime_Month]"
+            ],
+            "SAcompactGroup" : [
+              "SA_EarliestStartTime_Year",
+              "SA_EarliestStartTime_Month"
+            ],
+            "filter" : "month",
+            "queryCogroupNew" : "first(ThisYear['EarliestStartTime_Year'])+\"~~~\"+ThisYear['EarliestStartTime_Month'] as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "trendProjection" : "toString(now(), \"yyyy\")+\"~~~\"+toString(now(), \"99\")"
+          },
+          {
+            "display" : "Next 2 years",
+            "text_display" : "vs previous 2 years",
+            "Backlog30DayClose" : "[\"current day - 690 days\"..\"current day - 2 years\"]",
+            "BacklogCompare" : [
+              "current day - 2 years",
+              "current day"
+            ],
+            "BacklogLabel" : "Backlog Last 2 years",
+            "ClosedField" : "'ClosedDate_Month'",
+            "CoGroup" : "('EarliestStartTime_Month')",
+            "Compact" : [
+              [
+                "day",
+                0
+              ],
+              [
+                "day",
+                720
+              ]
+            ],
+            "CreatedField" : "'EarliestStartTime_Month'",
+            "CreatedProjection" : "created['EarliestStartTime_Month']",
+            "Current" : [
+              "1 day ahead",
+              "2 years ahead"
+            ],
+            "FullGroup" : "EarliestStartTime_Year~~~EarliestStartTime_Month",
+            "GenerateClosedDate" : "'ClosedDate_Year'+\"~~~\"+'ClosedDate_Month' as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "GenerateCoGroupDate" : "created['EarliestStartTime_Year']+\"~~~\"+created['EarliestStartTime_Month'] as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "GenerateEarliestStartTime" : "'EarliestStartTime_Year'+\"~~~\"+'EarliestStartTime_Month' as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "cogroupGenerateEarliestStartTime" : "q['EarliestStartTime_Year']+\"~~~\"+q['EarliestStartTime_Month'] as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "SAGenerateEarliestStartTime" : "'SA_EarliestStartTime_Year'+\"~~~\"+'SA_EarliestStartTime_Month' as 'SA_EarliestStartTime_Year~~~SA_EarliestStartTime_Month'",
+            "GroupbyClosedDate" : "('ClosedDate_Year','ClosedDate_Month')",
+            "GroupbyEarliestStartTime" : "('EarliestStartTime_Year','EarliestStartTime_Month')",
+            "SAGroupbyEarliestStartTime" : "('SA_EarliestStartTime_Year','SA_EarliestStartTime_Month')",
+            "Grouping" : "EarliestStartTime_Year~~~EarliestStartTime_Month",
+            "LastPeriodCompare" : [
+              "current day + 2 years",
+              "2 years ahead + 2 years"
+            ],
+            "LastYearCompare" : [
+              "2 years ago - 4 years",
+              "current day - 2 years"
+            ],
+            "Measure" : [
+              "Backlog",
+              "Count",
+              null,
+              {
+                "display" : "Backlog Count at Start of Month"
+              }
+            ],
+            "compactGroup" : [
+              "EarliestStartTime_Year",
+              "EarliestStartTime_Month"
+            ],
+            "icompactGroup" : [
+              "i[EarliestStartTime_Year]",
+              "i[EarliestStartTime_Month]"
+            ],
+            "SAcompactGroup" : [
+              "SA_EarliestStartTime_Year",
+              "SA_EarliestStartTime_Month"
+            ],
+            "filter" : "month",
+            "queryCogroupNew" : "first(ThisYear['EarliestStartTime_Year'])+\"~~~\"+ThisYear['EarliestStartTime_Month'] as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "trendProjection" : "toString(now(), \"yyyy\")+\"~~~\"+toString(now(), \"99\")"
+          }
+        ]
+      },
+      "BacklogDetail_Table" : {
+        "broadcastFacet" : false,
+        "groups" : [ ],
+        "label" : "",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.ServiceAppointment3_tp.FullyQualifiedName}\";\nq = filter q by {{row(Capacity_Demand_Chart.selection,[0],['eDate','eDate']).asDateRange(\"date('DueDate_Year','DueDate_Month','DueDate_Day')\")}};\nq = filter q by !('StatusCategory' in [\"Canceled\", \"Completed\"]);\nq = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('DueDate_Year','DueDate_Month','DueDate_Day')\")}};\nq = foreach q generate 'AppointmentNumber' as 'AppointmentNumber', 'AssignedResource_User_User_Name' as 'AssignedResource_User_User_Name', 'DueDate' as 'DueDate', 'DurationInMinutes' as 'DurationInMinutes', 'ParentRecordId_AccountId_Name' as 'ParentRecordId_AccountId_Name', 'ParentRecordId_CaseId' as 'ParentRecordId_CaseId', 'ParentRecordId_Priority' as 'ParentRecordId_Priority', 'ParentRecordId_WorkOrderNumber' as 'ParentRecordId_WorkOrderNumber', 'ParentRecordId_WorkTypeId_Name' as 'ParentRecordId_WorkTypeId_Name', 'ProductRequired_ProductName' as 'ProductRequired_ProductName', 'ServiceTerritoryId_Name' as 'ServiceTerritoryId_Name', 'StatusCategory' as 'StatusCategory';\nq = order q by 'AppointmentNumber' asc;\nq = limit q 100;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "valuestable"
+        }
+      },
+      "WorkOrderPriority" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.ServiceAppointment3_tp.FullyQualifiedName}\";\nq = filter q by {{row(Capacity_Demand_Chart.selection,[0],['eDate','eDate']).asDateRange(\"date('DueDate_Year','DueDate_Month','DueDate_Day')\")}};\nq = filter q by !('StatusCategory' in [\"Canceled\", \"Completed\"]);\nq = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('DueDate_Year','DueDate_Month','DueDate_Day')\")}};\nq = group q by 'ParentRecordId_Priority';\nq = foreach q generate 'ParentRecordId_Priority' as 'ParentRecordId_Priority', count() as 'count';\nq = limit q 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "centerText" : "",
+            "centerValueType" : "number",
+            "legend" : {
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "showMeasureTitle" : true,
+            "valueType" : "compactNumber",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "pie",
+            "theme" : "wave",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "inner" : 60
+          },
+          "type" : "chart"
+        }
+      },
+      "FTE_Capacity" : {
+        "broadcastFacet" : false,
+        "groups" : [ ],
+        "label" : "FTE_Capacity",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.TimeSlot3_tp.FullyQualifiedName}\";\nq = group q by ('DayOfWeek', 'STM_ServiceResource_User_Name');\nq = foreach q generate 'DayOfWeek' as 'DayOfWeek', 'STM_ServiceResource_User_Name' as 'STM_ServiceResource_User_Name', sum('AvailableTime') as 'sum_AvailableTime', (case when toString(now(), \"HH\") >= \"08\" then day_in_week(toDate((daysBetween(toDate(\"1970-01-01\", \"yyyy-MM-dd\"), now())*86400))) else day_in_week(toDate((daysBetween(toDate(\"1970-01-01\", \"yyyy-MM-dd\"), now())*86400 - 86400))) end ) as 'curr_day';\nq = order q by ('DayOfWeek' asc, 'STM_ServiceResource_User_Name' asc);\nq = limit q 2000;\nq = group q by ('DayOfWeek', 'STM_ServiceResource_User_Name');\nq = foreach q generate (case when (first(curr_day) == 1 and 'DayOfWeek' == \"Monday\") then \"01 Monday\" when (first(curr_day) == 1 and 'DayOfWeek' == \"Tuesday\") then \"02 Tuesday\" \nwhen (first(curr_day) == 1 and 'DayOfWeek' == \"Wednesday\") then \"03 Wednesday\" when (first(curr_day) == 1 and 'DayOfWeek' == \"Thursday\") then \"04 Thursday\" when (first(curr_day) == 1 and 'DayOfWeek' == \"Friday\") then \"05 Friday\" when (first(curr_day) == 1 and 'DayOfWeek' == \"Saturday\") then \"06 Saturday\" when (first(curr_day) == 1 and 'DayOfWeek' == \"Sunday\") then \"07 Sunday\" when (first(curr_day) == 2 and 'DayOfWeek' == \"Monday\") then \"07 Monday\" when (first(curr_day) == 2 and 'DayOfWeek' == \"Tuesday\") then \"01 Tuesday\" when (first(curr_day) == 2 and 'DayOfWeek' == \"Wednesday\") then \"02 Wednesday\" when (first(curr_day) == 2 and 'DayOfWeek' == \"Thursday\") then \"03 Thursday\" \nwhen (first(curr_day) == 2 and 'DayOfWeek' == \"Friday\") then \"04 Friday\" when (first(curr_day) == 2 and 'DayOfWeek' == \"Saturday\") then \"05 Saturday\" when (first(curr_day) == 2 and 'DayOfWeek' == \"Sunday\") then \"06 Sunday\" when (first(curr_day) == 3 and 'DayOfWeek' == \"Monday\") then \"06 Monday\" when (first(curr_day) == 3 and 'DayOfWeek' == \"Tuesday\") then \"07 Tuesday\" when (first(curr_day) == 3 and 'DayOfWeek' == \"Wednesday\") then \"01 Wednesday\" when (first(curr_day) == 3 and 'DayOfWeek' == \"Thursday\") then \"02 Thursday\" \nwhen (first(curr_day) == 3 and 'DayOfWeek' == \"Friday\") then \"03 Friday\" when (first(curr_day) == 3 and 'DayOfWeek' == \"Saturday\") then \"04 Saturday\" when (first(curr_day) == 3 and 'DayOfWeek' == \"Sunday\") then \"05 Sunday\" when (first(curr_day) == 4 and 'DayOfWeek' == \"Monday\") then \"05 Monday\" when (first(curr_day) == 4 and 'DayOfWeek' == \"Tuesday\") then \"06 Tuesday\" when (first(curr_day) == 4 and 'DayOfWeek' == \"Wednesday\") then \"07 Wednesday\" when (first(curr_day) == 4 and 'DayOfWeek' == \"Thursday\") then \"01 Thursday\" \nwhen (first(curr_day) == 4 and 'DayOfWeek' == \"Friday\") then \"02 Friday\" when (first(curr_day) == 4 and 'DayOfWeek' == \"Saturday\") then \"03 Saturday\" when (first(curr_day) == 4 and 'DayOfWeek' == \"Sunday\") then \"04 Sunday\" when (first(curr_day) == 5 and 'DayOfWeek' == \"Monday\") then \"04 Monday\" when (first(curr_day) == 5 and 'DayOfWeek' == \"Tuesday\") then \"05 Tuesday\" when (first(curr_day) == 5 and 'DayOfWeek' == \"Wednesday\") then \"06 Wednesday\" when (first(curr_day) == 5 and 'DayOfWeek' == \"Thursday\") then \"07 Thursday\" \nwhen (first(curr_day) == 5 and 'DayOfWeek' == \"Friday\") then \"01 Friday\" when (first(curr_day) == 5 and 'DayOfWeek' == \"Saturday\") then \"02 Saturday\" when (first(curr_day) == 5 and 'DayOfWeek' == \"Sunday\") then \"03 Sunday\" when (first(curr_day) == 6 and 'DayOfWeek' == \"Monday\") then \"03 Monday\" when (first(curr_day) == 6 and 'DayOfWeek' == \"Tuesday\") then \"04 Tuesday\" when (first(curr_day) == 6 and 'DayOfWeek' == \"Wednesday\") then \"05 Wednesday\" when (first(curr_day) == 6 and 'DayOfWeek' == \"Thursday\") then \"06 Thursday\" \nwhen (first(curr_day) == 6 and 'DayOfWeek' == \"Friday\") then \"07 Friday\" when (first(curr_day) == 6 and 'DayOfWeek' == \"Saturday\") then \"01 Saturday\" when (first(curr_day) == 6 and 'DayOfWeek' == \"Sunday\") then \"02 Sunday\" when (first(curr_day) == 7 and 'DayOfWeek' == \"Monday\") then \"02 Monday\" when (first(curr_day) == 7 and 'DayOfWeek' == \"Tuesday\") then \"03 Tuesday\" when (first(curr_day) == 7 and 'DayOfWeek' == \"Wednesday\") then \"04 Wednesday\" when (first(curr_day) == 7 and 'DayOfWeek' == \"Thursday\") then \"05 Thursday\" \nwhen (first(curr_day) == 7 and 'DayOfWeek' == \"Friday\") then \"06 Friday\" when (first(curr_day) == 7 and 'DayOfWeek' == \"Saturday\") then \"07 Saturday\" when (first(curr_day) == 7 and 'DayOfWeek' == \"Sunday\") then \"01 Sunday\"  end) as 'DayOfWeek', 'STM_ServiceResource_User_Name' as 'STM_ServiceResource_User_Name', sum(sum_AvailableTime) as 'sum_sum_AvailableTime';\nq = order q by 'DayOfWeek' asc;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "columnMap" : {
+              "r" : [ ],
+              "color" : [
+                "sum_AvailableTime"
+              ],
+              "x" : [
+                "DayOfWeek"
+              ],
+              "y" : [
+                "STM_ServiceResource_User_Name"
+              ]
+            },
+            "legend" : {
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "highColor" : "#009DDF",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "lowColor" : "#E2F4FC",
+            "x" : {
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : ""
+            },
+            "visualizationType" : "matrix",
+            "y" : {
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : ""
+            },
+            "theme" : "wave",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            }
+          },
+          "type" : "chart",
+          "visualizationType" : "matrix"
+        }
+      },
+      "JobsDue" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "JobsDue",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.ServiceAppointment3_tp.FullyQualifiedName}\";\nq = filter q by {{row(Capacity_Demand_Chart.selection,[0],['eDate','eDate']).asDateRange(\"date('DueDate_Year','DueDate_Month','DueDate_Day')\")}};\nq = filter q by !('StatusCategory' in [\"Canceled\", \"Completed\"]);\nq = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('DueDate_Year','DueDate_Month','DueDate_Day')\")}};\nq = group q by all;\nq = foreach q generate count() as 'count';\nq = limit q 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "none",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            }
+          },
+          "type" : "chart",
+          "visualizationType" : "hbar"
+        }
+      }
+    },
+    "widgetStyle" : {
+      "backgroundColor" : "#FFFFFF",
+      "borderColor" : "#E6ECF2",
+      "borderEdges" : [ ],
+      "borderRadius" : 0,
+      "borderWidth" : 1
+    },
+    "widgets" : {
+      "chart_FTE_Capacity" : {
+        "parameters" : {
+          "autoFitMode" : "fit",
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "highColor" : "#009DDF",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "lowColor" : "#E2F4FC",
+          "visualizationType" : "matrix",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 12,
+            "label" : "",
+            "align" : "left",
+            "subtitleLabel" : "Full Time Resources"
+          },
+          "columnMap" : {
+            "r" : [ ],
+            "color" : [
+              "sum_sum_AvailableTime"
+            ],
+            "x" : [
+              "DayOfWeek"
+            ],
+            "y" : [
+              "STM_ServiceResource_User_Name"
+            ]
+          },
+          "showActionMenu" : true,
+          "x" : {
+            "showTitle" : false,
+            "showAxis" : true,
+            "title" : ""
+          },
+          "y" : {
+            "showTitle" : false,
+            "showAxis" : true,
+            "title" : ""
+          },
+          "theme" : "light",
+          "step" : "FTE_Capacity",
+          "applyConditionalFormatting" : false
+        },
+        "type" : "chart"
+      },
+      "chart_PartsBreakdown" : {
+        "parameters" : {
+          "centerText" : "",
+          "totalValue" : "computeTotal",
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "bottom-center",
+            "inside" : false
+          },
+          "showMeasureTitle" : false,
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "pie",
+          "exploreLink" : false,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "Parts Breakdown",
+            "align" : "left",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "inner" : 70,
+          "totalLabel" : "",
+          "showActionMenu" : true,
+          "centerValueType" : "none",
+          "valueType" : "none",
+          "theme" : "dark",
+          "step" : "PartsBreakdown",
+          "applyConditionalFormatting" : false
+        },
+        "type" : "chart"
+      },
+      "text__Positive_means_you_have_enough_capacity_to_meet_demand_negative_means_you_need_to_staff_up_Shown_for_next_7_days_only_" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : " Positive means you have enough capacity to meet demand, negative means you need to staff up. Shown for next 7 days only."
+          },
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#5C7A99"
+        },
+        "type" : "text"
+      },
+      "chart_JobsDueChart" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showValues" : true,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "sync",
+          "totalSumMode" : "none",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "stackvbar",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 16,
+            "subtitleFontSize" : 11,
+            "label" : "Jobs Due",
+            "align" : "left",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "columnMap" : {
+            "split" : [
+              "StatusCategory"
+            ],
+            "trellis" : [ ],
+            "dimensionAxis" : [
+              "DueDate_Year~~~DueDate_Month~~~DueDate_Day"
+            ],
+            "plots" : [
+              "count"
+            ]
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : false,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "normalize" : false,
+          "theme" : "light",
+          "step" : "JobsDueChart",
+          "dimensionAxis" : {
+            "showTitle" : false,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : false
+        },
+        "type" : "chart"
+      },
+      "container_13" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_Backlog_Detail_Table" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Backlog Detail Table"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "link_Work_Order_Overview" : {
+        "parameters" : {
+          "destination" : "${App.Dashboards['Work Order Overview'].Id}",
+          "destinationType" : "dashboard",
+          "fontSize" : 12,
+          "includeState" : true,
+          "text" : "Work Order Overview",
+          "textAlignment" : "center",
+          "textColor" : "#091A3E"
+        },
+        "type" : "link"
+      },
+      "text_Work_Order_Backlog" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Work Order Backlog"
+          },
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "textAlignment" : "center",
+          "textColor" : "rgb(99, 79, 149)"
+        },
+        "type" : "text"
+      },
+      "text__Technician_Capacity" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : " Technician Capacity"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "chart_StatusCategory" : {
+        "parameters" : {
+          "centerText" : "",
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "bottom-center",
+            "inside" : false
+          },
+          "showMeasureTitle" : false,
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "pie",
+          "exploreLink" : false,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "Status Category",
+            "align" : "left",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "inner" : 70,
+          "columnMap" : {
+            "trellis" : [ ],
+            "dimension" : [
+              "StatusCategory"
+            ],
+            "plots" : [
+              "count"
+            ]
+          },
+          "showActionMenu" : true,
+          "centerValueType" : "none",
+          "valueType" : "compactNumber",
+          "theme" : "dark",
+          "step" : "StatusCategory",
+          "applyConditionalFormatting" : false
+        },
+        "type" : "chart"
+      },
+      "table_BacklogDetail_Table" : {
+        "parameters" : {
+          "borderColor" : "#e0e5ee",
+          "borderWidth" : 1,
+          "cell" : {
+            "backgroundColor" : "#ffffff",
+            "fontColor" : "#16325c",
+            "fontSize" : 12
+          },
+          "columnProperties" : { },
+          "columns" : [ ],
+          "customBulkActions" : [ ],
+          "exploreLink" : true,
+          "header" : {
+            "backgroundColor" : "#f4f6f9",
+            "fontColor" : "#16325c",
+            "fontSize" : 12
+          },
+          "innerMajorBorderColor" : "#a8b7c7",
+          "innerMinorBorderColor" : "#e0e5ee",
+          "maxColumnWidth" : 300,
+          "minColumnWidth" : 40,
+          "mode" : "variable",
+          "numberOfLines" : 1,
+          "showActionMenu" : true,
+          "showRowIndexColumn" : true,
+          "step" : "BacklogDetail_Table",
+          "totals" : true,
+          "verticalPadding" : 8
+        },
+        "type" : "table"
+      },
+      "container_1" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_2" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_3" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_5" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "chart_Capacity_Demand_Chart" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showValues" : true,
+          "bins" : {
+            "breakpoints" : {
+              "high" : 8,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "sync",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "vbar",
+          "exploreLink" : false,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "binValues" : true,
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "columnMap" : {
+            "trellis" : [ ],
+            "dimensionAxis" : [
+              "DueDate_"
+            ],
+            "plots" : [
+              "sum_sum_Availability"
+            ]
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : true,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "Availability (in minutes)",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "theme" : "light",
+          "step" : "Capacity_Demand_Chart",
+          "dimensionAxis" : {
+            "showTitle" : true,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "Due Date",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : false
+        },
+        "type" : "chart"
+      },
+      "container_8" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "number_JobsDue" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "count",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 32,
+          "showActionMenu" : true,
+          "step" : "JobsDue",
+          "textAlignment" : "center",
+          "title" : "Jobs Due",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 14
+        },
+        "type" : "number"
+      },
+      "number_ActualTravelTime_1" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "avg_ActualTravelTime",
+          "numberColor" : "#335779",
+          "numberSize" : 32,
+          "showActionMenu" : true,
+          "step" : "ActualTravelTime_1",
+          "textAlignment" : "right",
+          "title" : "Avg of Actual Travel Time (Minutes)",
+          "titleColor" : "#335779",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "text__Capacity_Demand_Gap_Analysis_" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : " Capacity - Demand Gap Analysis "
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "chart_CapacityBasedResources_Capacity" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "highColor" : "#2EC2BA",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "lowColor" : "#44A2F5",
+          "visualizationType" : "matrix",
+          "exploreLink" : false,
+          "title" : {
+            "fontSize" : 16,
+            "subtitleFontSize" : 12,
+            "label" : "",
+            "align" : "left",
+            "subtitleLabel" : "Capacity Based Resources"
+          },
+          "columnMap" : {
+            "r" : [ ],
+            "color" : [
+              "sum_CapacityInMins"
+            ],
+            "x" : [
+              "StartDate"
+            ],
+            "y" : [
+              "UserName"
+            ]
+          },
+          "showActionMenu" : true,
+          "x" : {
+            "showTitle" : false,
+            "showAxis" : true,
+            "title" : ""
+          },
+          "y" : {
+            "showTitle" : false,
+            "showAxis" : true,
+            "title" : ""
+          },
+          "theme" : "light",
+          "step" : "CapacityBasedResources_Capacity",
+          "applyConditionalFormatting" : false
+        },
+        "type" : "chart"
+      },
+      "listselector_Time_Selection" : {
+        "parameters" : {
+          "compact" : false,
+          "displayMode" : "combo",
+          "expanded" : true,
+          "exploreLink" : false,
+          "filterStyle" : {
+            "titleColor" : "#091A3E",
+            "valueColor" : "#17324D"
+          },
+          "instant" : true,
+          "showActionMenu" : false,
+          "step" : "Time_Selection",
+          "title" : "Date Range"
+        },
+        "type" : "listselector"
+      },
+      "link_Technician_Performance" : {
+        "parameters" : {
+          "destination" : "${App.Dashboards['Technician Performance'].Id}",
+          "destinationType" : "dashboard",
+          "fontSize" : 12,
+          "includeState" : true,
+          "text" : "Technician Performance",
+          "textAlignment" : "center",
+          "textColor" : "#091A3E"
+        },
+        "type" : "link"
+      },
+      "filterpanel_1" : {
+        "parameters" : {
+          "filterItemOptions" : {
+            "backgroundColor" : "#FFFFFF",
+            "borderColor" : "#E6ECF2",
+            "borderRadius" : 4,
+            "borderWidth" : 1,
+            "propertyColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "filters" : [ ],
+          "itemsPerRow" : 6,
+          "showAllFilters" : true,
+          "title" : {
+            "separatorColor" : "#E6ECF2",
+            "text" : {
+              "align" : "left",
+              "color" : "#091A3E",
+              "fontSize" : 16,
+              "label" : "Filters"
+            },
+            "visible" : false
+          }
+        },
+        "type" : "filterpanel"
+      },
+      "text_Work_Order_Backlog1" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Work Order Backlog"
+          },
+          "fontSize" : 24,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "chart_WorkOrderPriority" : {
+        "parameters" : {
+          "centerText" : "",
+          "totalValue" : "computeTotal",
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "bottom-center",
+            "inside" : false
+          },
+          "showMeasureTitle" : false,
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "pie",
+          "exploreLink" : false,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "Work Order Priority",
+            "align" : "left",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "inner" : 70,
+          "totalLabel" : "",
+          "showActionMenu" : true,
+          "centerValueType" : "none",
+          "valueType" : "none",
+          "theme" : "dark",
+          "step" : "WorkOrderPriority",
+          "applyConditionalFormatting" : false
+        },
+        "type" : "chart"
+      },
+      "container_11" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "number_JobsOverdue" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "count",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 32,
+          "showActionMenu" : true,
+          "step" : "JobsOverdue",
+          "textAlignment" : "center",
+          "title" : "Jobs Overdue",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 14
+        },
+        "type" : "number"
+      }
+    }
+  }
+}
