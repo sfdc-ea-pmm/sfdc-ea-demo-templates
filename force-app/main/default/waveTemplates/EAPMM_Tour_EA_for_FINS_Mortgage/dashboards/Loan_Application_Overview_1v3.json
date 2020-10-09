@@ -6312,7 +6312,7 @@
                       "CreatedDate_Week"
                     ]
                   ],
-                  "formula" : "round(abs(coalesce((D - sum(D) over ([-1..-1] partition by all order by ('CreatedDate_Year~~~CreatedDate_Week')))/(sum(D) over ([-1..-1] partition by all order by ('CreatedDate_Year~~~CreatedDate_Week'))),0)*100))"
+                  "formula" : "coalesce(round(abs(coalesce((D - sum(D) over ([-1..-1] partition by all order by ('CreatedDate_Year~~~CreatedDate_Week')))/(sum(D) over ([-1..-1] partition by all order by ('CreatedDate_Year~~~CreatedDate_Week'))),0)*100)), 0)"
                 },
                 "name" : "CompletedAppRateVsLastWeek100",
                 "header" : "Completed Applications Rate vs Last Week"
@@ -6403,7 +6403,7 @@
                       "CreatedDate_Week"
                     ]
                   ],
-                  "formula" : "(NewApplications - sum(NewApplications) over ([-1..-1] partition by all order by ('CreatedDate_Year~~~CreatedDate_Week')))/(sum(NewApplications) over ([-1..-1] partition by all order by ('CreatedDate_Year~~~CreatedDate_Week')))",
+                  "formula" : "coalesce((NewApplications - sum(NewApplications) over ([-1..-1] partition by all order by ('CreatedDate_Year~~~CreatedDate_Week')))/(sum(NewApplications) over ([-1..-1] partition by all order by ('CreatedDate_Year~~~CreatedDate_Week'))), 0)",
                   "filters" : [
                     [
                       "Status",
@@ -6431,7 +6431,7 @@
                       "CreatedDate_Week"
                     ]
                   ],
-                  "formula" : "round((NewApplications - sum(NewApplications) over ([-1..-1] partition by all order by ('CreatedDate_Year~~~CreatedDate_Week')))/(sum(NewApplications) over ([-1..-1] partition by all order by ('CreatedDate_Year~~~CreatedDate_Week')))*100)",
+                  "formula" : "coalesce(round((NewApplications - sum(NewApplications) over ([-1..-1] partition by all order by ('CreatedDate_Year~~~CreatedDate_Week')))/(sum(NewApplications) over ([-1..-1] partition by all order by ('CreatedDate_Year~~~CreatedDate_Week')))*100), 0)",
                   "filters" : [
                     [
                       "Status",
@@ -7915,7 +7915,7 @@
           "destinationType" : "page",
           "fontSize" : 14,
           "includeState" : false,
-          "text" : "Applications Need My Attention",
+          "text" : "Applications Needing My Attention",
           "textAlignment" : "center",
           "textColor" : "#FFFFFF"
         },
@@ -8991,7 +8991,7 @@
           "destinationType" : "page",
           "fontSize" : 14,
           "includeState" : false,
-          "text" : "Applications Need My Attention",
+          "text" : "Applications Needing My Attention",
           "textAlignment" : "center",
           "textColor" : "rgb(162, 184, 208)"
         },
@@ -9025,7 +9025,7 @@
           "destinationType" : "page",
           "fontSize" : 14,
           "includeState" : false,
-          "text" : "Applications Need My Attention",
+          "text" : "Applications Needing My Attention",
           "textAlignment" : "center",
           "textColor" : "#FFFFFF"
         },
