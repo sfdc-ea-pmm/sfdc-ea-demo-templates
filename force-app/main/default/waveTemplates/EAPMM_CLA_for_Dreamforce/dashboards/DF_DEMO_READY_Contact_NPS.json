@@ -172,7 +172,7 @@
         "groups" : [ ],
         "label" : "Config Data",
         "numbers" : [ ],
-        "query" : "config = load \"${App.Datasets.SurveyQuestionResponsewithDetails_tp.FullyQualifiedName}\"; config = filter config by 'Question_QuestionType' == \"NPS\"; config = filter config by 'Invitation_Participant_ParticipantType' == \"Contact\"; config = foreach config generate 'QuestionId' as 'QuestionId', 'Question_Name' as 'QuestionName', 'Question_QuestionType' as 'QuestionType', 'Invitation_SurveyId' as 'SurveyID', 'SurveyVersion_Survey_Name' as 'SurveyName', 'SurveyVersionId' as 'SurveyVersionID', 'SurveyVersion_VersionNumber' as 'VersionNumber', string_to_number('SurveyVersion_VersionNumber') as 'Version';\nconfig = order config by 'Version' desc;",
+        "query" : "config = load \"${App.Datasets.SurveyQuestionResponsewithDetails_tp.FullyQualifiedName}\"; config = filter config by 'Question_QuestionType' == \"NPS\"; config = filter config by 'Invitation_Participant_ParticipantType' == \"Contact\"; config = foreach config generate 'QuestionId' as 'QuestionId', 'Question_Name' as 'QuestionName', 'Question_QuestionType' as 'QuestionType', 'Invitation_SurveyId' as 'SurveyID', 'SurveyVersion_Survey_Name' as 'Survey_Name', 'SurveyVersionId' as 'SurveyVersionID', 'SurveyVersion_VersionNumber' as 'VersionNumber', string_to_number('SurveyVersion_VersionNumber') as 'Version';\nconfig = order config by 'Version' desc;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -183,7 +183,7 @@
           "QuestionName",
           "QuestionType",
           "SurveyID",
-          "SurveyName",
+          "Survey_Name",
           "SurveyVersionID",
           "VersionNumber"
         ],
