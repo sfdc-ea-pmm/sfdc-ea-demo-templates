@@ -63,9 +63,63 @@
           {"name": "OwnerId"},
           {"name": "Probability"},
           {"name": "StageName"},
-          {"name": "Type"}
+          {"name": "Type"},
+          {"name": "DateTimeCreated__c"}
         ],
         "object": "Opportunity"
+      }
+    },
+    "Filter_Org_Oppties": {
+      "action": "filter",
+      "parameters": {
+        "source": "Extract_Opportunity",
+        "saqlFilter": "'DateTimeCreated__c' == \"\""
+      }
+    },
+    "Filter_Demo_Oppties": {
+      "action": "filter",
+      "parameters": {
+        "source": "Extract_Opportunity",
+        "saqlFilter": "'DateTimeCreated__c' != \"\""
+      }
+    },
+    "Demo_Opp_Drop_CreatedDate": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "fields": [
+          {
+            "name": "CreatedDate"
+          }
+        ],
+        "source": "Filter_Demo_Oppties"
+      }
+    },
+    "Demo_Opp_Rename_Dates": {
+      "action": "computeExpression",
+      "parameters": {
+        "mergeWithSource": true,
+        "source": "Demo_Opp_Drop_CreatedDate",
+        "computedFields": [
+          {
+            "type": "Date",
+            "name": "CreatedDate",
+            "label": "CreatedDate",
+            "isYearEndFiscalYear": true,
+            "saqlExpression": "toDate(DateTimeCreated__c, \"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\")",
+            "format": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+          }
+        ]
+      }
+    },
+    "Append_Org_And_Demo_Oppties": {
+      "action": "append",
+      "parameters": {
+        "enableDisjointedSchemaMerge": false,
+        "sources": [
+          "Filter_Org_Oppties",
+          "Demo_Opp_Rename_Dates"
+        ]
       }
     },
     "Compute_UniqueUserName": {
@@ -193,7 +247,7 @@
       "action": "augment",
       "parameters": {
         "right_key": ["Id"],
-        "left": "Extract_Opportunity",
+        "left": "Append_Org_And_Demo_Oppties",
         "left_key": ["AccountId"],
         "right_select": [
           "AccountSource",
