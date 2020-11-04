@@ -5862,7 +5862,7 @@
         "groups" : [ ],
         "label" : "Responsive customer Vs Customer Base",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.SurveyQuestionResponsewithDetails_tp.FullyQualifiedName}\"; q = filter q by {{column(NPS___Customer_Journ_1.selection, [\"Stage\"]).asEquality(\"JourneyConfig_Stage\")}} && {{column(NPS___Customer_Journ_4.selection, [\"Stage\"]).asEquality(\"JourneyConfig_Stage\")}} && {{column(Responses_by_stage_1.selection, [\"Stage\"]).asEquality(\"JourneyConfig_Stage\")}};\nconfig = load \"${App.Datasets.Journey_Survey_Question_Config_Metadata_tp.FullyQualifiedName}\";\nconfig = filter config by 'Context' == \"Customer NPS\";\n\nresponsive = group config by all left, q by all;\nresponsive = foreach responsive generate \"Responsive\" as 'Customer Type', coalesce(unique(q.'Invitation_ParticipantId'),0) as 'Count';\ncontacts = load \"${App.Datasets.Contacts_tp.FullyQualifiedName}\";\npassive = group config by all left, q by all left, contacts by all;\npassive = foreach passive generate \"Untapped\" as 'Customer Type', count(contacts) - coalesce(unique(q.'Invitation_ParticipantId'),0) as 'Count';\n\nresult = union responsive, passive;\nresult = group result by 'Customer Type';\nresult = foreach result generate 'Customer Type', sum('Count') as 'Count';",
+        "query" : "q = load \"${App.Datasets.SurveyQuestionResponsewithDetails_tp.FullyQualifiedName}\"; q = filter q by {{column(NPS___Customer_Journ_1.selection, [\"Stage\"]).asEquality(\"JourneyConfig_Stage\")}} && {{column(NPS___Customer_Journ_4.selection, [\"Stage\"]).asEquality(\"JourneyConfig_Stage\")}} && {{column(Responses_by_stage_1.selection, [\"Stage\"]).asEquality(\"JourneyConfig_Stage\")}};\nconfig = load \"${App.Datasets.Journey_Survey_Question_Config_Metadata_tp.FullyQualifiedName}\";\nconfig = filter config by 'Context' == \"Customer NPS\";\n\nresponsive = group config by all left, q by all;\nresponsive = foreach responsive generate \"Responsive\" as 'Customer Type', coalesce(unique(q.'Invitation_ParticipantId'),0) as 'Count';\ncontacts = load \"${App.Datasets.Contacts_df_tp.FullyQualifiedName}\";\npassive = group config by all left, q by all left, contacts by all;\npassive = foreach passive generate \"Untapped\" as 'Customer Type', count(contacts) - coalesce(unique(q.'Invitation_ParticipantId'),0) as 'Count';\n\nresult = union responsive, passive;\nresult = group result by 'Customer Type';\nresult = foreach result generate 'Customer Type', sum('Count') as 'Count';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -7408,7 +7408,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Contacts_tp.Name}"
+            "name" : "${App.Datasets.Contacts_df_tp.Name}"
           }
         ],
         "isGlobal" : false,
