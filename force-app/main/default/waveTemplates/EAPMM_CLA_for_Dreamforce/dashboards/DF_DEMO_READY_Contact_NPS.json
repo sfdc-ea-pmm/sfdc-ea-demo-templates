@@ -26,7 +26,7 @@
             "fieldName" : "Id"
           },
           {
-            "dataSourceName" : "${App.Datasets.SurveyQuestionResponsewithDetails_tp.Name}",
+            "dataSourceName" : "${App.Datasets.SurveyQuestionResponsewithDetails_df_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "Invitation_ParticipantId"
@@ -172,7 +172,7 @@
         "groups" : [ ],
         "label" : "Config Data",
         "numbers" : [ ],
-        "query" : "config = load \"${App.Datasets.SurveyQuestionResponsewithDetails_tp.FullyQualifiedName}\"; config = filter config by 'Question_QuestionType' == \"NPS\"; config = filter config by 'Invitation_Participant_ParticipantType' == \"Contact\"; config = foreach config generate 'QuestionId' as 'QuestionId', 'Question_Name' as 'QuestionName', 'Question_QuestionType' as 'QuestionType', 'Invitation_SurveyId' as 'SurveyID', 'SurveyVersion_Survey_Name' as 'Survey_Name', 'SurveyVersionId' as 'SurveyVersionID', 'SurveyVersion_VersionNumber' as 'VersionNumber', string_to_number('SurveyVersion_VersionNumber') as 'Version';\nconfig = order config by 'Version' desc;",
+        "query" : "config = load \"${App.Datasets.SurveyQuestionResponsewithDetails_df_tp.FullyQualifiedName}\"; config = filter config by 'Question_QuestionType' == \"NPS\"; config = filter config by 'Invitation_Participant_ParticipantType' == \"Contact\"; config = foreach config generate 'QuestionId' as 'QuestionId', 'Question_Name' as 'QuestionName', 'Question_QuestionType' as 'QuestionType', 'Invitation_SurveyId' as 'SurveyID', 'SurveyVersion_Survey_Name' as 'Survey_Name', 'SurveyVersionId' as 'SurveyVersionID', 'SurveyVersion_VersionNumber' as 'VersionNumber', string_to_number('SurveyVersion_VersionNumber') as 'Version';\nconfig = order config by 'Version' desc;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -224,7 +224,7 @@
         "groups" : [ ],
         "label" : "Average score across all surveys",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.SurveyQuestionResponsewithDetails_tp.FullyQualifiedName}\";\nq = filter q by 'Question_QuestionType' == \"NPS\"; q = filter q by 'Invitation_Participant_ParticipantType' == \"Contact\"; q = filter q by {{column(Config_Data_1.result, [\"SurveyID\"]).asEquality(\"SurveyVersion_Survey_Id\")}}; q = filter q by {{column(Config_Data_1.result, [\"QuestionId\"]).asEquality(\"QuestionId\")}}; promoters = filter q by 'NumberValue' > 8; detractors = filter q by 'NumberValue' < 7;\nresult = group q by ('SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId') left, promoters by ('SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId') left, detractors by ('SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId');\nresult = foreach result generate q.'SurveyVersion_Survey_Id' as 'SurveyVersion_Survey_Id', q.'SurveyVersionId' as 'SurveyVersionId', q.'QuestionId' as 'QuestionId', count(promoters) as 'Promoter Value', count(detractors) as 'Detractor Value', count(q) as 'Count';\nresult = group result by all;\nresult = foreach result generate round(((sum('Promoter Value')-sum('Detractor Value'))*100)/sum(Count),0) as 'Avg Score';",
+        "query" : "q = load \"${App.Datasets.SurveyQuestionResponsewithDetails_df_tp.FullyQualifiedName}\";\nq = filter q by 'Question_QuestionType' == \"NPS\"; q = filter q by 'Invitation_Participant_ParticipantType' == \"Contact\"; q = filter q by {{column(Config_Data_1.result, [\"SurveyID\"]).asEquality(\"SurveyVersion_Survey_Id\")}}; q = filter q by {{column(Config_Data_1.result, [\"QuestionId\"]).asEquality(\"QuestionId\")}}; promoters = filter q by 'NumberValue' > 8; detractors = filter q by 'NumberValue' < 7;\nresult = group q by ('SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId') left, promoters by ('SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId') left, detractors by ('SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId');\nresult = foreach result generate q.'SurveyVersion_Survey_Id' as 'SurveyVersion_Survey_Id', q.'SurveyVersionId' as 'SurveyVersionId', q.'QuestionId' as 'QuestionId', count(promoters) as 'Promoter Value', count(detractors) as 'Detractor Value', count(q) as 'Count';\nresult = group result by all;\nresult = foreach result generate round(((sum('Promoter Value')-sum('Detractor Value'))*100)/sum(Count),0) as 'Avg Score';",
         "receiveFacetSource" : {
           "mode" : "none",
           "steps" : [ ]
@@ -347,7 +347,7 @@
           "Value",
           "count"
         ],
-        "query" : "q = load \"${App.Datasets.SurveyQuestionResponsewithDetails_tp.FullyQualifiedName}\";\nq = filter q by 'Question_QuestionType' == \"NPS\"; q = filter q by 'Invitation_Participant_ParticipantType' == \"Contact\"; q = foreach q generate 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day', 'NumberValue'; q = order q by ('CreatedDate_Year' desc, 'CreatedDate_Month' desc, 'CreatedDate_Day' desc); result = group q by ('SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId'); result = foreach result generate q.'SurveyVersion_Survey_Id' as 'SurveyVersion_Survey_Id', q.'SurveyVersionId' as 'SurveyVersionId', q.'QuestionId' as 'QuestionId', first(q.'NumberValue') as 'Value', count(q) as 'count';",
+        "query" : "q = load \"${App.Datasets.SurveyQuestionResponsewithDetails_df_tp.FullyQualifiedName}\";\nq = filter q by 'Question_QuestionType' == \"NPS\"; q = filter q by 'Invitation_Participant_ParticipantType' == \"Contact\"; q = foreach q generate 'SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId', 'CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day', 'NumberValue'; q = order q by ('CreatedDate_Year' desc, 'CreatedDate_Month' desc, 'CreatedDate_Day' desc); result = group q by ('SurveyVersion_Survey_Id', 'SurveyVersionId', 'QuestionId'); result = foreach result generate q.'SurveyVersion_Survey_Id' as 'SurveyVersion_Survey_Id', q.'SurveyVersionId' as 'SurveyVersionId', q.'QuestionId' as 'QuestionId', first(q.'NumberValue') as 'Value', count(q) as 'count';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
