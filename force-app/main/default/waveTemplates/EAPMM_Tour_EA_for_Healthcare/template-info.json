@@ -1,8 +1,25 @@
 {
   "templateType" : "app",
-  "label" : "Tour | EA for Healthcare",
+  "label" : "Tour | TCRM for Healthcare",
   "name" : "Tour_EA_for_Healthcare",
-  "description" : "",
+  "description": "Harbor Tour version of TCR for Healthcare",
+  "customAttributes": [
+    {
+      "label": "Author(s)",
+      "values": [
+        "TCRM PMM"
+      ]
+    },
+    {
+      "label": "Demo Version",
+      "values": ["v2020.47"]
+    },
+    {
+      "label": "Source Version",
+      "values": ["v228"]
+    }
+  ],
+  "tags": ["Harbor Tour", "Demo", "Healthcare", "HLS"],
   "assetVersion" : 50.0,
   "variableDefinition" : "variables.json",
   "uiDefinition" : "ui.json",
@@ -60,6 +77,96 @@
       "type" : "CSV",
       "schema" : "external_files/HLS_Barrier8.json",
       "userXmd" : "external_files/HLS_Barrier8_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "HLS_Care_Plan",
+      "name" : "HLS_Care_Plan7_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "file" : "external_files/HLS_Care_Plan7.csv",
+      "type" : "CSV",
+      "schema" : "external_files/HLS_Care_Plan7.json",
+      "userXmd" : "external_files/HLS_Care_Plan7_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "HLS_Care_Request",
+      "name" : "HLS_Care_Request8_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "file" : "external_files/HLS_Care_Request8.csv",
+      "type" : "CSV",
+      "schema" : "external_files/HLS_Care_Request8.json",
+      "userXmd" : "external_files/HLS_Care_Request8_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "HLS_Goal",
+      "name" : "HLS_Goal7_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "file" : "external_files/HLS_Goal7.csv",
+      "type" : "CSV",
+      "schema" : "external_files/HLS_Goal7.json",
+      "userXmd" : "external_files/HLS_Goal7_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "HLS_Patient",
+      "name" : "HLS_Patient8_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "file" : "external_files/HLS_Patient8.csv",
+      "type" : "CSV",
+      "schema" : "external_files/HLS_Patient8.json",
+      "userXmd" : "external_files/HLS_Patient8_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "HLS_Patient_Segment",
+      "name" : "HLS_Patient_Segment59_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "file" : "external_files/HLS_Patient_Segment59.csv",
+      "type" : "CSV",
+      "schema" : "external_files/HLS_Patient_Segment59.json",
+      "userXmd" : "external_files/HLS_Patient_Segment59_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "HLS_Problem",
+      "name" : "HLS_Problem7_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "file" : "external_files/HLS_Problem7.csv",
+      "type" : "CSV",
+      "schema" : "external_files/HLS_Problem7.json",
+      "userXmd" : "external_files/HLS_Problem7_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "HLS_Referral",
+      "name" : "HLS_Referral8_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "file" : "external_files/HLS_Referral8.csv",
+      "type" : "CSV",
+      "schema" : "external_files/HLS_Referral8.json",
+      "userXmd" : "external_files/HLS_Referral8_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "HLS_Task",
+      "name" : "HLS_Task7_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "file" : "external_files/HLS_Task7.csv",
+      "type" : "CSV",
+      "schema" : "external_files/HLS_Task7.json",
+      "userXmd" : "external_files/HLS_Task7_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "HLS_Visit",
+      "name" : "HLS_Visit8_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "file" : "external_files/HLS_Visit8.csv",
+      "type" : "CSV",
+      "schema" : "external_files/HLS_Visit8.json",
+      "userXmd" : "external_files/HLS_Visit8_XMD.json",
       "rows" : 5
     }
   ],
@@ -192,94 +299,9 @@
       "file" : "dashboards/Medical_Devices_Visit9.json"
     }
   ],
-  "eltDataflows" : [
-    {
-      "label" : "Main Dataflow",
-      "name" : "Main_Dataflow",
-      "condition" : "${Variables.Overrides.createDataflow}",
-      "file" : "dataflow/Main_Dataflow.json"
-    }
-  ],
+  "eltDataflows" : [ ],
   "recipes" : [ ],
   "datasetFiles" : [
-    {
-      "label" : "HLS_Account",
-      "name" : "HLS_Account8_tp",
-      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-      "userXmd" : "dataset_files/HLS_Account8_XMD.json"
-    },
-    {
-      "label" : "HLS_Activities",
-      "name" : "HLS_Activities8_tp",
-      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-      "userXmd" : "dataset_files/HLS_Activities8_XMD.json"
-    },
-    {
-      "label" : "HLS_AssessmentTask",
-      "name" : "HLS_AssessmentTask8_tp",
-      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-      "userXmd" : "dataset_files/HLS_AssessmentTask8_XMD.json"
-    },
-    {
-      "label" : "HLS_Barrier",
-      "name" : "HLS_Barrier8_tp",
-      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-      "userXmd" : "dataset_files/HLS_Barrier8_XMD.json"
-    },
-    {
-      "label" : "HLS_Care_Plan",
-      "name" : "HLS_Care_Plan7_tp",
-      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-      "userXmd" : "dataset_files/HLS_Care_Plan7_XMD.json"
-    },
-    {
-      "label" : "HLS_Care_Request",
-      "name" : "HLS_Care_Request8_tp",
-      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-      "userXmd" : "dataset_files/HLS_Care_Request8_XMD.json"
-    },
-    {
-      "label" : "HLS_Goal",
-      "name" : "HLS_Goal7_tp",
-      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-      "userXmd" : "dataset_files/HLS_Goal7_XMD.json"
-    },
-    {
-      "label" : "HLS_Patient",
-      "name" : "HLS_Patient8_tp",
-      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-      "userXmd" : "dataset_files/HLS_Patient8_XMD.json"
-    },
-    {
-      "label" : "HLS_Patient_Segment",
-      "name" : "HLS_Patient_Segment59_tp",
-      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-      "userXmd" : "dataset_files/HLS_Patient_Segment59_XMD.json"
-    },
-    {
-      "label" : "HLS_Problem",
-      "name" : "HLS_Problem7_tp",
-      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-      "userXmd" : "dataset_files/HLS_Problem7_XMD.json"
-    },
-    {
-      "label" : "HLS_Referral",
-      "name" : "HLS_Referral8_tp",
-      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-      "userXmd" : "dataset_files/HLS_Referral8_XMD.json"
-    },
-    {
-      "label" : "HLS_Task",
-      "name" : "HLS_Task7_tp",
-      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-      "userXmd" : "dataset_files/HLS_Task7_XMD.json"
-    },
-    {
-      "label" : "HLS_Visit",
-      "name" : "HLS_Visit8_tp",
-      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-      "userXmd" : "dataset_files/HLS_Visit8_XMD.json"
-    }
   ],
   "storedQueries" : [ ],
   "imageFiles" : [
@@ -325,9 +347,20 @@
     "appBadge" : {
       "name" : "10.png"
     },
-    "templateBadge" : {
-      "name" : "default.png"
+    "templateBadge": {
+      "name": "analytics_icon"
     },
-    "templatePreviews" : [ ]
+    "templatePreviews": [
+      {
+        "name": "einstein_scene",
+        "label": "",
+      "description": ""
+    },
+    {
+      "name": "demo_template_guide_0",
+      "label": "How to Use this Template",
+        "description": "This demo template is decoupled from core objects and does not require any additional licenses (only TCRM+). To customize the data you will need to download the datasets, modify and update. This template includes full sample data."
+      }
+    ]
   }
 }
