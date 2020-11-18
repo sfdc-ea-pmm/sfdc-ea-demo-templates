@@ -429,7 +429,7 @@
         },
         "dependent" : true,
         "fields" : [
-          "Case.Origin"
+          "Case_Origin"
         ],
         "label" : "Case Origin",
         "locked" : false,
@@ -441,7 +441,7 @@
         },
         "dependent" : true,
         "fields" : [
-          "Owner.Username"
+          "Owner_Username"
         ],
         "locked" : false,
         "operator" : "in"
@@ -452,7 +452,7 @@
         },
         "dependent" : true,
         "fields" : [
-          "Case.Status"
+          "Case_Status"
         ],
         "locked" : false,
         "operator" : "in"
@@ -1820,24 +1820,24 @@
           "query" : {
             "values" : [
               "Name",
-              "Case.CaseRecordType.Name",
+              "Case_CaseRecordType_Name",
               "AdmissionType",
               "ClinicalCaseType",
-              "Case.Origin",
-              "Case.Status",
+              "Case_Origin",
+              "Case_Status",
               "Created_Date_Format",
               "Due_Date_Format"
             ],
             "filters" : [
               [
-                "Case.Status",
+                "Case_Status",
                 [
                   "Closed"
                 ],
                 "not in"
               ],
               [
-                "Case.CaseRecordType.Name",
+                "Case_CaseRecordType_Name",
                 [
                   "Admission",
                   "Concurrent Review",
@@ -1891,7 +1891,7 @@
         "groups" : [ ],
         "label" : "Clinic",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case.Status' != \"Closed\";\nq = filter q by 'CareRequestRecordType.Name' == \"Admission\";\nq_D = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq_E = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq_F = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq_G = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text3\").asString()}}];\nq_H = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text3\").asString()}}];\nq_I = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text3\").asString()}}];\nresult = group q by all full, q_D by all full, q_E by all full, q_F by all full, q_G by all full, q_H by all full, q_I by all;\nresult = foreach result generate coalesce(unique(q.'Id'),0) as 'A', coalesce(unique(q.'ClinicalCaseType'),0) as 'B', coalesce(avg(q.'Days_Since_Created'),0) as 'C', \ncoalesce(unique(q_D.'Id'),0) as 'D', coalesce(unique(q_E.'ClinicalCaseType'),0) as 'E', coalesce(avg(q_F.'Days_Since_Created'),0) as 'F', unique(q_G.'Id') as 'G',\ncoalesce(unique(q_H.'ClinicalCaseType'),0) as 'H', avg(q_I.'Days_Since_Created') as 'I';\nresult = foreach result generate 'A', 'B', 'C', 'D', 'E', 'F', 'G' , 'H', 'I', (D-G)/G as 'Percentage_Change_In_CareRequest', coalesce((E-H)/H,0) as 'K', coalesce((F-I)/I,0) as 'L',(F-I) as 'Change_In_Days';\nresult = foreach result generate 'D' as 'Admission Care Requests','E' as 'Admission Clinical Types',round('F',0) as 'Avg Age','G' as 'Admission Care Request Previous',round('I',0) as 'Avg Age Previous','Percentage_Change_In_CareRequest',round('Change_In_Days',0) as 'Change_In_Days';\n",
+        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case_Status' != \"Closed\";\nq = filter q by 'CareRequestRecordType_Name' == \"Admission\";\nq_D = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq_E = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq_F = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq_G = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text3\").asString()}}];\nq_H = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text3\").asString()}}];\nq_I = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text3\").asString()}}];\nresult = group q by all full, q_D by all full, q_E by all full, q_F by all full, q_G by all full, q_H by all full, q_I by all;\nresult = foreach result generate coalesce(unique(q.'Id'),0) as 'A', coalesce(unique(q.'ClinicalCaseType'),0) as 'B', coalesce(avg(q.'Days_Since_Created'),0) as 'C', \ncoalesce(unique(q_D.'Id'),0) as 'D', coalesce(unique(q_E.'ClinicalCaseType'),0) as 'E', coalesce(avg(q_F.'Days_Since_Created'),0) as 'F', unique(q_G.'Id') as 'G',\ncoalesce(unique(q_H.'ClinicalCaseType'),0) as 'H', avg(q_I.'Days_Since_Created') as 'I';\nresult = foreach result generate 'A', 'B', 'C', 'D', 'E', 'F', 'G' , 'H', 'I', (D-G)/G as 'Percentage_Change_In_CareRequest', coalesce((E-H)/H,0) as 'K', coalesce((F-I)/I,0) as 'L',(F-I) as 'Change_In_Days';\nresult = foreach result generate 'D' as 'Admission Care Requests','E' as 'Admission Clinical Types',round('F',0) as 'Avg Age','G' as 'Admission Care Request Previous',round('I',0) as 'Avg Age Previous','Percentage_Change_In_CareRequest',round('Change_In_Days',0) as 'Change_In_Days';\n",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1935,7 +1935,7 @@
         "groups" : [ ],
         "label" : "Clinic_2",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case.Status' != \"Closed\";\nq = filter q by 'CareRequestRecordType.Name' == \"Service Request\";\nq_D = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq_E = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq_F = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq_G = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text3\").asString()}}];\nq_H = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text3\").asString()}}];\nq_I = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text3\").asString()}}];\nresult = group q by all full, q_D by all full, q_E by all full, q_F by all full, q_G by all full, q_H by all full, q_I by all;\nresult = foreach result generate unique(q.'Id') as 'A', unique(q.'ClinicalCaseType') as 'B', avg(q.'Days_Since_Created') as 'C', unique(q_D.'Id') as 'D', unique(q_E.'ClinicalCaseType') as 'E', avg(q_F.'Days_Since_Created') as 'F', unique(q_G.'Id') as 'G', unique(q_H.'ClinicalCaseType') as 'H', avg(q_I.'Days_Since_Created') as 'I';\nresult = foreach result generate 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',((D-G)/G) as 'Percentage_Change_In_CareRequest', ((E-H)/H) as 'K', ((F-I)/I) as 'L', (F-I) as 'Change_In_Days';\nresult = foreach result generate 'D' as 'Service Request','E' as 'Clinical Types',round('F',0) as 'Avg Age','G' as 'Service Request Previous',round('I',0) as 'Avg Age Previous','Percentage_Change_In_CareRequest',round('Change_In_Days',0) as 'Change_In_Days';",
+        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case_Status' != \"Closed\";\nq = filter q by 'CareRequestRecordType_Name' == \"Service Request\";\nq_D = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq_E = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq_F = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq_G = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text3\").asString()}}];\nq_H = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text3\").asString()}}];\nq_I = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text3\").asString()}}];\nresult = group q by all full, q_D by all full, q_E by all full, q_F by all full, q_G by all full, q_H by all full, q_I by all;\nresult = foreach result generate unique(q.'Id') as 'A', unique(q.'ClinicalCaseType') as 'B', avg(q.'Days_Since_Created') as 'C', unique(q_D.'Id') as 'D', unique(q_E.'ClinicalCaseType') as 'E', avg(q_F.'Days_Since_Created') as 'F', unique(q_G.'Id') as 'G', unique(q_H.'ClinicalCaseType') as 'H', avg(q_I.'Days_Since_Created') as 'I';\nresult = foreach result generate 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',((D-G)/G) as 'Percentage_Change_In_CareRequest', ((E-H)/H) as 'K', ((F-I)/I) as 'L', (F-I) as 'Change_In_Days';\nresult = foreach result generate 'D' as 'Service Request','E' as 'Clinical Types',round('F',0) as 'Avg Age','G' as 'Service Request Previous',round('I',0) as 'Avg Age Previous','Percentage_Change_In_CareRequest',round('Change_In_Days',0) as 'Change_In_Days';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2019,14 +2019,14 @@
             ],
             "filters" : [
               [
-                "Case.Status",
+                "Case_Status",
                 [
                   "Closed"
                 ],
                 "not in"
               ],
               [
-                "CareRequestRecordType.Name",
+                "CareRequestRecordType_Name",
                 [
                   "Admission"
                 ],
@@ -2175,14 +2175,14 @@
             ],
             "filters" : [
               [
-                "Case.Status",
+                "Case_Status",
                 [
                   "Closed"
                 ],
                 "not in"
               ],
               [
-                "CareRequestRecordType.Name",
+                "CareRequestRecordType_Name",
                 [
                   "Concurrent Review"
                 ],
@@ -2331,14 +2331,14 @@
             ],
             "filters" : [
               [
-                "Case.Status",
+                "Case_Status",
                 [
                   "Closed"
                 ],
                 "not in"
               ],
               [
-                "CareRequestRecordType.Name",
+                "CareRequestRecordType_Name",
                 [
                   "Concurrent Review"
                 ],
@@ -2488,14 +2488,14 @@
             ],
             "filters" : [
               [
-                "Case.Status",
+                "Case_Status",
                 [
                   "Closed"
                 ],
                 "not in"
               ],
               [
-                "CareRequestRecordType.Name",
+                "CareRequestRecordType_Name",
                 [
                   "Service Request"
                 ],
@@ -2645,14 +2645,14 @@
             ],
             "filters" : [
               [
-                "Case.Status",
+                "Case_Status",
                 [
                   "Closed"
                 ],
                 "not in"
               ],
               [
-                "CareRequestRecordType.Name",
+                "CareRequestRecordType_Name",
                 [
                   "Service Request"
                 ],
@@ -2802,14 +2802,14 @@
             ],
             "filters" : [
               [
-                "Case.Status",
+                "Case_Status",
                 [
                   "Closed"
                 ],
                 "not in"
               ],
               [
-                "CareRequestRecordType.Name",
+                "CareRequestRecordType_Name",
                 [
                   "Admission"
                 ],
@@ -2942,7 +2942,7 @@
         "groups" : [ ],
         "label" : "Clone of Clinic_2",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case.Status' != \"Closed\";\nq = filter q by 'CareRequestRecordType.Name' == \"Concurrent Review\";\nq_D = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq_E = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq_F = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq_G = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text3\").asString()}}];\nq_H = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text3\").asString()}}];\nq_I = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text3\").asString()}}];\nresult = group q by all full, q_D by all full, q_E by all full, q_F by all full, q_G by all full, q_H by all full, q_I by all;\nresult = foreach result generate unique(q.'Id') as 'A', unique(q.'ClinicalCaseType') as 'B', avg(q.'Days_Since_Created') as 'C', unique(q_D.'Id') as 'D', unique(q_E.'ClinicalCaseType') as 'E', avg(q_F.'Days_Since_Created') as 'F', unique(q_G.'Id') as 'G', unique(q_H.'ClinicalCaseType') as 'H', avg(q_I.'Days_Since_Created') as 'I';\nresult = foreach result generate 'D' as 'Concurrent Review Care Requests', 'E' as 'Clinical Types', round('F',0) as 'Avg Age', 'G' as 'Concurrent Review Care Requests Previous',round('I',0) as 'Avg Age Previous',(D-G)/G as 'Percentage_Change_In_CareRequest', round((F-I),0) as 'Change_In_Days';\n",
+        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case_Status' != \"Closed\";\nq = filter q by 'CareRequestRecordType_Name' == \"Concurrent Review\";\nq_D = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq_E = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq_F = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq_G = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text3\").asString()}}];\nq_H = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text3\").asString()}}];\nq_I = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text3\").asString()}}];\nresult = group q by all full, q_D by all full, q_E by all full, q_F by all full, q_G by all full, q_H by all full, q_I by all;\nresult = foreach result generate unique(q.'Id') as 'A', unique(q.'ClinicalCaseType') as 'B', avg(q.'Days_Since_Created') as 'C', unique(q_D.'Id') as 'D', unique(q_E.'ClinicalCaseType') as 'E', avg(q_F.'Days_Since_Created') as 'F', unique(q_G.'Id') as 'G', unique(q_H.'ClinicalCaseType') as 'H', avg(q_I.'Days_Since_Created') as 'I';\nresult = foreach result generate 'D' as 'Concurrent Review Care Requests', 'E' as 'Clinical Types', round('F',0) as 'Avg Age', 'G' as 'Concurrent Review Care Requests Previous',round('I',0) as 'Avg Age Previous',(D-G)/G as 'Percentage_Change_In_CareRequest', round((F-I),0) as 'Change_In_Days';\n",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]

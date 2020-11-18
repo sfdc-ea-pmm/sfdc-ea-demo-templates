@@ -1434,7 +1434,7 @@
         "groups" : [ ],
         "label" : "SigningProvider",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Referral8_tp.FullyQualifiedName}\";\nq = filter q by 'IsConverted' == \"false\";\nq = filter q by !('Status' in [\"Closed - Converted\", \"Closed - Not Converted\", \"New\", \"Rejected\"]);\nq = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(Time_Toggle_1.selection, 0, \"Text2\").asString()}}];\nq = group q by 'Contact.Name';\nq = foreach q generate 'Contact.Name' as 'Contact.Name', count() as 'count';\nq = order q by 'Contact.Name' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.HLS_Referral8_tp.FullyQualifiedName}\";\nq = filter q by 'IsConverted' == \"false\";\nq = filter q by !('Status' in [\"Closed - Converted\", \"Closed - Not Converted\", \"New\", \"Rejected\"]);\nq = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(Time_Toggle_1.selection, 0, \"Text2\").asString()}}];\nq = group q by 'Contact_Name';\nq = foreach q generate 'Contact_Name' as 'Contact_Name', count() as 'count';\nq = order q by 'Contact_Name' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2477,7 +2477,7 @@
         "groups" : [ ],
         "label" : "Open Details",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Referral8_tp.FullyQualifiedName}\";\nq = filter q by !('Status' in [\"Closed - Converted\", \"Closed - Not Converted\", \"New\", \"Rejected\"]);\nq = filter q by 'IsConverted' == \"false\";\nq = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(Time_Toggle_1.selection, 0, \"Text2\").asString()}}];\nq = foreach q generate 'HealthCloudGA__InsuranceType__c' as 'HealthCloudGA__InsuranceType__c', 'HealthCloudGA__IsOutOfNetwork__c' as 'HealthCloudGA__IsOutOfNetwork__c', 'HealthCloudGA__Specialty__c' as 'HealthCloudGA__Specialty__c', 'HealthCloudGA__TypeOfService__c' as 'HealthCloudGA__TypeOfService__c', 'Lead_Age_Days' as 'Lead_Age_Days', 'Name' as 'Name', 'ReferringOrganization.Name' as 'ReferringOrganization.Name', 'ReferringPractitioner.Name' as 'ReferringPractitioner.Name';\nq = limit q 100;",
+        "query" : "q = load \"${App.Datasets.HLS_Referral8_tp.FullyQualifiedName}\";\nq = filter q by !('Status' in [\"Closed - Converted\", \"Closed - Not Converted\", \"New\", \"Rejected\"]);\nq = filter q by 'IsConverted' == \"false\";\nq = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(Time_Toggle_1.selection, 0, \"Text2\").asString()}}];\nq = foreach q generate 'HealthCloudGA__InsuranceType__c' as 'HealthCloudGA__InsuranceType__c', 'HealthCloudGA__IsOutOfNetwork__c' as 'HealthCloudGA__IsOutOfNetwork__c', 'HealthCloudGA__Specialty__c' as 'HealthCloudGA__Specialty__c', 'HealthCloudGA__TypeOfService__c' as 'HealthCloudGA__TypeOfService__c', 'Lead_Age_Days' as 'Lead_Age_Days', 'Name' as 'Name', 'ReferringOrganization_Name' as 'ReferringOrganization_Name', 'ReferringPractitioner_Name' as 'ReferringPractitioner_Name';\nq = limit q 100;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]

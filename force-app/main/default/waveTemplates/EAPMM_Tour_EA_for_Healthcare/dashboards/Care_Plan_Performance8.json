@@ -112,14 +112,14 @@
       {
         "conditionalFormatting" : {
           "chartColor" : {
-            "referenceField" : "unique_CarePlan.AccountId",
+            "referenceField" : "unique_CarePlan_AccountId",
             "type" : "static",
             "parameters" : {
               "formatValue" : "rgb(131, 80, 232)"
             }
           }
         },
-        "field" : "ProgramPatientSummar_2.unique_CarePlan.AccountId",
+        "field" : "ProgramPatientSummar_2.unique_CarePlan_AccountId",
         "format" : {
           "delimiters" : { }
         }
@@ -139,7 +139,7 @@
             }
           }
         },
-        "field" : "CarePlans_On_Off_Tra_1.unique_CarePlan.Id",
+        "field" : "CarePlans_On_Off_Tra_1.unique_CarePlan_Id",
         "format" : {
           "delimiters" : { }
         }
@@ -194,7 +194,7 @@
         "recordDisplayFields" : [ ],
         "conditionalFormatting" : {
           "chartColor" : {
-            "referenceField" : "unique_CarePlan.AccountId",
+            "referenceField" : "unique_CarePlan_AccountId",
             "type" : "static",
             "parameters" : {
               "formatValue" : "rgb(131, 80, 232)"
@@ -238,7 +238,7 @@
         },
         "dependent" : true,
         "fields" : [
-          "CarePlan.CreatedDate"
+          "CarePlan_CreatedDate"
         ],
         "label" : "Time Period",
         "locked" : false,
@@ -250,7 +250,7 @@
         },
         "dependent" : true,
         "fields" : [
-          "CarePlanTemplate.Name"
+          "CarePlanTemplate_Name"
         ],
         "label" : "Care Plan Type",
         "locked" : false,
@@ -273,7 +273,7 @@
         },
         "dependent" : true,
         "fields" : [
-          "Account.Contact.Name"
+          "Account_Contact_Name"
         ],
         "label" : "Care Plan Owner",
         "locked" : false,
@@ -854,12 +854,12 @@
             "measures" : [
               [
                 "unique",
-                "CarePlan.AccountId",
+                "CarePlan_AccountId",
                 "A"
               ],
               [
                 "unique",
-                "CarePlan.AccountId",
+                "CarePlan_AccountId",
                 "B"
               ],
               [
@@ -884,12 +884,12 @@
                   "measures" : [
                     [
                       "unique",
-                      "CarePlan.AccountId"
+                      "CarePlan_AccountId"
                     ]
                   ],
                   "limit" : 1000,
                   "groups" : [
-                    "CarePlanTemplate.Name"
+                    "CarePlanTemplate_Name"
                   ]
                 }
               },
@@ -898,12 +898,12 @@
                   "measures" : [
                     [
                       "unique",
-                      "CarePlan.AccountId"
+                      "CarePlan_AccountId"
                     ]
                   ],
                   "limit" : 1000,
                   "groups" : [
-                    "CarePlanTemplate.Name"
+                    "CarePlanTemplate_Name"
                   ],
                   "filters" : [
                     [
@@ -927,7 +927,7 @@
                   "limit" : 1000,
                   "formula" : "coalesce(A,0)",
                   "groups" : [
-                    "CarePlanTemplate.Name"
+                    "CarePlanTemplate_Name"
                   ]
                 }
               },
@@ -942,7 +942,7 @@
                   "limit" : 1000,
                   "formula" : "coalesce(B,0)",
                   "groups" : [
-                    "CarePlanTemplate.Name"
+                    "CarePlanTemplate_Name"
                   ]
                 }
               },
@@ -957,7 +957,7 @@
                   "limit" : 1000,
                   "formula" : "(D/C)",
                   "groups" : [
-                    "CarePlanTemplate.Name"
+                    "CarePlanTemplate_Name"
                   ],
                   "order" : [
                     [
@@ -973,11 +973,11 @@
               }
             ],
             "groups" : [
-              "CarePlanTemplate.Name"
+              "CarePlanTemplate_Name"
             ],
             "filters" : [
               [
-                "CarePlan.IsClosed",
+                "CarePlan_IsClosed",
                 [
                   "false"
                 ],
@@ -1070,7 +1070,7 @@
             "columnMap" : {
               "trellis" : [ ],
               "dimensionAxis" : [
-                "CarePlanTemplate.Name"
+                "CarePlanTemplate_Name"
               ],
               "plots" : [
                 "E"
@@ -1123,28 +1123,28 @@
         "selectMode" : "singlerequired",
         "start" : {
           "Dimension2" : [
-            "CareBarrierCaseAccount.Contact.Contact_Age_Bucket"
+            "CareBarrierCaseAccount_Contact_Contact_Age_Bucket"
           ]
         },
         "type" : "staticflex",
         "values" : [
           {
-            "Dimension2" : "CareBarrierCaseAccount.Contact.Contact_Age_Bucket",
+            "Dimension2" : "CareBarrierCaseAccount_Contact_Contact_Age_Bucket",
             "Display" : "By Age",
             "Text3" : "vbar"
           },
           {
-            "Dimension2" : "CareBarrierCaseAccount.Contact.HealthCloudGA__Gender__c",
+            "Dimension2" : "CareBarrierCaseAccount_Contact_HealthCloudGA__Gender__c",
             "Display" : "By Gender",
             "Text3" : "pie"
           },
           {
-            "Dimension2" : "CareBarrierCaseAccount.Contact.MailingState",
+            "Dimension2" : "CareBarrierCaseAccount_Contact_MailingState",
             "Display" : "By Location",
             "Text3" : "choropleth"
           },
           {
-            "Dimension2" : "CareBarrierCaseAccount.MemberPlan.Plan.PlanType",
+            "Dimension2" : "CareBarrierCaseAccount_MemberPlan_Plan_PlanType",
             "Display" : "By Insurance Type",
             "Text3" : "vbar"
           }
@@ -1162,14 +1162,14 @@
         "query" : {
           "query" : {
             "values" : [
-              "Account.Contact.Name",
-              "Account.MemberPlan.Plan.PlanType",
+              "Account_Contact_Name",
+              "Account_MemberPlan_Plan_PlanType",
               "ActivityDate",
-              "CarePlanTemplate.Name",
-              "CarePlan.Subject",
-              "Goal.HealthCloudGA__ActivityDate__c",
-              "Goal.Name",
-              "Problem.HealthCloudGA__Description__c",
+              "CarePlanTemplate_Name",
+              "CarePlan_Subject",
+              "Goal_HealthCloudGA__ActivityDate__c",
+              "Goal_Name",
+              "Problem_HealthCloudGA__Description__c",
               "Risk_Level",
               "Subject"
             ]
@@ -1242,12 +1242,12 @@
         "type" : "staticflex",
         "values" : [
           {
-            "Dimension2" : "ProgramPatientSummary.RiskScore_Bucket",
+            "Dimension2" : "ProgramPatientSummary_RiskScore_Bucket",
             "Display" : "Risk Band",
             "Text3" : "vbar"
           },
           {
-            "Dimension2" : "ProgramPatientSummary.Conditions_Bucket",
+            "Dimension2" : "ProgramPatientSummary_Conditions_Bucket",
             "Display" : "# of Conditions",
             "Text3" : "vbar"
           },
@@ -1272,16 +1272,16 @@
             "measures" : [
               [
                 "unique",
-                "CarePlan.AccountId",
+                "CarePlan_AccountId",
                 "Count"
               ]
             ],
             "groups" : [
-              "Account.Contact.Contact_Age_Bucket"
+              "Account_Contact_Contact_Age_Bucket"
             ],
             "filters" : [
               [
-                "CarePlan.IsClosed",
+                "CarePlan_IsClosed",
                 [
                   "false"
                 ],
@@ -1377,7 +1377,7 @@
             "columnMap" : {
               "trellis" : [ ],
               "dimensionAxis" : [
-                "Account.Contact.Contact_Age_Bucket"
+                "Account_Contact_Contact_Age_Bucket"
               ],
               "plots" : [
                 "Count"
@@ -1439,12 +1439,12 @@
             "measures" : [
               [
                 "unique",
-                "CarePlan.Id"
+                "CarePlan_Id"
               ]
             ],
             "filters" : [
               [
-                "CarePlan.IsClosed",
+                "CarePlan_IsClosed",
                 [
                   "false"
                 ],
@@ -1528,7 +1528,7 @@
               "trellis" : [ ],
               "dimensionAxis" : [ ],
               "plots" : [
-                "unique_CarePlan.Id"
+                "unique_CarePlan_Id"
               ]
             },
             "showActionMenu" : true,
@@ -1584,7 +1584,7 @@
             "measures" : [
               [
                 "unique",
-                "CarePlan.Id",
+                "CarePlan_Id",
                 "Count"
               ]
             ],
@@ -1593,7 +1593,7 @@
             ],
             "filters" : [
               [
-                "CarePlan.IsClosed",
+                "CarePlan_IsClosed",
                 [
                   "false"
                 ],
@@ -1719,16 +1719,16 @@
             "measures" : [
               [
                 "unique",
-                "CarePlan.AccountId",
+                "CarePlan_AccountId",
                 "Count"
               ]
             ],
             "groups" : [
-              "Account.HealthCloudGA__EnrollmentType__c"
+              "Account_HealthCloudGA__EnrollmentType__c"
             ],
             "filters" : [
               [
-                "CarePlan.IsClosed",
+                "CarePlan_IsClosed",
                 [
                   "false"
                 ],
@@ -1821,7 +1821,7 @@
             "columnMap" : {
               "trellis" : [ ],
               "dimensionAxis" : [
-                "Account.HealthCloudGA__EnrollmentType__c"
+                "Account_HealthCloudGA__EnrollmentType__c"
               ],
               "plots" : [
                 "Count"
@@ -1881,13 +1881,13 @@
             "measures" : [
               [
                 "unique",
-                "CarePlan.AccountId",
+                "CarePlan_AccountId",
                 "Count"
               ]
             ],
             "limit" : 10,
             "groups" : [
-              "ProgramPatientSummary.Conditions_Breakdown"
+              "ProgramPatientSummary_Conditions_Breakdown"
             ],
             "filters" : [
               [
@@ -1900,7 +1900,7 @@
                 "in"
               ],
               [
-                "CarePlan.IsClosed",
+                "CarePlan_IsClosed",
                 [
                   "false"
                 ],
@@ -1995,7 +1995,7 @@
             "columnMap" : {
               "trellis" : [ ],
               "dimensionAxis" : [
-                "ProgramPatientSummary.Conditions_Breakdown"
+                "ProgramPatientSummary_Conditions_Breakdown"
               ],
               "plots" : [
                 "Count"
@@ -2057,17 +2057,17 @@
             "measures" : [
               [
                 "unique",
-                "CarePlan.AccountId",
+                "CarePlan_AccountId",
                 "A"
               ],
               [
                 "unique",
-                "CarePlan.AccountId",
+                "CarePlan_AccountId",
                 "B"
               ],
               [
                 "unique",
-                "CarePlan.AccountId",
+                "CarePlan_AccountId",
                 "C"
               ],
               [
@@ -2087,7 +2087,7 @@
                   "measures" : [
                     [
                       "unique",
-                      "CarePlan.AccountId"
+                      "CarePlan_AccountId"
                     ]
                   ]
                 }
@@ -2097,7 +2097,7 @@
                   "measures" : [
                     [
                       "unique",
-                      "CarePlan.AccountId"
+                      "CarePlan_AccountId"
                     ]
                   ],
                   "filters" : [
@@ -2116,7 +2116,7 @@
                   "measures" : [
                     [
                       "unique",
-                      "CarePlan.AccountId"
+                      "CarePlan_AccountId"
                     ]
                   ],
                   "filters" : [
@@ -2155,7 +2155,7 @@
             ],
             "filters" : [
               [
-                "CarePlan.IsClosed",
+                "CarePlan_IsClosed",
                 [
                   "false"
                 ],
@@ -2227,7 +2227,7 @@
             "measures" : [
               [
                 "unique",
-                "CarePlan.AccountId"
+                "CarePlan_AccountId"
               ]
             ]
           },
@@ -2307,7 +2307,7 @@
               "trellis" : [ ],
               "dimensionAxis" : [ ],
               "plots" : [
-                "unique_CarePlan.AccountId"
+                "unique_CarePlan_AccountId"
               ]
             },
             "showActionMenu" : true,
@@ -2359,7 +2359,7 @@
           "onTrack",
           "offTrack"
         ],
-        "query" : "q = load \"${App.Datasets.HLS_Task7_tp.FullyQualifiedName}\";\nq = filter q by 'CarePlan.IsClosed' == \"false\";\nq_A = filter q by 'IsOverdue' == \"true\";\nq_B = filter q by 'IsOverdue' == \"false\";\nresult = group q_A by '{{column(Static_New_1.selection,[\"Dimension2\"]).asObject()}}' full, q_B by '{{column(Static_New_1.selection,[\"Dimension2\"]).asObject()}}';\nresult = foreach result generate coalesce(q_A.'{{column(Static_New_1.selection,[\"Dimension2\"]).asObject()}}', q_B.'{{column(Static_New_1.selection,[\"Dimension2\"]).asObject()}}') as '{{column(Static_New_1.selection,[\"Dimension2\"]).asObject()}}', unique(q_A.'CarePlan.AccountId') as 'A', unique(q_B.'CarePlan.AccountId') as 'B';\nresult = foreach result generate '{{column(Static_New_1.selection,[\"Dimension2\"]).asObject()}}', 'A', 'B', coalesce(A,0) as 'offTrack', coalesce(B,0) as 'onTrack';\nresult = order result by ('{{column(Static_New_1.selection,[\"Dimension2\"]).asObject()}}' asc);\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.HLS_Task7_tp.FullyQualifiedName}\";\nq = filter q by 'CarePlan_IsClosed' == \"false\";\nq_A = filter q by 'IsOverdue' == \"true\";\nq_B = filter q by 'IsOverdue' == \"false\";\nresult = group q_A by '{{column(Static_New_1.selection,[\"Dimension2\"]).asObject()}}' full, q_B by '{{column(Static_New_1.selection,[\"Dimension2\"]).asObject()}}';\nresult = foreach result generate coalesce(q_A.'{{column(Static_New_1.selection,[\"Dimension2\"]).asObject()}}', q_B.'{{column(Static_New_1.selection,[\"Dimension2\"]).asObject()}}') as '{{column(Static_New_1.selection,[\"Dimension2\"]).asObject()}}', unique(q_A.'CarePlan_AccountId') as 'A', unique(q_B.'CarePlan_AccountId') as 'B';\nresult = foreach result generate '{{column(Static_New_1.selection,[\"Dimension2\"]).asObject()}}', 'A', 'B', coalesce(A,0) as 'offTrack', coalesce(B,0) as 'onTrack';\nresult = order result by ('{{column(Static_New_1.selection,[\"Dimension2\"]).asObject()}}' asc);\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2681,7 +2681,7 @@
           "columnMap" : {
             "trellis" : [ ],
             "dimensionAxis" : [
-              "ProgramPatientSummary.Conditions_Breakdown"
+              "ProgramPatientSummary_Conditions_Breakdown"
             ],
             "plots" : [
               "Count"
@@ -3095,7 +3095,7 @@
           "columnMap" : {
             "trellis" : [ ],
             "dimensionAxis" : [
-              "CarePlanTemplate.Name"
+              "CarePlanTemplate_Name"
             ],
             "plots" : [
               "E"
@@ -3200,7 +3200,7 @@
           "columnMap" : {
             "trellis" : [ ],
             "dimension" : [
-              "Account.HealthCloudGA__EnrollmentType__c"
+              "Account_HealthCloudGA__EnrollmentType__c"
             ],
             "plots" : [
               "Count"
@@ -3298,7 +3298,7 @@
           "columnMap" : {
             "trellis" : [ ],
             "dimensionAxis" : [
-              "Account.Contact.Contact_Age_Bucket"
+              "Account_Contact_Contact_Age_Bucket"
             ],
             "plots" : [
               "Count"
@@ -3469,7 +3469,7 @@
         "parameters" : {
           "compact" : false,
           "exploreLink" : true,
-          "measureField" : "unique_CarePlan.AccountId",
+          "measureField" : "unique_CarePlan_AccountId",
           "noResultsLabel" : "0",
           "numberColor" : "#FFFFFF",
           "numberSize" : 24,
@@ -3486,7 +3486,7 @@
         "parameters" : {
           "compact" : true,
           "exploreLink" : true,
-          "measureField" : "unique_CarePlan.Id",
+          "measureField" : "unique_CarePlan_Id",
           "noResultsLabel" : "-",
           "numberColor" : "#FFFFFF",
           "numberSize" : 24,

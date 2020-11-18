@@ -673,7 +673,7 @@
         "groups" : [ ],
         "label" : "Clone of Case_CaseRecordType__1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(Static_New_1.selection, 0, \"Text2\").asString()}}];\nq = group q by 'Case.CaseRecordType.Name';\nq = foreach q generate 'Case.CaseRecordType.Name' as 'Case.CaseRecordType.Name', unique('Id') as 'unique_Id';\nq = order q by 'Case.CaseRecordType.Name' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(Static_New_1.selection, 0, \"Text2\").asString()}}];\nq = group q by 'Case_CaseRecordType_Name';\nq = foreach q generate 'Case_CaseRecordType_Name' as 'Case_CaseRecordType_Name', unique('Id') as 'unique_Id';\nq = order q by 'Case_CaseRecordType_Name' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -801,7 +801,7 @@
               ]
             ],
             "groups" : [
-              "AccountContact.Contact.Name"
+              "AccountContact_Contact_Name"
             ]
           },
           "version" : -1.0
@@ -864,7 +864,7 @@
         "groups" : [ ],
         "label" : "Clone of CR_By_Type",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq_B = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(Static_New_1.selection, 0, \"Text2\").asString()}}];--q_B = filter q by 'Case.IsClosed' == \"false\";\nq_C = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(Static_New_1.selection, 0, \"Text3\").asString()}}];\nresult = group q_B by all full, q_C by all;\nresult = foreach result generate coalesce(unique(q_B.'Id'),0) as 'A', coalesce(unique(q_C.'Id'),0) as 'C';\nresult = foreach result generate coalesce('A',0) as 'A', coalesce('C',0) as 'C', coalesce((A-C)/C,0) as 'D';\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq_B = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(Static_New_1.selection, 0, \"Text2\").asString()}}];--q_B = filter q by 'Case_IsClosed' == \"false\";\nq_C = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(Static_New_1.selection, 0, \"Text3\").asString()}}];\nresult = group q_B by all full, q_C by all;\nresult = foreach result generate coalesce(unique(q_B.'Id'),0) as 'A', coalesce(unique(q_C.'Id'),0) as 'C';\nresult = foreach result generate coalesce('A',0) as 'A', coalesce('C',0) as 'C', coalesce((A-C)/C,0) as 'D';\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1037,7 +1037,7 @@
         "groups" : [ ],
         "label" : "Clone of Open_Care_Requests_01",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case.IsClosed' == \"false\";\nq_B = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(Static_New_1.selection, 0, \"Text2\").asString()}}];\nq_D = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(Static_New_1.selection, 0, \"Text3\").asString()}}];\nresult = group q by all full, q_B by all full, q_D by all;\nresult = foreach result generate coalesce(unique(q.'Id'),0) as 'A', coalesce(unique(q_B.'Id'),0) as 'B', coalesce(unique(q_D.'Id'),0) as 'D';\nresult = foreach result generate 'A', 'B', 'D', coalesce((B-D)/D,0) as 'C';\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case_IsClosed' == \"false\";\nq_B = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(Static_New_1.selection, 0, \"Text2\").asString()}}];\nq_D = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(Static_New_1.selection, 0, \"Text3\").asString()}}];\nresult = group q by all full, q_B by all full, q_D by all;\nresult = foreach result generate coalesce(unique(q.'Id'),0) as 'A', coalesce(unique(q_B.'Id'),0) as 'B', coalesce(unique(q_D.'Id'),0) as 'D';\nresult = foreach result generate 'A', 'B', 'D', coalesce((B-D)/D,0) as 'C';\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1159,7 +1159,7 @@
         "groups" : [ ],
         "label" : "lens_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(Static_New_1.selection, 0, \"Text2\").asString()}}];\nq = group q by ('AccountContact.Name');\nq = foreach q generate 'AccountContact.Name' as 'AccountContact.Name', count() as 'count';\nq = order q by ('count' desc);\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(Static_New_1.selection, 0, \"Text2\").asString()}}];\nq = group q by ('AccountContact_Name');\nq = foreach q generate 'AccountContact_Name' as 'AccountContact_Name', count() as 'count';\nq = order q by ('count' desc);\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]

@@ -176,7 +176,7 @@
             "dataSourceName" : "${App.Datasets.HLS_AssessmentTask8_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
-            "fieldName" : "VisitAddress.SalesRepresentative"
+            "fieldName" : "VisitAddress_SalesRepresentative"
           },
           {
             "dataSourceName" : "${App.Datasets.HLS_Visit8_tp.Name}",
@@ -194,13 +194,13 @@
             "dataSourceName" : "${App.Datasets.HLS_AssessmentTask8_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
-            "fieldName" : "VisitAddress.Account.Name"
+            "fieldName" : "VisitAddress_Account_Name"
           },
           {
             "dataSourceName" : "${App.Datasets.HLS_Visit8_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
-            "fieldName" : "Account.Name"
+            "fieldName" : "Account_Name"
           }
         ],
         "label" : "Account",
@@ -212,13 +212,13 @@
             "dataSourceName" : "${App.Datasets.HLS_AssessmentTask8_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
-            "fieldName" : "VisitAddress.Visits.Name"
+            "fieldName" : "VisitAddress_Visits_Name"
           },
           {
             "dataSourceName" : "${App.Datasets.HLS_Visit8_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
-            "fieldName" : "Visits.Name"
+            "fieldName" : "Visits_Name"
           }
         ],
         "label" : "VisitName",
@@ -230,7 +230,7 @@
             "dataSourceName" : "${App.Datasets.HLS_AssessmentTask8_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
-            "fieldName" : "VisitAddress.LocationName"
+            "fieldName" : "VisitAddress_LocationName"
           },
           {
             "dataSourceName" : "${App.Datasets.HLS_Visit8_tp.Name}",
@@ -1435,7 +1435,7 @@
         "groups" : [ ],
         "label" : "OrderbyVolume",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\n q = filter q by date('Visits.PlannedVisitStartTime_Year', 'Visits.PlannedVisitStartTime_Month', 'Visits.PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq = group q by ('Visits.AccountId','Account.Name');\r\nq1 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\n\nq1 = filter q1 by 'Order.Status' == \"Completed\";\n\n\nq1 = group q1 by ('VisitAddress.Account.Id','VisitAddress.Account.Name', 'Product2Id','Product.Name');\nresult = cogroup q by ('Visits.AccountId'), q1 by ('VisitAddress.Account.Id');\nresult = foreach result generate q.'Visits.AccountId' as 'Visits.AccountId', q.'Account.Name' as 'Account.Name', q1.'Product.Name' as 'ProductName',unique(q1.'UnitPrice') as 'UnitPrice', sum(q1.'Revenue') as 'ExpectedRevenue';\nresult = foreach result generate 'Visits.AccountId' as 'Visits.AccountId','Account.Name' as 'Account.Name',sum('ExpectedRevenue') as 'ExpectedRevenue';\nresult= group result by ('Account.Name');\nresult = foreach result generate 'Account.Name',sum('ExpectedRevenue') as 'Revenue';\nresult = order result by 'Revenue' desc;\n",
+        "query" : "q = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\n q = filter q by date('Visits_PlannedVisitStartTime_Year', 'Visits_PlannedVisitStartTime_Month', 'Visits_PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq = group q by ('Visits_AccountId','Account_Name');\r\nq1 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\n\nq1 = filter q1 by 'Order_Status' == \"Completed\";\n\n\nq1 = group q1 by ('VisitAddress_Account_Id','VisitAddress_Account_Name', 'Product2Id','Product_Name');\nresult = cogroup q by ('Visits_AccountId'), q1 by ('VisitAddress_Account_Id');\nresult = foreach result generate q.'Visits_AccountId' as 'Visits_AccountId', q.'Account_Name' as 'Account_Name', q1.'Product_Name' as 'ProductName',unique(q1.'UnitPrice') as 'UnitPrice', sum(q1.'Revenue') as 'ExpectedRevenue';\nresult = foreach result generate 'Visits_AccountId' as 'Visits_AccountId','Account_Name' as 'Account_Name',sum('ExpectedRevenue') as 'ExpectedRevenue';\nresult= group result by ('Account_Name');\nresult = foreach result generate 'Account_Name',sum('ExpectedRevenue') as 'Revenue';\nresult = order result by 'Revenue' desc;\n",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1502,7 +1502,7 @@
         "groups" : [ ],
         "label" : "Order_Status_1",
         "numbers" : [ ],
-        "query" : " q2 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\r\n\nq2 = filter q2 by !('Order.Status' in [\"Draft\",\"Activated\"]);\nq2 = group q2 by ('VisitAddress.Account.Id','VisitAddress.Account.Name','Order.Id', 'Order.Status','Product2Id','Product.Name');\r\nq = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\nq = filter q by date('Visits.PlannedVisitStartTime_Year', 'Visits.PlannedVisitStartTime_Month', 'Visits.PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq1 = group q by ('Visits.AccountId');\r\nresult = cogroup q1 by ('Visits.AccountId') , q2 by ('VisitAddress.Account.Id');\r\nresult = foreach result generate (q1.'Visits.AccountId') as 'Visits.AccountId', (q2.'Order.Id') as 'Order.Id',q2.'Order.Status' as 'Order.Status';\nresult = group result by 'Order.Status';\nresult = foreach result generate 'Order.Status' as 'Order.Status',unique('Order.Id') as 'Order.Id';\n",
+        "query" : " q2 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\r\n\nq2 = filter q2 by !('Order_Status' in [\"Draft\",\"Activated\"]);\nq2 = group q2 by ('VisitAddress_Account_Id','VisitAddress_Account_Name','Order_Id', 'Order_Status','Product2Id','Product_Name');\r\nq = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\nq = filter q by date('Visits_PlannedVisitStartTime_Year', 'Visits_PlannedVisitStartTime_Month', 'Visits_PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq1 = group q by ('Visits_AccountId');\r\nresult = cogroup q1 by ('Visits_AccountId') , q2 by ('VisitAddress_Account_Id');\r\nresult = foreach result generate (q1.'Visits_AccountId') as 'Visits_AccountId', (q2.'Order_Id') as 'Order_Id',q2.'Order_Status' as 'Order_Status';\nresult = group result by 'Order_Status';\nresult = foreach result generate 'Order_Status' as 'Order_Status',unique('Order_Id') as 'Order_Id';\n",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1623,7 +1623,7 @@
         "groups" : [ ],
         "label" : "Clone of lens_4",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\n q = filter q by date('Visits.PlannedVisitStartTime_Year', 'Visits.PlannedVisitStartTime_Month', 'Visits.PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq = group q by ('Visits.AccountId','Account.Name');\r\nq1 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\n\nq1 = filter q1 by !('Order.Status' in [\"Draft\",\"Activated\"]);\n\nq1 = group q1 by ('VisitAddress.Account.Id','VisitAddress.Account.Name','Order.Id', 'Product2Id','Product.Name');\nresult = cogroup q by ('Visits.AccountId'), q1 by ('VisitAddress.Account.Id');\nresult = foreach result generate (q.'Visits.AccountId') as 'Visits.AccountId', (q1.'Order.Id') as 'Order.Id',avg(q1.'OrderAgeDays') as 'OrderAgeDays';\nresult = group result by all;\nresult = foreach result generate unique('Order.Id') as 'Order.Id',round(avg('OrderAgeDays'),0) as 'OrderAgeDays';\n",
+        "query" : "q = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\n q = filter q by date('Visits_PlannedVisitStartTime_Year', 'Visits_PlannedVisitStartTime_Month', 'Visits_PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq = group q by ('Visits_AccountId','Account_Name');\r\nq1 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\n\nq1 = filter q1 by !('Order_Status' in [\"Draft\",\"Activated\"]);\n\nq1 = group q1 by ('VisitAddress_Account_Id','VisitAddress_Account_Name','Order_Id', 'Product2Id','Product_Name');\nresult = cogroup q by ('Visits_AccountId'), q1 by ('VisitAddress_Account_Id');\nresult = foreach result generate (q.'Visits_AccountId') as 'Visits_AccountId', (q1.'Order_Id') as 'Order_Id',avg(q1.'OrderAgeDays') as 'OrderAgeDays';\nresult = group result by all;\nresult = foreach result generate unique('Order_Id') as 'Order_Id',round(avg('OrderAgeDays'),0) as 'OrderAgeDays';\n",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1867,7 +1867,7 @@
               ]
             ],
             "groups" : [
-              "Product.Name"
+              "Product_Name"
             ]
           },
           "version" : -1.0
@@ -1886,7 +1886,7 @@
         "groups" : [ ],
         "label" : "Clone of Matrix",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\r\nq = filter q by !('Order.Status' in [\"Completed\",\"Draft\",\"Activated\"]);\nq = group q by ('VisitAddress.Account.Id','VisitAddress.Account.Name', 'Product2Id','Product.Name','Product.Family');\r\nq1 = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\nq1 = filter q1 by date('Visits.PlannedVisitStartTime_Year', 'Visits.PlannedVisitStartTime_Month', 'Visits.PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\r\nq1 = group q1 by ('Visits.AccountId', 'Account.Name');\r\nresult = cogroup q1 by ('Visits.AccountId','Account.Name') , q by ('VisitAddress.Account.Id','VisitAddress.Account.Name');\r\nresult= foreach result generate q1.'Account.Name' as 'Account.Name',q.'Product.Family' as 'Product.Family', sum(q.'Revenue') as 'Revenue';\nresult = group result by ('Account.Name','Product.Family');\nresult= foreach result generate 'Account.Name' as 'Account.Name','Product.Family' as 'ProductFamily', sum('Revenue') as 'Revenue';\nresult = order result by ('Revenue' asc);\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\r\nq = filter q by !('Order_Status' in [\"Completed\",\"Draft\",\"Activated\"]);\nq = group q by ('VisitAddress_Account_Id','VisitAddress_Account_Name', 'Product2Id','Product_Name','Product_Family');\r\nq1 = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\nq1 = filter q1 by date('Visits_PlannedVisitStartTime_Year', 'Visits_PlannedVisitStartTime_Month', 'Visits_PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\r\nq1 = group q1 by ('Visits_AccountId', 'Account_Name');\r\nresult = cogroup q1 by ('Visits_AccountId','Account_Name') , q by ('VisitAddress_Account_Id','VisitAddress_Account_Name');\r\nresult= foreach result generate q1.'Account_Name' as 'Account_Name',q.'Product_Family' as 'Product_Family', sum(q.'Revenue') as 'Revenue';\nresult = group result by ('Account_Name','Product_Family');\nresult= foreach result generate 'Account_Name' as 'Account_Name','Product_Family' as 'ProductFamily', sum('Revenue') as 'Revenue';\nresult = order result by ('Revenue' asc);\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1948,7 +1948,7 @@
                 "ProductFamily"
               ],
               "y" : [
-                "Account.Name"
+                "Account_Name"
               ]
             },
             "showActionMenu" : true,
@@ -1997,7 +1997,7 @@
         "groups" : [ ],
         "label" : "VisitsData_Account_N_2",
         "numbers" : [ ],
-        "query" : " q = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\nq = filter q by date('Visits.PlannedVisitStartTime_Year', 'Visits.PlannedVisitStartTime_Month', 'Visits.PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq1 = group q by ('Visits.AccountId','Account.Name');\r\nq2 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\r\nq2 = filter q2 by !('Order.Status' in [\"Completed\",\"Draft\",\"Activated\"]);\n\nq2 = group q2 by ('VisitAddress.Account.Id','VisitAddress.Account.Name');\r\nresult = cogroup q1 by ('Visits.AccountId') , q2 by ('VisitAddress.Account.Id');\r\nresult = foreach result generate  q1.'Account.Name' as 'Account.Name',sum(q2.'Quantity') as 'Quantity',sum(q2.'Revenue') as 'Revenue',unique(q1.'Visits.Id') as 'Visits.Id';\r\nresult = group result by 'Account.Name';\nresult = foreach result generate  'Account.Name' as 'Account.Name',sum('Quantity') as 'Quantity',sum('Revenue') as 'Revenue',sum('Visits.Id') as 'Visits.Id';\r\nresult = group result by 'Account.Name';\nresult= foreach result generate 'Account.Name' as 'Account.Name', {{cell(Static_New_1.selection,0,\"Text2\").asObject()}} as '{{cell(Static_New_1.selection,0,\"Text3\").asObject()}}';\nresult = order result by '{{cell(Static_New_1.selection,0,\"Text3\").asObject()}}' desc;\nresult = limit result 1000;\n",
+        "query" : " q = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\nq = filter q by date('Visits_PlannedVisitStartTime_Year', 'Visits_PlannedVisitStartTime_Month', 'Visits_PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq1 = group q by ('Visits_AccountId','Account_Name');\r\nq2 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\r\nq2 = filter q2 by !('Order_Status' in [\"Completed\",\"Draft\",\"Activated\"]);\n\nq2 = group q2 by ('VisitAddress_Account_Id','VisitAddress_Account_Name');\r\nresult = cogroup q1 by ('Visits_AccountId') , q2 by ('VisitAddress_Account_Id');\r\nresult = foreach result generate  q1.'Account_Name' as 'Account_Name',sum(q2.'Quantity') as 'Quantity',sum(q2.'Revenue') as 'Revenue',unique(q1.'Visits_Id') as 'Visits_Id';\r\nresult = group result by 'Account_Name';\nresult = foreach result generate  'Account_Name' as 'Account_Name',sum('Quantity') as 'Quantity',sum('Revenue') as 'Revenue',sum('Visits_Id') as 'Visits_Id';\r\nresult = group result by 'Account_Name';\nresult= foreach result generate 'Account_Name' as 'Account_Name', {{cell(Static_New_1.selection,0,\"Text2\").asObject()}} as '{{cell(Static_New_1.selection,0,\"Text3\").asObject()}}';\nresult = order result by '{{cell(Static_New_1.selection,0,\"Text3\").asObject()}}' desc;\nresult = limit result 1000;\n",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2141,7 +2141,7 @@
           },
           {
             "Display" : "# Visits",
-            "Text2" : "sum('Visits.Id')",
+            "Text2" : "sum('Visits_Id')",
             "Text3" : "Visit"
           }
         ]
@@ -2151,7 +2151,7 @@
         "groups" : [ ],
         "label" : "VisitsData_LocationN_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\nq = group q by 'Account.Name';\nq = foreach q generate 'Account.Name' as 'Account.Name', count() as 'count';\nq = order q by 'Account.Name' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\nq = group q by 'Account_Name';\nq = foreach q generate 'Account_Name' as 'Account_Name', count() as 'count';\nq = order q by 'Account_Name' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2383,7 +2383,7 @@
         "groups" : [ ],
         "label" : "ProductRequired_Prod_6",
         "numbers" : [ ],
-        "query" : "q2 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\r\nq2 = filter q2 by !('Order.Status' in [\"Completed\",\"Draft\",\"Activated\"]);\n\nq2 = group q2 by ('VisitAddress.Account.Id','VisitAddress.Account.Name', 'Product2Id','Product.Name');\r\nq = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\nq = filter q by date('Visits.PlannedVisitStartTime_Year', 'Visits.PlannedVisitStartTime_Month', 'Visits.PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq1 = group q by ('Visits.AccountId','Account.Name');\r\nresult = cogroup q1 by ('Visits.AccountId') , q2 by ('VisitAddress.Account.Id');\r\nresult = foreach result generate q2.'VisitAddress.Account.Name' as 'VisitAddress.Account.Name',q2.'Product.Name' as 'Product.Name',sum(q2.'Revenue') as 'Revenue',sum(q2.'Quantity') as 'Quantity';\r\nresult = group result by ('Product.Name');\r\nresult = foreach result generate 'Product.Name' as 'Product.Name',coalesce(sum('Revenue'),0) as 'Revenue',sum('Quantity') as 'Quantity';result= foreach result generate 'Product.Name' as 'Product.Name', {{cell(Static_New_2_1.selection,0,\"Text2\").asObject()}} as '{{cell(Static_New_2_1.selection,0,\"Text3\").asObject()}}';\n\nresult = order result by '{{cell(Static_New_2_1.selection,0,\"Text3\").asObject()}}' desc;\nresult = limit result 10;",
+        "query" : "q2 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\r\nq2 = filter q2 by !('Order_Status' in [\"Completed\",\"Draft\",\"Activated\"]);\n\nq2 = group q2 by ('VisitAddress_Account_Id','VisitAddress_Account_Name', 'Product2Id','Product_Name');\r\nq = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\nq = filter q by date('Visits_PlannedVisitStartTime_Year', 'Visits_PlannedVisitStartTime_Month', 'Visits_PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq1 = group q by ('Visits_AccountId','Account_Name');\r\nresult = cogroup q1 by ('Visits_AccountId') , q2 by ('VisitAddress_Account_Id');\r\nresult = foreach result generate q2.'VisitAddress_Account_Name' as 'VisitAddress_Account_Name',q2.'Product_Name' as 'Product_Name',sum(q2.'Revenue') as 'Revenue',sum(q2.'Quantity') as 'Quantity';\r\nresult = group result by ('Product_Name');\r\nresult = foreach result generate 'Product_Name' as 'Product_Name',coalesce(sum('Revenue'),0) as 'Revenue',sum('Quantity') as 'Quantity';result= foreach result generate 'Product_Name' as 'Product_Name', {{cell(Static_New_2_1.selection,0,\"Text2\").asObject()}} as '{{cell(Static_New_2_1.selection,0,\"Text3\").asObject()}}';\n\nresult = order result by '{{cell(Static_New_2_1.selection,0,\"Text3\").asObject()}}' desc;\nresult = limit result 10;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2501,7 +2501,7 @@
         "groups" : [ ],
         "label" : "Clone of VisitAccProdRev",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\n q = filter q by date('Visits.PlannedVisitStartTime_Year', 'Visits.PlannedVisitStartTime_Month', 'Visits.PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq = group q by ('Visits.AccountId','Account.Name');\r\nq1 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\n\nq1 = filter q1 by 'Order.Status' == \"Activated\";\n\n\nq1 = group q1 by ('VisitAddress.Account.Id','VisitAddress.Account.Name', 'Product2Id','Product.Name');\nresult = cogroup q by ('Visits.AccountId'), q1 by ('VisitAddress.Account.Id');\nresult = foreach result generate q.'Visits.AccountId' as 'Visits.AccountId', q.'Account.Name' as 'Account Name', q1.'Product.Name' as 'ProductName',unique(q1.'UnitPrice') as 'UnitPrice', sum(q1.'Revenue') as 'ExpectedRevenue';\nresult = foreach result generate 'Visits.AccountId' as 'Visits.AccountId','ProductName' as 'ProductName',sum('ExpectedRevenue') as 'ExpectedRevenue';\nresult= group result by all;\nresult = foreach result generate sum('ExpectedRevenue') as 'Revenue';\nresult = order result by 'Revenue' desc;\n",
+        "query" : "q = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\n q = filter q by date('Visits_PlannedVisitStartTime_Year', 'Visits_PlannedVisitStartTime_Month', 'Visits_PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq = group q by ('Visits_AccountId','Account_Name');\r\nq1 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\n\nq1 = filter q1 by 'Order_Status' == \"Activated\";\n\n\nq1 = group q1 by ('VisitAddress_Account_Id','VisitAddress_Account_Name', 'Product2Id','Product_Name');\nresult = cogroup q by ('Visits_AccountId'), q1 by ('VisitAddress_Account_Id');\nresult = foreach result generate q.'Visits_AccountId' as 'Visits_AccountId', q.'Account_Name' as 'Account Name', q1.'Product_Name' as 'ProductName',unique(q1.'UnitPrice') as 'UnitPrice', sum(q1.'Revenue') as 'ExpectedRevenue';\nresult = foreach result generate 'Visits_AccountId' as 'Visits_AccountId','ProductName' as 'ProductName',sum('ExpectedRevenue') as 'ExpectedRevenue';\nresult= group result by all;\nresult = foreach result generate sum('ExpectedRevenue') as 'Revenue';\nresult = order result by 'Revenue' desc;\n",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2572,7 +2572,7 @@
         "groups" : [ ],
         "label" : "VisitsData_Visits_Na_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\nq = filter q by date('Visits.PlannedVisitStartTime_Year', 'Visits.PlannedVisitStartTime_Month', 'Visits.PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq1 = group q by ('Visits.AccountId','SalesRepresentative','Visits.Id');\r\nq2 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\r\nq2 = filter q2 by !('Order.Status' in [\"Completed\",\"Draft\",\"Activated\"]);\n\nq2 = group q2 by ('VisitAddress.Account.Id','VisitAddress.Account.Name','VisitAddress.SalesRepresentative');\r\nresult = cogroup q1 by ('Visits.AccountId') , q2 by ('VisitAddress.Account.Id');\r\nresult = foreach result generate (q1.'Visits.Id') as 'Visits.Id', (q1.'Visits.AccountId') as 'Visits.AccountId', q1.'SalesRepresentative' as 'SalesRepresentative';\nresult = group result by 'SalesRepresentative';\nresult = foreach result generate 'SalesRepresentative' as 'SalesRepresentative',unique('Visits.Id') as 'Visits.Id';\nresult = order result by 'Visits.Id' desc;\nresult  = limit result 10;\n",
+        "query" : "q = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\nq = filter q by date('Visits_PlannedVisitStartTime_Year', 'Visits_PlannedVisitStartTime_Month', 'Visits_PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq1 = group q by ('Visits_AccountId','SalesRepresentative','Visits_Id');\r\nq2 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\r\nq2 = filter q2 by !('Order_Status' in [\"Completed\",\"Draft\",\"Activated\"]);\n\nq2 = group q2 by ('VisitAddress_Account_Id','VisitAddress_Account_Name','VisitAddress_SalesRepresentative');\r\nresult = cogroup q1 by ('Visits_AccountId') , q2 by ('VisitAddress_Account_Id');\r\nresult = foreach result generate (q1.'Visits_Id') as 'Visits_Id', (q1.'Visits_AccountId') as 'Visits_AccountId', q1.'SalesRepresentative' as 'SalesRepresentative';\nresult = group result by 'SalesRepresentative';\nresult = foreach result generate 'SalesRepresentative' as 'SalesRepresentative',unique('Visits_Id') as 'Visits_Id';\nresult = order result by 'Visits_Id' desc;\nresult  = limit result 10;\n",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2688,7 +2688,7 @@
         "groups" : [ ],
         "label" : "QuantityByProduct",
         "numbers" : [ ],
-        "query" : "q1 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\n\nq1 = filter q1 by !('Order.Status' in [\"Completed\",\"Draft\",\"Activated\"]);\n\nq1 = group q1 by ('VisitAddress.Account.Id','VisitAddress.Account.Name', 'Product2Id','Product.Name');\nq = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\n q = filter q by date('Visits.PlannedVisitStartTime_Year', 'Visits.PlannedVisitStartTime_Month', 'Visits.PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq = group q by ('Visits.AccountId','Account.Name');\r\nresult = cogroup q by ('Visits.AccountId'), q1 by ('VisitAddress.Account.Id');\nresult = foreach result generate q.'Visits.AccountId' as 'Visits.AccountId', q.'Account.Name' as 'Account Name', q1.'Product.Name' as 'Product.Name',unique(q1.'UnitPrice') as 'UnitPrice', sum(q1.'Quantity') as 'Quantity';\nresult = foreach result generate 'Visits.AccountId' as 'Visits.AccountId','Product.Name' as 'Product.Name',sum(Quantity) as 'Quantity';\nresult= group result by ('Product.Name');\nresult = foreach result generate 'Product.Name',sum('Quantity') as 'Quantity';\nresult = order result by 'Quantity' desc;\n",
+        "query" : "q1 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\n\nq1 = filter q1 by !('Order_Status' in [\"Completed\",\"Draft\",\"Activated\"]);\n\nq1 = group q1 by ('VisitAddress_Account_Id','VisitAddress_Account_Name', 'Product2Id','Product_Name');\nq = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\n q = filter q by date('Visits_PlannedVisitStartTime_Year', 'Visits_PlannedVisitStartTime_Month', 'Visits_PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq = group q by ('Visits_AccountId','Account_Name');\r\nresult = cogroup q by ('Visits_AccountId'), q1 by ('VisitAddress_Account_Id');\nresult = foreach result generate q.'Visits_AccountId' as 'Visits_AccountId', q.'Account_Name' as 'Account Name', q1.'Product_Name' as 'Product_Name',unique(q1.'UnitPrice') as 'UnitPrice', sum(q1.'Quantity') as 'Quantity';\nresult = foreach result generate 'Visits_AccountId' as 'Visits_AccountId','Product_Name' as 'Product_Name',sum(Quantity) as 'Quantity';\nresult= group result by ('Product_Name');\nresult = foreach result generate 'Product_Name',sum('Quantity') as 'Quantity';\nresult = order result by 'Quantity' desc;\n",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2763,7 +2763,7 @@
             "columnMap" : {
               "trellis" : [ ],
               "dimensionAxis" : [
-                "Product.Name"
+                "Product_Name"
               ],
               "plots" : [
                 "Quantity"
@@ -2836,13 +2836,13 @@
           {
             "Display" : "Next 30 days",
             "Text2" : "\"current day\"..\"30 days ahead\"",
-            "Text3" : "Visits.PlannedVisitStartTime_Week",
+            "Text3" : "Visits_PlannedVisitStartTime_Week",
             "Text4" : "VisitWeek"
           },
           {
             "Display" : "Next 90 days",
             "Text2" : "\"current day\"..\"90 days ahead\"",
-            "Text3" : "Visits.PlannedVisitStartTime_Month",
+            "Text3" : "Visits_PlannedVisitStartTime_Month",
             "Text4" : "VisitMonth"
           }
         ]
@@ -2850,20 +2850,20 @@
       "ProductOVer_1" : {
         "broadcastFacet" : true,
         "groups" : [
-          "Product.Name"
+          "Product_Name"
         ],
         "label" : "ProductOVer",
         "numbers" : [
           "ExpectedRevenue"
         ],
-        "query" : "q1 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\n\nq1 = filter q1 by !('Order.Status' in [\"Completed\",\"Draft\",\"Activated\"]);\nq1 = group q1 by ('VisitAddress.Account.Id','VisitAddress.Account.Name', 'Product2Id','Product.Name');\nq = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\n q = filter q by date('Visits.PlannedVisitStartTime_Year', 'Visits.PlannedVisitStartTime_Month', 'Visits.PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq = group q by ('Visits.AccountId','Account.Name');\r\nresult = cogroup q by ('Visits.AccountId'), q1 by ('VisitAddress.Account.Id');\nresult = foreach result generate q.'Visits.AccountId' as 'Visits.AccountId', q.'Account.Name' as 'Account Name', q1.'Product.Name' as 'Product.Name',unique(q1.'UnitPrice') as 'UnitPrice', sum(q1.'Revenue') as 'ExpectedRevenue';\nresult = foreach result generate 'Visits.AccountId' as 'Visits.AccountId','Product.Name' as 'Product.Name',sum('ExpectedRevenue') as 'ExpectedRevenue';\nresult= group result by ('Product.Name');\nresult = foreach result generate 'Product.Name',sum('ExpectedRevenue') as 'ExpectedRevenue';\nresult = order result by 'ExpectedRevenue' desc;\n",
+        "query" : "q1 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\n\nq1 = filter q1 by !('Order_Status' in [\"Completed\",\"Draft\",\"Activated\"]);\nq1 = group q1 by ('VisitAddress_Account_Id','VisitAddress_Account_Name', 'Product2Id','Product_Name');\nq = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\n q = filter q by date('Visits_PlannedVisitStartTime_Year', 'Visits_PlannedVisitStartTime_Month', 'Visits_PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq = group q by ('Visits_AccountId','Account_Name');\r\nresult = cogroup q by ('Visits_AccountId'), q1 by ('VisitAddress_Account_Id');\nresult = foreach result generate q.'Visits_AccountId' as 'Visits_AccountId', q.'Account_Name' as 'Account Name', q1.'Product_Name' as 'Product_Name',unique(q1.'UnitPrice') as 'UnitPrice', sum(q1.'Revenue') as 'ExpectedRevenue';\nresult = foreach result generate 'Visits_AccountId' as 'Visits_AccountId','Product_Name' as 'Product_Name',sum('ExpectedRevenue') as 'ExpectedRevenue';\nresult= group result by ('Product_Name');\nresult = foreach result generate 'Product_Name',sum('ExpectedRevenue') as 'ExpectedRevenue';\nresult = order result by 'ExpectedRevenue' desc;\n",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
         },
         "selectMode" : "single",
         "strings" : [
-          "Product.Name"
+          "Product_Name"
         ],
         "type" : "saql",
         "useGlobal" : true,
@@ -2935,7 +2935,7 @@
             "columnMap" : {
               "trellis" : [ ],
               "dimensionAxis" : [
-                "Product.Name"
+                "Product_Name"
               ],
               "plots" : [
                 "ExpectedRevenue"
@@ -2987,7 +2987,7 @@
         "groups" : [ ],
         "label" : "VisitAccProdRev",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\nq1 = filter q by date('Visits.PlannedVisitStartTime_Year', 'Visits.PlannedVisitStartTime_Month', 'Visits.PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\n\r\nq = group q by all;q = foreach q generate unique('Visits.Id') as 'unique_Visits.Id';",
+        "query" : "q = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\nq1 = filter q by date('Visits_PlannedVisitStartTime_Year', 'Visits_PlannedVisitStartTime_Month', 'Visits_PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\n\r\nq = group q by all;q = foreach q generate unique('Visits_Id') as 'unique_Visits_Id';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -3033,7 +3033,7 @@
         "broadcastFacet" : true,
         "groups" : [ ],
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\n q = filter q by date('Visits.PlannedVisitStartTime_Year', 'Visits.PlannedVisitStartTime_Month', 'Visits.PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq = group q by ('Visits.AccountId','Account.Name');\r\nq1 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\n\nq1 = filter q1 by 'Order.Status' == \"Open\";\n\nq1 = group q1 by ('VisitAddress.Account.Id','VisitAddress.Account.Name','Order.Id', 'Product2Id','Product.Name');\nresult = cogroup q by ('Visits.AccountId'), q1 by ('VisitAddress.Account.Id');\nresult = foreach result generate (q.'Visits.AccountId') as 'Visits.AccountId', (q1.'Order.Id') as 'Order.Id',avg(q1.'OrderAgeDays') as 'OrderAgeDays';\nresult = group result by all;\nresult = foreach result generate unique('Order.Id') as 'Order.Id',avg('OrderAgeDays') as 'OrderAgeDays';\n",
+        "query" : "q = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\n q = filter q by date('Visits_PlannedVisitStartTime_Year', 'Visits_PlannedVisitStartTime_Month', 'Visits_PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq = group q by ('Visits_AccountId','Account_Name');\r\nq1 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\n\nq1 = filter q1 by 'Order_Status' == \"Open\";\n\nq1 = group q1 by ('VisitAddress_Account_Id','VisitAddress_Account_Name','Order_Id', 'Product2Id','Product_Name');\nresult = cogroup q by ('Visits_AccountId'), q1 by ('VisitAddress_Account_Id');\nresult = foreach result generate (q.'Visits_AccountId') as 'Visits_AccountId', (q1.'Order_Id') as 'Order_Id',avg(q1.'OrderAgeDays') as 'OrderAgeDays';\nresult = group result by all;\nresult = foreach result generate unique('Order_Id') as 'Order_Id',avg('OrderAgeDays') as 'OrderAgeDays';\n",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -3147,8 +3147,8 @@
       "Table_New_1" : {
         "broadcastFacet" : true,
         "groups" : [
-          "Visits.Name",
-          "Account.Name",
+          "Visits_Name",
+          "Account_Name",
           "Visit Date",
           "Products"
         ],
@@ -3157,15 +3157,15 @@
           "Quantity Ordered",
           "Revenue Expected"
         ],
-        "query" : "q = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\n q = filter q by date('Visits.PlannedVisitStartTime_Year', 'Visits.PlannedVisitStartTime_Month', 'Visits.PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq = group q by ('Visits.AccountId','Visits.Name','Account.Name','VisitDate');\r\nq1 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\n\n\nq1 = filter q1 by !('Order.Status' in [\"Completed\",\"Draft\",\"Activated\"]);\n\nq1 = group q1 by ('VisitAddress.Account.Id','VisitAddress.Account.Name', 'Product2Id','Product.Name');\nresult = cogroup q by ('Visits.AccountId'), q1 by ('VisitAddress.Account.Id');\nresult = foreach result generate q.'Visits.Name' as 'Visits.Name', q.'Account.Name' as 'Account.Name', q.'VisitDate' as 'VisitDate',q1.'Product.Name' as 'ProductName',sum(q1.'Quantity') as 'Quantity Ordered',sum(q1.'Revenue') as 'ExpectedRevenue';\nresult = foreach result generate 'Visits.Name','Account.Name','VisitDate' as 'Visit Date','ProductName' as 'Products',sum('Quantity Ordered') as 'Quantity Ordered',sum('ExpectedRevenue') as 'Revenue Expected';\n",
+        "query" : "q = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\n q = filter q by date('Visits_PlannedVisitStartTime_Year', 'Visits_PlannedVisitStartTime_Month', 'Visits_PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq = group q by ('Visits_AccountId','Visits_Name','Account_Name','VisitDate');\r\nq1 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\n\n\nq1 = filter q1 by !('Order_Status' in [\"Completed\",\"Draft\",\"Activated\"]);\n\nq1 = group q1 by ('VisitAddress_Account_Id','VisitAddress_Account_Name', 'Product2Id','Product_Name');\nresult = cogroup q by ('Visits_AccountId'), q1 by ('VisitAddress_Account_Id');\nresult = foreach result generate q.'Visits_Name' as 'Visits_Name', q.'Account_Name' as 'Account_Name', q.'VisitDate' as 'VisitDate',q1.'Product_Name' as 'ProductName',sum(q1.'Quantity') as 'Quantity Ordered',sum(q1.'Revenue') as 'ExpectedRevenue';\nresult = foreach result generate 'Visits_Name','Account_Name','VisitDate' as 'Visit Date','ProductName' as 'Products',sum('Quantity Ordered') as 'Quantity Ordered',sum('ExpectedRevenue') as 'Revenue Expected';\n",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
         },
         "selectMode" : "single",
         "strings" : [
-          "Visits.Name",
-          "Account.Name",
+          "Visits_Name",
+          "Account_Name",
           "Visit Date",
           "Products"
         ],
@@ -3208,7 +3208,7 @@
         "groups" : [ ],
         "label" : "Visits",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\nq = filter q by date('Visits.PlannedVisitStartTime_Year', 'Visits.PlannedVisitStartTime_Month', 'Visits.PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq = group q by all;\nq = foreach q generate unique('Visits.Id') as 'unique_Visits.Id';\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\nq = filter q by date('Visits_PlannedVisitStartTime_Year', 'Visits_PlannedVisitStartTime_Month', 'Visits_PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq = group q by all;\nq = foreach q generate unique('Visits_Id') as 'unique_Visits_Id';\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -3323,7 +3323,7 @@
         "broadcastFacet" : true,
         "groups" : [ ],
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\nq = filter q by date('Visits.PlannedVisitStartTime_Year', 'Visits.PlannedVisitStartTime_Month', 'Visits.PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq1 = group q by ('Visits.AccountId','Account.Name','Visits.PlannedVisitStartTime_Year', 'Visits.PlannedVisitStartTime_Month', 'Visits.PlannedVisitStartTime_Week','Visits.PlannedVisitStartTime_Day','VisitDate','Visits.Id','Visits.Name');\r\nq2 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\r\nq2 = filter q2 by !('Order.Status' in [\"Completed\",\"Draft\",\"Activated\"]);\n\nq2 = group q2 by ('VisitAddress.Account.Id', 'VisitAddress.Account.Name','Product2Id','Product.Name');\r\nresult = cogroup q1 by ('Visits.AccountId') , q2 by ('VisitAddress.Account.Id');\r\nresult = foreach result generate q1.'Account.Name' as 'Account.Name',sum(q2.'Revenue') as 'Revenue',q1.'VisitDate' as 'VisitDate',q1.'Visits.PlannedVisitStartTime_Year' as 'Visits.PlannedVisitStartTime_Year' , q1.'Visits.PlannedVisitStartTime_Month' as 'Visits.PlannedVisitStartTime_Month', q1.'Visits.PlannedVisitStartTime_Week' as 'Visits.PlannedVisitStartTime_Week',q1.'Visits.PlannedVisitStartTime_Day' as 'Visits.PlannedVisitStartTime_Day';\nresult = foreach result generate 'Account.Name' as 'Account.Name','VisitDate' as 'VisitDate','Visits.PlannedVisitStartTime_Year', 'Visits.PlannedVisitStartTime_Month','Visits.PlannedVisitStartTime_Week', 'Visits.PlannedVisitStartTime_Day',sum('Revenue') as 'Revenue';\nresult= group result by ('Account.Name','{{cell(Date_Static_1.selection,0,\"Text3\").asString()}}');\nresult = foreach result generate 'Account.Name' as 'Account.Name','{{cell(Date_Static_1.selection,0,\"Text3\").asString()}}' as '{{cell(Date_Static_1.selection,0,\"Text4\").asString()}}',sum('Revenue') as 'Revenue';\nresult = order result by 'Revenue' desc;\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\nq = filter q by date('Visits_PlannedVisitStartTime_Year', 'Visits_PlannedVisitStartTime_Month', 'Visits_PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq1 = group q by ('Visits_AccountId','Account_Name','Visits_PlannedVisitStartTime_Year', 'Visits_PlannedVisitStartTime_Month', 'Visits_PlannedVisitStartTime_Week','Visits_PlannedVisitStartTime_Day','VisitDate','Visits_Id','Visits_Name');\r\nq2 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\r\nq2 = filter q2 by !('Order_Status' in [\"Completed\",\"Draft\",\"Activated\"]);\n\nq2 = group q2 by ('VisitAddress_Account_Id', 'VisitAddress_Account_Name','Product2Id','Product_Name');\r\nresult = cogroup q1 by ('Visits_AccountId') , q2 by ('VisitAddress_Account_Id');\r\nresult = foreach result generate q1.'Account_Name' as 'Account_Name',sum(q2.'Revenue') as 'Revenue',q1.'VisitDate' as 'VisitDate',q1.'Visits_PlannedVisitStartTime_Year' as 'Visits_PlannedVisitStartTime_Year' , q1.'Visits_PlannedVisitStartTime_Month' as 'Visits_PlannedVisitStartTime_Month', q1.'Visits_PlannedVisitStartTime_Week' as 'Visits_PlannedVisitStartTime_Week',q1.'Visits_PlannedVisitStartTime_Day' as 'Visits_PlannedVisitStartTime_Day';\nresult = foreach result generate 'Account_Name' as 'Account_Name','VisitDate' as 'VisitDate','Visits_PlannedVisitStartTime_Year', 'Visits_PlannedVisitStartTime_Month','Visits_PlannedVisitStartTime_Week', 'Visits_PlannedVisitStartTime_Day',sum('Revenue') as 'Revenue';\nresult= group result by ('Account_Name','{{cell(Date_Static_1.selection,0,\"Text3\").asString()}}');\nresult = foreach result generate 'Account_Name' as 'Account_Name','{{cell(Date_Static_1.selection,0,\"Text3\").asString()}}' as '{{cell(Date_Static_1.selection,0,\"Text4\").asString()}}',sum('Revenue') as 'Revenue';\nresult = order result by 'Revenue' desc;\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -3438,7 +3438,7 @@
         "broadcastFacet" : true,
         "groups" : [ ],
         "numbers" : [ ],
-        "query" : "q1 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\n\nq1 = filter q1 by !('Order.Status' in [\"Completed\",\"Draft\",\"Activated\"]);\n\n\nq1 = group q1 by ('VisitAddress.Account.Id','VisitAddress.Account.Name', 'Product2Id','Product.Name');\nq = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\n q = filter q by date('Visits.PlannedVisitStartTime_Year', 'Visits.PlannedVisitStartTime_Month', 'Visits.PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq = group q by ('Visits.AccountId','Account.Name');\r\nresult = cogroup q1 by ('VisitAddress.Account.Id') , q by ('Visits.AccountId');\nresult = foreach result generate q1.'Product2Id'  as 'Product2Id', q1.'Product.Name' as 'ProductName', sum(q1.'Revenue') as 'ExpectedRevenue',unique(q.'Visits.Id') as 'Visits.Id', q.'Visits.AccountId' as 'Visits.AccountId',q.'Account.Name' as 'Account Name';\nresult = foreach result generate unique('Visits.Id') as 'Visits.Id','Visits.AccountId' as 'Visits.AccountId','Product2Id' as 'Product2Id','ProductName' as 'ProductName',sum('ExpectedRevenue') as 'ExpectedRevenue';\nresult= group result by all;\nresult = foreach result generate unique('Visits.AccountId') as 'Account', unique('Product2Id') as 'Product2Id';\nresult = order result by 'Account' desc;\n",
+        "query" : "q1 = load \"${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}\";\n\nq1 = filter q1 by !('Order_Status' in [\"Completed\",\"Draft\",\"Activated\"]);\n\n\nq1 = group q1 by ('VisitAddress_Account_Id','VisitAddress_Account_Name', 'Product2Id','Product_Name');\nq = load \"${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}\";\r\n q = filter q by date('Visits_PlannedVisitStartTime_Year', 'Visits_PlannedVisitStartTime_Month', 'Visits_PlannedVisitStartTime_Day') in [{{cell(Date_Static_1.selection, 0, \"Text2\").asString()}}];\nq = group q by ('Visits_AccountId','Account_Name');\r\nresult = cogroup q1 by ('VisitAddress_Account_Id') , q by ('Visits_AccountId');\nresult = foreach result generate q1.'Product2Id'  as 'Product2Id', q1.'Product_Name' as 'ProductName', sum(q1.'Revenue') as 'ExpectedRevenue',unique(q.'Visits_Id') as 'Visits_Id', q.'Visits_AccountId' as 'Visits_AccountId',q.'Account_Name' as 'Account Name';\nresult = foreach result generate unique('Visits_Id') as 'Visits_Id','Visits_AccountId' as 'Visits_AccountId','Product2Id' as 'Product2Id','ProductName' as 'ProductName',sum('ExpectedRevenue') as 'ExpectedRevenue';\nresult= group result by all;\nresult = foreach result generate unique('Visits_AccountId') as 'Account', unique('Product2Id') as 'Product2Id';\nresult = order result by 'Account' desc;\n",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -3777,7 +3777,7 @@
               "ProductFamily"
             ],
             "y" : [
-              "Account.Name"
+              "Account_Name"
             ]
           },
           "showActionMenu" : true,
@@ -4418,7 +4418,7 @@
           "columnMap" : {
             "trellis" : [ ],
             "dimensionAxis" : [
-              "Product.Name"
+              "Product_Name"
             ],
             "plots" : [
               "Quantity"
@@ -4526,7 +4526,7 @@
         "parameters" : {
           "compact" : true,
           "exploreLink" : true,
-          "measureField" : "unique_Visits.Id",
+          "measureField" : "unique_Visits_Id",
           "noResultsLabel" : "0",
           "numberColor" : "#FFFFFF",
           "numberSize" : 24,
@@ -4567,7 +4567,7 @@
         "parameters" : {
           "compact" : false,
           "exploreLink" : true,
-          "measureField" : "unique_Visits.Id",
+          "measureField" : "unique_Visits_Id",
           "noResultsLabel" : "0",
           "numberColor" : "#FFFFFF",
           "numberSize" : 24,
@@ -4862,7 +4862,7 @@
         "parameters" : {
           "compact" : true,
           "exploreLink" : true,
-          "measureField" : "Order.Id",
+          "measureField" : "Order_Id",
           "noResultsLabel" : "0",
           "numberColor" : "#FFFFFF",
           "numberSize" : 24,
@@ -4879,7 +4879,7 @@
         "parameters" : {
           "compact" : true,
           "exploreLink" : true,
-          "measureField" : "Order.Id",
+          "measureField" : "Order_Id",
           "noResultsLabel" : "0",
           "numberColor" : "#FFFFFF",
           "numberSize" : 24,
@@ -4913,7 +4913,7 @@
         "parameters" : {
           "compact" : false,
           "exploreLink" : true,
-          "measureField" : "Visits.Id",
+          "measureField" : "Visits_Id",
           "noResultsLabel" : "0",
           "numberColor" : "#FFFFFF",
           "numberSize" : 24,
@@ -5101,7 +5101,7 @@
         "parameters" : {
           "compact" : false,
           "exploreLink" : true,
-          "measureField" : "VisitAddress.Account.Id",
+          "measureField" : "VisitAddress_Account_Id",
           "noResultsLabel" : "0",
           "numberColor" : "#FFFFFF",
           "numberSize" : 24,
@@ -5441,7 +5441,7 @@
           "columnMap" : {
             "trellis" : [ ],
             "dimensionAxis" : [
-              "Product.Name"
+              "Product_Name"
             ],
             "plots" : [
               "ExpectedRevenue"

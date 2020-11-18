@@ -263,7 +263,7 @@
         },
         "dependent" : true,
         "fields" : [
-          "Case.Priority"
+          "Case_Priority"
         ],
         "locked" : false,
         "operator" : "in"
@@ -818,7 +818,7 @@
                   ],
                   "filters" : [
                     [
-                      "Case.HealthCloudGA__DueDate__c",
+                      "Case_HealthCloudGA__DueDate__c",
                       [
                         [
                           [
@@ -866,7 +866,7 @@
                   ],
                   "filters" : [
                     [
-                      "Case.CreatedDate",
+                      "Case_CreatedDate",
                       [
                         [
                           [
@@ -909,7 +909,7 @@
             ],
             "filters" : [
               [
-                "Case.Status",
+                "Case_Status",
                 [
                   "Closed"
                 ],
@@ -1018,7 +1018,7 @@
                   ],
                   "filters" : [
                     [
-                      "Case.HealthCloudGA__DueDate__c",
+                      "Case_HealthCloudGA__DueDate__c",
                       [
                         [
                           [
@@ -1066,7 +1066,7 @@
                   ],
                   "filters" : [
                     [
-                      "Case.CreatedDate",
+                      "Case_CreatedDate",
                       [
                         [
                           [
@@ -1109,7 +1109,7 @@
             ],
             "filters" : [
               [
-                "Case.Status",
+                "Case_Status",
                 [
                   "Closed"
                 ],
@@ -1193,7 +1193,7 @@
         "groups" : [ ],
         "label" : "Clone of Avg_Days",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case.IsClosed' == \"false\";\nq_B = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_2.selection, 0, \"Text2\").asString()}}];\nq_C = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_2.selection, 0, \"Text3\").asString()}}];\nresult = group q by all full, q_B by all full, q_C by all;\nresult = foreach result generate avg(q.'Days_Since_Created') as 'A', avg(q_B.'Days_Since_Created') as 'B', avg(q_C.'Days_Since_Created') as 'C';\nresult = foreach result generate round('B',0) as 'Avg Age', round('C',0) as 'Avg Age Previous', round((B-C),0) as 'Change_In_Days';",
+        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case_IsClosed' == \"false\";\nq_B = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_2.selection, 0, \"Text2\").asString()}}];\nq_C = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_2.selection, 0, \"Text3\").asString()}}];\nresult = group q by all full, q_B by all full, q_C by all;\nresult = foreach result generate avg(q.'Days_Since_Created') as 'A', avg(q_B.'Days_Since_Created') as 'B', avg(q_C.'Days_Since_Created') as 'C';\nresult = foreach result generate round('B',0) as 'Avg Age', round('C',0) as 'Avg Age Previous', round((B-C),0) as 'Change_In_Days';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1237,7 +1237,7 @@
         "groups" : [ ],
         "label" : "care request by case type",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case.Status' != \"Closed\";\nq = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_2.selection, 0, \"Text2\").asString()}}];\nq_B = filter q by 'Due_days' >= 0 && 'Due_days' <= 2;\nresult = group q by 'ClinicalCaseType' full, q_B by 'ClinicalCaseType';\nresult = foreach result generate coalesce(q.'ClinicalCaseType', q_B.'ClinicalCaseType') as 'ClinicalCaseType', count(q) as 'A', count(q_B) as 'B';\nresult = order result by ('A' desc);\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case_Status' != \"Closed\";\nq = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_2.selection, 0, \"Text2\").asString()}}];\nq_B = filter q by 'Due_days' >= 0 && 'Due_days' <= 2;\nresult = group q by 'ClinicalCaseType' full, q_B by 'ClinicalCaseType';\nresult = foreach result generate coalesce(q.'ClinicalCaseType', q_B.'ClinicalCaseType') as 'ClinicalCaseType', count(q) as 'A', count(q_B) as 'B';\nresult = order result by ('A' desc);\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1322,7 +1322,7 @@
         "groups" : [ ],
         "label" : "Clone of Total_Requests",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case.IsClosed' == \"false\";\nq_B = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_2.selection, 0, \"Text2\").asString()}}];\nq_C = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_2.selection, 0, \"Text3\").asString()}}];\nresult = group q by all full, q_B by all full, q_C by all;\nresult = foreach result generate unique(q.'Id') as 'A', unique(q_B.'Id') as 'B', unique(q_C.'Id') as 'C';\nresult = foreach result generate 'B' as 'Total Care Requests', 'C' as 'Previous Total Care Request', (B-C)/C as 'Percentage_Change_In_CareRequest';\n",
+        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case_IsClosed' == \"false\";\nq_B = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_2.selection, 0, \"Text2\").asString()}}];\nq_C = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_2.selection, 0, \"Text3\").asString()}}];\nresult = group q by all full, q_B by all full, q_C by all;\nresult = foreach result generate unique(q.'Id') as 'A', unique(q_B.'Id') as 'B', unique(q_C.'Id') as 'C';\nresult = foreach result generate 'B' as 'Total Care Requests', 'C' as 'Previous Total Care Request', (B-C)/C as 'Percentage_Change_In_CareRequest';\n",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1415,7 +1415,7 @@
                   ],
                   "filters" : [
                     [
-                      "Case.HealthCloudGA__DueDate__c",
+                      "Case_HealthCloudGA__DueDate__c",
                       [
                         [
                           [
@@ -1463,7 +1463,7 @@
                   ],
                   "filters" : [
                     [
-                      "Case.CreatedDate",
+                      "Case_CreatedDate",
                       [
                         [
                           [
@@ -1515,7 +1515,7 @@
             ],
             "filters" : [
               [
-                "Case.Status",
+                "Case_Status",
                 [
                   "Closed"
                 ],
@@ -1579,7 +1579,7 @@
           "Percent of Breached SLA Previous",
           "Percentage_Change_In_CareRequest"
         ],
-        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case.IsClosed' == \"false\";\nq_B = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_2.selection, 0, \"Text2\").asString()}}] && 'Breached_SLA' == \"Yes\";\nq_C = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_2.selection, 0, \"Text3\").asString()}}] && 'Breached_SLA' == \"Yes\";\nresult = group q by all full, q_B by all full, q_C by all;\nresult = foreach result generate unique(q.'Id') as 'A', unique(q_B.'Id') as 'B', unique(q_C.'Id') as 'C';\nresult = foreach result generate (B/A) as 'Percent of Breached SLA', (C/A) as 'Percent of Breached SLA Previous', ((B/A)-(C/A))/(C/A) as 'Percentage_Change_In_CareRequest';\n",
+        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case_IsClosed' == \"false\";\nq_B = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_2.selection, 0, \"Text2\").asString()}}] && 'Breached_SLA' == \"Yes\";\nq_C = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_2.selection, 0, \"Text3\").asString()}}] && 'Breached_SLA' == \"Yes\";\nresult = group q by all full, q_B by all full, q_C by all;\nresult = foreach result generate unique(q.'Id') as 'A', unique(q_B.'Id') as 'B', unique(q_C.'Id') as 'C';\nresult = foreach result generate (B/A) as 'Percent of Breached SLA', (C/A) as 'Percent of Breached SLA Previous', ((B/A)-(C/A))/(C/A) as 'Percentage_Change_In_CareRequest';\n",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1624,7 +1624,7 @@
         "groups" : [ ],
         "label" : "CareRequestDetails",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case.Status' != \"Closed\";\nq = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_2.selection, 0, \"Text2\").asString()}}];\nq = foreach q generate 'Account.Name' as 'Account.Name', 'Breached_SLA' as 'Breached_SLA', 'CareRequestRecordType.Name' as 'CareRequestRecordType.Name', 'Case.Priority' as 'Case.Priority', 'Case.Status' as 'Case.Status', 'ClinicalCaseType' as 'ClinicalCaseType', 'Due_Date_Format' as 'Due_Date_Format', 'Name' as 'Name';\nq = limit q 100;",
+        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case_Status' != \"Closed\";\nq = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_2.selection, 0, \"Text2\").asString()}}];\nq = foreach q generate 'Account_Name' as 'Account_Name', 'Breached_SLA' as 'Breached_SLA', 'CareRequestRecordType_Name' as 'CareRequestRecordType_Name', 'Case_Priority' as 'Case_Priority', 'Case_Status' as 'Case_Status', 'ClinicalCaseType' as 'ClinicalCaseType', 'Due_Date_Format' as 'Due_Date_Format', 'Name' as 'Name';\nq = limit q 100;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]

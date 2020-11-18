@@ -125,7 +125,7 @@
         },
         "dependent" : true,
         "fields" : [
-          "CareBarriersCase.HealthCloudGA__DueDate__c"
+          "CareBarriersCase_HealthCloudGA__DueDate__c"
         ],
         "label" : "Time Period",
         "locked" : false,
@@ -161,7 +161,7 @@
         },
         "dependent" : true,
         "fields" : [
-          "CareBarrierCaseAccount.MemberPlan.Plan.PlanType"
+          "CareBarrierCaseAccount_MemberPlan_Plan_PlanType"
         ],
         "label" : "Insurance Types",
         "locked" : false,
@@ -173,7 +173,7 @@
         },
         "dependent" : true,
         "fields" : [
-          "CareBarrierCaseAccount.Contact.MailingState"
+          "CareBarrierCaseAccount_Contact_MailingState"
         ],
         "label" : "Location",
         "locked" : false,
@@ -1002,22 +1002,22 @@
         "type" : "staticflex",
         "values" : [
           {
-            "Dimension2" : "CareBarrierCaseAccount.Contact.Contact_Age_Bucket",
+            "Dimension2" : "CareBarrierCaseAccount_Contact_Contact_Age_Bucket",
             "Display" : "By Age",
             "Text3" : "vbar"
           },
           {
-            "Dimension2" : "CareBarrierCaseAccount.Contact.HealthCloudGA__Gender__c",
+            "Dimension2" : "CareBarrierCaseAccount_Contact_HealthCloudGA__Gender__c",
             "Display" : "By Gender",
             "Text3" : "pie"
           },
           {
-            "Dimension2" : "CareBarrierCaseAccount.Contact.MailingState",
+            "Dimension2" : "CareBarrierCaseAccount_Contact_MailingState",
             "Display" : "By Location",
             "Text3" : "choropleth"
           },
           {
-            "Dimension2" : "CareBarrierCaseAccount.MemberPlan.Plan.PlanType",
+            "Dimension2" : "CareBarrierCaseAccount_MemberPlan_Plan_PlanType",
             "Display" : "By Insurance Type",
             "Text3" : "vbar"
           }
@@ -1450,7 +1450,7 @@
         "groups" : [ ],
         "label" : "TaskPriority_New2",
         "numbers" : [ ],
-        "query" : "q1 = load \"${App.Datasets.HLS_Activities8_tp.FullyQualifiedName}\";\r\nq1 =  foreach q1 generate q1.'Id' as 'TaskId',q1.'AccountId' as 'AccountId',q1.'WhatId' as 'WhatId',q1.'Priority' as 'Priority',count() as 'count';\r\nresult1 = group q1 by ('WhatId','Priority','count','TaskId');\r\nq = load \"${App.Datasets.HLS_Barrier8_tp.FullyQualifiedName}\";\r\nresult = group q by ('Compute_CareBarrierId','Compute_CareBarrierName','CareDeterminantIds', 'CareBarrierCaseAccount.Name', 'CareDeterminantNames','CareBarrierPriority','Compute_PatientId');\r\n\r\n--result1 =  foreach result1 generate 'TaskId','WhatId','Priority','count'\r\nfinal = group result by ('Compute_CareBarrierId') left, result1 by ('WhatId');\r\n--final = foreach final generate result.'Compute_CareBarrierId' as 'Compute_CareBarrierId' , result1.'WhatId' as 'WhatId';\r\nfinal = foreach final generate result1.'Priority' as 'Priority',result1.'count' as 'count';\r\nfinal1 = group final by 'Priority';\r\nfinal1 = foreach final1 generate 'Priority' as 'Priority',sum('count') as 'count';\r\n\r\n",
+        "query" : "q1 = load \"${App.Datasets.HLS_Activities8_tp.FullyQualifiedName}\";\r\nq1 =  foreach q1 generate q1.'Id' as 'TaskId',q1.'AccountId' as 'AccountId',q1.'WhatId' as 'WhatId',q1.'Priority' as 'Priority',count() as 'count';\r\nresult1 = group q1 by ('WhatId','Priority','count','TaskId');\r\nq = load \"${App.Datasets.HLS_Barrier8_tp.FullyQualifiedName}\";\r\nresult = group q by ('Compute_CareBarrierId','Compute_CareBarrierName','CareDeterminantIds', 'CareBarrierCaseAccount_Name', 'CareDeterminantNames','CareBarrierPriority','Compute_PatientId');\r\n\r\n--result1 =  foreach result1 generate 'TaskId','WhatId','Priority','count'\r\nfinal = group result by ('Compute_CareBarrierId') left, result1 by ('WhatId');\r\n--final = foreach final generate result.'Compute_CareBarrierId' as 'Compute_CareBarrierId' , result1.'WhatId' as 'WhatId';\r\nfinal = foreach final generate result1.'Priority' as 'Priority',result1.'count' as 'count';\r\nfinal1 = group final by 'Priority';\r\nfinal1 = foreach final1 generate 'Priority' as 'Priority',sum('count') as 'count';\r\n\r\n",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1592,7 +1592,7 @@
         "broadcastFacet" : true,
         "groups" : [ ],
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Barrier8_tp.FullyQualifiedName}\";\r\nresult = group q by ('Compute_CareBarrierId','Compute_CareBarrierName','CareDeterminantIds', 'CareBarrierCaseAccount.Name', 'CareDeterminantNames','CareBarrierPriority','Compute_PatientId');\r\nresult = foreach result generate 'Compute_PatientId' as 'Compute_PatientId','Compute_CareBarrierId' as 'Compute_CareBarrierId','Compute_CareBarrierName' as 'Compute_CareBarrierName','CareDeterminantIds' as 'CareDeterminantIds', 'CareBarrierCaseAccount.Name' as 'CareBarrierCaseAccount.Name', 'CareDeterminantNames' as 'CareDeterminantNames','CareBarrierPriority' as 'CareBarrierPriority',row_number() over([..] partition by all order by 'Compute_PatientId' asc) as 'Row Number';\r\nresult = group result by ('Compute_CareBarrierId','Compute_CareBarrierName','CareDeterminantIds','CareBarrierCaseAccount.Name', 'CareDeterminantNames','CareBarrierPriority','Compute_PatientId','Row Number');\r\nq1 = load \"${App.Datasets.HLS_Activities8_tp.FullyQualifiedName}\";\r\nq1 = filter q1 by {{cell(TaskPriority_New2_1.selection,0,\"Priority\").asEquality(\"Priority\")}};\nq1 =  foreach q1 generate coalesce(q1.'WhatId',\"Not defined\") as 'WhatId',coalesce(q1.\r\n'Id',\"Not defined\") as 'TaskId',coalesce(q1.'Subject',\"Not defined\") as 'Subject', coalesce(q1.'Priority',\"Not defined\") as 'Priority', coalesce(q1.\r\n'TaskCreationDays',\"Not defined\") as 'TaskCreationDays', coalesce(q1.'ActivityDate',\"Not defined\") as 'ActivityDate',coalesce(case when 'Task_CreatedDays' > 10 then \"#FFDFDF\" end ,\"Not defined\") as 'Color';\r\nresult1 = group q1 by ('WhatId','Priority','Subject','TaskCreationDays','ActivityDate','Color');\r\nresult1 = foreach result1 generate coalesce('WhatId',\"Not defined\") as 'WhatId' ,coalesce('Subject',\"Not defined\") as 'Subject',coalesce('Priority',\"Not defined\") as 'Priority', coalesce('TaskCreationDays',\"Not defined\") as 'TaskCreationDays', coalesce('ActivityDate',\"Not defined\") as 'ActivityDate',coalesce('Color',\"Not defined\") as 'Color';\r\nresult1 = group result1 by ('WhatId','Subject','Priority','TaskCreationDays', 'ActivityDate','Color');\r\nfinal = group result by ('Compute_CareBarrierId') left,result1 by ('WhatId');\r\nfinal = foreach final generate result.'Row Number' as 'Row',result.'CareBarrierCaseAccount.Name' as 'CareBarrierCaseAccount.Name',result.'CareDeterminantNames' as 'CareDeterminantNames',result.'Compute_CareBarrierName' as '# of Barriers',\r\n    result.'CareBarrierPriority' as \r\n    'Barrier Priority',coalesce(result1.'Subject',\"Not Defined\") as 'Subject',coalesce(result1.'Priority',\"Not Defined\") as 'Tasks Priority',coalesce(result1.'TaskCreationDays',\"Not Defined\") as 'Days Overdue',coalesce(result1.'ActivityDate',\"Not Defined\") as 'Task Due Date',coalesce(result1.'Color',\"Not Defined\") as 'Color';\r\n\r\nfinal = foreach final generate 'Row','CareBarrierCaseAccount.Name','CareDeterminantNames','# of Barriers','Barrier Priority','Subject', 'Tasks Priority','Days Overdue','Task Due Date','Color';\r\nfinal =  order final by 'Row' asc",
+        "query" : "q = load \"${App.Datasets.HLS_Barrier8_tp.FullyQualifiedName}\";\r\nresult = group q by ('Compute_CareBarrierId','Compute_CareBarrierName','CareDeterminantIds', 'CareBarrierCaseAccount_Name', 'CareDeterminantNames','CareBarrierPriority','Compute_PatientId');\r\nresult = foreach result generate 'Compute_PatientId' as 'Compute_PatientId','Compute_CareBarrierId' as 'Compute_CareBarrierId','Compute_CareBarrierName' as 'Compute_CareBarrierName','CareDeterminantIds' as 'CareDeterminantIds', 'CareBarrierCaseAccount_Name' as 'CareBarrierCaseAccount_Name', 'CareDeterminantNames' as 'CareDeterminantNames','CareBarrierPriority' as 'CareBarrierPriority',row_number() over([..] partition by all order by 'Compute_PatientId' asc) as 'Row Number';\r\nresult = group result by ('Compute_CareBarrierId','Compute_CareBarrierName','CareDeterminantIds','CareBarrierCaseAccount_Name', 'CareDeterminantNames','CareBarrierPriority','Compute_PatientId','Row Number');\r\nq1 = load \"${App.Datasets.HLS_Activities8_tp.FullyQualifiedName}\";\r\nq1 = filter q1 by {{cell(TaskPriority_New2_1.selection,0,\"Priority\").asEquality(\"Priority\")}};\nq1 =  foreach q1 generate coalesce(q1.'WhatId',\"Not defined\") as 'WhatId',coalesce(q1.\r\n'Id',\"Not defined\") as 'TaskId',coalesce(q1.'Subject',\"Not defined\") as 'Subject', coalesce(q1.'Priority',\"Not defined\") as 'Priority', coalesce(q1.\r\n'TaskCreationDays',\"Not defined\") as 'TaskCreationDays', coalesce(q1.'ActivityDate',\"Not defined\") as 'ActivityDate',coalesce(case when 'Task_CreatedDays' > 10 then \"#FFDFDF\" end ,\"Not defined\") as 'Color';\r\nresult1 = group q1 by ('WhatId','Priority','Subject','TaskCreationDays','ActivityDate','Color');\r\nresult1 = foreach result1 generate coalesce('WhatId',\"Not defined\") as 'WhatId' ,coalesce('Subject',\"Not defined\") as 'Subject',coalesce('Priority',\"Not defined\") as 'Priority', coalesce('TaskCreationDays',\"Not defined\") as 'TaskCreationDays', coalesce('ActivityDate',\"Not defined\") as 'ActivityDate',coalesce('Color',\"Not defined\") as 'Color';\r\nresult1 = group result1 by ('WhatId','Subject','Priority','TaskCreationDays', 'ActivityDate','Color');\r\nfinal = group result by ('Compute_CareBarrierId') left,result1 by ('WhatId');\r\nfinal = foreach final generate result.'Row Number' as 'Row',result.'CareBarrierCaseAccount_Name' as 'CareBarrierCaseAccount_Name',result.'CareDeterminantNames' as 'CareDeterminantNames',result.'Compute_CareBarrierName' as '# of Barriers',\r\n    result.'CareBarrierPriority' as \r\n    'Barrier Priority',coalesce(result1.'Subject',\"Not Defined\") as 'Subject',coalesce(result1.'Priority',\"Not Defined\") as 'Tasks Priority',coalesce(result1.'TaskCreationDays',\"Not Defined\") as 'Days Overdue',coalesce(result1.'ActivityDate',\"Not Defined\") as 'Task Due Date',coalesce(result1.'Color',\"Not Defined\") as 'Color';\r\n\r\nfinal = foreach final generate 'Row','CareBarrierCaseAccount_Name','CareDeterminantNames','# of Barriers','Barrier Priority','Subject', 'Tasks Priority','Days Overdue','Task Due Date','Color';\r\nfinal =  order final by 'Row' asc",
         "receiveFacetSource" : {
           "mode" : "exclude",
           "steps" : [
@@ -1601,7 +1601,7 @@
         },
         "selectMode" : "single",
         "strings" : [
-          "CareBarrierCaseAccount.Name",
+          "CareBarrierCaseAccount_Name",
           "CareDeterminantNames",
           "# of Barriers",
           "Barrier Priority",

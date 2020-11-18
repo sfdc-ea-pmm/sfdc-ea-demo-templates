@@ -583,7 +583,7 @@
         "groups" : [ ],
         "label" : "Account_Contact_Acco_5",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Task7_tp.FullyQualifiedName}\";\nq = filter q by 'CarePlan.IsClosed' == \"false\";\nq = filter q by 'IsOverdue' == \"true\";\n--q = filter q by 'DaysOverdue' >= -15 && 'DaysOverdue' <= -1;\nq = group q by all;\nq = foreach q generate unique('Id') as 'Id';\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.HLS_Task7_tp.FullyQualifiedName}\";\nq = filter q by 'CarePlan_IsClosed' == \"false\";\nq = filter q by 'IsOverdue' == \"true\";\n--q = filter q by 'DaysOverdue' >= -15 && 'DaysOverdue' <= -1;\nq = group q by all;\nq = foreach q generate unique('Id') as 'Id';\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -973,7 +973,7 @@
         "groups" : [ ],
         "label" : "Breached_SLA_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by date('DueDate_Year', 'DueDate_Month', 'DueDate_Day') in [\"current day\"..\"2 days ahead\"];\nq = filter q by 'Case.Status' != \"Closed\";\nq = group q by all;\nq = foreach q generate unique('Id') as 'count';",
+        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by date('DueDate_Year', 'DueDate_Month', 'DueDate_Day') in [\"current day\"..\"2 days ahead\"];\nq = filter q by 'Case_Status' != \"Closed\";\nq = group q by all;\nq = foreach q generate unique('Id') as 'count';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]

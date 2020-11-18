@@ -447,7 +447,7 @@
         },
         "dependent" : true,
         "fields" : [
-          "Owner.Username"
+          "Owner_Username"
         ],
         "locked" : false,
         "operator" : "in"
@@ -458,7 +458,7 @@
         },
         "dependent" : true,
         "fields" : [
-          "Case.CaseRecordType.Name"
+          "Case_CaseRecordType_Name"
         ],
         "locked" : false,
         "operator" : "in"
@@ -1346,7 +1346,7 @@
         "groups" : [ ],
         "label" : "Clone of Number_of_CRs",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case.IsClosed' == \"false\";\nq_B = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq_C = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text3\").asString()}}];\nresult = group q by all full, q_B by all full, q_C by all;\nresult = foreach result generate unique(q.'Id') as 'A', unique(q_B.'Id') as 'B',unique(q_C.'Id') as 'C';\nresult = foreach result generate 'A', 'B', 'C', (B-C)/C as 'Percentage_Change_In_CareRequest';\n",
+        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case_IsClosed' == \"false\";\nq_B = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq_C = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text3\").asString()}}];\nresult = group q by all full, q_B by all full, q_C by all;\nresult = foreach result generate unique(q.'Id') as 'A', unique(q_B.'Id') as 'B',unique(q_C.'Id') as 'C';\nresult = foreach result generate 'A', 'B', 'C', (B-C)/C as 'Percentage_Change_In_CareRequest';\n",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1390,7 +1390,7 @@
         "groups" : [ ],
         "label" : "AdmissionType_Clinic_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'isReopenedCareRequest' == 1;\nq = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq = foreach q generate 'Case.CaseRecordType.Name' as 'Case.CaseRecordType.Name', 'Case.Status' as 'Case.Status', 'ClinicalCaseType' as 'ClinicalCaseType', 'Created_Date_Format' as 'Created_Date_Format', 'Name' as 'Name', 'Owner.Username' as 'Owner.Username', 'ReopenReason' as 'ReopenReason', 'Reopened_Date_Format' as 'Reopened_Date_Format';\nq = limit q 100;",
+        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'isReopenedCareRequest' == 1;\nq = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq = foreach q generate 'Case_CaseRecordType_Name' as 'Case_CaseRecordType_Name', 'Case_Status' as 'Case_Status', 'ClinicalCaseType' as 'ClinicalCaseType', 'Created_Date_Format' as 'Created_Date_Format', 'Name' as 'Name', 'Owner_Username' as 'Owner_Username', 'ReopenReason' as 'ReopenReason', 'Reopened_Date_Format' as 'Reopened_Date_Format';\nq = limit q 100;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1552,7 +1552,7 @@
         "groups" : [ ],
         "label" : "Clone of Number_of_Denials",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case.IsClosed' == \"false\";\nq_B = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}] && 'isDeniedCareRequest' == 1;\nq_C = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text3\").asString()}}] && 'isDeniedCareRequest' == 1;\nresult = group q by all full, q_B by all full, q_C by all;\nresult = foreach result generate unique(q.'Id') as 'A', unique(q_B.'Id') as 'B', unique(q_C.'Id') as 'C';\nresult = foreach result generate 'A', 'B', 'C', (B-C)/C as 'Percentage_Change_In_CareRequest';",
+        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case_IsClosed' == \"false\";\nq_B = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}] && 'isDeniedCareRequest' == 1;\nq_C = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text3\").asString()}}] && 'isDeniedCareRequest' == 1;\nresult = group q by all full, q_B by all full, q_C by all;\nresult = foreach result generate unique(q.'Id') as 'A', unique(q_B.'Id') as 'B', unique(q_C.'Id') as 'C';\nresult = foreach result generate 'A', 'B', 'C', (B-C)/C as 'Percentage_Change_In_CareRequest';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1897,13 +1897,13 @@
           "query" : {
             "values" : [
               "Name",
-              "Case.CaseRecordType.Name",
+              "Case_CaseRecordType_Name",
               "ClinicalCaseType",
-              "Case.Status",
+              "Case_Status",
               "ReopenReason",
               "Created_Date_Format",
               "Reopened_Date_Format",
-              "Owner.Username"
+              "Owner_Username"
             ],
             "filters" : [
               [
@@ -2254,7 +2254,7 @@
         "groups" : [ ],
         "label" : "Clone of AdmissionType_Clinic_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'isDeniedCareRequest' == 1;\nq = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq = foreach q generate 'Case.CaseRecordType.Name' as 'Case.CaseRecordType.Name', 'Case.Status' as 'Case.Status', 'ClinicalCaseType' as 'ClinicalCaseType', 'Created_Date_Format' as 'Created_Date_Format', 'DecisionReason' as 'DecisionReason', 'Denied_Date_Format' as 'Denied_Date_Format', 'Name' as 'Name', 'Owner.Username' as 'Owner.Username';\nq = limit q 100;",
+        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'isDeniedCareRequest' == 1;\nq = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq = foreach q generate 'Case_CaseRecordType_Name' as 'Case_CaseRecordType_Name', 'Case_Status' as 'Case_Status', 'ClinicalCaseType' as 'ClinicalCaseType', 'Created_Date_Format' as 'Created_Date_Format', 'DecisionReason' as 'DecisionReason', 'Denied_Date_Format' as 'Denied_Date_Format', 'Name' as 'Name', 'Owner_Username' as 'Owner_Username';\nq = limit q 100;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2407,7 +2407,7 @@
             ],
             "filters" : [
               [
-                "Case.IsClosed",
+                "Case_IsClosed",
                 [
                   "false"
                 ],
@@ -2461,7 +2461,7 @@
         "groups" : [ ],
         "label" : "Clone of Number_Of_Reopened",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case.IsClosed' == \"false\";\nq_B = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}] && 'isReopenedCareRequest' == 1;\nq_C = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text3\").asString()}}] && 'isReopenedCareRequest' == 1;\nresult = group q by all full, q_B by all full, q_C by all;\nresult = foreach result generate unique(q.'Id') as 'A', unique(q_B.'Id') as 'B', unique(q_C.'Id') as 'C';\nresult = foreach result generate 'A', 'B', 'C', (B-C)/C as 'Percentage_Change_In_CareRequest';\n",
+        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case_IsClosed' == \"false\";\nq_B = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}] && 'isReopenedCareRequest' == 1;\nq_C = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text3\").asString()}}] && 'isReopenedCareRequest' == 1;\nresult = group q by all full, q_B by all full, q_C by all;\nresult = foreach result generate unique(q.'Id') as 'A', unique(q_B.'Id') as 'B', unique(q_C.'Id') as 'C';\nresult = foreach result generate 'A', 'B', 'C', (B-C)/C as 'Percentage_Change_In_CareRequest';\n",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2662,7 +2662,7 @@
             ],
             "filters" : [
               [
-                "Case.IsClosed",
+                "Case_IsClosed",
                 [
                   "false"
                 ],
@@ -2859,7 +2859,7 @@
             ],
             "filters" : [
               [
-                "Case.IsClosed",
+                "Case_IsClosed",
                 [
                   "false"
                 ],
@@ -3056,7 +3056,7 @@
             ],
             "filters" : [
               [
-                "Case.IsClosed",
+                "Case_IsClosed",
                 [
                   "false"
                 ],
@@ -3134,7 +3134,7 @@
         "groups" : [ ],
         "label" : "Clone of Id_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case.IsClosed' == \"false\";\nq_B = filter q by 'isDeniedCareRequest' == 1 && date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq_D = filter q by 'isReopenedCareRequest' == 1 && date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nresult = group q by all full, q_B by all full, q_D by all;\nresult = foreach result generate coalesce(unique(q.'Id'),0) as 'A', coalesce(unique(q_B.'Id'),0) as 'B', coalesce(unique(q_D.'Id'),0) as 'D';\nresult = foreach result generate 'A', 'B', 'D', coalesce((B/A),0) as 'C', coalesce((D/A),0) as 'E';\nresult = order result by ('D' desc);\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}\";\nq = filter q by 'Case_IsClosed' == \"false\";\nq_B = filter q by 'isDeniedCareRequest' == 1 && date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nq_D = filter q by 'isReopenedCareRequest' == 1 && date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [{{cell(static_1.selection, 0, \"Text2\").asString()}}];\nresult = group q by all full, q_B by all full, q_D by all;\nresult = foreach result generate coalesce(unique(q.'Id'),0) as 'A', coalesce(unique(q_B.'Id'),0) as 'B', coalesce(unique(q_D.'Id'),0) as 'D';\nresult = foreach result generate 'A', 'B', 'D', coalesce((B/A),0) as 'C', coalesce((D/A),0) as 'E';\nresult = order result by ('D' desc);\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
