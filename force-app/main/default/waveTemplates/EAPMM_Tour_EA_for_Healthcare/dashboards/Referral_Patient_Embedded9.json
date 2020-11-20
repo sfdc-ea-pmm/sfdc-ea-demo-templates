@@ -745,7 +745,7 @@
               ]
             ],
             "groups" : [
-              "HealthCloudGA__InsuranceType__c"
+              "HealthCloudGA_InsuranceType__c"
             ]
           },
           "version" : -1.0
@@ -819,7 +819,7 @@
             "columnMap" : {
               "trellis" : [ ],
               "dimensionAxis" : [
-                "HealthCloudGA__InsuranceType__c"
+                "HealthCloudGA_InsuranceType__c"
               ],
               "plots" : [
                 "count"
@@ -881,7 +881,7 @@
               ]
             ],
             "groups" : [
-              "HealthCloudGA__Specialty__c"
+              "HealthCloudGA_Specialty__c"
             ]
           },
           "version" : -1.0
@@ -955,7 +955,7 @@
             "columnMap" : {
               "trellis" : [ ],
               "dimensionAxis" : [
-                "HealthCloudGA__Specialty__c"
+                "HealthCloudGA_Specialty__c"
               ],
               "plots" : [
                 "count"
@@ -1017,7 +1017,7 @@
               ]
             ],
             "groups" : [
-              "HealthCloudGA__TypeOfService__c"
+              "HealthCloudGA_TypeOfService__c"
             ]
           },
           "version" : -1.0
@@ -1091,7 +1091,7 @@
             "columnMap" : {
               "trellis" : [ ],
               "dimensionAxis" : [
-                "HealthCloudGA__TypeOfService__c"
+                "HealthCloudGA_TypeOfService__c"
               ],
               "plots" : [
                 "count"
@@ -1144,7 +1144,7 @@
           "avg_Lead_Age_Days",
           "order"
         ],
-        "query" : "dataset = load \"${App.Datasets.HLS_Referral8_tp.FullyQualifiedName}\"; a = group dataset by all; a = foreach a generate avg('Lead_Age_Days') as 'avg_Lead_Age_Days', case when avg('Lead_Age_Days') < {{coalesce(cell(referral_age_all.result, 0, \"avg_Lead_Age_Days\"),0).asString()}} then \"This Referral (on track)\" else \"This Referral (behind)\" end as 'ReferralType', 1 as 'order'; dataset = filter dataset by 'IsConverted' == \"true\"; b = filter dataset by 'HealthCloudGA__Specialty__c' == \"Cardiology\"; b = group b by all; b = foreach b generate avg('Lead_Age_Days') as 'avg_Lead_Age_Days', \"Avg Specialty\" as 'ReferralType', 2 as 'order'; c = filter dataset by 'HealthCloudGA__TypeOfService__c' == \"Surgery\"; c = group c by all; c = foreach c generate avg('Lead_Age_Days') as 'avg_Lead_Age_Days', \"Avg Type of Service\" as 'ReferralType', 3 as 'order'; d = filter dataset by 'HealthCloudGA__InsuranceType__c' == \"Medicare\"; d = group d by all; d = foreach d generate avg('Lead_Age_Days') as 'avg_Lead_Age_Days', \"Avg Insurance Type\" as 'ReferralType', 4 as 'order'; e = group dataset by all; e = foreach e generate avg('Lead_Age_Days') as 'avg_Lead_Age_Days', \"Avg Overall\" as 'ReferralType', 5 as 'order'; f = union a,b,c,d,e; f = order f by 'order' asc;",
+        "query" : "dataset = load \"${App.Datasets.HLS_Referral8_tp.FullyQualifiedName}\"; a = group dataset by all; a = foreach a generate avg('Lead_Age_Days') as 'avg_Lead_Age_Days', case when avg('Lead_Age_Days') < {{coalesce(cell(referral_age_all.result, 0, \"avg_Lead_Age_Days\"),0).asString()}} then \"This Referral (on track)\" else \"This Referral (behind)\" end as 'ReferralType', 1 as 'order'; dataset = filter dataset by 'IsConverted' == \"true\"; b = filter dataset by 'HealthCloudGA_Specialty__c' == \"Cardiology\"; b = group b by all; b = foreach b generate avg('Lead_Age_Days') as 'avg_Lead_Age_Days', \"Avg Specialty\" as 'ReferralType', 2 as 'order'; c = filter dataset by 'HealthCloudGA_TypeOfService__c' == \"Surgery\"; c = group c by all; c = foreach c generate avg('Lead_Age_Days') as 'avg_Lead_Age_Days', \"Avg Type of Service\" as 'ReferralType', 3 as 'order'; d = filter dataset by 'HealthCloudGA_InsuranceType__c' == \"Medicare\"; d = group d by all; d = foreach d generate avg('Lead_Age_Days') as 'avg_Lead_Age_Days', \"Avg Insurance Type\" as 'ReferralType', 4 as 'order'; e = group dataset by all; e = foreach e generate avg('Lead_Age_Days') as 'avg_Lead_Age_Days', \"Avg Overall\" as 'ReferralType', 5 as 'order'; f = union a,b,c,d,e; f = order f by 'order' asc;",
         "selectMode" : "single",
         "strings" : [
           "ReferralType"
@@ -1495,7 +1495,7 @@
         "numbers" : [
           "conversion_pct"
         ],
-        "query" : "a = load \"${App.Datasets.HLS_Referral8_tp.FullyQualifiedName}\";\na = filter a by 'HealthCloudGA__InsuranceType__c' == \"Medicare\";\nb = filter a by 'IsConverted' == \"true\";\nc = group a by all full, b by all;\nc = foreach c generate round(100*(count(b)/count(a)),1) as 'conversion_pct';\n",
+        "query" : "a = load \"${App.Datasets.HLS_Referral8_tp.FullyQualifiedName}\";\na = filter a by 'HealthCloudGA_InsuranceType__c' == \"Medicare\";\nb = filter a by 'IsConverted' == \"true\";\nc = group a by all full, b by all;\nc = foreach c generate round(100*(count(b)/count(a)),1) as 'conversion_pct';\n",
         "selectMode" : "single",
         "strings" : [ ],
         "type" : "saql",
@@ -1557,7 +1557,7 @@
         "groups" : [ ],
         "label" : "conversion_specialty",
         "numbers" : [ ],
-        "query" : "a = load \"${App.Datasets.HLS_Referral8_tp.FullyQualifiedName}\";\na = filter a by 'HealthCloudGA__Specialty__c' == \"Orthopedics\";\nb = filter a by 'IsConverted' == \"true\";\nc = group a by all full, b by all;\nc = foreach c generate round(100*(count(b)/count(a)),1) as 'conversion_pct';\n",
+        "query" : "a = load \"${App.Datasets.HLS_Referral8_tp.FullyQualifiedName}\";\na = filter a by 'HealthCloudGA_Specialty__c' == \"Orthopedics\";\nb = filter a by 'IsConverted' == \"true\";\nc = group a by all full, b by all;\nc = foreach c generate round(100*(count(b)/count(a)),1) as 'conversion_pct';\n",
         "selectMode" : "single",
         "strings" : [ ],
         "type" : "saql",
@@ -1857,7 +1857,7 @@
         "numbers" : [
           "conversion_pct"
         ],
-        "query" : "a = load \"${App.Datasets.HLS_Referral8_tp.FullyQualifiedName}\";\na = filter a by 'HealthCloudGA__TypeOfService__c' == \"Medicare\";\nb = filter a by 'IsConverted' == \"true\";\nc = group a by all full, b by all;\nc = foreach c generate round(100*(count(b)/count(a)),1) as 'conversion_pct';\n",
+        "query" : "a = load \"${App.Datasets.HLS_Referral8_tp.FullyQualifiedName}\";\na = filter a by 'HealthCloudGA_TypeOfService__c' == \"Medicare\";\nb = filter a by 'IsConverted' == \"true\";\nc = group a by all full, b by all;\nc = foreach c generate round(100*(count(b)/count(a)),1) as 'conversion_pct';\n",
         "selectMode" : "single",
         "strings" : [ ],
         "type" : "saql",
@@ -2104,7 +2104,7 @@
           "avg_Lead_Age_Days",
           "order"
         ],
-        "query" : "dataset = load \"${App.Datasets.HLS_Referral8_tp.FullyQualifiedName}\";\n\na = filter dataset by 'Id' == \"00QB0000006MTUjMAO\";\na = group a by all;\na = foreach a generate avg('Lead_Age_Days') as 'avg_Lead_Age_Days', \"This Referral (on track)\" as 'ReferralType', 1 as 'order';\n\nb = filter dataset by 'HealthCloudGA__Specialty__c' == \"Cardiology\";\nb = group b by all;\nb = foreach b generate avg('Lead_Age_Days') as 'avg_Lead_Age_Days', \"Avg Specialty\" as 'ReferralType', 2 as 'order';\n\nc = filter dataset by 'HealthCloudGA__TypeOfService__c' == \"Surgery\";\nc = group c by all;\nc = foreach c generate avg('Lead_Age_Days') as 'avg_Lead_Age_Days', \"Avg Type of Service\" as 'ReferralType', 3 as 'order';\n\nd = filter dataset by 'HealthCloudGA__InsuranceType__c' == \"Medicare\";\nd = group d by all;\nd = foreach d generate avg('Lead_Age_Days') as 'avg_Lead_Age_Days', \"Avg Insurance Type\" as 'ReferralType', 4 as 'order';\n\ne = group dataset by all;\ne = foreach e generate avg('Lead_Age_Days') as 'avg_Lead_Age_Days', \"Avg Overall\" as 'ReferralType', 5 as 'order';\n\nf = union a,b,c,d,e;\nf = order f by 'order' asc;",
+        "query" : "dataset = load \"${App.Datasets.HLS_Referral8_tp.FullyQualifiedName}\";\n\na = filter dataset by 'Id' == \"00QB0000006MTUjMAO\";\na = group a by all;\na = foreach a generate avg('Lead_Age_Days') as 'avg_Lead_Age_Days', \"This Referral (on track)\" as 'ReferralType', 1 as 'order';\n\nb = filter dataset by 'HealthCloudGA_Specialty__c' == \"Cardiology\";\nb = group b by all;\nb = foreach b generate avg('Lead_Age_Days') as 'avg_Lead_Age_Days', \"Avg Specialty\" as 'ReferralType', 2 as 'order';\n\nc = filter dataset by 'HealthCloudGA_TypeOfService__c' == \"Surgery\";\nc = group c by all;\nc = foreach c generate avg('Lead_Age_Days') as 'avg_Lead_Age_Days', \"Avg Type of Service\" as 'ReferralType', 3 as 'order';\n\nd = filter dataset by 'HealthCloudGA_InsuranceType__c' == \"Medicare\";\nd = group d by all;\nd = foreach d generate avg('Lead_Age_Days') as 'avg_Lead_Age_Days', \"Avg Insurance Type\" as 'ReferralType', 4 as 'order';\n\ne = group dataset by all;\ne = foreach e generate avg('Lead_Age_Days') as 'avg_Lead_Age_Days', \"Avg Overall\" as 'ReferralType', 5 as 'order';\n\nf = union a,b,c,d,e;\nf = order f by 'order' asc;",
         "selectMode" : "single",
         "strings" : [
           "ReferralType"
@@ -2317,7 +2317,7 @@
       "text_10" : {
         "parameters" : {
           "content" : {
-            "displayTemplate" : "You've converted {{coalesce(cell(conversion_insurance.result, 0, \"conversion_pct\"),0).asString()}}% of {{cell(insurance.result, 0, \"HealthCloudGA__InsuranceType__c\").asString()}} referrals.  This is {{cell(comparison_text.result, 0, \"insurance_text\").asString()}} your average conversion rate for all sources."
+            "displayTemplate" : "You've converted {{coalesce(cell(conversion_insurance.result, 0, \"conversion_pct\"),0).asString()}}% of {{cell(insurance.result, 0, \"HealthCloudGA_InsuranceType__c\").asString()}} referrals.  This is {{cell(comparison_text.result, 0, \"insurance_text\").asString()}} your average conversion rate for all sources."
           },
           "fontSize" : 12,
           "textAlignment" : "left",
@@ -2328,7 +2328,7 @@
       "text_12" : {
         "parameters" : {
           "content" : {
-            "displayTemplate" : "You've converted {{coalesce(cell(conversion_specialty.result, 0, \"conversion_pct\"),0).asString()}}% of {{cell(specialty.result, 0, \"HealthCloudGA__Specialty__c\").asString()}} referrals.  This is {{cell(comparison_text.result, 0, \"specialty_text\").asString()}} your average conversion rate for all sources."
+            "displayTemplate" : "You've converted {{coalesce(cell(conversion_specialty.result, 0, \"conversion_pct\"),0).asString()}}% of {{cell(specialty.result, 0, \"HealthCloudGA_Specialty__c\").asString()}} referrals.  This is {{cell(comparison_text.result, 0, \"specialty_text\").asString()}} your average conversion rate for all sources."
           },
           "fontSize" : 12,
           "textAlignment" : "left",
@@ -2339,7 +2339,7 @@
       "text_11" : {
         "parameters" : {
           "content" : {
-            "displayTemplate" : "You've converted {{coalesce(cell(conversion_type_of_service.result, 0, \"conversion_pct\"),0).asString()}}% of {{cell(type_of_service.result, 0, \"HealthCloudGA__TypeOfService__c\").asString()}} referrals.  This is {{cell(comparison_text.result, 0, \"type_of_service_text\").asString()}} your average conversion rate for all sources."
+            "displayTemplate" : "You've converted {{coalesce(cell(conversion_type_of_service.result, 0, \"conversion_pct\"),0).asString()}}% of {{cell(type_of_service.result, 0, \"HealthCloudGA_TypeOfService__c\").asString()}} referrals.  This is {{cell(comparison_text.result, 0, \"type_of_service_text\").asString()}} your average conversion rate for all sources."
           },
           "fontSize" : 12,
           "textAlignment" : "left",
@@ -2491,7 +2491,7 @@
           "title" : {
             "fontSize" : 12,
             "subtitleFontSize" : 11,
-            "label" : "Type of Service : {{cell(type_of_service.result, 0, \"HealthCloudGA__TypeOfService__c\").asString()}}",
+            "label" : "Type of Service : {{cell(type_of_service.result, 0, \"HealthCloudGA_TypeOfService__c\").asString()}}",
             "align" : "center",
             "subtitleLabel" : ""
           },
@@ -2567,7 +2567,7 @@
           "title" : {
             "fontSize" : 12,
             "subtitleFontSize" : 11,
-            "label" : "Insurance : {{cell(insurance.result, 0, \"HealthCloudGA__InsuranceType__c\").asString()}}",
+            "label" : "Insurance : {{cell(insurance.result, 0, \"HealthCloudGA_InsuranceType__c\").asString()}}",
             "align" : "center",
             "subtitleLabel" : ""
           },
@@ -2824,7 +2824,7 @@
       "text_7" : {
         "parameters" : {
           "content" : {
-            "displayTemplate" : "When Specialty is {{cell(specialty.result, 0, \"HealthCloudGA__Specialty__c\").asString()}}"
+            "displayTemplate" : "When Specialty is {{cell(specialty.result, 0, \"HealthCloudGA_Specialty__c\").asString()}}"
           },
           "fontSize" : 14,
           "textAlignment" : "left",
@@ -3020,7 +3020,7 @@
       "text_9" : {
         "parameters" : {
           "content" : {
-            "displayTemplate" : "When Insurance Type is {{cell(insurance.result, 0, \"HealthCloudGA__InsuranceType__c\").asString()}}"
+            "displayTemplate" : "When Insurance Type is {{cell(insurance.result, 0, \"HealthCloudGA_InsuranceType__c\").asString()}}"
           },
           "fontSize" : 14,
           "textAlignment" : "left",
@@ -3059,7 +3059,7 @@
           "title" : {
             "fontSize" : 12,
             "subtitleFontSize" : 11,
-            "label" : "Specialty : {{cell(specialty.result, 0, \"HealthCloudGA__Specialty__c\").asString()}}",
+            "label" : "Specialty : {{cell(specialty.result, 0, \"HealthCloudGA_Specialty__c\").asString()}}",
             "align" : "center",
             "subtitleLabel" : ""
           },
@@ -3097,7 +3097,7 @@
       "text_8" : {
         "parameters" : {
           "content" : {
-            "displayTemplate" : "When Type of Service is {{cell(type_of_service.result, 0, \"HealthCloudGA__TypeOfService__c\").asString()}}"
+            "displayTemplate" : "When Type of Service is {{cell(type_of_service.result, 0, \"HealthCloudGA_TypeOfService__c\").asString()}}"
           },
           "fontSize" : 14,
           "textAlignment" : "left",

@@ -36,7 +36,7 @@
             }
           }
         },
-        "field" : "HealthCloudGA__Condi_2.count",
+        "field" : "HealthCloudGA_Condi_2.count",
         "format" : {
           "delimiters" : { }
         }
@@ -113,7 +113,7 @@
             }
           }
         },
-        "field" : "HealthCloudGA__AgeBa_2.count",
+        "field" : "HealthCloudGA_AgeBa_2.count",
         "format" : {
           "delimiters" : { }
         }
@@ -171,7 +171,7 @@
           }
         },
         "salesforceActions" : [ ],
-        "field" : "HealthCloudGA__AgeBa_2.ALL",
+        "field" : "HealthCloudGA_AgeBa_2.ALL",
         "members" : [ ],
         "customActions" : [ ]
       },
@@ -194,7 +194,7 @@
           }
         },
         "salesforceActions" : [ ],
-        "field" : "HealthCloudGA__Condi_2.ALL",
+        "field" : "HealthCloudGA_Condi_2.ALL",
         "members" : [ ],
         "customActions" : [ ]
       },
@@ -230,7 +230,7 @@
         },
         "dependent" : true,
         "fields" : [
-          "AccountProgramPatients_HealthCloudGA__Year__c"
+          "AccountProgramPatients_HealthCloudGA_Year__c"
         ],
         "label" : "Year",
         "locked" : false,
@@ -242,7 +242,7 @@
         },
         "dependent" : true,
         "fields" : [
-          "HealthCloudGA__EnrollmentType__c"
+          "HealthCloudGA_EnrollmentType__c"
         ],
         "label" : "Enrollment Type",
         "locked" : false,
@@ -254,7 +254,7 @@
         },
         "dependent" : true,
         "fields" : [
-          "AccountProgramPatients_HealthCloudGA__Conditions__c"
+          "AccountProgramPatients_HealthCloudGA_Conditions__c"
         ],
         "label" : "Conditions",
         "locked" : false,
@@ -266,7 +266,7 @@
         },
         "dependent" : true,
         "fields" : [
-          "Contact_HealthCloudGA__Gender__c"
+          "Contact_HealthCloudGA_Gender__c"
         ],
         "label" : "Gender",
         "locked" : false,
@@ -2969,7 +2969,7 @@
     ],
     "layouts" : [ ],
     "steps" : {
-      "HealthCloudGA__Condi_2" : {
+      "HealthCloudGA_Condi_2" : {
         "broadcastFacet" : true,
         "datasets" : [
           {
@@ -2977,7 +2977,7 @@
           }
         ],
         "isGlobal" : false,
-        "label" : "HealthCloudGA__Condi_2",
+        "label" : "HealthCloudGA_Condi_2",
         "query" : {
           "query" : {
             "measures" : [
@@ -3126,7 +3126,7 @@
         "groups" : [ ],
         "label" : "Clone of Avg_Activities_RiskScore",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Patient_Segment59_tp.FullyQualifiedName}\";\nresult = group q by ('AccountProgramPatients_HealthCloudGA__Year__c', 'AccountProgramPatients_RiskScore_Bucket');\nresult = foreach result generate q.'AccountProgramPatients_HealthCloudGA__Year__c' as 'AccountProgramPatients_HealthCloudGA__Year__c', q.'AccountProgramPatients_RiskScore_Bucket' as 'AccountProgramPatients_RiskScore_Bucket', coalesce(avg(q.'AccountProgTasks_Activities_Num1'),0) as 'A', coalesce(count(q),0) as 'A__count';\nresult = group result by ('AccountProgramPatients_HealthCloudGA__Year__c', 'AccountProgramPatients_RiskScore_Bucket');\nresult = foreach result generate 'AccountProgramPatients_HealthCloudGA__Year__c', 'AccountProgramPatients_RiskScore_Bucket', coalesce(first(A),0) as 'A', coalesce(first(A__count),0) as 'A__count', coalesce((sum(A) - sum(sum(A)) over ([-1..-1] partition by all order by ('AccountProgramPatients_HealthCloudGA__Year__c','AccountProgramPatients_RiskScore_Bucket')))/(sum(sum(A)) over ([-1..-1] partition by all order by ('AccountProgramPatients_HealthCloudGA__Year__c','AccountProgramPatients_RiskScore_Bucket'))),0)as 'B';\nresult = order result by ('AccountProgramPatients_HealthCloudGA__Year__c' desc);\nsummary = group result by ('AccountProgramPatients_HealthCloudGA__Year__c', 'AccountProgramPatients_RiskScore_Bucket');\nsummary = foreach summary generate coalesce(sum(avg('A') * sum('A__count')) over([..] partition by all) / sum(sum('A__count')) over([..] partition by all),0) as 'A_total', coalesce(sum(sum('B')) over([..] partition by all),0) as 'B_total';\nsummary = foreach summary generate coalesce('A_total',0) as 'A_total',coalesce('B_total',0) as 'B_total',case when 'B_total' < 0 then \"▼\" when 'B_total' > 0 then \"▲\" else \"︎◀︎▶\" end as 'Values';\nsummary = foreach summary generate coalesce('A_total',0) as 'A_total',coalesce('B_total',0) as 'B_total','Values',case when 'Values'==\"▼\" then \"#E84340\" when 'Values'==\"▲\" then \"#00B531\" when 'Values'==\"︎◀︎▶\" then \"#D3D3D3\" end as 'Color';\nsummary = limit summary 1;\n--result = limit result 2000;\n--result = union result, summary;",
+        "query" : "q = load \"${App.Datasets.HLS_Patient_Segment59_tp.FullyQualifiedName}\";\nresult = group q by ('AccountProgramPatients_HealthCloudGA_Year__c', 'AccountProgramPatients_RiskScore_Bucket');\nresult = foreach result generate q.'AccountProgramPatients_HealthCloudGA_Year__c' as 'AccountProgramPatients_HealthCloudGA_Year__c', q.'AccountProgramPatients_RiskScore_Bucket' as 'AccountProgramPatients_RiskScore_Bucket', coalesce(avg(q.'AccountProgTasks_Activities_Num1'),0) as 'A', coalesce(count(q),0) as 'A__count';\nresult = group result by ('AccountProgramPatients_HealthCloudGA_Year__c', 'AccountProgramPatients_RiskScore_Bucket');\nresult = foreach result generate 'AccountProgramPatients_HealthCloudGA_Year__c', 'AccountProgramPatients_RiskScore_Bucket', coalesce(first(A),0) as 'A', coalesce(first(A__count),0) as 'A__count', coalesce((sum(A) - sum(sum(A)) over ([-1..-1] partition by all order by ('AccountProgramPatients_HealthCloudGA_Year__c','AccountProgramPatients_RiskScore_Bucket')))/(sum(sum(A)) over ([-1..-1] partition by all order by ('AccountProgramPatients_HealthCloudGA_Year__c','AccountProgramPatients_RiskScore_Bucket'))),0)as 'B';\nresult = order result by ('AccountProgramPatients_HealthCloudGA_Year__c' desc);\nsummary = group result by ('AccountProgramPatients_HealthCloudGA_Year__c', 'AccountProgramPatients_RiskScore_Bucket');\nsummary = foreach summary generate coalesce(sum(avg('A') * sum('A__count')) over([..] partition by all) / sum(sum('A__count')) over([..] partition by all),0) as 'A_total', coalesce(sum(sum('B')) over([..] partition by all),0) as 'B_total';\nsummary = foreach summary generate coalesce('A_total',0) as 'A_total',coalesce('B_total',0) as 'B_total',case when 'B_total' < 0 then \"▼\" when 'B_total' > 0 then \"▲\" else \"︎◀︎▶\" end as 'Values';\nsummary = foreach summary generate coalesce('A_total',0) as 'A_total',coalesce('B_total',0) as 'B_total','Values',case when 'Values'==\"▼\" then \"#E84340\" when 'Values'==\"▲\" then \"#00B531\" when 'Values'==\"︎◀︎▶\" then \"#D3D3D3\" end as 'Color';\nsummary = limit summary 1;\n--result = limit result 2000;\n--result = union result, summary;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -3166,7 +3166,7 @@
           "type" : "table"
         }
       },
-      "HealthCloudGA__Year__8" : {
+      "HealthCloudGA_Year__8" : {
         "broadcastFacet" : true,
         "datasets" : [
           {
@@ -3183,8 +3183,8 @@
               ]
             ],
             "groups" : [
-              "AccountProgramPatients_HealthCloudGA__Year__c",
-              "HealthCloudGA__EnrollmentType__c"
+              "AccountProgramPatients_HealthCloudGA_Year__c",
+              "HealthCloudGA_EnrollmentType__c"
             ]
           },
           "version" : -1.0
@@ -3244,11 +3244,11 @@
             },
             "columnMap" : {
               "split" : [
-                "HealthCloudGA__EnrollmentType__c"
+                "HealthCloudGA_EnrollmentType__c"
               ],
               "trellis" : [ ],
               "dimensionAxis" : [
-                "AccountProgramPatients_HealthCloudGA__Year__c"
+                "AccountProgramPatients_HealthCloudGA_Year__c"
               ],
               "plots" : [
                 "count"
@@ -3434,7 +3434,7 @@
           "type" : "chart"
         }
       },
-      "HealthCloudGA__Year__9" : {
+      "HealthCloudGA_Year__9" : {
         "broadcastFacet" : true,
         "datasets" : [
           {
@@ -3447,11 +3447,11 @@
             "measures" : [
               [
                 "avg",
-                "AccountProgramPatients_HealthCloudGA__RiskScore__c"
+                "AccountProgramPatients_HealthCloudGA_RiskScore__c"
               ]
             ],
             "groups" : [
-              "AccountProgramPatients_HealthCloudGA__Year__c"
+              "AccountProgramPatients_HealthCloudGA_Year__c"
             ]
           },
           "version" : -1.0
@@ -3513,10 +3513,10 @@
               "split" : [ ],
               "trellis" : [ ],
               "dimensionAxis" : [
-                "AccountProgramPatients_HealthCloudGA__Year__c"
+                "AccountProgramPatients_HealthCloudGA_Year__c"
               ],
               "plots" : [
-                "avg_AccountProgramPatients_HealthCloudGA__RiskScore__c"
+                "avg_AccountProgramPatients_HealthCloudGA_RiskScore__c"
               ]
             },
             "fillArea" : true,
@@ -3572,7 +3572,7 @@
         "groups" : [ ],
         "label" : "Total # of Patients",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Patient_Segment59_tp.FullyQualifiedName}\";\nresult = group q by all;\nresult = foreach result generate count(q) as 'A', round(avg(q.'AccountProgramPatients_HealthCloudGA__RiskScore__c'),2) as 'B', round(avg(q.'AccountProgramPatients_Conditions_In_Number')\n,2) as 'C';\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.HLS_Patient_Segment59_tp.FullyQualifiedName}\";\nresult = group q by all;\nresult = foreach result generate count(q) as 'A', round(avg(q.'AccountProgramPatients_HealthCloudGA_RiskScore__c'),2) as 'B', round(avg(q.'AccountProgramPatients_Conditions_In_Number')\n,2) as 'C';\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -3616,7 +3616,7 @@
         "groups" : [ ],
         "label" : "Avg_RiskScore",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Patient_Segment59_tp.FullyQualifiedName}\";\nq = group q by 'Contact_Contact_Age_Bucket';\nq = foreach q generate 'Contact_Contact_Age_Bucket' as 'Contact_Contact_Age_Bucket', avg('AccountProgramPatients_HealthCloudGA__RiskScore__c') as 'avg_AccountProgramPatients_HealthCloudGA__RiskScore__c',case when q.'Contact_Contact_Age_Bucket' == \"01. 0-34\" then \"0-34\" when q.'Contact_Contact_Age_Bucket' == \"02. 34-44\" then \"34-44\" when q.'Contact_Contact_Age_Bucket' == \"03. 45-54\" then \"45-54\" when q.'Contact_Contact_Age_Bucket' == \"04. 55-64\" then \"55-64\" when q.'Contact_Contact_Age_Bucket' == \"05. 65-74\" then \"65-74\" when q.'Contact_Contact_Age_Bucket' == \"06. 75-84\" then \"75-84\" when q.'Contact_Contact_Age_Bucket' == \"07. 85+\" then \"85+\" end as 'Contact_Age';\nq = order q by 'avg_AccountProgramPatients_HealthCloudGA__RiskScore__c' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.HLS_Patient_Segment59_tp.FullyQualifiedName}\";\nq = group q by 'Contact_Contact_Age_Bucket';\nq = foreach q generate 'Contact_Contact_Age_Bucket' as 'Contact_Contact_Age_Bucket', avg('AccountProgramPatients_HealthCloudGA_RiskScore__c') as 'avg_AccountProgramPatients_HealthCloudGA_RiskScore__c',case when q.'Contact_Contact_Age_Bucket' == \"01. 0-34\" then \"0-34\" when q.'Contact_Contact_Age_Bucket' == \"02. 34-44\" then \"34-44\" when q.'Contact_Contact_Age_Bucket' == \"03. 45-54\" then \"45-54\" when q.'Contact_Contact_Age_Bucket' == \"04. 55-64\" then \"55-64\" when q.'Contact_Contact_Age_Bucket' == \"05. 65-74\" then \"65-74\" when q.'Contact_Contact_Age_Bucket' == \"06. 75-84\" then \"75-84\" when q.'Contact_Contact_Age_Bucket' == \"07. 85+\" then \"85+\" end as 'Contact_Age';\nq = order q by 'avg_AccountProgramPatients_HealthCloudGA_RiskScore__c' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -3843,7 +3843,7 @@
           "type" : "chart"
         }
       },
-      "HealthCloudGA__Year__5" : {
+      "HealthCloudGA_Year__5" : {
         "broadcastFacet" : true,
         "datasets" : [
           {
@@ -3851,7 +3851,7 @@
           }
         ],
         "isGlobal" : false,
-        "label" : "HealthCloudGA__Year__5",
+        "label" : "HealthCloudGA_Year__5",
         "query" : {
           "query" : {
             "measures" : [
@@ -3861,8 +3861,8 @@
               ]
             ],
             "groups" : [
-              "AccountProgramPatients_HealthCloudGA__Year__c",
-              "Contact_HealthCloudGA__Gender__c"
+              "AccountProgramPatients_HealthCloudGA_Year__c",
+              "Contact_HealthCloudGA_Gender__c"
             ]
           },
           "version" : -1.0
@@ -3922,11 +3922,11 @@
             },
             "columnMap" : {
               "split" : [
-                "Contact_HealthCloudGA__Gender__c"
+                "Contact_HealthCloudGA_Gender__c"
               ],
               "trellis" : [ ],
               "dimensionAxis" : [
-                "AccountProgramPatients_HealthCloudGA__Year__c"
+                "AccountProgramPatients_HealthCloudGA_Year__c"
               ],
               "plots" : [
                 "count"
@@ -3985,7 +3985,7 @@
         "groups" : [ ],
         "label" : "ChangeInGender",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Patient_Segment59_tp.FullyQualifiedName}\";\nq_A = filter q by 'Contact_HealthCloudGA__Gender__c' == \"Male\";\nq_B = filter q by 'Contact_HealthCloudGA__Gender__c' == \"Female\";\nresult = group q_A by 'AccountProgramPatients_HealthCloudGA__Year__c' full, q_B by 'AccountProgramPatients_HealthCloudGA__Year__c';\nresult = foreach result generate coalesce(q_A.'AccountProgramPatients_HealthCloudGA__Year__c', q_B.'AccountProgramPatients_HealthCloudGA__Year__c') as 'AccountProgramPatients_HealthCloudGA__Year__c', coalesce(count(q_A),0) as 'A', coalesce(count(q_B),0) as 'B';\nresult = group result by 'AccountProgramPatients_HealthCloudGA__Year__c';\nresult = foreach result generate 'AccountProgramPatients_HealthCloudGA__Year__c', coalesce(first(A),0) as 'A', coalesce(first(B),0) as 'B', coalesce((sum(A) - sum(sum(A)) over ([-1..-1] partition by all order by ('AccountProgramPatients_HealthCloudGA__Year__c')))/(sum(sum(A)) over ([-1..-1] partition by all order by ('AccountProgramPatients_HealthCloudGA__Year__c'))),0) as 'C', coalesce((sum(B) - sum(sum(B)) over ([-1..-1] partition by all order by ('AccountProgramPatients_HealthCloudGA__Year__c')))/(sum(sum(B)) over ([-1..-1] partition by all order by ('AccountProgramPatients_HealthCloudGA__Year__c'))),0) as 'D';\nresult = foreach result generate 'AccountProgramPatients_HealthCloudGA__Year__c',coalesce('A',0) as 'A',coalesce('B',0) as 'B',coalesce('C',0) as 'C',coalesce('D',0) as 'D',case when 'D' < 0 then \"▼\" when 'D' > 0 then \"▲\" else \"◀︎▶\" end as 'Values';\nresult = foreach result generate 'AccountProgramPatients_HealthCloudGA__Year__c',coalesce('A',0) as 'A',coalesce('B',0) as 'B',coalesce('C',0) as 'C',coalesce('D',0) as 'D','Values',case when 'Values'==\"▼\" then \"#E84340\" when 'Values'==\"▲\" then \"#00B531\" when 'Values'==\"◀︎▶\" then \"#D3D3D3\" end as 'Color';\nresult = order result by ('AccountProgramPatients_HealthCloudGA__Year__c' desc);\nresult = limit result 1;",
+        "query" : "q = load \"${App.Datasets.HLS_Patient_Segment59_tp.FullyQualifiedName}\";\nq_A = filter q by 'Contact_HealthCloudGA_Gender__c' == \"Male\";\nq_B = filter q by 'Contact_HealthCloudGA_Gender__c' == \"Female\";\nresult = group q_A by 'AccountProgramPatients_HealthCloudGA_Year__c' full, q_B by 'AccountProgramPatients_HealthCloudGA_Year__c';\nresult = foreach result generate coalesce(q_A.'AccountProgramPatients_HealthCloudGA_Year__c', q_B.'AccountProgramPatients_HealthCloudGA_Year__c') as 'AccountProgramPatients_HealthCloudGA_Year__c', coalesce(count(q_A),0) as 'A', coalesce(count(q_B),0) as 'B';\nresult = group result by 'AccountProgramPatients_HealthCloudGA_Year__c';\nresult = foreach result generate 'AccountProgramPatients_HealthCloudGA_Year__c', coalesce(first(A),0) as 'A', coalesce(first(B),0) as 'B', coalesce((sum(A) - sum(sum(A)) over ([-1..-1] partition by all order by ('AccountProgramPatients_HealthCloudGA_Year__c')))/(sum(sum(A)) over ([-1..-1] partition by all order by ('AccountProgramPatients_HealthCloudGA_Year__c'))),0) as 'C', coalesce((sum(B) - sum(sum(B)) over ([-1..-1] partition by all order by ('AccountProgramPatients_HealthCloudGA_Year__c')))/(sum(sum(B)) over ([-1..-1] partition by all order by ('AccountProgramPatients_HealthCloudGA_Year__c'))),0) as 'D';\nresult = foreach result generate 'AccountProgramPatients_HealthCloudGA_Year__c',coalesce('A',0) as 'A',coalesce('B',0) as 'B',coalesce('C',0) as 'C',coalesce('D',0) as 'D',case when 'D' < 0 then \"▼\" when 'D' > 0 then \"▲\" else \"◀︎▶\" end as 'Values';\nresult = foreach result generate 'AccountProgramPatients_HealthCloudGA_Year__c',coalesce('A',0) as 'A',coalesce('B',0) as 'B',coalesce('C',0) as 'C',coalesce('D',0) as 'D','Values',case when 'Values'==\"▼\" then \"#E84340\" when 'Values'==\"▲\" then \"#00B531\" when 'Values'==\"◀︎▶\" then \"#D3D3D3\" end as 'Color';\nresult = order result by ('AccountProgramPatients_HealthCloudGA_Year__c' desc);\nresult = limit result 1;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -4024,12 +4024,12 @@
           "type" : "table"
         }
       },
-      "HealthCloudGA__Year__6" : {
+      "HealthCloudGA_Year__6" : {
         "broadcastFacet" : true,
         "groups" : [ ],
-        "label" : "HealthCloudGA__Year__6",
+        "label" : "HealthCloudGA_Year__6",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Patient_Segment59_tp.FullyQualifiedName}\";\n--q = foreach q generate 'AccountProgramPatients_HealthCloudGA__Year__c' as 'AccountProgramPatients_HealthCloudGA__Year__c', coalesce('AccountProgramPatients_HealthCloudGA__NumberOfConditions__c',\"Not Defined\") as 'AccountProgramPatients_HealthCloudGA__NumberOfConditions__c';\nq = group q by ('AccountProgramPatients_HealthCloudGA__Year__c', 'AccountProgramPatients_HealthCloudGA__NumberOfConditions__c');\nq = foreach q generate 'AccountProgramPatients_HealthCloudGA__Year__c' as 'AccountProgramPatients_HealthCloudGA__Year__c', 'AccountProgramPatients_HealthCloudGA__NumberOfConditions__c' as 'AccountProgramPatients_HealthCloudGA__NumberOfConditions__c', count() as 'count';\nq = order q by ('AccountProgramPatients_HealthCloudGA__Year__c' asc, 'AccountProgramPatients_HealthCloudGA__NumberOfConditions__c' asc);\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.HLS_Patient_Segment59_tp.FullyQualifiedName}\";\n--q = foreach q generate 'AccountProgramPatients_HealthCloudGA_Year__c' as 'AccountProgramPatients_HealthCloudGA_Year__c', coalesce('AccountProgramPatients_HealthCloudGA_NumberOfConditions__c',\"Not Defined\") as 'AccountProgramPatients_HealthCloudGA_NumberOfConditions__c';\nq = group q by ('AccountProgramPatients_HealthCloudGA_Year__c', 'AccountProgramPatients_HealthCloudGA_NumberOfConditions__c');\nq = foreach q generate 'AccountProgramPatients_HealthCloudGA_Year__c' as 'AccountProgramPatients_HealthCloudGA_Year__c', 'AccountProgramPatients_HealthCloudGA_NumberOfConditions__c' as 'AccountProgramPatients_HealthCloudGA_NumberOfConditions__c', count() as 'count';\nq = order q by ('AccountProgramPatients_HealthCloudGA_Year__c' asc, 'AccountProgramPatients_HealthCloudGA_NumberOfConditions__c' asc);\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -4144,7 +4144,7 @@
           "Number of Care Plan Tasks Overdue",
           "Number of Social Determinants"
         ],
-        "query" : "q = load \"${App.Datasets.HLS_Patient_Segment59_tp.FullyQualifiedName}\";\r\n--q1 = filter q by 'AccountProgTasks_Task_Overdue_Days_Bucket' is not null;\r\n--,row_number() over([..] partition by 'all' order by 'Name' asc) as '#'\r\n--result = group q by ('Name','AccountProgramPatients_RiskScore_Bucket', 'AccountProgramPatients_HealthCloudGA__Conditions__c','AccountProgramPatients_HealthCloudGA__NumberOfConditions__c') ;\r\nresult = foreach q generate q.'Name' as 'Name', coalesce(q.'AccountProgramPatients_RiskScore_Bucket',\"Not Defined\") as 'Risk Band', coalesce(q.'AccountProgramPatients_HealthCloudGA__Conditions__c',\"Not Defined\") as 'Conditions',q.'AccountProgramPatients_Conditions_In_Number' as 'Number Of Conditions',sum(q.'AccountProgramPatients_HealthCloudGA__RiskScore__c') as 'Risk Score',sum(q.'CareDets_Number_Of_CareDeterminants') as 'Number of Social Determinants',sum(q.'AccountProgTasks_Number_Of_Tasks_Overdue') as 'Number of Care Plan Tasks Overdue',case when q.'AccountProgramPatients_HealthCloudGA__RiskScore__c' > 4 then \"#FFDFDF\" else \"Not Defined\" end as 'Color_RiskScore';\r\n\r\nresult = foreach result generate 'Name','Risk Score',case when 'Risk Band' == \"01.0-1\" then \"0-1\" when 'Risk Band' == \"02.1-2\" then \"1-2\" when 'Risk Band' == \"03.2-3\" then \"2-3\" when 'Risk Band' == \"04.3-4\" then \"3-4\" when 'Risk Band' == \"05.4-5\" then \"4-5\" when 'Risk Band' == \"06.5-6\" then \"5-6\" when 'Risk Band' == \"07.6-7\" then \"6-7\"  when 'Risk Band' == \"08.7-8\" then \"7-8\"  when 'Risk Band' == \"09.8-9\" then \"8-9\"  when 'Risk Band' == \"10.9-10\" then \"9-10\"  when 'Risk Band' == \"11.10+\" then \"10+\" else \"Not Defined\" end as 'Risk Band','Conditions','Number Of Conditions','Number of Care Plan Tasks Overdue','Number of Social Determinants','Color_RiskScore',case when 'Risk Band' == \"Not Defined\" then \"Not Defined\" when 'Risk Band' == \"02.1-2\" then \"Not Defined\" when 'Risk Band' == \"03.2-3\" then \"Not Defined\" else  \"#FFDFDF\" end as 'Color_RiskBand';\r\nresult = order result by 'Risk Score' desc;\r\n\r\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.HLS_Patient_Segment59_tp.FullyQualifiedName}\";\r\n--q1 = filter q by 'AccountProgTasks_Task_Overdue_Days_Bucket' is not null;\r\n--,row_number() over([..] partition by 'all' order by 'Name' asc) as '#'\r\n--result = group q by ('Name','AccountProgramPatients_RiskScore_Bucket', 'AccountProgramPatients_HealthCloudGA_Conditions__c','AccountProgramPatients_HealthCloudGA_NumberOfConditions__c') ;\r\nresult = foreach q generate q.'Name' as 'Name', coalesce(q.'AccountProgramPatients_RiskScore_Bucket',\"Not Defined\") as 'Risk Band', coalesce(q.'AccountProgramPatients_HealthCloudGA_Conditions__c',\"Not Defined\") as 'Conditions',q.'AccountProgramPatients_Conditions_In_Number' as 'Number Of Conditions',sum(q.'AccountProgramPatients_HealthCloudGA_RiskScore__c') as 'Risk Score',sum(q.'CareDets_Number_Of_CareDeterminants') as 'Number of Social Determinants',sum(q.'AccountProgTasks_Number_Of_Tasks_Overdue') as 'Number of Care Plan Tasks Overdue',case when q.'AccountProgramPatients_HealthCloudGA_RiskScore__c' > 4 then \"#FFDFDF\" else \"Not Defined\" end as 'Color_RiskScore';\r\n\r\nresult = foreach result generate 'Name','Risk Score',case when 'Risk Band' == \"01.0-1\" then \"0-1\" when 'Risk Band' == \"02.1-2\" then \"1-2\" when 'Risk Band' == \"03.2-3\" then \"2-3\" when 'Risk Band' == \"04.3-4\" then \"3-4\" when 'Risk Band' == \"05.4-5\" then \"4-5\" when 'Risk Band' == \"06.5-6\" then \"5-6\" when 'Risk Band' == \"07.6-7\" then \"6-7\"  when 'Risk Band' == \"08.7-8\" then \"7-8\"  when 'Risk Band' == \"09.8-9\" then \"8-9\"  when 'Risk Band' == \"10.9-10\" then \"9-10\"  when 'Risk Band' == \"11.10+\" then \"10+\" else \"Not Defined\" end as 'Risk Band','Conditions','Number Of Conditions','Number of Care Plan Tasks Overdue','Number of Social Determinants','Color_RiskScore',case when 'Risk Band' == \"Not Defined\" then \"Not Defined\" when 'Risk Band' == \"02.1-2\" then \"Not Defined\" when 'Risk Band' == \"03.2-3\" then \"Not Defined\" else  \"#FFDFDF\" end as 'Color_RiskBand';\r\nresult = order result by 'Risk Score' desc;\r\n\r\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -4437,7 +4437,7 @@
         "groups" : [ ],
         "label" : "AccountProgramPatien_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Patient_Segment59_tp.FullyQualifiedName}\";\nq = group q by 'Location';\nq = foreach q generate 'Location' as 'Location', count() as 'count', coalesce(avg('AccountProgramPatients_HealthCloudGA__RiskScore__c'),0) as 'avg_AccountProgramPatients_HealthCloudGA__RiskScore__c';\nq = order q by 'Location' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.HLS_Patient_Segment59_tp.FullyQualifiedName}\";\nq = group q by 'Location';\nq = foreach q generate 'Location' as 'Location', count() as 'count', coalesce(avg('AccountProgramPatients_HealthCloudGA_RiskScore__c'),0) as 'avg_AccountProgramPatients_HealthCloudGA_RiskScore__c';\nq = order q by 'Location' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -4485,7 +4485,7 @@
               "showBinLabel" : true,
               "measures" : [
                 "count",
-                "avg_AccountProgramPatients_HealthCloudGA__RiskScore__c"
+                "avg_AccountProgramPatients_HealthCloudGA_RiskScore__c"
               ],
               "showNullValues" : true,
               "showPercentage" : true,
@@ -4650,10 +4650,10 @@
           "type" : "chart"
         }
       },
-      "HealthCloudGA__AgeBa_2" : {
+      "HealthCloudGA_AgeBa_2" : {
         "broadcastFacet" : true,
         "groups" : [ ],
-        "label" : "HealthCloudGA__AgeBa_2",
+        "label" : "HealthCloudGA_AgeBa_2",
         "numbers" : [ ],
         "query" : "q = load \"${App.Datasets.HLS_Patient_Segment59_tp.FullyQualifiedName}\";\nq = foreach q generate coalesce('Contact_Contact_Age_Bucket',\"Not Defined\") as 'Contact_Contact_Age_Bucket';\nq = group q by 'Contact_Contact_Age_Bucket';\nq = foreach q generate 'Contact_Contact_Age_Bucket' as 'Contact_Contact_Age_Bucket', count() as 'count';\nq = order q by 'Contact_Contact_Age_Bucket' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
@@ -4768,12 +4768,12 @@
           "type" : "chart"
         }
       },
-      "HealthCloudGA__Enrol_3" : {
+      "HealthCloudGA_Enrol_3" : {
         "broadcastFacet" : true,
         "groups" : [ ],
-        "label" : "HealthCloudGA__Enrol_3",
+        "label" : "HealthCloudGA_Enrol_3",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Patient_Segment59_tp.FullyQualifiedName}\";\nq = group q by 'HealthCloudGA__EnrollmentType__c';\nq = foreach q generate 'HealthCloudGA__EnrollmentType__c' as 'HealthCloudGA__EnrollmentType__c', count() as 'count';\nq = order q by 'count' desc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.HLS_Patient_Segment59_tp.FullyQualifiedName}\";\nq = group q by 'HealthCloudGA_EnrollmentType__c';\nq = foreach q generate 'HealthCloudGA_EnrollmentType__c' as 'HealthCloudGA_EnrollmentType__c', count() as 'count';\nq = order q by 'count' desc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -4886,10 +4886,10 @@
           "type" : "chart"
         }
       },
-      "HealthCloudGA__Numbe_3" : {
+      "HealthCloudGA_Numbe_3" : {
         "broadcastFacet" : true,
         "groups" : [ ],
-        "label" : "HealthCloudGA__Numbe_3",
+        "label" : "HealthCloudGA_Numbe_3",
         "numbers" : [ ],
         "query" : "q = load \"${App.Datasets.HLS_Patient_Segment59_tp.FullyQualifiedName}\";\nq = foreach q generate coalesce('AccountProgramPatients_Conditions_Bucket',\"Not Defined\") as 'AccountProgramPatients_Conditions_Bucket';\nq = group q by 'AccountProgramPatients_Conditions_Bucket';\nq = foreach q generate 'AccountProgramPatients_Conditions_Bucket' as 'AccountProgramPatients_Conditions_Bucket', count() as 'count';\nq = order q by 'AccountProgramPatients_Conditions_Bucket' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
@@ -4958,7 +4958,7 @@
         "groups" : [ ],
         "label" : "Gender",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Patient_Segment59_tp.FullyQualifiedName}\";\nq_A = filter q by 'Contact_HealthCloudGA__Gender__c' == \"Male\";\nq_B = filter q by 'Contact_HealthCloudGA__Gender__c' == \"Female\";\nresult = group q by all full, q_A by all full, q_B by all;\nresult = foreach result generate count(q_A) as 'A', count(q_B) as 'B', count(q) as 'C';\nresult = foreach result generate 'A', 'B', 'C', A/C as 'D', B/C as 'E';\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.HLS_Patient_Segment59_tp.FullyQualifiedName}\";\nq_A = filter q by 'Contact_HealthCloudGA_Gender__c' == \"Male\";\nq_B = filter q by 'Contact_HealthCloudGA_Gender__c' == \"Female\";\nresult = group q by all full, q_A by all full, q_B by all;\nresult = foreach result generate count(q_A) as 'A', count(q_B) as 'B', count(q) as 'C';\nresult = foreach result generate 'A', 'B', 'C', A/C as 'D', B/C as 'E';\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -5021,7 +5021,7 @@
         "groups" : [ ],
         "label" : "lens_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.HLS_Patient_Segment59_tp.FullyQualifiedName}\";\nresult = group q by 'AccountProgramPatients_HealthCloudGA__Year__c';\nresult = foreach result generate q.'AccountProgramPatients_HealthCloudGA__Year__c' as 'AccountProgramPatients_HealthCloudGA__Year__c', coalesce(avg(q.'AccountProgramPatients_HealthCloudGA__RiskScore__c'),0) as 'A', coalesce(count(q),0) as 'A__count';\nresult = group result by 'AccountProgramPatients_HealthCloudGA__Year__c';\nresult = foreach result generate 'AccountProgramPatients_HealthCloudGA__Year__c', coalesce(first(A),0) as 'A', coalesce(first(A__count),0) as 'A__count', coalesce((sum(A) - sum(sum(A)) over ([-1..-1] partition by all order by ('AccountProgramPatients_HealthCloudGA__Year__c')))/(sum(sum(A)) over ([-1..-1] partition by all order by ('AccountProgramPatients_HealthCloudGA__Year__c'))),0) as 'B';\nresult = order result by ('AccountProgramPatients_HealthCloudGA__Year__c' desc);\nsummary = group result by 'AccountProgramPatients_HealthCloudGA__Year__c';\nsummary = foreach summary generate 'AccountProgramPatients_HealthCloudGA__Year__c',coalesce(sum(avg('A') * sum('A__count')) over([..] partition by all) / sum(sum('A__count')) over([..] partition by all),0) as 'A_total', coalesce(sum(sum('B')) over([..] partition by all),0) as 'B_total';\nsummary = foreach summary generate 'AccountProgramPatients_HealthCloudGA__Year__c',coalesce('A_total',0) as 'A_total',coalesce('B_total',0) as 'B_total',case when 'B_total' < 0 then \"▼\" when 'B_total' > 0 then \"▲\" else \"◀︎▶\" end as 'Values';\nsummary = foreach summary generate 'AccountProgramPatients_HealthCloudGA__Year__c',coalesce('A_total',0) as 'A_total',coalesce('B_total',0) as 'B_total','Values',case when 'Values'==\"▼\" then \"#E84340\" when 'Values'==\"▲\" then \"#00B531\" when 'Values'==\"◀︎▶\" then \"#D3D3D3\" end as 'Color';\nsummary = order summary by ('AccountProgramPatients_HealthCloudGA__Year__c' desc);\nsummary = limit summary 1;\n--result = limit result 2000;\n--result = union result, summary;",
+        "query" : "q = load \"${App.Datasets.HLS_Patient_Segment59_tp.FullyQualifiedName}\";\nresult = group q by 'AccountProgramPatients_HealthCloudGA_Year__c';\nresult = foreach result generate q.'AccountProgramPatients_HealthCloudGA_Year__c' as 'AccountProgramPatients_HealthCloudGA_Year__c', coalesce(avg(q.'AccountProgramPatients_HealthCloudGA_RiskScore__c'),0) as 'A', coalesce(count(q),0) as 'A__count';\nresult = group result by 'AccountProgramPatients_HealthCloudGA_Year__c';\nresult = foreach result generate 'AccountProgramPatients_HealthCloudGA_Year__c', coalesce(first(A),0) as 'A', coalesce(first(A__count),0) as 'A__count', coalesce((sum(A) - sum(sum(A)) over ([-1..-1] partition by all order by ('AccountProgramPatients_HealthCloudGA_Year__c')))/(sum(sum(A)) over ([-1..-1] partition by all order by ('AccountProgramPatients_HealthCloudGA_Year__c'))),0) as 'B';\nresult = order result by ('AccountProgramPatients_HealthCloudGA_Year__c' desc);\nsummary = group result by 'AccountProgramPatients_HealthCloudGA_Year__c';\nsummary = foreach summary generate 'AccountProgramPatients_HealthCloudGA_Year__c',coalesce(sum(avg('A') * sum('A__count')) over([..] partition by all) / sum(sum('A__count')) over([..] partition by all),0) as 'A_total', coalesce(sum(sum('B')) over([..] partition by all),0) as 'B_total';\nsummary = foreach summary generate 'AccountProgramPatients_HealthCloudGA_Year__c',coalesce('A_total',0) as 'A_total',coalesce('B_total',0) as 'B_total',case when 'B_total' < 0 then \"▼\" when 'B_total' > 0 then \"▲\" else \"◀︎▶\" end as 'Values';\nsummary = foreach summary generate 'AccountProgramPatients_HealthCloudGA_Year__c',coalesce('A_total',0) as 'A_total',coalesce('B_total',0) as 'B_total','Values',case when 'Values'==\"▼\" then \"#E84340\" when 'Values'==\"▲\" then \"#00B531\" when 'Values'==\"◀︎▶\" then \"#D3D3D3\" end as 'Color';\nsummary = order summary by ('AccountProgramPatients_HealthCloudGA_Year__c' desc);\nsummary = limit summary 1;\n--result = limit result 2000;\n--result = union result, summary;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -5445,7 +5445,7 @@
               "showDomain" : false
             }
           },
-          "step" : "HealthCloudGA__Condi_2",
+          "step" : "HealthCloudGA_Condi_2",
           "theme" : "light",
           "applyConditionalFormatting" : true,
           "dimensionAxis" : {
@@ -5556,7 +5556,7 @@
             }
           },
           "valueType" : "none",
-          "step" : "HealthCloudGA__Year__6",
+          "step" : "HealthCloudGA_Year__6",
           "theme" : "dark",
           "applyConditionalFormatting" : true,
           "dimensionAxis" : {
@@ -5655,10 +5655,10 @@
             "split" : [ ],
             "trellis" : [ ],
             "dimensionAxis" : [
-              "AccountProgramPatients_HealthCloudGA__Year__c"
+              "AccountProgramPatients_HealthCloudGA_Year__c"
             ],
             "plots" : [
-              "avg_AccountProgramPatients_HealthCloudGA__RiskScore__c"
+              "avg_AccountProgramPatients_HealthCloudGA_RiskScore__c"
             ]
           },
           "fillArea" : true,
@@ -5683,7 +5683,7 @@
             }
           },
           "valueType" : "none",
-          "step" : "HealthCloudGA__Year__9",
+          "step" : "HealthCloudGA_Year__9",
           "theme" : "dark",
           "applyConditionalFormatting" : true,
           "dimensionAxis" : {
@@ -5814,7 +5814,7 @@
               "showDomain" : false
             }
           },
-          "step" : "HealthCloudGA__AgeBa_2",
+          "step" : "HealthCloudGA_AgeBa_2",
           "theme" : "dark",
           "applyConditionalFormatting" : true,
           "dimensionAxis" : {
@@ -5885,11 +5885,11 @@
           },
           "columnMap" : {
             "split" : [
-              "HealthCloudGA__EnrollmentType__c"
+              "HealthCloudGA_EnrollmentType__c"
             ],
             "trellis" : [ ],
             "dimensionAxis" : [
-              "AccountProgramPatients_HealthCloudGA__Year__c"
+              "AccountProgramPatients_HealthCloudGA_Year__c"
             ],
             "plots" : [
               "count"
@@ -5917,7 +5917,7 @@
             }
           },
           "valueType" : "none",
-          "step" : "HealthCloudGA__Year__8",
+          "step" : "HealthCloudGA_Year__8",
           "theme" : "dark",
           "applyConditionalFormatting" : true,
           "dimensionAxis" : {
@@ -6004,7 +6004,7 @@
           "showActionMenu" : true,
           "centerValueType" : "number",
           "valueType" : "compactNumber",
-          "step" : "HealthCloudGA__Numbe_3",
+          "step" : "HealthCloudGA_Numbe_3",
           "theme" : "dark",
           "applyConditionalFormatting" : true
         },
@@ -6049,7 +6049,7 @@
             "showBinLabel" : true,
             "measures" : [
               "count",
-              "avg_AccountProgramPatients_HealthCloudGA__RiskScore__c"
+              "avg_AccountProgramPatients_HealthCloudGA_RiskScore__c"
             ],
             "showNullValues" : true,
             "showPercentage" : true,
@@ -6377,7 +6377,7 @@
             }
           },
           "theme" : "dark",
-          "step" : "HealthCloudGA__Enrol_3",
+          "step" : "HealthCloudGA_Enrol_3",
           "applyConditionalFormatting" : true,
           "dimensionAxis" : {
             "showTitle" : false,
@@ -6452,7 +6452,7 @@
           "showActionMenu" : true,
           "centerValueType" : "number",
           "valueType" : "compactNumber",
-          "step" : "HealthCloudGA__Numbe_3",
+          "step" : "HealthCloudGA_Numbe_3",
           "theme" : "dark",
           "applyConditionalFormatting" : true
         },
@@ -6551,7 +6551,7 @@
               "showDomain" : false
             }
           },
-          "step" : "HealthCloudGA__AgeBa_2",
+          "step" : "HealthCloudGA_AgeBa_2",
           "theme" : "dark",
           "applyConditionalFormatting" : true,
           "dimensionAxis" : {
@@ -6622,11 +6622,11 @@
           },
           "columnMap" : {
             "split" : [
-              "Contact_HealthCloudGA__Gender__c"
+              "Contact_HealthCloudGA_Gender__c"
             ],
             "trellis" : [ ],
             "dimensionAxis" : [
-              "AccountProgramPatients_HealthCloudGA__Year__c"
+              "AccountProgramPatients_HealthCloudGA_Year__c"
             ],
             "plots" : [
               "count"
@@ -6654,7 +6654,7 @@
             }
           },
           "valueType" : "none",
-          "step" : "HealthCloudGA__Year__5",
+          "step" : "HealthCloudGA_Year__5",
           "theme" : "dark",
           "applyConditionalFormatting" : true,
           "dimensionAxis" : {
@@ -7025,7 +7025,7 @@
       "text_26" : {
         "parameters" : {
           "content" : {
-            "displayTemplate" : "Average Risk Score is {{coalesce(cell(First_Text_1.result, 0, \"avg_AccountProgramPatients_HealthCloudGA__RiskScore__c\"),\"No Results Found\").asObject()}}. The population age band with highest average risk is {{coalesce(cell(First_Text_1.result, 0, \"Contact_Age\"),\"No Results Found\").asObject()}}."
+            "displayTemplate" : "Average Risk Score is {{coalesce(cell(First_Text_1.result, 0, \"avg_AccountProgramPatients_HealthCloudGA_RiskScore__c\"),\"No Results Found\").asObject()}}. The population age band with highest average risk is {{coalesce(cell(First_Text_1.result, 0, \"Contact_Age\"),\"No Results Found\").asObject()}}."
           },
           "fontSize" : 16,
           "showActionMenu" : true,
