@@ -1,0 +1,3285 @@
+{
+  "name" : "Care_Coordinator_Member_Overview8_tp",
+  "label" : "Care Coordinator Member Overview",
+  "folder" : {
+    "id" : "${App.Folder.Id}"
+  },
+  "dateVersion" : 1,
+  "mobileDisabled" : false,
+  "xmd" : {
+    "measures" : [
+      {
+        "conditionalFormatting" : { },
+        "field" : "RiskMembersOverdue_2.Percent",
+        "format" : {
+          "delimiters" : { },
+          "customFormat" : "[\"#,###.##%\",100]"
+        }
+      },
+      {
+        "conditionalFormatting" : { },
+        "field" : "RiskMembersOverdue_2.TotalPercentMembers",
+        "format" : {
+          "delimiters" : { },
+          "customFormat" : "[\"#,###.##%\",100]"
+        }
+      },
+      {
+        "conditionalFormatting" : {
+          "backgroundColor" : {
+            "referenceField" : "Percent",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "#00B531",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "rgb(103, 122, 151)",
+                  "bin" : "0"
+                },
+                {
+                  "formatValue" : "#E84340",
+                  "bin" : "1"
+                }
+              ]
+            }
+          }
+        },
+        "field" : "RiskMembersOverdue_1.Percent",
+        "format" : {
+          "delimiters" : {
+            "thousands" : ",",
+            "decimal" : "."
+          },
+          "customFormat" : "[\"#,###.##%\",100]"
+        }
+      },
+      {
+        "conditionalFormatting" : { },
+        "field" : "RiskMembersOverdue_1.TotalPercentMembers",
+        "format" : {
+          "delimiters" : {
+            "thousands" : ",",
+            "decimal" : "."
+          },
+          "customFormat" : "[\"#,###.##%\",100]"
+        }
+      },
+      {
+        "conditionalFormatting" : {
+          "backgroundColor" : {
+            "referenceField" : "Percent",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "#00B531",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "rgb(103, 122, 151)",
+                  "bin" : "0"
+                },
+                {
+                  "formatValue" : "#E84340",
+                  "bin" : "1"
+                }
+              ]
+            }
+          }
+        },
+        "field" : "WithCarePlans_1.Percent",
+        "format" : {
+          "delimiters" : {
+            "thousands" : ",",
+            "decimal" : "."
+          },
+          "customFormat" : "[\"#,###.##%\",100]"
+        }
+      },
+      {
+        "conditionalFormatting" : { },
+        "field" : "WithCarePlans_1.TotalPercentMembers",
+        "format" : {
+          "delimiters" : {
+            "thousands" : ",",
+            "decimal" : "."
+          },
+          "customFormat" : "[\"#,###.##%\",100]"
+        }
+      },
+      {
+        "conditionalFormatting" : { },
+        "field" : "DueSoonTasks_1.TotalPercentMembers",
+        "format" : {
+          "delimiters" : {
+            "thousands" : ",",
+            "decimal" : "."
+          },
+          "customFormat" : "[\"#,###.##%\",100]"
+        }
+      },
+      {
+        "conditionalFormatting" : {
+          "backgroundColor" : {
+            "referenceField" : "Percent",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "#00B531",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "rgb(103, 122, 151)",
+                  "bin" : "0"
+                },
+                {
+                  "formatValue" : "#E84340",
+                  "bin" : "1"
+                }
+              ]
+            }
+          }
+        },
+        "field" : "DueSoonTasks_1.Percent",
+        "format" : {
+          "delimiters" : {
+            "thousands" : ",",
+            "decimal" : "."
+          },
+          "customFormat" : "[\"#,###.##%\",100]"
+        }
+      },
+      {
+        "conditionalFormatting" : {
+          "backgroundColor" : {
+            "referenceField" : "Percent",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "#00B531",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "rgb(103, 122, 151)",
+                  "bin" : "0"
+                },
+                {
+                  "formatValue" : "#E84340",
+                  "bin" : "1"
+                }
+              ]
+            }
+          }
+        },
+        "field" : "OpenCarePlanTasks_1.Percent",
+        "format" : {
+          "delimiters" : {
+            "thousands" : ",",
+            "decimal" : "."
+          },
+          "customFormat" : "[\"#,###.##%\",100]"
+        }
+      },
+      {
+        "conditionalFormatting" : { },
+        "field" : "OpenCarePlanTasks_1.TotalPercentMembers",
+        "format" : {
+          "delimiters" : {
+            "thousands" : ",",
+            "decimal" : "."
+          },
+          "customFormat" : "[\"#,###.##%\",100]"
+        }
+      }
+    ],
+    "derivedDimensions" : [ ],
+    "organizations" : [ ],
+    "showDetailsDefaultFields" : [ ],
+    "dates" : [ ],
+    "derivedMeasures" : [ ],
+    "dimensions" : [ ]
+  },
+  "state" : {
+    "dataSourceLinks" : [ ],
+    "filters" : [
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.HLS_Task7_tp.Name}"
+        },
+        "dependent" : true,
+        "fields" : [
+          "Status"
+        ],
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.HLS_Task7_tp.Name}"
+        },
+        "dependent" : true,
+        "fields" : [
+          "Risk_Level"
+        ],
+        "locked" : false,
+        "operator" : "in"
+      }
+    ],
+    "gridLayouts" : [
+      {
+        "maxWidth" : 1500,
+        "name" : "Default",
+        "numColumns" : 48,
+        "pages" : [
+          {
+            "label" : "CARE PLAN",
+            "name" : "aa652248-d621-4101-a460-f4947c0d0df2",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 48,
+                "column" : 0,
+                "name" : "container_1",
+                "row" : 0,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "rgb(75, 31, 72)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 2
+                }
+              },
+              {
+                "colspan" : 17,
+                "column" : 3,
+                "name" : "text_1",
+                "row" : 1,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#FFFFFF",
+                  "borderEdges" : [
+                    "left"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 36,
+                "name" : "text_11",
+                "row" : 19,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(9, 26, 62, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 36,
+                "name" : "text_19",
+                "row" : 29,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(9, 26, 62, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 36,
+                "name" : "text_21",
+                "row" : 46,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(9, 26, 62, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 26,
+                "column" : 1,
+                "name" : "text_24",
+                "row" : 14,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#335779",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 0,
+                "name" : "container_2",
+                "row" : 6,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 47,
+                "column" : 1,
+                "name" : "filterpanel_2",
+                "row" : 7,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 27,
+                "name" : "chart_8",
+                "row" : 26,
+                "rowspan" : 15,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(17, 48, 91)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 9,
+                "name" : "chart_9",
+                "row" : 53,
+                "rowspan" : 16,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 27,
+                "name" : "chart_10",
+                "row" : 53,
+                "rowspan" : 16,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(17, 48, 91)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 10,
+                "column" : 37,
+                "name" : "text_97",
+                "row" : 29,
+                "rowspan" : 8,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(9, 26, 62, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 10,
+                "column" : 37,
+                "name" : "text_98",
+                "row" : 20,
+                "rowspan" : 8,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(9, 26, 62, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 10,
+                "column" : 37,
+                "name" : "text_99",
+                "row" : 38,
+                "rowspan" : 8,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(9, 26, 62, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 10,
+                "column" : 37,
+                "name" : "text_100",
+                "row" : 47,
+                "rowspan" : 8,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(9, 26, 62, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 36,
+                "name" : "text_101",
+                "row" : 14,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(51, 87, 121)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 36,
+                "name" : "text_102",
+                "row" : 38,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(9, 26, 62, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 17,
+                "column" : 1,
+                "name" : "container_12",
+                "row" : 20,
+                "rowspan" : 26,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(17, 48, 91)",
+                  "borderColor" : "rgb(4, 29, 64)",
+                  "borderEdges" : [
+                    "right"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 10,
+                "name" : "chart_12",
+                "row" : 26,
+                "rowspan" : 15,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 15,
+                "column" : 2,
+                "name" : "text_109",
+                "row" : 22,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(9, 39, 81)",
+                  "borderColor" : "rgb(9, 39, 81)",
+                  "borderEdges" : [
+                    "left"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 2,
+                "name" : "text_111",
+                "row" : 38,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(9, 26, 62, 0)",
+                  "borderColor" : "rgb(230, 236, 242)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 2,
+                "name" : "text_112",
+                "row" : 35,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#335779",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 17,
+                "column" : 18,
+                "name" : "container_14",
+                "row" : 20,
+                "rowspan" : 26,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(17, 48, 91)",
+                  "borderColor" : "rgb(4, 29, 64)",
+                  "borderEdges" : [
+                    "left"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 15,
+                "column" : 19,
+                "name" : "text_117",
+                "row" : 22,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(9, 39, 81)",
+                  "borderColor" : "rgb(9, 39, 81)",
+                  "borderEdges" : [
+                    "left"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 19,
+                "name" : "text_119",
+                "row" : 38,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(9, 26, 62, 0)",
+                  "borderColor" : "rgb(230, 236, 242)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 19,
+                "name" : "text_120",
+                "row" : 35,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#335779",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 17,
+                "column" : 1,
+                "name" : "container_15",
+                "row" : 47,
+                "rowspan" : 27,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(17, 48, 91)",
+                  "borderColor" : "rgb(4, 29, 64)",
+                  "borderEdges" : [
+                    "right"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 15,
+                "column" : 2,
+                "name" : "text_125",
+                "row" : 49,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(9, 39, 81)",
+                  "borderColor" : "rgb(9, 39, 81)",
+                  "borderEdges" : [
+                    "left"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 2,
+                "name" : "text_127",
+                "row" : 65,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(9, 26, 62, 0)",
+                  "borderColor" : "rgb(230, 236, 242)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 2,
+                "name" : "text_128",
+                "row" : 62,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#335779",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 17,
+                "column" : 18,
+                "name" : "container_16",
+                "row" : 47,
+                "rowspan" : 27,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(17, 48, 91)",
+                  "borderColor" : "rgb(4, 29, 64)",
+                  "borderEdges" : [
+                    "left"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 15,
+                "column" : 19,
+                "name" : "text_133",
+                "row" : 49,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(9, 39, 81)",
+                  "borderColor" : "rgb(9, 39, 81)",
+                  "borderEdges" : [
+                    "left"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 19,
+                "name" : "text_135",
+                "row" : 65,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(9, 26, 62, 0)",
+                  "borderColor" : "rgb(230, 236, 242)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 19,
+                "name" : "text_136",
+                "row" : 62,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#335779",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 2,
+                "name" : "number_1",
+                "row" : 26,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 19,
+                "name" : "number_3",
+                "row" : 26,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 2,
+                "name" : "number_4",
+                "row" : 53,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 5,
+                "name" : "number_6",
+                "row" : 27,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 16,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 2,
+                "name" : "number_7",
+                "row" : 30,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 2,
+                "name" : "number_5",
+                "row" : 36,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 19,
+                "name" : "number_2",
+                "row" : 30,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#C6D3E1",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 19,
+                "name" : "number_9",
+                "row" : 36,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 22,
+                "name" : "number_11",
+                "row" : 27,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(17, 48, 91)",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 16,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 2,
+                "name" : "number_12",
+                "row" : 57,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 2,
+                "name" : "number_13",
+                "row" : 63,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 5,
+                "name" : "number_14",
+                "row" : 54,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(17, 48, 91)",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 16,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 19,
+                "name" : "number_15",
+                "row" : 53,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 19,
+                "name" : "number_16",
+                "row" : 57,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 22,
+                "name" : "number_17",
+                "row" : 54,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 16,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 19,
+                "name" : "number_18",
+                "row" : 63,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 27,
+                "name" : "number_19",
+                "row" : 14,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(51, 87, 121)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 17,
+                "column" : 1,
+                "name" : "link_1",
+                "row" : 42,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#335779",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 17,
+                "column" : 18,
+                "name" : "link_2",
+                "row" : 42,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#335779",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 17,
+                "column" : 1,
+                "name" : "link_3",
+                "row" : 70,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#335779",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 17,
+                "column" : 18,
+                "name" : "link_4",
+                "row" : 70,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#335779",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 1,
+                "name" : "image_1",
+                "row" : 1,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#FFFFFF",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight" : "fine",
+        "selectors" : [ ],
+        "style" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "backgroundColor" : "rgb(4, 29, 64)",
+          "cellSpacingX" : 0,
+          "cellSpacingY" : 0,
+          "fit" : "original",
+          "gutterColor" : "#C5D3E0"
+        },
+        "version" : 1.0
+      }
+    ],
+    "layouts" : [ ],
+    "steps" : {
+      "OpenCarePlanTasks_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "OpenCarePlanTasks",
+        "numbers" : [
+          "All_Data",
+          "Till_Last_Week",
+          "Percent",
+          "TotalPercentMembers"
+        ],
+        "query" : "q = load \"${App.Datasets.HLS_Task7_tp.FullyQualifiedName}\";\r\nq4 = group q by all;\r\nq4 = foreach q4 generate unique(q4.'CarePlan_AccountId') as 'Total_Members';\r\n\r\nq1 = filter q by 'CarePlan_IsClosed' == \"false\" && 'IsOverdue' == \"true\";\r\nq1 = filter q1 by 'Status' in [\"In Progress\", \"Not Started\", \"Waiting on someone else\"];\r\nresult = group q1 by 'CarePlan_AccountId';\r\nresult = foreach result generate q1.'CarePlan_AccountId' as 'CarePlan_AccountId', coalesce(unique(q1.'CarePlan_AccountId'),0) as 'A', coalesce(unique(q1.'Task_Overdue_Days_Bucket'),0) as 'B';\r\nresult = order result by ('CarePlan_AccountId' asc);\r\nsummary = group result by 'CarePlan_AccountId';\r\nsummary = foreach summary generate sum(sum('A')) over([..] partition by all) as 'A_total', sum(sum('B')) over([..] partition by all) as 'B_total';\r\nsummary = limit summary 1;\r\n\r\nq2 = filter q by 'CarePlan_IsClosed' == \"false\" && 'IsOverdue' == \"true\";\r\nq2 = filter q2 by 'Status' in [\"In Progress\", \"Not Started\", \"Waiting on someone else\"];\r\nq2 = filter q2 by date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day') in [..\"1 week ago\"];\r\nresult1 = group q2 by 'CarePlan_AccountId';\r\nresult1 = foreach result1 generate q2.'CarePlan_AccountId' as 'CarePlan_AccountId', coalesce(unique(q2.'CarePlan_AccountId'),0) as 'A', coalesce(unique(q2.'Task_Overdue_Days_Bucket'),0) as 'B';\r\nresult1 = order result1 by ('CarePlan_AccountId' asc);\r\nsummary1 = group result1 by 'CarePlan_AccountId';\r\nsummary1 = foreach summary1 generate sum(sum('A')) over([..] partition by all) as 'A_total1', sum(sum('B')) over([..] partition by all) as 'B_total1';\r\nsummary1 = limit summary1 1;\r\n\r\nq3 = group summary by all full,summary1 by all,q4 by all;\r\nq3 = foreach q3 generate coalesce(sum(summary.'A_total'),0) as 'All_Data',coalesce(sum(summary1.'A_total1'),0) as 'Till_Last_Week',coalesce(sum(q4.'Total_Members'),0) as 'Total_Members1';\r\nq3 = foreach q3 generate 'All_Data','Till_Last_Week',coalesce(('All_Data'-'Till_Last_Week')/('Till_Last_Week'),0) as 'Percent',coalesce(('All_Data'/'Total_Members1'),0) as 'TotalPercentMembers';",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "showRowIndexColumn" : false,
+            "subtotals" : true,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "TextDescription_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "TextDescription4",
+        "numbers" : [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G"
+        ],
+        "query" : "q = load \"${App.Datasets.HLS_Task7_tp.FullyQualifiedName}\";\nq = filter q by 'CarePlan_IsClosed' == \"false\";\nq_B = filter q by 'Task_Due_Days_Bucket' in [\"1.0-7 days\"] && !('Status' in [\"Completed\", \"Deferred\"]);\nq_C = filter q by 'Risk_Level' == \"3. High\" && 'Task_Due_Days_Bucket' in [\"1.0-7 days\"] && !('Status' in [\"Completed\", \"Deferred\"]);\nq_D = filter q by 'Risk_Level' == \"3. High\" && 'Task_Due_Days_Bucket' in [\"1.0-7 days\"] && !('Status' in [\"Completed\", \"Deferred\"]) && 'Priority' == \"High\";\nresult = group q by all full, q_B by all full, q_C by all full, q_D by all;\nresult = foreach result generate coalesce(unique(q.'CarePlan_AccountId'),0) as 'A', coalesce(unique(q_B.'CarePlan_AccountId'),0) as 'B',coalesce(unique(q_C.'CarePlan_AccountId'),0) as 'C', coalesce(unique(q_D.'CarePlan_AccountId'),0) as 'D';\nresult = foreach result generate 'A', 'B', 'C', 'D', round(coalesce((B/A)*100,0),2) as 'E', round(coalesce((C/B)*100,0),2) as 'F', round(coalesce((D/C)*100,0),2) as 'G';\nresult = limit result 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "DueSoonTasks_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "DueSoonTasks",
+        "numbers" : [
+          "All_Data",
+          "Till_Last_Week",
+          "Percent",
+          "TotalPercentMembers"
+        ],
+        "query" : "q = load \"${App.Datasets.HLS_Task7_tp.FullyQualifiedName}\";\r\nq4 = group q by all;\r\nq4 = foreach q4 generate unique(q4.'CarePlan_AccountId') as 'Total_Members';\r\n\r\nq1 = filter q by 'CarePlan_IsClosed' == \"false\" && 'Task_Due_Days_Bucket' in [\"1.0-7 days\",\"2.8-14 days\",\"15-30 days\"];\r\nresult = group q1 by 'CarePlan_AccountId';\r\nresult = foreach result generate q1.'CarePlan_AccountId' as 'CarePlan_AccountId', coalesce(unique(q1.'CarePlan_AccountId'),0) as 'A', coalesce(unique(q1.'Task_Due_Days_Bucket'),0) as 'B';\r\nresult = order result by ('CarePlan_AccountId' asc);\r\nsummary = group result by 'CarePlan_AccountId';\r\nsummary = foreach summary generate sum(sum('A')) over([..] partition by all) as 'A_total', sum(sum('B')) over([..] partition by all) as 'B_total';\r\nsummary = limit summary 1;\r\n\r\nq2 = filter q by 'CarePlan_IsClosed' == \"false\" && 'Task_Due_Days_Bucket' in [\"1.0-7 days\",\"2.8-14 days\",\"15-30 days\"];\r\nq2 = filter q2 by date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day') in [..\"1 week ago\"];\r\nresult1 = group q2 by 'CarePlan_AccountId';\r\nresult1 = foreach result1 generate q2.'CarePlan_AccountId' as 'CarePlan_AccountId', coalesce(unique(q2.'CarePlan_AccountId'),0) as 'A', coalesce(unique(q2.'Task_Due_Days_Bucket'),0) as 'B';\r\nresult1 = order result1 by ('CarePlan_AccountId' asc);\r\nsummary1 = group result1 by 'CarePlan_AccountId';\r\nsummary1 = foreach summary1 generate sum(sum('A')) over([..] partition by all) as 'A_total1', sum(sum('B')) over([..] partition by all) as 'B_total1';\r\nsummary1 = limit summary1 1;\r\n\r\nq3 = group summary by all full,summary1 by all,q4 by all;\r\nq3 = foreach q3 generate coalesce(sum(summary.'A_total'),0) as 'All_Data',coalesce(sum(summary1.'A_total1'),0) as 'Till_Last_Week',coalesce(sum(q4.'Total_Members'),0) as 'Total_Members1';\r\nq3 = foreach q3 generate 'All_Data','Till_Last_Week',coalesce(('All_Data'-'Till_Last_Week')/('Till_Last_Week'),0) as 'Percent',coalesce(('All_Data'/'Total_Members1'),0) as 'TotalPercentMembers';",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "showRowIndexColumn" : false,
+            "subtotals" : true,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "Median_1" : {
+        "broadcastFacet" : false,
+        "groups" : [ ],
+        "label" : "Median",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.HLS_Task7_tp.FullyQualifiedName}\";\nq_A = filter q by 'Risk_Level' == \"3. High\" && 'IsOverdue' == \"true\" && !('Status' in [\"Completed\", \"Deferred\"]);\nresult = group q by all full, q_A by all;\nresult = foreach result generate coalesce(unique(q_A.'CarePlan_AccountId'),0) as 'A', coalesce(median(q.'Account_Contact_Contact_Age'),0) as 'B';\nresult = limit result 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "Priority_2" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Priority_2",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.HLS_Task7_tp.FullyQualifiedName}\";\nq = filter q by 'CarePlan_IsClosed' == \"false\";\nq = filter q by !('Status' in [\"Completed\", \"Deferred\"]);\nq = filter q by 'IsOverdue' == \"true\";\nq = group q by 'Priority';\nq = foreach q generate 'Priority' as 'Priority', unique('CarePlan_AccountId') as 'Count';\nq = order q by 'Priority' asc;\nq = limit q 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "showValues" : true,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : false,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "vbar",
+            "binValues" : false,
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : false,
+              "showAxis" : false,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "applyConditionalFormatting" : true,
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              },
+              "title" : ""
+            }
+          },
+          "type" : "chart"
+        }
+      },
+      "Task_Overdue_Days_Bu_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Task_Overdue_Days_Bu_1",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.HLS_Task7_tp.FullyQualifiedName}\";\nq = filter q by 'CarePlan_IsClosed' == \"false\";\nq = filter q by !('Status' in [\"Completed\", \"Deferred\"]);\nq = filter q by 'Task_Overdue_Days_Bucket' in [\"1.0-7 days\",\"2.8-14 days\", \"3.15-30 days\"];\nq = group q by 'Task_Overdue_Days_Bucket';\nq = foreach q generate 'Task_Overdue_Days_Bucket' as 'Task_Overdue_Days_Bucket', unique('CarePlan_AccountId') as 'Count';\nq = order q by 'Task_Overdue_Days_Bucket' asc;\nq = limit q 3;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "showValues" : true,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : false,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "binValues" : false,
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : false,
+              "showAxis" : false,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "applyConditionalFormatting" : true,
+            "dimensionAxis" : {
+              "showTitle" : false,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              },
+              "title" : ""
+            }
+          },
+          "type" : "chart"
+        }
+      },
+      "TextDesc_1_1" : {
+        "broadcastFacet" : false,
+        "groups" : [ ],
+        "label" : "TextDesc_1",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.HLS_Task7_tp.FullyQualifiedName}\";\nq_B = filter q by 'Risk_Level' == \"3. High\";\nq_C = filter q by 'Risk_Level' == \"3. High\" && 'IsOverdue' == \"true\" && !('Status' in [\"Completed\", \"Deferred\"]);\nresult = group q by all full, q_B by all full, q_C by all;\nresult = foreach result generate coalesce(unique(q.'CarePlan_AccountId'),0) as 'A', coalesce(unique(q_B.'CarePlan_AccountId'),0) as 'B', coalesce(unique(q_C.'CarePlan_AccountId'),0) as 'C';\nresult = foreach result generate 'A', 'B', 'C', coalesce(round((B/A)*100,2),0) as 'PercentageOfMembersWithRisk', coalesce(round((C/B)*100,2),0) as 'PercentageOfMembersBehind';\nresult = limit result 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "Total_Members_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Total Members",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.HLS_Task7_tp.FullyQualifiedName}\";\nq = group q by all;\nq = foreach q generate unique('CarePlan_AccountId') as 'unique_AccountId';\nq = limit q 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "showValues" : true,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "binValues" : false,
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "applyConditionalFormatting" : true,
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              },
+              "title" : ""
+            }
+          },
+          "type" : "chart"
+        }
+      },
+      "RiskMembersOverdue_2" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "RiskMembersOverdue",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.HLS_Task7_tp.FullyQualifiedName}\";\r\nq4 = group q by all;\r\nq4 = foreach q4 generate unique(q4.'CarePlan_AccountId') as 'Total_Members';\r\n\r\nq1 = filter q by 'CarePlan_IsClosed' == \"false\";\r\nq1 = filter q1 by 'Risk_Level' == \"3. High\" && 'IsOverdue' == \"true\" && !('Status' in [\"Completed\", \"Deferred\"]);\r\n--q1 = filter q1 by !('Status' in [\"Completed\", \"Deferred\"]);\r\nresult = group q1 by 'CarePlan_AccountId';\r\nresult = foreach result generate q1.'CarePlan_AccountId' as 'CarePlan_AccountId', unique(q1.'CarePlan_AccountId') as 'A', unique(q1.'Task_Overdue_Days_Bucket') as 'B';\r\nresult = order result by ('CarePlan_AccountId' asc);\r\nsummary = group result by 'CarePlan_AccountId';\r\nsummary = foreach summary generate sum(sum('A')) over([..] partition by all) as 'A_total', sum(sum('B')) over([..] partition by all) as 'B_total';\r\nsummary = limit summary 1;\r\n\r\n\r\nq2 = filter q by 'CarePlan_IsClosed' == \"false\";\r\nq2 = filter q2 by 'Risk_Level' == \"3. High\" && 'IsOverdue' == \"true\" && !('Status' in [\"Completed\", \"Deferred\"]);\r\n--q2 = filter q2 by !('Status' in [\"Completed\", \"Deferred\"]);\r\nq2 = filter q2 by date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day') in [..\"1 week ago\"];\r\nresult1 = group q2 by 'CarePlan_AccountId';\r\nresult1 = foreach result1 generate q2.'CarePlan_AccountId' as 'CarePlan_AccountId', unique(q2.'CarePlan_AccountId') as 'A', unique(q2.'Task_Overdue_Days_Bucket') as 'B';\r\nresult1 = order result1 by ('CarePlan_AccountId' asc);\r\nsummary1 = group result1 by 'CarePlan_AccountId';\r\nsummary1 = foreach summary1 generate sum(sum('A')) over([..] partition by all) as 'A_total1', sum(sum('B')) over([..] partition by all) as 'B_total1';\r\nsummary1 = limit summary1 1;\r\n\r\n\r\nq3 = group summary by all full,summary1 by all,q4 by all;\r\nq3 = foreach q3 generate sum(summary.'A_total') as 'All_Data',sum(summary1.'A_total1') as 'Till_Last_Week',sum(q4.'Total_Members') as 'Total_Members1';\r\nq3 = foreach q3 generate 'All_Data','Till_Last_Week',round(('All_Data'-'Till_Last_Week')/('Till_Last_Week'),3) as 'Percent','Total_Members1' as 'Total_Members1',round(('All_Data'/'Total_Members1'),3) as 'TotalPercentMembers';",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [
+              "All_Data"
+            ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "showRowIndexColumn" : false,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "RiskMembersOverdue_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "RiskMembersOverdue",
+        "numbers" : [
+          "All_Data",
+          "Till_Last_Week",
+          "Percent",
+          "Total_Members1",
+          "TotalPercentMembers"
+        ],
+        "query" : "q = load \"${App.Datasets.HLS_Task7_tp.FullyQualifiedName}\";\r\nq4 = group q by all;\r\nq4 = foreach q4 generate unique(q4.'CarePlan_AccountId') as 'Total_Members';\r\n\r\nq1 = filter q by 'CarePlan_IsClosed' == \"false\";\r\nq1 = filter q1 by 'Risk_Level' == \"3. High\" && 'IsOverdue' == \"true\" && !('Status' in [\"Completed\", \"Deferred\"]);\r\n--q1 = filter q1 by !('Status' in [\"Completed\", \"Deferred\"]);\r\nresult = group q1 by 'CarePlan_AccountId';\r\nresult = foreach result generate q1.'CarePlan_AccountId' as 'CarePlan_AccountId', coalesce(unique(q1.'CarePlan_AccountId'),0) as 'A', coalesce(unique(q1.'Task_Overdue_Days_Bucket'),0) as 'B';\r\nresult = order result by ('CarePlan_AccountId' asc);\r\nsummary = group result by 'CarePlan_AccountId';\r\nsummary = foreach summary generate sum(sum('A')) over([..] partition by all) as 'A_total', sum(sum('B')) over([..] partition by all) as 'B_total';\r\nsummary = limit summary 1;\r\n\r\n\r\nq2 = filter q by 'CarePlan_IsClosed' == \"false\";\r\nq2 = filter q2 by 'Risk_Level' == \"3. High\" && 'IsOverdue' == \"true\" && !('Status' in [\"Completed\", \"Deferred\"]);\r\n--q2 = filter q2 by !('Status' in [\"Completed\", \"Deferred\"]);\r\nq2 = filter q2 by date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day') in [..\"1 week ago\"];\r\nresult1 = group q2 by 'CarePlan_AccountId';\r\nresult1 = foreach result1 generate q2.'CarePlan_AccountId' as 'CarePlan_AccountId', coalesce(unique(q2.'CarePlan_AccountId'),0) as 'A', coalesce(unique(q2.'Task_Overdue_Days_Bucket'),0) as 'B';\r\nresult1 = order result1 by ('CarePlan_AccountId' asc);\r\nsummary1 = group result1 by 'CarePlan_AccountId';\r\nsummary1 = foreach summary1 generate sum(sum('A')) over([..] partition by all) as 'A_total1', sum(sum('B')) over([..] partition by all) as 'B_total1';\r\nsummary1 = limit summary1 1;\r\n\r\n\r\nq3 = group summary by all full,summary1 by all,q4 by all;\r\nq3 = foreach q3 generate coalesce(sum(summary.'A_total'),0) as 'All_Data',coalesce(sum(summary1.'A_total1'),0) as 'Till_Last_Week',coalesce(sum(q4.'Total_Members'),0) as 'Total_Members1';\r\nq3 = foreach q3 generate 'All_Data','Till_Last_Week',coalesce(('All_Data'-'Till_Last_Week')/('Till_Last_Week'),0) as 'Percent','Total_Members1' as 'Total_Members1',coalesce(('All_Data'/'Total_Members1'),0) as 'TotalPercentMembers';",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "showRowIndexColumn" : false,
+            "subtotals" : true,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "Risk_Level_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Risk_Level_1",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.HLS_Task7_tp.FullyQualifiedName}\";\nq = filter q by 'CarePlan_IsClosed' == \"false\";\nq = filter q by 'IsOverdue' == \"true\";\nq = filter q by !('Status' in [\"Completed\", \"Deferred\"]);\nq = group q by 'Risk_Level';\nq = foreach q generate 'Risk_Level' as 'Risk_Level', unique('CarePlan_AccountId') as 'Count';\nq = order q by 'Risk_Level' asc;\nq = limit q 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "fit",
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "showValues" : true,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : false,
+              "customSize" : 30,
+              "position" : "bottom-center",
+              "inside" : false
+            },
+            "axisMode" : "sync",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "vbar",
+            "binValues" : false,
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "right",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : false,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : false,
+              "showAxis" : false,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "applyConditionalFormatting" : true,
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              },
+              "title" : ""
+            }
+          },
+          "type" : "chart"
+        }
+      },
+      "Top3Insurance" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Top3Insurance",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.HLS_Task7_tp.FullyQualifiedName}\";\nq = filter q by 'CarePlan_IsClosed' == \"false\";\nq = filter q by !('Status' in [\"Completed\", \"Deferred\"]);\nq = filter q by 'IsOverdue' == \"true\";\nresult = group q by 'Account_MemberPlan_Plan_PlanType';\nresult = foreach result generate q.'Account_MemberPlan_Plan_PlanType' as 'Account_MemberPlan_Plan_PlanType', count(q) as 'A', unique(q.'CarePlan_AccountId') as 'B', unique(q.'Task_Overdue_Days_Bucket') as 'C';\nresult = order result by ('B' desc);\nsummary = group result by 'Account_MemberPlan_Plan_PlanType';\nsummary = foreach summary generate sum(sum('A')) over([..] partition by all) as 'A_total', sum(sum('B')) over([..] partition by all) as 'B_total', sum(sum('C')) over([..] partition by all) as 'C_total';\nsummary = limit summary 1;\nresult = limit result 3;\nresult = union result, summary;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "lens_4" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "lens_4",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.HLS_Task7_tp.FullyQualifiedName}\";\nq = filter q by 'CarePlan_IsClosed' == \"false\";\nq = filter q by !('Status' in [\"Completed\", \"Deferred\"]);\nq = filter q by 'Task_Due_Days_Bucket' in [\"1.0-7 days\",\"2.8-14 days\",\"3.15-30 days\"];\nq = group q by 'Task_Due_Days_Bucket';\nq = foreach q generate 'Task_Due_Days_Bucket' as 'Task_Due_Days_Bucket', unique('CarePlan_AccountId') as 'Count';\nq = order q by 'Task_Due_Days_Bucket' asc;\nq = limit q 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "showValues" : true,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : false,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "binValues" : false,
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : false,
+              "showAxis" : false,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "applyConditionalFormatting" : true,
+            "dimensionAxis" : {
+              "showTitle" : false,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              },
+              "title" : ""
+            }
+          },
+          "type" : "chart"
+        }
+      },
+      "WithCarePlans_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "WithCarePlans",
+        "numbers" : [
+          "All_Data",
+          "Till_Last_Week",
+          "Percent",
+          "TotalPercentMembers"
+        ],
+        "query" : "q = load \"${App.Datasets.HLS_Task7_tp.FullyQualifiedName}\";\r\nq4 = group q by all;\r\nq4 = foreach q4 generate unique(q4.'CarePlan_AccountId') as 'Total_Members';\r\n\r\nq1 = filter q by 'CarePlan_IsClosed' == \"false\" && 'IsOverdue' == \"true\";\r\n--q1 = filter q1 by !('Status' in [\"Completed\", \"Deferred\"]);\r\nresult = group q1 by 'CarePlan_AccountId';\r\nresult = foreach result generate q1.'CarePlan_AccountId' as 'CarePlan_AccountId', coalesce(unique(q1.'CarePlan_AccountId'),0) as 'A', coalesce(unique(q1.'Task_Overdue_Days_Bucket'),0) as 'B';\r\nresult = order result by ('CarePlan_AccountId' asc);\r\nsummary = group result by 'CarePlan_AccountId';\r\nsummary = foreach summary generate sum(sum('A')) over([..] partition by all) as 'A_total', sum(sum('B')) over([..] partition by all) as 'B_total';\r\nsummary = limit summary 1;\r\n\r\nq2 = filter q by 'CarePlan_IsClosed' == \"false\" && 'IsOverdue' == \"true\";\r\n--q2 = filter q2 by !('Status' in [\"Completed\", \"Deferred\"]);\r\nq2 = filter q2 by date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day') in [..\"1 week ago\"];\r\nresult1 = group q2 by 'CarePlan_AccountId';\r\nresult1 = foreach result1 generate q2.'CarePlan_AccountId' as 'CarePlan_AccountId', coalesce(unique(q2.'CarePlan_AccountId'),0) as 'A', coalesce(unique(q2.'Task_Overdue_Days_Bucket'),0) as 'B';\r\nresult1 = order result1 by ('CarePlan_AccountId' asc);\r\nsummary1 = group result1 by 'CarePlan_AccountId';\r\nsummary1 = foreach summary1 generate sum(sum('A')) over([..] partition by all) as 'A_total1', sum(sum('B')) over([..] partition by all) as 'B_total1';\r\nsummary1 = limit summary1 1;\r\n\r\nq3 = group summary by all full,summary1 by all,q4 by all;\r\nq3 = foreach q3 generate coalesce(sum(summary.'A_total'),0) as 'All_Data',coalesce(sum(summary1.'A_total1'),0) as 'Till_Last_Week',coalesce(sum(q4.'Total_Members'),0) as 'Total_Members1';\r\nq3 = foreach q3 generate 'All_Data','Till_Last_Week',coalesce(('All_Data'-'Till_Last_Week')/('Till_Last_Week'),0) as 'Percent',coalesce(('All_Data'/'Total_Members1'),0) as 'TotalPercentMembers';",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "showRowIndexColumn" : false,
+            "subtotals" : true,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      }
+    },
+    "widgetStyle" : {
+      "backgroundColor" : "rgba(255, 255, 255, 0)",
+      "borderColor" : "#E6ECF2",
+      "borderEdges" : [ ],
+      "borderRadius" : 0,
+      "borderWidth" : 1
+    },
+    "widgets" : {
+      "number_12" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "Till_Last_Week",
+          "noResultsLabel" : "0",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 12,
+          "showActionMenu" : true,
+          "step" : "OpenCarePlanTasks_1",
+          "textAlignment" : "left",
+          "title" : "VS LAST WEEK:",
+          "titleColor" : "#C6D3E1",
+          "titleSize" : 12
+        },
+        "type" : "number"
+      },
+      "number_11" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "Percent",
+          "noResultsLabel" : "0",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 14,
+          "showActionMenu" : true,
+          "step" : "WithCarePlans_1",
+          "textAlignment" : "center",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "container_16" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_15" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_14" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_19" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "◼︎"
+          },
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#00B3B4"
+        },
+        "type" : "text"
+      },
+      "number_19" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "unique_AccountId",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "Total_Members_1",
+          "textAlignment" : "left",
+          "title" : "TOTAL MEMBERS",
+          "titleColor" : "#C6D3E1",
+          "titleSize" : 14
+        },
+        "type" : "number"
+      },
+      "number_18" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "TotalPercentMembers",
+          "noResultsLabel" : "No Results Found",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 16,
+          "showActionMenu" : true,
+          "step" : "DueSoonTasks_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "number_17" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "Percent",
+          "noResultsLabel" : "0",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 14,
+          "showActionMenu" : true,
+          "step" : "DueSoonTasks_1",
+          "textAlignment" : "center",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 14
+        },
+        "type" : "number"
+      },
+      "number_16" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "Till_Last_Week",
+          "noResultsLabel" : "0",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 12,
+          "showActionMenu" : true,
+          "step" : "DueSoonTasks_1",
+          "textAlignment" : "left",
+          "title" : "VS LAST WEEK:",
+          "titleColor" : "#C6D3E1",
+          "titleSize" : 12
+        },
+        "type" : "number"
+      },
+      "text_98" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "High risks members make {{cell(TextDesc_1_1.result, 0, \"PercentageOfMembersWithRisk\").asObject()}}% of your member population. {{cell(TextDesc_1_1.result, 0, \"PercentageOfMembersBehind\").asObject()}}% of those are falling behind on their care plan adherence"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#C6D3E1"
+        },
+        "type" : "text"
+      },
+      "number_15" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "All_Data",
+          "noResultsLabel" : "0",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 32,
+          "showActionMenu" : true,
+          "step" : "DueSoonTasks_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "text_97" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "{{cell(Median_1.result, 0, \"B\").asObject()}} years is the median age of high risk patients who are behind on their care plan adherence"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#C6D3E1"
+        },
+        "type" : "text"
+      },
+      "number_14" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "Percent",
+          "noResultsLabel" : "0",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 14,
+          "showActionMenu" : true,
+          "step" : "OpenCarePlanTasks_1",
+          "textAlignment" : "center",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "text_133" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Members with Care Plan Tasks Due Soon"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#C6D3E1"
+        },
+        "type" : "text"
+      },
+      "number_13" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "TotalPercentMembers",
+          "noResultsLabel" : "No Results Found",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 16,
+          "showActionMenu" : true,
+          "step" : "OpenCarePlanTasks_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "text_11" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "◼︎"
+          },
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#00B3B4"
+        },
+        "type" : "text"
+      },
+      "text_99" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Top 3 insurance for members who are falling behind on care plan adherence are {{coalesce(column(Top3Insurance.result,[\"Account_MemberPlan_Plan_PlanType\"]),\"No Result Found\").asObject()}}"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#C6D3E1"
+        },
+        "type" : "text"
+      },
+      "container_1" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_125" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Members with Open Care Plan Tasks"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#C6D3E1"
+        },
+        "type" : "text"
+      },
+      "container_2" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_128" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : ""
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "chart_9" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "showValues" : true,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "vbar",
+          "exploreLink" : true,
+          "binValues" : false,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : false,
+            "showAxis" : false,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "step" : "Priority_2",
+          "theme" : "dark",
+          "applyConditionalFormatting" : true,
+          "dimensionAxis" : {
+            "showTitle" : true,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            },
+            "title" : ""
+          }
+        },
+        "type" : "chart"
+      },
+      "text_127" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "OVERALL POPULATION"
+          },
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "rgb(125, 152, 179)"
+        },
+        "type" : "text"
+      },
+      "chart_8" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "showValues" : true,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "hbar",
+          "exploreLink" : true,
+          "binValues" : false,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : false,
+            "showAxis" : false,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "step" : "Task_Overdue_Days_Bu_1",
+          "theme" : "dark",
+          "applyConditionalFormatting" : true,
+          "dimensionAxis" : {
+            "showTitle" : false,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            },
+            "title" : ""
+          }
+        },
+        "type" : "chart"
+      },
+      "text_1" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Analytics for Healthcare"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "filterpanel_2" : {
+        "parameters" : {
+          "filterItemOptions" : {
+            "backgroundColor" : "#FFFFFF",
+            "borderColor" : "#E6ECF2",
+            "borderRadius" : 4,
+            "borderWidth" : 1,
+            "propertyColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "filters" : [ ],
+          "itemsPerRow" : 3,
+          "showAllFilters" : true,
+          "title" : {
+            "separatorColor" : "#E6ECF2",
+            "text" : {
+              "align" : "left",
+              "color" : "#091A3E",
+              "fontSize" : 16,
+              "label" : ""
+            },
+            "visible" : false
+          }
+        },
+        "type" : "filterpanel"
+      },
+      "text_47" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "HIGH RISK MEMBERS WITH OVERDUE TASKS"
+          },
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#C6D3E1"
+        },
+        "type" : "text"
+      },
+      "text_49" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "9.09%"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_48" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "OF OVERAL POPULATION"
+          },
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#E6ECF2"
+        },
+        "type" : "text"
+      },
+      "text_120" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : ""
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text_44" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "FROM LAST WEEK (90)"
+          },
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#E6ECF2"
+        },
+        "type" : "text"
+      },
+      "number_5" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "TotalPercentMembers",
+          "noResultsLabel" : "No Results Found",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 16,
+          "showActionMenu" : true,
+          "step" : "RiskMembersOverdue_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "number_4" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "All_Data",
+          "noResultsLabel" : "0",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 32,
+          "showActionMenu" : true,
+          "step" : "OpenCarePlanTasks_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "text_112" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : ""
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "number_3" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "All_Data",
+          "noResultsLabel" : "0",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 32,
+          "showActionMenu" : true,
+          "step" : "WithCarePlans_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "number_2" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "Till_Last_Week",
+          "noResultsLabel" : "0",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 12,
+          "showActionMenu" : true,
+          "step" : "WithCarePlans_1",
+          "textAlignment" : "left",
+          "title" : "VS LAST WEEK:",
+          "titleColor" : "#C6D3E1",
+          "titleSize" : 12
+        },
+        "type" : "number"
+      },
+      "number_1" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "All_Data",
+          "noResultsLabel" : "0",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 32,
+          "showActionMenu" : true,
+          "step" : "RiskMembersOverdue_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "text_117" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Members with Overdue Care Plan Tasks"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#C6D3E1"
+        },
+        "type" : "text"
+      },
+      "text_119" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "OVERALL POPULATION"
+          },
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "rgb(125, 152, 179)"
+        },
+        "type" : "text"
+      },
+      "container_12" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "image_1" : {
+        "parameters" : {
+          "alignmentX" : "center",
+          "alignmentY" : "center",
+          "fit" : "fitheight",
+          "image" : {
+            "name" : "${App.Images['healthpng160'].Name}",
+            "namespace" : "${Org.Namespace}"
+          },
+          "tooltip" : ""
+        },
+        "type" : "image"
+      },
+      "chart_12" : {
+        "parameters" : {
+          "autoFitMode" : "fit",
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "showValues" : true,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : 30,
+            "position" : "bottom-center",
+            "inside" : false
+          },
+          "axisMode" : "sync",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "vbar",
+          "exploreLink" : true,
+          "binValues" : false,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "right",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : false,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : false,
+            "showAxis" : false,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "step" : "Risk_Level_1",
+          "theme" : "dark",
+          "applyConditionalFormatting" : true,
+          "dimensionAxis" : {
+            "showTitle" : true,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            },
+            "title" : ""
+          }
+        },
+        "type" : "chart"
+      },
+      "chart_10" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "showValues" : true,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "hbar",
+          "exploreLink" : true,
+          "binValues" : false,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : false,
+            "showAxis" : false,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "step" : "lens_4",
+          "theme" : "dark",
+          "applyConditionalFormatting" : true,
+          "dimensionAxis" : {
+            "showTitle" : false,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            },
+            "title" : ""
+          }
+        },
+        "type" : "chart"
+      },
+      "number_9" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "TotalPercentMembers",
+          "noResultsLabel" : "No Results Found",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 16,
+          "showActionMenu" : true,
+          "step" : "WithCarePlans_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "number_7" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "Till_Last_Week",
+          "noResultsLabel" : "0",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 12,
+          "showActionMenu" : true,
+          "step" : "RiskMembersOverdue_1",
+          "textAlignment" : "left",
+          "title" : "VS LAST WEEK:",
+          "titleColor" : "#C6D3E1",
+          "titleSize" : 12
+        },
+        "type" : "number"
+      },
+      "text_111" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "OVERALL POPULATION"
+          },
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#7D98B3"
+        },
+        "type" : "text"
+      },
+      "number_6" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "Percent",
+          "noResultsLabel" : "0",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 14,
+          "showActionMenu" : true,
+          "step" : "RiskMembersOverdue_1",
+          "textAlignment" : "center",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 14
+        },
+        "type" : "number"
+      },
+      "text_102" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "◼︎"
+          },
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#00B3B4"
+        },
+        "type" : "text"
+      },
+      "text_101" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Care Plan Overview"
+          },
+          "fontSize" : 18,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_104" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "OVERALL POPULATION"
+          },
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "rgb(198, 211, 225)"
+        },
+        "type" : "text"
+      },
+      "text_103" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "9.09%"
+          },
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_109" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "High Risk Members with Overdue Tasks"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#C6D3E1"
+        },
+        "type" : "text"
+      },
+      "link_3" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "${App.Dashboards['Members Care Plan Adherence Details'].Name}",
+            "namespace" : "${Org.Namespace}",
+            "pageName" : "9f5c2662-c154-4d4e-91e3-cd6fac10aa5a"
+          },
+          "destinationType" : "dashboard",
+          "fontSize" : 12,
+          "includeState" : true,
+          "text" : "SEE DASHBOARD",
+          "textAlignment" : "center",
+          "textColor" : "rgb(92, 173, 255)"
+        },
+        "type" : "link"
+      },
+      "link_4" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "${App.Dashboards['Members Goals and Tasks'].Name}",
+            "namespace" : "${Org.Namespace}",
+            "pageName" : "fbeaa333-df6f-480c-a86a-659494b9b600"
+          },
+          "destinationType" : "dashboard",
+          "fontSize" : 12,
+          "includeState" : true,
+          "text" : "SEE DASHBOARD",
+          "textAlignment" : "center",
+          "textColor" : "rgb(92, 173, 255)"
+        },
+        "type" : "link"
+      },
+      "text_24" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Member Overview"
+          },
+          "fontSize" : 18,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "link_1" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "${App.Dashboards['Members Care Plan Adherence Details'].Name}",
+            "namespace" : "${Org.Namespace}",
+            "pageName" : "fbeaa333-df6f-480c-a86a-659494b9b600"
+          },
+          "destinationType" : "dashboard",
+          "fontSize" : 12,
+          "includeState" : true,
+          "text" : "SEE DASHBOARD",
+          "textAlignment" : "center",
+          "textColor" : "rgb(92, 173, 255)"
+        },
+        "type" : "link"
+      },
+      "link_2" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "${App.Dashboards['Members Goals and Tasks'].Name}",
+            "namespace" : "${Org.Namespace}",
+            "pageName" : "307932a4-9f5d-4b47-998d-8587f21fc74c"
+          },
+          "destinationType" : "dashboard",
+          "fontSize" : 12,
+          "includeState" : true,
+          "text" : "SEE DASHBOARD",
+          "textAlignment" : "center",
+          "textColor" : "rgb(92, 173, 255)"
+        },
+        "type" : "link"
+      },
+      "text_21" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "◼︎"
+          },
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#00B3B4"
+        },
+        "type" : "text"
+      },
+      "text_100" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "{{coalesce(cell(TextDescription_1.result, 0, \"E\"),0).asObject()}}% members are at risk of missing their care plan tasks. {{coalesce(cell(TextDescription_1.result, 0, \"F\"),0).asObject()}}% of them are high risk and {{coalesce(cell(TextDescription_1.result, 0, \"G\"),0).asObject()}}% of those tasks are high priority"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#C6D3E1"
+        },
+        "type" : "text"
+      },
+      "text_135" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "OVERALL POPULATION"
+          },
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "rgb(125, 152, 179)"
+        },
+        "type" : "text"
+      },
+      "text_136" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : ""
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      }
+    }
+  }
+}

@@ -10,15 +10,15 @@
     },
     {
       "label": "Demo Version",
-      "values": ["v2020.31"]
+      "values": ["v2020.34"]
     },
     {
       "label": "Source Version",
-      "values": ["v224"]
+      "values": ["v226"]
     }
   ],
   "tags": ["Demo", "Manufacturing"],
-  "assetVersion": 48.0,
+  "assetVersion": 49.0,
   "variableDefinition": "variables.json",
   "uiDefinition": "ui.json",
   "rules": [
@@ -45,6 +45,16 @@
       "type": "CSV",
       "schema": "external_files/MFG_Demo_Data.json",
       "userXmd": "external_files/MFG_Demo_Data_XMD.json",
+      "rows": 5
+    },
+    {
+      "label": "MFG_Order_Product",
+      "name": "MFG_Order_Product",
+      "condition": "${Variables.Overrides.createAllExternalFiles}",
+      "file": "external_files/MFG_Order_Product.csv",
+      "type": "CSV",
+      "schema": "external_files/MFG_Order_Product.json",
+      "userXmd": "external_files/MFG_Order_Product_XMD.json",
       "rows": 5
     }
   ],
@@ -85,20 +95,24 @@
       "name": "Product_Performance_w_Forecast_tp",
       "condition": "${Variables.Overrides.createAllDashboards}",
       "file": "dashboards/Product_Performance_w_Forecast.json"
-    }
-  ],
-  "eltDataflows": [
+    },
     {
-      "label": "MFG Demo",
-      "name": "MFG_Demo",
-      "condition": "${Variables.Overrides.createDataflow}",
-      "file": "dataflow/MFG_Demo.json"
+      "label": "MFG Demo - Forecast Analysis",
+      "name": "Forecast_Analysis_tp",
+      "condition": "${Variables.Overrides.createAllDashboards}",
+      "file": "dashboards/Forecast_Analysis.json"
     }
   ],
+  "eltDataflows": [],
   "recipes": [],
   "datasetFiles": [],
   "storedQueries": [],
   "imageFiles": [
+    {
+      "name": "manufacturing_app_iconpng112",
+      "condition": "${Variables.Overrides.createAllImages}",
+      "file": "images/manufacturing_app_icon.png"
+    },
     {
       "name": "Powered_by_analytics_bannerpng4",
       "condition": "${Variables.Overrides.createAllImages}",
@@ -128,7 +142,7 @@
       {
         "name": "demo_template_guide_0",
         "label": "How to Use this Template",
-        "description": "This demo template is decoupled from core objects and does not require any additional licenses (only EA+). To customize the data you will need to download the datasets, modify and update. This template includes limited sample data, for more data download the CSVs and schema files from here (https://ac-sdo-repo.s3-us-west-2.amazonaws.com/demo-tempate-csv/EAPMM_EA_for_MFG.zip) and update the corresponding datasets after app creation."
+        "description": "This demo template is decoupled from core objects and does not require any additional licenses (only EA+). To customize the data you will need to download the datasets, modify and update. This template includes limited sample data, for more data download the CSVs and schema files from here (https://ac-sdo-repo.s3-us-west-2.amazonaws.com/demo-template-csv/EAPMM_EA_for_MFG.zip) and update the corresponding datasets after app creation."
       }
     ]
   }

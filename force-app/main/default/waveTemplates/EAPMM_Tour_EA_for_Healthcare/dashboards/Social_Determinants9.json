@@ -1,0 +1,2748 @@
+{
+  "name" : "Social_Determinants9_tp",
+  "label" : "Social Determinants",
+  "folder" : {
+    "id" : "${App.Folder.Id}"
+  },
+  "dateVersion" : 1,
+  "mobileDisabled" : false,
+  "xmd" : {
+    "measures" : [
+      {
+        "conditionalFormatting" : { },
+        "field" : "MembersWithBarriers_2.% of Members",
+        "format" : {
+          "delimiters" : {
+            "thousands" : ",",
+            "decimal" : "."
+          },
+          "customFormat" : "[\"#,###.##%\",100]"
+        }
+      },
+      {
+        "conditionalFormatting" : {
+          "chartColor" : {
+            "referenceField" : "CareBarrierPriority",
+            "type" : "categories",
+            "parameters" : {
+              "values" : [
+                {
+                  "formatValue" : "rgb(52, 127, 219)",
+                  "value" : "High"
+                },
+                {
+                  "formatValue" : "rgb(131, 80, 232)",
+                  "value" : "Low"
+                },
+                {
+                  "formatValue" : "rgb(76, 168, 161)",
+                  "value" : "Normal"
+                }
+              ]
+            }
+          }
+        },
+        "field" : "CareBarrierPriority_1.count",
+        "format" : {
+          "delimiters" : { }
+        }
+      },
+      {
+        "conditionalFormatting" : {
+          "chartColor" : {
+            "referenceField" : "count",
+            "type" : "static",
+            "parameters" : {
+              "formatValue" : "rgb(131, 80, 232)"
+            }
+          }
+        },
+        "field" : "CareBarrierCaseAccou_1.count",
+        "format" : {
+          "delimiters" : { }
+        }
+      }
+    ],
+    "derivedDimensions" : [ ],
+    "organizations" : [ ],
+    "showDetailsDefaultFields" : [ ],
+    "dates" : [ ],
+    "derivedMeasures" : [ ],
+    "dimensions" : [
+      {
+        "recordDisplayFields" : [ ],
+        "conditionalFormatting" : {
+          "chartColor" : {
+            "referenceField" : "CareBarrierPriority",
+            "type" : "categories",
+            "parameters" : {
+              "values" : [
+                {
+                  "formatValue" : "rgb(52, 127, 219)",
+                  "value" : "High"
+                },
+                {
+                  "formatValue" : "rgb(131, 80, 232)",
+                  "value" : "Low"
+                },
+                {
+                  "formatValue" : "rgb(76, 168, 161)",
+                  "value" : "Normal"
+                }
+              ]
+            }
+          }
+        },
+        "salesforceActions" : [ ],
+        "field" : "CareBarrierPriority_1.ALL",
+        "members" : [ ],
+        "customActions" : [ ]
+      },
+      {
+        "recordDisplayFields" : [ ],
+        "conditionalFormatting" : {
+          "chartColor" : {
+            "referenceField" : "count",
+            "type" : "static",
+            "parameters" : {
+              "formatValue" : "rgb(131, 80, 232)"
+            }
+          }
+        },
+        "salesforceActions" : [ ],
+        "field" : "CareBarrierCaseAccou_1.ALL",
+        "members" : [ ],
+        "customActions" : [ ]
+      }
+    ]
+  },
+  "state" : {
+    "dataSourceLinks" : [ ],
+    "filters" : [
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.HLS_Barrier8_tp.Name}"
+        },
+        "dependent" : true,
+        "fields" : [
+          "CareBarriersCase_HealthCloudGA_DueDate__c"
+        ],
+        "label" : "Time Period",
+        "locked" : false,
+        "operator" : ">=<="
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.HLS_Barrier8_tp.Name}"
+        },
+        "dependent" : true,
+        "fields" : [
+          "CareDeterminantNames"
+        ],
+        "label" : "Social Determinants",
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.HLS_Barrier8_tp.Name}"
+        },
+        "dependent" : true,
+        "fields" : [
+          "Compute_CareBarrierTypeName"
+        ],
+        "label" : "Barrier Types",
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.HLS_Barrier8_tp.Name}"
+        },
+        "dependent" : true,
+        "fields" : [
+          "CareBarrierCaseAccount_MemberPlan_Plan_PlanType"
+        ],
+        "label" : "Insurance Types",
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.HLS_Barrier8_tp.Name}"
+        },
+        "dependent" : true,
+        "fields" : [
+          "CareBarrierCaseAccount_Contact_MailingState"
+        ],
+        "label" : "Location",
+        "locked" : false,
+        "operator" : "in"
+      }
+    ],
+    "gridLayouts" : [
+      {
+        "maxWidth" : 1500,
+        "name" : "Default",
+        "numColumns" : 48,
+        "pages" : [
+          {
+            "label" : "Determinants",
+            "name" : "d223139e-93cb-402e-9aff-4504cdd4e101",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 48,
+                "column" : 0,
+                "name" : "container_1",
+                "row" : 6,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 0,
+                "name" : "container_2",
+                "row" : 0,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "rgb(75, 31, 72)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 2
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 0,
+                "name" : "container_3",
+                "row" : 12,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 1,
+                "name" : "text_1",
+                "row" : 13,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 1,
+                "name" : "image_1",
+                "row" : 1,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#FFFFFF",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 17,
+                "column" : 3,
+                "name" : "text_3",
+                "row" : 1,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#FFFFFF",
+                  "borderEdges" : [
+                    "left"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 15,
+                "column" : 9,
+                "name" : "text_2",
+                "row" : 13,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 1,
+                "name" : "number_1",
+                "row" : 15,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 9,
+                "name" : "number_2",
+                "row" : 15,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 2,
+                "name" : "chart_3",
+                "row" : 70,
+                "rowspan" : 25,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 17,
+                "name" : "chart_4",
+                "row" : 70,
+                "rowspan" : 25,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 32,
+                "name" : "chart_6",
+                "row" : 70,
+                "rowspan" : 25,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 2,
+                "name" : "text_7",
+                "row" : 64,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(255, 255, 255, 0)",
+                  "borderEdges" : [
+                    "left"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 17,
+                "name" : "text_9",
+                "row" : 64,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(255, 255, 255, 0)",
+                  "borderEdges" : [
+                    "left"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 0,
+                "name" : "container_6",
+                "row" : 19,
+                "rowspan" : 41,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(24, 41, 92)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 1,
+                "name" : "text_12",
+                "row" : 20,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 28,
+                "name" : "text_13",
+                "row" : 20,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 31,
+                "column" : 1,
+                "name" : "container_12",
+                "row" : 63,
+                "rowspan" : 35,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "rgb(220, 228, 239)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 15,
+                "column" : 24,
+                "name" : "text_5",
+                "row" : 13,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 24,
+                "name" : "number_3",
+                "row" : 15,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 25,
+                "column" : 1,
+                "name" : "chart_1",
+                "row" : 27,
+                "rowspan" : 29,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 18,
+                "column" : 28,
+                "name" : "pillbox_11",
+                "row" : 24,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(24, 41, 92)",
+                  "borderColor" : "rgb(24, 41, 92)",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 18,
+                "column" : 28,
+                "name" : "chart_2",
+                "row" : 29,
+                "rowspan" : 28,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 0,
+                "name" : "container_5",
+                "row" : 101,
+                "rowspan" : 63,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 1,
+                "name" : "text_14",
+                "row" : 103,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 46,
+                "column" : 1,
+                "name" : "table_1",
+                "row" : 107,
+                "rowspan" : 56,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 15,
+                "column" : 32,
+                "name" : "container_7",
+                "row" : 63,
+                "rowspan" : 35,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 33,
+                "name" : "text_4",
+                "row" : 64,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 0,
+                "name" : "container_8",
+                "row" : 60,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 0,
+                "name" : "container_9",
+                "row" : 63,
+                "rowspan" : 35,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 47,
+                "name" : "container_11",
+                "row" : 63,
+                "rowspan" : 35,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 0,
+                "name" : "container_13",
+                "row" : 98,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 1,
+                "name" : "text_6",
+                "row" : 24,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 46,
+                "column" : 1,
+                "name" : "filterpanel_1",
+                "row" : 7,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 13,
+                "name" : "pillbox_1",
+                "row" : 24,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(103, 122, 151)",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight" : "fine",
+        "selectors" : [ ],
+        "style" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "backgroundColor" : "rgb(9, 26, 62)",
+          "cellSpacingX" : 0,
+          "cellSpacingY" : 0,
+          "fit" : "original",
+          "gutterColor" : "#C6D3E1"
+        },
+        "version" : 1.0
+      }
+    ],
+    "layouts" : [ ],
+    "steps" : {
+      "Chart12_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.HLS_Barrier8_tp.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "Chart12",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              "{{column(New_Static_1.selection,[\"Dimension2\"]).asObject()}}"
+            ],
+            "filters" : [
+              [
+                "{{column(New_Static_1.selection,[\"Dimension2\"]).asObject()}}",
+                [
+                  "Not Defined"
+                ],
+                "not in"
+              ]
+            ],
+            "order" : [
+              [
+                "count",
+                {
+                  "ascending" : false
+                }
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "TaskPriority_New2_1"
+          ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "showValues" : true,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "binValues" : false,
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "applyConditionalFormatting" : true,
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              },
+              "title" : ""
+            }
+          },
+          "type" : "chart"
+        }
+      },
+      "CareBarrierPriority_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.HLS_Barrier8_tp.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "CareBarrierPriority_1",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              "CareBarrierPriority"
+            ],
+            "filters" : [
+              [
+                "CareBarrierStatus",
+                [
+                  "Open"
+                ],
+                "in"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "TaskPriority_New2_1"
+          ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "centerText" : "",
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "showValues" : true,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "showMeasureTitle" : false,
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "pie",
+            "binValues" : false,
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "parameters" : { },
+              "chartsPerLine" : 4
+            },
+            "inner" : 60,
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimension" : [
+                "CareBarrierPriority"
+              ],
+              "plots" : [
+                "count"
+              ]
+            },
+            "showActionMenu" : true,
+            "centerValueType" : "number",
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : false,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "valueType" : "compactNumber",
+            "theme" : "wave",
+            "applyConditionalFormatting" : true,
+            "dimensionAxis" : {
+              "showTitle" : false,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round",
+                  "parameters" : { }
+                }
+              },
+              "title" : ""
+            }
+          },
+          "type" : "chart"
+        }
+      },
+      "static_1" : {
+        "broadcastFacet" : true,
+        "columns" : { },
+        "label" : "",
+        "selectMode" : "singlerequired",
+        "type" : "staticflex",
+        "values" : [
+          {
+            "Dimension2" : "CareBarrierCaseAccount_Contact_Contact_Age_Bucket",
+            "Display" : "By Age",
+            "Text3" : "vbar"
+          },
+          {
+            "Dimension2" : "CareBarrierCaseAccount_Contact_HealthCloudGA_Gender__c",
+            "Display" : "By Gender",
+            "Text3" : "pie"
+          },
+          {
+            "Dimension2" : "CareBarrierCaseAccount_Contact_MailingState",
+            "Display" : "By Location",
+            "Text3" : "choropleth"
+          },
+          {
+            "Dimension2" : "CareBarrierCaseAccount_MemberPlan_Plan_PlanType",
+            "Display" : "By Insurance Type",
+            "Text3" : "vbar"
+          }
+        ]
+      },
+      "MembersWithBarriers_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "MembersWithBarriers",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.HLS_Barrier8_tp.FullyQualifiedName}\";\nq = group q by all;\nq = foreach q generate unique('Compute_PatientId') as 'unique_Compute_PatientId';\nq = limit q 2000;",
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "TaskPriority_New2_1"
+          ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "showValues" : true,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "binValues" : false,
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "applyConditionalFormatting" : true,
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              },
+              "title" : ""
+            }
+          },
+          "type" : "chart"
+        }
+      },
+      "CareBarrierCaseAccou_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.HLS_Barrier8_tp.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "unique",
+                "Compute_PatientId",
+                "Count"
+              ]
+            ],
+            "groups" : [
+              "{{column(static_1.selection,[\"Dimension2\"]).asObject()}}"
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "TaskPriority_New2_1"
+          ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "autoZoom" : false,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "highColor" : "#1674D9",
+            "lowColor" : "#C5DBF7",
+            "projectionType" : "AlbersUSA",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "{{coalesce(cell(static_1.selection, 0, \"Text3\"), cell(static_1.result, 0, \"Text3\")).asString()}}",
+            "binValues" : false,
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "theme" : "wave",
+            "map" : "US States",
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "MembersWithBarriers_2" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "%ofSocialDeterminants",
+        "numbers" : [
+          "% of Members"
+        ],
+        "query" : "q = load \"${App.Datasets.HLS_Barrier8_tp.FullyQualifiedName}\";\n\nq1 = load \"${App.Datasets.HLS_Account8_tp.FullyQualifiedName}\";\nq2 = group q by all full,q1 by all;\nq2 = foreach q2 generate unique(q.'Compute_PatientId') as 'Sum_PatientId',unique(q1.'Id') as 'Sum_Accounts';\nq2 = foreach q2 generate round(('Sum_PatientId'/'Sum_Accounts'),4) as '% of Members';",
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "TaskPriority_New2_1"
+          ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "showRowIndexColumn" : false,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "BarrierCreatedDays_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.HLS_Barrier8_tp.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              "BarrierCreatedDays"
+            ],
+            "filters" : [
+              [
+                "CareBarrierStatus",
+                [
+                  "Open"
+                ],
+                "in"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "TaskPriority_New2_1"
+          ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "showValues" : true,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "binValues" : false,
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimensionAxis" : [
+                "BarrierCreatedDays"
+              ],
+              "plots" : [
+                "count"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "applyConditionalFormatting" : true,
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              },
+              "title" : ""
+            }
+          },
+          "type" : "chart"
+        }
+      },
+      "TaskPriority_New2_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "TaskPriority_New2",
+        "numbers" : [ ],
+        "query" : "q1 = load \"${App.Datasets.HLS_Activities8_tp.FullyQualifiedName}\";\r\nq1 =  foreach q1 generate q1.'Id' as 'TaskId',q1.'AccountId' as 'AccountId',q1.'WhatId' as 'WhatId',q1.'Priority' as 'Priority',count() as 'count';\r\nresult1 = group q1 by ('WhatId','Priority','count','TaskId');\r\nq = load \"${App.Datasets.HLS_Barrier8_tp.FullyQualifiedName}\";\r\nresult = group q by ('Compute_CareBarrierId','Compute_CareBarrierName','CareDeterminantIds', 'CareBarrierCaseAccount_Name', 'CareDeterminantNames','CareBarrierPriority','Compute_PatientId');\r\n\r\n--result1 =  foreach result1 generate 'TaskId','WhatId','Priority','count'\r\nfinal = group result by ('Compute_CareBarrierId') left, result1 by ('WhatId');\r\n--final = foreach final generate result.'Compute_CareBarrierId' as 'Compute_CareBarrierId' , result1.'WhatId' as 'WhatId';\r\nfinal = foreach final generate result1.'Priority' as 'Priority',result1.'count' as 'count';\r\nfinal1 = group final by 'Priority';\r\nfinal1 = foreach final1 generate 'Priority' as 'Priority',sum('count') as 'count';\r\n\r\n",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "showValues" : true,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "binValues" : false,
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "applyConditionalFormatting" : true,
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              },
+              "title" : ""
+            }
+          },
+          "type" : "chart"
+        }
+      },
+      "New_Static_1" : {
+        "broadcastFacet" : true,
+        "columns" : {
+          "Dimension2" : {
+            "dataset" : {
+              "name" : "${App.Datasets.HLS_Barrier8_tp.Name}"
+            },
+            "type" : "grouping"
+          },
+          "Display" : {
+            "type" : "string"
+          }
+        },
+        "label" : "New_Static",
+        "selectMode" : "singlerequired",
+        "type" : "staticflex",
+        "values" : [
+          {
+            "Display" : "Social Determinants",
+            "Dimension2" : "CareDeterminantNames"
+          },
+          {
+            "Display" : "Barrier Types",
+            "Dimension2" : "Compute_CareBarrierTypeName"
+          }
+        ]
+      },
+      "lens_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.HLS_Barrier8_tp.FullyQualifiedName}\";\r\nresult = group q by ('Compute_CareBarrierId','Compute_CareBarrierName','CareDeterminantIds', 'CareBarrierCaseAccount_Name', 'CareDeterminantNames','CareBarrierPriority','Compute_PatientId');\r\nresult = foreach result generate 'Compute_PatientId' as 'Compute_PatientId','Compute_CareBarrierId' as 'Compute_CareBarrierId','Compute_CareBarrierName' as 'Compute_CareBarrierName','CareDeterminantIds' as 'CareDeterminantIds', 'CareBarrierCaseAccount_Name' as 'CareBarrierCaseAccount_Name', 'CareDeterminantNames' as 'CareDeterminantNames','CareBarrierPriority' as 'CareBarrierPriority',row_number() over([..] partition by all order by 'Compute_PatientId' asc) as 'Row Number';\r\nresult = group result by ('Compute_CareBarrierId','Compute_CareBarrierName','CareDeterminantIds','CareBarrierCaseAccount_Name', 'CareDeterminantNames','CareBarrierPriority','Compute_PatientId','Row Number');\r\nq1 = load \"${App.Datasets.HLS_Activities8_tp.FullyQualifiedName}\";\r\nq1 = filter q1 by {{cell(TaskPriority_New2_1.selection,0,\"Priority\").asEquality(\"Priority\")}};\nq1 =  foreach q1 generate coalesce(q1.'WhatId',\"Not defined\") as 'WhatId',coalesce(q1.\r\n'Id',\"Not defined\") as 'TaskId',coalesce(q1.'Subject',\"Not defined\") as 'Subject', coalesce(q1.'Priority',\"Not defined\") as 'Priority', coalesce(q1.\r\n'TaskCreationDays',\"Not defined\") as 'TaskCreationDays', coalesce(q1.'ActivityDate',\"Not defined\") as 'ActivityDate',coalesce(case when 'Task_CreatedDays' > 10 then \"#FFDFDF\" end ,\"Not defined\") as 'Color';\r\nresult1 = group q1 by ('WhatId','Priority','Subject','TaskCreationDays','ActivityDate','Color');\r\nresult1 = foreach result1 generate coalesce('WhatId',\"Not defined\") as 'WhatId' ,coalesce('Subject',\"Not defined\") as 'Subject',coalesce('Priority',\"Not defined\") as 'Priority', coalesce('TaskCreationDays',\"Not defined\") as 'TaskCreationDays', coalesce('ActivityDate',\"Not defined\") as 'ActivityDate',coalesce('Color',\"Not defined\") as 'Color';\r\nresult1 = group result1 by ('WhatId','Subject','Priority','TaskCreationDays', 'ActivityDate','Color');\r\nfinal = group result by ('Compute_CareBarrierId') left,result1 by ('WhatId');\r\nfinal = foreach final generate result.'Row Number' as 'Row',result.'CareBarrierCaseAccount_Name' as 'CareBarrierCaseAccount_Name',result.'CareDeterminantNames' as 'CareDeterminantNames',result.'Compute_CareBarrierName' as '# of Barriers',\r\n    result.'CareBarrierPriority' as \r\n    'Barrier Priority',coalesce(result1.'Subject',\"Not Defined\") as 'Subject',coalesce(result1.'Priority',\"Not Defined\") as 'Tasks Priority',coalesce(result1.'TaskCreationDays',\"Not Defined\") as 'Days Overdue',coalesce(result1.'ActivityDate',\"Not Defined\") as 'Task Due Date',coalesce(result1.'Color',\"Not Defined\") as 'Color';\r\n\r\nfinal = foreach final generate 'Row','CareBarrierCaseAccount_Name','CareDeterminantNames','# of Barriers','Barrier Priority','Subject', 'Tasks Priority','Days Overdue','Task Due Date','Color';\r\nfinal =  order final by 'Row' asc",
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "TaskPriority_New2_1"
+          ]
+        },
+        "selectMode" : "single",
+        "strings" : [
+          "CareBarrierCaseAccount_Name",
+          "CareDeterminantNames",
+          "# of Barriers",
+          "Barrier Priority",
+          "Subject",
+          "Tasks Priority",
+          "Days Overdue",
+          "Task Due Date"
+        ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "showValues" : true,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "binValues" : false,
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "applyConditionalFormatting" : true,
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              },
+              "title" : ""
+            }
+          },
+          "type" : "chart"
+        }
+      },
+      "Total_Numbers_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.HLS_Account8_tp.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "Total_Numbers",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "unique",
+                "Id"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "TaskPriority_New2_1"
+          ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "showValues" : true,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "binValues" : false,
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimensionAxis" : [ ],
+              "plots" : [
+                "unique_Id"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "applyConditionalFormatting" : true,
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              },
+              "title" : ""
+            }
+          },
+          "type" : "chart"
+        }
+      }
+    },
+    "widgetStyle" : {
+      "backgroundColor" : "rgba(255, 255, 255, 0)",
+      "borderColor" : "#E6ECF2",
+      "borderEdges" : [ ],
+      "borderRadius" : 0,
+      "borderWidth" : 1
+    },
+    "widgets" : {
+      "container_13" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_14" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Member Details"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text_13" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Population Breakdown"
+          },
+          "fontSize" : 18,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_12" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Top Social Determinants"
+          },
+          "fontSize" : 18,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "container_1" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_2" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_3" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_5" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "chart_6" : {
+        "parameters" : {
+          "centerText" : "",
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "showMeasureTitle" : false,
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "pie",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "inner" : 60,
+          "showActionMenu" : true,
+          "centerValueType" : "number",
+          "valueType" : "compactNumber",
+          "step" : "TaskPriority_New2_1",
+          "theme" : "light",
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "container_6" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_3" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Einstein Analytics for Healthcare"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "container_7" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_2" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "UNIQUE MEMBERS WITH SOCIAL DETERMINANTS"
+          },
+          "fontSize" : 12,
+          "showActionMenu" : false,
+          "textAlignment" : "left",
+          "textColor" : "#C6D3E1"
+        },
+        "type" : "text"
+      },
+      "container_8" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_5" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "% of SOCIAL DETERMINANTS"
+          },
+          "fontSize" : 12,
+          "showActionMenu" : false,
+          "textAlignment" : "left",
+          "textColor" : "#C6D3E1"
+        },
+        "type" : "text"
+      },
+      "container_9" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_4" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "# of Tasks by Priority"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "chart_2" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "showValues" : true,
+          "autoZoom" : false,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "highColor" : "#1674D9",
+          "lowColor" : "#C5DBF7",
+          "projectionType" : "AlbersUSA",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "{{coalesce(cell(static_1.selection, 0, \"Text3\"), cell(static_1.result, 0, \"Text3\")).asString()}}",
+          "exploreLink" : true,
+          "binValues" : false,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : false,
+            "showAxis" : false,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "step" : "CareBarrierCaseAccou_1",
+          "theme" : "dark",
+          "map" : "US States",
+          "applyConditionalFormatting" : true,
+          "dimensionAxis" : {
+            "showTitle" : false,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            },
+            "title" : ""
+          }
+        },
+        "type" : "chart"
+      },
+      "text_7" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Open Barriers by Priority"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "chart_1" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "showValues" : true,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "hbar",
+          "exploreLink" : true,
+          "binValues" : false,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : false,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "high" : 10,
+              "showDomain" : false
+            }
+          },
+          "step" : "Chart12_1",
+          "theme" : "dark",
+          "applyConditionalFormatting" : true,
+          "dimensionAxis" : {
+            "showTitle" : false,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            },
+            "title" : ""
+          }
+        },
+        "type" : "chart"
+      },
+      "text_6" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Click on charts to filter dashboard"
+          },
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#C6D3E1"
+        },
+        "type" : "text"
+      },
+      "chart_4" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "showValues" : true,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "hbar",
+          "exploreLink" : true,
+          "binValues" : false,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "columnMap" : {
+            "trellis" : [ ],
+            "dimensionAxis" : [
+              "BarrierCreatedDays"
+            ],
+            "plots" : [
+              "count"
+            ]
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : false,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "step" : "BarrierCreatedDays_1",
+          "theme" : "light",
+          "applyConditionalFormatting" : true,
+          "dimensionAxis" : {
+            "showTitle" : false,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            },
+            "title" : ""
+          }
+        },
+        "type" : "chart"
+      },
+      "text_9" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Barriers Open by Time Bucket"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "chart_3" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "centerText" : "",
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "showValues" : true,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "showMeasureTitle" : false,
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "pie",
+          "exploreLink" : true,
+          "binValues" : false,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "inner" : 60,
+          "columnMap" : {
+            "trellis" : [ ],
+            "dimension" : [
+              "CareBarrierPriority"
+            ],
+            "plots" : [
+              "count"
+            ]
+          },
+          "showActionMenu" : true,
+          "centerValueType" : "number",
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : false,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "valueType" : "compactNumber",
+          "step" : "CareBarrierPriority_1",
+          "theme" : "light",
+          "applyConditionalFormatting" : true,
+          "dimensionAxis" : {
+            "showTitle" : false,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            },
+            "title" : ""
+          }
+        },
+        "type" : "chart"
+      },
+      "text_1" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "TOTAL NUMBERS"
+          },
+          "fontSize" : 12,
+          "showActionMenu" : false,
+          "textAlignment" : "left",
+          "textColor" : "#C6D3E1"
+        },
+        "type" : "text"
+      },
+      "filterpanel_1" : {
+        "parameters" : {
+          "filterItemOptions" : {
+            "backgroundColor" : "#FFFFFF",
+            "borderColor" : "#E6ECF2",
+            "borderRadius" : 4,
+            "borderWidth" : 1,
+            "propertyColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "filters" : [ ],
+          "itemsPerRow" : 5,
+          "showAllFilters" : true,
+          "title" : {
+            "separatorColor" : "#E6ECF2",
+            "text" : {
+              "align" : "left",
+              "color" : "#091A3E",
+              "fontSize" : 16,
+              "label" : "Filters"
+            },
+            "visible" : false
+          }
+        },
+        "type" : "filterpanel"
+      },
+      "pillbox_11" : {
+        "parameters" : {
+          "compact" : false,
+          "displayTemplate" : "[Display]",
+          "exploreLink" : false,
+          "fontSize" : 14,
+          "selectedTab" : {
+            "backgroundColor" : "rgb(103, 122, 151)",
+            "borderColor" : "rgb(24, 41, 92)",
+            "borderEdges" : [ ],
+            "borderWidth" : 0,
+            "textColor" : "#FFFFFF"
+          },
+          "showActionMenu" : true,
+          "step" : "static_1",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "pillbox"
+      },
+      "table_1" : {
+        "parameters" : {
+          "borderColor" : "#e1e5ee",
+          "borderWidth" : 1,
+          "cell" : {
+            "backgroundColor" : "#f2f6fa",
+            "fontColor" : "#16325c",
+            "fontSize" : 12
+          },
+          "columnProperties" : { },
+          "columns" : [ ],
+          "customBulkActions" : [ ],
+          "evenRowColor" : "#f2f6fa",
+          "exploreLink" : true,
+          "header" : {
+            "backgroundColor" : "#e4ecf2",
+            "fontColor" : "#5c7a99",
+            "fontSize" : 12
+          },
+          "innerMajorBorderColor" : "#a9b7c7",
+          "innerMinorBorderColor" : "#e1e5ee",
+          "mode" : "fittocontainer",
+          "numberOfLines" : 1,
+          "oddRowColor" : "#ffffff",
+          "pivoted" : false,
+          "showActionMenu" : true,
+          "showRowIndexColumn" : true,
+          "step" : "lens_1",
+          "totals" : true,
+          "verticalPadding" : 8
+        },
+        "type" : "table"
+      },
+      "number_3" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "% of Members",
+          "noResultsLabel" : "0%",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 24,
+          "showActionMenu" : true,
+          "step" : "MembersWithBarriers_2",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "number_2" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "unique_Compute_PatientId",
+          "noResultsLabel" : "0",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 24,
+          "showActionMenu" : true,
+          "step" : "MembersWithBarriers_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "number_1" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "unique_Id",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 24,
+          "showActionMenu" : true,
+          "step" : "Total_Numbers_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16
+        },
+        "type" : "number"
+      },
+      "pillbox_1" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : false,
+          "fontSize" : 14,
+          "selectedTab" : {
+            "backgroundColor" : "rgb(103, 122, 151)",
+            "borderColor" : "rgb(103, 122, 151)",
+            "borderEdges" : [
+              "all"
+            ],
+            "borderWidth" : 0,
+            "textColor" : "#FFFFFF"
+          },
+          "showActionMenu" : true,
+          "step" : "New_Static_1",
+          "textColor" : "#E6ECF2"
+        },
+        "type" : "pillbox"
+      },
+      "container_12" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "image_1" : {
+        "parameters" : {
+          "alignmentX" : "center",
+          "alignmentY" : "center",
+          "fit" : "fitheight",
+          "image" : {
+            "name" : "${App.Images['healthpng160'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "type" : "image"
+      },
+      "container_11" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      }
+    }
+  }
+}

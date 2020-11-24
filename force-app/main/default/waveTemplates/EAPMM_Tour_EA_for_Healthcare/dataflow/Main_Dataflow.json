@@ -1,0 +1,4258 @@
+{
+  "notificationLevel": "",
+  "workflowDefinition": {
+    "HLS_Augment_User_Onto_AssessmentTask": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_ProductFulfillmentLocation_Onto_Visits",
+        "left_key": ["Account.OwnerId"],
+        "right_select": [
+          "AccountId",
+          "ContactId",
+          "City",
+          "Email",
+          "FullPhotoUrl",
+          "FirstName",
+          "Id",
+          "MediumPhotoUrl",
+          "ManagerId",
+          "Name",
+          "Phone",
+          "Role.DeveloperName",
+          "Role.Hierarchy_RoleNames",
+          "Role.Hierarchy_RoleNamesPath",
+          "Role.Id",
+          "UserRoleId",
+          "Username",
+          "UserType",
+          "UniqueUserName",
+          "Title",
+          "SmallPhotoUrl",
+          "Role.Roles",
+          "State",
+          "Role.RolePath",
+          "Role.RoleNamesPath",
+          "Role.RoleNames",
+          "Role.PortalAccountOwnerId",
+          "Role.PortalAccountId",
+          "Role.ParentRoleId",
+          "Role.ParentRole.ParentRoleId",
+          "Role.ParentRole.Name",
+          "Role.ParentRole.DeveloperName",
+          "IsActive",
+          "isDuplicate",
+          "MediumBannerPhotoUrl",
+          "Role.Name"
+        ],
+        "right": "HLS_Compute_Manager_Unique",
+        "relationship": "Owner",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Digest_Address": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AddressType"},
+          {"name": "City"},
+          {"name": "Country"},
+          {"name": "Description"},
+          {"name": "Id"},
+          {"name": "LocationType"},
+          {"name": "Name"},
+          {"name": "ParentId"},
+          {"name": "State"},
+          {"name": "Street"}
+        ],
+        "object": "Address"
+      }
+    },
+    "HLS_Digest_User": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "filterConditions": [{
+          "field": "IsActive",
+          "value": "true",
+          "operator": "="
+        }],
+        "fields": [
+          {"name": "Name"},
+          {"name": "Id"},
+          {"name": "IsActive"},
+          {"name": "Username"},
+          {"name": "UserRoleId"},
+          {"name": "SmallPhotoUrl"},
+          {"name": "FullPhotoUrl"},
+          {"name": "ManagerId"},
+          {"name": "UserType"},
+          {"name": "City"},
+          {"name": "State"},
+          {"name": "Email"},
+          {"name": "Phone"},
+          {"name": "Title"},
+          {"name": "ContactId"},
+          {"name": "AccountId"},
+          {"name": "FirstName"},
+          {"name": "MediumBannerPhotoUrl"},
+          {"name": "MediumPhotoUrl"}
+        ],
+        "object": "User"
+      }
+    },
+    "HLS_Augment_ProgramPatientSummary_onto_Goal": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["HealthCloudGA__Account__c"],
+        "left": "HLS_Augment_Account_onto_Task",
+        "left_key": ["CarePlan.AccountId"],
+        "right_select": [
+          "Conditions_Breakdown",
+          "Conditions_Bucket",
+          "Conditions_In_Number",
+          "HealthCloudGA__Account__c",
+          "HealthCloudGA__Age__c",
+          "HealthCloudGA__AgeBand__c",
+          "HealthCloudGA__Conditions__c",
+          "HealthCloudGA__DisabilityStatus__c",
+          "HealthCloudGA__EffectiveDate__c",
+          "HealthCloudGA__EnrollmentType__c",
+          "HealthCloudGA__Gender__c",
+          "HealthCloudGA__HCCCodes__c",
+          "HealthCloudGA__Institution__c",
+          "HealthCloudGA__NumberOfConditions__c",
+          "HealthCloudGA__ProgramPatientAffiliation__c",
+          "HealthCloudGA__RiskScore__c",
+          "HealthCloudGA__Year__c",
+          "Id",
+          "Name",
+          "OwnerId",
+          "ProgramPatientAffiliation.HealthCloudGA__Account__c",
+          "RiskScore_Bucket"
+        ],
+        "right": "HLS_CE_ProgramPatientAffiliation",
+        "relationship": "ProgramPatientSummary",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Digest_Account": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "HealthCloudGA__PrimaryContact__c"},
+          {"name": "HealthCloudGA__PayerType__c"},
+          {"name": "Name"},
+          {"name": "RecordTypeId"},
+          {"name": "OwnerId"},
+          {
+            "defaultValue": "Not Defined",
+            "name": "HealthCloudGA__Gender__pc"
+          },
+          {"name": "PersonMailingState"},
+          {"name": "HealthCloudGA__Age__pc"},
+          {"name": "HealthCloudGA__EnrollmentType__c"},
+          {"name": "HealthCloudGA__CarePlan__c"}
+        ],
+        "object": "Account"
+      }
+    },
+    "HLS_Add_Fields_To_Opportunity": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "HLS_Digest_Opportunity",
+        "computedFields": [
+          {
+            "precision": 8,
+            "name": "OpportunityAge",
+            "saqlExpression": "case when IsClosed == \"false\" then daysBetween(toDate(CreatedDate_sec_epoch), now()) else daysBetween(toDate(CreatedDate_sec_epoch),toDate(CloseDate_sec_epoch)) end",
+            "scale": 0,
+            "label": "Opportunity Age",
+            "type": "Numeric"
+          },
+          {
+            "name": "Opportunity_Age_Bucket",
+            "saqlExpression": "case when 'OpportunityAge' >=0 and 'OpportunityAge' <8 then \"1. 0-7\" when 'OpportunityAge' >=8 and 'OpportunityAge' < 16 then \"2. 8-15\" when 'OpportunityAge' >=16 and 'OpportunityAge' < 24 then \"3. 16-23\"  when  'OpportunityAge' >=24 and 'OpportunityAge' < 32 then \"4. 24-31\"  when  'OpportunityAge' >=32 and 'OpportunityAge' < 40 then \"5. 32-39\" when 'OpportunityAge' >= 40 then \"6. 40+\" end",
+            "label": "Opportunity Age Bucket",
+            "type": "Text"
+          }
+        ],
+        "mergeWithSource": true
+      }
+    },
+    "HLS_Augment_Contact_onto_Lead": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_MemberPlan_onto_Lead",
+        "left_key": ["HealthCloudGA__ReferringPractitioner__c"],
+        "right_select": [
+          "Name",
+          "OwnerId",
+          "Contact_Age_Bucket",
+          "Contact_Age",
+          "MailingState_01",
+          "PhotoUrl",
+          "FirstName",
+          "LastName"
+        ],
+        "right": "HLS_CE_Contact",
+        "relationship": "ReferringPractitioner",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Digest_ProductFulfillmentLocation": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {"name": "FulfillmentLocationId"},
+          {"name": "Id"},
+          {"name": "LocationId"},
+          {"name": "Name"},
+          {"name": "ProductId"},
+          {"name": "UserId"}
+        ],
+        "object": "ProductFulfillmentLocation"
+      }
+    },
+    "HLS_Register_Barrier": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "HLS_Barrier",
+        "alias": "${App.Datasets.HLS_Barrier8_tp.FullyQualifiedName}",
+        "source": "HLS_Augment_User_Onto_CareBarrierCaseAccount"
+      }
+    },
+    "HLS_Append_CareBarriersData": {
+      "action": "append",
+      "parameters": {
+        "enableDisjointedSchemaMerge": true,
+        "sources": [
+          "HLS_Augment_CareBarriers_Onto_CareBarrierDeterminant",
+          "HLS_Filter_CareBarriers"
+        ]
+      }
+    },
+    "HLS_Digest_Contact": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {"name": "HealthCloudGA__Age__c"},
+          {"name": "HealthCloudGA__BirthDate__c"},
+          {
+            "defaultValue": "Not Defined",
+            "name": "HealthCloudGA__Gender__c"
+          },
+          {"name": "HealthCloudGA__PreferredName__c"},
+          {"name": "Id"},
+          {"name": "Name"},
+          {"name": "Birthdate"},
+          {"name": "OwnerId"},
+          {"name": "MailingState"},
+          {"name": "PhotoUrl"},
+          {"name": "FirstName"},
+          {"name": "LastName"}
+        ],
+        "object": "Contact"
+      }
+    },
+    "HLS_Augment_Location_Onto_Visit": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_User_Onto_VisitedParty",
+        "left_key": ["PlaceId"],
+        "right_select": [
+          "Id",
+          "IsInventoryLocation",
+          "LocationLevel",
+          "LocationType",
+          "Name",
+          "RootLocationId",
+          "VisitorAddressId"
+        ],
+        "right": "HLS_Digest_Location",
+        "relationship": "Location",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Digest_Event": {
+      "schema": {"objects": [{"fields": [
+        {
+          "name": "ActivityDate",
+          "label": "ActivityDate"
+        },
+        {
+          "name": "CreatedDate",
+          "label": "CreatedDate"
+        }
+      ]}]},
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "OwnerId"},
+          {"name": "CreatedDate"},
+          {"name": "LastModifiedDate"},
+          {"name": "Subject"},
+          {"name": "DurationInMinutes"},
+          {"name": "EventSubtype"},
+          {"name": "WhatId"},
+          {"name": "AccountId"},
+          {"name": "Id"},
+          {"name": "WhoId"},
+          {"name": "ActivityDate"}
+        ],
+        "object": "Event"
+      }
+    },
+    "HLS_CE_AssessmentTask": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "HLS_Digest_AssessmentTask",
+        "computedFields": [{
+          "name": "TaskCompleted",
+          "saqlExpression": "case when 'Status' == \"Completed\" then 1 else 0 end",
+          "scale": 0,
+          "label": "TaskCompleted",
+          "type": "Numeric"
+        }],
+        "mergeWithSource": true
+      }
+    },
+    "HLS_Augment_CareplanTemplate_Onto_Tasks": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_CE_Goal_Due_Days",
+        "left_key": ["HealthCloudGA__CarePlanTemplate__c"],
+        "right_select": [
+          "Id",
+          "Name",
+          "HealthCloudGA__Active__c",
+          "HealthCloudGA__ClonedFrom__c",
+          "HealthCloudGA__Description__c"
+        ],
+        "right": "HLS_Digest_CarePlanTemplate",
+        "relationship": "CarePlanTemplate",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_Problem_onto_Goal": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_Goal_onto_Task",
+        "left_key": ["Goal.HealthCloudGA__CarePlanProblem__c"],
+        "right_select": [
+          "CreatedById",
+          "CreatedDate",
+          "HealthCloudGA__CarePlan__c",
+          "HealthCloudGA__Priority__c",
+          "Name",
+          "OwnerId",
+          "Id",
+          "HealthCloudGA__Description__c",
+          "HealthCloudGA__Account__c",
+          "HealthCloudGA__CarePlanTemplate__c"
+        ],
+        "right": "HLS_Digest_Problem",
+        "relationship": "Problem",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Digest_CareBarrierDeterminant": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "CareBarrierId"},
+          {"name": "CareDeterminantId"},
+          {"name": "CreatedById"},
+          {"name": "Id"},
+          {"name": "Name"}
+        ],
+        "object": "CareBarrierDeterminant"
+      }
+    },
+    "HLS_Register_AssessmentTask": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "rowLevelSecurityFilter": "'Owner.Role.Roles' == \"$User.UserRoleId\" || 'Account.OwnerId' == \"$User.Id\"",
+        "name": "HLS_AssessmentTask",
+        "alias": "${App.Datasets.HLS_AssessmentTask8_tp.FullyQualifiedName}",
+        "source": "HLS_Augment_UserRoles_Onto_VisitProducts"
+      }
+    },
+    "HLS_Filter_CaseRecordType": {
+      "action": "filter",
+      "parameters": {
+        "source": "HLS_Augment_RecordType_onto_Case",
+        "saqlFilter": "'CaseRecordType.Name' == \"CarePlan\""
+      }
+    },
+    "HLS_Augment_Account_onto_Problem": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Digest_Problem",
+        "left_key": ["HealthCloudGA__Account__c"],
+        "right_select": [
+          "Id",
+          "HealthCloudGA__PrimaryContact__c",
+          "HealthCloudGA__PayerType__c",
+          "Name",
+          "OwnerId",
+          "HealthCloudGA__Gender__pc",
+          "PersonMailingState",
+          "HealthCloudGA__Age__pc",
+          "HealthCloudGA__EnrollmentType__c",
+          "HealthCloudGA__CarePlan__c",
+          "Contact.AccountId",
+          "Contact.HealthCloudGA__Age__c",
+          "Contact.HealthCloudGA__BirthDate__c",
+          "Contact.HealthCloudGA__Gender__c",
+          "Contact.HealthCloudGA__PreferredName__c",
+          "Contact.Id",
+          "Contact.Name",
+          "Contact.Birthdate",
+          "Contact.OwnerId",
+          "Contact.MailingState",
+          "Contact.Patient_Age_Bucket",
+          "Contact.Contact_Age_Bucket",
+          "Contact.Contact_Age",
+          "Contact.MailingState_01",
+          "Contact.PhotoUrl",
+          "Contact.FirstName",
+          "Contact.LastName"
+        ],
+        "right": "HLS_Augment_Contact_onto_Account",
+        "relationship": "Account",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Join_Time_In_Current_Stage_to_Opportunity": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["OpportunityId"],
+        "left": "HLS_Augment_Account_onto_Opportunity2",
+        "left_key": ["Id"],
+        "right_select": [
+          "Duration_Seconds",
+          "Duration_Days",
+          "Duration_Days_Bucket",
+          "Duration_Hours"
+        ],
+        "right": "HLS_Calculate_Current_Stage_Duration",
+        "relationship": "Time_In_Current_Stage",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_RecordType_onto_Account": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Digest_Account",
+        "left_key": ["RecordTypeId"],
+        "right_select": ["Name"],
+        "right": "HLS_Digest_Record_Type",
+        "relationship": "RecordType",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_Case_onto_Problem": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_Problem_onto_Goal",
+        "left_key": ["Goal.HealthCloudGA__CarePlan__c"],
+        "right_select": [
+          "AccountId",
+          "CaseNumber",
+          "ClosedDate",
+          "CreatedDate",
+          "Id",
+          "IsClosed",
+          "IsDeleted",
+          "IsEscalated",
+          "OwnerId",
+          "Priority",
+          "RecordTypeId",
+          "Status",
+          "Subject",
+          "Type",
+          "CaseRecordType.Name",
+          "Origin",
+          "HealthCloudGA__SourceSystem__c",
+          "HealthCloudGA__SourceSystemID__c",
+          "HealthCloudGA__SourceSystemModified__c",
+          "HealthCloudGA__SourceAgency__c",
+          "HealthCloudGA__SourceAgencyMeasureVersion__c",
+          "HealthCloudGA__SourceAgencyMeasureID__c",
+          "HealthCloudGA__SortOrder__c",
+          "HealthCloudGA__FinancialValue__c",
+          "HealthCloudGA__DueDate__c",
+          "ContactId",
+          "SuppliedName",
+          "SuppliedCompany",
+          "Reason",
+          "LastModifiedById"
+        ],
+        "right": "HLS_Augment_RecordType_onto_Case",
+        "relationship": "CarePlan",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Calculate_Current_Stage_Duration": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "HLS_Filter_Out_Last_Stage_Updates",
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "Duration_Seconds",
+            "saqlExpression": "date_diff(\"second\",toDate(ValidFromDate_sec_epoch), now())",
+            "scale": 0,
+            "label": "Duration",
+            "type": "Numeric"
+          },
+          {
+            "precision": 18,
+            "name": "Duration_Days",
+            "saqlExpression": "date_diff(\"day\",toDate(ValidFromDate_sec_epoch), now())",
+            "scale": 0,
+            "label": "Duration_Days",
+            "type": "Numeric"
+          },
+          {
+            "name": "Duration_Days_Bucket",
+            "saqlExpression": "case when 'Duration_Days' >=0 and 'Duration_Days' <8 then \"1. 0-7\" when 'Duration_Days' >=8 and 'Duration_Days' < 16 then \"2. 8-15\" when 'Duration_Days' >=16 and 'Duration_Days' < 24 then \"3. 16-23\"  when  'Duration_Days' >=24 and 'Duration_Days' < 32 then \"4. 24-31\"  when  'Duration_Days' >=32 and 'Duration_Days' < 40 then \"5. 32-39\" when 'Duration_Days' >= 40 then \"6. 40+\" end",
+            "label": "Duration Bucket (Days)",
+            "type": "Text"
+          },
+          {
+            "precision": 18,
+            "name": "Duration_Hours",
+            "saqlExpression": "date_diff(\"hour\",toDate(ValidFromDate_sec_epoch), now())",
+            "scale": 0,
+            "label": "Duration_Hours",
+            "type": "Numeric"
+          }
+        ],
+        "mergeWithSource": true
+      }
+    },
+    "HLS_Augment_ProgramPatientSummary_onto_CareRequest": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["ProgramPatientAffiliation.HealthCloudGA__Account__c"],
+        "left": "HLS_Augment_Case_CareRequest",
+        "left_key": ["MemberId"],
+        "right_select": [
+          "HealthCloudGA__RiskScore__c",
+          "HealthCloudGA__Conditions__c",
+          "HealthCloudGA__NumberOfConditions__c",
+          "HealthCloudGA__Year__c",
+          "HealthCloudGA__Age__c",
+          "HealthCloudGA__AgeBand__c",
+          "HealthCloudGA__EffectiveDate__c",
+          "HealthCloudGA__EnrollmentType__c",
+          "HealthCloudGA__DisabilityStatus__c",
+          "HealthCloudGA__Gender__c",
+          "HealthCloudGA__HCCCodes__c",
+          "HealthCloudGA__Institution__c"
+        ],
+        "right": "HLS_Augment_ProgramPatientAffiliation_onto_ProgramPatientSummary",
+        "relationship": "ProgramPatientSummary",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Register_Account": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "HLS_Account",
+        "alias": "${App.Datasets.HLS_Account8_tp.FullyQualifiedName}",
+        "source": "HLS_Augment_User_onto_Account"
+      }
+    },
+    "HLS_Augment_Account_onto_Lead": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_Contact_onto_Lead",
+        "left_key": ["HealthCloudGA__ReferringOrganization__c"],
+        "right_select": [
+          "Name",
+          "RecordTypeId",
+          "OwnerId",
+          "HealthCloudGA__EnrollmentType__c",
+          "HealthCloudGA__CarePlan__c"
+        ],
+        "right": "HLS_Digest_Account",
+        "relationship": "ReferringOrganization",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_CareDeterminantType_Onto_CareDeterminants": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Digest_CareDeterminants",
+        "left_key": ["CareDeterminantTypeId"],
+        "right_select": [
+          "Id",
+          "Name",
+          "Type"
+        ],
+        "right": "HLS_Digest_CareDeterminantType",
+        "relationship": "CareDeterminantType",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_CE_CareDeterminants": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "HLS_Augment_CareDeterminantType_Onto_CareDeterminants",
+        "computedFields": [
+          {
+            "precision": 16,
+            "name": "Number_Of_CareDeterminants",
+            "saqlExpression": "case when 'Id' is not null then 1 else 0 end",
+            "scale": 0,
+            "label": "Number_Of_CareDeterminants",
+            "type": "Numeric"
+          },
+          {
+            "name": "CareDeterminantId1",
+            "saqlExpression": "'Id'",
+            "label": "CareDeterminantId1",
+            "type": "Text"
+          }
+        ],
+        "mergeWithSource": true
+      }
+    },
+    "HLS_Register_Lead": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "HLS_Referral",
+        "alias": "${App.Datasets.HLS_Referral8_tp.FullyQualifiedName}",
+        "source": "HLS_Augment_Contact_onto_Leads"
+      }
+    },
+    "HLS_Augment_User_onto_Account": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_Contact_onto_Account",
+        "left_key": ["OwnerId"],
+        "right_select": [
+          "Email",
+          "FullPhotoUrl",
+          "Id",
+          "IsActive",
+          "isDuplicate",
+          "ManagerId",
+          "Name",
+          "Role.DeveloperName",
+          "Role.Hierarchy_RoleNames",
+          "Role.Name",
+          "Role.ParentRole.DeveloperName",
+          "Role.ParentRole.Name",
+          "Role.RoleNames",
+          "ContactId",
+          "AccountId",
+          "FirstName",
+          "Role.Id",
+          "Role.ParentRoleId",
+          "Role.PortalAccountId",
+          "Role.PortalAccountOwnerId",
+          "Role.ParentRole.ParentRoleId",
+          "Role.Hierarchy_RoleNamesPath",
+          "MediumBannerPhotoUrl",
+          "MediumPhotoUrl"
+        ],
+        "right": "HLS_Compute_Manager_Unique",
+        "relationship": "Owner",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Compute_Unique_Name": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["Name"],
+        "orderBy": [{
+          "name": "Id",
+          "direction": "asc"
+        }],
+        "source": "HLS_Augment_UserRole_onto_User",
+        "computedFields": [{
+          "expression": {
+            "sourceField": "Id",
+            "offset": "next()"
+          },
+          "name": "isDuplicate",
+          "description": "isDuplicate",
+          "label": "isDuplicate"
+        }]
+      }
+    },
+    "HLS_Add_Unique_Sort_Key_to_OpportunityHistory": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "HLS_Digest_OpportunityHistory",
+        "computedFields": [{
+          "defaultValue": "'CreatedDate'",
+          "name": "Unique_Sort_Key",
+          "saqlExpression": "'CreatedDate' + \"-\" +  'Id'",
+          "type": "Text"
+        }],
+        "mergeWithSource": true
+      }
+    },
+    "HLS_Augment_CareBarrierDeterminant_Onto_CareBarrier": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["CareBarrierId"],
+        "left": "HLS_Augment_CareBarrierType_Onto_CareBarrier",
+        "left_key": ["Id"],
+        "right_select": [
+          "CareBarrierId",
+          "CareDeterminantId",
+          "CreatedById",
+          "Id",
+          "Name"
+        ],
+        "right": "HLS_Digest_CareBarrierDeterminant",
+        "relationship": "CareBarrierDeterminant",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_CareBarriers_Onto_CareBarrierDeterminant": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Digest_CareBarrierDeterminant",
+        "left_key": ["CareBarrierId"],
+        "right_select": [
+          "Id",
+          "Name",
+          "CareBarrierTypeId",
+          "CaseId",
+          "CreatedById",
+          "IsActive",
+          "PatientId",
+          "Priority",
+          "Status",
+          "CBId",
+          "CBName",
+          "CreatedDate",
+          "BarrierCreatedDay",
+          "CareBarrierType.Id",
+          "CareBarrierType.Name"
+        ],
+        "right": "HLS_Augment_CareBarrierType_Onto_CareBarrier",
+        "relationship": "CareBarrier",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Digest_Product": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Description"},
+          {"name": "Id"},
+          {"name": "Family"},
+          {"name": "Name"},
+          {"name": "ProductCode"},
+          {"name": "QuantityUnitOfMeasure"},
+          {"name": "SystemModstamp"}
+        ],
+        "object": "Product2"
+      }
+    },
+    "HLS_Augment_AppendedData_Onto_CareDeterminantsData": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Append_CareBarriersData",
+        "left_key": ["CareDeterminantId"],
+        "right_select": [
+          "CareDeterminantId1",
+          "CareDeterminantType.Id",
+          "CareDeterminantType.Name",
+          "CareDeterminantType.Type",
+          "CareDeterminantTypeId",
+          "Id",
+          "Name",
+          "Number_Of_CareDeterminants",
+          "PatientId"
+        ],
+        "right": "HLS_CE_CareDeterminants",
+        "relationship": "CareDeterminant",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_ParentName_onto_UserRole": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Flatten_UserRole",
+        "left_key": ["ParentRoleId"],
+        "right_select": [
+          "Name",
+          "ParentRoleId",
+          "DeveloperName"
+        ],
+        "right": "HLS_Digest_UserRole",
+        "relationship": "ParentRole",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Find_Last_Stage_Updates": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["OpportunityId"],
+        "orderBy": [{
+          "name": "Unique_Sort_Key",
+          "direction": "desc"
+        }],
+        "source": "HLS_Filter_Out_Stage_Updates",
+        "computedFields": [{
+          "expression": {
+            "sourceField": "Id",
+            "default": "current()",
+            "offset": "first()"
+          },
+          "name": "LastStageUpdate_Id",
+          "description": "Final Stage Change Id",
+          "label": "LastStageUpdate_Id"
+        }]
+      }
+    },
+    "HLS_Compute_Node": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "HLS_Append_CareBarriers_With_CareDeterminants",
+        "computedFields": [
+          {
+            "defaultValue": "Not Defined",
+            "name": "Compute_Case",
+            "saqlExpression": "case when 'CaseId' is not null then 'CaseId' else 'CareBarrier.CaseId' end",
+            "label": "Compute_Case",
+            "type": "Text"
+          },
+          {
+            "defaultValue": "Not Defined",
+            "name": "Compute_CareBarrierId",
+            "saqlExpression": "case when 'CareBarrierId' is not null then 'CareBarrierId' else 'CBId' end",
+            "label": "Compute_CareBarrierId",
+            "type": "Text"
+          },
+          {
+            "defaultValue": "Not Defined",
+            "name": "Compute_CareBarrierName",
+            "saqlExpression": "case when 'CareBarrier.CBName' is not null then 'CareBarrier.CBName' else 'CBName' end",
+            "label": "Compute_CareBarrierName",
+            "type": "Text"
+          },
+          {
+            "defaultValue": "Not Defined",
+            "name": "Compute_CareBarrierTypeName",
+            "saqlExpression": "case when 'CareBarrier.CareBarrierType.Name' is not null then 'CareBarrier.CareBarrierType.Name' else 'CareBarrierType.Name' end ",
+            "label": "Compute_CareBarrierTypeName",
+            "type": "Text"
+          },
+          {
+            "defaultValue": "Not Defined",
+            "name": "Compute_CareBarrierTypeId",
+            "saqlExpression": "case when 'CareBarrier.CareBarrierTypeId' is not null then 'CareBarrier.CareBarrierTypeId' else 'CareBarrierType.Id' end ",
+            "label": "Compute_CareBarrierTypeId",
+            "type": "Text"
+          },
+          {
+            "defaultValue": "Not Defined",
+            "name": "Compute_PatientId",
+            "saqlExpression": "case when 'CareBarrier.PatientId' is not null then 'CareBarrier.PatientId' else 'PatientId' end ",
+            "label": "Compute_PatientId",
+            "type": "Text"
+          },
+          {
+            "precision": 1,
+            "name": "Compute_CareDeterminantId",
+            "saqlExpression": "case when 'Id' == 'AppendCareBarriers.CareDeterminantId' then 1 else 0 end",
+            "scale": 0,
+            "label": "Compute_CareDeterminantId",
+            "type": "Numeric"
+          },
+          {
+            "defaultValue": "Not Defined",
+            "name": "CareDeterminantIds",
+            "saqlExpression": "case when 'CareDeterminant.Id' is not null then 'CareDeterminant.Id' else 'CareDeterminantId1'  end",
+            "label": "CareDeterminantIds",
+            "type": "Text"
+          },
+          {
+            "defaultValue": "Not Defined",
+            "name": "CareDeterminantNames",
+            "saqlExpression": "case when 'CareDeterminant.Name' is null then 'CareDeterminantType.Name' else 'CareDeterminant.Name' end",
+            "label": "CareDeterminantNames",
+            "type": "Text"
+          },
+          {
+            "defaultValue": "Not Defined",
+            "name": "CareBarrierPriority",
+            "saqlExpression": "case when 'CareBarrier.Priority' is not null then 'CareBarrier.Priority' else 'Priority' end",
+            "label": "CareBarrierPriority",
+            "type": "Text"
+          },
+          {
+            "defaultValue": "Not Defined",
+            "name": "CareDeterminantType",
+            "saqlExpression": "case when 'CareDeterminant.CareDeterminantType.Type' is not null then 'CareDeterminant.CareDeterminantType.Type' else 'CareDeterminantType.Type' end",
+            "label": "CareDeterminantType",
+            "type": "Text"
+          },
+          {
+            "defaultValue": "Not Defined",
+            "name": "CareDeterminantTypeIds",
+            "saqlExpression": "case when 'CareDeterminant.CareDeterminantTypeId' is not null then 'CareDeterminant.CareDeterminantTypeId' else 'CareDeterminantTypeId' end",
+            "label": "CareDeterminantTypeIds",
+            "type": "Text"
+          },
+          {
+            "defaultValue": "Not Defined",
+            "name": "CareBarrierStatus",
+            "saqlExpression": "case when 'CareBarrier.Status' is null then 'Status' else 'CareBarrier.Status' end",
+            "label": "CareBarrierStatus",
+            "type": "Text"
+          },
+          {
+            "precision": 16,
+            "name": "Barrier_Created_Days",
+            "saqlExpression": "case when 'CareBarrier.BarrierCreatedDay' is null then 'BarrierCreatedDay' else 'CareBarrier.BarrierCreatedDay' end",
+            "scale": 0,
+            "label": "Barrier_Created_Days",
+            "type": "Numeric"
+          },
+          {
+            "name": "BarrierCreatedDays",
+            "saqlExpression": "case when Barrier_Created_Days  >= 0 && Barrier_Created_Days <= 7 then \"1.0-7 days\" when Barrier_Created_Days > 7 && Barrier_Created_Days <= 14 then \"2.8-14 days\"  when Barrier_Created_Days > 14 && Barrier_Created_Days <= 30 then \"3.15-30 days\" when Barrier_Created_Days > 30 then \"4.30+ days\" end",
+            "label": "BarrierCreatedDays",
+            "type": "Text"
+          }
+        ],
+        "mergeWithSource": true
+      }
+    },
+    "HLS_Digest_Visit": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {"name": "ActualVisitEndTime"},
+          {"name": "ActualVisitStartTime"},
+          {"name": "ContextId"},
+          {"name": "CreatedDate"},
+          {"name": "Id"},
+          {"name": "InstructionDescription"},
+          {"name": "Name"},
+          {"name": "OwnerId"},
+          {"name": "PlaceId"},
+          {"name": "PlannedVisitEndTime"},
+          {"name": "PlannedVisitStartTime"},
+          {"name": "Status"},
+          {"name": "StatusRemarks"},
+          {"name": "VisitorId"},
+          {"name": "VisitPriority"}
+        ],
+        "object": "Visit"
+      }
+    },
+    "HLS_Add_Fields_to_OpportunityHistory": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "HLS_Compute_Historical_Trending_Fields",
+        "computedFields": [
+          {
+            "defaultValue": "\"1\"",
+            "name": "Stage_isUpdated",
+            "saqlExpression": "case when 'StageName' == 'StageNamePrev' then \"0\" else \"1\" end",
+            "type": "Text"
+          },
+          {
+            "defaultValue": "\"1\"",
+            "name": "CloseDate_isUpdated",
+            "saqlExpression": "case when 'CloseDatePrev' == 'CloseDate' then \"0\" else \"1\" end",
+            "type": "Text"
+          },
+          {
+            "defaultValue": "\"1\"",
+            "name": "Amount_isUpdated",
+            "saqlExpression": "case when 'AmountPrev' == 'Amount' then \"0\" else \"1\" end",
+            "type": "Text"
+          },
+          {
+            "name": "IsLastUpdate",
+            "saqlExpression": "case when 'ValidToDate' == \"3000-01-01T00:00:00.000Z\" then \"1\" else \"0\" end",
+            "label": "IsLastUpdate",
+            "type": "Text"
+          },
+          {
+            "precision": 8,
+            "name": "IsPushed",
+            "saqlExpression": "case when ('CloseDatePrev_sec_epoch' > 0) && ('CloseDatePrev' < 'CloseDate') then 1 else 0 end",
+            "scale": 0,
+            "type": "Numeric"
+          },
+          {
+            "precision": 8,
+            "name": "IsPulled",
+            "saqlExpression": "case when ('CloseDatePrev_sec_epoch' > 0) && ('CloseDatePrev' > 'CloseDate') then 1 else 0 end",
+            "scale": 0,
+            "type": "Numeric"
+          },
+          {
+            "precision": 18,
+            "name": "Duration",
+            "saqlExpression": "case when 'ValidToDate' == \"3000-01-01T00:00:00.000Z\" then     date_diff(\"second\",toDate(ValidFromDate_sec_epoch), now())     else     date_diff(\"second\",toDate(ValidFromDate_sec_epoch), toDate(ValidToDate_sec_epoch))     end",
+            "scale": 0,
+            "label": "Duration",
+            "type": "Numeric"
+          }
+        ],
+        "mergeWithSource": true
+      }
+    },
+    "HLS_Augment_Account_Onto_ProgramPatients": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["HealthCloudGA__Account__c"],
+        "left": "HLS_CE_Contact_onto_Account",
+        "left_key": ["Id"],
+        "right_select": [
+          "HealthCloudGA__Account__c",
+          "HealthCloudGA__RiskScore__c",
+          "Id",
+          "Name",
+          "HealthCloudGA__ProgramPatientAffiliation__c",
+          "HealthCloudGA__NumberOfConditions__c",
+          "HealthCloudGA__Year__c",
+          "HealthCloudGA__Age__c",
+          "HealthCloudGA__AgeBand__c",
+          "HealthCloudGA__EffectiveDate__c",
+          "HealthCloudGA__EnrollmentType__c",
+          "HealthCloudGA__Gender__c",
+          "HealthCloudGA__Conditions__c",
+          "RiskScore_Bucket",
+          "Conditions_Bucket",
+          "Conditions_Breakdown",
+          "Conditions_In_Number"
+        ],
+        "right": "HLS_CE_ProgramPatientAffiliation",
+        "relationship": "AccountProgramPatients",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Digest_Visitor": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AssigneeId"},
+          {"name": "Id"},
+          {"name": "Name"},
+          {"name": "VisitId"},
+          {"name": "IsPrimaryResource"}
+        ],
+        "complexFilterConditions": "IsPrimaryResource = true",
+        "object": "Visitor"
+      }
+    },
+    "HLS_Digest_ProgramPatientAffiliation": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "HealthCloudGA__Account__c"},
+          {"name": "HealthCloudGA__Program__c"},
+          {"name": "Id"}
+        ],
+        "object": "HealthCloudGA__ProgramPatientAffiliation__c"
+      }
+    },
+    "HLS_Digest_AssessmentTask": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AssessmentTaskDefinitionId"},
+          {"name": "Id"},
+          {"name": "IsRequired"},
+          {"name": "Name"},
+          {"name": "OwnerId"},
+          {"name": "ParentId"},
+          {"name": "Status"},
+          {"name": "TaskType"}
+        ],
+        "object": "AssessmentTask"
+      }
+    },
+    "HLS_Digest_Task": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "HealthCloudGA__TaskType__c"},
+          {"name": "HealthCloudGA__CarePlanGoal__c"},
+          {"name": "HealthCloudGA__CarePlanProblem__c"},
+          {"name": "HealthCloudGA__CarePlanTemplate__c"},
+          {"name": "AccountId"},
+          {"name": "ActivityDate"},
+          {"name": "Id"},
+          {"name": "IsClosed"},
+          {"name": "IsHighPriority"},
+          {"name": "OwnerId"},
+          {
+            "defaultValue": "Not Defined",
+            "name": "Priority",
+            "isMultiValue": false
+          },
+          {"name": "RecordTypeId"},
+          {"name": "Status"},
+          {"name": "TaskSubtype"},
+          {"name": "CreatedDate"},
+          {"name": "Subject"},
+          {"name": "Description"},
+          {"name": "WhatId"},
+          {"name": "WhoId"}
+        ],
+        "object": "Task"
+      }
+    },
+    "HLS_Digest_ProductRequest": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {"name": "CaseId"},
+          {"name": "Id"},
+          {"name": "DestinationLocationId"},
+          {"name": "OwnerId"},
+          {"name": "ProductRequestNumber"},
+          {"name": "Status"}
+        ],
+        "object": "ProductRequest"
+      }
+    },
+    "HLS_Augment_User_onto_Goal": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_CareplanTemplate_Onto_Tasks",
+        "left_key": ["Goal.OwnerId"],
+        "right_select": [
+          "Email",
+          "Id",
+          "IsActive",
+          "ManagerId",
+          "isDuplicate",
+          "Name",
+          "Role.DeveloperName",
+          "Role.Hierarchy_RoleNames",
+          "Role.Name",
+          "Role.ParentRole.DeveloperName",
+          "Role.ParentRole.Name",
+          "State",
+          "UniqueUserName",
+          "Username",
+          "UserType",
+          "ContactId",
+          "AccountId",
+          "FirstName",
+          "Role.Id",
+          "Role.ParentRoleId",
+          "Role.PortalAccountId",
+          "Role.PortalAccountOwnerId",
+          "Role.ParentRole.ParentRoleId",
+          "Role.Hierarchy_RoleNamesPath",
+          "MediumBannerPhotoUrl",
+          "MediumPhotoUrl"
+        ],
+        "right": "HLS_Compute_Manager_Unique",
+        "relationship": "Owner",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Digest_Problem": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "CreatedById"},
+          {"name": "CreatedDate"},
+          {"name": "HealthCloudGA__CarePlan__c"},
+          {"name": "HealthCloudGA__Priority__c"},
+          {"name": "Name"},
+          {"name": "OwnerId"},
+          {"name": "HealthCloudGA__Description__c"},
+          {"name": "Id"},
+          {"name": "HealthCloudGA__Account__c"},
+          {"name": "HealthCloudGA__CarePlanTemplate__c"}
+        ],
+        "object": "HealthCloudGA__CarePlanProblem__c"
+      }
+    },
+    "HLS_compute_Lead": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "HLS_Digest_Lead",
+        "computedFields": [
+          {
+            "precision": 2,
+            "name": "Lead_Age_Days",
+            "saqlExpression": "case when 'IsConverted' == \"false\" then daysBetween(toDate(CreatedDate_sec_epoch),now()) else daysBetween(toDate(CreatedDate_sec_epoch),toDate(ConvertedDate_sec_epoch)) end",
+            "scale": 1,
+            "label": "Lead_Age_Days",
+            "type": "Numeric"
+          },
+          {
+            "name": "Lead_Age_Bucket",
+            "saqlExpression": "case when 'Lead_Age_Days' >=0 and 'Lead_Age_Days' <8 then \"1. 0-7\" when 'Lead_Age_Days' >=8 and 'Lead_Age_Days' < 16 then \"2. 8-15\" when  'Lead_Age_Days' >=16 and 'Lead_Age_Days' < 24 then \"3. 16-23\"  when  'Lead_Age_Days' >=24 and 'Lead_Age_Days' < 32 then \"4. 24-31\"  when  'Lead_Age_Days' >=32 and 'Lead_Age_Days' < 40 then \"5. 32-39\" when 'Lead_Age_Days' >= 40 then \"6. 40+\" end",
+            "label": "Lead_Age_Bucket",
+            "type": "Text"
+          },
+          {
+            "name": "LeadName",
+            "saqlExpression": "'Name'",
+            "label": "LeadName",
+            "type": "Text"
+          },
+          {
+            "precision": 2,
+            "name": "Lead_Age_Days_In_Hours",
+            "saqlExpression": "case when 'IsConverted' == \"false\" then date_diff(\"hour\", toDate('CreatedDate_sec_epoch'),now()) else date_diff(\"hour\",toDate('CreatedDate_sec_epoch'),toDate('ConvertedDate_sec_epoch')) end",
+            "scale": 0,
+            "label": "Lead_Age_Days_In_Hours",
+            "type": "Numeric"
+          }
+        ],
+        "mergeWithSource": true
+      }
+    },
+    "HLS_Augment_CareDeterminants_Onto_Patients": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["PatientId"],
+        "left": "HLS_Augment_Account_Onto_ProgramPatients",
+        "left_key": ["Id"],
+        "right_select": [
+          "CareDeterminantType.Id",
+          "CareDeterminantType.Name",
+          "CareDeterminantType.Type",
+          "CareDeterminantTypeId",
+          "Name",
+          "Number_Of_CareDeterminants",
+          "PatientId",
+          "Id",
+          "CareDeterminantId1"
+        ],
+        "right": "HLS_CE_CareDeterminants",
+        "relationship": "CareDets",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "HLS_Augment_MemberPlan_onto_Account": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["MemberId"],
+        "left": "HLS_Augment_Contact_onto_Account",
+        "left_key": ["Id"],
+        "right_select": [
+          "EffectiveTo",
+          "Id",
+          "MemberId",
+          "Name",
+          "PayerId",
+          "Plan.PlanType",
+          "PrimarySecondaryTertiary",
+          "Status",
+          "SubscriberId",
+          "IssuerNumber",
+          "MemberNumber",
+          "PrimaryCarePhysician"
+        ],
+        "right": "HLS_Augment_PurchaserPlan_onto_MemberPlan",
+        "relationship": "MemberPlan",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Digest_UserRole": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "Name"},
+          {"name": "ParentRoleId"},
+          {"name": "PortalAccountId"},
+          {"name": "PortalAccountOwnerId"},
+          {"name": "DeveloperName"}
+        ],
+        "object": "UserRole"
+      }
+    },
+    "HLS_Augment_Account_Onto_Visits": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_ProductRequired_Onto_Visits",
+        "left_key": ["Visits.AccountId"],
+        "right_select": [
+          "Id",
+          "Name",
+          "OwnerId"
+        ],
+        "right": "HLS_Digest_Account",
+        "relationship": "Account",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_Product_Onto_OrderItem": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_Order_Onto_OrderItem",
+        "left_key": ["Product2Id"],
+        "right_select": [
+          "Description",
+          "Family",
+          "Id",
+          "Name",
+          "PriceBookEntry.Id",
+          "PriceBookEntry.Name",
+          "PriceBookEntry.PriceBook.Id",
+          "PriceBookEntry.PriceBook.IsStandard",
+          "PriceBookEntry.PriceBook.Name",
+          "PriceBookEntry.Pricebook2Id",
+          "PriceBookEntry.Product2Id",
+          "PriceBookEntry.ProductCode",
+          "PriceBookEntry.UnitPrice",
+          "PriceBookEntry.UseStandardPrice",
+          "ProductCode",
+          "Products.Id",
+          "Products.LocationId",
+          "Products.Product2Id",
+          "Products.ProductItemNumber",
+          "Products.ProductName",
+          "Products.QuantityOnHand",
+          "Products.QuantityUnitOfMeasure",
+          "QuantityUnitOfMeasure",
+          "SystemModstamp"
+        ],
+        "right": "HLS_Augment_PriceBook_Onto_Products",
+        "relationship": "Product",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_Visitor_Onto_Visit": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["VisitId"],
+        "left": "HLS_Digest_Visit",
+        "left_key": ["Id"],
+        "right_select": [
+          "AssigneeId",
+          "Id",
+          "Name",
+          "ServiceResource.AccountId",
+          "ServiceResource.Id",
+          "ServiceResource.Name",
+          "ServiceResource.ResourceType",
+          "ServiceResource.RelatedRecordId",
+          "UserVisitor.AccountId",
+          "UserVisitor.City",
+          "UserVisitor.ContactId",
+          "UserVisitor.Email",
+          "UserVisitor.FirstName",
+          "UserVisitor.FullPhotoUrl",
+          "UserVisitor.Id",
+          "UserVisitor.IsActive",
+          "UserVisitor.ManagerId",
+          "UserVisitor.Name",
+          "UserVisitor.SmallPhotoUrl",
+          "UserVisitor.Username",
+          "VisitId",
+          "IsPrimaryResource",
+          "UserVisitor.MediumPhotoUrl",
+          "UserVisitor.MediumBannerPhotoUrl"
+        ],
+        "right": "HLS_Augment_User_Onto_Visitor",
+        "relationship": "Visitor",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_CE_Products": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "HLS_Augment_Product_Onto_OrderItem",
+        "computedFields": [
+          {
+            "name": "OrderAgeDays",
+            "saqlExpression": "case when 'Order.Status' == \"Completed\" then  daysBetween(toDate('Order.EffectiveDate_sec_epoch'),toDate('Order.EndDate_sec_epoch')) end",
+            "scale": 0,
+            "label": "OrderAgeDays",
+            "type": "Numeric"
+          },
+          {
+            "defaultValue": "0",
+            "precision": 12,
+            "name": "Revenue",
+            "saqlExpression": "('Quantity')*('UnitPrice')",
+            "scale": 0,
+            "label": "Revenue",
+            "type": "Numeric"
+          }
+        ],
+        "mergeWithSource": true
+      }
+    },
+    "HLS_Filter_CareBarriers": {
+      "action": "filter",
+      "parameters": {
+        "source": "HLS_CE_CareBarriers",
+        "saqlFilter": "Compute_field == 0"
+      }
+    },
+    "HLS_Augment_Problem_to_Goal": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_CE_Goal",
+        "left_key": ["HealthCloudGA__CarePlanProblem__c"],
+        "right_select": [
+          "OwnerId",
+          "Name",
+          "HealthCloudGA__CarePlan__c",
+          "HealthCloudGA__Account__c",
+          "HealthCloudGA__Priority__c",
+          "Account.Name",
+          "Account.HealthCloudGA__PayerType__c",
+          "Account.HealthCloudGA__PrimaryContact__c",
+          "Id",
+          "Account.Id",
+          "Account.OwnerId",
+          "Account.Contact.OwnerId",
+          "Account.Contact.HealthCloudGA__PreferredName__c",
+          "Account.Contact.Patient_Age_Bucket",
+          "Account.Contact.MailingState",
+          "Account.Contact.Contact_Age_Bucket",
+          "Account.HealthCloudGA__EnrollmentType__c",
+          "Account.Contact.Contact_Age",
+          "Account.HealthCloudGA__Gender__pc",
+          "Account.PersonMailingState",
+          "Account.HealthCloudGA__Age__pc",
+          "Account.Contact.AccountId",
+          "Account.Contact.HealthCloudGA__Age__c",
+          "Account.Contact.HealthCloudGA__BirthDate__c",
+          "Account.Contact.HealthCloudGA__Gender__c",
+          "Account.Contact.Id",
+          "Account.Contact.Birthdate",
+          "Account.HealthCloudGA__CarePlan__c",
+          "Account.Contact.MailingState_01",
+          "Account.Contact.PhotoUrl",
+          "Account.Contact.FirstName",
+          "Account.Contact.LastName",
+          "HealthCloudGA__CarePlanTemplate__c"
+        ],
+        "right": "HLS_Augment_Account_onto_Problem",
+        "relationship": "Problem",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_User_onto_CareRequest": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_Contact_Onto_CareRequest",
+        "left_key": ["Case.OwnerId"],
+        "right_select": [
+          "Name",
+          "IsActive",
+          "Username",
+          "UserRoleId",
+          "FullPhotoUrl",
+          "ManagerId",
+          "UserType",
+          "State",
+          "Email",
+          "Title",
+          "Role.Name",
+          "Role.DeveloperName",
+          "Role.ParentRole.Name",
+          "Role.ParentRole.DeveloperName",
+          "Role.RoleNames",
+          "Role.Hierarchy_RoleNames",
+          "isDuplicate",
+          "UniqueUserName",
+          "SmallPhotoUrl",
+          "ContactId",
+          "AccountId",
+          "FirstName",
+          "Role.Id",
+          "Role.ParentRoleId",
+          "Role.PortalAccountId",
+          "Role.PortalAccountOwnerId",
+          "Role.ParentRole.ParentRoleId",
+          "Role.Hierarchy_RoleNamesPath",
+          "MediumBannerPhotoUrl",
+          "MediumPhotoUrl"
+        ],
+        "right": "HLS_Compute_Manager_Unique",
+        "relationship": "Owner",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Digest_CareDeterminantType": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "Name"},
+          {"name": "Type"}
+        ],
+        "object": "CareDeterminantType"
+      }
+    },
+    "HLS_CE_CareBarriers": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "HLS_Augment_CareBarrierDeterminant_Onto_CareBarrier",
+        "computedFields": [{
+          "precision": 2,
+          "name": "Compute_field",
+          "saqlExpression": "case when 'Id' == 'CareBarrierDeterminant.CareBarrierId' then 1 else 0 end",
+          "scale": 0,
+          "label": "Compute_field",
+          "type": "Numeric"
+        }],
+        "mergeWithSource": true
+      }
+    },
+    "HLS_Augment_PriceBook_Onto_Products": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Product2Id"],
+        "left": "HLS_Augment_Product_Onto_ProductItem",
+        "left_key": ["Id"],
+        "right_select": [
+          "Id",
+          "Name",
+          "PriceBook.Id",
+          "PriceBook.IsStandard",
+          "PriceBook.Name",
+          "Pricebook2Id",
+          "Product2Id",
+          "ProductCode",
+          "UnitPrice",
+          "UseStandardPrice"
+        ],
+        "right": "HLS_Augment_PriceBook_Onto_PrickBookEntry",
+        "relationship": "PriceBookEntry",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_ProgramPatientAffiliation_onto_ProgramPatientSummary": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Digest_ProgramPatientSummary",
+        "left_key": ["HealthCloudGA__ProgramPatientAffiliation__c"],
+        "right_select": ["HealthCloudGA__Account__c"],
+        "right": "HLS_Digest_ProgramPatientAffiliation",
+        "relationship": "ProgramPatientAffiliation",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Digest_PurchaserPlan": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {
+            "defaultValue": "Not Defined",
+            "name": "PlanType",
+            "isMultiValue": false
+          },
+          {"name": "Affiliation"},
+          {"name": "EffectiveFrom"},
+          {"name": "EffectiveTo"},
+          {"name": "Name"},
+          {"name": "PayerId"},
+          {"name": "PlanStatus"},
+          {"name": "PlanNumber"},
+          {"name": "ServiceType"},
+          {"name": "SourceSystem"},
+          {"name": "SourceSystemIdentifier"},
+          {"name": "OwnerId"},
+          {"name": "Notes"},
+          {"name": "CreatedDate"},
+          {"name": "CreatedById"},
+          {"name": "LastModifiedById"},
+          {"name": "LastModifiedDate"}
+        ],
+        "object": "PurchaserPlan"
+      }
+    },
+    "HLS_Augment_Order_Onto_OrderItem": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Digest_OrderItem",
+        "left_key": ["OrderId"],
+        "right_select": [
+          "AccountId",
+          "ActivatedDate",
+          "ContractId",
+          "EffectiveDate",
+          "Id",
+          "EndDate",
+          "Name",
+          "OrderNumber",
+          "OrderReferenceNumber",
+          "OriginalOrderId",
+          "Pricebook2Id",
+          "Status",
+          "StatusCode",
+          "TotalAmount",
+          "Type"
+        ],
+        "right": "HLS_Digest_Order",
+        "relationship": "Order",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_Account_Onto_Products": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_Address_Onto_Orders",
+        "left_key": ["VisitAddress.Visits.AccountId"],
+        "right_select": [
+          "Id",
+          "OwnerId",
+          "Name"
+        ],
+        "right": "HLS_Digest_Account",
+        "relationship": "Account",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Filter_Compute_CareDeterminantId": {
+      "action": "filter",
+      "parameters": {
+        "source": "HLS_Compute_Node",
+        "saqlFilter": "Compute_CareDeterminantId == 0"
+      }
+    },
+    "HLS_Digest_CareRequest": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AdmissionType"},
+          {"name": "CareRequestCaseId"},
+          {"name": "ClinicalCaseType"},
+          {"name": "CreatedDate"},
+          {"name": "CreatedById"},
+          {"name": "DueDate"},
+          {"name": "EffectiveFrom"},
+          {"name": "EffectiveTo"},
+          {"name": "Id"},
+          {"name": "MemberId"},
+          {"name": "DecisionDate"},
+          {"name": "DecisionReason"},
+          {"name": "DecisionDaysRemaining"},
+          {"name": "Name"},
+          {"name": "RecordTypeId"},
+          {"name": "ServiceDate"},
+          {"name": "ReopenedDate"},
+          {"name": "ReopenReason"},
+          {"name": "ResolutionDate"},
+          {"name": "ResolutionNotes"},
+          {"name": "RequestingPractitionerId"}
+        ],
+        "object": "CareRequest"
+      }
+    },
+    "HLS_Augment_VisitedParty_Onto_Visitors": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["VisitId"],
+        "left": "HLS_Augment_Visitor_Onto_Visit",
+        "left_key": ["Id"],
+        "right_select": [
+          "ContactId",
+          "Id",
+          "Name",
+          "SalesRep.AccountId",
+          "SalesRep.FirstName",
+          "SalesRep.Id",
+          "SalesRep.Name",
+          "VisitId",
+          "SalesRep.LastName"
+        ],
+        "right": "HLS_Augment_Contacts_Onto_VisitedParty",
+        "relationship": "VisitedParty",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Digest_Location": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "IsInventoryLocation"},
+          {"name": "LocationLevel"},
+          {"name": "LocationType"},
+          {"name": "Name"},
+          {"name": "RootLocationId"},
+          {"name": "VisitorAddressId"}
+        ],
+        "object": "Location"
+      }
+    },
+    "HLS_Digest_AssessmentTaskOrder": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AssessmentTaskId"},
+          {"name": "LastModifiedDate"},
+          {"name": "Id"},
+          {"name": "CreatedDate"},
+          {"name": "Name"},
+          {"name": "OrderId"}
+        ],
+        "object": "AssessmentTaskOrder"
+      }
+    },
+    "HLS_Augment_Contact_onto_Account": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_RecordType_onto_Account",
+        "left_key": ["HealthCloudGA__PrimaryContact__c"],
+        "right_select": [
+          "AccountId",
+          "HealthCloudGA__Age__c",
+          "HealthCloudGA__BirthDate__c",
+          "HealthCloudGA__Gender__c",
+          "HealthCloudGA__PreferredName__c",
+          "Id",
+          "Name",
+          "Birthdate",
+          "OwnerId",
+          "Patient_Age_Bucket",
+          "MailingState",
+          "Contact_Age_Bucket",
+          "Contact_Age",
+          "MailingState_01",
+          "PhotoUrl",
+          "FirstName",
+          "LastName"
+        ],
+        "right": "HLS_CE_Contact",
+        "relationship": "Contact",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_CE_Visits": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "HLS_Augment_Account_Onto_Visits",
+        "computedFields": [
+          {
+            "name": "SalesRepresentative",
+            "saqlExpression": "case when 'Visits.Contact.Name' is null then 'Visits.User.Name' else 'Visits.Contact.Name' end",
+            "label": "SalesRepresentative",
+            "type": "Text"
+          },
+          {
+            "name": "LocationName",
+            "saqlExpression": "case when 'Visits.Address.Name' is null then 'Visits.Location.Name' else 'Visits.Address.Name' end",
+            "label": "LocationName",
+            "type": "Text"
+          },
+          {
+            "name": "VisitDate",
+            "saqlExpression": "substr(('Visits.PlannedVisitStartTime'),1,10)",
+            "label": "VisitDate",
+            "type": "Text"
+          }
+        ],
+        "mergeWithSource": true
+      }
+    },
+    "HLS_CE_Contact": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "HLS_Digest_Contact",
+        "computedFields": [
+          {
+            "name": "Patient_Age_Bucket",
+            "saqlExpression": "case when coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1) >= 0 && coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1)<= 20 then \"1. 0-20\" when coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1)> 20 && coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1)<=40 then \"2. 21-40\" when coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1)> 40 && coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1)<=60 then \"3. 41-60\" when coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1)> 60 && coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1)<=80 then \"4. 61-80\"  when coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1)> 80 && coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1)<=100 then \"5. 81-100\" when coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1)> 100 && coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1)<=120 then \"6. 101-120\" when coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1)> 120 then \"7. > 120\" end",
+            "label": "Patient Age Bucket",
+            "type": "Text"
+          },
+          {
+            "name": "Contact_Age_Bucket",
+            "saqlExpression": "case when coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1) >= 0 && coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1)<= 34 then \"01. 0-34\" when coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1)> 34 && coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1)<=44 then \"02. 34-44\" when coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1)> 44 && coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1)<=54 then \"03. 45-54\" when coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1)> 54 && coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1)<=64 then \"04. 55-64\"  when coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1)> 64 && coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1)<=74 then \"05. 65-74\" when coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1)> 74 && coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1)<=84 then \"06. 75-84\" when coalesce(daysBetween(toDate('Birthdate',\"yyyy-MM-dd\"),now())/365,-1)> 84 then \"07. > 85+\" end",
+            "label": "Contact_Age_Bucket",
+            "type": "Text"
+          },
+          {
+            "precision": 16,
+            "name": "Contact_Age",
+            "saqlExpression": "string_to_number(substr('HealthCloudGA__Age__c',1,2))",
+            "scale": 0,
+            "label": "Contact_Age",
+            "type": "Numeric"
+          },
+          {
+            "name": "MailingState_01",
+            "saqlExpression": "case when 'MailingState' is not null then 'MailingState' else \"Not Defined\" end ",
+            "label": "MailingState_01",
+            "type": "Text"
+          }
+        ],
+        "mergeWithSource": true
+      }
+    },
+    "HLS_Digest_CareBarrier": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "CareBarrierTypeId"},
+          {"name": "CaseId"},
+          {"name": "CreatedById"},
+          {"name": "IsActive"},
+          {"name": "Name"},
+          {"name": "PatientId"},
+          {
+            "defaultValue": "Not Defined",
+            "name": "Priority"
+          },
+          {"name": "Status"},
+          {
+            "name": "Id",
+            "label": "CBId"
+          },
+          {"name": "CreatedDate"}
+        ],
+        "object": "CareBarrier"
+      }
+    },
+    "HLS_Register_Opportunity": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "HLS_Patient",
+        "alias": "${App.Datasets.HLS_Patient8_tp.FullyQualifiedName}",
+        "source": "HLS_Join_Time_In_Current_Stage_to_Opportunity"
+      }
+    },
+    "HLS_Augment_CareBarrierType_Onto_CareBarrier": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_CE_ComputeCareBarriers",
+        "left_key": ["CareBarrierTypeId"],
+        "right_select": [
+          "Id",
+          "Name"
+        ],
+        "right": "HLS_Digest_CareBarrierType",
+        "relationship": "CareBarrierType",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Digest_Lead": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Status"},
+          {"name": "ConvertedContactId"},
+          {"name": "ConvertedAccountId"},
+          {"name": "ConvertedDate"},
+          {"name": "ConvertedOpportunityId"},
+          {"name": "CreatedDate"},
+          {"name": "HealthCloudGA__AssignCareCoordinatorContact__c"},
+          {"name": "HealthCloudGA__AssignCareCoordinatorUser__c"},
+          {"name": "HealthCloudGA__IsMarkedForPatientConversion__c"},
+          {"name": "Id"},
+          {"name": "Industry"},
+          {"name": "IsConverted"},
+          {"name": "LastActivityDate"},
+          {"name": "LeadSource"},
+          {"name": "Name"},
+          {"name": "OwnerId"},
+          {"name": "RecordTypeId"},
+          {"name": "HealthCloudGA__ReferringPractitioner__c"},
+          {"name": "HealthCloudGA__ReasonForOutOfNetworkReferral__c"},
+          {"name": "HealthCloudGA__ReasonforReferral__c"},
+          {"name": "HealthCloudGA__InsuranceType__c"},
+          {"name": "HealthCloudGA__IsOutOfNetwork__c"},
+          {"name": "HealthCloudGA__ReferringOrganization__c"},
+          {"name": "HealthCloudGA__Specialty__c"},
+          {"name": "HealthCloudGA__TypeOfService__c"},
+          {"name": "HealthCloudGA__Priority__c"},
+          {"name": "HealthCloudGA__BirthDate__c"},
+          {"name": "HealthCloudGA__Diagnosis__c"},
+          {"name": "HealthCloudGA__ReferredToOrganization__c"},
+          {"name": "HealthCloudGA__ReferredToPractitioner__c"},
+          {"name": "HealthCloudGA__ReferringUser__c"},
+          {"name": "HealthCloudGA__RelatedAccount__c"},
+          {"name": "HC13_SigningProvider__c"},
+          {"name": "HC13_ReasonForDisqualification__c"}
+        ],
+        "object": "Lead"
+      }
+    },
+    "HLS_Flatten_Hierarchy_Grouping": {
+      "action": "flatten",
+      "parameters": {
+        "include_self_id": true,
+        "self_field": "DeveloperName",
+        "multi_field": "Hierarchy_RoleNames",
+        "parent_field": "ParentRole.DeveloperName",
+        "path_field": "Hierarchy_RoleNamesPath",
+        "source": "HLS_Flatten_ParentName"
+      }
+    },
+    "HLS_Register_Visits": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "rowLevelSecurityFilter": "'Owner.Role.Roles' == \"$User.UserRoleId\" || 'Account.OwnerId' == \"$User.Id\"",
+        "name": "HLS_Visit",
+        "alias": "${App.Datasets.HLS_Visit8_tp.FullyQualifiedName}",
+        "source": "HLS_Augment_User_Onto_AssessmentTask"
+      }
+    },
+    "HLS_Augment_Account_onto_Task": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_Case_onto_Problem",
+        "left_key": ["CarePlan.AccountId"],
+        "right_select": [
+          "Id",
+          "HealthCloudGA__PrimaryContact__c",
+          "HealthCloudGA__PayerType__c",
+          "Name",
+          "Contact.AccountId",
+          "Contact.HealthCloudGA__Age__c",
+          "Contact.HealthCloudGA__BirthDate__c",
+          "Contact.HealthCloudGA__Gender__c",
+          "Contact.Id",
+          "Contact.Name",
+          "Contact.Birthdate",
+          "MemberPlan.SubscriberId",
+          "MemberPlan.EffectiveTo",
+          "MemberPlan.Id",
+          "MemberPlan.MemberId",
+          "MemberPlan.Name",
+          "MemberPlan.PayerId",
+          "MemberPlan.Status",
+          "MemberPlan.IssuerNumber",
+          "MemberPlan.MemberNumber",
+          "MemberPlan.PrimaryCarePhysician",
+          "MemberPlan.Plan.PlanType",
+          "MemberPlan.PrimarySecondaryTertiary",
+          "RecordTypeId",
+          "RecordType.Name",
+          "OwnerId",
+          "Contact.OwnerId",
+          "Contact.HealthCloudGA__PreferredName__c",
+          "Contact.Patient_Age_Bucket",
+          "Contact.MailingState",
+          "Contact.Contact_Age_Bucket",
+          "HealthCloudGA__EnrollmentType__c",
+          "Contact.Contact_Age",
+          "Contact.MailingState_01",
+          "HealthCloudGA__CarePlan__c",
+          "Contact.PhotoUrl",
+          "Contact.FirstName",
+          "Contact.LastName"
+        ],
+        "right": "HLS_Augment_MemberPlan_onto_Account",
+        "relationship": "Account",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Digest_PriceBookEntry": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "Name"},
+          {"name": "Pricebook2Id"},
+          {"name": "Product2Id"},
+          {"name": "ProductCode"},
+          {"name": "UnitPrice"},
+          {"name": "UseStandardPrice"}
+        ],
+        "object": "PricebookEntry"
+      }
+    },
+    "HLS_Flatten_UserRole": {
+      "action": "flatten",
+      "parameters": {
+        "include_self_id": false,
+        "self_field": "Id",
+        "multi_field": "Roles",
+        "parent_field": "ParentRoleId",
+        "path_field": "RolePath",
+        "source": "HLS_Digest_UserRole"
+      }
+    },
+    "HLS_Aug_Account_onto_CareRequest": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_RecordType_onto_CareRequest",
+        "left_key": ["MemberId"],
+        "right_select": [
+          "Contact.AccountId",
+          "Contact.Birthdate",
+          "Contact.HealthCloudGA__Age__c",
+          "Contact.HealthCloudGA__BirthDate__c",
+          "Contact.HealthCloudGA__Gender__c",
+          "Contact.Id",
+          "Contact.Name",
+          "HealthCloudGA__PayerType__c",
+          "Name",
+          "RecordTypeId",
+          "RecordType.Name",
+          "OwnerId",
+          "Contact.OwnerId",
+          "Contact.HealthCloudGA__PreferredName__c",
+          "Contact.Patient_Age_Bucket",
+          "Contact.MailingState",
+          "Contact.Contact_Age_Bucket",
+          "HealthCloudGA__EnrollmentType__c",
+          "Contact.Contact_Age",
+          "Contact.MailingState_01",
+          "HealthCloudGA__CarePlan__c",
+          "Contact.PhotoUrl",
+          "Contact.FirstName",
+          "Contact.LastName"
+        ],
+        "right": "HLS_Augment_Contact_onto_Account",
+        "relationship": "Account",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_User_onto_Lead": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_compute_Lead",
+        "left_key": ["OwnerId"],
+        "right_select": [
+          "Email",
+          "FullPhotoUrl",
+          "Id",
+          "IsActive",
+          "isDuplicate",
+          "ManagerId",
+          "Name",
+          "Role.DeveloperName",
+          "Role.Hierarchy_RoleNames",
+          "Role.Name",
+          "Role.ParentRole.DeveloperName",
+          "Role.ParentRole.Name",
+          "Role.RolePath",
+          "UniqueUserName",
+          "Username",
+          "UserType",
+          "UserRoleId",
+          "Role.Roles",
+          "ContactId",
+          "AccountId",
+          "FirstName",
+          "Role.Id",
+          "Role.ParentRoleId",
+          "Role.PortalAccountId",
+          "Role.PortalAccountOwnerId",
+          "Role.ParentRole.ParentRoleId",
+          "Role.Hierarchy_RoleNamesPath",
+          "MediumBannerPhotoUrl",
+          "MediumPhotoUrl"
+        ],
+        "right": "HLS_Compute_Manager_Unique",
+        "relationship": "Owner",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Register_Goal": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "HLS_Goal",
+        "alias": "${App.Datasets.HLS_Goal7_tp.FullyQualifiedName}",
+        "source": "HLS_Augment_User_to_Goal"
+      }
+    },
+    "HLS_Register_Patient_Segment": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "HLS_Patient_Segment",
+        "alias": "${App.Datasets.HLS_Patient_Segment59_tp.FullyQualifiedName}",
+        "source": "HLS_Augment_User_Onto_PatientProgramActivities"
+      }
+    },
+    "HLS_Augment_MemberPlanAccount_Onto_CareBarriersCase": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_CareBarriers_Onto_Case",
+        "left_key": ["Compute_PatientId"],
+        "right_select": [
+          "Id",
+          "HealthCloudGA__PrimaryContact__c",
+          "HealthCloudGA__PayerType__c",
+          "Name",
+          "OwnerId",
+          "HealthCloudGA__Gender__pc",
+          "PersonMailingState",
+          "HealthCloudGA__Age__pc",
+          "HealthCloudGA__EnrollmentType__c",
+          "HealthCloudGA__CarePlan__c",
+          "Contact.AccountId",
+          "Contact.HealthCloudGA__Age__c",
+          "Contact.HealthCloudGA__BirthDate__c",
+          "Contact.HealthCloudGA__Gender__c",
+          "Contact.HealthCloudGA__PreferredName__c",
+          "Contact.Id",
+          "Contact.Birthdate",
+          "Contact.MailingState",
+          "Contact.PhotoUrl",
+          "Contact.FirstName",
+          "Contact.LastName",
+          "Contact.Contact_Age_Bucket",
+          "Contact.Contact_Age",
+          "Contact.MailingState_01",
+          "MemberPlan.Id",
+          "MemberPlan.MemberId",
+          "MemberPlan.Name",
+          "MemberPlan.PayerId",
+          "MemberPlan.Status",
+          "MemberPlan.MemberNumber",
+          "MemberPlan.Plan.PlanType",
+          "Contact.OwnerId"
+        ],
+        "right": "HLS_Augment_MemberPlan_onto_Account",
+        "relationship": "CareBarrierCaseAccount",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_User_Onto_VisitedParty": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_Contact_Onto_VisitedParty",
+        "left_key": ["VisitorId"],
+        "right_select": [
+          "AccountId",
+          "City",
+          "ContactId",
+          "Email",
+          "FirstName",
+          "FullPhotoUrl",
+          "IsActive",
+          "Id",
+          "ManagerId",
+          "Name",
+          "Phone",
+          "SmallPhotoUrl",
+          "State",
+          "Title",
+          "Username",
+          "UserRoleId",
+          "UserType",
+          "MediumPhotoUrl",
+          "MediumBannerPhotoUrl"
+        ],
+        "right": "HLS_Digest_User",
+        "relationship": "User",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Digest_CareBarrierType": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "Name"}
+        ],
+        "object": "CareBarrierType"
+      }
+    },
+    "HLS_Digest_MemberPlan": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "filterConditions": [{
+          "field": "PrimarySecondaryTertiary",
+          "value": "Primary",
+          "operator": "="
+        }],
+        "fields": [
+          {"name": "SubscriberId"},
+          {"name": "Affiliation"},
+          {"name": "EffectiveTo"},
+          {"name": "GroupNumber"},
+          {"name": "Id"},
+          {"name": "MemberId"},
+          {"name": "Name"},
+          {"name": "OwnerId"},
+          {"name": "PayerId"},
+          {"name": "PlanId"},
+          {"name": "PrimarySecondaryTertiary"},
+          {"name": "RelationshipToSubscriber"},
+          {"name": "SourceSystem"},
+          {"name": "Status"},
+          {"name": "IssuerNumber"},
+          {"name": "MemberNumber"},
+          {"name": "PrimaryCarePhysician"}
+        ],
+        "object": "MemberPlan"
+      }
+    },
+    "HLS_Augment_Contact_Onto_CareRequest": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Contact.Id"],
+        "left": "HLS_CE_CareRequest_Due_Days",
+        "left_key": ["RequestingPractitionerId"],
+        "right_select": [
+          "Contact.AccountId",
+          "Contact.Birthdate",
+          "Contact.Contact_Age",
+          "Contact.Contact_Age_Bucket",
+          "Contact.HealthCloudGA__Age__c",
+          "Contact.HealthCloudGA__BirthDate__c",
+          "Contact.HealthCloudGA__Gender__c",
+          "Contact.HealthCloudGA__PreferredName__c",
+          "Contact.Id",
+          "Contact.MailingState",
+          "Contact.MailingState_01",
+          "Contact.Name",
+          "Contact.OwnerId",
+          "Contact.Patient_Age_Bucket",
+          "HealthCloudGA__Age__pc",
+          "HealthCloudGA__EnrollmentType__c",
+          "HealthCloudGA__Gender__pc",
+          "HealthCloudGA__PayerType__c",
+          "HealthCloudGA__PrimaryContact__c",
+          "Id",
+          "Name",
+          "OwnerId",
+          "RecordType.Name",
+          "PersonMailingState",
+          "RecordTypeId",
+          "HealthCloudGA__CarePlan__c",
+          "Contact.PhotoUrl",
+          "Contact.FirstName",
+          "Contact.LastName"
+        ],
+        "right": "HLS_Augment_Contact_onto_Account",
+        "relationship": "AccountContact",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_User_Onto_PatientProgramActivities": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_EventTask_Onto_AccountPrograms",
+        "left_key": ["OwnerId"],
+        "right_select": [
+          "City",
+          "FullPhotoUrl",
+          "Email",
+          "IsActive",
+          "isDuplicate",
+          "ManagerId",
+          "Name",
+          "Phone",
+          "Role.DeveloperName",
+          "ContactId",
+          "AccountId",
+          "FirstName",
+          "Role.Id",
+          "Role.ParentRoleId",
+          "Role.PortalAccountId",
+          "Role.PortalAccountOwnerId",
+          "Role.ParentRole.ParentRoleId",
+          "Role.Hierarchy_RoleNamesPath",
+          "MediumBannerPhotoUrl",
+          "MediumPhotoUrl"
+        ],
+        "right": "HLS_Compute_Manager_Unique",
+        "relationship": "UserActivity",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_User_onto_Opportunity": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Add_Fields_To_Opportunity",
+        "left_key": ["Id"],
+        "right_select": [
+          "Name",
+          "Role.Name",
+          "UniqueUserName",
+          "ContactId",
+          "AccountId",
+          "FirstName",
+          "Role.Id",
+          "Role.ParentRoleId",
+          "Role.PortalAccountId",
+          "Role.PortalAccountOwnerId",
+          "Role.ParentRole.ParentRoleId",
+          "Role.Hierarchy_RoleNamesPath",
+          "MediumBannerPhotoUrl",
+          "MediumPhotoUrl"
+        ],
+        "right": "HLS_Compute_Manager_Unique",
+        "relationship": "Owner",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_User_Onto_CareBarrierCaseAccount": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_MemberPlanAccount_Onto_CareBarriersCase",
+        "left_key": ["CareBarrierCaseAccount.OwnerId"],
+        "right_select": [
+          "Name",
+          "Id",
+          "Username",
+          "UserRoleId",
+          "ManagerId",
+          "Title",
+          "ContactId",
+          "AccountId",
+          "FirstName",
+          "Role.Id",
+          "Role.ParentRoleId",
+          "Role.PortalAccountId",
+          "Role.PortalAccountOwnerId",
+          "Role.ParentRole.ParentRoleId",
+          "Role.Hierarchy_RoleNamesPath",
+          "UniqueUserName",
+          "FullPhotoUrl",
+          "Email",
+          "Role.DeveloperName",
+          "Role.Hierarchy_RoleNames",
+          "Role.Name",
+          "Role.ParentRole.DeveloperName",
+          "Role.ParentRole.Name",
+          "Role.RoleNamesPath",
+          "Role.RoleNames",
+          "Role.RolePath",
+          "Role.Roles",
+          "SmallPhotoUrl",
+          "UserType",
+          "State",
+          "MediumBannerPhotoUrl",
+          "MediumPhotoUrl"
+        ],
+        "right": "HLS_Compute_Manager_Unique",
+        "relationship": "AccountUser",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Register_Problem": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "HLS_Problem",
+        "alias": "${App.Datasets.HLS_Problem7_tp.FullyQualifiedName}",
+        "source": "HLS_Augment_User_onto_Problem"
+      }
+    },
+    "HLS_Augment_Account_onto_Opportunity": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_Contact_onto_Opportunity",
+        "left_key": ["AccountId"],
+        "right_select": [
+          "Name",
+          "HealthCloudGA__PayerType__c",
+          "HealthCloudGA__PrimaryContact__c",
+          "RecordType.Name",
+          "HealthCloudGA__EnrollmentType__c",
+          "HealthCloudGA__CarePlan__c"
+        ],
+        "right": "HLS_Augment_RecordType_onto_Account",
+        "relationship": "Account",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_ProductTransfers_Onto_Visits": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["ProductTransfer.Product2Id"],
+        "left": "HLS_CE_Visits",
+        "left_key": ["Product2Id"],
+        "right_select": [
+          "AccountId",
+          "CaseId",
+          "DestinationLocationId",
+          "Id",
+          "OwnerId",
+          "ProductRequestNumber",
+          "ProductTransfer.DestinationLocationId",
+          "ProductTransfer.Id",
+          "ProductTransfer.OwnerId",
+          "ProductTransfer.Product2Id",
+          "ProductTransfer.ProductRequestId",
+          "ProductTransfer.ProductTransferNumber",
+          "ProductTransfer.QuantityReceived",
+          "ProductTransfer.QuantitySent",
+          "ProductTransfer.Status",
+          "Status"
+        ],
+        "right": "HLS_Augment_ProductTransfer_Onto_ProductRequest",
+        "relationship": "ProductTransfer",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Digest_VisitedParty": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "ContactId"},
+          {"name": "Id"},
+          {"name": "Name"},
+          {"name": "VisitId"}
+        ],
+        "object": "VisitedParty"
+      }
+    },
+    "HLS_Add_Fields_To_Task": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "HLS_Digest_Task",
+        "computedFields": [
+          {
+            "precision": 16,
+            "name": "Task_Due_Days",
+            "saqlExpression": "case when ('IsClosed' == \"false\") then daysBetween(now(),toDate('ActivityDate_sec_epoch')) end",
+            "scale": 0,
+            "label": "Task_Due_Days",
+            "type": "Numeric"
+          },
+          {
+            "name": "Task_Overdue_Days_Bucket",
+            "saqlExpression": "case when ('IsClosed' == \"false\") && Task_Due_Days < 0 && Task_Due_Days >= -7 then \"1.0-7 days\" when Task_Due_Days < -7 && Task_Due_Days >= -14 then \"2.8-14 days\"  when Task_Due_Days < -14 && Task_Due_Days >= -30 then \"3.15-30 days\" when Task_Due_Days < -30 && Task_Due_Days >= -60 then \"4.31-60 days\" when Task_Due_Days < -60 && Task_Due_Days >= -90 then \"5.61-90 days\"  when Task_Due_Days < -90 then \"6.90+ days\" end",
+            "label": "Task_Overdue_Days_Bucket",
+            "type": "Text"
+          },
+          {
+            "name": "Task_Due_Days_Bucket",
+            "saqlExpression": "case when Task_Due_Days >= 0 && Task_Due_Days <= 7 then \"1.0-7 days\" when Task_Due_Days > 7 && Task_Due_Days <= 14 then \"2.8-14 days\"  when Task_Due_Days > 14 && Task_Due_Days <= 30 then \"3.15-30 days\" when Task_Due_Days > 30 && Task_Due_Days <= 60 then \"4.31-60 days\" when Task_Due_Days > 60 && Task_Due_Days <= 90 then \"5.61-90 days\"  when Task_Due_Days >= 91 then \"6.90+ days\" end",
+            "label": "Task_Due_Days_Bucket",
+            "type": "Text"
+          },
+          {
+            "name": "Task_Due_Days_Text",
+            "saqlExpression": "number_to_string(abs('Task_Due_Days'),\"#\")",
+            "label": "Task_Due_Days_Text",
+            "type": "Text"
+          },
+          {
+            "name": "IsOverdue",
+            "saqlExpression": "case when ('IsClosed' == \"false\") && (daysBetween(toDate(substr('ActivityDate', 1, 10), \"yyyy-MM-dd\"), now()) > 0) then \"true\" else \"false\" end",
+            "label": "IsOverdue",
+            "type": "Text"
+          },
+          {
+            "defaultValue": "0",
+            "precision": 18,
+            "name": "DaysOverdue",
+            "saqlExpression": "case when 'IsOverdue' == \"true\" then daysBetween(toDate(substr('ActivityDate', 1, 10), \"yyyy-MM-dd\"), now()) else 0 end",
+            "scale": 2,
+            "label": "Days Overdue",
+            "type": "Numeric"
+          },
+          {
+            "name": "DaysOverdueText",
+            "saqlExpression": "number_to_string(abs('DaysOverdue'),\"#\")",
+            "label": "Days Overdue Text",
+            "type": "Text"
+          },
+          {
+            "defaultValue": "0",
+            "precision": 16,
+            "name": "Number_Of_Tasks_Overdue",
+            "saqlExpression": "case when 'IsOverdue' == \"true\" then 1 else 0 end",
+            "scale": 0,
+            "label": "Number_Of_Tasks_Overdue",
+            "type": "Numeric"
+          },
+          {
+            "defaultValue": "0",
+            "precision": 16,
+            "name": "Compute_Task",
+            "saqlExpression": "case when 'AccountId' is not null then 1 else 0 end",
+            "scale": 0,
+            "label": "Compute_Task",
+            "type": "Numeric"
+          },
+          {
+            "defaultValue": "Not Defined",
+            "name": "TaskId",
+            "saqlExpression": "'Id'",
+            "label": "TaskId",
+            "type": "Text"
+          },
+          {
+            "defaultValue": "0",
+            "name": "Task_CreatedDays",
+            "saqlExpression": "daysBetween(toDate(CreatedDate_sec_epoch),now())",
+            "scale": 0,
+            "label": "Task_CreatedDays",
+            "type": "Numeric"
+          },
+          {
+            "name": "TaskCreationDays",
+            "saqlExpression": "number_to_string('Task_CreatedDays',\"####\") + \" \" + \"days\"",
+            "label": "TaskCreationDays",
+            "type": "Text"
+          },
+          {
+            "defaultValue": "Not Defined",
+            "name": "Task_Status",
+            "saqlExpression": "case when ('Status' == \"Completed\" || 'Status' == \"Deferred\") then \"False\" else \"True\" end ",
+            "label": "Task Status",
+            "type": "Text"
+          }
+        ],
+        "mergeWithSource": true
+      }
+    },
+    "HLS_Augment_Address_Onto_Orders": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Visits.Id"],
+        "left": "HLS_Augment_AssessmentTasks_Onto_Orders",
+        "left_key": ["AssessmentTasks.AssessmentTask.ParentId"],
+        "right_select": [
+          "Account.Id",
+          "Account.OwnerId",
+          "Account.Name",
+          "LocationName",
+          "SalesRepresentative",
+          "Visits.AccountId",
+          "Visits.ActualVisitEndTime",
+          "Visits.ActualVisitStartTime",
+          "Visits.Address.City",
+          "Visits.Address.AddressType",
+          "Visits.Address.Country",
+          "Visits.Address.Description",
+          "Visits.Address.Id",
+          "Visits.Address.LocationType",
+          "Visits.Address.Name",
+          "Visits.Address.ParentId",
+          "Visits.Address.State",
+          "Visits.Address.Street",
+          "Visits.Contact.AccountId",
+          "Visits.Contact.FirstName",
+          "Visits.Contact.Id",
+          "Visits.Contact.LastName",
+          "Visits.Contact.Name",
+          "Visits.ContextId",
+          "Visits.CreatedDate",
+          "Visits.Id",
+          "Visits.InstructionDescription",
+          "Visits.Location.Id",
+          "Visits.Location.Name",
+          "Visits.Location.LocationLevel",
+          "Visits.Name",
+          "Visits.OwnerId",
+          "Visits.PlaceId",
+          "Visits.PlannedVisitEndTime",
+          "Visits.Location.VisitorAddressId",
+          "Visits.Location.RootLocationId",
+          "Visits.Location.LocationType",
+          "Visits.PlannedVisitStartTime",
+          "Visits.Status",
+          "Visits.User.AccountId",
+          "Visits.User.ContactId",
+          "Visits.User.FirstName",
+          "Visits.User.Id",
+          "Visits.User.Name",
+          "Visits.User.Phone",
+          "Visits.VisitedParty.Id",
+          "Visits.VisitedParty.ContactId",
+          "Visits.VisitedParty.Name",
+          "Visits.VisitedParty.SalesRep.AccountId",
+          "Visits.VisitedParty.SalesRep.FirstName",
+          "Visits.VisitedParty.SalesRep.Id",
+          "Visits.VisitedParty.SalesRep.LastName",
+          "Visits.VisitedParty.SalesRep.Name",
+          "Visits.Visitor.Id",
+          "Visits.Visitor.IsPrimaryResource",
+          "Visits.VisitedParty.VisitId",
+          "Visits.Visitor.AssigneeId",
+          "Visits.Visitor.Name",
+          "Visits.Visitor.ServiceResource.Id",
+          "Visits.Visitor.ServiceResource.AccountId",
+          "Visits.Visitor.ServiceResource.Name",
+          "Visits.Visitor.ServiceResource.ResourceType",
+          "Visits.Visitor.UserVisitor.AccountId",
+          "Visits.Visitor.UserVisitor.City",
+          "Visits.Visitor.UserVisitor.ContactId",
+          "Visits.Visitor.UserVisitor.Email",
+          "Visits.Visitor.UserVisitor.FirstName",
+          "Visits.Visitor.UserVisitor.Id",
+          "Visits.Visitor.UserVisitor.Name",
+          "Visits.Visitor.UserVisitor.Username",
+          "Visits.Visitor.VisitId",
+          "Visits.VisitorId",
+          "Visits.VisitPriority",
+          "Id",
+          "ParentRecordId",
+          "Product2Id",
+          "ProductRequiredNumber",
+          "QuantityRequired",
+          "QuantityUnitOfMeasure",
+          "VisitDate",
+          "ProductName"
+        ],
+        "right": "HLS_CE_Visits",
+        "relationship": "VisitAddress",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Digest_CarePlanTemplate": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "CreatedById"},
+          {"name": "CreatedDate"},
+          {"name": "HealthCloudGA__ClonedFrom__c"},
+          {"name": "HealthCloudGA__Active__c"},
+          {"name": "HealthCloudGA__Description__c"},
+          {"name": "Id"},
+          {"name": "Name"},
+          {"name": "OwnerId"}
+        ],
+        "object": "HealthCloudGA__CarePlanTemplate__c"
+      }
+    },
+    "HLS_Augment_User_to_Goal": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_Problem_to_Goal",
+        "left_key": ["OwnerId"],
+        "right_select": [
+          "Email",
+          "FullPhotoUrl",
+          "Id",
+          "IsActive",
+          "isDuplicate",
+          "ManagerId",
+          "Name",
+          "Role.DeveloperName",
+          "Role.Hierarchy_RoleNames",
+          "Role.Name",
+          "Role.ParentRole.DeveloperName",
+          "Role.ParentRole.Name",
+          "Role.RoleNames",
+          "ContactId",
+          "AccountId",
+          "FirstName",
+          "Role.Id",
+          "Role.ParentRoleId",
+          "Role.PortalAccountId",
+          "Role.PortalAccountOwnerId",
+          "Role.ParentRole.ParentRoleId",
+          "Role.Hierarchy_RoleNamesPath",
+          "MediumBannerPhotoUrl",
+          "MediumPhotoUrl"
+        ],
+        "right": "HLS_Compute_Manager_Unique",
+        "relationship": "Owner",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Digest_ProductTransfer": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "DestinationLocationId"},
+          {"name": "Id"},
+          {"name": "OwnerId"},
+          {"name": "Product2Id"},
+          {"name": "ProductRequestId"},
+          {"name": "ProductTransferNumber"},
+          {"name": "QuantityReceived"},
+          {"name": "QuantitySent"},
+          {"name": "Status"}
+        ],
+        "object": "ProductTransfer"
+      }
+    },
+    "HLS_Augment_CareDeterminantsData_Onto_AppendedData": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["CareDeterminantId"],
+        "left": "HLS_CE_CareDeterminants",
+        "left_key": ["Id"],
+        "right_select": [
+          "CareDeterminantId",
+          "CareBarrierId",
+          "CareBarrierTypeId",
+          "CaseId",
+          "CBId",
+          "Compute_field",
+          "Name",
+          "Id",
+          "PatientId",
+          "Priority",
+          "Status",
+          "CBName",
+          "CreatedDate",
+          "BarrierCreatedDay",
+          "CareBarrierType.Id",
+          "CareBarrierType.Name",
+          "CareBarrier.CareBarrierTypeId",
+          "CareBarrier.CaseId",
+          "CareBarrier.CreatedById",
+          "CareBarrier.IsActive",
+          "CareBarrier.Name",
+          "CareBarrier.PatientId",
+          "CareBarrier.Priority",
+          "CareBarrier.Status",
+          "CareBarrier.Id",
+          "CareBarrier.CreatedDate",
+          "CareBarrier.CBId",
+          "CareBarrier.CBName",
+          "CareBarrier.BarrierCreatedDay",
+          "CareBarrier.CareBarrierType.Id",
+          "CareBarrier.CareBarrierType.Name",
+          "CareBarrierDeterminant.CareBarrierId",
+          "CareBarrierDeterminant.CareDeterminantId",
+          "CareBarrierDeterminant.CreatedById",
+          "CareBarrierDeterminant.Id",
+          "CareBarrierDeterminant.Name"
+        ],
+        "right": "HLS_Append_CareBarriersData",
+        "relationship": "AppendCareBarriers",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_Case_CareRequest": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Aug_Account_onto_CareRequest",
+        "left_key": ["CareRequestCaseId"],
+        "right_select": [
+          "Type",
+          "Subject",
+          "Status",
+          "RecordTypeId",
+          "Priority",
+          "OwnerId",
+          "IsEscalated",
+          "IsClosed",
+          "IsDeleted",
+          "Id",
+          "CreatedDate",
+          "ClosedDate",
+          "CaseNumber",
+          "AccountId",
+          "CaseRecordType.Name",
+          "Origin",
+          "HealthCloudGA__SourceSystem__c",
+          "HealthCloudGA__SourceSystemID__c",
+          "HealthCloudGA__SourceSystemModified__c",
+          "HealthCloudGA__SourceAgency__c",
+          "HealthCloudGA__SourceAgencyMeasureVersion__c",
+          "HealthCloudGA__SourceAgencyMeasureID__c",
+          "HealthCloudGA__SortOrder__c",
+          "HealthCloudGA__FinancialValue__c",
+          "HealthCloudGA__DueDate__c",
+          "ContactId",
+          "SuppliedName",
+          "SuppliedCompany",
+          "Reason",
+          "LastModifiedById"
+        ],
+        "right": "HLS_Augment_RecordType_onto_Case",
+        "relationship": "Case",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_RecordType_onto_Case": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Digest_Case",
+        "left_key": ["RecordTypeId"],
+        "right_select": ["Name"],
+        "right": "HLS_Digest_Record_Type",
+        "relationship": "CaseRecordType",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_UserRole_onto_User": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Digest_User",
+        "left_key": ["UserRoleId"],
+        "right_select": [
+          "Name",
+          "DeveloperName",
+          "Roles",
+          "RolePath",
+          "ParentRole.Name",
+          "ParentRole.DeveloperName",
+          "RoleNames",
+          "RoleNamesPath",
+          "Hierarchy_RoleNames",
+          "Hierarchy_RoleNamesPath",
+          "ParentRole.ParentRoleId",
+          "Id",
+          "ParentRoleId",
+          "PortalAccountId",
+          "PortalAccountOwnerId"
+        ],
+        "right": "HLS_Flatten_Hierarchy_Grouping",
+        "relationship": "Role",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_CE_Task": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "HLS_AppendTaskEvent",
+        "computedFields": [
+          {
+            "name": "Task_Type",
+            "saqlExpression": "case when 'TaskSubtype' is null then 'EventSubtype' else 'TaskSubtype' end",
+            "label": "Task_Type",
+            "type": "Text"
+          },
+          {
+            "name": "Activities_Num1",
+            "saqlExpression": "case when 'Id' is not null then 1 else 0 end",
+            "scale": 0,
+            "label": "Activities_Num1",
+            "type": "Numeric"
+          }
+        ],
+        "mergeWithSource": true
+      }
+    },
+    "HLS_Flatten_ParentName": {
+      "action": "flatten",
+      "parameters": {
+        "include_self_id": true,
+        "self_field": "DeveloperName",
+        "multi_field": "RoleNames",
+        "parent_field": "ParentRole.DeveloperName",
+        "path_field": "RoleNamesPath",
+        "source": "HLS_Augment_ParentName_onto_UserRole"
+      }
+    },
+    "HLS_Augment_ProductRequired_Onto_Visits": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Digest_ProductRequired",
+        "left_key": ["ParentRecordId"],
+        "right_select": [
+          "AccountId",
+          "ActualVisitEndTime",
+          "ActualVisitStartTime",
+          "Address.City",
+          "Address.AddressType",
+          "Address.Country",
+          "Address.Description",
+          "Address.Id",
+          "Address.LocationType",
+          "Address.ParentId",
+          "Address.Name",
+          "Address.State",
+          "Contact.AccountId",
+          "Address.Street",
+          "Contact.FirstName",
+          "Contact.LastName",
+          "Contact.Id",
+          "Contact.Name",
+          "ContextId",
+          "CreatedDate",
+          "Id",
+          "InstructionDescription",
+          "Location.Id",
+          "Location.IsInventoryLocation",
+          "Location.LocationLevel",
+          "Location.LocationType",
+          "Location.Name",
+          "Location.RootLocationId",
+          "Location.VisitorAddressId",
+          "Name",
+          "OwnerId",
+          "PlaceId",
+          "PlannedVisitEndTime",
+          "PlannedVisitStartTime",
+          "Status",
+          "StatusRemarks",
+          "User.AccountId",
+          "User.City",
+          "User.ContactId",
+          "User.Email",
+          "User.FirstName",
+          "User.FullPhotoUrl",
+          "User.Id",
+          "User.IsActive",
+          "User.ManagerId",
+          "User.Name",
+          "User.Phone",
+          "User.SmallPhotoUrl",
+          "User.State",
+          "User.Title",
+          "User.Username",
+          "User.UserRoleId",
+          "User.UserType",
+          "VisitedParty.ContactId",
+          "VisitedParty.Id",
+          "VisitedParty.Name",
+          "VisitedParty.SalesRep.AccountId",
+          "VisitedParty.SalesRep.FirstName",
+          "VisitedParty.SalesRep.Id",
+          "VisitedParty.SalesRep.LastName",
+          "VisitedParty.SalesRep.Name",
+          "VisitedParty.VisitId",
+          "Visitor.AssigneeId",
+          "Visitor.Id",
+          "Visitor.Name",
+          "Visitor.VisitId",
+          "VisitPriority",
+          "VisitorId",
+          "Visitor.ServiceResource.AccountId",
+          "Visitor.ServiceResource.Id",
+          "Visitor.ServiceResource.Name",
+          "Visitor.ServiceResource.RelatedRecordId",
+          "Visitor.ServiceResource.ResourceType",
+          "Visitor.UserVisitor.Name",
+          "Visitor.UserVisitor.Id",
+          "Visitor.UserVisitor.IsActive",
+          "Visitor.UserVisitor.Username",
+          "Visitor.UserVisitor.SmallPhotoUrl",
+          "Visitor.UserVisitor.FullPhotoUrl",
+          "Visitor.UserVisitor.ManagerId",
+          "Visitor.UserVisitor.City",
+          "Visitor.UserVisitor.Email",
+          "Visitor.UserVisitor.ContactId",
+          "Visitor.UserVisitor.AccountId",
+          "Visitor.UserVisitor.FirstName",
+          "Visitor.IsPrimaryResource",
+          "Visitor.UserVisitor.MediumPhotoUrl",
+          "User.MediumPhotoUrl",
+          "Visitor.UserVisitor.MediumBannerPhotoUrl",
+          "User.MediumBannerPhotoUrl"
+        ],
+        "right": "HLS_Augment_Address_Onto_Visit",
+        "relationship": "Visits",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Digest_Case": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Priority"},
+          {"name": "ClosedDate"},
+          {"name": "AccountId"},
+          {"name": "CaseNumber"},
+          {"name": "CreatedDate"},
+          {"name": "Id"},
+          {"name": "IsClosed"},
+          {"name": "IsDeleted"},
+          {"name": "IsEscalated"},
+          {"name": "Status"},
+          {"name": "RecordTypeId"},
+          {"name": "Subject"},
+          {"name": "Type"},
+          {"name": "OwnerId"},
+          {"name": "Origin"},
+          {"name": "HealthCloudGA__SourceSystem__c"},
+          {"name": "HealthCloudGA__SourceSystemID__c"},
+          {"name": "HealthCloudGA__SourceSystemModified__c"},
+          {"name": "HealthCloudGA__SourceAgency__c"},
+          {"name": "HealthCloudGA__SourceAgencyMeasureVersion__c"},
+          {"name": "HealthCloudGA__SourceAgencyMeasureID__c"},
+          {"name": "HealthCloudGA__SortOrder__c"},
+          {"name": "HealthCloudGA__FinancialValue__c"},
+          {"name": "HealthCloudGA__DueDate__c"},
+          {"name": "ContactId"},
+          {"name": "SuppliedName"},
+          {"name": "SuppliedCompany"},
+          {"name": "Reason"},
+          {"name": "LastModifiedById"}
+        ],
+        "object": "Case"
+      }
+    },
+    "HLS_Augment_UserRoles_Onto_VisitProducts": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_Account_Onto_Products",
+        "left_key": ["VisitAddress.Account.OwnerId"],
+        "right_select": [
+          "AccountId",
+          "City",
+          "ContactId",
+          "Email",
+          "FirstName",
+          "FullPhotoUrl",
+          "Id",
+          "IsActive",
+          "ManagerId",
+          "isDuplicate",
+          "MediumBannerPhotoUrl",
+          "MediumPhotoUrl",
+          "Name",
+          "Phone",
+          "Role.DeveloperName",
+          "Role.Hierarchy_RoleNames",
+          "Role.Id",
+          "Role.Hierarchy_RoleNamesPath",
+          "Role.Name",
+          "Role.ParentRole.DeveloperName",
+          "Role.ParentRole.ParentRoleId",
+          "Role.ParentRole.Name",
+          "Role.ParentRoleId",
+          "Role.PortalAccountId",
+          "Role.PortalAccountOwnerId",
+          "Role.RoleNamesPath",
+          "Role.RoleNames",
+          "Role.RolePath",
+          "Role.Roles",
+          "SmallPhotoUrl",
+          "State",
+          "Title",
+          "UniqueUserName",
+          "Username",
+          "UserRoleId",
+          "UserType"
+        ],
+        "right": "HLS_Compute_Manager_Unique",
+        "relationship": "Owner",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_Contacts_Onto_VisitedParty": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Digest_VisitedParty",
+        "left_key": ["ContactId"],
+        "right_select": [
+          "AccountId",
+          "Id",
+          "Name",
+          "FirstName",
+          "LastName"
+        ],
+        "right": "HLS_Digest_Contact",
+        "relationship": "SalesRep",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_ProductTransfer_Onto_ProductRequest": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["ProductRequestId"],
+        "left": "HLS_Digest_ProductRequest",
+        "left_key": ["Id"],
+        "right_select": [
+          "DestinationLocationId",
+          "Id",
+          "OwnerId",
+          "Product2Id",
+          "ProductRequestId",
+          "ProductTransferNumber",
+          "QuantityReceived",
+          "QuantitySent",
+          "Status"
+        ],
+        "right": "HLS_Digest_ProductTransfer",
+        "relationship": "ProductTransfer",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_MemberPlan_onto_Lead": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["MemberId"],
+        "left": "HLS_Augment_User_onto_Lead",
+        "left_key": ["ConvertedAccountId"],
+        "right_select": [
+          "Affiliation",
+          "EffectiveTo",
+          "GroupNumber",
+          "MemberId",
+          "Id",
+          "MemberNumber",
+          "Name",
+          "OwnerId",
+          "PayerId",
+          "Plan.PlanType",
+          "PlanId",
+          "PrimaryCarePhysician",
+          "PrimarySecondaryTertiary",
+          "RelationshipToSubscriber",
+          "SourceSystem",
+          "Status",
+          "SubscriberId",
+          "IssuerNumber"
+        ],
+        "right": "HLS_Augment_PurchaserPlan_onto_MemberPlan",
+        "relationship": "MemberPlan",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_CE_Goal": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "HLS_Digest_Goal",
+        "computedFields": [
+          {
+            "precision": 16,
+            "name": "Goal_Due_Days",
+            "saqlExpression": "case when 'HealthCloudGA__Progress__c' < 100 then daysBetween(now(),toDate('HealthCloudGA__ActivityDate__c_sec_epoch')) end",
+            "scale": 0,
+            "label": "Goal_Due_Days",
+            "type": "Numeric"
+          },
+          {
+            "name": "Goal_Overdue_Days_Bucket",
+            "saqlExpression": "case when Goal_Due_Days < 0 && Goal_Due_Days >= -7 then \"1.0-7 days\" when Goal_Due_Days < -7 && Goal_Due_Days >= -14 then \"2.8-14 days\"  when Goal_Due_Days < -14 && Goal_Due_Days >= -30 then \"3.15-30 days\" when Goal_Due_Days < -30 && Goal_Due_Days >= -60 then \"4.31-60 days\" when Goal_Due_Days < -60 && Goal_Due_Days >= -90 then \"5.61-90 days\"  when Goal_Due_Days < -90 then \"6.90+ days\" end",
+            "label": "Goal_Overdue_Days_Bucket",
+            "type": "Text"
+          },
+          {
+            "name": "Goal_Due_Days_Bucket",
+            "saqlExpression": "case when Goal_Due_Days >= 0 && Goal_Due_Days <= 7 then \"1.0-7 days\" when Goal_Due_Days > 7 && Goal_Due_Days <= 14 then \"2.8-14 days\"  when Goal_Due_Days > 14 && Goal_Due_Days <= 30 then \"3.15-30 days\" when Goal_Due_Days > 30 && Goal_Due_Days <= 60 then \"4.31-60 days\" when Goal_Due_Days > 60 && Goal_Due_Days <= 90 then \"5.61-90 days\"  when Goal_Due_Days >= 91 then \"6.90+ days\" end",
+            "label": "Goal_Due_Days_Bucket",
+            "type": "Text"
+          },
+          {
+            "name": "Goal_Due_Days_Text",
+            "saqlExpression": "number_to_string(abs('Goal_Due_Days'),\"#\")",
+            "label": "Goal_Due_Days_Text",
+            "type": "Text"
+          }
+        ],
+        "mergeWithSource": true
+      }
+    },
+    "HLS_Create_IsLastStageUpdate_Field": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "HLS_Find_Last_Stage_Updates",
+        "computedFields": [{
+          "name": "IsLastStageUpdate",
+          "saqlExpression": "case when 'LastStageUpdate_Id' == 'Id' then \"1\" else \"0\" end",
+          "label": "IsLastStageUpdate",
+          "type": "Text"
+        }],
+        "mergeWithSource": true
+      }
+    },
+    "HLS_Augment_Account_onto_Opportunity2": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_Account_onto_Opportunity",
+        "left_key": ["HealthCloudGA__ReferringOrganization__c"],
+        "right_select": [
+          "Name",
+          "HealthCloudGA__CarePlan__c"
+        ],
+        "right": "HLS_Augment_RecordType_onto_Account",
+        "relationship": "ReferringOrganization",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_CE_ProgramPatientAffiliation": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "HLS_Augment_ProgramPatientAffiliation_onto_ProgramPatientSummary",
+        "computedFields": [
+          {
+            "name": "RiskScore_Bucket",
+            "saqlExpression": "case when 'HealthCloudGA__RiskScore__c' >= 0 && 'HealthCloudGA__RiskScore__c' <= 1 then \"01.0-1\" when 'HealthCloudGA__RiskScore__c' > 1 && 'HealthCloudGA__RiskScore__c' <= 2 then \"02.1-2\"  when 'HealthCloudGA__RiskScore__c' > 2 && 'HealthCloudGA__RiskScore__c' <= 3 then \"03.2-3\" when 'HealthCloudGA__RiskScore__c' > 3 && 'HealthCloudGA__RiskScore__c' <= 4 then \"04.3-4\" when 'HealthCloudGA__RiskScore__c' > 4 && 'HealthCloudGA__RiskScore__c' <= 5 then \"05.4-5\" when 'HealthCloudGA__RiskScore__c' > 5 && 'HealthCloudGA__RiskScore__c' <= 6 then \"06.5-6\" when 'HealthCloudGA__RiskScore__c' > 6 && 'HealthCloudGA__RiskScore__c' <= 7 then \"07.6-7\" when 'HealthCloudGA__RiskScore__c' > 7 && 'HealthCloudGA__RiskScore__c' <= 8 then \"08.7-8\" when 'HealthCloudGA__RiskScore__c' > 8 && 'HealthCloudGA__RiskScore__c' <= 9 then \"09.8-9\" when 'HealthCloudGA__RiskScore__c' > 9 && 'HealthCloudGA__RiskScore__c' <= 10 then \"10.9-10\" when 'HealthCloudGA__RiskScore__c' > 10 && 'HealthCloudGA__RiskScore__c' <= 11 then \"11.10+\"  end",
+            "label": "RiskScore_Bucket",
+            "type": "Text"
+          },
+          {
+            "defaultValue": "Not Defined",
+            "precision": 16,
+            "name": "Conditions_Bucket",
+            "saqlExpression": "case when 'HealthCloudGA__NumberOfConditions__c' == \"0\" || 'HealthCloudGA__NumberOfConditions__c' == \"1\" then \"01.0-1\" when 'HealthCloudGA__NumberOfConditions__c' == \"2\"  || 'HealthCloudGA__NumberOfConditions__c' == \"3\" then \"02.2-3\"  when \n'HealthCloudGA__NumberOfConditions__c' == \"4\" || 'HealthCloudGA__NumberOfConditions__c' == \"5\" then \"03.4-5\" when \n'HealthCloudGA__NumberOfConditions__c' == \"6\" || 'HealthCloudGA__NumberOfConditions__c' == \"7\" then \"04.6-7\" end",
+            "label": "Conditions_Bucket",
+            "type": "Text"
+          },
+          {
+            "multiValueSeparator": ",",
+            "defaultValue": "NA",
+            "name": "Conditions_Breakdown",
+            "saqlExpression": "'HealthCloudGA__Conditions__c'",
+            "label": "Conditions_Breakdown",
+            "type": "Text",
+            "isMultiValue": true
+          },
+          {
+            "defaultValue": "0",
+            "name": "Conditions_In_Number",
+            "saqlExpression": "string_to_number('HealthCloudGA__NumberOfConditions__c')",
+            "scale": 0,
+            "label": "Conditions_In_Number",
+            "type": "Numeric"
+          }
+        ],
+        "mergeWithSource": true
+      }
+    },
+    "HLS_Augment_AssessmentTask_Onto_AssessmentTaskOrder": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Digest_AssessmentTaskOrder",
+        "left_key": ["AssessmentTaskId"],
+        "right_select": [
+          "AssessmentTaskDefinitionId",
+          "Id",
+          "IsRequired",
+          "Name",
+          "OwnerId",
+          "ParentId",
+          "TaskCompleted",
+          "Status",
+          "TaskType"
+        ],
+        "right": "HLS_CE_AssessmentTask",
+        "relationship": "AssessmentTask",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_EventTask_Onto_AccountPrograms": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["AccountId"],
+        "left": "HLS_Augment_CareDeterminants_Onto_Patients",
+        "left_key": ["Id"],
+        "right_select": [
+          "AccountId",
+          "Activities_Num1",
+          "ActivityDate",
+          "Compute_Task",
+          "CreatedDate",
+          "DaysOverdue",
+          "DaysOverdueText",
+          "Description",
+          "DurationInMinutes",
+          "EventSubtype",
+          "HealthCloudGA__CarePlanGoal__c",
+          "HealthCloudGA__CarePlanProblem__c",
+          "HealthCloudGA__CarePlanTemplate__c",
+          "HealthCloudGA__TaskType__c",
+          "Id",
+          "IsClosed",
+          "IsHighPriority",
+          "IsOverdue",
+          "LastModifiedDate",
+          "Number_Of_Tasks_Overdue",
+          "OwnerId",
+          "Priority",
+          "RecordTypeId",
+          "Status",
+          "Subject",
+          "TaskCreationDays",
+          "TaskId",
+          "TaskSubtype",
+          "Task_CreatedDays",
+          "Task_Due_Days",
+          "Task_Due_Days_Bucket",
+          "Task_Due_Days_Text",
+          "Task_Overdue_Days_Bucket",
+          "Task_Type",
+          "WhatId",
+          "WhoId",
+          "Task_Status"
+        ],
+        "right": "HLS_CE_Task",
+        "relationship": "AccountProgTasks",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "HLS_CE_Contact_onto_Account": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "HLS_Augment_Contact_onto_Account",
+        "computedFields": [{
+          "name": "Location",
+          "saqlExpression": "case when 'Contact.MailingState' is not null then 'Contact.MailingState' else \"Not Defined\" end",
+          "label": "Location",
+          "type": "Text"
+        }],
+        "mergeWithSource": true
+      }
+    },
+    "HLS_Append_CareBarriers_With_CareDeterminants": {
+      "action": "append",
+      "parameters": {
+        "enableDisjointedSchemaMerge": true,
+        "sources": [
+          "HLS_Augment_AppendedData_Onto_CareDeterminantsData",
+          "HLS_Augment_CareDeterminantsData_Onto_AppendedData"
+        ]
+      }
+    },
+    "HLS_Digest_CareDeterminants": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "CareDeterminantTypeId"},
+          {"name": "Id"},
+          {"name": "Name"},
+          {"name": "PatientId"}
+        ],
+        "object": "CareDeterminant"
+      }
+    },
+    "HLS_Digest_Record_Type": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Name"},
+          {"name": "Id"}
+        ],
+        "object": "RecordType"
+      }
+    },
+    "HLS_Augment_Product_Onto_ProductItem": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Product2Id"],
+        "left": "HLS_Digest_Product",
+        "left_key": ["Id"],
+        "right_select": [
+          "Id",
+          "LocationId",
+          "Product2Id",
+          "ProductItemNumber",
+          "ProductName",
+          "QuantityOnHand",
+          "QuantityUnitOfMeasure"
+        ],
+        "right": "HLS_Digest_ProductItem",
+        "relationship": "Products",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_User_Onto_Visitor": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_ServiceResource_Onto_Visitor",
+        "left_key": ["AssigneeId"],
+        "right_select": [
+          "AccountId",
+          "City",
+          "ContactId",
+          "Email",
+          "FirstName",
+          "FullPhotoUrl",
+          "Id",
+          "IsActive",
+          "ManagerId",
+          "Name",
+          "SmallPhotoUrl",
+          "Username",
+          "MediumPhotoUrl",
+          "MediumBannerPhotoUrl"
+        ],
+        "right": "HLS_Digest_User",
+        "relationship": "UserVisitor",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_CE_Goal_Due_Days": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "HLS_Augment_ProgramPatientSummary_onto_Goal",
+        "computedFields": [
+          {
+            "precision": 10,
+            "name": "Task_Created_Days",
+            "saqlExpression": "daysBetween(toDate(CreatedDate_sec_epoch),now())",
+            "scale": 0,
+            "label": "Task_Created_Days",
+            "type": "Numeric"
+          },
+          {
+            "name": "Task_Age_Bucket",
+            "saqlExpression": "case when Task_Created_Days >= 0 && Task_Created_Days <= 7 then \"1.0-7\" when Task_Created_Days >= 8 && Task_Created_Days <= 15 then \"2.8-15\"  when Task_Created_Days>= 16 && Task_Created_Days <= 23 then \"3.16-23\" when Task_Created_Days >= 24 && Task_Created_Days <= 30 then \"4.24-30\" when Task_Created_Days > 30 then \"5. > 30\" end",
+            "label": "Task_Age_Bucket",
+            "type": "Text"
+          },
+          {
+            "name": "Risk_Level",
+            "saqlExpression": "case when 'ProgramPatientSummary.HealthCloudGA__RiskScore__c' < 3 then \"1. Low\" when 'ProgramPatientSummary.HealthCloudGA__RiskScore__c' >=3 and 'ProgramPatientSummary.HealthCloudGA__RiskScore__c' < 6 then \"2. Medium\" when  'ProgramPatientSummary.HealthCloudGA__RiskScore__c' >=6  then \"3. High\"  end",
+            "label": "Risk_Level",
+            "type": "Text"
+          },
+          {
+            "name": "IsCarePlanOverdue",
+            "saqlExpression": "case when ('CarePlan.IsClosed' == \"false\") && (daysBetween(toDate(substr('CarePlan.HealthCloudGA__DueDate__c', 1, 10), \"yyyy-MM-dd\"), now()) > 0) then \"true\" else \"false\" end",
+            "label": "IsCarePlanOverdue",
+            "type": "Text"
+          }
+        ],
+        "mergeWithSource": true
+      }
+    },
+    "HLS_Digest_Goal": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "OwnerId"},
+          {"name": "Name"},
+          {"name": "Id"},
+          {"name": "HealthCloudGA__Progress__c"},
+          {"name": "HealthCloudGA__Priority__c"},
+          {"name": "HealthCloudGA__CarePlan__c"},
+          {"name": "HealthCloudGA__CarePlanTemplate__c"},
+          {"name": "HealthCloudGA__CarePlanProblem__c"},
+          {"name": "CreatedDate"},
+          {"name": "CreatedById"},
+          {"name": "HealthCloudGA__ActivityDate__c"}
+        ],
+        "object": "HealthCloudGA__CarePlanGoal__c"
+      }
+    },
+    "HLS_AppendTaskEvent": {
+      "action": "append",
+      "parameters": {
+        "enableDisjointedSchemaMerge": true,
+        "sources": [
+          "HLS_Digest_Event",
+          "HLS_Add_Fields_To_Task"
+        ]
+      }
+    },
+    "HLS_Augment_CareBarriers_Onto_Case": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Filter_Compute_CareDeterminantId",
+        "left_key": ["Compute_Case"],
+        "right_select": [
+          "AccountId",
+          "CaseNumber",
+          "CaseRecordType.Name",
+          "ClosedDate",
+          "ContactId",
+          "CreatedDate",
+          "HealthCloudGA__DueDate__c",
+          "HealthCloudGA__FinancialValue__c",
+          "HealthCloudGA__SortOrder__c",
+          "HealthCloudGA__SourceAgencyMeasureID__c",
+          "HealthCloudGA__SourceAgencyMeasureVersion__c",
+          "HealthCloudGA__SourceAgency__c",
+          "HealthCloudGA__SourceSystemID__c",
+          "HealthCloudGA__SourceSystemModified__c",
+          "HealthCloudGA__SourceSystem__c",
+          "Id",
+          "IsDeleted",
+          "IsClosed",
+          "IsEscalated",
+          "LastModifiedById",
+          "Origin",
+          "OwnerId",
+          "Priority",
+          "Reason",
+          "RecordTypeId",
+          "Status",
+          "Subject",
+          "SuppliedCompany",
+          "SuppliedName",
+          "Type"
+        ],
+        "right": "HLS_Filter_CaseRecordType",
+        "relationship": "CareBarriersCase",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Compute_Manager_Unique": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "HLS_Compute_Unique_Name",
+        "computedFields": [{
+          "name": "UniqueUserName",
+          "saqlExpression": "case when isDuplicate is null then 'Name' else 'Name' + \" (\" +'Username'+ \")\" end",
+          "label": "UniqueUserName",
+          "type": "Text"
+        }],
+        "mergeWithSource": true
+      }
+    },
+    "HLS_Filter_Out_Last_Stage_Updates": {
+      "action": "filter",
+      "parameters": {
+        "filter": "IsLastStageUpdate:EQ:1",
+        "source": "HLS_Create_IsLastStageUpdate_Field"
+      }
+    },
+    "HLS_CE_ComputeCareBarriers": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "HLS_Digest_CareBarrier",
+        "computedFields": [
+          {
+            "name": "CBId",
+            "saqlExpression": "'Id'",
+            "label": "CBId",
+            "type": "Text"
+          },
+          {
+            "name": "CBName",
+            "saqlExpression": "'Name'",
+            "label": "CBName",
+            "type": "Text"
+          },
+          {
+            "defaultValue": "0",
+            "precision": 16,
+            "name": "BarrierCreatedDay",
+            "saqlExpression": "daysBetween(toDate(CreatedDate,\"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\"),now())",
+            "scale": 0,
+            "label": "BarrierCreatedDay",
+            "type": "Numeric"
+          }
+        ],
+        "mergeWithSource": true
+      }
+    },
+    "HLS_Digest_ProductItem": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "LocationId"},
+          {"name": "Product2Id"},
+          {"name": "ProductItemNumber"},
+          {"name": "ProductName"},
+          {"name": "QuantityOnHand"},
+          {"name": "QuantityUnitOfMeasure"}
+        ],
+        "object": "ProductItem"
+      }
+    },
+    "HLS_Register_Activities": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "HLS_Activities",
+        "alias": "${App.Datasets.HLS_Activities8_tp.FullyQualifiedName}",
+        "source": "HLS_CE_Task"
+      }
+    },
+    "HLS_CE_CareRequest_Due_Days": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "HLS_Augment_ProgramPatientSummary_onto_CareRequest",
+        "computedFields": [
+          {
+            "defaultValue": "0",
+            "precision": 16,
+            "name": "Days_Since_Created",
+            "saqlExpression": "daysBetween(toDate(CreatedDate,\"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\"),now())",
+            "scale": 0,
+            "label": "Days Since Created",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "Due_days",
+            "saqlExpression": "case when DueDate is not null then daysBetween(now(),toDate(DueDate_sec_epoch)) end",
+            "scale": 0,
+            "label": "Due_days",
+            "type": "Numeric"
+          },
+          {
+            "name": "CareRequest_Age_Bucket",
+            "saqlExpression": "case when Days_Since_Created >= 0 && Days_Since_Created <= 2 then \"1.0-2\" when Days_Since_Created >= 3 && Days_Since_Created <= 5 then \"2.3-5\"  when Days_Since_Created>= 6 && Days_Since_Created <= 7 then \"3.6-7\" when Days_Since_Created>= 8 then \"4.>7\" end",
+            "label": "Care Request Age Bucket",
+            "type": "Text"
+          },
+          {
+            "precision": 1,
+            "name": "isReopenedCareRequest",
+            "saqlExpression": "case when 'ReopenedDate' is null then 0 else 1 end",
+            "scale": 0,
+            "label": "isReopenedCareRequest",
+            "type": "Numeric"
+          },
+          {
+            "precision": 1,
+            "name": "isDeniedCareRequest",
+            "saqlExpression": "case when 'DecisionDate' is null then 0 else 1 end",
+            "scale": 0,
+            "label": "isDeniedCareRequest",
+            "type": "Numeric"
+          },
+          {
+            "name": "Risk_Level",
+            "saqlExpression": "case when 'ProgramPatientSummary.HealthCloudGA__RiskScore__c' < 3 then \"1. Low\" when 'ProgramPatientSummary.HealthCloudGA__RiskScore__c' >=3 and 'ProgramPatientSummary.HealthCloudGA__RiskScore__c' < 6 then \"2. Medium\" when  'ProgramPatientSummary.HealthCloudGA__RiskScore__c' >=6  then \"3. High\"  else \"4. NA\" end",
+            "label": "Risk_Level",
+            "type": "Text"
+          },
+          {
+            "name": "Created_Date_Format",
+            "saqlExpression": "substr(date_to_string(toDate('Case.CreatedDate_sec_epoch'), \"yyyy-MM-dd HH:mm:ss\"),1,10)",
+            "label": "Date Opened",
+            "type": "Text"
+          },
+          {
+            "name": "Due_Date_Format",
+            "saqlExpression": "substr(date_to_string(toDate('DueDate_sec_epoch'), \"yyyy-MM-dd HH:mm:ss\"),1,10)",
+            "label": "Due Date",
+            "type": "Text"
+          },
+          {
+            "name": "Denied_Date_Format",
+            "saqlExpression": "substr(date_to_string(toDate('DecisionDate_sec_epoch'), \"yyyy-MM-dd HH:mm:ss\"),1,10)",
+            "label": "Denied Date",
+            "type": "Text"
+          },
+          {
+            "name": "Reopened_Date_Format",
+            "saqlExpression": "substr(date_to_string(toDate('ReopenedDate_sec_epoch'), \"yyyy-MM-dd HH:mm:ss\"),1,10)",
+            "label": "Reopened Date",
+            "type": "Text"
+          },
+          {
+            "name": "Breached_SLA",
+            "saqlExpression": "case when Due_days < 0 then \"Yes\" else \"No\" end",
+            "label": "Breached SLA",
+            "type": "Text"
+          },
+          {
+            "defaultValue": "0",
+            "precision": 16,
+            "name": "Resolution_Days",
+            "saqlExpression": "daysBetween(now(),toDate('ResolutionDate_sec_epoch'))",
+            "scale": 0,
+            "label": "Resolution_Days",
+            "type": "Numeric"
+          }
+        ],
+        "mergeWithSource": true
+      }
+    },
+    "HLS_Compute_Historical_Trending_Fields": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["OpportunityId"],
+        "orderBy": [{
+          "name": "Unique_Sort_Key",
+          "direction": "asc"
+        }],
+        "source": "HLS_Add_Unique_Sort_Key_to_OpportunityHistory",
+        "computedFields": [
+          {
+            "expression": {
+              "sourceField": "CreatedDate",
+              "default": "current()",
+              "offset": "first()"
+            },
+            "name": "OpportunityCreatedDate",
+            "description": "Opportunity Created Date",
+            "label": "OpportunityCreatedDate"
+          },
+          {
+            "expression": {
+              "sourceField": "CreatedDate",
+              "default": "3000-01-01T00:00:00.000Z",
+              "offset": "next()"
+            },
+            "name": "ValidToDate",
+            "description": "ValidToDate",
+            "label": "ValidToDate"
+          },
+          {
+            "expression": {
+              "sourceField": "CreatedDate",
+              "default": "current()",
+              "offset": "current()"
+            },
+            "name": "ValidFromDate",
+            "description": "ValidFromDate",
+            "label": "ValidFromDate"
+          },
+          {
+            "expression": {
+              "sourceField": "Amount",
+              "default": "0",
+              "offset": "previous()"
+            },
+            "name": "AmountPrev",
+            "description": "AmountPrev",
+            "label": "AmountPrev"
+          },
+          {
+            "expression": {
+              "sourceField": "StageName",
+              "offset": "previous()"
+            },
+            "name": "StageNamePrev",
+            "description": "Previous Stage Name",
+            "label": "Prev Stage Name"
+          },
+          {
+            "expression": {
+              "sourceField": "ForecastCategory",
+              "offset": "previous()"
+            },
+            "name": "ForecastCategoryPrev",
+            "description": "ForecastCategoryPrev",
+            "label": "ForecastCategoryPrev"
+          },
+          {
+            "expression": {
+              "sourceField": "CloseDate",
+              "default": "1970-01-01",
+              "offset": "previous()"
+            },
+            "name": "CloseDatePrev",
+            "description": "Previous Close Date",
+            "label": "Prev Close Date"
+          },
+          {
+            "expression": {
+              "sourceField": "CreatedDate",
+              "offset": "previous()"
+            },
+            "name": "CreatedDatePrev",
+            "description": "Previous Created Date",
+            "label": "Prev CreatedDate"
+          }
+        ]
+      }
+    },
+    "HLS_Digest_ProductRequired": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "ParentRecordId"},
+          {"name": "Product2Id"},
+          {"name": "ProductRequiredNumber"},
+          {"name": "QuantityRequired"},
+          {"name": "QuantityUnitOfMeasure"},
+          {"name": "ProductName"}
+        ],
+        "object": "ProductRequired"
+      }
+    },
+    "HLS_Augment_PriceBook_Onto_PrickBookEntry": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Digest_PriceBookEntry",
+        "left_key": ["Pricebook2Id"],
+        "right_select": [
+          "Id",
+          "Name",
+          "IsStandard"
+        ],
+        "right": "HLS_Digest_PriceBook",
+        "relationship": "PriceBook",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Digest_Order": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {"name": "ActivatedDate"},
+          {"name": "ContractId"},
+          {"name": "EffectiveDate"},
+          {"name": "EndDate"},
+          {"name": "Id"},
+          {"name": "Name"},
+          {"name": "OrderNumber"},
+          {"name": "OriginalOrderId"},
+          {"name": "OrderReferenceNumber"},
+          {"name": "Pricebook2Id"},
+          {"name": "Status"},
+          {"name": "StatusCode"},
+          {"name": "TotalAmount"},
+          {"name": "Type"}
+        ],
+        "object": "Order"
+      }
+    },
+    "HLS_Filter_Out_Stage_Updates": {
+      "action": "filter",
+      "parameters": {
+        "filter": "Stage_isUpdated:EQ:1",
+        "source": "HLS_Add_Fields_to_OpportunityHistory"
+      }
+    },
+    "HLS_Register_CareRequest": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "HLS_Care_Request",
+        "alias": "${App.Datasets.HLS_Care_Request8_tp.FullyQualifiedName}",
+        "source": "HLS_Augment_User_onto_CareRequest"
+      }
+    },
+    "HLS_Augment_Contact_Onto_VisitedParty": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_VisitedParty_Onto_Visitors",
+        "left_key": ["VisitorId"],
+        "right_select": [
+          "AccountId",
+          "Id",
+          "Name",
+          "FirstName",
+          "LastName"
+        ],
+        "right": "HLS_Digest_Contact",
+        "relationship": "Contact",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Digest_OrderItem": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AvailableQuantity"},
+          {"name": "CreatedDate"},
+          {"name": "Id"},
+          {"name": "EndDate"},
+          {"name": "ListPrice"},
+          {"name": "OrderId"},
+          {"name": "OrderItemNumber"},
+          {"name": "OriginalOrderItemId"},
+          {"name": "PricebookEntryId"},
+          {"name": "Product2Id"},
+          {"name": "Quantity"},
+          {"name": "ServiceDate"},
+          {"name": "TotalPrice"},
+          {"name": "UnitPrice"}
+        ],
+        "object": "OrderItem"
+      }
+    },
+    "HLS_Register_Case": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "HLS_Care_Plan",
+        "alias": "${App.Datasets.HLS_Care_Plan7_tp.FullyQualifiedName}",
+        "source": "HLS_Augment_RecordType_onto_Case"
+      }
+    },
+    "HLS_Digest_ProgramPatientSummary": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "HealthCloudGA__Account__c"},
+          {
+            "defaultValue": null,
+            "name": "HealthCloudGA__RiskScore__c"
+          },
+          {"name": "Id"},
+          {"name": "OwnerId"},
+          {"name": "Name"},
+          {"name": "HealthCloudGA__ProgramPatientAffiliation__c"},
+          {
+            "defaultValue": "Not Defined",
+            "name": "HealthCloudGA__NumberOfConditions__c"
+          },
+          {"name": "HealthCloudGA__Year__c"},
+          {"name": "HealthCloudGA__Age__c"},
+          {"name": "HealthCloudGA__AgeBand__c"},
+          {"name": "HealthCloudGA__EffectiveDate__c"},
+          {
+            "defaultValue": "Not Defined",
+            "name": "HealthCloudGA__EnrollmentType__c"
+          },
+          {"name": "HealthCloudGA__DisabilityStatus__c"},
+          {"name": "HealthCloudGA__Gender__c"},
+          {"name": "HealthCloudGA__HCCCodes__c"},
+          {"name": "HealthCloudGA__Institution__c"},
+          {
+            "defaultValue": "NA",
+            "name": "HealthCloudGA__Conditions__c",
+            "isMultiValue": false
+          }
+        ],
+        "object": "HealthCloudGA__ProgramPatientSummary__c"
+      }
+    },
+    "HLS_Augment_Contact_onto_Leads": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_Account_onto_Lead",
+        "left_key": ["HC13_SigningProvider__c"],
+        "right_select": ["Name"],
+        "right": "HLS_CE_Contact",
+        "relationship": "Contact",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_AssessmentTasks_Onto_Orders": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["OrderId"],
+        "left": "HLS_CE_Products",
+        "left_key": ["Order.Id"],
+        "right_select": [
+          "AssessmentTask.AssessmentTaskDefinitionId",
+          "AssessmentTask.Id",
+          "AssessmentTask.IsRequired",
+          "AssessmentTask.Name",
+          "AssessmentTask.OwnerId",
+          "AssessmentTask.ParentId",
+          "AssessmentTask.Status",
+          "AssessmentTask.TaskCompleted",
+          "AssessmentTask.TaskType",
+          "AssessmentTaskId",
+          "CreatedDate",
+          "Id",
+          "Name",
+          "LastModifiedDate",
+          "OrderId"
+        ],
+        "right": "HLS_Augment_AssessmentTask_Onto_AssessmentTaskOrder",
+        "relationship": "AssessmentTasks",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_Contact_onto_Opportunity": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_User_onto_Opportunity",
+        "left_key": ["HealthCloudGA__ReferringPractitioner__c"],
+        "right_select": [
+          "Name",
+          "MailingState_01",
+          "PhotoUrl",
+          "FirstName",
+          "LastName"
+        ],
+        "right": "HLS_CE_Contact",
+        "relationship": "ReferringPractitioner",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Digest_ServiceResource": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {"name": "Id"},
+          {"name": "Name"},
+          {"name": "RelatedRecordId"},
+          {"name": "ResourceType"}
+        ],
+        "object": "ServiceResource"
+      }
+    },
+    "HLS_Augment_Address_Onto_Visit": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_Location_Onto_Visit",
+        "left_key": ["PlaceId"],
+        "right_select": [
+          "AddressType",
+          "City",
+          "Country",
+          "Description",
+          "Id",
+          "LocationType",
+          "Name",
+          "ParentId",
+          "State",
+          "Street"
+        ],
+        "right": "HLS_Digest_Address",
+        "relationship": "Address",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_ServiceResource_Onto_Visitor": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Digest_Visitor",
+        "left_key": ["AssigneeId"],
+        "right_select": [
+          "AccountId",
+          "Id",
+          "Name",
+          "RelatedRecordId",
+          "ResourceType"
+        ],
+        "right": "HLS_Digest_ServiceResource",
+        "relationship": "ServiceResource",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_User_onto_Problem": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Augment_Account_onto_Problem",
+        "left_key": ["OwnerId"],
+        "right_select": [
+          "Email",
+          "FullPhotoUrl",
+          "Id",
+          "IsActive",
+          "isDuplicate",
+          "ManagerId",
+          "Name",
+          "Role.DeveloperName",
+          "Role.Hierarchy_RoleNames",
+          "Role.Name",
+          "Role.ParentRole.DeveloperName",
+          "Role.ParentRole.Name",
+          "Role.RoleNames",
+          "Role.Roles",
+          "State",
+          "Title",
+          "UniqueUserName",
+          "Username",
+          "UserType",
+          "UserRoleId",
+          "ContactId",
+          "AccountId",
+          "FirstName",
+          "Role.Id",
+          "Role.ParentRoleId",
+          "Role.PortalAccountId",
+          "Role.PortalAccountOwnerId",
+          "Role.ParentRole.ParentRoleId",
+          "Role.Hierarchy_RoleNamesPath",
+          "MediumBannerPhotoUrl",
+          "MediumPhotoUrl"
+        ],
+        "right": "HLS_Compute_Manager_Unique",
+        "relationship": "Owner",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_RecordType_onto_CareRequest": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Digest_CareRequest",
+        "left_key": ["RecordTypeId"],
+        "right_select": ["Name"],
+        "right": "HLS_Digest_Record_Type",
+        "relationship": "CareRequestRecordType",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Register_Goals_Tasks": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "HLS_Task",
+        "alias": "${App.Datasets.HLS_Task7_tp.FullyQualifiedName}",
+        "source": "HLS_Augment_User_onto_Goal"
+      }
+    },
+    "HLS_Augment_ProductFulfillmentLocation_Onto_Visits": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["ProductId"],
+        "left": "HLS_Augment_ProductTransfers_Onto_Visits",
+        "left_key": ["Product2Id"],
+        "right_select": [
+          "AccountId",
+          "FulfillmentLocationId",
+          "Id",
+          "LocationId",
+          "Name",
+          "ProductId",
+          "UserId"
+        ],
+        "right": "HLS_Digest_ProductFulfillmentLocation",
+        "relationship": "ProductFulfillmentLocation",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Digest_OpportunityHistory": {
+      "schema": {"objects": [{
+        "label": "OpportunityHistory",
+        "fields": [
+          {
+            "format": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+            "name": "CreatedDate",
+            "description": "Opportunity Created Date",
+            "label": "CreatedDate"
+          },
+          {
+            "name": "Amount",
+            "description": "Amount",
+            "label": "Amount"
+          },
+          {
+            "name": "CloseDate",
+            "label": "CloseDate"
+          }
+        ]
+      }]},
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Amount"},
+          {
+            "fiscalMonthOffset": 0,
+            "firstDayOfWeek": 0,
+            "name": "CloseDate"
+          },
+          {"name": "CreatedById"},
+          {
+            "fiscalMonthOffset": 0,
+            "firstDayOfWeek": 0,
+            "name": "CreatedDate"
+          },
+          {"name": "ForecastCategory"},
+          {"name": "Id"},
+          {"name": "IsDeleted"},
+          {"name": "OpportunityId"},
+          {"name": "StageName"}
+        ],
+        "object": "OpportunityHistory"
+      }
+    },
+    "HLS_Digest_PriceBook": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "IsStandard"},
+          {"name": "Name"}
+        ],
+        "object": "Pricebook2"
+      }
+    },
+    "HLS_Augment_Goal_onto_Task": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Add_Fields_To_Task",
+        "left_key": ["HealthCloudGA__CarePlanGoal__c"],
+        "right_select": [
+          "CreatedById",
+          "CreatedDate",
+          "Goal_Due_Days",
+          "Goal_Due_Days_Bucket",
+          "Goal_Due_Days_Text",
+          "Goal_Overdue_Days_Bucket",
+          "HealthCloudGA__ActivityDate__c",
+          "HealthCloudGA__CarePlanProblem__c",
+          "HealthCloudGA__CarePlan__c",
+          "HealthCloudGA__Priority__c",
+          "HealthCloudGA__Progress__c",
+          "Id",
+          "Name",
+          "OwnerId"
+        ],
+        "right": "HLS_CE_Goal",
+        "relationship": "Goal",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Augment_PurchaserPlan_onto_MemberPlan": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "HLS_Digest_MemberPlan",
+        "left_key": ["PlanId"],
+        "right_select": ["PlanType"],
+        "right": "HLS_Digest_PurchaserPlan",
+        "relationship": "Plan",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "HLS_Digest_Opportunity": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {"name": "Amount"},
+          {"name": "CloseDate"},
+          {"name": "CreatedDate"},
+          {"name": "CreatedById"},
+          {"name": "HealthCloudGA__Diagnosis__c"},
+          {"name": "ForecastCategoryName"},
+          {"name": "HealthCloudGA__InsuranceGroupId__c"},
+          {"name": "HealthCloudGA__InsuranceMemberId__c"},
+          {"name": "HealthCloudGA__InsuranceType__c"},
+          {"name": "HealthCloudGA__IsOutOfNetwork__c"},
+          {"name": "HealthCloudGA__Primary_Insurance__c"},
+          {"name": "HealthCloudGA__Priority__c"},
+          {"name": "HealthCloudGA__ReasonForOutOfNetworkReferral__c"},
+          {"name": "HealthCloudGA__Reason_for_Referral__c"},
+          {"name": "HealthCloudGA__ReferralReceivedDate__c"},
+          {"name": "HealthCloudGA__ReferredToOrganization__c"},
+          {"name": "HealthCloudGA__ReferredToPractitioner__c"},
+          {"name": "HealthCloudGA__ReferredToUser__c"},
+          {"name": "HealthCloudGA__ReferringOrganization__c"},
+          {"name": "HealthCloudGA__ReferringPractitioner__c"},
+          {"name": "HealthCloudGA__ReferringUser__c"},
+          {"name": "HealthCloudGA__Specialty__c"},
+          {"name": "HealthCloudGA__TrackingNumber__c"},
+          {"name": "HealthCloudGA__TypeOfService__c"},
+          {"name": "Id"},
+          {"name": "OwnerId"},
+          {"name": "IsClosed"},
+          {"name": "IsWon"},
+          {"name": "LastActivityDate"},
+          {"name": "LeadSource"},
+          {"name": "Name"},
+          {"name": "RecordTypeId"},
+          {"name": "StageName"}
+        ],
+        "object": "Opportunity"
+      }
+    }
+  },
+  "_type": "dataflow",
+  "description": "HLS Analytics Dataflow",
+  "MasterLabel": "Main Dataflow",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive",
+  "isDeletable": true,
+  "longRunningAlertInMins": "",
+  "DataflowType": "USER",
+  "name": "Main_Dataflow",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": ""
+}

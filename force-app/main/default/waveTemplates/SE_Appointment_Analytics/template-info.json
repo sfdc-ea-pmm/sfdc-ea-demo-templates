@@ -1,0 +1,98 @@
+{
+  "templateType" : "app",
+  "label" : "SE Demo | Appointment Analytics",
+  "name" : "SE_Appointment_Analytics",
+  "description" : "Demo version of Appointment Analytics.",
+  "customAttributes": [
+    {
+      "label": "Author(s)",
+      "values": ["Siegbert D'Haese (sdhaese@salesforce.com)", "EA PMM"]
+    },
+    {
+      "label": "Demo Version",
+      "values": ["v2020.41"]
+    },
+    {
+      "label": "Source Version",
+      "values": ["v228"]
+    }
+  ],
+  "tags": ["SE Demo", "Service", "Appointment"],
+  "assetVersion" : 50.0,
+  "variableDefinition" : "variables.json",
+  "uiDefinition" : "ui.json",
+  "rules" : [
+    {
+      "type" : "templateToApp",
+      "file" : "template-to-app-rules.json"
+    },
+    {
+      "type" : "appToTemplate",
+      "file" : "app-to-template-rules.json"
+    }
+  ],
+  "releaseInfo" : {
+    "templateVersion" : "1.0",
+    "notesFile" : "releaseNotes.html"
+  },
+  "folderDefinition" : "folder.json",
+  "externalFiles" : [ {
+    "label" : "ServiceAppointment",
+    "name" : "ServiceAppointment_tp",
+    "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+    "userXmd" : "external_files/ServiceAppointment_XMD.json",
+    "file": "external_files/ServiceAppointment.csv",
+      "type": "CSV",
+      "schema": "external_files/ServiceAppointment.json"
+  }],
+  "lenses" : [ ],
+  "dashboards" : [
+    {
+      "label" : "Appointment Overview",
+      "name" : "Appointment_Overview_Dashboard4_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Appointment_Overview_Dashboard4.json"
+    },
+    {
+      "label" : "Service Resources Performance",
+      "name" : "Service_Resources_Performance_Dashboard4_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Service_Resources_Performance_Dashboard4.json"
+    }
+  ],
+  "eltDataflows" : [ ],
+  "recipes" : [ ],
+  "datasetFiles" : [
+    
+  ],
+  "storedQueries" : [ ],
+  "imageFiles" : [
+    {
+      "name" : "service_appt_logo8",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/service_appt_logo.png"
+    }
+  ],
+  "extendedTypes" : { },
+  "templateDependencies" : [ ],
+  "icons": {
+    "appBadge": {
+      "name": "16.png"
+    },
+    "templateBadge": {
+      "name": "analytics_icon"
+    },
+    "templatePreviews": [
+      {
+        "name": "einstein_scene",
+        "label": "",
+        "description": ""
+      },
+      {
+        "name": "demo_template_guide_0",
+        "label": "How to Use this Template",
+        "description": "This demo template is decoupled from core objects and does not require any additional licenses (only EA+). To customize the data, download the datasets, modify with the tools of your choice and upload to update the datasets. Note: This templat requires Time Zones to be enabled in your org."
+      }
+    ]
+  }
+}

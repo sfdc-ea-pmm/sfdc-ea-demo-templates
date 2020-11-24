@@ -2,6 +2,26 @@
   "isDeletable": true,
   "notificationLevel": "Never",
   "workflowDefinition": {
+    "extract-Sales_Data3": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.Sales_Data3_tp.FullyQualifiedName}"}
+    },
+    "register-Sales_Data3": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Sales_Data",
+        "alias": "${App.Datasets.Sales_Data3_tp.FullyQualifiedName}",
+        "source": "compute-Sales_Data3-SFDC_Id"
+      }
+    },
+    "slice-Sales_Data3-SFDC_Id": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "extract-Sales_Data3",
+        "fields": [{"name": "SFDC_Id"}]
+      }
+    },
     "compute-Sales_Data3-SFDC_Id": {
       "action": "computeExpression",
       "parameters": {
@@ -13,59 +33,6 @@
           "label": "SFDC_Id",
           "type": "Text"
         }]
-      }
-    },
-    "extract-Sales_Data2": {
-      "action": "edgemart",
-      "parameters": {"alias": "${App.Datasets.Sales_Data3_tp.FullyQualifiedName}"}
-    },
-    "extract-Sales_Data3": {
-      "action": "edgemart",
-      "parameters": {"alias": "\\${App.Datasets.${App.Datasets[Rules.CurrentNode].Name}.FullyQualifiedName}"}
-    },
-    "slice-Sales_Data3-SFDC_Id": {
-      "action": "sliceDataset",
-      "parameters": {
-        "mode": "drop",
-        "source": "extract-Sales_Data3",
-        "fields": [{"name": "SFDC_Id"}]
-      }
-    },
-    "register-Sales_Data2": {
-      "action": "sfdcRegister",
-      "parameters": {
-        "name": "Sales_Data",
-        "alias": "${App.Datasets.Sales_Data3_tp.FullyQualifiedName}",
-        "source": "compute-Sales_Data2-SFDC_Id"
-      }
-    },
-    "slice-Sales_Data2-SFDC_Id": {
-      "action": "sliceDataset",
-      "parameters": {
-        "mode": "drop",
-        "source": "extract-Sales_Data2",
-        "fields": [{"name": "SFDC_Id"}]
-      }
-    },
-    "compute-Sales_Data2-SFDC_Id": {
-      "action": "computeExpression",
-      "parameters": {
-        "source": "slice-Sales_Data2-SFDC_Id",
-        "mergeWithSource": true,
-        "computedFields": [{
-          "name": "SFDC_Id",
-          "saqlExpression": "\"0013A00001hEcBEQA0\"",
-          "label": "SFDC_Id",
-          "type": "Text"
-        }]
-      }
-    },
-    "register-Sales_Data3": {
-      "action": "sfdcRegister",
-      "parameters": {
-        "name": "Sales_Data",
-        "alias": "\\${App.Datasets.${App.Datasets[Rules.CurrentNode].Name}.FullyQualifiedName}",
-        "source": "compute-Sales_Data3-SFDC_Id"
       }
     }
   },
