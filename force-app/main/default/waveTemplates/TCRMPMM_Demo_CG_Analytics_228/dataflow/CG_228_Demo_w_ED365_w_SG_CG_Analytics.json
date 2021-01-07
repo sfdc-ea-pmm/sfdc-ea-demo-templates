@@ -1,0 +1,2873 @@
+{
+  "notificationLevel": "",
+  "workflowDefinition": {
+    "CG_Digest_SurveyQuestionResponse": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "ChoiceValue"},
+          {"name": "CreatedById"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "CreatedDate",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "Datatype"},
+          {"name": "DateTimeValue"},
+          {"name": "DateValue"},
+          {"name": "Id"},
+          {"name": "InvitationId"},
+          {"name": "IsDeleted"},
+          {"name": "IsTrueOrFalse"},
+          {"name": "LastModifiedById"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "LastModifiedDate",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "NumberValue"},
+          {"name": "QuestionChoiceId"},
+          {"name": "QuestionId"},
+          {"name": "Rank"},
+          {"name": "ResponseId"},
+          {"name": "ResponseShortText"},
+          {"name": "ResponseValue"},
+          {"name": "SurveyVersionId"},
+          {"name": "SystemModstamp"}
+        ],
+        "object": "SurveyQuestionResponse"
+      }
+    },
+    "CG_Augment_Assortment_onto_AssortmentProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Digest_AssortmentProduct",
+        "left_key": ["AssortmentId"],
+        "right_select": ["Name"],
+        "right": "CG_Digest_Assortment",
+        "relationship": "Assortment",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_CE_SurveySubject_Combine_ParticipantId": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_Augment_Visit_onto_SurveySubject",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "ContactId_Derived",
+            "saqlExpression": "coalesce('RetailStore.PrimaryContactId', 'Visit.RetailStore.PrimaryContactId', 'SurveyInvitation.ParticipantId')",
+            "label": "ContactId_Derived",
+            "type": "Text"
+          },
+          {
+            "name": "RetailStoreId",
+            "saqlExpression": "coalesce('RetailStore.Id', 'Visit.RetailStore.Id')",
+            "label": "RetailStoreId",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "CG_Digest_AssessmentTask": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Description"},
+          {"name": "TaskType"},
+          {"name": "OwnerId"},
+          {"name": "Name"},
+          {"name": "IsDeleted"},
+          {"name": "Id"},
+          {"name": "ParentId"},
+          {"name": "IsRequired"}
+        ],
+        "object": "AssessmentTask"
+      }
+    },
+    "CG_CE_AssessmentTaskOrder_Find_Duplicate_Orders": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_CR_AssessmentTaskOrder_Find_Previous_Orders",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "IsDuplicate",
+          "saqlExpression": "case when 'OrderId' == 'OrderIdPrevious' then \"True\" else \"False\" end",
+          "label": "IsDuplicate",
+          "type": "Text"
+        }]
+      }
+    },
+    "CG_Augment_RetailStoreGroup_onto_RetailStore": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Digest_RetailStore",
+        "left_key": ["RetailLocationGroupId"],
+        "right_select": [
+          "Description",
+          "Name",
+          "Id"
+        ],
+        "right": "CG_Digest_RetailStoreGroup",
+        "relationship": "RetailStoreGroup",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Augment_User_onto_Case": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Augment_Contact_onto_Case",
+        "left_key": ["OwnerId"],
+        "right_select": [
+          "UserType",
+          "Username",
+          "Name",
+          "ManagerId",
+          "FullPhotoUrl",
+          "SmallPhotoUrl",
+          "Role.Name",
+          "Parents",
+          "ParentPath",
+          "UniqueUserName",
+          "Computed_ParentID",
+          "Role.ParentRoleId"
+        ],
+        "right": "CG_CE_Unique_UserName",
+        "relationship": "Owner",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Register_OrderItem_wo_predicate": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_OrderItem_wo_predicate",
+        "alias": "${App.Datasets.CG_OrderItem_wo_predicate41_tp.FullyQualifiedName}",
+        "source": "CG_Augment_AssortmentProduct_onto_OrderItem"
+      }
+    },
+    "CG_Augment_PrimaryContact_onto_RetailStore": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Augment_Account_onto_RetailStore",
+        "left_key": ["PrimaryContactId"],
+        "right_select": [
+          "Department",
+          "Description",
+          "Name",
+          "MobilePhone",
+          "Phone",
+          "Email"
+        ],
+        "right": "CG_Digest_Contact",
+        "relationship": "PrimaryContact",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Filter_SurveyQuestionResponse_Keep_NPS_Data": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_Augment_SurveyQuestion_onto_SurveyQuestionResponse",
+        "saqlFilter": "'SurveyQuestion.QuestionType' == \"NPS\""
+      }
+    },
+    "CG_Augment_Account_onto_Order": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Digest_Order",
+        "left_key": ["AccountId"],
+        "right_select": [
+          "BillingCity",
+          "BillingCountry",
+          "BillingPostalCode",
+          "BillingState",
+          "Industry",
+          "Name",
+          "Parent_Account_Names",
+          "Parent_Account_NamesPath",
+          "Phone",
+          "ShippingCity",
+          "ShippingCountry",
+          "ShippingState"
+        ],
+        "right": "CG_Append_Accounts",
+        "relationship": "Account",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Digest_SurveyResponse": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {
+            "fiscalMonthOffset": 2,
+            "name": "CompletionDateTime",
+            "isYearEndFiscalYear": false
+          },
+          {
+            "fiscalMonthOffset": 2,
+            "name": "CreatedDate",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "Id"},
+          {"name": "InterviewGuid"},
+          {"name": "InterviewId"},
+          {"name": "InvitationId"},
+          {"name": "IpAddress"},
+          {"name": "IsDeleted"},
+          {"name": "Language"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "LastModifiedDate",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "Name"},
+          {"name": "Status"},
+          {"name": "SubmitterId"},
+          {"name": "SurveyId"},
+          {"name": "SurveyVersionId"}
+        ],
+        "object": "SurveyResponse"
+      }
+    },
+    "CG_Update_Product_Fill_null_Assortment_Records_with_NA": {
+      "action": "update",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Augment_AssortmentProduct_onto_Product",
+        "left_key": ["Id"],
+        "update_columns": {"AssortmentProduct.Assortment.Name": "Fill_Null_Assortment_with_NA"},
+        "right": "CG_CE_Product_without_Assortment"
+      }
+    },
+    "CG_Register_RetailVisitKpi": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "rowLevelSecurityFilter": " ",
+        "name": "CG_RetailVisitKpi",
+        "alias": "${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}",
+        "source": "CG_CE_RetailVisitKpi_Compute_Values"
+      }
+    },
+    "CG_Digest_SurveyQuestion": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "CreatedById"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "CreatedDate",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "DeveloperName"},
+          {"name": "Id"},
+          {"name": "IsDeleted"},
+          {"name": "IsDeprecated"},
+          {"name": "LastModifiedById"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "LastModifiedDate",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "Name"},
+          {"name": "QuestionName"},
+          {"name": "QuestionType"},
+          {"name": "SurveyPageId"},
+          {"name": "SurveyVersionId"},
+          {"name": "SystemModstamp"}
+        ],
+        "object": "SurveyQuestion"
+      }
+    },
+    "CG_Filter_Products_without_ProductCategory": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_Augment_ProductCategory_onto_Product",
+        "saqlFilter": "'ProductCategory.ProductCategory.Name' is null"
+      }
+    },
+    "CG_CE_Promotion": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_Digest_Promotion",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "fiscalMonthOffset": 2,
+            "saqlExpression": "case when 'EndDate' is null then case when toDate('StartDate', \"yyyy-MM-dd\") >= toDate(date_to_string(now(),\"yyyy-MM-dd\"), \"yyyy-MM-dd\") then toDate('StartDate', \"yyyy-MM-dd\") else toDate(date_to_string(now(),\"yyyy-MM-dd\"), \"yyyy-MM-dd\") end else toDate('EndDate', \"yyyy-MM-dd\") end",
+            "name": "EndDate_Computed",
+            "format": "yyyy-MM-dd",
+            "label": "EndDate_Computed",
+            "type": "Date",
+            "isYearEndFiscalYear": false
+          },
+          {
+            "name": "Dummy_Key",
+            "saqlExpression": "\"NA\"",
+            "label": "Dummy_Key",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "CG_Flatten_Account_With_SelfIds": {
+      "schema": {"objects": [{
+        "label": "Parent_Account_Names",
+        "fields": [
+          {
+            "name": "Parent_Account_Names",
+            "label": "Parent_Account_Names",
+            "isSystemField": false
+          },
+          {
+            "name": "Parent_Account_NamesPath",
+            "label": "Parent_Account_NamesPath",
+            "isSystemField": false
+          }
+        ]
+      }]},
+      "action": "flatten",
+      "parameters": {
+        "include_self_id": true,
+        "self_field": "Name",
+        "multi_field": "Parent_Account_Names",
+        "parent_field": "Computed_Parent_Account_Name",
+        "path_field": "Parent_Account_NamesPath",
+        "source": "CG_CE_Account_Parent_Account_Name_WithSelf_Ids"
+      }
+    },
+    "CG_CR_AssessmentTaskOrder_Find_Previous_Orders": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["OrderId"],
+        "orderBy": [{
+          "name": "LastModifiedDate",
+          "direction": "desc"
+        }],
+        "source": "CG_Append_AssessmentTaskOrder_with_Dummy",
+        "computedFields": [{
+          "expression": {
+            "sourceField": "OrderId",
+            "offset": "previous()"
+          },
+          "name": "OrderIdPrevious",
+          "label": "OrderIdPrevious"
+        }]
+      }
+    },
+    "CG_Digest_Promotion": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Category"},
+          {"name": "SystemModstamp"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "StartDate",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "OwnerId"},
+          {"name": "Objective"},
+          {"name": "Name"},
+          {"name": "Methods"},
+          {"name": "Level"},
+          {"name": "IsDeleted"},
+          {"name": "IsActive"},
+          {"name": "Id"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "EndDate",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "Description"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "CreatedDate",
+            "isYearEndFiscalYear": false
+          }
+        ],
+        "object": "Promotion"
+      }
+    },
+    "CG_Augment_UserRole_onto_User": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Digest_User",
+        "left_key": ["UserRoleId"],
+        "right_select": [
+          "ParentRoleId",
+          "Name"
+        ],
+        "right": "CG_Digest_UserRole",
+        "relationship": "Role",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Augment_Survey_onto_SurveySubject": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Augment_SurveyInvitation_onto_SurveySubject",
+        "left_key": ["SurveyId"],
+        "right_select": [
+          "Description",
+          "Name",
+          "SurveyType"
+        ],
+        "right": "CG_Digest_Survey",
+        "relationship": "Survey",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Digest_AssessmentTaskOrder": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AssessmentTaskId"},
+          {"name": "Id"},
+          {"name": "IsDeleted"},
+          {"name": "Name"},
+          {"name": "OrderId"},
+          {"name": "RetailStoreId"},
+          {"name": "CreatedById"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "CreatedDate",
+            "isYearEndFiscalYear": false
+          },
+          {
+            "fiscalMonthOffset": 2,
+            "name": "LastModifiedDate",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "LastModifiedById"}
+        ],
+        "object": "AssessmentTaskOrder"
+      }
+    },
+    "CG_Register_Visit": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "rowLevelSecurityFilter": " ",
+        "name": "CG_Visit",
+        "alias": "${App.Datasets.CG_Visit69_tp.FullyQualifiedName}",
+        "source": "CG_Augment_RetailStore_onto_Visit"
+      }
+    },
+    "CG_Augment_AssessmentTaskOrder_onto_Order": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["OrderId"],
+        "left": "CG_Augment_Account_onto_Order",
+        "left_key": ["Id"],
+        "right_select": [
+          "Name",
+          "RetailStoreId",
+          "RetailStore.Name",
+          "RetailStore.Account.Name",
+          "AssessmentTask.Description",
+          "AssessmentTask.TaskType",
+          "AssessmentTask.Name",
+          "AssessmentTask.Id",
+          "AssessmentTask.Visit.ActualVisitEndTime",
+          "AssessmentTask.Visit.ActualVisitStartTime",
+          "AssessmentTask.Visit.InstructionDescription",
+          "AssessmentTask.Visit.Id",
+          "AssessmentTask.Visit.VisitPriority",
+          "AssessmentTask.Visit.VisitorId",
+          "AssessmentTask.Visit.Status",
+          "AssessmentTask.Visit.PlannedVisitStartTime",
+          "AssessmentTask.Visit.PlannedVisitEndTime",
+          "AssessmentTask.Visit.Name",
+          "AssessmentTask.Visit.ActualVisitDuration",
+          "AssessmentTask.Visit.ActualVisitStartTime_YearMonthDay",
+          "AssessmentTask.Visit.Visitor.Name",
+          "AssessmentTask.Visit.Visitor.UniqueUserName",
+          "AssessmentTask.Visit.RetailStore.AccountId",
+          "AssessmentTask.Visit.RetailStore.Id",
+          "AssessmentTask.Visit.RetailStore.RetailLocationGroupId",
+          "AssessmentTask.Visit.RetailStore.Priority",
+          "AssessmentTask.Visit.RetailStore.PrimaryContactId",
+          "AssessmentTask.Visit.RetailStore.Name",
+          "AssessmentTask.Visit.RetailStore.RetailStoreGroup.Description",
+          "AssessmentTask.Visit.RetailStore.RetailStoreGroup.Name",
+          "AssessmentTask.Visit.RetailStore.Account.Name",
+          "AssessmentTask.Visit.RetailStore.PrimaryContact.Name",
+          "AssessmentTask.Visit.RetailStore.Location.Name",
+          "AssessmentTask.Visit.RetailStore.Location.Address.City",
+          "AssessmentTask.Visit.RetailStore.Location.Address.Country",
+          "AssessmentTask.Visit.RetailStore.Location.Address.State",
+          "AssessmentTask.Visit.RetailStore.Location.Address.PostalCode",
+          "AssessmentTask.Visit.RetailStore.Location.Address.Name",
+          "RetailStore.Account.Parent_Account_Names",
+          "RetailStore.Account.Parent_Account_NamesPath",
+          "AssessmentTask.Visit.RetailStore.Account.Parent_Account_Names",
+          "AssessmentTask.Visit.RetailStore.Account.Parent_Account_NamesPath",
+          "AssessmentTask.Visit.RetailStore.RetailStoreGroupName_Custom",
+          "AssessmentTask.Visit.Visitor.Computed_ParentID",
+          "AssessmentTask.Visit.Visitor.UserType",
+          "AssessmentTask.Visit.Visitor.Username",
+          "AssessmentTask.Visit.Visitor.ManagerId",
+          "AssessmentTask.Visit.Visitor.FullPhotoUrl",
+          "AssessmentTask.Visit.Visitor.SmallPhotoUrl",
+          "AssessmentTask.Visit.Visitor.Parents",
+          "AssessmentTask.Visit.Visitor.ParentPath",
+          "AssessmentTask.Visit.Visitor.Role.Name",
+          "AssessmentTask.Visit.Visitor.Role.ParentRoleId"
+        ],
+        "right": "CG_Augment_AssessmentTask_onto_AssessmentTaskOrder",
+        "relationship": "AssessmentTaskOrder",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Augment_RetailStore_onto_AssessmentTaskOrder": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Filter_AssessmentTaskOrder_Remove_Duplicates",
+        "left_key": ["RetailStoreId"],
+        "right_select": [
+          "Account.Name",
+          "Name",
+          "Account.Parent_Account_Names",
+          "Account.Parent_Account_NamesPath"
+        ],
+        "right": "CG_Augment_Account_onto_RetailStore",
+        "relationship": "RetailStore",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_CE_Visit": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_Digest_Visit",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 16,
+            "name": "PlannedVisitDuration",
+            "saqlExpression": "(PlannedVisitEndTime_sec_epoch - PlannedVisitStartTime_sec_epoch)/60",
+            "scale": 0,
+            "label": "Planned Visit Duration (Minutes)",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "ActualVisitDuration",
+            "saqlExpression": "(ActualVisitEndTime_sec_epoch - ActualVisitStartTime_sec_epoch)/60",
+            "scale": 0,
+            "label": "Actual Visit Duration (Minutes)",
+            "type": "Numeric"
+          },
+          {
+            "saqlExpression": "'ActualVisitStartTime_Year'+ \"-\" +'ActualVisitStartTime_Month'+ \"-\" +'ActualVisitStartTime_Day'",
+            "name": "ActualVisitStartTime_YearMonthDay",
+            "label": "ActualVisitStartTime_YearMonthDay",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "CG_Update_Product_Fill_null_ProductCategory_Records_with_NA": {
+      "action": "update",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Augment_ProductCategory_onto_Product",
+        "left_key": ["Id"],
+        "update_columns": {"ProductCategory.ProductCategory.Name": "Fill_Null_ProductCategory_with_NA"},
+        "right": "CG_CE_Product_without_ProductCategory"
+      }
+    },
+    "CG_CE_Case": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_Augment_RetailStore_onto_Case",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "defaultValue": "NA",
+            "saqlExpression": "coalesce('Account.Name', 'RetailStore.Account.Name')\n",
+            "name": "Account_Name_Computed",
+            "label": "Account Name",
+            "type": "Text"
+          },
+          {
+            "name": "Contact_Name_Computed",
+            "saqlExpression": "coalesce('Contact.Name', 'RetailStore.PrimaryContact.Name')",
+            "label": "Contact Name",
+            "type": "Text"
+          },
+          {
+            "precision": 16,
+            "saqlExpression": "daysBetween(toDate(CreatedDate,\"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\"),now())",
+            "name": "DaysSinceCreated",
+            "scale": 0,
+            "label": "Days Since Created",
+            "type": "Numeric"
+          }
+        ]
+      }
+    },
+    "CG_Digest_Order": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {"name": "ActivatedById"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "ActivatedDate",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "Type"},
+          {"name": "TotalAmount"},
+          {"name": "StatusCode"},
+          {"name": "Status"},
+          {"name": "ShippingState"},
+          {"name": "ShippingCity"},
+          {"name": "Pricebook2Id"},
+          {"name": "OwnerId"},
+          {"name": "OriginalOrderId"},
+          {"name": "OrderNumber"},
+          {"name": "IsReductionOrder"},
+          {"name": "IsDeleted"},
+          {"name": "Id"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "EndDate",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "EffectiveDate"},
+          {"name": "Description"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "CreatedDate",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "BillingState"},
+          {"name": "BillingCity"},
+          {"name": "CreatedById"}
+        ],
+        "object": "Order"
+      }
+    },
+    "CG_Digest_Case": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {"name": "CaseNumber"},
+          {"name": "ClosedDate"},
+          {"name": "Comments"},
+          {"name": "ContactEmail"},
+          {"name": "Type"},
+          {"name": "Subject"},
+          {"name": "Status"},
+          {"name": "Reason"},
+          {"name": "Priority"},
+          {"name": "ParentId"},
+          {"name": "OwnerId"},
+          {"name": "Origin"},
+          {"name": "MasterRecordId"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "LastModifiedDate",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "LastModifiedById"},
+          {"name": "IsEscalated"},
+          {"name": "IsDeleted"},
+          {"name": "IsClosed"},
+          {"name": "Id"},
+          {"name": "Description"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "CreatedDate",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "CreatedById"},
+          {"name": "ContactPhone"},
+          {"name": "ContactMobile"},
+          {"name": "ContactId"},
+          {"name": "ContactFax"}
+        ],
+        "object": "Case"
+      }
+    },
+    "CG_CE_Account_Parent_Account_Name_WithoutSelf_Ids": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_Augment_ParentAccount_onto_Account",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "Computed_Parent_Account_Name",
+          "saqlExpression": "case when 'Independent_Account_Flag'==\"Yes\" then \"NA\" else 'Parent_Account.Name' end",
+          "label": "Computed_Parent_Account_Name",
+          "type": "Text"
+        }]
+      }
+    },
+    "CG_Augment_Location_onto_RetailStore": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Augment_PrimaryContact_onto_RetailStore",
+        "left_key": ["LocationId"],
+        "right_select": [
+          "Name",
+          "LocationLevel",
+          "Address.City",
+          "Address.Country",
+          "Address.Name",
+          "Address.PostalCode",
+          "Address.State"
+        ],
+        "right": "CG_Augment_Address_onto_Location",
+        "relationship": "Location",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Digest_SurveyInvitation": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "InvitationLink"},
+          {"name": "InviteExpiryDateTime"},
+          {"name": "IsDefault"},
+          {"name": "Name"},
+          {"name": "OwnerId"},
+          {"name": "ParticipantId"},
+          {"name": "ResponseStatus"},
+          {"name": "SurveyId"},
+          {"name": "IsDeleted"}
+        ],
+        "object": "SurveyInvitation"
+      }
+    },
+    "CG_CE_Account_Parent_Account_Name_WithSelf_Ids": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_Augment_ParentAccount_onto_Account",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "Computed_Parent_Account_Name",
+          "saqlExpression": "case when 'Parent_Account.Name' is null then \"NA\" else 'Parent_Account.Name' end",
+          "label": "Computed_Parent_Account_Name",
+          "type": "Text"
+        }]
+      }
+    },
+    "CG_Filter_Dummy": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_CR_Dummy",
+        "saqlFilter": "'CR_Computed_Dummy' == \"Dummy\""
+      }
+    },
+    "CG_Register_User": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "rowLevelSecurityFilter": "'Id' == \"$User.Id\"",
+        "name": "CG User",
+        "alias": "${App.Datasets.CG_User69_tp.FullyQualifiedName}",
+        "source": "CG_CE_Unique_UserName"
+      }
+    },
+    "CG_Append_AssessmentTaskOrder_with_Dummy": {
+      "action": "append",
+      "parameters": {
+        "enableDisjointedSchemaMerge": true,
+        "sources": [
+          "CG_Digest_AssessmentTaskOrder",
+          "CG_Filter_Dummy"
+        ]
+      }
+    },
+    "CG_Digest_User": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {"name": "Alias"},
+          {"name": "UserType"},
+          {
+            "defaultValue": "None",
+            "name": "UserRoleId"
+          },
+          {"name": "Username"},
+          {"name": "Title"},
+          {"name": "Street"},
+          {"name": "State"},
+          {"name": "PostalCode"},
+          {"name": "Phone"},
+          {"name": "Name"},
+          {"name": "MobilePhone"},
+          {
+            "defaultValue": "NA",
+            "name": "ManagerId"
+          },
+          {"name": "LastName"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "CreatedDate",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "Department"},
+          {"name": "Country"},
+          {"name": "ContactId"},
+          {"name": "CompanyName"},
+          {"name": "FullPhotoUrl"},
+          {"name": "Id"},
+          {"name": "FirstName"},
+          {"name": "Fax"},
+          {"name": "Email"},
+          {"name": "City"},
+          {"name": "IndividualId"},
+          {"name": "IsActive"},
+          {"name": "Division"},
+          {"name": "EmployeeNumber"},
+          {"name": "SmallPhotoUrl"}
+        ],
+        "object": "User"
+      }
+    },
+    "CG_Filter_Products_without_Assortment": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_Augment_AssortmentProduct_onto_Product",
+        "saqlFilter": "'AssortmentProduct.Assortment.Name' is null"
+      }
+    },
+    "CG_CE_Dummy": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_Digest_RetailStore_Dummy",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "OrderId",
+            "saqlExpression": "\"All\"",
+            "label": "OrderId",
+            "type": "Text"
+          },
+          {
+            "name": "ResponseId",
+            "saqlExpression": "\"All\"",
+            "label": "ResponseId",
+            "type": "Text"
+          },
+          {
+            "name": "LastModifiedDate",
+            "saqlExpression": "toDate(\"1970-01-01\", \"yyyy-MM-dd\")",
+            "format": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+            "label": "LastModifiedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "QuestionId",
+            "saqlExpression": "\"All\"",
+            "label": "QuestionId",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "CG_Register_SurveyQuestionResponse": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_SurveyQuestionResponse",
+        "alias": "${App.Datasets.CG_SurveyQuestionResponse69_tp.FullyQualifiedName}",
+        "source": "CG_SurveyResponse_onto_SurveyQuestionResponse"
+      }
+    },
+    "CG_Augment_AID_onto_RetailVisitKpi": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Augment_ProductCategory_onto_RetailVisitKpi",
+        "left_key": ["AssessmentIndDefinitionId"],
+        "right_select": [
+          "Description",
+          "DataType",
+          "Name"
+        ],
+        "right": "CG_Digest_AssessmentIndicatorDefinition",
+        "relationship": "AssessmentIndicatorDefinition",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Augment_RetailStore_onto_Case": {
+      "action": "augment",
+      "parameters": {
+        "right_key": [
+          "AccountId",
+          "PrimaryContactId"
+        ],
+        "left": "CG_Augment_User_onto_Case",
+        "left_key": [
+          "AccountId",
+          "ContactId"
+        ],
+        "right_select": [
+          "DeliveryFrequency",
+          "DeliveryMethod",
+          "Description",
+          "StoreType",
+          "Priority",
+          "Name",
+          "RetailStoreGroup.Description",
+          "RetailStoreGroup.Name",
+          "Account.Industry",
+          "Account.Name",
+          "Account.Type",
+          "PrimaryContact.Department",
+          "PrimaryContact.Description",
+          "PrimaryContact.Email",
+          "PrimaryContact.Name",
+          "PrimaryContact.Phone",
+          "Location.Name",
+          "Location.LocationLevel",
+          "Location.Address.City",
+          "Location.Address.Country",
+          "Location.Address.State",
+          "Location.Address.PostalCode",
+          "Location.Address.Name",
+          "Id",
+          "Account.Parent_Account_Names",
+          "Account.Parent_Account_NamesPath",
+          "RetailStoreGroupName_Custom"
+        ],
+        "right": "CG_CE_RetailStore",
+        "relationship": "RetailStore",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Augment_RetailStore_onto_SurveySubject": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Augment_Survey_onto_SurveySubject",
+        "left_key": ["SubjectId"],
+        "right_select": [
+          "Id",
+          "Priority",
+          "Name",
+          "RetailStoreGroup.Name",
+          "Account.Name",
+          "Account.Type",
+          "Location.Name",
+          "Location.Address.City",
+          "Location.Address.Country",
+          "Location.Address.State",
+          "Location.Address.Name",
+          "PrimaryContactId",
+          "Account.Parent_Account_Names",
+          "Account.Parent_Account_NamesPath",
+          "RetailStoreGroupName_Custom"
+        ],
+        "right": "CG_CE_RetailStore",
+        "relationship": "RetailStore",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Augment_Account_FindIsParentAccount": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["ParentId"],
+        "left": "CG_Digest_Account",
+        "left_key": ["Id"],
+        "right_select": ["ParentId"],
+        "right": "CG_Digest_Account",
+        "relationship": "IsParent",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Register_Promotion": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_Promotion",
+        "alias": "${App.Datasets.CG_Promotion69_tp.FullyQualifiedName}",
+        "source": "CG_CE_Promotion"
+      }
+    },
+    "CG_CE_Product_without_ProductCategory": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_Filter_Products_without_ProductCategory",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "defaultValue": "NA",
+          "name": "Fill_Null_ProductCategory_with_NA",
+          "saqlExpression": "\"NA\"",
+          "label": "Fill_Null_ProductCategory_with_NA",
+          "type": "Text"
+        }]
+      }
+    },
+    "CG_Digest_RetailVisitKpi": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "ActualBooleanValue"},
+          {"name": "ActualDateTimeValue"},
+          {"name": "ActualDecimalValue"},
+          {"name": "ActualIntegerValue"},
+          {"name": "ActualStringValue"},
+          {"name": "AssessmentIndDefinitionId"},
+          {"name": "AssessmentTaskId"},
+          {"name": "CreatedById"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "CreatedDate",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "Id"},
+          {"name": "InStoreLocationId"},
+          {"name": "UnitOfMeasure"},
+          {"name": "Type"},
+          {"name": "TargetStringValue"},
+          {"name": "TargetIntegerValue"},
+          {"name": "TargetDecimalValue"},
+          {"name": "TargetDateTimeValue"},
+          {"name": "TargetBooleanValue"},
+          {"name": "PromotionId"},
+          {"name": "ProductId"},
+          {"name": "ProductCategoryId"},
+          {"name": "PlanogramId"},
+          {"name": "Name"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "LastModifiedDate",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "LastModifiedById"},
+          {"name": "IsDeleted"}
+        ],
+        "object": "RetailVisitKpi"
+      }
+    },
+    "CG_ProductCategory_onto_ProductCategoryProduct": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Digest_ProductCategoryProduct",
+        "left_key": ["ProductCategoryId"],
+        "right_select": ["Name"],
+        "right": "CG_Digest_ProductCategory",
+        "relationship": "ProductCategory",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Digest_Assortment": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "Description"},
+          {"name": "Name"}
+        ],
+        "object": "Assortment"
+      }
+    },
+    "CG_Augment_SurveyInvitation_onto_SurveySubject": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Digest_SurveySubject",
+        "left_key": ["ParentId"],
+        "right_select": [
+          "Id",
+          "InvitationLink",
+          "InviteExpiryDateTime",
+          "Name",
+          "ParticipantId",
+          "ResponseStatus"
+        ],
+        "right": "CG_Digest_SurveyInvitation",
+        "relationship": "SurveyInvitation",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Register_Product": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_Product",
+        "alias": "${App.Datasets.CG_Product64_tp.FullyQualifiedName}",
+        "source": "CG_Digest_Product"
+      }
+    },
+    "CG_CE_Account_Compute_Flags": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_Augment_Account_FindIsParentAccount",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "saqlExpression": "case when 'ParentId' is null then \"No\" else \"Yes\" end",
+            "name": "HasParent_Flag",
+            "label": "HasParent_flag",
+            "type": "Text"
+          },
+          {
+            "saqlExpression": "case when 'IsParent.ParentId' is null then \"No\" else \"Yes\" end",
+            "name": "IsParent_Flag",
+            "label": "IsParent_Flag",
+            "type": "Text"
+          },
+          {
+            "saqlExpression": "case when 'IsParent_Flag' == \"No\" && 'HasParent_Flag' == \"No\" then \"Yes\" else \"No\" end",
+            "name": "Independent_Account_Flag",
+            "label": "Independent_Account_Flag",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "CG_Augment_Product_onto_RetailVisitKpi": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Augment_Promotion_onto_RetailVisitKpi",
+        "left_key": ["ProductId"],
+        "right_select": [
+          "Description",
+          "QuantityUnitOfMeasure",
+          "ProductCode",
+          "Name",
+          "Family",
+          "ProductCategory.ProductCategory.Name"
+        ],
+        "right": "CG_Update_Product_Fill_null_ProductCategory_Records_with_NA",
+        "relationship": "Product",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Digest_SurveySubject": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "IsDeleted"},
+          {"name": "Name"},
+          {"name": "ParentId"},
+          {"name": "SubjectEntityType"},
+          {"name": "SubjectId"},
+          {"name": "SurveyId"},
+          {"name": "SurveyInvitationId"},
+          {"name": "SurveyResponseId"}
+        ],
+        "object": "SurveySubject"
+      }
+    },
+    "CG_Register_Visit_wo_predicate": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_Visit_wo_predicate",
+        "alias": "${App.Datasets.CG_Visit_wo_predicate51_tp.FullyQualifiedName}",
+        "source": "CG_Augment_RetailStore_onto_Visit"
+      }
+    },
+    "CG_CE_Augment_Promotion_onto_RetailStore": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Dummy_Key"],
+        "left": "CG_Augment_Product_onto_RetailStore",
+        "left_key": ["Dummy_Key"],
+        "right_select": ["Id"],
+        "right": "CG_CE_Promotion",
+        "relationship": "Promotion",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_CR_Dummy": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["OrderId"],
+        "orderBy": [{
+          "name": "OrderId",
+          "direction": "asc"
+        }],
+        "source": "CG_CE_Dummy",
+        "computedFields": [{
+          "expression": {
+            "sourceField": "OrderId",
+            "default": "Dummy",
+            "offset": "next()"
+          },
+          "name": "CR_Computed_Dummy",
+          "label": "CR_Computed_Dummy"
+        }]
+      }
+    },
+    "CG_Filter_Account_IsParentNo": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_Flatten_Account_Without_SelfIds",
+        "saqlFilter": "'IsParent_Flag'==\"No\""
+      }
+    },
+    "CG_Augment_Contact_onto_SurveySubject": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_CE_SurveySubject_Combine_ParticipantId",
+        "left_key": ["ContactId_Derived"],
+        "right_select": [
+          "Account.Name",
+          "Account.Type",
+          "Email",
+          "Name",
+          "Phone",
+          "Account.Parent_Account_Names",
+          "Account.Parent_Account_NamesPath"
+        ],
+        "right": "CG_Augment_Account_onto_Contact",
+        "relationship": "Contact",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_CE_Product_without_Assortment": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_Filter_Products_without_Assortment",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "Fill_Null_Assortment_with_NA",
+          "saqlExpression": "\"NA\"",
+          "label": "Fill_Null_Assortment_with_NA",
+          "type": "Text"
+        }]
+      }
+    },
+    "CG_Augment_AssessmentTask_onto_RetailVisitKpi": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Augment_AID_onto_RetailVisitKpi",
+        "left_key": ["AssessmentTaskId"],
+        "right_select": [
+          "Description",
+          "TaskType",
+          "Name",
+          "Id",
+          "Visit.ActualVisitEndTime",
+          "Visit.ActualVisitStartTime",
+          "Visit.InstructionDescription",
+          "Visit.Id",
+          "Visit.VisitPriority",
+          "Visit.VisitorId",
+          "Visit.Status",
+          "Visit.PlannedVisitStartTime",
+          "Visit.PlannedVisitEndTime",
+          "Visit.Name",
+          "Visit.ActualVisitDuration",
+          "Visit.ActualVisitStartTime_YearMonthDay",
+          "Visit.Visitor.Name",
+          "Visit.Visitor.UniqueUserName",
+          "Visit.RetailStore.AccountId",
+          "Visit.RetailStore.Id",
+          "Visit.RetailStore.RetailLocationGroupId",
+          "Visit.RetailStore.Priority",
+          "Visit.RetailStore.PrimaryContactId",
+          "Visit.RetailStore.Name",
+          "Visit.RetailStore.RetailStoreGroup.Description",
+          "Visit.RetailStore.RetailStoreGroup.Name",
+          "Visit.RetailStore.Account.Name",
+          "Visit.RetailStore.Account.Parent_Account_Names",
+          "Visit.RetailStore.Account.Parent_Account_NamesPath",
+          "Visit.RetailStore.PrimaryContact.Name",
+          "Visit.RetailStore.Location.Name",
+          "Visit.RetailStore.Location.Address.City",
+          "Visit.RetailStore.Location.Address.Country",
+          "Visit.RetailStore.Location.Address.State",
+          "Visit.RetailStore.Location.Address.PostalCode",
+          "Visit.RetailStore.Location.Address.Name",
+          "IsRequired",
+          "Visit.RetailStore.RetailStoreGroupName_Custom",
+          "Visit.Visitor.Computed_ParentID",
+          "Visit.Visitor.UserType",
+          "Visit.Visitor.Username",
+          "Visit.Visitor.ManagerId",
+          "Visit.Visitor.FullPhotoUrl",
+          "Visit.Visitor.SmallPhotoUrl",
+          "Visit.Visitor.Parents",
+          "Visit.Visitor.ParentPath",
+          "Visit.Visitor.Role.Name",
+          "Visit.Visitor.Role.ParentRoleId"
+        ],
+        "right": "CG_Augment_Visit_onto_AssessmentTask",
+        "relationship": "AssessmentTask",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Augment_ProductCategory_onto_RetailVisitKpi": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Augment_InStoreLocation_onto_RetailVisitKpi",
+        "left_key": ["ProductCategoryId"],
+        "right_select": [
+          "Description",
+          "Name"
+        ],
+        "right": "CG_Digest_ProductCategory",
+        "relationship": "ProductCategory",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Augment_SurveySubject_onto_SurveyResponse": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["SurveyInvitation.Id"],
+        "left": "CG_Digest_SurveyResponse",
+        "left_key": ["InvitationId"],
+        "right_select": [
+          "Name",
+          "SubjectEntityType",
+          "SurveyInvitation.InvitationLink",
+          "SurveyInvitation.InviteExpiryDateTime",
+          "SurveyInvitation.Name",
+          "SurveyInvitation.ResponseStatus",
+          "Survey.Description",
+          "Survey.Name",
+          "Survey.SurveyType",
+          "RetailStore.Priority",
+          "RetailStore.Name",
+          "RetailStore.RetailStoreGroup.Name",
+          "RetailStore.Account.Name",
+          "RetailStore.Location.Name",
+          "RetailStore.Location.Address.City",
+          "RetailStore.Location.Address.Country",
+          "RetailStore.Location.Address.State",
+          "Visit.Status",
+          "Visit.Name",
+          "Visit.RetailStore.Name",
+          "Visit.RetailStore.RetailStoreGroup.Name",
+          "Visit.RetailStore.Account.Name",
+          "Visit.RetailStore.PrimaryContact.Name",
+          "Visit.RetailStore.Location.Name",
+          "Visit.RetailStore.Location.Address.City",
+          "Visit.RetailStore.Location.Address.Country",
+          "Visit.RetailStore.Location.Address.State",
+          "Contact.Email",
+          "Contact.Name",
+          "Contact.Phone",
+          "Contact.Account.Name",
+          "Contact.Account.Type",
+          "Location",
+          "City",
+          "State",
+          "StoreGroup",
+          "StoreName",
+          "Account",
+          "RetailStoreId",
+          "Contact.Account.Parent_Account_Names",
+          "Contact.Account.Parent_Account_NamesPath",
+          "RetailStore.Account.Parent_Account_Names",
+          "RetailStore.Account.Parent_Account_NamesPath",
+          "Visit.RetailStore.Account.Parent_Account_Names",
+          "Visit.RetailStore.Account.Parent_Account_NamesPath",
+          "RetailStore.RetailStoreGroupName_Custom",
+          "Visit.RetailStore.RetailStoreGroupName_Custom",
+          "Visit.Visitor.UserType",
+          "Visit.Visitor.Username",
+          "Visit.Visitor.ManagerId",
+          "Visit.Visitor.FullPhotoUrl",
+          "Visit.Visitor.SmallPhotoUrl",
+          "Visit.Visitor.Parents",
+          "Visit.Visitor.ParentPath",
+          "Visit.Visitor.Role.Name",
+          "Visit.Visitor.Role.ParentRoleId"
+        ],
+        "right": "CG_CE_SurveySubject",
+        "relationship": "SurveySubject",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_Register_OrderItem": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "rowLevelSecurityFilter": " ",
+        "name": "CG_OrderItem",
+        "alias": "${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}",
+        "source": "CG_Augment_AssortmentProduct_onto_OrderItem"
+      }
+    },
+    "CG_Augment_Promotion_onto_RetailVisitKpi": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Digest_RetailVisitKpi",
+        "left_key": ["PromotionId"],
+        "right_select": ["Name"],
+        "right": "CG_Digest_Promotion",
+        "relationship": "Promotion",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Register_ProductCategory": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_ProductCategory",
+        "alias": "${App.Datasets.CG_ProductCategory64_tp.FullyQualifiedName}",
+        "source": "CG_Digest_ProductCategory"
+      }
+    },
+    "CG_CE_SurveyQuestionResponse_ScoreBucketing": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_Slice_SurveyQuestionResponse",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "ResponseValueBucket",
+          "saqlExpression": "case \n    when 'NumberValue' >= 0 and 'NumberValue' <= 6 then \"Detractors\"\nwhen 'NumberValue' >= 7  and 'NumberValue' <= 8 then \"Passives\" \n    when 'NumberValue' >= 9  and 'NumberValue' <= 10 then \"Promoters\" \n    end",
+          "label": "ResponseValueBucket",
+          "type": "Text"
+        }]
+      }
+    },
+    "CG_Augment_InStoreLocation_onto_RetailVisitKpi": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Augment_Product_onto_RetailVisitKpi",
+        "left_key": ["InStoreLocationId"],
+        "right_select": [
+          "Category",
+          "Name",
+          "InStoreLocationType"
+        ],
+        "right": "CG_Digest_InStoreLocation",
+        "relationship": "InStoreLocation",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Augment_Visitor_onto_Visit": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_CE_Visit",
+        "left_key": ["VisitorId"],
+        "right_select": [
+          "UserType",
+          "Username",
+          "Name",
+          "ManagerId",
+          "FullPhotoUrl",
+          "SmallPhotoUrl",
+          "Role.Name",
+          "Parents",
+          "ParentPath",
+          "UniqueUserName",
+          "Computed_ParentID",
+          "Role.ParentRoleId"
+        ],
+        "right": "CG_CE_Unique_UserName",
+        "relationship": "Visitor",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Digest_AssortmentProduct": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AssortmentId"},
+          {"name": "Id"},
+          {"name": "ProductId"},
+          {"name": "Name"}
+        ],
+        "object": "AssortmentProduct"
+      }
+    },
+    "CG_Flatten_Account_Without_SelfIds": {
+      "schema": {"objects": [{
+        "label": "Parent_Account_Names",
+        "fields": [
+          {
+            "name": "Parent_Account_Names",
+            "label": "Parent_Account_Names",
+            "isSystemField": false
+          },
+          {
+            "name": "Parent_Account_NamesPath",
+            "label": "Parent_Account_NamesPath",
+            "isSystemField": false
+          }
+        ]
+      }]},
+      "action": "flatten",
+      "parameters": {
+        "include_self_id": false,
+        "self_field": "Name",
+        "multi_field": "Parent_Account_Names",
+        "parent_field": "Computed_Parent_Account_Name",
+        "path_field": "Parent_Account_NamesPath",
+        "source": "CG_CE_Account_Parent_Account_Name_WithoutSelf_Ids"
+      }
+    },
+    "CG_Digest_RetailStore": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {"name": "DeliveryFrequency"},
+          {"name": "DeliveryMethod"},
+          {"name": "Description"},
+          {"name": "Id"},
+          {"name": "StoreType"},
+          {"name": "RetailLocationGroupId"},
+          {"name": "Priority"},
+          {"name": "PrimaryContactId"},
+          {"name": "OwnerId"},
+          {"name": "Name"},
+          {"name": "LocationId"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "CreatedDate",
+            "isYearEndFiscalYear": false
+          }
+        ],
+        "object": "RetailStore"
+      }
+    },
+    "CG_Digest_ProductCategoryProduct": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "IsPrimaryCategory"},
+          {"name": "ProductId"},
+          {"name": "ProductCategoryId"},
+          {"name": "Name"}
+        ],
+        "object": "ProductCategoryProduct"
+      }
+    },
+    "CG_Augment_AssessmentTask_onto_AssessmentTaskOrder": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Augment_RetailStore_onto_AssessmentTaskOrder",
+        "left_key": ["AssessmentTaskId"],
+        "right_select": [
+          "Description",
+          "TaskType",
+          "Name",
+          "Id",
+          "Visit.ActualVisitEndTime",
+          "Visit.ActualVisitStartTime",
+          "Visit.InstructionDescription",
+          "Visit.Id",
+          "Visit.VisitPriority",
+          "Visit.VisitorId",
+          "Visit.Status",
+          "Visit.PlannedVisitStartTime",
+          "Visit.PlannedVisitEndTime",
+          "Visit.Name",
+          "Visit.ActualVisitDuration",
+          "Visit.ActualVisitStartTime_YearMonthDay",
+          "Visit.Visitor.Name",
+          "Visit.Visitor.UniqueUserName",
+          "Visit.RetailStore.AccountId",
+          "Visit.RetailStore.Id",
+          "Visit.RetailStore.RetailLocationGroupId",
+          "Visit.RetailStore.Priority",
+          "Visit.RetailStore.PrimaryContactId",
+          "Visit.RetailStore.Name",
+          "Visit.RetailStore.RetailStoreGroup.Description",
+          "Visit.RetailStore.RetailStoreGroup.Name",
+          "Visit.RetailStore.Account.Name",
+          "Visit.RetailStore.Account.Parent_Account_Names",
+          "Visit.RetailStore.Account.Parent_Account_NamesPath",
+          "Visit.RetailStore.PrimaryContact.Name",
+          "Visit.RetailStore.Location.Name",
+          "Visit.RetailStore.Location.Address.City",
+          "Visit.RetailStore.Location.Address.Country",
+          "Visit.RetailStore.Location.Address.State",
+          "Visit.RetailStore.Location.Address.PostalCode",
+          "Visit.RetailStore.Location.Address.Name",
+          "Visit.RetailStore.RetailStoreGroupName_Custom",
+          "Visit.Visitor.Computed_ParentID",
+          "Visit.Visitor.UserType",
+          "Visit.Visitor.Username",
+          "Visit.Visitor.ManagerId",
+          "Visit.Visitor.FullPhotoUrl",
+          "Visit.Visitor.SmallPhotoUrl",
+          "Visit.Visitor.Parents",
+          "Visit.Visitor.ParentPath",
+          "Visit.Visitor.Role.Name",
+          "Visit.Visitor.Role.ParentRoleId"
+        ],
+        "right": "CG_Augment_Visit_onto_AssessmentTask",
+        "relationship": "AssessmentTask",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Augment_Visit_onto_SurveySubject": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Augment_RetailStore_onto_SurveySubject",
+        "left_key": ["SubjectId"],
+        "right_select": [
+          "Status",
+          "Name",
+          "RetailStore.PrimaryContactId",
+          "RetailStore.Name",
+          "RetailStore.RetailStoreGroup.Name",
+          "RetailStore.Account.Name",
+          "RetailStore.PrimaryContact.Name",
+          "RetailStore.Location.Name",
+          "RetailStore.Location.Address.City",
+          "RetailStore.Location.Address.Country",
+          "RetailStore.Location.Address.State",
+          "RetailStore.Id",
+          "PlaceId",
+          "RetailStore.Account.Parent_Account_Names",
+          "RetailStore.Account.Parent_Account_NamesPath",
+          "RetailStore.RetailStoreGroupName_Custom",
+          "Visitor.UserType",
+          "Visitor.Username",
+          "Visitor.ManagerId",
+          "Visitor.FullPhotoUrl",
+          "Visitor.SmallPhotoUrl",
+          "Visitor.Parents",
+          "Visitor.ParentPath",
+          "Visitor.Role.Name",
+          "Visitor.Role.ParentRoleId"
+        ],
+        "right": "CG_Augment_RetailStore_onto_Visit",
+        "relationship": "Visit",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Augment_SurveyQuestion_onto_SurveyQuestionResponse": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Digest_SurveyQuestionResponse",
+        "left_key": ["QuestionId"],
+        "right_select": [
+          "Name",
+          "QuestionName",
+          "QuestionType"
+        ],
+        "right": "CG_Digest_SurveyQuestion",
+        "relationship": "SurveyQuestion",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Digest_Visit": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {
+            "fiscalMonthOffset": 2,
+            "name": "ActualVisitEndTime",
+            "isYearEndFiscalYear": false
+          },
+          {
+            "fiscalMonthOffset": 2,
+            "name": "ActualVisitStartTime",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "CreatedById"},
+          {"name": "LastModifiedById"},
+          {"name": "IsDeleted"},
+          {"name": "InstructionDescription"},
+          {"name": "Id"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "CreatedDate",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "VisitPriority"},
+          {"name": "VisitorId"},
+          {"name": "SystemModstamp"},
+          {"name": "StatusRemarks"},
+          {"name": "Status"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "PlannedVisitStartTime",
+            "isYearEndFiscalYear": false
+          },
+          {
+            "fiscalMonthOffset": 2,
+            "name": "PlannedVisitEndTime",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "PlaceId"},
+          {"name": "OwnerId"},
+          {"name": "Name"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "LastModifiedDate",
+            "isYearEndFiscalYear": false
+          }
+        ],
+        "object": "Visit"
+      }
+    },
+    "CG_CR_SurveyQuestionResponse": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["ResponseId"],
+        "orderBy": [{
+          "name": "QuestionId",
+          "direction": "asc"
+        }],
+        "source": "CG_Append_SurveyQuestionResponse_with_Dummy",
+        "computedFields": [{
+          "expression": {
+            "sourceField": "ResponseId",
+            "offset": "previous()"
+          },
+          "name": "FirstResponseValue",
+          "label": "FirstResponseValue"
+        }]
+      }
+    },
+    "CG_CR_Unique_User_Flag": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["Name"],
+        "orderBy": [{
+          "name": "Id",
+          "direction": "asc"
+        }],
+        "source": "CG_Flatten_UserRole",
+        "computedFields": [{
+          "expression": {
+            "sourceField": "Id",
+            "offset": "next()"
+          },
+          "name": "isDuplicate",
+          "label": "isDuplicate"
+        }]
+      }
+    },
+    "CG_Augment_AssortmentProduct_onto_RetailVisitKpi": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Augment_AssessmentTask_onto_RetailVisitKpi",
+        "left_key": ["ProductId"],
+        "right_select": ["AssortmentProduct.Assortment.Name"],
+        "right": "CG_Update_Product_Fill_null_Assortment_Records_with_NA",
+        "relationship": "Assortment",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_Augment_AssortmentProduct_onto_Product": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["ProductId"],
+        "left": "CG_Update_Product_Fill_null_ProductCategory_Records_with_NA",
+        "left_key": ["Id"],
+        "right_select": ["Assortment.Name"],
+        "right": "CG_Augment_Assortment_onto_AssortmentProduct",
+        "relationship": "AssortmentProduct",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_Digest_Account": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountSource"},
+          {"name": "AnnualRevenue"},
+          {"name": "BillingCity"},
+          {"name": "BillingCountry"},
+          {"name": "BillingState"},
+          {"name": "BillingStreet"},
+          {"name": "Description"},
+          {"name": "Id"},
+          {"name": "Industry"},
+          {"name": "LastActivityDate"},
+          {"name": "MasterRecordId"},
+          {"name": "Name"},
+          {"name": "OwnerId"},
+          {"name": "ParentId"},
+          {"name": "Phone"},
+          {"name": "PhotoUrl"},
+          {"name": "ShippingCountry"},
+          {"name": "ShippingState"},
+          {"name": "ShippingStreet"},
+          {"name": "Type"},
+          {"name": "BillingPostalCode"},
+          {"name": "ShippingCity"}
+        ],
+        "object": "Account"
+      }
+    },
+    "CG_Filter_SurveyQuestionResponse_GetFirstResponse": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_CR_SurveyQuestionResponse",
+        "saqlFilter": "FirstResponseValue is null && 'CR_Computed_Dummy' != \"Dummy\""
+      }
+    },
+    "CG_Filter_AssessmentTaskOrder_Remove_Duplicates": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_CE_AssessmentTaskOrder_Find_Duplicate_Orders",
+        "saqlFilter": "'IsDuplicate' == \"False\""
+      }
+    },
+    "CG_Digest_Address": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AddressType"},
+          {"name": "City"},
+          {"name": "Country"},
+          {"name": "Street"},
+          {"name": "State"},
+          {"name": "PostalCode"},
+          {"name": "ParentId"},
+          {"name": "Name"},
+          {"name": "Id"},
+          {"name": "GeocodeAccuracy"},
+          {"name": "DrivingDirections"},
+          {"name": "Description"}
+        ],
+        "object": "Address"
+      }
+    },
+    "CG_Augment_Account_onto_Case": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Digest_Case",
+        "left_key": ["AccountId"],
+        "right_select": [
+          "AnnualRevenue",
+          "Description",
+          "Industry",
+          "Name",
+          "Parent_Account_Names",
+          "Parent_Account_NamesPath",
+          "Phone"
+        ],
+        "right": "CG_Append_Accounts",
+        "relationship": "Account",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Digest_Product": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Description"},
+          {"name": "QuantityUnitOfMeasure"},
+          {"name": "ProductCode"},
+          {"name": "Name"},
+          {"name": "Id"},
+          {
+            "defaultValue": "NA",
+            "name": "Family"
+          },
+          {
+            "fiscalMonthOffset": 2,
+            "name": "CreatedDate",
+            "isYearEndFiscalYear": false
+          }
+        ],
+        "object": "Product2"
+      }
+    },
+    "CG_Slice_SurveyQuestionResponse": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "CG_Filter_SurveyQuestionResponse_GetFirstResponse",
+        "fields": [
+          {"name": "CR_Computed_Dummy"},
+          {"name": "OrderId"}
+        ]
+      }
+    },
+    "CG_Register_Case": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_Case",
+        "alias": "${App.Datasets.CG_Case69_tp.FullyQualifiedName}",
+        "source": "CG_CE_Case"
+      }
+    },
+    "CG_Augment_AssortmentProduct_onto_OrderItem": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Augment_Order_onto_OrderItem",
+        "left_key": ["Product2Id"],
+        "right_select": ["AssortmentProduct.Assortment.Name"],
+        "right": "CG_Update_Product_Fill_null_Assortment_Records_with_NA",
+        "relationship": "Assortment",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_SurveyResponse_onto_SurveyQuestionResponse": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_CE_SurveyQuestionResponse_ScoreBucketing",
+        "left_key": ["ResponseId"],
+        "right_select": [
+          "CompletionDateTime",
+          "Name",
+          "Status",
+          "SurveySubject.Name",
+          "SurveySubject.SubjectEntityType",
+          "SurveySubject.SurveyInvitation.InvitationLink",
+          "SurveySubject.SurveyInvitation.InviteExpiryDateTime",
+          "SurveySubject.SurveyInvitation.Name",
+          "SurveySubject.SurveyInvitation.ResponseStatus",
+          "SurveySubject.Survey.Description",
+          "SurveySubject.Survey.Name",
+          "SurveySubject.Survey.SurveyType",
+          "SurveySubject.RetailStore.Priority",
+          "SurveySubject.RetailStore.Name",
+          "SurveySubject.RetailStore.RetailStoreGroup.Name",
+          "SurveySubject.RetailStore.Account.Name",
+          "SurveySubject.RetailStore.Account.Parent_Account_Names",
+          "SurveySubject.RetailStore.Account.Parent_Account_NamesPath",
+          "SurveySubject.RetailStore.Location.Name",
+          "SurveySubject.RetailStore.Location.Address.City",
+          "SurveySubject.RetailStore.Location.Address.Country",
+          "SurveySubject.RetailStore.Location.Address.State",
+          "SurveySubject.RetailStore.RetailStoreGroupName_Custom",
+          "SurveySubject.Visit.Status",
+          "SurveySubject.Visit.Name",
+          "SurveySubject.Visit.RetailStore.Name",
+          "SurveySubject.Visit.RetailStore.RetailStoreGroup.Name",
+          "SurveySubject.Visit.RetailStore.Account.Name",
+          "SurveySubject.Visit.RetailStore.Account.Parent_Account_Names",
+          "SurveySubject.Visit.RetailStore.Account.Parent_Account_NamesPath",
+          "SurveySubject.Visit.RetailStore.PrimaryContact.Name",
+          "SurveySubject.Visit.RetailStore.Location.Name",
+          "SurveySubject.Visit.RetailStore.Location.Address.City",
+          "SurveySubject.Visit.RetailStore.Location.Address.Country",
+          "SurveySubject.Visit.RetailStore.Location.Address.State",
+          "SurveySubject.Visit.RetailStore.RetailStoreGroupName_Custom",
+          "SurveySubject.RetailStoreId",
+          "SurveySubject.Contact.Email",
+          "SurveySubject.Contact.Name",
+          "SurveySubject.Contact.Phone",
+          "SurveySubject.Contact.Account.Name",
+          "SurveySubject.Contact.Account.Type",
+          "SurveySubject.Contact.Account.Parent_Account_Names",
+          "SurveySubject.Contact.Account.Parent_Account_NamesPath",
+          "SurveySubject.Location",
+          "SurveySubject.City",
+          "SurveySubject.State",
+          "SurveySubject.Account",
+          "SurveySubject.StoreGroup",
+          "SurveySubject.StoreName"
+        ],
+        "right": "CG_Augment_SurveySubject_onto_SurveyResponse",
+        "relationship": "SurveyResponse",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Register_RetailVisitKpi_wo_predicate": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_RetailVisitKpi_wo_predicate",
+        "alias": "${App.Datasets.CG_RetailVisitKpi_wo_predicate51_tp.FullyQualifiedName}",
+        "source": "CG_CE_RetailVisitKpi_Compute_Values"
+      }
+    },
+    "CG_CE_RetailVisitKpi_Compute_Values": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_Augment_AssortmentProduct_onto_RetailVisitKpi",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' == \"Number\" then case when 'ActualIntegerValue' is not null && 'TargetIntegerValue' is null then \"True\" else \"False\" end\nwhen 'AssessmentIndicatorDefinition.DataType' == \"Decimal\" then case when 'ActualDecimalValue' is not null && 'TargetDecimalValue' is null then \"True\" else \"False\" end\nwhen 'AssessmentIndicatorDefinition.DataType' == \"Boolean\" then case when 'ActualBooleanValue' is not null && 'TargetBooleanValue' is null then \"True\" else \"False\" end end",
+            "name": "Target_Empty_Flag",
+            "label": "Target_Empty_Flag",
+            "type": "Text"
+          },
+          {
+            "precision": 16,
+            "name": "ActualValue_Num_Dec_Computed",
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' == \"Number\" then 'ActualIntegerValue' when 'AssessmentIndicatorDefinition.DataType' == \"Decimal\" then 'ActualDecimalValue' end",
+            "scale": 5,
+            "label": "ActualValue_Num_Dec_Computed",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' == \"Number\" then 'TargetIntegerValue' when 'AssessmentIndicatorDefinition.DataType' == \"Decimal\" then 'TargetDecimalValue' end",
+            "name": "TargetValue_Num_Dec_Computed",
+            "scale": 5,
+            "label": "TargetValue_Num_Dec_Computed",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "name": "ActualValue_Num_Dec_Adjusted",
+            "saqlExpression": "case when 'Target_Empty_Flag' == \"False\" && 'ActualValue_Num_Dec_Computed' > 'TargetValue_Num_Dec_Computed' then 'TargetValue_Num_Dec_Computed' else 'ActualValue_Num_Dec_Computed' end",
+            "scale": 5,
+            "label": "ActualValue_Num_Dec_Adjusted",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "saqlExpression": "case when 'Type' in [\"Facing\",\"ShareOfShelf\",\"Inventory\"] && 'AssessmentIndicatorDefinition.DataType' in [\"Number\", \"Decimal\"] && 'Target_Empty_Flag' == \"True\" then 'ActualValue_Num_Dec_Computed' else 'TargetValue_Num_Dec_Computed' end",
+            "name": "Fill_Target_Num_Dec_when_Empty",
+            "scale": 5,
+            "label": "Fill_Target_Num_Dec_when_Empty",
+            "type": "Numeric"
+          },
+          {
+            "name": "Fill_Target_Boolean_when_Empty",
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' == \"Boolean\" then case when 'Target_Empty_Flag' == \"False\" then 'TargetBooleanValue' else case when ('Type' != \"OutOfStock\" || 'Type' is null) && 'ActualBooleanValue'==\"True\" then 'ActualBooleanValue' else \"False\" end end end",
+            "label": "Fill_Target_Boolean_when_Empty",
+            "type": "Text"
+          },
+          {
+            "precision": 16,
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' in [\"Number\",\"Decimal\"] then 'ActualValue_Num_Dec_Adjusted' when 'AssessmentIndicatorDefinition.DataType' == \"Boolean\" then \ncase when 'ActualBooleanValue' == \"True\" then 1 else 0 end end",
+            "name": "ActualValue_Computed",
+            "scale": 5,
+            "label": "ActualValue_Computed",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' in [\"Number\",\"Decimal\"] then 'Fill_Target_Num_Dec_when_Empty' when 'AssessmentIndicatorDefinition.DataType' == \"Boolean\" then case when 'Fill_Target_Boolean_when_Empty' == \"True\" then 1 else 0 end end",
+            "name": "TargetValue_Computed",
+            "scale": 5,
+            "label": "TargetValue_Computed",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' == \"Boolean\" then abs('ActualValue_Computed' - 'TargetValue_Computed')*100 else abs('ActualValue_Computed' - 'TargetValue_Computed')/'TargetValue_Computed' *100 end",
+            "name": "NonCompliance_Percentage",
+            "scale": 5,
+            "label": "NonCompliance_Percentage",
+            "type": "Numeric"
+          },
+          {
+            "precision": 16,
+            "saqlExpression": "100 - 'NonCompliance_Percentage'",
+            "name": "Compliance_Percentage",
+            "scale": 5,
+            "label": "Compliance_Percentage",
+            "type": "Numeric"
+          },
+          {
+            "name": "Target_n_Actual_Values_Present_Flag",
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' == \"Number\" && 'ActualIntegerValue' is not null then \"True\" when 'AssessmentIndicatorDefinition.DataType' == \"Decimal\" && 'ActualDecimalValue' is not null then \"True\" when 'AssessmentIndicatorDefinition.DataType' == \"Boolean\" && 'ActualBooleanValue' is not null then \"True\" else \"False\" end",
+            "label": "Target_n_Actual_Values_Present_Flag",
+            "type": "Text"
+          },
+          {
+            "saqlExpression": "case when 'AssessmentIndicatorDefinition.DataType' in [\"Number\",\"Decimal\"] && 'Type' in [\"Facing\",\"ShareOfShelf\",\"Inventory\"] then \"True\" when 'AssessmentIndicatorDefinition.DataType' == \"Boolean\" && ('PromotionId' is not null || 'Type' == \"OutOfStock\") then \"True\" else \"False\" end",
+            "name": "Include_In_Compliance_Temp",
+            "label": "Include in Compliance - Temp",
+            "type": "Text"
+          },
+          {
+            "name": "Include_In_Compliance",
+            "saqlExpression": "case when 'Target_n_Actual_Values_Present_Flag' == \"True\" && 'Include_In_Compliance_Temp' == \"True\" then \"True\" else \"False\" end",
+            "label": "Include In Compliance?",
+            "type": "Text"
+          },
+          {
+            "name": "Type_Computed",
+            "saqlExpression": "case when 'PromotionId' is not null then \"Promotion\" else 'Type' end",
+            "label": "Type_Computed",
+            "type": "Text"
+          },
+          {
+            "precision": 10,
+            "name": "Completed_Tasks_Count",
+            "saqlExpression": "case when ActualIntegerValue is not null || ActualDecimalValue is not null || ActualBooleanValue is not null || ActualDateTimeValue is not null || ActualStringValue is not null then 1 else 0 end",
+            "scale": 0,
+            "label": "Completed_Tasks_Count",
+            "type": "Numeric"
+          },
+          {
+            "fiscalMonthOffset": 2,
+            "saqlExpression": "toDate('AssessmentTask.Visit.ActualVisitStartTime_sec_epoch')",
+            "name": "ActualVisitStartTime",
+            "format": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+            "label": "ActualVisitStartTime",
+            "type": "Date",
+            "isYearEndFiscalYear": false
+          },
+          {
+            "name": "Product_Name_Custom",
+            "saqlExpression": "case when 'Product.Name' is not null then 'Product.Name' else \"NA\" end",
+            "label": "Product Name",
+            "type": "Text"
+          },
+          {
+            "name": "ProductCategory_Name_Custom",
+            "saqlExpression": "coalesce('ProductCategory.Name', \"NA\")",
+            "label": "Product Category",
+            "type": "Text"
+          },
+          {
+            "name": "Task_Status",
+            "saqlExpression": "case when ActualIntegerValue is not null || ActualDecimalValue is not null || ActualBooleanValue is not null || ActualDateTimeValue is not null || ActualStringValue is not null then \"Completed\" else \"Not Completed\" end",
+            "label": "Task Status",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "CG_Digest_AssessmentIndicatorDefinition": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "DataType"},
+          {"name": "Name"},
+          {"name": "Id"},
+          {"name": "Description"}
+        ],
+        "object": "AssessmentIndicatorDefinition"
+      }
+    },
+    "CG_Augment_Order_onto_OrderItem": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Augment_Product_onto_OrderItem",
+        "left_key": ["OrderId"],
+        "right_select": [
+          "ActivatedDate",
+          "Type",
+          "TotalAmount",
+          "StatusCode",
+          "Status",
+          "ShippingState",
+          "ShippingCity",
+          "OrderNumber",
+          "IsReductionOrder",
+          "IsDeleted",
+          "EndDate",
+          "EffectiveDate",
+          "Description",
+          "CreatedDate",
+          "BillingState",
+          "BillingCity",
+          "Account.Industry",
+          "Account.Name",
+          "Account.Phone",
+          "AssessmentTaskOrder.Name",
+          "AssessmentTaskOrder.RetailStore.Name",
+          "AssessmentTaskOrder.RetailStore.Account.Name",
+          "AssessmentTaskOrder.AssessmentTask.TaskType",
+          "AssessmentTaskOrder.AssessmentTask.Name",
+          "AssessmentTaskOrder.RetailStoreId",
+          "AssessmentTaskOrder.AssessmentTask.Visit.ActualVisitEndTime",
+          "AssessmentTaskOrder.AssessmentTask.Visit.ActualVisitStartTime",
+          "AssessmentTaskOrder.AssessmentTask.Visit.InstructionDescription",
+          "AssessmentTaskOrder.AssessmentTask.Visit.Id",
+          "AssessmentTaskOrder.AssessmentTask.Visit.VisitPriority",
+          "AssessmentTaskOrder.AssessmentTask.Visit.VisitorId",
+          "AssessmentTaskOrder.AssessmentTask.Visit.Status",
+          "AssessmentTaskOrder.AssessmentTask.Visit.PlannedVisitStartTime",
+          "AssessmentTaskOrder.AssessmentTask.Visit.PlannedVisitEndTime",
+          "AssessmentTaskOrder.AssessmentTask.Visit.Name",
+          "AssessmentTaskOrder.AssessmentTask.Visit.ActualVisitDuration",
+          "AssessmentTaskOrder.AssessmentTask.Visit.ActualVisitStartTime_YearMonthDay",
+          "AssessmentTaskOrder.AssessmentTask.Visit.Visitor.Name",
+          "AssessmentTaskOrder.AssessmentTask.Visit.Visitor.UniqueUserName",
+          "AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.AccountId",
+          "AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Id",
+          "AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.RetailLocationGroupId",
+          "AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Priority",
+          "AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.PrimaryContactId",
+          "AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Name",
+          "AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.RetailStoreGroup.Description",
+          "AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.RetailStoreGroup.Name",
+          "AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Account.Name",
+          "AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.PrimaryContact.Name",
+          "AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Location.Name",
+          "AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Location.Address.City",
+          "AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Location.Address.Country",
+          "AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Location.Address.State",
+          "AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Location.Address.PostalCode",
+          "AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Location.Address.Name",
+          "Account.Parent_Account_Names",
+          "Account.Parent_Account_NamesPath",
+          "AssessmentTaskOrder.RetailStore.Account.Parent_Account_Names",
+          "AssessmentTaskOrder.RetailStore.Account.Parent_Account_NamesPath",
+          "AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Account.Parent_Account_Names",
+          "AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Account.Parent_Account_NamesPath",
+          "AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.RetailStoreGroupName_Custom",
+          "AssessmentTaskOrder.AssessmentTask.Visit.Visitor.Computed_ParentID",
+          "AssessmentTaskOrder.AssessmentTask.Visit.Visitor.UserType",
+          "AssessmentTaskOrder.AssessmentTask.Visit.Visitor.Username",
+          "AssessmentTaskOrder.AssessmentTask.Visit.Visitor.ManagerId",
+          "AssessmentTaskOrder.AssessmentTask.Visit.Visitor.FullPhotoUrl",
+          "AssessmentTaskOrder.AssessmentTask.Visit.Visitor.SmallPhotoUrl",
+          "AssessmentTaskOrder.AssessmentTask.Visit.Visitor.Parents",
+          "AssessmentTaskOrder.AssessmentTask.Visit.Visitor.ParentPath",
+          "AssessmentTaskOrder.AssessmentTask.Visit.Visitor.Role.Name",
+          "AssessmentTaskOrder.AssessmentTask.Visit.Visitor.Role.ParentRoleId"
+        ],
+        "right": "CG_Augment_AssessmentTaskOrder_onto_Order",
+        "relationship": "Order",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_CE_Product": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_Digest_Product",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "Dummy_Key",
+            "saqlExpression": "\"NA\"",
+            "label": "Dummy_Key",
+            "type": "Text"
+          },
+          {
+            "name": "Id_with_Name",
+            "saqlExpression": "'Id'+\"_\"+'Name'",
+            "label": "Id_with_Name",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "CG_Augment_RetailStore_onto_Visit": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Augment_Visitor_onto_Visit",
+        "left_key": ["PlaceId"],
+        "right_select": [
+          "Account.AccountSource",
+          "Account.AnnualRevenue",
+          "Account.Industry",
+          "Account.Name",
+          "Account.Phone",
+          "Account.Type",
+          "AccountId",
+          "DeliveryFrequency",
+          "DeliveryMethod",
+          "Description",
+          "Id",
+          "Location.LocationLevel",
+          "Location.Name",
+          "Name",
+          "PrimaryContact.Department",
+          "PrimaryContact.Description",
+          "PrimaryContact.Email",
+          "PrimaryContact.MobilePhone",
+          "PrimaryContact.Name",
+          "PrimaryContact.Phone",
+          "PrimaryContactId",
+          "Priority",
+          "RetailLocationGroupId",
+          "RetailStoreGroup.Description",
+          "RetailStoreGroup.Name",
+          "StoreType",
+          "Location.Address.City",
+          "Location.Address.Country",
+          "Location.Address.State",
+          "Location.Address.PostalCode",
+          "Location.Address.Name",
+          "Account.Parent_Account_Names",
+          "Account.Parent_Account_NamesPath",
+          "RetailStoreGroupName_Custom"
+        ],
+        "right": "CG_CE_RetailStore",
+        "relationship": "RetailStore",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Digest_InStoreLocation": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Category"},
+          {"name": "RetailStoreId"},
+          {"name": "Name"},
+          {"name": "LocationId"},
+          {"name": "InStoreLocationType"},
+          {"name": "Id"},
+          {"name": "Description"},
+          {"name": "PlanogramId"}
+        ],
+        "object": "InStoreLocation"
+      }
+    },
+    "CG_Digest_OrderItem": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AvailableQuantity"},
+          {"name": "CreatedById"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "CreatedDate",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "Description"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "EndDate",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "Id"},
+          {"name": "UnitPrice"},
+          {"name": "TotalPrice"},
+          {"name": "SystemModstamp"},
+          {"name": "ServiceDate"},
+          {"name": "Quantity"},
+          {"name": "Product2Id"},
+          {"name": "PricebookEntryId"},
+          {"name": "OriginalOrderItemId"},
+          {"name": "OrderItemNumber"},
+          {"name": "OrderId"},
+          {"name": "ListPrice"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "LastModifiedDate",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "LastModifiedById"},
+          {"name": "IsDeleted"}
+        ],
+        "object": "OrderItem"
+      }
+    },
+    "CG_Digest_ProductCategory": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "CatalogId"},
+          {"name": "Description"},
+          {"name": "Id"},
+          {"name": "Name"},
+          {"name": "NumberOfProducts"},
+          {"name": "ParentCategoryId"}
+        ],
+        "object": "ProductCategory"
+      }
+    },
+    "CG_Augment_Contact_onto_Case": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Augment_Account_onto_Case",
+        "left_key": ["ContactId"],
+        "right_select": [
+          "Description",
+          "Department",
+          "Email",
+          "FirstName",
+          "LastName",
+          "LeadSource",
+          "Name",
+          "MobilePhone",
+          "Phone",
+          "Title"
+        ],
+        "right": "CG_Digest_Contact",
+        "relationship": "Contact",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_CE_Fill_null_ParentRoleIds_with_NA": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_Augment_UserRole_onto_User",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "ParentRole_Id",
+          "saqlExpression": "case when 'Role.ParentRoleId' is null then \"NA\" else 'Role.ParentRoleId' end",
+          "label": "ParentRole_Id",
+          "type": "Text"
+        }]
+      }
+    },
+    "CG_Digest_Contact": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {"name": "Birthdate"},
+          {"name": "Department"},
+          {"name": "Description"},
+          {"name": "Email"},
+          {"name": "FirstName"},
+          {"name": "Id"},
+          {"name": "IndividualId"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "LastModifiedDate",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "LastName"},
+          {"name": "LastReferencedDate"},
+          {"name": "LeadSource"},
+          {"name": "Name"},
+          {"name": "OwnerId"},
+          {"name": "Phone"},
+          {"name": "PhotoUrl"},
+          {"name": "Salutation"},
+          {"name": "Title"},
+          {"name": "LastActivityDate"},
+          {"name": "MobilePhone"}
+        ],
+        "object": "Contact"
+      }
+    },
+    "CG_CE_SurveySubject": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_Augment_Contact_onto_SurveySubject",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "Location",
+            "saqlExpression": "coalesce('RetailStore.Location.Name', 'Visit.RetailStore.Location.Name')",
+            "label": "Location",
+            "type": "Text"
+          },
+          {
+            "name": "City",
+            "saqlExpression": "coalesce('RetailStore.Location.Address.City', 'Visit.RetailStore.Location.Address.City')",
+            "label": "City",
+            "type": "Text"
+          },
+          {
+            "name": "State",
+            "saqlExpression": "coalesce('RetailStore.Location.Address.State', 'Visit.RetailStore.Location.Address.State')",
+            "label": "State",
+            "type": "Text"
+          },
+          {
+            "name": "Account",
+            "saqlExpression": "coalesce('RetailStore.Account.Name','Visit.RetailStore.Account.Name','Contact.Account.Name')",
+            "label": "Account",
+            "type": "Text"
+          },
+          {
+            "name": "StoreGroup",
+            "saqlExpression": "coalesce('RetailStore.RetailStoreGroupName_Custom', 'Visit.RetailStore.RetailStoreGroupName_Custom')",
+            "label": "Store Group",
+            "type": "Text"
+          },
+          {
+            "name": "StoreName",
+            "saqlExpression": "coalesce('RetailStore.Name','Visit.RetailStore.Name')",
+            "label": "Store Name",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "CG_Append_SurveyQuestionResponse_with_Dummy": {
+      "action": "append",
+      "parameters": {
+        "enableDisjointedSchemaMerge": true,
+        "sources": [
+          "CG_Filter_SurveyQuestionResponse_Keep_NPS_Data",
+          "CG_Filter_Dummy"
+        ]
+      }
+    },
+    "CG_Digest_RetailStore_Dummy": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [{"name": "Id"}],
+        "object": "RetailStore"
+      }
+    },
+    "CG_Augment_ProductCategory_onto_Product": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["ProductId"],
+        "left": "CG_Digest_Product",
+        "left_key": ["Id"],
+        "right_select": ["ProductCategory.Name"],
+        "right": "CG_ProductCategory_onto_ProductCategoryProduct",
+        "relationship": "ProductCategory",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_Filter_Record_IsParentYes": {
+      "action": "filter",
+      "parameters": {
+        "source": "CG_Flatten_Account_With_SelfIds",
+        "saqlFilter": "'IsParent_Flag'==\"Yes\""
+      }
+    },
+    "CG_Augment_Product_onto_RetailStore": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Dummy_Key"],
+        "left": "CG_CE_RetailStore",
+        "left_key": ["Dummy_Key"],
+        "right_select": ["Id_with_Name"],
+        "right": "CG_CE_Product",
+        "relationship": "Product",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "CG_Augment_ParentAccount_onto_Account": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_CE_Account_Compute_Flags",
+        "left_key": ["ParentId"],
+        "right_select": ["Name"],
+        "right": "CG_CE_Account_Compute_Flags",
+        "relationship": "Parent_Account",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Flatten_UserRole": {
+      "schema": {"objects": [{
+        "label": "UserWithRoles",
+        "fields": [
+          {
+            "name": "Parents",
+            "label": "Parents",
+            "isSystemField": false
+          },
+          {
+            "name": "ParentPath",
+            "label": "ParentPath",
+            "isSystemField": false
+          }
+        ]
+      }]},
+      "action": "flatten",
+      "parameters": {
+        "include_self_id": false,
+        "self_field": "UserRoleId",
+        "multi_field": "Parents",
+        "parent_field": "ParentRole_Id",
+        "path_field": "ParentPath",
+        "source": "CG_CE_Fill_null_ParentRoleIds_with_NA"
+      }
+    },
+    "CG_Flatten_Manager": {
+      "schema": {"objects": [{
+        "label": "UserWithManagers",
+        "fields": [
+          {
+            "name": "Parents",
+            "label": "Parents",
+            "isSystemField": false
+          },
+          {
+            "name": "ParentPath",
+            "label": "ParentPath",
+            "isSystemField": false
+          }
+        ]
+      }]},
+      "action": "flatten",
+      "parameters": {
+        "include_self_id": true,
+        "self_field": "Id",
+        "multi_field": "Parents",
+        "parent_field": "ManagerId",
+        "path_field": "ParentPath",
+        "source": "CG_Augment_UserRole_onto_User"
+      }
+    },
+    "CG_Digest_Survey": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "ActiveVersionId"},
+          {"name": "CreatedById"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "CreatedDate",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "Description"},
+          {"name": "DeveloperName"},
+          {"name": "Id"},
+          {"name": "IsDeleted"},
+          {"name": "LastModifiedById"},
+          {
+            "fiscalMonthOffset": 2,
+            "name": "LastModifiedDate",
+            "isYearEndFiscalYear": false
+          },
+          {"name": "Name"},
+          {"name": "OwnerId"},
+          {"name": "SurveyType"},
+          {"name": "TotalVersionsCount"},
+          {"name": "LatestVersionId"}
+        ],
+        "object": "Survey"
+      }
+    },
+    "CG_CE_Unique_UserName": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_CR_Unique_User_Flag",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "UniqueUserName",
+            "saqlExpression": "case when isDuplicate is null then 'Name' else 'Name' + \" (\" +'Username'+ \")\" end",
+            "label": "Unique User Name",
+            "type": "Text"
+          },
+          {
+            "name": "IsYearEndFiscal_Computed",
+            "saqlExpression": "\"false\"",
+            "label": "IsYearEndFiscal_Computed",
+            "type": "Text"
+          },
+          {
+            "name": "Computed_ParentID",
+            "saqlExpression": "'Role.ParentRoleId'",
+            "label": "Computed_ParentID",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "CG_Digest_RetailStoreGroup": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Description"},
+          {"name": "Id"},
+          {"name": "Name"}
+        ],
+        "object": "RetailLocationGroup"
+      }
+    },
+    "CG_Augment_Account_onto_Contact": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Digest_Contact",
+        "left_key": ["AccountId"],
+        "right_select": [
+          "Name",
+          "Phone",
+          "Parent_Account_Names",
+          "Parent_Account_NamesPath",
+          "Type"
+        ],
+        "right": "CG_Append_Accounts",
+        "relationship": "Account",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Augment_Visit_onto_AssessmentTask": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Digest_AssessmentTask",
+        "left_key": ["ParentId"],
+        "right_select": [
+          "ActualVisitEndTime",
+          "ActualVisitStartTime",
+          "InstructionDescription",
+          "Id",
+          "VisitPriority",
+          "VisitorId",
+          "Status",
+          "PlannedVisitStartTime",
+          "PlannedVisitEndTime",
+          "Name",
+          "ActualVisitDuration",
+          "ActualVisitStartTime_YearMonthDay",
+          "Visitor.Name",
+          "Visitor.UniqueUserName",
+          "RetailStore.AccountId",
+          "RetailStore.Id",
+          "RetailStore.RetailLocationGroupId",
+          "RetailStore.Priority",
+          "RetailStore.PrimaryContactId",
+          "RetailStore.Name",
+          "RetailStore.RetailStoreGroup.Description",
+          "RetailStore.RetailStoreGroup.Name",
+          "RetailStore.Account.Name",
+          "RetailStore.Account.Parent_Account_Names",
+          "RetailStore.Account.Parent_Account_NamesPath",
+          "RetailStore.PrimaryContact.Name",
+          "RetailStore.Location.Name",
+          "RetailStore.Location.Address.City",
+          "RetailStore.Location.Address.Country",
+          "RetailStore.Location.Address.State",
+          "RetailStore.Location.Address.PostalCode",
+          "RetailStore.Location.Address.Name",
+          "RetailStore.RetailStoreGroupName_Custom",
+          "Visitor.Computed_ParentID",
+          "Visitor.UserType",
+          "Visitor.Username",
+          "Visitor.ManagerId",
+          "Visitor.FullPhotoUrl",
+          "Visitor.SmallPhotoUrl",
+          "Visitor.Parents",
+          "Visitor.ParentPath",
+          "Visitor.Role.Name",
+          "Visitor.Role.ParentRoleId"
+        ],
+        "right": "CG_Augment_RetailStore_onto_Visit",
+        "relationship": "Visit",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_CE_RetailStore": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "CG_Augment_Location_onto_RetailStore",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "Dummy_Key",
+            "saqlExpression": "\"NA\"",
+            "label": "Dummy_Key",
+            "type": "Text"
+          },
+          {
+            "name": "RetailStoreGroupName_Custom",
+            "saqlExpression": "case when 'RetailStoreGroup.Name' is null then \"NA\" else 'RetailStoreGroup.Name' end",
+            "label": "Store Group",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "CG_Append_Accounts": {
+      "action": "append",
+      "parameters": {
+        "enableDisjointedSchemaMerge": true,
+        "sources": [
+          "CG_Filter_Record_IsParentYes",
+          "CG_Filter_Account_IsParentNo"
+        ]
+      }
+    },
+    "CG_Register_RetailStore": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_RetailStore",
+        "alias": "${App.Datasets.CG_RetailStore53_tp.FullyQualifiedName}",
+        "source": "CG_CE_Augment_Promotion_onto_RetailStore"
+      }
+    },
+    "CG_Digest_Location": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "VisitorAddressId"},
+          {"name": "OwnerId"},
+          {"name": "Name"},
+          {"name": "LocationType"},
+          {"name": "Id"},
+          {"name": "Description"},
+          {"name": "DrivingDirections"},
+          {"name": "LocationLevel"}
+        ],
+        "object": "Location"
+      }
+    },
+    "CG_Augment_Account_onto_RetailStore": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Augment_RetailStoreGroup_onto_RetailStore",
+        "left_key": ["AccountId"],
+        "right_select": [
+          "AccountSource",
+          "AnnualRevenue",
+          "Industry",
+          "Name",
+          "Parent_Account_Names",
+          "Parent_Account_NamesPath",
+          "Phone",
+          "Type"
+        ],
+        "right": "CG_Append_Accounts",
+        "relationship": "Account",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Digest_UserRole": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "DeveloperName"},
+          {"name": "Id"},
+          {"name": "Name"},
+          {"name": "ParentRoleId"}
+        ],
+        "object": "UserRole"
+      }
+    },
+    "CG_Augment_Product_onto_OrderItem": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Digest_OrderItem",
+        "left_key": ["Product2Id"],
+        "right_select": [
+          "Description",
+          "QuantityUnitOfMeasure",
+          "ProductCode",
+          "Name",
+          "Family",
+          "ProductCategory.ProductCategory.Name"
+        ],
+        "right": "CG_Update_Product_Fill_null_ProductCategory_Records_with_NA",
+        "relationship": "Product",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CG_Augment_Address_onto_Location": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CG_Digest_Location",
+        "left_key": ["VisitorAddressId"],
+        "right_select": [
+          "City",
+          "Country",
+          "State",
+          "Street",
+          "PostalCode",
+          "Name"
+        ],
+        "right": "CG_Digest_Address",
+        "relationship": "Address",
+        "operation": "LookupSingleValue"
+      }
+    }
+  },
+  "_type": "dataflow",
+  "description": "CG Analytics",
+  "MasterLabel": "CG 228 Demo w ED365 w SG CG Analytics",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive",
+  "isDeletable": true,
+  "longRunningAlertInMins": "",
+  "DataflowType": "USER",
+  "name": "CG_228_Demo_w_ED365_w_SG_CG_Analytics",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": ""
+}
