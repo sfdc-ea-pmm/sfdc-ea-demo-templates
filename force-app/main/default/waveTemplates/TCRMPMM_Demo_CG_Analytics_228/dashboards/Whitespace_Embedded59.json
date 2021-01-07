@@ -400,7 +400,7 @@
         "groups" : [ ],
         "label" : "quantity_trend",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}\";\r\nq = filter q by 'Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.RetailLocationGroupId' == \"{{cell(Get_StoreGroup_1.result, 0, \"RetailLocationGroupId\").asString()}}\";\r\nq = group q by ('Order.ActivatedDate_Year{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}', 'Order.ActivatedDate_Month{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}');\r\nq = foreach q generate 'Order.ActivatedDate_Year{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}' + \"~~~\" + 'Order.ActivatedDate_Month{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}' as 'Order.ActivatedDate_Year{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}~~~Order.ActivatedDate_Month{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}', sum('Quantity') as 'Quantity';\r\nq = order q by 'Order.ActivatedDate_Year{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}~~~Order.ActivatedDate_Month{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}' asc;\r\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}\";\r\nq = filter q by 'Order_AssessmentTaskOrder_AssessmentTask_Visit_RetailStore_RetailLocationGroupId' == \"{{cell(Get_StoreGroup_1.result, 0, \"RetailLocationGroupId\").asString()}}\";\r\nq = group q by ('Order_ActivatedDate_Year{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}', 'Order_ActivatedDate_Month{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}');\r\nq = foreach q generate 'Order_ActivatedDate_Year{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}' + \"~~~\" + 'Order_ActivatedDate_Month{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}' as 'Order_ActivatedDate_Year{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}~~~Order_ActivatedDate_Month{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}', sum('Quantity') as 'Quantity';\r\nq = order q by 'Order_ActivatedDate_Year{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}~~~Order_ActivatedDate_Month{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}' asc;\r\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -516,7 +516,7 @@
         "groups" : [ ],
         "label" : "Get_StoreGroup",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}\";\nq = group q by ('Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Id', 'Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.RetailLocationGroupId');\nq = foreach q generate 'Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Id' as 'RetailStoreId', 'Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.RetailLocationGroupId' as 'RetailLocationGroupId';\nq = limit q 1;",
+        "query" : "q = load \"${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}\";\nq = group q by ('Order_AssessmentTaskOrder_AssessmentTask_Visit_RetailStore_Id', 'Order_AssessmentTaskOrder_AssessmentTask_Visit_RetailStore_RetailLocationGroupId');\nq = foreach q generate 'Order_AssessmentTaskOrder_AssessmentTask_Visit_RetailStore_Id' as 'RetailStoreId', 'Order_AssessmentTaskOrder_AssessmentTask_Visit_RetailStore_RetailLocationGroupId' as 'RetailLocationGroupId';\nq = limit q 1;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -563,7 +563,7 @@
         "groups" : [ ],
         "label" : "Quantity_by_Products",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}\";\nq = filter q by 'Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.RetailLocationGroupId' in [\"{{cell(Get_StoreGroup_1.result, 0, \"RetailLocationGroupId\").asString()}}\"];\nq = group q by 'Product.Name';\nq = foreach q generate 'Product.Name' as 'Product.Name', sum('Quantity') as 'Total_Quantity';\nq = order q by 'Total_Quantity' desc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}\";\nq = filter q by 'Order_AssessmentTaskOrder_AssessmentTask_Visit_RetailStore_RetailLocationGroupId' in [\"{{cell(Get_StoreGroup_1.result, 0, \"RetailLocationGroupId\").asString()}}\"];\nq = group q by 'Product_Name';\nq = foreach q generate 'Product_Name' as 'Product_Name', sum('Quantity') as 'Total_Quantity';\nq = order q by 'Total_Quantity' desc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -700,13 +700,13 @@
         "values" : [
           {
             "Display" : "Product Category",
-            "Field_value" : "'Product.ProductCategory.ProductCategory.Name'",
-            "Api_name" : "Product.ProductCategory.ProductCategory.Name"
+            "Field_value" : "'Product_ProductCategory_ProductCategory_Name'",
+            "Api_name" : "Product_ProductCategory_ProductCategory_Name"
           },
           {
             "Display" : "Product",
-            "Field_value" : "'Product.Name'",
-            "Api_name" : "Product.Name"
+            "Field_value" : "'Product_Name'",
+            "Api_name" : "Product_Name"
           }
         ]
       },
@@ -715,7 +715,7 @@
         "groups" : [ ],
         "label" : "revenue_trend",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}\";\r\nq = filter q by 'Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.RetailLocationGroupId' == \"{{cell(Get_StoreGroup_1.result, 0, \"RetailLocationGroupId\").asString()}}\";\r\nq = group q by ('Order.ActivatedDate_Year{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}', 'Order.ActivatedDate_Month{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}');\r\nq = foreach q generate 'Order.ActivatedDate_Year{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}' + \"~~~\" + 'Order.ActivatedDate_Month{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}' as 'Order.ActivatedDate_Year{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}~~~Order.ActivatedDate_Month{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}', sum('TotalPrice') as 'Sales';\r\nq = order q by 'Order.ActivatedDate_Year{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}~~~Order.ActivatedDate_Month{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}' asc;\r\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}\";\r\nq = filter q by 'Order_AssessmentTaskOrder_AssessmentTask_Visit_RetailStore_RetailLocationGroupId' == \"{{cell(Get_StoreGroup_1.result, 0, \"RetailLocationGroupId\").asString()}}\";\r\nq = group q by ('Order_ActivatedDate_Year{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}', 'Order_ActivatedDate_Month{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}');\r\nq = foreach q generate 'Order_ActivatedDate_Year{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}' + \"~~~\" + 'Order_ActivatedDate_Month{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}' as 'Order_ActivatedDate_Year{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}~~~Order_ActivatedDate_Month{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}', sum('TotalPrice') as 'Sales';\r\nq = order q by 'Order_ActivatedDate_Year{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}~~~Order_ActivatedDate_Month{{cell(date_parser_1.result, 0, \"Is_Fiscal\").asString()}}' asc;\r\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -959,7 +959,7 @@
               ]
             ],
             "groups" : [
-              "Order.ActivatedDate"
+              "Order_ActivatedDate"
             ]
           },
           "version" : -1.0
@@ -990,7 +990,7 @@
         "groups" : [ ],
         "label" : "heatmap_sales",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}\";\nq = filter q by 'Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.RetailLocationGroupId' == \"{{cell(Get_StoreGroup_1.result, 0, \"RetailLocationGroupId\").asString()}}\";\nq = group q by ({{column(prod_prodcat_1.selection,[\"Field_value\"]).asObject()}}, 'Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Name');\nq = foreach q generate  {{row(prod_prodcat_1.selection,[0],[\"Field_value\",\"Api_name\"]).asProjection()}}, 'Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Name' as 'Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Name', sum('TotalPrice') as 'Sales';\nq = order q by ({{column(prod_prodcat_1.selection,[\"Field_value\"]).asObject()}} asc, 'Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Name' asc);\n",
+        "query" : "q = load \"${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}\";\nq = filter q by 'Order_AssessmentTaskOrder_AssessmentTask_Visit_RetailStore_RetailLocationGroupId' == \"{{cell(Get_StoreGroup_1.result, 0, \"RetailLocationGroupId\").asString()}}\";\nq = group q by ({{column(prod_prodcat_1.selection,[\"Field_value\"]).asObject()}}, 'Order_AssessmentTaskOrder_AssessmentTask_Visit_RetailStore_Name');\nq = foreach q generate  {{row(prod_prodcat_1.selection,[0],[\"Field_value\",\"Api_name\"]).asProjection()}}, 'Order_AssessmentTaskOrder_AssessmentTask_Visit_RetailStore_Name' as 'Order_AssessmentTaskOrder_AssessmentTask_Visit_RetailStore_Name', sum('TotalPrice') as 'Sales';\nq = order q by ({{column(prod_prodcat_1.selection,[\"Field_value\"]).asObject()}} asc, 'Order_AssessmentTaskOrder_AssessmentTask_Visit_RetailStore_Name' asc);\n",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1074,7 +1074,7 @@
         "groups" : [ ],
         "label" : "Sales_by_Products",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}\";\nq = filter q by 'Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.RetailLocationGroupId' in [\"{{cell(Get_StoreGroup_1.result, 0, \"RetailLocationGroupId\").asString()}}\"];\nq = group q by 'Product.Name';\nq = foreach q generate 'Product.Name' as 'Product.Name', sum('TotalPrice') as 'Total_Sales';\nq = order q by 'Total_Sales' desc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}\";\nq = filter q by 'Order_AssessmentTaskOrder_AssessmentTask_Visit_RetailStore_RetailLocationGroupId' in [\"{{cell(Get_StoreGroup_1.result, 0, \"RetailLocationGroupId\").asString()}}\"];\nq = group q by 'Product_Name';\nq = foreach q generate 'Product_Name' as 'Product_Name', sum('TotalPrice') as 'Total_Sales';\nq = order q by 'Total_Sales' desc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1191,7 +1191,7 @@
         "broadcastFacet" : true,
         "groups" : [ ],
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}\";\nq = filter q by 'Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.RetailLocationGroupId' == \"{{cell(Get_StoreGroup_1.result, 0, \"RetailLocationGroupId\").asString()}}\";\nq = group q by ({{column(prod_prodcat_1.selection,[\"Field_value\"]).asObject()}}, 'Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Name');\nq = foreach q generate  {{row(prod_prodcat_1.selection,[0],[\"Field_value\",\"Api_name\"]).asProjection()}}, 'Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Name' as 'Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Name', sum('Quantity') as 'Quantity';\nq = order q by ({{column(prod_prodcat_1.selection,[\"Field_value\"]).asObject()}} asc, 'Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Name' asc);\n",
+        "query" : "q = load \"${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}\";\nq = filter q by 'Order_AssessmentTaskOrder_AssessmentTask_Visit_RetailStore_RetailLocationGroupId' == \"{{cell(Get_StoreGroup_1.result, 0, \"RetailLocationGroupId\").asString()}}\";\nq = group q by ({{column(prod_prodcat_1.selection,[\"Field_value\"]).asObject()}}, 'Order_AssessmentTaskOrder_AssessmentTask_Visit_RetailStore_Name');\nq = foreach q generate  {{row(prod_prodcat_1.selection,[0],[\"Field_value\",\"Api_name\"]).asProjection()}}, 'Order_AssessmentTaskOrder_AssessmentTask_Visit_RetailStore_Name' as 'Order_AssessmentTaskOrder_AssessmentTask_Visit_RetailStore_Name', sum('Quantity') as 'Quantity';\nq = order q by ({{column(prod_prodcat_1.selection,[\"Field_value\"]).asObject()}} asc, 'Order_AssessmentTaskOrder_AssessmentTask_Visit_RetailStore_Name' asc);\n",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]

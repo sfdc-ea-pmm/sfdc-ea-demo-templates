@@ -1398,31 +1398,31 @@
             "dataSourceName" : "${App.Datasets.CG_Visit69_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
-            "fieldName" : "RetailStore.Id"
+            "fieldName" : "RetailStore_Id"
           },
           {
             "dataSourceName" : "${App.Datasets.CG_RetailVisitKpi70_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
-            "fieldName" : "AssessmentTask.Visit.RetailStore.Id"
+            "fieldName" : "AssessmentTask_Visit_RetailStore_Id"
           },
           {
             "dataSourceName" : "${App.Datasets.CG_OrderItem59_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
-            "fieldName" : "Order.AssessmentTaskOrder.AssessmentTask.Visit.RetailStore.Id"
+            "fieldName" : "Order_AssessmentTaskOrder_AssessmentTask_Visit_RetailStore_Id"
           },
           {
             "dataSourceName" : "${App.Datasets.CG_SurveyQuestionResponse69_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
-            "fieldName" : "SurveyResponse.SurveySubject.RetailStoreId"
+            "fieldName" : "SurveyResponse_SurveySubject_RetailStoreId"
           },
           {
             "dataSourceName" : "${App.Datasets.CG_Case69_tp.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
-            "fieldName" : "RetailStore.Id"
+            "fieldName" : "RetailStore_Id"
           },
           {
             "dataSourceName" : "${App.Datasets.CG_RetailStore53_tp.Name}",
@@ -5878,7 +5878,7 @@
         "groups" : [ ],
         "label" : "RequiredTasks_Completed_Gauge",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}\";\r\nq = filter q by 'AssessmentTask.Visit.Status' in [\"Completed\", \"Abandoned\"];\r\nq_Tasks = filter q by date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\r\nq_Required_Tasks = filter q_Tasks by 'AssessmentTask.IsRequired' == \"true\";\r\n\r\nresult = group q_Tasks by all full, q_Required_Tasks by all;\r\n\r\nresult = foreach result generate count(q_Tasks) as 'Tasks', sum(q_Tasks.'Completed_Tasks_Count') as 'Completed_Tasks_Count', sum(q_Tasks.'Completed_Tasks_Count')/count(q_Tasks) as 'Percent_Tasks_Completed', count(q_Required_Tasks) as 'Required_Tasks', sum(q_Required_Tasks.'Completed_Tasks_Count') as 'Required_Tasks_Completed', sum(q_Required_Tasks.'Completed_Tasks_Count')/count(q_Tasks) as 'Total_Required_CompletedTasks_percent';",
+        "query" : "q = load \"${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}\";\r\nq = filter q by 'AssessmentTask_Visit_Status' in [\"Completed\", \"Abandoned\"];\r\nq_Tasks = filter q by date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\r\nq_Required_Tasks = filter q_Tasks by 'AssessmentTask_IsRequired' == \"true\";\r\n\r\nresult = group q_Tasks by all full, q_Required_Tasks by all;\r\n\r\nresult = foreach result generate count(q_Tasks) as 'Tasks', sum(q_Tasks.'Completed_Tasks_Count') as 'Completed_Tasks_Count', sum(q_Tasks.'Completed_Tasks_Count')/count(q_Tasks) as 'Percent_Tasks_Completed', count(q_Required_Tasks) as 'Required_Tasks', sum(q_Required_Tasks.'Completed_Tasks_Count') as 'Required_Tasks_Completed', sum(q_Required_Tasks.'Completed_Tasks_Count')/count(q_Tasks) as 'Total_Required_CompletedTasks_percent';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -5994,7 +5994,7 @@
         "groups" : [ ],
         "label" : "CompletedTasks_Gauge",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}\";\r\nq = filter q by 'AssessmentTask.Visit.Status' in [\"Completed\", \"Abandoned\"];\r\n\r\nq_Tasks = filter q by date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\r\nq_Required_Tasks = filter q_Tasks by 'AssessmentTask.IsRequired' == \"true\";\r\n\r\nresult = group q_Tasks by all full, q_Required_Tasks by all;\r\n\r\nresult = foreach result generate count(q_Tasks) as 'Total Tasks', sum(q_Tasks.'Completed_Tasks_Count') as 'Completed Tasks', sum(q_Tasks.'Completed_Tasks_Count')/count(q_Tasks) as 'Percent_Tasks_Completed', count(q_Required_Tasks) as 'Required Tasks', sum(q_Required_Tasks.'Completed_Tasks_Count') as 'Required Tasks Completed', sum(q_Required_Tasks.'Completed_Tasks_Count')/count(q_Tasks) as 'Total_Required_CompletedTasks_percent';",
+        "query" : "q = load \"${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}\";\r\nq = filter q by 'AssessmentTask_Visit_Status' in [\"Completed\", \"Abandoned\"];\r\n\r\nq_Tasks = filter q by date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\r\nq_Required_Tasks = filter q_Tasks by 'AssessmentTask_IsRequired' == \"true\";\r\n\r\nresult = group q_Tasks by all full, q_Required_Tasks by all;\r\n\r\nresult = foreach result generate count(q_Tasks) as 'Total Tasks', sum(q_Tasks.'Completed_Tasks_Count') as 'Completed Tasks', sum(q_Tasks.'Completed_Tasks_Count')/count(q_Tasks) as 'Percent_Tasks_Completed', count(q_Required_Tasks) as 'Required Tasks', sum(q_Required_Tasks.'Completed_Tasks_Count') as 'Required Tasks Completed', sum(q_Required_Tasks.'Completed_Tasks_Count')/count(q_Tasks) as 'Total_Required_CompletedTasks_percent';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -6218,7 +6218,7 @@
         "groups" : [ ],
         "label" : "TotalTasks_percent_change",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}\";\r\nq = filter q by 'AssessmentTask.Visit.Status' in [\"Completed\", \"Abandoned\"];\r\nq_A = filter q by date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\r\nq_B = filter q by date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Previous_Period\").asString()}}];\r\n\r\nresult = group q_A by all full, q_B by all;\r\nresult = foreach result generate count(q_A) as 'Tasks_current_year', count(q_B) as 'Tasks_previous_year';\r\nresult = foreach result generate 'Tasks_current_year', 'Tasks_previous_year', ('Tasks_current_year'-'Tasks_previous_year')/'Tasks_previous_year' as 'Percent_Change';",
+        "query" : "q = load \"${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}\";\r\nq = filter q by 'AssessmentTask_Visit_Status' in [\"Completed\", \"Abandoned\"];\r\nq_A = filter q by date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\r\nq_B = filter q by date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Previous_Period\").asString()}}];\r\n\r\nresult = group q_A by all full, q_B by all;\r\nresult = foreach result generate count(q_A) as 'Tasks_current_year', count(q_B) as 'Tasks_previous_year';\r\nresult = foreach result generate 'Tasks_current_year', 'Tasks_previous_year', ('Tasks_current_year'-'Tasks_previous_year')/'Tasks_previous_year' as 'Percent_Change';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -6334,7 +6334,7 @@
         "groups" : [ ],
         "label" : "Order_KPIs",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}\";\nq_A = filter q by date('Order.ActivatedDate_Year', 'Order.ActivatedDate_Month', 'Order.ActivatedDate_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\nq_B = filter q by date('Order.ActivatedDate_Year', 'Order.ActivatedDate_Month', 'Order.ActivatedDate_Day') in [{{cell(Static_Date_Selector.selection,0,\"Previous_Period\").asString()}}];\nresult = group q_A by all full, q_B by all;\nresult = foreach result generate sum(q_A.'TotalPrice') as 'Order_Amount_Current', sum(q_B.'TotalPrice') as 'Order_Amount_Previous', (coalesce(sum(q_A.'TotalPrice'),0) - coalesce(sum(q_B.'TotalPrice'),0)) / coalesce(sum(q_B.'TotalPrice'),0) as 'Order_Amount_Percentage_Change_vs_Previous_Period'; \nresult = limit result 1;",
+        "query" : "q = load \"${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}\";\nq_A = filter q by date('Order_ActivatedDate_Year', 'Order_ActivatedDate_Month', 'Order_ActivatedDate_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\nq_B = filter q by date('Order_ActivatedDate_Year', 'Order_ActivatedDate_Month', 'Order_ActivatedDate_Day') in [{{cell(Static_Date_Selector.selection,0,\"Previous_Period\").asString()}}];\nresult = group q_A by all full, q_B by all;\nresult = foreach result generate sum(q_A.'TotalPrice') as 'Order_Amount_Current', sum(q_B.'TotalPrice') as 'Order_Amount_Previous', (coalesce(sum(q_A.'TotalPrice'),0) - coalesce(sum(q_B.'TotalPrice'),0)) / coalesce(sum(q_B.'TotalPrice'),0) as 'Order_Amount_Percentage_Change_vs_Previous_Period'; \nresult = limit result 1;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -6378,7 +6378,7 @@
         "groups" : [ ],
         "label" : "Avg Tasks Per Visit KPI",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}\";\nq = filter q by date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\nq = filter q by 'AssessmentTask.Visit.Status' in [\"Completed\", \"Abandoned\"];\nresult = group q by all;\nresult = foreach result generate unique(q.'AssessmentTask.Visit.Id') as 'Visits', count() as 'Tasks', count() / unique(q.'AssessmentTask.Visit.Id') as 'Number_of_Tasks_per_Visit';\nresult = limit result 1;",
+        "query" : "q = load \"${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}\";\nq = filter q by date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\nq = filter q by 'AssessmentTask_Visit_Status' in [\"Completed\", \"Abandoned\"];\nresult = group q by all;\nresult = foreach result generate unique(q.'AssessmentTask_Visit_Id') as 'Visits', count() as 'Tasks', count() / unique(q.'AssessmentTask_Visit_Id') as 'Number_of_Tasks_per_Visit';\nresult = limit result 1;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -6467,7 +6467,7 @@
         "groups" : [ ],
         "label" : "AllTasks_trend",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}\";\r\nq = filter q by 'AssessmentTask.Visit.Status' in [\"Completed\", \"Abandoned\"];\r\nq = filter q by date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\r\nq = group q by ({{cell(Static_Date_Selector.selection,0,\"Time_Dim_Visit_Grouping\").asString()}});\r\nq = foreach q generate {{cell(Static_Date_Selector.selection,0,\"Time_Dim_Visit_Dim\").asString()}} as {{cell(Static_Date_Selector.selection,0,\"Time_Dim_Visit_Alias\").asString()}}, count(q) as 'Total Tasks';",
+        "query" : "q = load \"${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}\";\r\nq = filter q by 'AssessmentTask_Visit_Status' in [\"Completed\", \"Abandoned\"];\r\nq = filter q by date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\r\nq = group q by ({{cell(Static_Date_Selector.selection,0,\"Time_Dim_Visit_Grouping\").asString()}});\r\nq = foreach q generate {{cell(Static_Date_Selector.selection,0,\"Time_Dim_Visit_Dim\").asString()}} as {{cell(Static_Date_Selector.selection,0,\"Time_Dim_Visit_Alias\").asString()}}, count(q) as 'Total Tasks';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -6583,7 +6583,7 @@
         "groups" : [ ],
         "label" : "OutOfStock_Details",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}\";\nq = filter q by 'ActualBooleanValue' == \"True\";\nq = filter q by 'Type_Computed' == \"OutOfStock\";\nq = filter q by date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\nq = foreach q generate 'Product.Name' as 'Product', 'ActualVisitStartTime' as 'ActualVisitStartTime';\nq = order q by 'ActualVisitStartTime' desc;",
+        "query" : "q = load \"${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}\";\nq = filter q by 'ActualBooleanValue' == \"True\";\nq = filter q by 'Type_Computed' == \"OutOfStock\";\nq = filter q by date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\nq = foreach q generate 'Product_Name' as 'Product', 'ActualVisitStartTime' as 'ActualVisitStartTime';\nq = order q by 'ActualVisitStartTime' desc;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -7064,7 +7064,7 @@
         "groups" : [ ],
         "label" : "Tasks_Per_RetailVisitKpi_Trend",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}\";\nq = filter q by date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}] && 'AssessmentTask.Visit.Status' in [\"Completed\", \"Abandoned\"];\nq = group q by ({{cell(Static_Date_Selector.selection,0,\"Time_Dim_Visit_Grouping\").asString()}});\nq = foreach q generate {{cell(Static_Date_Selector.selection,0,\"Time_Dim_Visit_Dim\").asString()}} as {{cell(Static_Date_Selector.selection,0,\"Time_Dim_Visit_Alias\").asString()}}, count() / unique('AssessmentTask.Visit.Id') as 'Number_of_Tasks_per_Visit';\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}\";\nq = filter q by date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}] && 'AssessmentTask_Visit_Status' in [\"Completed\", \"Abandoned\"];\nq = group q by ({{cell(Static_Date_Selector.selection,0,\"Time_Dim_Visit_Grouping\").asString()}});\nq = foreach q generate {{cell(Static_Date_Selector.selection,0,\"Time_Dim_Visit_Dim\").asString()}} as {{cell(Static_Date_Selector.selection,0,\"Time_Dim_Visit_Alias\").asString()}}, count() / unique('AssessmentTask_Visit_Id') as 'Number_of_Tasks_per_Visit';\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -7525,7 +7525,7 @@
         "groups" : [ ],
         "label" : "RequiredTasks_trend",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}\";\r\nq = filter q by 'AssessmentTask.Visit.Status' in [\"Completed\", \"Abandoned\"];\r\nq = filter q by date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\r\nq = foreach q generate {{cell(Static_Date_Selector.selection,0,\"Time_Dim_Visit_Dim\").asString()}} as {{cell(Static_Date_Selector.selection,0,\"Time_Dim_Visit_Alias\").asString()}}, 'AssessmentTask.IsRequired';\r\nq_Required_Tasks = filter q by 'AssessmentTask.IsRequired' == \"true\";\r\n\r\nq = group q by ({{cell(Static_Date_Selector.selection,0,\"Time_Dim_Visit_Alias\").asString()}}) full, q_Required_Tasks by ({{cell(Static_Date_Selector.selection,0,\"Time_Dim_Visit_Alias\").asString()}});\r\nq = foreach q generate q.{{cell(Static_Date_Selector.selection,0,\"Time_Dim_Visit_Alias\").asString()}} as {{cell(Static_Date_Selector.selection,0,\"Time_Dim_Visit_Alias\").asString()}}, count(q_Required_Tasks)/count(q) as 'Required_Tasks_Percentage';",
+        "query" : "q = load \"${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}\";\r\nq = filter q by 'AssessmentTask_Visit_Status' in [\"Completed\", \"Abandoned\"];\r\nq = filter q by date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\r\nq = foreach q generate {{cell(Static_Date_Selector.selection,0,\"Time_Dim_Visit_Dim\").asString()}} as {{cell(Static_Date_Selector.selection,0,\"Time_Dim_Visit_Alias\").asString()}}, 'AssessmentTask_IsRequired';\r\nq_Required_Tasks = filter q by 'AssessmentTask_IsRequired' == \"true\";\r\n\r\nq = group q by ({{cell(Static_Date_Selector.selection,0,\"Time_Dim_Visit_Alias\").asString()}}) full, q_Required_Tasks by ({{cell(Static_Date_Selector.selection,0,\"Time_Dim_Visit_Alias\").asString()}});\r\nq = foreach q generate q.{{cell(Static_Date_Selector.selection,0,\"Time_Dim_Visit_Alias\").asString()}} as {{cell(Static_Date_Selector.selection,0,\"Time_Dim_Visit_Alias\").asString()}}, count(q_Required_Tasks)/count(q) as 'Required_Tasks_Percentage';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -7749,7 +7749,7 @@
         "groups" : [ ],
         "label" : "Out of Stock_KPIs",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}\";\nq = filter q by 'AssessmentIndicatorDefinition.DataType' == \"Boolean\";\nq = filter q by 'Type_Computed' == \"OutOfStock\";\nq = filter q by date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\nq_A = filter q by 'ActualBooleanValue' == \"True\";\nresult = group q by all full, q_A by all;\nresult = foreach result generate count(q_A) as 'count_OutOfStock_Actual', count(q) as 'count_OutOfStock_Target', count(q_A) / count(q) as 'OutOfStock_Actual_Percentage';\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}\";\nq = filter q by 'AssessmentIndicatorDefinition_DataType' == \"Boolean\";\nq = filter q by 'Type_Computed' == \"OutOfStock\";\nq = filter q by date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\nq_A = filter q by 'ActualBooleanValue' == \"True\";\nresult = group q by all full, q_A by all;\nresult = foreach result generate count(q_A) as 'count_OutOfStock_Actual', count(q) as 'count_OutOfStock_Target', count(q_A) / count(q) as 'OutOfStock_Actual_Percentage';\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -8128,7 +8128,7 @@
         "groups" : [ ],
         "label" : "Case Details",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.CG_Case69_tp.FullyQualifiedName}\";\nq = filter q by 'IsClosed' == \"false\";\nq = foreach q generate 'Subject', 'DaysSinceCreated', 'Priority', 'CaseNumber', 'Contact_Name_Computed', 'Owner.Name', 'CreatedDate','Type';",
+        "query" : "q = load \"${App.Datasets.CG_Case69_tp.FullyQualifiedName}\";\nq = filter q by 'IsClosed' == \"false\";\nq = foreach q generate 'Subject', 'DaysSinceCreated', 'Priority', 'CaseNumber', 'Contact_Name_Computed', 'Owner_Name', 'CreatedDate','Type';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -8174,7 +8174,7 @@
         "groups" : [ ],
         "label" : "Orders Trend",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}\";\nq = filter q by date('Order.ActivatedDate_Year', 'Order.ActivatedDate_Month', 'Order.ActivatedDate_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\nq = group q by ({{cell(Static_Date_Selector.selection,0,\"Time_Dim_Orders_Grouping\").asString()}});\nq = foreach q generate {{cell(Static_Date_Selector.selection,0,\"Time_Dim_Orders_Dim\").asString()}} as {{cell(Static_Date_Selector.selection,0,\"Time_Dim_Orders_Alias\").asString()}}, sum('TotalPrice') as 'TotalPrice';\nq = order q by ({{cell(Static_Date_Selector.selection,0,\"Time_Dim_Orders_Alias\").asString()}} asc);\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}\";\nq = filter q by date('Order_ActivatedDate_Year', 'Order_ActivatedDate_Month', 'Order_ActivatedDate_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\nq = group q by ({{cell(Static_Date_Selector.selection,0,\"Time_Dim_Orders_Grouping\").asString()}});\nq = foreach q generate {{cell(Static_Date_Selector.selection,0,\"Time_Dim_Orders_Dim\").asString()}} as {{cell(Static_Date_Selector.selection,0,\"Time_Dim_Orders_Alias\").asString()}}, sum('TotalPrice') as 'TotalPrice';\nq = order q by ({{cell(Static_Date_Selector.selection,0,\"Time_Dim_Orders_Alias\").asString()}} asc);\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -8283,7 +8283,7 @@
         "groups" : [ ],
         "label" : "NPS_KPIs",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.CG_SurveyQuestionResponse69_tp.FullyQualifiedName}\";\nCurrent = filter q by date('SurveyResponse.CompletionDateTime_Year', 'SurveyResponse.CompletionDateTime_Month', 'SurveyResponse.CompletionDateTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\nPrevious = filter q by date('SurveyResponse.CompletionDateTime_Year', 'SurveyResponse.CompletionDateTime_Month', 'SurveyResponse.CompletionDateTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Previous_Period\").asString()}}];\nCurrent_Detractors = filter q by 'ResponseValueBucket' == \"Detractors\";\nCurrent_Promoters = filter q by 'ResponseValueBucket' == \"Promoters\";\nPrevious_Detractors = filter q by 'ResponseValueBucket' == \"Detractors\";\nPrevious_Promoters = filter q by 'ResponseValueBucket' == \"Promoters\";\nresult = group q by all full, Current by all full, Current_Detractors by all full , Current_Promoters by all full , Previous by all full, \nPrevious_Detractors by all full, Previous_Promoters by all;\nresult = foreach result generate \n(coalesce(count(Current_Promoters)/count(Current),0)) - (coalesce(count(Current_Detractors)/count(Current),0))as 'NetPromoterScore_Current',\n  ((coalesce(count(Previous_Promoters)/count(Previous),0)) - (coalesce((count(Previous_Detractors))/count(Previous),0))) as 'NPS_Score_Previous',\n  (((coalesce(count(Current_Promoters)/count(Current),0)) - (coalesce(count(Current_Detractors)/count(Current),0))) -\n ((coalesce(count(Previous_Promoters)/count(Previous),0)) - (coalesce(count(Previous_Detractors)/count(Previous),0))))/\n ((coalesce(count(Previous_Promoters)/count(Previous),0))- (coalesce(count(Previous_Detractors)/ count(Previous),0))) as 'PoP_Percent_Change';",
+        "query" : "q = load \"${App.Datasets.CG_SurveyQuestionResponse69_tp.FullyQualifiedName}\";\nCurrent = filter q by date('SurveyResponse_CompletionDateTime_Year', 'SurveyResponse_CompletionDateTime_Month', 'SurveyResponse_CompletionDateTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\nPrevious = filter q by date('SurveyResponse_CompletionDateTime_Year', 'SurveyResponse_CompletionDateTime_Month', 'SurveyResponse_CompletionDateTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Previous_Period\").asString()}}];\nCurrent_Detractors = filter q by 'ResponseValueBucket' == \"Detractors\";\nCurrent_Promoters = filter q by 'ResponseValueBucket' == \"Promoters\";\nPrevious_Detractors = filter q by 'ResponseValueBucket' == \"Detractors\";\nPrevious_Promoters = filter q by 'ResponseValueBucket' == \"Promoters\";\nresult = group q by all full, Current by all full, Current_Detractors by all full , Current_Promoters by all full , Previous by all full, \nPrevious_Detractors by all full, Previous_Promoters by all;\nresult = foreach result generate \n(coalesce(count(Current_Promoters)/count(Current),0)) - (coalesce(count(Current_Detractors)/count(Current),0))as 'NetPromoterScore_Current',\n  ((coalesce(count(Previous_Promoters)/count(Previous),0)) - (coalesce((count(Previous_Detractors))/count(Previous),0))) as 'NPS_Score_Previous',\n  (((coalesce(count(Current_Promoters)/count(Current),0)) - (coalesce(count(Current_Detractors)/count(Current),0))) -\n ((coalesce(count(Previous_Promoters)/count(Previous),0)) - (coalesce(count(Previous_Detractors)/count(Previous),0))))/\n ((coalesce(count(Previous_Promoters)/count(Previous),0))- (coalesce(count(Previous_Detractors)/ count(Previous),0))) as 'PoP_Percent_Change';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -8657,7 +8657,7 @@
         "groups" : [ ],
         "label" : "Order by Product",
         "numbers" : [ ],
-        "query" : "-- Compliance% Calculation\r\nrvk = load \"${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}\";\r\nrvk = filter rvk by date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\r\ncomp = filter rvk by 'Include_In_Compliance' == \"True\";\r\ncomp_result = group comp by ('ProductCategory_Name_Custom','Product_Name_Custom','AssessmentTask.Visit.RetailStore.Name');\r\ncomp_result = foreach comp_result generate 'ProductCategory_Name_Custom' as 'Product_Category','Product_Name_Custom' as 'Product', 'AssessmentTask.Visit.RetailStore.Name' as 'Store_Name', avg('Compliance_Percentage') as 'Avg_Compliance_Percentage';\r\ncomp_result = group comp_result by  ('Product_Category','Product');\r\ncomp_result = foreach comp_result generate 'Product_Category' as 'Product_Category','Product' as 'Product', avg('Avg_Compliance_Percentage') as 'Avg_CompliancePercentage';\r\n-- Order Details\r\norder1 = load \"${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}\";\r\norder1 = filter order1 by date('Order.ActivatedDate_Year', 'Order.ActivatedDate_Month', 'Order.ActivatedDate_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\r\norder1 = group order1 by ({{column(product_toggle_1.selection,[\"Field_Value\"]).asObject()}},'Order.ActivatedDate_Year','Order.ActivatedDate_Week');\r\norder1 = foreach order1 generate {{column(product_toggle_1.selection,[\"Field_Value\"]).asObject()}},'Order.ActivatedDate_Year'+\"-\"+'Order.ActivatedDate_Week' \r\nas 'YearWeek', sum('TotalPrice') as 'Sales',sum('Quantity') as 'Quantity';\r\norder1 = group order1 by ({{column(product_toggle_1.selection,[\"Field_Value\"]).asObject()}});\r\norder1 = foreach order1 generate {{column(product_toggle_1.selection,[\"Field_Value\"]).asObject()}} as 'Product_Category', {{column(product_toggle_1.selection,[\"Field_Value\"]).asObject()}} as 'Product', sum('Sales') as 'Sales',sum('Quantity') as 'Quantity';\r\n-- Share of Shelf\r\nsos = filter rvk by 'Include_In_Compliance' == \"True\" and 'Type_Computed' == \"ShareOfShelf\";\r\nsos = group sos by ('ProductCategory_Name_Custom','Product_Name_Custom','AssessmentTask.Visit.RetailStore.Name');\r\nsos = foreach sos generate 'ProductCategory_Name_Custom' as 'Product_Category','Product_Name_Custom' as 'Product', 'AssessmentTask.Visit.RetailStore.Name' as 'Store_Name', avg('Compliance_Percentage') as 'Avg_SoSCompliance_Percentage';\r\nsos = group sos by ('Product_Category','Product');\r\nsos = foreach sos generate 'Product_Category', 'Product', avg('Avg_SoSCompliance_Percentage') as 'Avg_SoSCompliance_Percentage';\r\n-- FacingsCompliance% Calculation\r\nfcs = filter rvk by 'Include_In_Compliance' == \"True\" and 'Type_Computed' == \"Facing\";\r\nfcs = group fcs by  ('ProductCategory_Name_Custom','Product_Name_Custom','AssessmentTask.Visit.RetailStore.Name');\r\nfcs = foreach fcs generate 'ProductCategory_Name_Custom' as 'Product_Category','Product_Name_Custom' as 'Product', 'AssessmentTask.Visit.RetailStore.Name' as 'Store_Name', avg('Compliance_Percentage') as 'Avg_FacingsCompliance_Percentage';\r\nfcs = group fcs by ('Product_Category','Product');\r\nfcs = foreach fcs generate 'Product_Category', 'Product', avg('Avg_FacingsCompliance_Percentage') as 'Avg_FacingsCompliance_Percentage';\r\n-- OutofStock Compliance% Calculation\r\noos_comp = filter rvk by 'Include_In_Compliance' == \"True\" and 'Type_Computed' == \"OutOfStock\";\r\noos_comp = group oos_comp by  ('ProductCategory_Name_Custom','Product_Name_Custom','AssessmentTask.Visit.RetailStore.Name');\r\noos_comp = foreach oos_comp generate 'ProductCategory_Name_Custom' as 'Product_Category','Product_Name_Custom' as 'Product', 'AssessmentTask.Visit.RetailStore.Name' as 'Store_Name', avg('Compliance_Percentage') as 'Avg_OutOfStock_Compliance';\r\noos_comp = group oos_comp by ('Product_Category','Product');\r\noos_comp = foreach oos_comp generate 'Product_Category', 'Product', avg('Avg_OutOfStock_Compliance') as 'Avg_OutOfStock_Compliance';\r\n--PromotionCompliance\r\npromo = filter rvk by 'Include_In_Compliance' == \"True\" and 'Type_Computed' == \"Promotion\";\r\npromo = group promo by ('ProductCategory_Name_Custom','Product_Name_Custom','AssessmentTask.Visit.RetailStore.Name');\r\npromo = foreach promo generate 'ProductCategory_Name_Custom' as 'Product_Category','Product_Name_Custom' as 'Product', 'AssessmentTask.Visit.RetailStore.Name' as 'Store_Name', avg('Compliance_Percentage') as 'Avg_PromoCompliance_Percentage';\r\npromo = group promo by ('Product_Category','Product');\r\npromo = foreach promo generate 'Product_Category', 'Product', avg('Avg_PromoCompliance_Percentage') as 'Avg_PromoCompliance_Percentage';\r\n--InventoryCompliance\r\ninv = filter rvk by 'Include_In_Compliance' == \"True\" and 'Type_Computed' == \"Inventory\";\r\ninv = group inv by ('ProductCategory_Name_Custom','Product_Name_Custom','AssessmentTask.Visit.RetailStore.Name');\r\ninv = foreach inv generate 'ProductCategory_Name_Custom' as 'Product_Category','Product_Name_Custom' as 'Product', 'AssessmentTask.Visit.RetailStore.Name' as 'Store_Name', avg('Compliance_Percentage') as 'Avg_InventoryCompliance_Percentage';\r\ninv = group inv by ('Product_Category','Product');\r\ninv = foreach inv generate 'Product_Category', 'Product', avg('Avg_InventoryCompliance_Percentage') as 'Avg_InventoryCompliance_Percentage';\r\n\r\n--final multidataset table \r\nfinal_table = cogroup order1 by ('Product_Category','Product') full, sos by ('Product_Category','Product') full, comp_result by ('Product_Category','Product') full,fcs by ('Product_Category','Product') full, oos_comp by ('Product_Category','Product') full, promo by ('Product_Category','Product') full, inv by ('Product_Category','Product');\r\nfinal_table = foreach final_table generate coalesce(comp_result.'Product_Category',order1.'Product_Category',sos.'Product_Category',fcs.'Product_Category', oos_comp.'Product_Category', promo.'Product_Category',inv.'Product_Category') as 'ProductCategory_Name_Custom', coalesce(comp_result.'Product',order1.'Product',sos.'Product',fcs.'Product', oos_comp.'Product', promo.'Product',inv.'Product') as 'Product_Name_Custom', sum(order1.'Sales') as 'total_sales',sum(order1.'Quantity') as 'total_qty', avg(sos.'Avg_SoSCompliance_Percentage') as 'Avg_SoSCompliance_Percentage',avg(comp_result.'Avg_CompliancePercentage') as 'Avg_CompliancePercentage',avg(fcs.'Avg_FacingsCompliance_Percentage') as 'Avg_FacingsCompliance_Percentage', avg(oos_comp.'Avg_OutOfStock_Compliance') as 'Avg_OutOfStock_Compliance', avg(promo.'Avg_PromoCompliance_Percentage') as 'Avg_PromoCompliance_Percentage', avg(inv.'Avg_InventoryCompliance_Percentage') as 'Avg_InventoryCompliance_Percentage';\r\nfinal_table1 = group final_table by '{{column(product_toggle_1.selection,[\"API_Name\"]).asObject()}}';\r\nfinal_table1 = filter final_table1 by {{cell(picklist_1_1.selection,0,\"Api_name\").asObject()}} is not null and '{{column(product_toggle_1.selection,[\"API_Name\"]).asObject()}}' != \"NA\";\r\nfinal_table1 = foreach final_table1 generate '{{column(product_toggle_1.selection,[\"API_Name\"]).asObject()}}',{{cell(picklist_1_1.selection,0,\"Field_value\").asObject()}}  as '{{cell(picklist_1_1.selection,0,\"Api_name\").asObject()}}';\r\nfinal_table1 = order final_table1 by {{cell(picklist_1_1.selection,0,\"Api_name\").asObject()}} desc;",
+        "query" : "-- Compliance% Calculation\r\nrvk = load \"${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}\";\r\nrvk = filter rvk by date('ActualVisitStartTime_Year', 'ActualVisitStartTime_Month', 'ActualVisitStartTime_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\r\ncomp = filter rvk by 'Include_In_Compliance' == \"True\";\r\ncomp_result = group comp by ('ProductCategory_Name_Custom','Product_Name_Custom','AssessmentTask_Visit_RetailStore_Name');\r\ncomp_result = foreach comp_result generate 'ProductCategory_Name_Custom' as 'Product_Category','Product_Name_Custom' as 'Product', 'AssessmentTask_Visit_RetailStore_Name' as 'Store_Name', avg('Compliance_Percentage') as 'Avg_Compliance_Percentage';\r\ncomp_result = group comp_result by  ('Product_Category','Product');\r\ncomp_result = foreach comp_result generate 'Product_Category' as 'Product_Category','Product' as 'Product', avg('Avg_Compliance_Percentage') as 'Avg_CompliancePercentage';\r\n-- Order Details\r\norder1 = load \"${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}\";\r\norder1 = filter order1 by date('Order_ActivatedDate_Year', 'Order_ActivatedDate_Month', 'Order_ActivatedDate_Day') in [{{cell(Static_Date_Selector.selection,0,\"Current_Period\").asString()}}];\r\norder1 = group order1 by ({{column(product_toggle_1.selection,[\"Field_Value\"]).asObject()}},'Order_ActivatedDate_Year','Order_ActivatedDate_Week');\r\norder1 = foreach order1 generate {{column(product_toggle_1.selection,[\"Field_Value\"]).asObject()}},'Order_ActivatedDate_Year'+\"-\"+'Order_ActivatedDate_Week' \r\nas 'YearWeek', sum('TotalPrice') as 'Sales',sum('Quantity') as 'Quantity';\r\norder1 = group order1 by ({{column(product_toggle_1.selection,[\"Field_Value\"]).asObject()}});\r\norder1 = foreach order1 generate {{column(product_toggle_1.selection,[\"Field_Value\"]).asObject()}} as 'Product_Category', {{column(product_toggle_1.selection,[\"Field_Value\"]).asObject()}} as 'Product', sum('Sales') as 'Sales',sum('Quantity') as 'Quantity';\r\n-- Share of Shelf\r\nsos = filter rvk by 'Include_In_Compliance' == \"True\" and 'Type_Computed' == \"ShareOfShelf\";\r\nsos = group sos by ('ProductCategory_Name_Custom','Product_Name_Custom','AssessmentTask_Visit_RetailStore_Name');\r\nsos = foreach sos generate 'ProductCategory_Name_Custom' as 'Product_Category','Product_Name_Custom' as 'Product', 'AssessmentTask_Visit_RetailStore_Name' as 'Store_Name', avg('Compliance_Percentage') as 'Avg_SoSCompliance_Percentage';\r\nsos = group sos by ('Product_Category','Product');\r\nsos = foreach sos generate 'Product_Category', 'Product', avg('Avg_SoSCompliance_Percentage') as 'Avg_SoSCompliance_Percentage';\r\n-- FacingsCompliance% Calculation\r\nfcs = filter rvk by 'Include_In_Compliance' == \"True\" and 'Type_Computed' == \"Facing\";\r\nfcs = group fcs by  ('ProductCategory_Name_Custom','Product_Name_Custom','AssessmentTask_Visit_RetailStore_Name');\r\nfcs = foreach fcs generate 'ProductCategory_Name_Custom' as 'Product_Category','Product_Name_Custom' as 'Product', 'AssessmentTask_Visit_RetailStore_Name' as 'Store_Name', avg('Compliance_Percentage') as 'Avg_FacingsCompliance_Percentage';\r\nfcs = group fcs by ('Product_Category','Product');\r\nfcs = foreach fcs generate 'Product_Category', 'Product', avg('Avg_FacingsCompliance_Percentage') as 'Avg_FacingsCompliance_Percentage';\r\n-- OutofStock Compliance% Calculation\r\noos_comp = filter rvk by 'Include_In_Compliance' == \"True\" and 'Type_Computed' == \"OutOfStock\";\r\noos_comp = group oos_comp by  ('ProductCategory_Name_Custom','Product_Name_Custom','AssessmentTask_Visit_RetailStore_Name');\r\noos_comp = foreach oos_comp generate 'ProductCategory_Name_Custom' as 'Product_Category','Product_Name_Custom' as 'Product', 'AssessmentTask_Visit_RetailStore_Name' as 'Store_Name', avg('Compliance_Percentage') as 'Avg_OutOfStock_Compliance';\r\noos_comp = group oos_comp by ('Product_Category','Product');\r\noos_comp = foreach oos_comp generate 'Product_Category', 'Product', avg('Avg_OutOfStock_Compliance') as 'Avg_OutOfStock_Compliance';\r\n--PromotionCompliance\r\npromo = filter rvk by 'Include_In_Compliance' == \"True\" and 'Type_Computed' == \"Promotion\";\r\npromo = group promo by ('ProductCategory_Name_Custom','Product_Name_Custom','AssessmentTask_Visit_RetailStore_Name');\r\npromo = foreach promo generate 'ProductCategory_Name_Custom' as 'Product_Category','Product_Name_Custom' as 'Product', 'AssessmentTask_Visit_RetailStore_Name' as 'Store_Name', avg('Compliance_Percentage') as 'Avg_PromoCompliance_Percentage';\r\npromo = group promo by ('Product_Category','Product');\r\npromo = foreach promo generate 'Product_Category', 'Product', avg('Avg_PromoCompliance_Percentage') as 'Avg_PromoCompliance_Percentage';\r\n--InventoryCompliance\r\ninv = filter rvk by 'Include_In_Compliance' == \"True\" and 'Type_Computed' == \"Inventory\";\r\ninv = group inv by ('ProductCategory_Name_Custom','Product_Name_Custom','AssessmentTask_Visit_RetailStore_Name');\r\ninv = foreach inv generate 'ProductCategory_Name_Custom' as 'Product_Category','Product_Name_Custom' as 'Product', 'AssessmentTask_Visit_RetailStore_Name' as 'Store_Name', avg('Compliance_Percentage') as 'Avg_InventoryCompliance_Percentage';\r\ninv = group inv by ('Product_Category','Product');\r\ninv = foreach inv generate 'Product_Category', 'Product', avg('Avg_InventoryCompliance_Percentage') as 'Avg_InventoryCompliance_Percentage';\r\n\r\n--final multidataset table \r\nfinal_table = cogroup order1 by ('Product_Category','Product') full, sos by ('Product_Category','Product') full, comp_result by ('Product_Category','Product') full,fcs by ('Product_Category','Product') full, oos_comp by ('Product_Category','Product') full, promo by ('Product_Category','Product') full, inv by ('Product_Category','Product');\r\nfinal_table = foreach final_table generate coalesce(comp_result.'Product_Category',order1.'Product_Category',sos.'Product_Category',fcs.'Product_Category', oos_comp.'Product_Category', promo.'Product_Category',inv.'Product_Category') as 'ProductCategory_Name_Custom', coalesce(comp_result.'Product',order1.'Product',sos.'Product',fcs.'Product', oos_comp.'Product', promo.'Product',inv.'Product') as 'Product_Name_Custom', sum(order1.'Sales') as 'total_sales',sum(order1.'Quantity') as 'total_qty', avg(sos.'Avg_SoSCompliance_Percentage') as 'Avg_SoSCompliance_Percentage',avg(comp_result.'Avg_CompliancePercentage') as 'Avg_CompliancePercentage',avg(fcs.'Avg_FacingsCompliance_Percentage') as 'Avg_FacingsCompliance_Percentage', avg(oos_comp.'Avg_OutOfStock_Compliance') as 'Avg_OutOfStock_Compliance', avg(promo.'Avg_PromoCompliance_Percentage') as 'Avg_PromoCompliance_Percentage', avg(inv.'Avg_InventoryCompliance_Percentage') as 'Avg_InventoryCompliance_Percentage';\r\nfinal_table1 = group final_table by '{{column(product_toggle_1.selection,[\"API_Name\"]).asObject()}}';\r\nfinal_table1 = filter final_table1 by {{cell(picklist_1_1.selection,0,\"Api_name\").asObject()}} is not null and '{{column(product_toggle_1.selection,[\"API_Name\"]).asObject()}}' != \"NA\";\r\nfinal_table1 = foreach final_table1 generate '{{column(product_toggle_1.selection,[\"API_Name\"]).asObject()}}',{{cell(picklist_1_1.selection,0,\"Field_value\").asObject()}}  as '{{cell(picklist_1_1.selection,0,\"Api_name\").asObject()}}';\r\nfinal_table1 = order final_table1 by {{cell(picklist_1_1.selection,0,\"Api_name\").asObject()}} desc;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -8887,9 +8887,9 @@
             "Display" : "Current Week",
             "Current_Period" : "\"current week\"..\"current week\"",
             "Previous_Period" : "\"1 week ago\"..\"1 week ago\"",
-            "Time_Dim_Orders_Grouping" : "'Order.ActivatedDate_Year','Order.ActivatedDate_Month', 'Order.ActivatedDate_Day'",
-            "Time_Dim_Orders_Dim" : "'Order.ActivatedDate_Year' + \"~~~\" + 'Order.ActivatedDate_Month' + \"~~~\"+'Order.ActivatedDate_Day'",
-            "Time_Dim_Orders_Alias" : "'Order.ActivatedDate_Year~~~Order.ActivatedDate_Month~~~Order.ActivatedDate_Day'",
+            "Time_Dim_Orders_Grouping" : "'Order_ActivatedDate_Year','Order_ActivatedDate_Month', 'Order_ActivatedDate_Day'",
+            "Time_Dim_Orders_Dim" : "'Order_ActivatedDate_Year' + \"~~~\" + 'Order_ActivatedDate_Month' + \"~~~\"+'Order_ActivatedDate_Day'",
+            "Time_Dim_Orders_Alias" : "'Order_ActivatedDate_Year~~~Order_ActivatedDate_Month~~~Order_ActivatedDate_Day'",
             "Vs_Text" : "Previous Week",
             "Time_Dim_Visit_Grouping" : "'ActualVisitStartTime_Year','ActualVisitStartTime_Month', 'ActualVisitStartTime_Day'",
             "Time_Dim_Visit_Dim" : "'ActualVisitStartTime_Year' + \"~~~\" + 'ActualVisitStartTime_Month' + \"~~~\"+'ActualVisitStartTime_Day'",
@@ -8899,9 +8899,9 @@
             "Display" : "Current Month",
             "Current_Period" : "\"current month\"..\"current month\"",
             "Previous_Period" : "\"1 month ago\"..\"1 month ago\"",
-            "Time_Dim_Orders_Grouping" : "'Order.ActivatedDate_Year','Order.ActivatedDate_Week'",
-            "Time_Dim_Orders_Dim" : "'Order.ActivatedDate_Year' + \"~~~\" + 'Order.ActivatedDate_Week'",
-            "Time_Dim_Orders_Alias" : "'Order.ActivatedDate_Year~~~Order.ActivatedDate_Week'",
+            "Time_Dim_Orders_Grouping" : "'Order_ActivatedDate_Year','Order_ActivatedDate_Week'",
+            "Time_Dim_Orders_Dim" : "'Order_ActivatedDate_Year' + \"~~~\" + 'Order_ActivatedDate_Week'",
+            "Time_Dim_Orders_Alias" : "'Order_ActivatedDate_Year~~~Order_ActivatedDate_Week'",
             "Vs_Text" : "Previous Month",
             "Time_Dim_Visit_Grouping" : "'ActualVisitStartTime_Year','ActualVisitStartTime_Week'",
             "Time_Dim_Visit_Dim" : "'ActualVisitStartTime_Year' + \"~~~\" + 'ActualVisitStartTime_Week'",
@@ -8911,9 +8911,9 @@
             "Display" : "Current Quarter",
             "Current_Period" : "\"current quarter\"..\"current quarter\"",
             "Previous_Period" : "\"1 quarter ago\"..\"1 quarter ago\"",
-            "Time_Dim_Orders_Grouping" : "'Order.ActivatedDate_Year','Order.ActivatedDate_Month'",
-            "Time_Dim_Orders_Dim" : "'Order.ActivatedDate_Year' + \"~~~\" + 'Order.ActivatedDate_Month'",
-            "Time_Dim_Orders_Alias" : "'Order.ActivatedDate_Year~~~Order.ActivatedDate_Month'",
+            "Time_Dim_Orders_Grouping" : "'Order_ActivatedDate_Year','Order_ActivatedDate_Month'",
+            "Time_Dim_Orders_Dim" : "'Order_ActivatedDate_Year' + \"~~~\" + 'Order_ActivatedDate_Month'",
+            "Time_Dim_Orders_Alias" : "'Order_ActivatedDate_Year~~~Order_ActivatedDate_Month'",
             "Vs_Text" : "Previous Quarter",
             "Time_Dim_Visit_Grouping" : "'ActualVisitStartTime_Year','ActualVisitStartTime_Month'",
             "Time_Dim_Visit_Dim" : "'ActualVisitStartTime_Year' + \"~~~\" + 'ActualVisitStartTime_Month'",
@@ -8923,9 +8923,9 @@
             "Display" : "Current Year",
             "Current_Period" : "\"current year\"..\"current year\"",
             "Previous_Period" : "\"1 year ago\"..\"1 year ago\"",
-            "Time_Dim_Orders_Grouping" : "'Order.ActivatedDate_Year','Order.ActivatedDate_Month'",
-            "Time_Dim_Orders_Dim" : "'Order.ActivatedDate_Year' + \"~~~\" + 'Order.ActivatedDate_Month'",
-            "Time_Dim_Orders_Alias" : "'Order.ActivatedDate_Year~~~Order.ActivatedDate_Month'",
+            "Time_Dim_Orders_Grouping" : "'Order_ActivatedDate_Year','Order_ActivatedDate_Month'",
+            "Time_Dim_Orders_Dim" : "'Order_ActivatedDate_Year' + \"~~~\" + 'Order_ActivatedDate_Month'",
+            "Time_Dim_Orders_Alias" : "'Order_ActivatedDate_Year~~~Order_ActivatedDate_Month'",
             "Vs_Text" : "Previous Year",
             "Time_Dim_Visit_Grouping" : "'ActualVisitStartTime_Year','ActualVisitStartTime_Month'",
             "Time_Dim_Visit_Dim" : "'ActualVisitStartTime_Year' + \"~~~\" + 'ActualVisitStartTime_Month'",
@@ -8935,9 +8935,9 @@
             "Display" : "Current Week To Date",
             "Current_Period" : "\"current week\"..\"current day\"",
             "Previous_Period" : "\"1 week ago\"..\"current day - 1 week\"",
-            "Time_Dim_Orders_Grouping" : "'Order.ActivatedDate_Year','Order.ActivatedDate_Month', 'Order.ActivatedDate_Day'",
-            "Time_Dim_Orders_Dim" : "'Order.ActivatedDate_Year' + \"~~~\" + 'Order.ActivatedDate_Month' + \"~~~\"+'Order.ActivatedDate_Day'",
-            "Time_Dim_Orders_Alias" : "'Order.ActivatedDate_Year~~~Order.ActivatedDate_Month~~~Order.ActivatedDate_Day'",
+            "Time_Dim_Orders_Grouping" : "'Order_ActivatedDate_Year','Order_ActivatedDate_Month', 'Order_ActivatedDate_Day'",
+            "Time_Dim_Orders_Dim" : "'Order_ActivatedDate_Year' + \"~~~\" + 'Order_ActivatedDate_Month' + \"~~~\"+'Order_ActivatedDate_Day'",
+            "Time_Dim_Orders_Alias" : "'Order_ActivatedDate_Year~~~Order_ActivatedDate_Month~~~Order_ActivatedDate_Day'",
             "Vs_Text" : "Last Week Same Day",
             "Time_Dim_Visit_Grouping" : "'ActualVisitStartTime_Year','ActualVisitStartTime_Month', 'ActualVisitStartTime_Day'",
             "Time_Dim_Visit_Dim" : "'ActualVisitStartTime_Year' + \"~~~\" + 'ActualVisitStartTime_Month' + \"~~~\"+'ActualVisitStartTime_Day'",
@@ -8947,9 +8947,9 @@
             "Display" : "Current Month To Date",
             "Current_Period" : "\"current month\"..\"current day\"",
             "Previous_Period" : "\"1 month ago\"..\"current day - 1 month\"",
-            "Time_Dim_Orders_Grouping" : "'Order.ActivatedDate_Year','Order.ActivatedDate_Week'",
-            "Time_Dim_Orders_Dim" : "'Order.ActivatedDate_Year' + \"~~~\" + 'Order.ActivatedDate_Week'",
-            "Time_Dim_Orders_Alias" : "'Order.ActivatedDate_Year~~~Order.ActivatedDate_Week'",
+            "Time_Dim_Orders_Grouping" : "'Order_ActivatedDate_Year','Order_ActivatedDate_Week'",
+            "Time_Dim_Orders_Dim" : "'Order_ActivatedDate_Year' + \"~~~\" + 'Order_ActivatedDate_Week'",
+            "Time_Dim_Orders_Alias" : "'Order_ActivatedDate_Year~~~Order_ActivatedDate_Week'",
             "Vs_Text" : "Last Month Same Day",
             "Time_Dim_Visit_Grouping" : "'ActualVisitStartTime_Year','ActualVisitStartTime_Week'",
             "Time_Dim_Visit_Dim" : "'ActualVisitStartTime_Year' + \"~~~\" + 'ActualVisitStartTime_Week'",
@@ -8959,9 +8959,9 @@
             "Display" : "Current Quarter To Date",
             "Current_Period" : "\"current quarter\"..\"current day\"",
             "Previous_Period" : "\"1 quarter ago\"..\"current day - 1 quarter\"",
-            "Time_Dim_Orders_Grouping" : "'Order.ActivatedDate_Year','Order.ActivatedDate_Month'",
-            "Time_Dim_Orders_Dim" : "'Order.ActivatedDate_Year' + \"~~~\" + 'Order.ActivatedDate_Month'",
-            "Time_Dim_Orders_Alias" : "'Order.ActivatedDate_Year~~~Order.ActivatedDate_Month'",
+            "Time_Dim_Orders_Grouping" : "'Order_ActivatedDate_Year','Order_ActivatedDate_Month'",
+            "Time_Dim_Orders_Dim" : "'Order_ActivatedDate_Year' + \"~~~\" + 'Order_ActivatedDate_Month'",
+            "Time_Dim_Orders_Alias" : "'Order_ActivatedDate_Year~~~Order_ActivatedDate_Month'",
             "Vs_Text" : "Last Qtr Same Day",
             "Time_Dim_Visit_Grouping" : "'ActualVisitStartTime_Year','ActualVisitStartTime_Month'",
             "Time_Dim_Visit_Dim" : "'ActualVisitStartTime_Year' + \"~~~\" + 'ActualVisitStartTime_Month'",
@@ -8971,9 +8971,9 @@
             "Display" : "Current Year To Date",
             "Current_Period" : "\"current year\"..\"current day\"",
             "Previous_Period" : "\"1 year ago\"..\"current day - 1 year\"",
-            "Time_Dim_Orders_Grouping" : "'Order.ActivatedDate_Year','Order.ActivatedDate_Month'",
-            "Time_Dim_Orders_Dim" : "'Order.ActivatedDate_Year' + \"~~~\" + 'Order.ActivatedDate_Month'",
-            "Time_Dim_Orders_Alias" : "'Order.ActivatedDate_Year~~~Order.ActivatedDate_Month'",
+            "Time_Dim_Orders_Grouping" : "'Order_ActivatedDate_Year','Order_ActivatedDate_Month'",
+            "Time_Dim_Orders_Dim" : "'Order_ActivatedDate_Year' + \"~~~\" + 'Order_ActivatedDate_Month'",
+            "Time_Dim_Orders_Alias" : "'Order_ActivatedDate_Year~~~Order_ActivatedDate_Month'",
             "Vs_Text" : "Last Year Same Day",
             "Time_Dim_Visit_Grouping" : "'ActualVisitStartTime_Year','ActualVisitStartTime_Month'",
             "Time_Dim_Visit_Dim" : "'ActualVisitStartTime_Year' + \"~~~\" + 'ActualVisitStartTime_Month'",
@@ -8983,9 +8983,9 @@
             "Display" : "Last 7 Days",
             "Current_Period" : "\"7 days ago\"..\"current day\"",
             "Previous_Period" : "\"14 days ago\"..\"8 days ago\"",
-            "Time_Dim_Orders_Grouping" : "'Order.ActivatedDate_Year','Order.ActivatedDate_Month', 'Order.ActivatedDate_Day'",
-            "Time_Dim_Orders_Dim" : "'Order.ActivatedDate_Year' + \"~~~\" + 'Order.ActivatedDate_Month' + \"~~~\"+'Order.ActivatedDate_Day'",
-            "Time_Dim_Orders_Alias" : "'Order.ActivatedDate_Year~~~Order.ActivatedDate_Month~~~Order.ActivatedDate_Day'",
+            "Time_Dim_Orders_Grouping" : "'Order_ActivatedDate_Year','Order_ActivatedDate_Month', 'Order_ActivatedDate_Day'",
+            "Time_Dim_Orders_Dim" : "'Order_ActivatedDate_Year' + \"~~~\" + 'Order_ActivatedDate_Month' + \"~~~\"+'Order_ActivatedDate_Day'",
+            "Time_Dim_Orders_Alias" : "'Order_ActivatedDate_Year~~~Order_ActivatedDate_Month~~~Order_ActivatedDate_Day'",
             "Vs_Text" : "Rolling Previous Week",
             "Time_Dim_Visit_Grouping" : "'ActualVisitStartTime_Year','ActualVisitStartTime_Month', 'ActualVisitStartTime_Day'",
             "Time_Dim_Visit_Dim" : "'ActualVisitStartTime_Year' + \"~~~\" + 'ActualVisitStartTime_Month' + \"~~~\"+'ActualVisitStartTime_Day'",
@@ -8995,9 +8995,9 @@
             "Display" : "Last 30 Days",
             "Current_Period" : "\"30 days ago\"..\"current day\"",
             "Previous_Period" : "\"60 days ago\"..\"31 days ago\"",
-            "Time_Dim_Orders_Grouping" : "'Order.ActivatedDate_Year','Order.ActivatedDate_Week'",
-            "Time_Dim_Orders_Dim" : "'Order.ActivatedDate_Year' + \"~~~\" + 'Order.ActivatedDate_Week'",
-            "Time_Dim_Orders_Alias" : "'Order.ActivatedDate_Year~~~Order.ActivatedDate_Week'",
+            "Time_Dim_Orders_Grouping" : "'Order_ActivatedDate_Year','Order_ActivatedDate_Week'",
+            "Time_Dim_Orders_Dim" : "'Order_ActivatedDate_Year' + \"~~~\" + 'Order_ActivatedDate_Week'",
+            "Time_Dim_Orders_Alias" : "'Order_ActivatedDate_Year~~~Order_ActivatedDate_Week'",
             "Vs_Text" : "Rolling Prev Month",
             "Time_Dim_Visit_Grouping" : "'ActualVisitStartTime_Year','ActualVisitStartTime_Week'",
             "Time_Dim_Visit_Dim" : "'ActualVisitStartTime_Year' + \"~~~\" + 'ActualVisitStartTime_Week'",
@@ -9007,9 +9007,9 @@
             "Display" : "Last 90 Days",
             "Current_Period" : "\"90 days ago\"..\"current day\"",
             "Previous_Period" : "\"180 days ago\"..\"91 days ago\"",
-            "Time_Dim_Orders_Grouping" : "'Order.ActivatedDate_Year','Order.ActivatedDate_Month'",
-            "Time_Dim_Orders_Dim" : "'Order.ActivatedDate_Year' + \"~~~\" + 'Order.ActivatedDate_Month'",
-            "Time_Dim_Orders_Alias" : "'Order.ActivatedDate_Year~~~Order.ActivatedDate_Month'",
+            "Time_Dim_Orders_Grouping" : "'Order_ActivatedDate_Year','Order_ActivatedDate_Month'",
+            "Time_Dim_Orders_Dim" : "'Order_ActivatedDate_Year' + \"~~~\" + 'Order_ActivatedDate_Month'",
+            "Time_Dim_Orders_Alias" : "'Order_ActivatedDate_Year~~~Order_ActivatedDate_Month'",
             "Vs_Text" : "Rolling Prev Qtr",
             "Time_Dim_Visit_Grouping" : "'ActualVisitStartTime_Year','ActualVisitStartTime_Month'",
             "Time_Dim_Visit_Dim" : "'ActualVisitStartTime_Year' + \"~~~\" + 'ActualVisitStartTime_Month'",
@@ -9041,12 +9041,12 @@
         "values" : [
           {
             "Display" : "Product",
-            "Field_Value" : "'Product.Name'",
+            "Field_Value" : "'Product_Name'",
             "API_Name" : "Product_Name_Custom"
           },
           {
             "Display" : "Product Category",
-            "Field_Value" : "'Product.ProductCategory.ProductCategory.Name'",
+            "Field_Value" : "'Product_ProductCategory_ProductCategory_Name'",
             "API_Name" : "ProductCategory_Name_Custom"
           }
         ]
