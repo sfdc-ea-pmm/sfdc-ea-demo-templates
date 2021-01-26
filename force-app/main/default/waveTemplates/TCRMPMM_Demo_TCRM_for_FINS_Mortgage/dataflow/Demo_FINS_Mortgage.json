@@ -1,0 +1,47 @@
+{
+  "isDeletable": true,
+  "notificationLevel": "Never",
+  "workflowDefinition": {
+    "Register_LoanApplications": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "FSC_Mortgage_ResidentialLoanApplication",
+        "alias": "${App.Datasets.FSC_Mortgage_ResidentialLoanApplication7_tp.FullyQualifiedName}",
+        "source": "Update_LoanApplicationId"
+      }
+    },
+    "Edgemart_LoanApplicationDateUpdated": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.RLA_v24.FullyQualifiedName}"}
+    },
+    "Extract_LoanApplications": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "Name"}
+        ],
+        "object": "ResidentialLoanApplication"
+      }
+    },
+    "Update_LoanApplicationId": {
+      "action": "update",
+      "parameters": {
+        "right_key": ["Name"],
+        "left": "Edgemart_LoanApplicationDateUpdated",
+        "left_key": ["Name"],
+        "update_columns": {"Id": "Id"},
+        "right": "Extract_LoanApplications"
+      }
+    }
+  },
+  "DataflowType": "USER",
+  "_type": "dataflow",
+  "name": "Demo_FINS_Mortgage",
+  "description": "Demo - FINS Mortgage",
+  "MasterLabel": "Demo - FINS Mortgage",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": "",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive"
+}
