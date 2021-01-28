@@ -17,7 +17,7 @@
       "parameters": {
         "name": "Residential Loan Applications",
         "alias": "${App.Datasets.Demo_Mortgage_Residential_Loan_Applications_tp.FullyQualifiedName}",
-        "source": "Update_ResidentialLoanApplication"
+        "source": "Update_OwnerId_RLA"
       }
     },
     "Shift_Dates_Demo_Mortgage_Residential_Loan_Applications": {
@@ -69,6 +69,17 @@
         "name": "Mortgage Leads",
         "alias": "${App.Datasets.Demo_Mortgage_Leads_tp.FullyQualifiedName}",
         "source": "Drop_Aux_Demo_Mortgage_Leads"
+      }
+    },
+    "Extract_User": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "Name"},
+          {"name": "SmallPhotoUrl"}
+        ],
+        "object": "User"
       }
     },
     "Drop_Aux_Demo_Mortgage_Residential_Loan_Applications": {
@@ -142,6 +153,19 @@
             "isYearEndFiscalYear": true
           }
         ]
+      }
+    },
+    "Update_OwnerId_RLA": {
+      "action": "update",
+      "parameters": {
+        "right_key": ["Name"],
+        "left": "Update_ResidentialLoanApplication",
+        "left_key": ["Owner_Name"],
+        "update_columns": {
+          "Owner_SmallPhotoUrl": "SmallPhotoUrl",
+          "OwnerId": "Id"
+        },
+        "right": "Extract_User"
       }
     },
     "Drop_Aux_Demo_Mortgage_Leads": {
