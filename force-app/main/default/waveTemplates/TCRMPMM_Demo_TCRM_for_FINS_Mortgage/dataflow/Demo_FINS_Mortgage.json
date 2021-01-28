@@ -2,37 +2,211 @@
   "isDeletable": true,
   "notificationLevel": "Never",
   "workflowDefinition": {
-    "Register_LoanApplications": {
-      "action": "sfdcRegister",
+    "Update_ResidentialLoanApplication": {
+      "action": "update",
       "parameters": {
-        "name": "FSC_Mortgage_ResidentialLoanApplication",
-        "alias": "${App.Datasets.FSC_Mortgage_ResidentialLoanApplication7_tp.FullyQualifiedName}",
-        "source": "Update_LoanApplicationId"
+        "right_key": ["Name"],
+        "left": "Drop_Aux_Demo_Mortgage_Residential_Loan_Applications",
+        "left_key": ["Name"],
+        "update_columns": {"Id": "Id"},
+        "right": "Extract_ResidentialLoanApplication"
       }
     },
-    "Edgemart_LoanApplicationDateUpdated": {
-      "action": "edgemart",
-      "parameters": {"alias": "${App.Datasets.RLA_v24.FullyQualifiedName}"}
+    "Register_Shifted_Dataset_Demo_Residential_Loan_Applications": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Residential Loan Applications",
+        "alias": "${App.Datasets.FSC_Mortgage_ResidentialLoanApplication7_tp.FullyQualifiedName}",
+        "source": "Update_ResidentialLoanApplication"
+      }
     },
-    "Extract_LoanApplications": {
+    "Shift_Dates_Demo_Mortgage_Residential_Loan_Applications": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_Demo_Mortgage_Residential_Loan_Applications",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LastModifiedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "LastModifiedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Extract_ResidentialLoanApplication": {
       "action": "sfdcDigest",
       "parameters": {
         "fields": [
-          {"name": "Id"},
-          {"name": "Name"}
+          {"name": "Name"},
+          {"name": "Id"}
         ],
         "object": "ResidentialLoanApplication"
       }
     },
-    "Update_LoanApplicationId": {
-      "action": "update",
+    "Register_Shifted_Dataset_ Demo_Mortgage_Leads": {
+      "action": "sfdcRegister",
       "parameters": {
-        "right_key": ["Name"],
-        "left": "Edgemart_LoanApplicationDateUpdated",
-        "left_key": ["Name"],
-        "update_columns": {"Id": "Id"},
-        "right": "Extract_LoanApplications"
+        "name": "Mortgage Leads",
+        "alias": "${App.Datasets.Mortgage_Leads_dataset_ID_v8.FullyQualifiedName}",
+        "source": "Drop_Aux_Demo_Mortgage_Leads"
       }
+    },
+    "Drop_Aux_Demo_Mortgage_Residential_Loan_Applications": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_Demo_Mortgage_Residential_Loan_Applications",
+        "fields": [
+          {"name": "LastModifiedDate_Aux"},
+          {"name": "CreatedDate_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Drop_Dates_Demo_Mortgage_Leads": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_Demo_Mortgage_Leads",
+        "fields": [
+          {"name": "CreatedDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Compute_Aux_Demo_Mortgage_Leads": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_Demo_Mortgage_Leads",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "(case\nwhen  date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now()) < 7 then 0 \nelse (date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now()) - (date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now()) % 7)) * 86400\nend)",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Shift_Dates_Demo_Mortgage_Leads": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_Demo_Mortgage_Leads",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Aux_Demo_Mortgage_Leads": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_Demo_Mortgage_Leads",
+        "fields": [
+          {"name": "CreatedDate_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Compute_Aux_Demo_Mortgage_Residential_Loan_Applications": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_Demo_Mortgage_Residential_Loan_Applications",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "(case\nwhen  date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now()) < 7 then 0 \nelse (date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now()) - (date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now()) % 7)) * 86400\nend)",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "LastModifiedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_sec_epoch')",
+            "label": "LastModifiedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Dates_Demo_Mortgage_Residential_Loan_Applications": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_Demo_Mortgage_Residential_Loan_Applications",
+        "fields": [
+          {"name": "LastModifiedDate"},
+          {"name": "CreatedDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Load_Dataset_Demo_Mortgage_Residential_Loan_Applications": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.FSC_Mortgage_ResidentialLoanApplication7_tp.FullyQualifiedName}"}
+    },
+    "Load_Dataset_Demo_Mortgage_Leads": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.Mortgage_Leads_dataset_ID_v8.FullyQualifiedName}"}
     }
   },
   "DataflowType": "USER",

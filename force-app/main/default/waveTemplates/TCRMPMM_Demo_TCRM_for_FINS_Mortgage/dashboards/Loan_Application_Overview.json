@@ -59,30 +59,6 @@
       {
         "conditionalFormatting" : {
           "color" : {
-            "referenceField" : "B",
-            "type" : "multiple",
-            "parameters" : {
-              "bins" : [
-                {
-                  "formatValue" : "#E84340",
-                  "bin" : "*"
-                },
-                {
-                  "formatValue" : "#3AE867",
-                  "bin" : "0"
-                }
-              ]
-            }
-          }
-        },
-        "field" : "CreatedDate_Year_Cre_1.B",
-        "format" : {
-          "delimiters" : { }
-        }
-      },
-      {
-        "conditionalFormatting" : {
-          "color" : {
             "referenceField" : "CompletedAppRateVsLastWeek",
             "type" : "multiple",
             "parameters" : {
@@ -100,6 +76,30 @@
           }
         },
         "field" : "PoP_Completion_Rate_1.CompletedAppRateVsLastWeek",
+        "format" : {
+          "delimiters" : { }
+        }
+      },
+      {
+        "conditionalFormatting" : {
+          "color" : {
+            "referenceField" : "B",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "#E84340",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "#3AE867",
+                  "bin" : "0"
+                }
+              ]
+            }
+          }
+        },
+        "field" : "CreatedDate_Year_Cre_1.B",
         "format" : {
           "delimiters" : { }
         }
@@ -5136,7 +5136,7 @@
         "groups" : [ ],
         "label" : "Leads PoP",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Mortgage_Leads_dataset_ID_v8.FullyQualifiedName}\";\nq_A = filter q by 'IsConverted' == \"true\";\nq_A = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [..\"current day\"];\nresult = group q_A by ('CreatedDate_Year', 'CreatedDate_Week');\nresult = foreach result generate q_A.'CreatedDate_Year' + \"~~~\" + q_A.'CreatedDate_Week' as 'CreatedDate_Year~~~CreatedDate_Week', count(q_A) as 'A';\nresult = group result by 'CreatedDate_Year~~~CreatedDate_Week';\nresult = foreach result generate 'CreatedDate_Year~~~CreatedDate_Week', first(A) as 'A', coalesce((sum(A) - sum(sum(A)) over([-1..-1] partition by 'all' order by 'CreatedDate_Year~~~CreatedDate_Week' asc)) / sum(sum(A)) over([-1..-1] partition by 'all' order by 'CreatedDate_Year~~~CreatedDate_Week' asc),0) as 'B', (case when coalesce((sum(A) - sum(sum(A)) over([-1..-1] partition by 'all' order by 'CreatedDate_Year~~~CreatedDate_Week' asc)) / sum(sum(A)) over([-1..-1] partition by 'all' order by 'CreatedDate_Year~~~CreatedDate_Week' asc),0) < 0 then \"#E84340\" when coalesce((sum(A) - sum(sum(A)) over([-1..-1] partition by 'all' order by 'CreatedDate_Year~~~CreatedDate_Week' asc)) / sum(sum(A)) over([-1..-1] partition by 'all' order by 'CreatedDate_Year~~~CreatedDate_Week' asc),0) >0 then \"#3AE867\" else \"#7D98B3\" end) as 'color_LeadsConversion';\nresult = order result by ('CreatedDate_Year~~~CreatedDate_Week' desc);\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.Mortgage_Leads_dataset_ID_v8.FullyQualifiedName}\";\nq_A = filter q by 'IsConverted' == \"true\";\nq_A = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [..\"current year\"];\nresult = group q_A by ('CreatedDate_Year', 'CreatedDate_Week');\nresult = foreach result generate q_A.'CreatedDate_Year' + \"~~~\" + q_A.'CreatedDate_Week' as 'CreatedDate_Year~~~CreatedDate_Week', count(q_A) as 'A';\nresult = group result by 'CreatedDate_Year~~~CreatedDate_Week';\nresult = foreach result generate 'CreatedDate_Year~~~CreatedDate_Week', first(A) as 'A', coalesce((sum(A) - sum(sum(A)) over([-1..-1] partition by 'all' order by 'CreatedDate_Year~~~CreatedDate_Week' asc)) / sum(sum(A)) over([-1..-1] partition by 'all' order by 'CreatedDate_Year~~~CreatedDate_Week' asc),0) as 'B', (case when coalesce((sum(A) - sum(sum(A)) over([-1..-1] partition by 'all' order by 'CreatedDate_Year~~~CreatedDate_Week' asc)) / sum(sum(A)) over([-1..-1] partition by 'all' order by 'CreatedDate_Year~~~CreatedDate_Week' asc),0) < 0 then \"#E84340\" when coalesce((sum(A) - sum(sum(A)) over([-1..-1] partition by 'all' order by 'CreatedDate_Year~~~CreatedDate_Week' asc)) / sum(sum(A)) over([-1..-1] partition by 'all' order by 'CreatedDate_Year~~~CreatedDate_Week' asc),0) >0 then \"#3AE867\" else \"#7D98B3\" end) as 'color_LeadsConversion';\nresult = order result by ('CreatedDate_Year~~~CreatedDate_Week' desc);\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
