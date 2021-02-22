@@ -1,0 +1,64 @@
+{
+    "outcome": {
+            "type": "Text",
+            "label": "InactivityFlag",
+            "name": "InactivityFlag",
+            "goal": "Minimize",
+            "failureValue": "false",
+            "successValue": "true"
+    },
+    "autopilot": {
+        "enabled": true
+    },
+    "setup": {
+        "dataset": {
+            "id": "${App.Datasets.ED_Members_Activity_tp.Id}"
+        },
+        "outcome": {
+            "type": "Text",
+            "label": "InactivityFlag",
+            "name": "InactivityFlag",
+            "goal": "Minimize",
+            "failure": "false",
+            "success": "true"
+        },
+        "fields": [
+            {
+                "type": "number",
+                "name": "MemberCurrency.PointsBalance"
+            },
+            {
+                "type": "number",
+                "name": "Transactions.Transaction_Amount_Previous_Period"
+            },
+            {
+                "type": "number",
+                "name": "MemberCurrency.Ledger.Previous_Accrued_Points"
+            },
+            {
+                "type": "number",
+                "name": "Transactions.Transaction_Amount_Current_Period"
+            },
+            {
+                "type": "number",
+                "name": "MemberCurrency.Ledger.Current_Accrued_Points"
+            },
+            {
+                "type": "number",
+                "name": "Transactions.Accrual_Transactions_Current_Period"
+            },
+            {
+                "type": "number",
+                "name": "Transactions.Transaction_Amount_all"
+            },
+            {
+                "type": "number",
+                "name": "Current_Transaction_Frequency"
+            },
+            {
+                "type": "number",
+                "name": "Months_in_Tier"
+            }
+        ]
+    }
+}
