@@ -1,0 +1,2415 @@
+{
+  "isDeletable": true,
+  "notificationLevel": "Never",
+  "workflowDefinition": {
+    "Drop_Aux_CG_Promotion69": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_CG_Promotion69",
+        "fields": [
+          {"name": "ElapsedSeconds"},
+          {"name": "SystemModstamp_Aux"},
+          {"name": "StartDate_Aux"},
+          {"name": "CreatedDate_Aux"},
+          {"name": "EndDate_Computed_Aux"},
+          {"name": "EndDate_Aux"}
+        ]
+      }
+    },
+    "Load_Dataset_CG_Visit69": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.CG_Visit69_tp.FullyQualifiedName}"}
+    },
+    "Compute_Aux_CG_PromotionChannel69": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_CG_PromotionChannel69",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "EndDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('EndDate_sec_epoch')",
+            "label": "EndDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "EndDate_Temp_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('EndDate_Temp_sec_epoch')",
+            "label": "EndDate_Temp_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "StartDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('StartDate_sec_epoch')",
+            "label": "StartDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "EndDate_Computed_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('EndDate_Computed_sec_epoch')",
+            "label": "EndDate_Computed_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Promotion_EndDate_Aux",
+            "saqlExpression": "toDate('Promotion_EndDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "Promotion_EndDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Shift_Dates_CG_RetailStore53": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_CG_RetailStore53",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Period",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Dates_CG_RetailStore53": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_CG_RetailStore53",
+        "fields": [
+          {"name": "CreatedDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Drop_Dates_CG_OrderItem59": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_CG_OrderItem59",
+        "fields": [
+          {"name": "LastModifiedDate"},
+          {"name": "Order_CreatedDate"},
+          {"name": "Order_EffectiveDate"},
+          {"name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitEndTime"},
+          {"name": "EndDate"},
+          {"name": "SystemModstamp"},
+          {"name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitStartTime"},
+          {"name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitStartTime"},
+          {"name": "ServiceDate"},
+          {"name": "CreatedDate"},
+          {"name": "Order_EndDate"},
+          {"name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitEndTime"},
+          {"name": "Order_ActivatedDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Shift_Dates_CG_OrderItem59": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_CG_OrderItem59",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LastModifiedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "LastModifiedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Order_CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Order_CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Order.CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Order_EffectiveDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Order_EffectiveDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Order.EffectiveDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('EndDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "EndDate",
+            "format": "yyyy-MM-dd",
+            "label": "EndDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('Order_ActivatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "Order_ActivatedDate",
+            "format": "yyyy-MM-dd",
+            "label": "Order_ActivatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitEndTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitEndTime",
+            "format": "yyyy-MM-dd",
+            "label": "Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitEndTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitStartTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitStartTime",
+            "format": "yyyy-MM-dd",
+            "label": "Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitStartTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitEndTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitEndTime",
+            "format": "yyyy-MM-dd",
+            "label": "Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitEndTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitStartTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitStartTime",
+            "format": "yyyy-MM-dd",
+            "label": "Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitStartTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('Order_EndDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "Order_EndDate",
+            "format": "yyyy-MM-dd",
+            "label": "Order_EndDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('ServiceDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "ServiceDate",
+            "format": "yyyy-MM-dd",
+            "label": "ServiceDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('SystemModstamp_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "SystemModstamp",
+            "format": "yyyy-MM-dd",
+            "label": "SystemModstamp",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Compute_Aux_CG_RetailStore53": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_CG_RetailStore53",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Shift_Dates_CG_RetailVisitKpi70": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_CG_RetailVisitKpi70",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LastModifiedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "LastModifiedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ActualVisitStartTime",
+            "saqlExpression": "toDate('ActualVisitStartTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "ActualVisitStartTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ActualDateTimeValue",
+            "saqlExpression": "toDate('ActualDateTimeValue_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "ActualDateTimeValue",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('AssessmentTask_Visit_ActualVisitEndTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "AssessmentTask_Visit_ActualVisitEndTime",
+            "format": "yyyy-MM-dd",
+            "label": "AssessmentTask_Visit_ActualVisitEndTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('AssessmentTask_Visit_ActualVisitStartTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "AssessmentTask_Visit_ActualVisitStartTime",
+            "format": "yyyy-MM-dd",
+            "label": "AssessmentTask_Visit_ActualVisitStartTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('AssessmentTask_Visit_PlannedVisitEndTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "AssessmentTask_Visit_PlannedVisitEndTime",
+            "format": "yyyy-MM-dd",
+            "label": "AssessmentTask_Visit_PlannedVisitEndTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('AssessmentTask_Visit_PlannedVisitStartTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "AssessmentTask_Visit_PlannedVisitStartTime",
+            "format": "yyyy-MM-dd",
+            "label": "AssessmentTask_Visit_PlannedVisitStartTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('TargetDateTimeValue_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "TargetDateTimeValue",
+            "format": "yyyy-MM-dd",
+            "label": "TargetDateTimeValue",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Dates_CG_RetailVisitKpi_wo_predicate51": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_CG_RetailVisitKpi_wo_predicate51",
+        "fields": [
+          {"name": "LastModifiedDate"},
+          {"name": "TargetDateTimeValue"},
+          {"name": "AssessmentTask_Visit_PlannedVisitEndTime"},
+          {"name": "AssessmentTask_Visit_ActualVisitEndTime"},
+          {"name": "AssessmentTask_Visit_ActualVisitStartTime"},
+          {"name": "AssessmentTask_Visit_PlannedVisitStartTime"},
+          {"name": "ActualDateTimeValue"},
+          {"name": "ActualVisitStartTime"},
+          {"name": "CreatedDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Compute_Aux_CG_Case69": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_CG_Case69",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LastModifiedDate_Aux",
+            "saqlExpression": "toDate('LastModifiedDate_sec_epoch')",
+            "format": "yy-MM-dd",
+            "label": "LastModifiedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Dates_CG_PromotionChannel69": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_CG_PromotionChannel69",
+        "fields": [
+          {"name": "Promotion_EndDate"},
+          {"name": "EndDate"},
+          {"name": "EndDate_Temp"},
+          {"name": "StartDate"},
+          {"name": "EndDate_Computed"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Load_Dataset_CG_OrderItem_wo_predicate41": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.CG_OrderItem_wo_predicate41_tp.FullyQualifiedName}"}
+    },
+    "Shift_Dates_CG_StoreProduct54": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_CG_StoreProduct54",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "StartDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('StartDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "StartDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('EndDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "EndDate",
+            "format": "yyyy-MM-dd",
+            "label": "EndDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Aux_CG_RetailStore53": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_CG_RetailStore53",
+        "fields": [
+          {"name": "CreatedDate_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_CG_StoreProduct54": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_StoreProduct54",
+        "alias": "${App.Datasets.CG_StoreProduct54_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_CG_StoreProduct54"
+      }
+    },
+    "Register_Shifted_Dataset_CG_RetailVisitKpi_wo_predicate51": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_RetailVisitKpi_wo_predicate51",
+        "alias": "${App.Datasets.CG_RetailVisitKpi_wo_predicate51_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_CG_RetailVisitKpi_wo_predicate51"
+      }
+    },
+    "Load_Dataset_CG_User69": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.CG_User69_tp.FullyQualifiedName}"}
+    },
+    "Drop_Aux_CG_OrderItem_wo_predicate41": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_CG_OrderItem_wo_predicate41",
+        "fields": [
+          {"name": "ElapsedSeconds"},
+          {"name": "LastModifiedDate_Aux"},
+          {"name": "Order_CreatedDate_Aux"},
+          {"name": "Order_EffectiveDate_Aux"},
+          {"name": "CreatedDate_Aux"},
+          {"name": "EndDate_Aux"},
+          {"name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitEndTime_Aux"},
+          {"name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitStartTime_Aux"},
+          {"name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitEndTime_Aux"},
+          {"name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitStartTime_Aux"},
+          {"name": "Order_EndDate_Aux"},
+          {"name": "ServiceDate_Aux"},
+          {"name": "SystemModstamp_Aux"},
+          {"name": "Order_ActivatedDate_Aux"}
+        ]
+      }
+    },
+    "Load_Dataset_CG_RetailVisitKpi_wo_predicate51": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.CG_RetailVisitKpi_wo_predicate51_tp.FullyQualifiedName}"}
+    },
+    "Compute_Aux_CG_RetailVisitKpi_wo_predicate51": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_CG_RetailVisitKpi_wo_predicate51",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "LastModifiedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_sec_epoch')",
+            "label": "LastModifiedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ActualVisitStartTime_Aux",
+            "saqlExpression": "toDate('ActualVisitStartTime_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "ActualVisitStartTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ActualDateTimeValue_Aux",
+            "saqlExpression": "toDate('ActualDateTimeValue_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "ActualDateTimeValue_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "AssessmentTask_Visit_ActualVisitEndTime_Aux",
+            "saqlExpression": "toDate('AssessmentTask_Visit_ActualVisitEndTime_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "AssessmentTask_Visit_ActualVisitEndTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "AssessmentTask_Visit_ActualVisitStartTime_Aux",
+            "saqlExpression": "toDate('AssessmentTask_Visit_ActualVisitStartTime_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "AssessmentTask_Visit_ActualVisitStartTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "AssessmentTask_Visit_PlannedVisitEndTime_Aux",
+            "saqlExpression": "toDate('AssessmentTask_Visit_PlannedVisitEndTime_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "AssessmentTask_Visit_PlannedVisitEndTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "AssessmentTask_Visit_PlannedVisitStartTime_Aux",
+            "saqlExpression": "toDate('AssessmentTask_Visit_PlannedVisitStartTime_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "AssessmentTask_Visit_PlannedVisitStartTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "TargetDateTimeValue_Aux",
+            "saqlExpression": "toDate('TargetDateTimeValue_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "TargetDateTimeValue_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Load_Dataset_CG_Promotion69": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.CG_Promotion69_tp.FullyQualifiedName}"}
+    },
+    "Load_Dataset_CG_Visit_wo_predicate51": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.CG_Visit_wo_predicate51_tp.FullyQualifiedName}"}
+    },
+    "Shift_Dates_CG_Visit_wo_predicate51": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_CG_Visit_wo_predicate51",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LastModifiedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "LastModifiedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "PlannedVisitEndTime",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('PlannedVisitEndTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "PlannedVisitEndTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "PlannedVisitStartTime",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('PlannedVisitStartTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "PlannedVisitStartTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "SystemModstamp",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('SystemModstamp_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "SystemModstamp",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('ActualVisitEndTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "ActualVisitEndTime",
+            "format": "yyyy-MM-dd",
+            "label": "ActualVisitEndTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('ActualVisitStartTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "ActualVisitStartTime",
+            "format": "yyyy-MM-dd",
+            "label": "ActualVisitStartTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_CG_Visit_wo_predicate51": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_Visit_wo_predicate51",
+        "alias": "${App.Datasets.CG_Visit_wo_predicate51_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_CG_Visit_wo_predicate51"
+      }
+    },
+    "Load_Dataset_CG_Product64": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.CG_Product64_tp.FullyQualifiedName}"}
+    },
+    "Register_Shifted_Dataset_CG_PromotionChannel69": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_PromotionChannel69",
+        "alias": "${App.Datasets.CG_PromotionChannel69_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_CG_PromotionChannel69"
+      }
+    },
+    "Drop_Aux_CG_RetailVisitKpi70": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_CG_RetailVisitKpi70",
+        "fields": [
+          {"name": "ElapsedSeconds"},
+          {"name": "LastModifiedDate_Aux"},
+          {"name": "CreatedDate_Aux"},
+          {"name": "ActualVisitStartTime_Aux"},
+          {"name": "ActualDateTimeValue_Aux"},
+          {"name": "AssessmentTask_Visit_ActualVisitEndTime_Aux"},
+          {"name": "AssessmentTask_Visit_ActualVisitStartTime_Aux"},
+          {"name": "AssessmentTask_Visit_PlannedVisitEndTime_Aux"},
+          {"name": "AssessmentTask_Visit_PlannedVisitStartTime_Aux"},
+          {"name": "TargetDateTimeValue_Aux"}
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_CG_Case69": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_Case69",
+        "alias": "${App.Datasets.CG_Case69_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_CG_Case69"
+      }
+    },
+    "Load_Dataset_CG_RetailStore53": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.CG_RetailStore53_tp.FullyQualifiedName}"}
+    },
+    "Register_Shifted_Dataset_CG_RetailStore53": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_RetailStore53",
+        "alias": "${App.Datasets.CG_RetailStore53_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_CG_RetailStore53"
+      }
+    },
+    "Drop_Aux_CG_User69": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_CG_User69",
+        "fields": [
+          {"name": "CreatedDate_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_CG_Product64": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_Product64",
+        "alias": "${App.Datasets.CG_Product64_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_CG_Product64"
+      }
+    },
+    "Drop_Dates_CG_OrderItem_wo_predicate41": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_CG_OrderItem_wo_predicate41",
+        "fields": [
+          {"name": "LastModifiedDate"},
+          {"name": "Order_CreatedDate"},
+          {"name": "Order_EffectiveDate"},
+          {"name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitEndTime"},
+          {"name": "EndDate"},
+          {"name": "SystemModstamp"},
+          {"name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitStartTime"},
+          {"name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitStartTime"},
+          {"name": "ServiceDate"},
+          {"name": "CreatedDate"},
+          {"name": "Order_EndDate"},
+          {"name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitEndTime"},
+          {"name": "Order_ActivatedDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Drop_Dates_CG_User69": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_CG_User69",
+        "fields": [
+          {"name": "CreatedDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Load_Dataset_CG_StoreProduct54": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.CG_StoreProduct54_tp.FullyQualifiedName}"}
+    },
+    "Register_Shifted_Dataset_CG_User69": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_User69",
+        "alias": "${App.Datasets.CG_User69_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_CG_User69"
+      }
+    },
+    "Drop_Dates_CG_SurveyQuestionResponse69": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_CG_SurveyQuestionResponse69",
+        "fields": [
+          {"name": "LastModifiedDate"},
+          {"name": "DateTimeValue"},
+          {"name": "CreatedDate"},
+          {"name": "SurveyResponse_CompletionDateTime"},
+          {"name": "DateValue"},
+          {"name": "SurveyResponse_SurveySubject_SurveyInvitation_InviteExpiryDateTime"},
+          {"name": "SystemModstamp"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_CG_Promotion69": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_Promotion69",
+        "alias": "${App.Datasets.CG_Promotion69_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_CG_Promotion69"
+      }
+    },
+    "Drop_Aux_CG_PromotionChannel69": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_CG_PromotionChannel69",
+        "fields": [
+          {"name": "ElapsedSeconds"},
+          {"name": "EndDate_Aux"},
+          {"name": "EndDate_Temp_Aux"},
+          {"name": "StartDate_Aux"},
+          {"name": "EndDate_Computed_Aux"},
+          {"name": "Promotion_EndDate_Aux"}
+        ]
+      }
+    },
+    "Drop_Aux_CG_Visit_wo_predicate51": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_CG_Visit_wo_predicate51",
+        "fields": [
+          {"name": "ElapsedSeconds"},
+          {"name": "LastModifiedDate_Aux"},
+          {"name": "PlannedVisitEndTime_Aux"},
+          {"name": "PlannedVisitStartTime_Aux"},
+          {"name": "CreatedDate_Aux"},
+          {"name": "SystemModstamp_Aux"},
+          {"name": "ActualVisitEndTime_Aux"},
+          {"name": "ActualVisitStartTime_Aux"}
+        ]
+      }
+    },
+    "Load_Dataset_CG_PromotionChannel69": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.CG_PromotionChannel69_tp.FullyQualifiedName}"}
+    },
+    "Compute_Aux_CG_Promotion69": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_CG_Promotion69",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "SystemModstamp_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('SystemModstamp_sec_epoch')",
+            "label": "SystemModstamp_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "StartDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('StartDate_sec_epoch')",
+            "label": "StartDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "EndDate_Computed_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('EndDate_Computed_sec_epoch')",
+            "label": "EndDate_Computed_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "EndDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('EndDate_sec_epoch')",
+            "label": "EndDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Shift_Dates_CG_Promotion69": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_CG_Promotion69",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "SystemModstamp",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('SystemModstamp_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "SystemModstamp",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "StartDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('StartDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "StartDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "EndDate_Computed",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('EndDate_Computed_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "EndDate_Computed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "EndDate",
+            "saqlExpression": "toDate('EndDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "EndDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Shift_Dates_CG_Product64": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_CG_Product64",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate(date_to_epoch(now()) - 86400 * 90)",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Aux_CG_Visit69": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_CG_Visit69",
+        "fields": [
+          {"name": "ElapsedSeconds"},
+          {"name": "LastModifiedDate_Aux"},
+          {"name": "PlannedVisitEndTime_Aux"},
+          {"name": "PlannedVisitStartTime_Aux"},
+          {"name": "CreatedDate_Aux"},
+          {"name": "SystemModstamp_Aux"},
+          {"name": "ActualVisitEndTime_Aux"},
+          {"name": "ActualVisitStartTime_Aux"}
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_CG_OrderItem_wo_predicate41": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_OrderItem_wo_predicate41",
+        "alias": "${App.Datasets.CG_OrderItem_wo_predicate41_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_CG_OrderItem_wo_predicate41"
+      }
+    },
+    "Register_Shifted_Dataset_CG_SurveyQuestionResponse69": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_SurveyQuestionResponse69",
+        "alias": "${App.Datasets.CG_SurveyQuestionResponse69_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_CG_SurveyQuestionResponse69"
+      }
+    },
+    "Drop_Aux_CG_RetailVisitKpi_wo_predicate51": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_CG_RetailVisitKpi_wo_predicate51",
+        "fields": [
+          {"name": "ElapsedSeconds"},
+          {"name": "LastModifiedDate_Aux"},
+          {"name": "CreatedDate_Aux"},
+          {"name": "ActualVisitStartTime_Aux"},
+          {"name": "ActualDateTimeValue_Aux"},
+          {"name": "AssessmentTask_Visit_ActualVisitEndTime_Aux"},
+          {"name": "AssessmentTask_Visit_ActualVisitStartTime_Aux"},
+          {"name": "AssessmentTask_Visit_PlannedVisitEndTime_Aux"},
+          {"name": "AssessmentTask_Visit_PlannedVisitStartTime_Aux"},
+          {"name": "TargetDateTimeValue_Aux"}
+        ]
+      }
+    },
+    "Drop_Dates_CG_Case69": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_CG_Case69",
+        "fields": [
+          {"name": "LastModifiedDate"},
+          {"name": "CreatedDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Drop_Dates_CG_Promotion69": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_CG_Promotion69",
+        "fields": [
+          {"name": "EndDate"},
+          {"name": "SystemModstamp"},
+          {"name": "StartDate"},
+          {"name": "CreatedDate"},
+          {"name": "EndDate_Computed"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_CG_OrderItem59": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_OrderItem59",
+        "alias": "${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_CG_OrderItem59"
+      }
+    },
+    "Compute_Aux_CG_Product64": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_CG_Product64",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Load_Dataset_CG_Case69": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.CG_Case69_tp.FullyQualifiedName}"}
+    },
+    "Drop_Dates_CG_StoreProduct54": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_CG_StoreProduct54",
+        "fields": [
+          {"name": "EndDate"},
+          {"name": "StartDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Drop_Aux_CG_Case69": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_CG_Case69",
+        "fields": [
+          {"name": "ElapsedSeconds"},
+          {"name": "CreatedDate_Aux"},
+          {"name": "LastModifiedDate_Aux"}
+        ]
+      }
+    },
+    "Shift_Dates_CG_OrderItem_wo_predicate41": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_CG_OrderItem_wo_predicate41",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LastModifiedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "LastModifiedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Order_CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Order_CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Order.CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Order_EffectiveDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Order_EffectiveDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Order.EffectiveDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Order_ActivatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Order_ActivatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Order.ActivatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('EndDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "EndDate",
+            "format": "yyyy-MM-dd",
+            "label": "EndDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitEndTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitEndTime",
+            "format": "yyyy-MM-dd",
+            "label": "Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitEndTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitStartTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitStartTime",
+            "format": "yyyy-MM-dd",
+            "label": "Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitStartTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitEndTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitEndTime",
+            "format": "yyyy-MM-dd",
+            "label": "Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitEndTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitStartTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitStartTime",
+            "format": "yyyy-MM-dd",
+            "label": "Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitStartTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('Order_EndDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "Order_EndDate",
+            "format": "yyyy-MM-dd",
+            "label": "Order_EndDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('ServiceDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "ServiceDate",
+            "format": "yyyy-MM-dd",
+            "label": "ServiceDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('SystemModstamp_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "SystemModstamp",
+            "format": "yyyy-MM-dd",
+            "label": "SystemModstamp",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Compute_Aux_CG_User69": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_CG_User69",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_CG_Visit69": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_Visit69",
+        "alias": "${App.Datasets.CG_Visit69_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_CG_Visit69"
+      }
+    },
+    "Shift_Dates_CG_Visit69": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_CG_Visit69",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LastModifiedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "LastModifiedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "PlannedVisitEndTime",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('PlannedVisitEndTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "PlannedVisitEndTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "PlannedVisitStartTime",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('PlannedVisitStartTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "PlannedVisitStartTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "SystemModstamp",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('SystemModstamp_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "SystemModstamp",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ActualVisitEndTime",
+            "saqlExpression": "toDate('ActualVisitEndTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "ActualVisitEndTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ActualVisitStartTime",
+            "saqlExpression": "toDate('ActualVisitStartTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "ActualVisitStartTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Shift_Dates_CG_PromotionChannel69": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_CG_PromotionChannel69",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "EndDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('EndDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "EndDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "EndDate_Temp",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('EndDate_Temp_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "EndDate_Temp",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "StartDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('StartDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "StartDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "EndDate_Computed",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('EndDate_Computed_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "EndDate_Computed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Promotion_EndDate",
+            "saqlExpression": "toDate('Promotion_EndDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "Promotion_EndDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Compute_Aux_CG_SurveyQuestionResponse69": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_CG_SurveyQuestionResponse69",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "LastModifiedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_sec_epoch')",
+            "label": "LastModifiedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "SurveyResponse_CompletionDateTime_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('SurveyResponse_CompletionDateTime_sec_epoch')",
+            "label": "SurveyResponse_CompletionDateTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "SystemModstamp_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('SystemModstamp_sec_epoch')",
+            "label": "SystemModstamp_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "DateTimeValue_Aux",
+            "saqlExpression": "toDate('DateTimeValue_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "DateTimeValue_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('DateValue_sec_epoch')",
+            "name": "DateValue_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "DateValue_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('SurveyResponse_SurveySubject_SurveyInvitation_InviteExpiryDateTime_sec_epoch')",
+            "name": "SurveyResponse_SurveySubject_SurveyInvitation_InviteExpiryDateTime_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "SurveyResponse_SurveySubject_SurveyInvitation_InviteExpiryDateTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Shift_Dates_CG_RetailVisitKpi_wo_predicate51": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_CG_RetailVisitKpi_wo_predicate51",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LastModifiedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "LastModifiedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('ActualVisitStartTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "ActualVisitStartTime",
+            "format": "yyyy-MM-dd",
+            "label": "ActualVisitStartTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('ActualDateTimeValue_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "ActualDateTimeValue",
+            "format": "yyyy-MM-dd",
+            "label": "ActualDateTimeValue",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('AssessmentTask_Visit_ActualVisitEndTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "AssessmentTask_Visit_ActualVisitEndTime",
+            "format": "yyyy-MM-dd",
+            "label": "AssessmentTask_Visit_ActualVisitEndTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('AssessmentTask_Visit_ActualVisitStartTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "AssessmentTask_Visit_ActualVisitStartTime",
+            "format": "yyyy-MM-dd",
+            "label": "AssessmentTask_Visit_ActualVisitStartTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('AssessmentTask_Visit_PlannedVisitEndTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "AssessmentTask_Visit_PlannedVisitEndTime",
+            "format": "yyyy-MM-dd",
+            "label": "AssessmentTask_Visit_PlannedVisitEndTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('AssessmentTask_Visit_PlannedVisitStartTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "AssessmentTask_Visit_PlannedVisitStartTime",
+            "format": "yyyy-MM-dd",
+            "label": "AssessmentTask_Visit_PlannedVisitStartTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('TargetDateTimeValue_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "TargetDateTimeValue",
+            "format": "yyyy-MM-dd",
+            "label": "TargetDateTimeValue",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Aux_CG_Product64": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_CG_Product64",
+        "fields": [
+          {"name": "CreatedDate_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Shift_Dates_CG_User69": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_CG_User69",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Load_Dataset_CG_RetailVisitKpi70": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}"}
+    },
+    "Drop_Aux_CG_SurveyQuestionResponse69": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_CG_SurveyQuestionResponse69",
+        "fields": [
+          {"name": "ElapsedSeconds"},
+          {"name": "LastModifiedDate_Aux"},
+          {"name": "CreatedDate_Aux"},
+          {"name": "SurveyResponse_CompletionDateTime_Aux"},
+          {"name": "SystemModstamp_Aux"},
+          {"name": "DateTimeValue_Aux"},
+          {"name": "DateValue_Aux"},
+          {"name": "SurveyResponse_SurveySubject_SurveyInvitation_InviteExpiryDateTime_Aux"}
+        ]
+      }
+    },
+    "Compute_Aux_CG_StoreProduct54": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_CG_StoreProduct54",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "StartDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('StartDate_sec_epoch')",
+            "label": "StartDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "EndDate_Aux",
+            "saqlExpression": "toDate('EndDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "EndDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Dates_CG_Visit69": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_CG_Visit69",
+        "fields": [
+          {"name": "LastModifiedDate"},
+          {"name": "PlannedVisitEndTime"},
+          {"name": "ActualVisitEndTime"},
+          {"name": "ActualVisitStartTime"},
+          {"name": "PlannedVisitStartTime"},
+          {"name": "CreatedDate"},
+          {"name": "SystemModstamp"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Compute_Aux_CG_OrderItem_wo_predicate41": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_CG_OrderItem_wo_predicate41",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "LastModifiedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_sec_epoch')",
+            "label": "LastModifiedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Order_CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Order_CreatedDate_sec_epoch')",
+            "label": "Order_CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Order_EffectiveDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Order_EffectiveDate_sec_epoch')",
+            "label": "Order_EffectiveDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Order_ActivatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Order_ActivatedDate_sec_epoch')",
+            "label": "Order_ActivatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('EndDate_sec_epoch')",
+            "name": "EndDate_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "EndDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitEndTime_sec_epoch')",
+            "name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitEndTime_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitEndTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitStartTime_sec_epoch')",
+            "name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitStartTime_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitStartTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitEndTime_sec_epoch')",
+            "name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitEndTime_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitEndTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitStartTime_sec_epoch')",
+            "name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitStartTime_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitStartTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('Order_EndDate_sec_epoch')",
+            "name": "Order_EndDate_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "Order_EndDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('ServiceDate_sec_epoch')",
+            "name": "ServiceDate_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "ServiceDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('SystemModstamp_sec_epoch')",
+            "name": "SystemModstamp_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "SystemModstamp_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Load_Dataset_CG_OrderItem59": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}"}
+    },
+    "Register_Shifted_Dataset_CG_RetailVisitKpi70": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_RetailVisitKpi70",
+        "alias": "${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_CG_RetailVisitKpi70"
+      }
+    },
+    "Compute_Aux_CG_Visit_wo_predicate51": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_CG_Visit_wo_predicate51",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "LastModifiedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_sec_epoch')",
+            "label": "LastModifiedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "PlannedVisitEndTime_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('PlannedVisitEndTime_sec_epoch')",
+            "label": "PlannedVisitEndTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "PlannedVisitStartTime_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('PlannedVisitStartTime_sec_epoch')",
+            "label": "PlannedVisitStartTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "SystemModstamp_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('SystemModstamp_sec_epoch')",
+            "label": "SystemModstamp_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('ActualVisitEndTime_sec_epoch')",
+            "name": "ActualVisitEndTime_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "ActualVisitEndTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('ActualVisitStartTime_sec_epoch')",
+            "name": "ActualVisitStartTime_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "ActualVisitStartTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Shift_Dates_CG_SurveyQuestionResponse69": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_CG_SurveyQuestionResponse69",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LastModifiedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "LastModifiedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "SurveyResponse_CompletionDateTime",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('SurveyResponse_CompletionDateTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "SurveyResponse.CompletionDateTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "SystemModstamp",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('SystemModstamp_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "SystemModstamp",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "DateTimeValue",
+            "saqlExpression": "toDate('DateTimeValue_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "DateTimeValue",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "DateValue",
+            "saqlExpression": "toDate('DateValue_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "DateValue",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('SurveyResponse_SurveySubject_SurveyInvitation_InviteExpiryDateTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "SurveyResponse_SurveySubject_SurveyInvitation_InviteExpiryDateTime",
+            "format": "yyyy-MM-dd",
+            "label": "SurveyResponse_SurveySubject_SurveyInvitation_InviteExpiryDateTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Compute_Aux_CG_OrderItem59": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_CG_OrderItem59",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "LastModifiedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_sec_epoch')",
+            "label": "LastModifiedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Order_CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Order_CreatedDate_sec_epoch')",
+            "label": "Order_CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Order_EffectiveDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Order_EffectiveDate_sec_epoch')",
+            "label": "Order_EffectiveDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "EndDate_Aux",
+            "saqlExpression": "toDate('EndDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "EndDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('Order_ActivatedDate_sec_epoch')",
+            "name": "Order_ActivatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "Order_ActivatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitEndTime_sec_epoch')",
+            "name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitEndTime_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitEndTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitStartTime_sec_epoch')",
+            "name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitStartTime_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitStartTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitEndTime_sec_epoch')",
+            "name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitEndTime_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitEndTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitStartTime_sec_epoch')",
+            "name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitStartTime_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitStartTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('Order_EndDate_sec_epoch')",
+            "name": "Order_EndDate_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "Order_EndDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('ServiceDate_sec_epoch')",
+            "name": "ServiceDate_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "ServiceDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "SystemModstamp_Aux",
+            "saqlExpression": "toDate('SystemModstamp_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "SystemModstamp_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Compute_Aux_CG_Visit69": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_CG_Visit69",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "LastModifiedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_sec_epoch')",
+            "label": "LastModifiedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "PlannedVisitEndTime_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('PlannedVisitEndTime_sec_epoch')",
+            "label": "PlannedVisitEndTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "PlannedVisitStartTime_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('PlannedVisitStartTime_sec_epoch')",
+            "label": "PlannedVisitStartTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "SystemModstamp_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('SystemModstamp_sec_epoch')",
+            "label": "SystemModstamp_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ActualVisitEndTime_Aux",
+            "saqlExpression": "toDate('ActualVisitEndTime_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "ActualVisitEndTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('ActualVisitStartTime_sec_epoch')",
+            "name": "ActualVisitStartTime_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "ActualVisitStartTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Shift_Dates_CG_Case69": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_CG_Case69",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('LastModifiedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "LastModifiedDate",
+            "format": "yyyy-MM-dd",
+            "label": "LastModifiedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Dates_CG_RetailVisitKpi70": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_CG_RetailVisitKpi70",
+        "fields": [
+          {"name": "LastModifiedDate"},
+          {"name": "CreatedDate"},
+          {"name": "ActualDateTimeValue"},
+          {"name": "ActualVisitStartTime"},
+          {"name": "AssessmentTask_Visit_ActualVisitEndTime"},
+          {"name": "AssessmentTask_Visit_ActualVisitStartTime"},
+          {"name": "AssessmentTask_Visit_PlannedVisitEndTime"},
+          {"name": "AssessmentTask_Visit_PlannedVisitStartTime"},
+          {"name": "TargetDateTimeValue"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Drop_Aux_CG_OrderItem59": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_CG_OrderItem59",
+        "fields": [
+          {"name": "ElapsedSeconds"},
+          {"name": "LastModifiedDate_Aux"},
+          {"name": "Order_CreatedDate_Aux"},
+          {"name": "Order_EffectiveDate_Aux"},
+          {"name": "CreatedDate_Aux"},
+          {"name": "EndDate_Aux"},
+          {"name": "Order_ActivatedDate_Aux"},
+          {"name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitEndTime_Aux"},
+          {"name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_ActualVisitStartTime_Aux"},
+          {"name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitEndTime_Aux"},
+          {"name": "Order_AssessmentTaskOrder_AssessmentTask_Visit_PlannedVisitStartTime_Aux"},
+          {"name": "Order_EndDate_Aux"},
+          {"name": "ServiceDate_Aux"},
+          {"name": "SystemModstamp_Aux"}
+        ]
+      }
+    },
+    "Drop_Dates_CG_Product64": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_CG_Product64",
+        "fields": [
+          {"name": "CreatedDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Compute_Aux_CG_RetailVisitKpi70": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_CG_RetailVisitKpi70",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "LastModifiedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_sec_epoch')",
+            "label": "LastModifiedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('ActualVisitStartTime_sec_epoch')",
+            "name": "ActualVisitStartTime_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "ActualVisitStartTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('ActualDateTimeValue_sec_epoch')",
+            "name": "ActualDateTimeValue_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "ActualDateTimeValue_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('AssessmentTask_Visit_ActualVisitEndTime_sec_epoch')",
+            "name": "AssessmentTask_Visit_ActualVisitEndTime_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "AssessmentTask_Visit_ActualVisitEndTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('AssessmentTask_Visit_ActualVisitStartTime_sec_epoch')",
+            "name": "AssessmentTask_Visit_ActualVisitStartTime_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "AssessmentTask_Visit_ActualVisitStartTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('AssessmentTask_Visit_PlannedVisitEndTime_sec_epoch')",
+            "name": "AssessmentTask_Visit_PlannedVisitEndTime_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "AssessmentTask_Visit_PlannedVisitEndTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('AssessmentTask_Visit_PlannedVisitStartTime_sec_epoch')",
+            "name": "AssessmentTask_Visit_PlannedVisitStartTime_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "AssessmentTask_Visit_PlannedVisitStartTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('TargetDateTimeValue_sec_epoch')",
+            "name": "TargetDateTimeValue_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "TargetDateTimeValue_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Load_Dataset_CG_SurveyQuestionResponse69": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.CG_SurveyQuestionResponse69_tp.FullyQualifiedName}"}
+    },
+    "Drop_Aux_CG_StoreProduct54": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_CG_StoreProduct54",
+        "fields": [
+          {"name": "StartDate_Aux"},
+          {"name": "ElapsedSeconds"},
+          {"name": "EndDate_Aux"}
+        ]
+      }
+    },
+    "Drop_Dates_CG_Visit_wo_predicate51": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_CG_Visit_wo_predicate51",
+        "fields": [
+          {"name": "LastModifiedDate"},
+          {"name": "PlannedVisitEndTime"},
+          {"name": "ActualVisitEndTime"},
+          {"name": "ActualVisitStartTime"},
+          {"name": "PlannedVisitStartTime"},
+          {"name": "CreatedDate"},
+          {"name": "SystemModstamp"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    }
+  },
+  "DataflowType": "USER",
+  "_type": "dataflow",
+  "name": "Timeshifting",
+  "description": "CG 228 - Timeshifting",
+  "MasterLabel": "- Timeshifting",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": "",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive"
+}
