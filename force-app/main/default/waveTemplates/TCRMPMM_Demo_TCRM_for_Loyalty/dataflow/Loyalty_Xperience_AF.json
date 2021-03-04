@@ -1,0 +1,102 @@
+{
+  "isDeletable": true,
+  "notificationLevel": "Never",
+  "workflowDefinition": {
+  "Edg_LoyaltyLedger": {
+    "action": "edgemart",
+    "parameters": {
+      "alias": "${App.Datasets.LoyaltyLedger7.FullyQualifiedName}"
+    }
+  },
+  "Extract_LoyaltyProgramPartner": {
+    "action": "sfdcDigest",
+    "parameters": {
+      "fields": [
+        {
+          "name": "Name"
+        },
+        {
+          "name": "Id"
+        }
+      ],
+      "object": "LoyaltyProgramPartner"
+    }
+  },
+  "Update_LoyaltyLedger": {
+    "action": "update",
+    "parameters": {
+      "right_key": [
+        "Name"
+      ],
+      "left": "Edg_LoyaltyLedger",
+      "left_key": [
+        "TransactionJournal_LoyaltyProgramPartner_Partner_Name"
+      ],
+      "update_columns": {
+        "TransactionJournal_PartnerId": "Id"
+      },
+      "right": "Extract_LoyaltyProgramPartner"
+    }
+  },
+  "Edg_LoyaltyMemberTier": {
+    "action": "edgemart",
+    "parameters": {
+      "alias": "${App.Datasets.LoyaltyMemberTier7.FullyQualifiedName}"
+    }
+  },
+  "Update_LoyaltyMemberTier": {
+    "action": "update",
+    "parameters": {
+      "right_key": [
+        "MembershipNumber"
+      ],
+      "left": "Edg_LoyaltyMemberTier",
+      "left_key": [
+        "LoyaltyProgramMember_MembershipNumber"
+      ],
+      "update_columns": {
+        "LoyaltyMemberId": "Id"
+      },
+      "right": "Extract_LoyaltyProgramMember"
+    }
+  },
+  "Register_ LoyaltyMemberTier": {
+    "action": "sfdcRegister",
+    "parameters": {
+      "name": "LoyaltyMemberTier",
+      "alias": "${App.Datasets.LoyaltyMemberTier7.FullyQualifiedName}",
+      "source": "Update_LoyaltyMemberTier"
+    }
+  },
+  "Register_LoyaltyLedger": {
+    "action": "sfdcRegister",
+    "parameters": {
+      "name": "LoyaltyLedger",
+      "alias": "${App.Datasets.LoyaltyLedger7.FullyQualifiedName}",
+      "source": "Update_LoyaltyLedger"
+    }
+  },
+  "Extract_LoyaltyProgramMember": {
+    "action": "sfdcDigest",
+    "parameters": {
+      "fields": [
+        {
+          "name": "MembershipNumber"
+        },
+        {
+          "name": "Id"
+        }
+      ],
+      "object": "LoyaltyProgramMember"
+    }
+  }
+},
+  "DataflowType": "USER",
+  "_type": "dataflow",
+  "name": "Loyalty_Xperience_AF",
+  "MasterLabel": "Loyalty Xperience - AF",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": "",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive"
+}

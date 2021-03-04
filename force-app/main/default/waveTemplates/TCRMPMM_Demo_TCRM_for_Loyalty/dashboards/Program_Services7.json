@@ -1,0 +1,4258 @@
+{
+  "name" : "Program_Services7_tp",
+  "label" : "Loyalty Member Services",
+  "folder" : {
+    "id" : "${App.Folder.Id}"
+  },
+  "dateVersion" : 1,
+  "mobileDisabled" : false,
+  "xmd" : {
+    "measures" : [
+      {
+        "conditionalFormatting" : {
+          "color" : {
+            "referenceField" : "TierChanges_CompareToDuration_percentage",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "#FF9897",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "#3AE867",
+                  "bin" : "0"
+                }
+              ]
+            }
+          }
+        },
+        "field" : "TierChangesKPI_1.TierChanges_CompareToDuration_percentage",
+        "format" : {
+          "delimiters" : { }
+        }
+      },
+      {
+        "conditionalFormatting" : { },
+        "field" : "KPIMetrics_1.AdjustedPoints_NQP_percentage",
+        "format" : {
+          "delimiters" : { }
+        }
+      },
+      {
+        "conditionalFormatting" : { },
+        "field" : "KPIMetrics_1.AccrualCancellation_NQP_percentage",
+        "format" : {
+          "delimiters" : { }
+        }
+      },
+      {
+        "conditionalFormatting" : { },
+        "field" : "KPIMetrics_1.RedemptionCancellation_NQP_percentage",
+        "format" : {
+          "delimiters" : { }
+        }
+      },
+      {
+        "conditionalFormatting" : {
+          "color" : {
+            "referenceField" : "Number_of_Members_percentage",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "#FF9897",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "#3AE867",
+                  "bin" : "0"
+                }
+              ]
+            }
+          }
+        },
+        "field" : "CountofMembers_1.Number_of_Members_percentage",
+        "format" : {
+          "delimiters" : { }
+        }
+      }
+    ],
+    "derivedDimensions" : [ ],
+    "organizations" : [ ],
+    "showDetailsDefaultFields" : [ ],
+    "dates" : [ ],
+    "derivedMeasures" : [ ],
+    "dimensions" : [ ]
+  },
+  "state" : {
+    "dataSourceLinks" : [
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyMemberTierHistory7.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "CreatedDate"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyLedger_ManualActions7.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "ActivityDate"
+          }
+        ],
+        "label" : "Date",
+        "name" : "Link_5366"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyMemberTierHistory7.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "LoyaltyMemberTier_LoyaltyProgramMember_LoyaltyProgram_Name"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyLedger_ManualActions7.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "TransactionJournal_LoyaltyProgramMember_LoyaltyProgram_Name"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyProgramTier7.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "LoyaltyProgram_Name"
+          }
+        ],
+        "label" : "Program Name",
+        "name" : "Link_2514"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyMemberTierHistory7.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "LoyaltyMemberTier_LoyaltyTier_LoyaltyTierGroup_Name"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyLedger_ManualActions7.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "LoyaltyTierMember_LoyaltyTier_LoyaltyTierGroup_Name"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyProgramTier7.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "LoyaltyTierGroup_Name"
+          }
+        ],
+        "label" : "Tier Group",
+        "name" : "Link_2530"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyProgramTier7.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "LoyaltyProgramCurrency_NQP_Currency"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyLedger_ManualActions7.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "LoyaltyProgramCurrency_NQP_Currency"
+          }
+        ],
+        "label" : "NQP Currency",
+        "name" : "Link_6274"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyProgramTier7.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "LoyaltyProgramCurrency_QP_Currency"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyLedger_ManualActions7.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "LoyaltyProgramCurrency_QP_Currency"
+          }
+        ],
+        "label" : "QP Currency",
+        "name" : "Link_6293"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyMemberTier7.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "LoyaltyProgramMember_MemberName"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyMemberTierHistory7.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "LoyaltyMemberTier_LoyaltyProgramMember_MemberName"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyLedger_ManualActions7.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "TransactionJournal_LoyaltyProgramMember_MemberName"
+          }
+        ],
+        "label" : "Member Name",
+        "name" : "Link_8330"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyLedger_ManualActions7.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "User_Username"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyMemberTierHistory7.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "User_UniqueUserName"
+          }
+        ],
+        "label" : "Agent",
+        "name" : "Link_1356"
+      }
+    ],
+    "filters" : [ ],
+    "gridLayouts" : [
+      {
+        "maxWidth" : 1500,
+        "name" : "Default",
+        "numColumns" : 50,
+        "pages" : [
+          {
+            "label" : "NQP",
+            "name" : "32c353e3-3530-4079-8b9d-4d9c79561b33",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_1",
+                "row" : 6,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(227, 234, 240)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 3,
+                "name" : "text_1",
+                "row" : 16,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 1,
+                "name" : "image_1",
+                "row" : 16,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_3",
+                "row" : 12,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 0,
+                "name" : "container_4",
+                "row" : 15,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 49,
+                "name" : "container_5",
+                "row" : 15,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_6",
+                "row" : 22,
+                "rowspan" : 36,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 24,
+                "name" : "image_2",
+                "row" : 16,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 31,
+                "name" : "text_2",
+                "row" : 15,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 31,
+                "name" : "number_2",
+                "row" : 18,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 38,
+                "name" : "text_3",
+                "row" : 15,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 38,
+                "name" : "number_4",
+                "row" : 18,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 43,
+                "name" : "text_4",
+                "row" : 15,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 43,
+                "name" : "number_5",
+                "row" : 18,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 20,
+                "column" : 1,
+                "name" : "chart_1",
+                "row" : 24,
+                "rowspan" : 32,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 27,
+                "column" : 22,
+                "name" : "chart_3",
+                "row" : 24,
+                "rowspan" : 32,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 34,
+                "name" : "number_6",
+                "row" : 18,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 40,
+                "name" : "number_7",
+                "row" : 18,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 46,
+                "name" : "number_8",
+                "row" : 18,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_35",
+                "row" : 58,
+                "rowspan" : 69,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 21,
+                "column" : 1,
+                "name" : "chart_4",
+                "row" : 63,
+                "rowspan" : 29,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 25,
+                "column" : 24,
+                "name" : "chart_2",
+                "row" : 63,
+                "rowspan" : 29,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 31,
+                "name" : "listselector_2",
+                "row" : 7,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 43,
+                "name" : "navigation_1",
+                "row" : 59,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "table_3",
+                "row" : 98,
+                "rowspan" : 28,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 37,
+                "name" : "dateselector_1",
+                "row" : 7,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "left",
+                    "right"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 43,
+                "name" : "dateselector_2",
+                "row" : 7,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "left",
+                    "right"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 1,
+                "name" : "container_8",
+                "row" : 15,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(31, 58, 84)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 12,
+                "name" : "container_9",
+                "row" : 15,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 25,
+                "column" : 24,
+                "name" : "container_12",
+                "row" : 15,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(31, 58, 84)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 26,
+                "name" : "text_6",
+                "row" : 16,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 7,
+                "name" : "listselector_3",
+                "row" : 7,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 13,
+                "name" : "listselector_4",
+                "row" : 7,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 19,
+                "name" : "listselector_5",
+                "row" : 7,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 23,
+                "name" : "container_11",
+                "row" : 15,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 10,
+                "column" : 13,
+                "name" : "container_14",
+                "row" : 15,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(31, 58, 84)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 15,
+                "name" : "text_7",
+                "row" : 16,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 18,
+                "name" : "number_3",
+                "row" : 16,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 20,
+                "name" : "number_9",
+                "row" : 16,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 13,
+                "name" : "image_6",
+                "row" : 16,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 37,
+                "name" : "text_12",
+                "row" : 10,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "left",
+                    "right"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 43,
+                "name" : "text_13",
+                "row" : 10,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "left",
+                    "right"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_141",
+                "row" : 0,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 1,
+                "name" : "image_5",
+                "row" : 1,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 18,
+                "column" : 3,
+                "name" : "text_15",
+                "row" : 1,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 25,
+                "name" : "listselector_6",
+                "row" : 7,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 1,
+                "name" : "listselector_7",
+                "row" : 7,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 1,
+                "name" : "text_5",
+                "row" : 95,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 7,
+                "name" : "number_10",
+                "row" : 16,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 9,
+                "name" : "number_12",
+                "row" : 16,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 19,
+                "column" : 1,
+                "name" : "text_8",
+                "row" : 59,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 19,
+                "column" : 24,
+                "name" : "text_9",
+                "row" : 59,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              }
+            ]
+          },
+          {
+            "label" : "QP",
+            "name" : "e079ebfa-a3f6-48d9-b404-c92bb0cea058",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_1",
+                "row" : 6,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(227, 234, 240)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 1,
+                "name" : "listselector_1",
+                "row" : 7,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 3,
+                "name" : "text_1",
+                "row" : 16,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 1,
+                "name" : "image_1",
+                "row" : 16,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_3",
+                "row" : 12,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 0,
+                "name" : "container_4",
+                "row" : 15,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 49,
+                "name" : "container_5",
+                "row" : 15,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_6",
+                "row" : 22,
+                "rowspan" : 36,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 24,
+                "name" : "image_2",
+                "row" : 16,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 31,
+                "name" : "text_2",
+                "row" : 15,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 31,
+                "name" : "number_2",
+                "row" : 18,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 38,
+                "name" : "text_3",
+                "row" : 15,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 38,
+                "name" : "number_4",
+                "row" : 18,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 43,
+                "name" : "text_4",
+                "row" : 15,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 43,
+                "name" : "number_5",
+                "row" : 18,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 20,
+                "column" : 1,
+                "name" : "chart_1",
+                "row" : 24,
+                "rowspan" : 32,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 27,
+                "column" : 22,
+                "name" : "chart_3",
+                "row" : 24,
+                "rowspan" : 32,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 34,
+                "name" : "number_6",
+                "row" : 18,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 40,
+                "name" : "number_7",
+                "row" : 18,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 46,
+                "name" : "number_8",
+                "row" : 18,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_35",
+                "row" : 58,
+                "rowspan" : 69,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 21,
+                "column" : 1,
+                "name" : "chart_4",
+                "row" : 63,
+                "rowspan" : 29,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 31,
+                "name" : "listselector_2",
+                "row" : 7,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 43,
+                "name" : "navigation_1",
+                "row" : 59,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "table_3",
+                "row" : 98,
+                "rowspan" : 28,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 37,
+                "name" : "dateselector_1",
+                "row" : 7,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "left",
+                    "right"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 43,
+                "name" : "dateselector_2",
+                "row" : 7,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "left",
+                    "right"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 1,
+                "name" : "container_8",
+                "row" : 15,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(31, 58, 84)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 12,
+                "name" : "container_9",
+                "row" : 15,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 25,
+                "column" : 24,
+                "name" : "container_12",
+                "row" : 15,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(31, 58, 84)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 26,
+                "name" : "text_6",
+                "row" : 16,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 7,
+                "name" : "listselector_3",
+                "row" : 7,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 13,
+                "name" : "listselector_4",
+                "row" : 7,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 19,
+                "name" : "listselector_5",
+                "row" : 7,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 25,
+                "column" : 24,
+                "name" : "chart_5",
+                "row" : 63,
+                "rowspan" : 29,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 23,
+                "name" : "container_10",
+                "row" : 15,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 10,
+                "column" : 13,
+                "name" : "container_16",
+                "row" : 15,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(31, 58, 84)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 13,
+                "name" : "image_6",
+                "row" : 16,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 15,
+                "name" : "text_7",
+                "row" : 16,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 18,
+                "name" : "number_3",
+                "row" : 16,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 20,
+                "name" : "number_9",
+                "row" : 16,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 37,
+                "name" : "text_12",
+                "row" : 10,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "left",
+                    "right"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 43,
+                "name" : "text_13",
+                "row" : 10,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "left",
+                    "right"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "container_140",
+                "row" : 0,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 18,
+                "column" : 3,
+                "name" : "text_15",
+                "row" : 1,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 1,
+                "name" : "image_5",
+                "row" : 1,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 25,
+                "name" : "listselector_6",
+                "row" : 7,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 1,
+                "name" : "text_5",
+                "row" : 95,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 7,
+                "name" : "number_10",
+                "row" : 16,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 9,
+                "name" : "number_12",
+                "row" : 16,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 19,
+                "column" : 24,
+                "name" : "text_10",
+                "row" : 59,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 19,
+                "column" : 1,
+                "name" : "text_8",
+                "row" : 59,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight" : "fine",
+        "selectors" : [ ],
+        "style" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "backgroundColor" : "#F2F6FA",
+          "cellSpacingX" : 0,
+          "cellSpacingY" : 0,
+          "fit" : "original",
+          "gutterColor" : "#C5D3E0"
+        },
+        "version" : 1.0
+      }
+    ],
+    "layouts" : [ ],
+    "steps" : {
+      "KPIMetrics_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "KPIMetrics",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.LoyaltyLedger_ManualActions7.FullyQualifiedName}\";\n\nq_A = filter q by 'TransactionType' == \"AdjustedPoints_Positive\" && 'LoyaltyProgramCurrency_CurrencyType' == \"NonQualifying\";\nq_A_Duration = filter q_A by {{row(ActivityDate_2.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('TransactionJournal_ActivityDate_Year', 'TransactionJournal_ActivityDate_Month', 'TransactionJournal_ActivityDate_Day')\")}};\nq_A_CompareDuration = filter q_A by {{row(ActivityDate_3.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('TransactionJournal_ActivityDate_Year', 'TransactionJournal_ActivityDate_Month', 'TransactionJournal_ActivityDate_Day')\")}};\n\nq_B = filter q by  'TransactionType' == \"AccrualReversal\" && 'LoyaltyProgramCurrency_CurrencyType' == \"NonQualifying\";\nq_B_Duration = filter q_B by {{row(ActivityDate_2.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('TransactionJournal_ActivityDate_Year', 'TransactionJournal_ActivityDate_Month', 'TransactionJournal_ActivityDate_Day')\")}};\nq_B_CompareDuration = filter q_B by {{row(ActivityDate_3.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('TransactionJournal_ActivityDate_Year', 'TransactionJournal_ActivityDate_Month', 'TransactionJournal_ActivityDate_Day')\")}};\n\nq_C = filter q by 'TransactionType' == \"RedemptionReversal\" && 'LoyaltyProgramCurrency_CurrencyType' == \"NonQualifying\";\nq_C_Duration = filter q_C by {{row(ActivityDate_2.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('TransactionJournal_ActivityDate_Year', 'TransactionJournal_ActivityDate_Month', 'TransactionJournal_ActivityDate_Day')\")}};\nq_C_CompareDuration = filter q_C by {{row(ActivityDate_3.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('TransactionJournal_ActivityDate_Year', 'TransactionJournal_ActivityDate_Month', 'TransactionJournal_ActivityDate_Day')\")}};\nresult = group q_A_Duration by all full, q_B_Duration by all full, q_C_Duration by all full,q_A_CompareDuration by all full,q_B_CompareDuration by all full, q_C_CompareDuration by all;\nresult = foreach result generate sum(q_A_Duration.'Points') as 'AdjustedPoints_NQP', sum(q_B_Duration.'Points') as 'AccrualCancellation_NQP', sum(q_C_Duration.'Points') as 'RedemptionCancellation_NQP'\n,(sum(q_A_Duration.'Points')- sum(q_A_CompareDuration.'Points'))/sum(q_A_CompareDuration.'Points')*100 as 'AdjustedPoints_NQP_percentage'\n,(sum(q_B_Duration.'Points')- sum(q_B_CompareDuration.'Points'))/sum(q_B_CompareDuration.'Points')*100 as 'AccrualCancellation_NQP_percentage'\n,(sum(q_C_Duration.'Points')- sum(q_C_CompareDuration.'Points'))/sum(q_C_CompareDuration.'Points')*100 as 'RedemptionCancellation_NQP_percentage';",
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "ActivityDate_3",
+            "LoyaltyProgramCurren_2",
+            "ActivityDate_2"
+          ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "subtotals" : true,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "TransactionJournal_L_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "TransactionJournal_L_1",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.LoyaltyMemberTier7.FullyQualifiedName}\";\nq = group q by 'LoyaltyProgramMember_MemberName';\nq = foreach q generate 'LoyaltyProgramMember_MemberName' as 'LoyaltyProgramMember_MemberName', count() as 'count';\nhist = load \"${App.Datasets.LoyaltyMemberTierHistory7.FullyQualifiedName}\";\nhist = group hist by 'LoyaltyMemberTier_LoyaltyProgramMember_MemberName';\nhist = foreach hist generate 'LoyaltyMemberTier_LoyaltyProgramMember_MemberName' as 'LoyaltyProgramMember_MemberName', count() as 'count';\n\nresult = union q, hist;\nresult = group result by 'LoyaltyProgramMember_MemberName';\nresult = foreach result generate 'LoyaltyProgramMember_MemberName' as 'LoyaltyProgramMember_MemberName';",
+        "receiveFacetSource" : {
+          "mode" : "include",
+          "steps" : [
+            "LoyaltyProgramCurren_1",
+            "LoyaltyTierMember_Lo_1"
+          ]
+        },
+        "selectMode" : "single",
+        "start" : [ ],
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "TransactionJournal_L_2" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.LoyaltyProgramTier7.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              "LoyaltyProgram_Name"
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "none",
+          "steps" : [ ]
+        },
+        "selectMode" : "singlerequired",
+        "start" : [
+          "Xplore"
+        ],
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : { }
+      },
+      "DetailsTable_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "DetailsTable",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.LoyaltyLedger_ManualActions7.FullyQualifiedName}\";\nhist = load \"${App.Datasets.LoyaltyMemberTierHistory7.FullyQualifiedName}\";\nhist = filter hist by 'ReasonForChange_NewValue' is not null;\ncurrency = load \"${App.Datasets.LoyaltyMemberCurrency7.FullyQualifiedName}\";\nq_B = filter q by 'TransactionType' == \"AdjustedPoints_Positive\" && 'LoyaltyProgramCurrency_CurrencyType' == \"NonQualifying\";\nq_C = filter q by 'TransactionType' == \"AdjustedPoints_Negative\" && 'LoyaltyProgramCurrency_CurrencyType' == \"NonQualifying\";\nq_D = filter q by 'TransactionType' == \"AccrualReversal\" && 'LoyaltyProgramCurrency_CurrencyType' == \"NonQualifying\";\nq_E = filter q by 'TransactionType' == \"AccrualReversal\";\nq_F = filter q by 'TransactionType' == \"RedemptionReversal\" && 'LoyaltyProgramCurrency_CurrencyType' == \"NonQualifying\";\nq_G = filter q by 'TransactionType' == \"RedemptionReversal\";\n\n\nresult = group q by 'LoyaltyProgramMemberId' full, q_B by 'LoyaltyProgramMemberId' full, q_C by 'LoyaltyProgramMemberId' full, q_D by 'LoyaltyProgramMemberId' full,q_E by 'LoyaltyProgramMemberId' full,q_F by 'LoyaltyProgramMemberId' full,q_G by 'LoyaltyProgramMemberId' full, currency by 'LoyaltyMemberId' full, hist by 'LoyaltyMemberTier_LoyaltyMemberId';\n\nresult = foreach result generate coalesce(first(q.'TransactionJournal_LoyaltyProgramMember_MemberName'),first(hist.'LoyaltyMemberTier_LoyaltyProgramMember_MemberName' ),first(currency.'LoyaltyProgramMember_MemberName'), first(q_B.'TransactionJournal_LoyaltyProgramMember_MemberName'), first(q_C.'TransactionJournal_LoyaltyProgramMember_MemberName'), first(q_D.'TransactionJournal_LoyaltyProgramMember_MemberName'),first(q_E.'TransactionJournal_LoyaltyProgramMember_MemberName'),first(q_F.'TransactionJournal_LoyaltyProgramMember_MemberName'),first(q_G.'TransactionJournal_LoyaltyProgramMember_MemberName')) as 'Member', \nfirst(q.'LoyaltyTierMember_LoyaltyTier_LoyaltyTierGroup_Name') as 'Tier Group',\nfirst(q.'LoyaltyTierMember_LoyaltyTier_Name') as 'Tier',\ncount(q) as 'Modifications', sum(q_B.'Points') as 'Credited Points', sum(q_C.'Points') as 'Debited Points', \ncount(q_E) as 'Accrual Reversals',\nsum(q_D.'Points') as 'Accrued NQP Reversed',\ncount(q_G) as 'Redemption Reversals',\nsum(q_F.'Points') as 'Redeemed NQP Reversed',\n \nsum(currency.'PointsBalance') as 'Points Balance',count(hist) as 'Tier Changes', first(q.'TransactionJournal_LoyaltyProgramMember_MemberType') as 'Member Type',\ndate_diff(\"month\", toDate(first(q.'TransactionJournal_LoyaltyProgramMember_EnrollmentDate_sec_epoch')), now()) as 'Membership Duration (in months)',\nfirst(q.'TransactionJournal_LoyaltyProgramMember_LeadOrContactId') as 'LeadOrContactId', first(q.'TransactionJournal_LoyaltyProgramMember_LeadOrContactName') as 'Name';",
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "ActivityDate_2",
+            "ActivityDate_3"
+          ]
+        },
+        "selectMode" : "single",
+        "strings" : [
+          "Member",
+          "Tier Group",
+          "Tier",
+          "Modifications",
+          "Credited Points",
+          "Debited Points",
+          "Accrual Reversals",
+          "Accrued NQP Reversed",
+          "Redemption Reversals",
+          "Redeemed NQP Reversed",
+          "Points Balance",
+          "Tier Changes",
+          "Member Type",
+          "Membership Duration (in months)"
+        ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "mode" : "fittocontainer",
+            "numberOfLines" : 1,
+            "pivoted" : false,
+            "showActionMenu" : true,
+            "showRowIndexColumn" : false,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "LoyaltyProgramCurren_2" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.LoyaltyProgramTier7.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              "LoyaltyProgramCurrency_QP_Currency"
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "include",
+          "steps" : [
+            "LoyaltyTierMember_Lo_1",
+            "TransactionJournal_L_2"
+          ]
+        },
+        "selectMode" : "single",
+        "start" : [ ],
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : { }
+      },
+      "LoyaltyActions_1" : {
+        "broadcastFacet" : false,
+        "groups" : [ ],
+        "label" : "LoyaltyActions",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.LoyaltyLedger_ManualActions7.FullyQualifiedName}\";q = filter q by {{column(LoyaltyProgramCurren_1.selection, [\"LoyaltyProgramCurrency_NQP_Currency\"]).asEquality('LoyaltyProgramCurrency_NQP_Currency')}} or ('LoyaltyProgramCurrency_QP_Currency' is not null && {{column(LoyaltyProgramCurren_2.selection, [\"LoyaltyProgramCurrency_QP_Currency\"]).asEquality('LoyaltyProgramCurrency_QP_Currency')}});\nq = group q by 'TransactionType';\nq = foreach q generate 'TransactionType' as 'TransactionType', unique('TransactionJournalId') as 'Count';\nhist = load \"${App.Datasets.LoyaltyMemberTierHistory7.FullyQualifiedName}\";hist = filter hist by 'ReasonForChange_NewValue' is not null;\nhist = group hist by all;\nhist = foreach hist generate \"Tier Changes\" as 'TransactionType', count() as 'Count';\nresult = group q by 'TransactionType' full, hist by 'TransactionType';\nresult = foreach result generate coalesce(q.'TransactionType', hist.'TransactionType') as 'TransactionType', coalesce(sum(q.'Count'), sum(hist.'Count')) as 'Count';\nresult = order result by 'Count' desc;",
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "ActivityDate_3",
+            "LoyaltyProgramCurren_1",
+            "LoyaltyProgramCurren_2"
+          ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "LoyaltyTierMember_Lo_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.LoyaltyProgramTier7.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              "LoyaltyTierGroup_Name"
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "include",
+          "steps" : [
+            "TransactionJournal_L_2"
+          ]
+        },
+        "selectMode" : "singlerequired",
+        "start" : [
+          "Regular"
+        ],
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : { }
+      },
+      "ImpactonPoints_2" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "ImpactonPoints",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.LoyaltyLedger_ManualActions7.FullyQualifiedName}\";\nq_E = filter q by 'TransactionType' == \"AccrualReversal\" && 'TransactionJournal_UsageType' == \"Loyalty\" && 'LoyaltyProgramCurrency_CurrencyType' == \"Qualifying\";\nq_F = filter q by 'TransactionType' == \"AdjustedPoints_Positive\" && 'TransactionJournal_UsageType' == \"Loyalty\" && 'LoyaltyProgramCurrency_CurrencyType' == \"Qualifying\";\nq_G = filter q by 'TransactionType' == \"AdjustedPoints_Negative\" && 'TransactionJournal_UsageType' == \"Loyalty\" && 'LoyaltyProgramCurrency_CurrencyType' == \"Qualifying\";\nresult = group q by ('ActivityDate_Year', 'ActivityDate_Month') full,\nq_E by ('ActivityDate_Year', 'ActivityDate_Month') full, q_F by ('ActivityDate_Year', 'ActivityDate_Month') full,q_G by ('ActivityDate_Year', 'ActivityDate_Month');\n\nresult = foreach result generate coalesce(q.'ActivityDate_Year' + \"~~~\" + q.'ActivityDate_Month', q_E.'ActivityDate_Year' + \"~~~\" + q_E.'ActivityDate_Month', q_F.'ActivityDate_Year' + \"~~~\" + q_F.'ActivityDate_Month', q_G.'ActivityDate_Year' + \"~~~\" + q_G.'ActivityDate_Month') as 'ActivityDate_Year~~~ActivityDate_Month', \n\nsum(q_E.'Points')*-1 as 'Accrual Reversals', \nsum(q_F.'Points') as 'Credited Points',\nsum(q_G.'Points')*-1 as 'Debited Points',\ncoalesce(sum(q_E.'Points')*-1,0) + coalesce(sum(q_F.'Points'),0)+ coalesce(sum(q_G.'Points')*-1,0) as 'OverallTrend_QP';\n\nresult = order result by ('ActivityDate_Year~~~ActivityDate_Month' asc);\nresult = limit result 2000;",
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "ActivityDate_3",
+            "LoyaltyProgramCurren_1"
+          ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "fit",
+            "showValues" : true,
+            "stack" : true,
+            "showPoints" : true,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : false,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "bottom-center",
+              "inside" : false
+            },
+            "axisMode" : "sync",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "combo",
+            "missingValue" : "connect",
+            "showValuesOnLine" : false,
+            "title" : {
+              "fontSize" : 18,
+              "subtitleFontSize" : 11,
+              "label" : "How did the modifications affect the qualifying points?",
+              "align" : "left",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "plots" : {
+              "OverallTrend_QP" : {
+                "mark" : "line"
+              },
+              "PositiveAdjustedPoints_QP" : {
+                "mark" : "bar"
+              },
+              "AccrualCancellation_QP" : {
+                "mark" : "bar"
+              },
+              "NegativeAdjustedPoints_QP" : {
+                "mark" : "bar"
+              }
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "Qualifying Points (QP) Value",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "ImpactonPoints_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "ImpactonPoints",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.LoyaltyLedger_ManualActions7.FullyQualifiedName}\";\nq_A = filter q by 'TransactionType' == \"AccrualReversal\" && 'TransactionJournal_UsageType' == \"Loyalty\" && 'LoyaltyProgramCurrency_CurrencyType' == \"NonQualifying\";\nq_B = filter q by 'TransactionType' == \"RedemptionReversal\" && 'TransactionJournal_UsageType' == \"Loyalty\" && 'LoyaltyProgramCurrency_CurrencyType' == \"NonQualifying\";\nq_C = filter q by 'TransactionType' == \"AdjustedPoints_Positive\" && 'TransactionJournal_UsageType' == \"Loyalty\" && 'LoyaltyProgramCurrency_CurrencyType' == \"NonQualifying\";\nq_D = filter q by 'TransactionType' == \"AdjustedPoints_Negative\" && 'TransactionJournal_UsageType' == \"Loyalty\" && 'LoyaltyProgramCurrency_CurrencyType' == \"NonQualifying\";\n\n\nresult = group q by ('ActivityDate_Year', 'ActivityDate_Month') full,q_A by ('ActivityDate_Year', 'ActivityDate_Month') full, q_B by ('ActivityDate_Year', 'ActivityDate_Month') full, q_C by ('ActivityDate_Year', 'ActivityDate_Month') full, q_D by ('ActivityDate_Year', 'ActivityDate_Month');\n\nresult = foreach result generate coalesce(q.'ActivityDate_Year' + \"~~~\" + q.'ActivityDate_Month',q_A.'ActivityDate_Year' + \"~~~\" + q_A.'ActivityDate_Month', q_B.'ActivityDate_Year' + \"~~~\" + q_B.'ActivityDate_Month' , q_D.'ActivityDate_Year' + \"~~~\" + q_D.'ActivityDate_Month') as 'ActivityDate_Year~~~ActivityDate_Month', \ncoalesce(sum(q_A.'Points')*-1,0) as 'Accrual Reversals', \ncoalesce(sum(q_B.'Points'),0) as 'Redemption Reversal ', \ncoalesce(sum(q_C.'Points'),0) as 'Credited Points', \ncoalesce(sum(q_D.'Points')*-1,0) as 'Debited Points', \ncoalesce(sum(q_A.'Points')*-1,0) + coalesce(sum(q_B.'Points'),0) + coalesce(sum(q_C.'Points'),0) + coalesce(sum(q_D.'Points')*-1,0)  as 'OverallTrend_NQP';\n\nresult = order result by ('ActivityDate_Year~~~ActivityDate_Month' asc);\nresult = limit result 2000;",
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "ActivityDate_3",
+            "LoyaltyProgramCurren_2"
+          ]
+        },
+        "selectMode" : "single",
+        "start" : [ ],
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "fit",
+            "showValues" : true,
+            "stack" : true,
+            "showPoints" : true,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : false,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "bottom-center",
+              "inside" : false
+            },
+            "axisMode" : "sync",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "combo",
+            "missingValue" : "connect",
+            "showValuesOnLine" : false,
+            "title" : {
+              "fontSize" : 18,
+              "subtitleFontSize" : 11,
+              "label" : "How did the modifications affect the non-qualifying points?",
+              "align" : "left",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "plots" : {
+              "OverallTrend_QP" : {
+                "mark" : "line"
+              },
+              "PositiveAdjustedPoints_QP" : {
+                "mark" : "line"
+              },
+              "RedemptionCancellation_NQP" : {
+                "mark" : "bar"
+              },
+              "AccrualCancellation_NQP" : {
+                "mark" : "bar"
+              },
+              "NegativeAdjustedPoints_NQP" : {
+                "mark" : "bar"
+              },
+              "OverallTrend_NQP" : {
+                "mark" : "line"
+              },
+              "AccrualCancellation_QP" : {
+                "mark" : "line"
+              },
+              "NegativeAdjustedPoints_QP" : {
+                "mark" : "line"
+              },
+              "PositiveAdjustedPoints_NQP" : {
+                "mark" : "bar"
+              }
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "Non-Qualifying Points (NQP) Value",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "ActivityDate_2" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.LoyaltyLedger_ManualActions7.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              "ActivityDate"
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "none",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "start" : [
+          [
+            [
+              "year",
+              0
+            ],
+            [
+              "year",
+              0
+            ]
+          ]
+        ],
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : { }
+      },
+      "Trend_ManualActions_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Trend_ManualActions",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.LoyaltyLedger_ManualActions7.FullyQualifiedName}\";q = filter q by {{column(LoyaltyProgramCurren_1.selection, [\"LoyaltyProgramCurrency_NQP_Currency\"]).asEquality('LoyaltyProgramCurrency_NQP_Currency')}} or ('LoyaltyProgramCurrency_QP_Currency' is not null && {{column(LoyaltyProgramCurren_2.selection, [\"LoyaltyProgramCurrency_QP_Currency\"]).asEquality('LoyaltyProgramCurrency_QP_Currency')}});\nq = group q by ('ActivityDate_Year', 'ActivityDate_Month', 'TransactionType');\nq = foreach q generate 'ActivityDate_Year' as Date_Year,'ActivityDate_Month' as 'Date_Month', 'TransactionType', count() as 'Count';\n\nhist = load \"${App.Datasets.LoyaltyMemberTierHistory7.FullyQualifiedName}\";\nhist = filter hist by 'ReasonForChange_NewValue' is not null;\nhist = group hist by ('CreatedDate_Year', 'CreatedDate_Month');\nhist = foreach hist generate 'CreatedDate_Year' as 'Date_Year','CreatedDate_Month' as 'Date_Month', \"Tier Changes\" as 'TransactionType', count() as 'Count';\n\nresult = union hist, q;\nresult = filter result by {{column(LoyaltyActions_1.selection, [\"TransactionType\"]).asEquality('TransactionType')}};\nresult = group result by ('Date_Year', 'Date_Month');\nresult = foreach result generate 'Date_Year' + \"~~~\" +  'Date_Month' as 'Date_Year~~~Date_Month', sum('Count') as 'Actions';",
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "ActivityDate_3",
+            "LoyaltyProgramCurren_1",
+            "LoyaltyProgramCurren_2"
+          ]
+        },
+        "selectMode" : "single",
+        "start" : [ ],
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showPoints" : false,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : false,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "line",
+            "dashLine" : {
+              "measures" : "",
+              "showDashLine" : false
+            },
+            "title" : {
+              "fontSize" : 18,
+              "subtitleFontSize" : 11,
+              "label" : "Trend",
+              "align" : "left",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "fillArea" : true,
+            "showActionMenu" : true,
+            "showZero" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : false,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "valueType" : "none",
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : false,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true,
+            "drawArea" : {
+              "measure" : "",
+              "showDrawArea" : false,
+              "bounding1" : "",
+              "bounding2" : ""
+            }
+          },
+          "type" : "chart"
+        }
+      },
+      "ActivityDate_3" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.LoyaltyLedger_ManualActions7.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              "ActivityDate"
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "none",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "start" : [
+          [
+            [
+              "year",
+              -1
+            ],
+            [
+              "year",
+              -1
+            ]
+          ]
+        ],
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : { }
+      },
+      "LoyaltyProgramCurren_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.LoyaltyProgramTier7.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              "LoyaltyProgramCurrency_NQP_Currency"
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "include",
+          "steps" : [
+            "TransactionJournal_L_2",
+            "LoyaltyTierMember_Lo_1"
+          ]
+        },
+        "selectMode" : "singlerequired",
+        "start" : [
+          "Nights Stayed"
+        ],
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : { }
+      },
+      "LoyaltyProgram_Name_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.LoyaltyProgramTier7.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              "LoyaltyProgram_Name"
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "User_Username_1",
+            "LoyaltyTierMember_Lo_1",
+            "LoyaltyProgramCurren_1",
+            "LoyaltyProgramCurren_2",
+            "ActivityDate_2",
+            "ActivityDate_3"
+          ]
+        },
+        "selectMode" : "singlerequired",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : { }
+      },
+      "ImpactonTiers_1" : {
+        "broadcastFacet" : false,
+        "groups" : [ ],
+        "label" : "ImpactonTiers",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.LoyaltyMemberTierHistory7.FullyQualifiedName}\";\nq = group q by ('OldValue', 'NewValue');\nq = foreach q generate 'OldValue' as 'OldValue', 'NewValue' as 'NewValue', count() as 'count';",
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "ActivityDate_3"
+          ]
+        },
+        "selectMode" : "single",
+        "start" : [ ],
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showDimensionTitle" : false,
+            "showActionMenu" : true,
+            "showAbsoluteValues" : true,
+            "legend" : {
+              "showHeader" : true,
+              "show" : false,
+              "position" : "right-top",
+              "inside" : false
+            },
+            "showTotal" : false,
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "sankey",
+            "theme" : "wave",
+            "title" : {
+              "fontSize" : 18,
+              "subtitleFontSize" : 11,
+              "label" : "Impact on Tiers",
+              "align" : "left",
+              "subtitleLabel" : ""
+            },
+            "applyConditionalFormatting" : false
+          },
+          "type" : "chart"
+        }
+      },
+      "TierChangesKPI_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "TierChangesKPI",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.LoyaltyMemberTierHistory7.FullyQualifiedName}\";\nq = filter q by 'ReasonForChange_NewValue' is not null ;\nq_duration = filter q by {{row(ActivityDate_2.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day')\")}};\nq_compareduration = filter q by {{row(ActivityDate_3.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day')\")}};\n\nresult = group q_duration by all full, q_compareduration by all;\nresult = foreach result generate count(q_duration) as 'TierChanges',(count(q_duration)-count(q_compareduration))/count(q_compareduration) as 'TierChanges_CompareToDuration_percentage';\n",
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "ActivityDate_2",
+            "ActivityDate_3"
+          ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "CountofMembers_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "CountofMembers",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.LoyaltyLedger_ManualActions7.FullyQualifiedName}\";q = filter q by {{column(LoyaltyProgramCurren_1.selection, [\"LoyaltyProgramCurrency_NQP_Currency\"]).asEquality('LoyaltyProgramCurrency_NQP_Currency')}} or ('LoyaltyProgramCurrency_QP_Currency' is not null && {{column(LoyaltyProgramCurren_2.selection, [\"LoyaltyProgramCurrency_QP_Currency\"]).asEquality('LoyaltyProgramCurrency_QP_Currency')}});q = filter q by 'TransactionJournal_Status' == \"Processed\";q_Duration = filter q by {{row(ActivityDate_2.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day')\")}};q_Duration =  group q_Duration by 'LoyaltyProgramMemberId' ;q_Duration = foreach q_Duration generate 'LoyaltyProgramMemberId' as 'LoyaltyMemberId', count() as 'count';q_CompareToDuration = filter q by {{row(ActivityDate_3.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day')\")}};q_CompareToDuration =  group q_CompareToDuration by 'LoyaltyProgramMemberId';q_CompareToDuration = foreach q_CompareToDuration generate 'LoyaltyProgramMemberId' as 'LoyaltyMemberId', count() as 'count';hist = load \"${App.Datasets.LoyaltyMemberTierHistory7.FullyQualifiedName}\";hist = filter hist by 'ReasonForChange_NewValue' is not null;hist_Duration= filter hist by {{row(ActivityDate_2.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day')\")}};hist_Duration = group hist_Duration by 'LoyaltyMemberTier_LoyaltyMemberId';hist_Duration = foreach hist_Duration generate  'LoyaltyMemberTier_LoyaltyMemberId' as 'LoyaltyMemberId', count() as 'count';hist_CompareToDuration = filter hist by {{row(ActivityDate_3.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day')\")}};hist_CompareToDuration = group hist_CompareToDuration by 'LoyaltyMemberTier_LoyaltyMemberId';hist_CompareToDuration = foreach hist_CompareToDuration generate  'LoyaltyMemberTier_LoyaltyMemberId' as 'LoyaltyMemberId', count() as 'count';result_Duration = union q_Duration, hist_Duration;result_Duration = group result_Duration by 'LoyaltyMemberId';result_Duration = foreach result_Duration  generate 'LoyaltyMemberId' as 'LoyaltyMemberId', unique('LoyaltyMemberId') as 'Count of Members';result_CompareToDuration = union q_CompareToDuration, hist_CompareToDuration;result_CompareToDuration = group result_CompareToDuration by 'LoyaltyMemberId';result_CompareToDuration = foreach result_CompareToDuration  generate 'LoyaltyMemberId' as 'LoyaltyMemberId', unique('LoyaltyMemberId') as 'Count of Members Durations';finalresult = group result_Duration by all full, result_CompareToDuration by all;finalresult = foreach finalresult generate sum(result_Duration.'Count of Members') as 'Count of Members', sum(result_CompareToDuration.'Count of Members Durations') as 'Count of Members Durations',(sum(result_Duration.'Count of Members') - sum(result_CompareToDuration.'Count of Members Durations')*100)/sum(result_CompareToDuration.'Count of Members Durations') as 'Number_of_Members_percentage';",
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "ActivityDate_3",
+            "LoyaltyProgramCurren_1",
+            "LoyaltyProgramCurren_2",
+            "ActivityDate_2"
+          ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "User_Username_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "User_Username_1",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.LoyaltyLedger_ManualActions7.FullyQualifiedName}\";\nq = group q by 'User_UniqueUserName';\nq = foreach q generate 'User_UniqueUserName' as 'User_UniqueUserName', count() as 'count';\nhist = load \"${App.Datasets.LoyaltyMemberTierHistory7.FullyQualifiedName}\";\nhist = group hist by 'User_UniqueUserName';\nhist = foreach hist generate 'User_UniqueUserName' as 'User_UniqueUserName', count() as 'count';\n\nresult = union q, hist;\nresult = group result by 'User_UniqueUserName';\nresult = foreach result generate 'User_UniqueUserName' as 'User_UniqueUserName';",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "multi",
+        "start" : [ ],
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      }
+    },
+    "widgetStyle" : {
+      "backgroundColor" : "#FFFFFF",
+      "borderColor" : "#E6ECF2",
+      "borderEdges" : [ ],
+      "borderRadius" : 0,
+      "borderWidth" : 1
+    },
+    "widgets" : {
+      "number_12" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "Number_of_Members_percentage",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 12,
+          "showActionMenu" : true,
+          "step" : "CountofMembers_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "number_10" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "Count of Members",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 16,
+          "showActionMenu" : true,
+          "step" : "CountofMembers_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "container_16" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_14" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_13" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : ""
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text_15" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : " Loyalty Member Services"
+          },
+          "fontSize" : 20,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text_10" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "How did the modifications affect the qualifying points?"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text_12" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : ""
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "container_1" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_3" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_4" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_5" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_6" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_3" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Accrual Cancellation"
+          },
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_2" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Adjusted Points Positive"
+          },
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "chart_5" : {
+        "parameters" : {
+          "autoFitMode" : "fit",
+          "showValues" : true,
+          "stack" : true,
+          "showPoints" : true,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "bottom-center",
+            "inside" : false
+          },
+          "axisMode" : "sync",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "combo",
+          "missingValue" : "connect",
+          "showValuesOnLine" : false,
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 18,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "left",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "plots" : {
+            "OverallTrend_QP" : {
+              "mark" : "line"
+            },
+            "Credited Points" : {
+              "mark" : "bar"
+            },
+            "PositiveAdjustedPoints_QP" : {
+              "mark" : "bar"
+            },
+            "Debited Points" : {
+              "mark" : "bar"
+            },
+            "AccrualCancellation_QP" : {
+              "mark" : "bar"
+            },
+            "NegativeAdjustedPoints_QP" : {
+              "mark" : "bar"
+            },
+            "Accrual Reversals" : {
+              "mark" : "bar"
+            }
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "Qualifying Points (QP) Value",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "theme" : "wave",
+          "step" : "ImpactonPoints_2",
+          "dimensionAxis" : {
+            "showTitle" : true,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "container_8" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_5" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Details Table"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text_4" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Redemption Cancellation"
+          },
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "container_9" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "chart_2" : {
+        "parameters" : {
+          "autoFitMode" : "fit",
+          "showValues" : true,
+          "stack" : true,
+          "showPoints" : true,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "bottom-center",
+            "inside" : false
+          },
+          "axisMode" : "sync",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "combo",
+          "missingValue" : "connect",
+          "showValuesOnLine" : false,
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 18,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "left",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "plots" : {
+            "Credited Points" : {
+              "mark" : "bar"
+            },
+            "Redemption Reversal " : {
+              "mark" : "bar"
+            },
+            "NegativeAdjustedPoints_NQP" : {
+              "mark" : "bar"
+            },
+            "OverallTrend_NQP" : {
+              "mark" : "line"
+            },
+            "Debited Points" : {
+              "mark" : "bar"
+            },
+            "NegativeAdjustedPoints_QP" : {
+              "mark" : "line"
+            },
+            "Accrual Reversals" : {
+              "mark" : "bar"
+            },
+            "OverallTrend_QP" : {
+              "mark" : "line"
+            },
+            "PositiveAdjustedPoints_QP" : {
+              "mark" : "line"
+            },
+            "RedemptionCancellation_NQP" : {
+              "mark" : "bar"
+            },
+            "AccrualCancellation_NQP" : {
+              "mark" : "bar"
+            },
+            "AccrualCancellation_QP" : {
+              "mark" : "line"
+            },
+            "PositiveAdjustedPoints_NQP" : {
+              "mark" : "bar"
+            }
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "Non-Qualifying Points (NQP) Value",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "theme" : "wave",
+          "step" : "ImpactonPoints_1",
+          "dimensionAxis" : {
+            "showTitle" : true,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "text_7" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Tier Changes"
+          },
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "chart_1" : {
+        "parameters" : {
+          "centerText" : "",
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "bottom-center",
+            "inside" : false
+          },
+          "showMeasureTitle" : false,
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "pie",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 16,
+            "subtitleFontSize" : 11,
+            "label" : "Modifications",
+            "align" : "left",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "inner" : 60,
+          "showActionMenu" : true,
+          "centerValueType" : "number",
+          "valueType" : "compactNumber",
+          "theme" : "dark",
+          "step" : "LoyaltyActions_1",
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "text_6" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "{{coalesce(cell(LoyaltyProgramCurren_1.selection, 0, \"LoyaltyProgramCurrency_NQP_Currency\"), \"\").asString()}}"
+          },
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "chart_4" : {
+        "parameters" : {
+          "showDimensionTitle" : false,
+          "autoFitMode" : "keepLabels",
+          "legend" : {
+            "showHeader" : true,
+            "show" : false,
+            "position" : "right-top",
+            "inside" : false
+          },
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "sankey",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 18,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "left",
+            "subtitleLabel" : ""
+          },
+          "showActionMenu" : true,
+          "showAbsoluteValues" : true,
+          "showTotal" : false,
+          "theme" : "wave",
+          "step" : "ImpactonTiers_1",
+          "applyConditionalFormatting" : false
+        },
+        "type" : "chart"
+      },
+      "text_9" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "How did the modifications affect the non-qualifying points?"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "chart_3" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showPoints" : false,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "line",
+          "dashLine" : {
+            "measures" : "",
+            "showDashLine" : false
+          },
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 16,
+            "subtitleFontSize" : 11,
+            "label" : "Modifications Trend",
+            "align" : "left",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "fillArea" : true,
+          "showActionMenu" : true,
+          "showZero" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : false,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "valueType" : "none",
+          "theme" : "dark",
+          "step" : "Trend_ManualActions_1",
+          "dimensionAxis" : {
+            "showTitle" : false,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : true,
+          "drawArea" : {
+            "measure" : "",
+            "showDrawArea" : false,
+            "bounding1" : "",
+            "bounding2" : ""
+          }
+        },
+        "type" : "chart"
+      },
+      "text_8" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Tier Changes"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "image_5" : {
+        "parameters" : {
+          "alignmentX" : "center",
+          "alignmentY" : "center",
+          "fit" : "original",
+          "image" : {
+            "name" : "${App.Images['Loyalty_ProgramServices_Iconpng22pn1'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "type" : "image"
+      },
+      "dateselector_1" : {
+        "parameters" : {
+          "absoluteModeEnabled" : true,
+          "calendarTypeSwitchingAllowed" : true,
+          "defaultFiscalMode" : false,
+          "displayMode" : "filter",
+          "filterStyle" : {
+            "titleColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "instant" : false,
+          "presetsEnabled" : true,
+          "relativeModeEnabled" : true,
+          "showActionMenu" : true,
+          "step" : "ActivityDate_2",
+          "title" : "Duration"
+        },
+        "type" : "dateselector"
+      },
+      "text_1" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Members with Modifications"
+          },
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "image_6" : {
+        "parameters" : {
+          "alignmentX" : "center",
+          "alignmentY" : "center",
+          "fit" : "original",
+          "image" : {
+            "name" : "${App.Images['Loyalty_TierChanges_Icon_Greypng11p1'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "type" : "image"
+      },
+      "number_5" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "RedemptionCancellation_NQP",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 16,
+          "showActionMenu" : true,
+          "step" : "KPIMetrics_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "number_4" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "AccrualCancellation_NQP",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 16,
+          "showActionMenu" : true,
+          "step" : "KPIMetrics_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "number_3" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "TierChanges",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 16,
+          "showActionMenu" : true,
+          "step" : "TierChangesKPI_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "number_2" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "AdjustedPoints_NQP",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 16,
+          "showActionMenu" : true,
+          "step" : "KPIMetrics_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "image_1" : {
+        "parameters" : {
+          "alignmentX" : "center",
+          "alignmentY" : "center",
+          "fit" : "fitheight",
+          "image" : {
+            "name" : "${App.Images['Loyalty_MemberService_Icon_Whitepng1'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "type" : "image"
+      },
+      "container_12" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_11" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_10" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "image_2" : {
+        "parameters" : {
+          "alignmentX" : "center",
+          "alignmentY" : "center",
+          "fit" : "fitheight",
+          "image" : {
+            "name" : "${App.Images['Loyalty_Currency_Icon_Greypng11png31'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "type" : "image"
+      },
+      "container_35" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "number_9" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "TierChanges_CompareToDuration_percentage",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 12,
+          "showActionMenu" : true,
+          "step" : "TierChangesKPI_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "number_8" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "RedemptionCancellation_NQP_percentage",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 12,
+          "showActionMenu" : true,
+          "step" : "KPIMetrics_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "number_7" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "AccrualCancellation_NQP_percentage",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 12,
+          "showActionMenu" : true,
+          "step" : "KPIMetrics_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "number_6" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "AdjustedPoints_NQP_percentage",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 12,
+          "showActionMenu" : true,
+          "step" : "KPIMetrics_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "dateselector_2" : {
+        "parameters" : {
+          "absoluteModeEnabled" : true,
+          "calendarTypeSwitchingAllowed" : true,
+          "defaultFiscalMode" : false,
+          "displayMode" : "filter",
+          "filterStyle" : {
+            "titleColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "instant" : false,
+          "presetsEnabled" : true,
+          "relativeModeEnabled" : true,
+          "showActionMenu" : true,
+          "step" : "ActivityDate_3",
+          "title" : "Compare to"
+        },
+        "type" : "dateselector"
+      },
+      "listselector_7" : {
+        "parameters" : {
+          "compact" : false,
+          "displayMode" : "filter",
+          "exploreLink" : false,
+          "filterStyle" : {
+            "titleColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "instant" : false,
+          "measureField" : "none",
+          "showActionMenu" : true,
+          "step" : "TransactionJournal_L_2",
+          "title" : "Program"
+        },
+        "type" : "listselector"
+      },
+      "listselector_6" : {
+        "parameters" : {
+          "compact" : false,
+          "displayMode" : "filter",
+          "exploreLink" : false,
+          "filterStyle" : {
+            "titleColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "instant" : true,
+          "measureField" : "none",
+          "showActionMenu" : true,
+          "step" : "TransactionJournal_L_1",
+          "title" : "Member"
+        },
+        "type" : "listselector"
+      },
+      "listselector_3" : {
+        "parameters" : {
+          "compact" : false,
+          "displayMode" : "filter",
+          "exploreLink" : false,
+          "filterStyle" : {
+            "titleColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "instant" : false,
+          "measureField" : "none",
+          "showActionMenu" : true,
+          "step" : "LoyaltyTierMember_Lo_1",
+          "title" : "Tier Group"
+        },
+        "type" : "listselector"
+      },
+      "listselector_2" : {
+        "parameters" : {
+          "compact" : false,
+          "displayMode" : "filter",
+          "exploreLink" : false,
+          "filterStyle" : {
+            "titleColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "instant" : false,
+          "measureField" : "none",
+          "showActionMenu" : true,
+          "step" : "User_Username_1",
+          "title" : "Agent"
+        },
+        "type" : "listselector"
+      },
+      "listselector_5" : {
+        "parameters" : {
+          "compact" : false,
+          "displayMode" : "filter",
+          "exploreLink" : false,
+          "filterStyle" : {
+            "titleColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "instant" : false,
+          "measureField" : "none",
+          "showActionMenu" : true,
+          "step" : "LoyaltyProgramCurren_2",
+          "title" : "Qualifying Currency"
+        },
+        "type" : "listselector"
+      },
+      "listselector_4" : {
+        "parameters" : {
+          "compact" : false,
+          "displayMode" : "filter",
+          "exploreLink" : false,
+          "filterStyle" : {
+            "titleColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "instant" : false,
+          "measureField" : "none",
+          "showActionMenu" : true,
+          "step" : "LoyaltyProgramCurren_1",
+          "title" : "Non-Qualifying Currency"
+        },
+        "type" : "listselector"
+      },
+      "navigation_1" : {
+        "parameters" : {
+          "fontSize" : 16,
+          "selectedTab" : {
+            "backgroundColor" : "rgb(0, 112, 210)",
+            "borderColor" : "rgb(0, 112, 210)",
+            "borderEdges" : [ ],
+            "borderWidth" : 2,
+            "textColor" : "#FFFFFF"
+          },
+          "tabCount" : 2,
+          "textColor" : "rgb(0, 112, 210)"
+        },
+        "type" : "navigation"
+      },
+      "container_140" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_141" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "table_3" : {
+        "parameters" : {
+          "borderColor" : "#e0e5ee",
+          "borderWidth" : 1,
+          "cell" : {
+            "backgroundColor" : "#ffffff",
+            "fontColor" : "#16325c",
+            "fontSize" : 12
+          },
+          "columnProperties" : { },
+          "columns" : [ ],
+          "customBulkActions" : [
+            {
+              "label" : "Add to Campaign",
+              "visualforce" : {
+                "name" : "BulkAction",
+                "namespace" : "EABulkActions"
+              }
+            }
+          ],
+          "exploreLink" : true,
+          "header" : {
+            "backgroundColor" : "#f4f6f9",
+            "fontColor" : "#16325c",
+            "fontSize" : 12
+          },
+          "innerMajorBorderColor" : "#a8b7c7",
+          "innerMinorBorderColor" : "#e0e5ee",
+          "mode" : "fittocontainer",
+          "numberOfLines" : 1,
+          "pivoted" : false,
+          "showActionMenu" : true,
+          "showRowIndexColumn" : false,
+          "step" : "DetailsTable_1",
+          "totals" : true,
+          "verticalPadding" : 8
+        },
+        "type" : "table"
+      },
+      "listselector_1" : {
+        "parameters" : {
+          "compact" : false,
+          "displayMode" : "filter",
+          "exploreLink" : false,
+          "filterStyle" : {
+            "titleColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "instant" : false,
+          "measureField" : "none",
+          "showActionMenu" : true,
+          "step" : "LoyaltyProgram_Name_1",
+          "title" : "Program Name"
+        },
+        "type" : "listselector"
+      }
+    }
+  }
+}
