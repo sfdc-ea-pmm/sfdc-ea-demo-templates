@@ -1,0 +1,227 @@
+{
+  "isDeletable": true,
+  "notificationLevel": "Never",
+  "workflowDefinition": {
+    "Extract_RetailStore": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {
+            "name": "Id"
+          },
+          {
+            "name": "Name"
+          }
+        ],
+        "object": "RetailStore"
+      }
+    },
+    "Register_CG_OrderItem59": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_OrderItem59",
+        "alias": "${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}",
+        "source": "Update_Acc_CG_OrderItem59"
+      }
+    },
+    "Update_RS_CG_Case69": {
+      "action": "update",
+      "parameters": {
+        "right_key": [
+          "Name"
+        ],
+        "left": "Edg_CG_Case69",
+        "left_key": [
+          "RetailStore_Name"
+        ],
+        "update_columns": {
+          "RetailStore_Id": "Id"
+        },
+        "right": "Extract_RetailStore"
+      }
+    },
+    "Extract_Account": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {
+            "name": "Id"
+          },
+          {
+            "name": "Name"
+          }
+        ],
+        "object": "Account"
+      }
+    },
+    "Update_RS_CG_Visit69": {
+      "action": "update",
+      "parameters": {
+        "right_key": [
+          "Name"
+        ],
+        "left": "Edg_CG_Visit69",
+        "left_key": [
+          "RetailStore_Name"
+        ],
+        "update_columns": {
+          "RetailStore_Id": "Id"
+        },
+        "right": "Extract_RetailStore"
+      }
+    },
+    "Edg_CG_Visit69": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.CG_Visit69_tp.FullyQualifiedName}"
+      }
+    },
+    "Update_RS_CG_RetailVisitKpi70": {
+      "action": "update",
+      "parameters": {
+        "right_key": [
+          "Name"
+        ],
+        "left": "Edg_CG_RetailVisitKpi70",
+        "left_key": [
+          "AssessmentTask_Visit_RetailStore_Name"
+        ],
+        "update_columns": {
+          "AssessmentTask_Visit_RetailStore_Id": "Id"
+        },
+        "right": "Extract_RetailStore"
+      }
+    },
+    "Update_Acc_CG_OrderItem59": {
+      "action": "update",
+      "parameters": {
+        "right_key": [
+          "Name"
+        ],
+        "left": "Update_RS_CG_OrderItem59_2",
+        "left_key": [
+          "Order_AssessmentTaskOrder_AssessmentTask_Visit_RetailStore_Account_Name"
+        ],
+        "update_columns": {
+          "Order_AssessmentTaskOrder_AssessmentTask_Visit_RetailStore_AccountId": "Id"
+        },
+        "right": "Extract_Account"
+      }
+    },
+    "Edg_CG_RetailVisitKpi70": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}"
+      }
+    },
+    "Register_CG_RetailVisitKpi70": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_RetailVisitKpi70",
+        "alias": "${App.Datasets.CG_RetailVisitKpi70_tp.FullyQualifiedName}",
+        "source": "Update_Acc_CG_RetailVisitKpi70"
+      }
+    },
+    "Register_CG_Visit69": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_Visit69",
+        "alias": "${App.Datasets.CG_Visit69_tp.FullyQualifiedName}",
+        "source": "Update_Acc_CG_Visit69"
+      }
+    },
+    "Register_CG_Case69": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CG_Case69",
+        "alias": "${App.Datasets.CG_Case69_tp.FullyQualifiedName}",
+        "source": "Update_RS_CG_Case69"
+      }
+    },
+    "Update_RS_CG_OrderItem59_2": {
+      "action": "update",
+      "parameters": {
+        "right_key": [
+          "Name"
+        ],
+        "left": "Update_RS_CG_OrderItem59",
+        "left_key": [
+          "Order_AssessmentTaskOrder_RetailStore_Name"
+        ],
+        "update_columns": {
+          "Order_AssessmentTaskOrder_RetailStoreId": "Id"
+        },
+        "right": "Extract_RetailStore"
+      }
+    },
+    "Update_Acc_CG_RetailVisitKpi70": {
+      "action": "update",
+      "parameters": {
+        "right_key": [
+          "Name"
+        ],
+        "left": "Update_RS_CG_RetailVisitKpi70",
+        "left_key": [
+          "AssessmentTask_Visit_RetailStore_Account_Name"
+        ],
+        "update_columns": {
+          "AssessmentTask_Visit_RetailStore_AccountId": "Id"
+        },
+        "right": "Extract_Account"
+      }
+    },
+    "Edg_CG_OrderItem59": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.CG_OrderItem59_tp.FullyQualifiedName}"
+      }
+    },
+    "Update_RS_CG_OrderItem59": {
+      "action": "update",
+      "parameters": {
+        "right_key": [
+          "Name"
+        ],
+        "left": "Edg_CG_OrderItem59",
+        "left_key": [
+          "Order_AssessmentTaskOrder_AssessmentTask_Visit_RetailStore_Name"
+        ],
+        "update_columns": {
+          "Order_AssessmentTaskOrder_AssessmentTask_Visit_RetailStore_Id": "Id"
+        },
+        "right": "Extract_RetailStore"
+      }
+    },
+    "Edg_CG_Case69": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.CG_Case69_tp.FullyQualifiedName}"
+      }
+    },
+    "Update_Acc_CG_Visit69": {
+      "action": "update",
+      "parameters": {
+        "right_key": [
+          "Name"
+        ],
+        "left": "Update_RS_CG_Visit69",
+        "left_key": [
+          "RetailStore_Account_Name"
+        ],
+        "update_columns": {
+          "RetailStore_AccountId": "Id"
+        },
+        "right": "Extract_Account"
+      }
+    }
+  },
+  "DataflowType": "USER",
+  "_type": "dataflow",
+  "name": "AF_Fixer",
+  "description": "CG 228 - AF Fixer",
+  "MasterLabel": "- AF Fixer",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": "",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive"
+}

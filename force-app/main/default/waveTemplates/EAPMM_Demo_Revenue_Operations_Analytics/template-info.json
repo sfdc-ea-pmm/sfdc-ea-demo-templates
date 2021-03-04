@@ -1,6 +1,6 @@
 {
   "templateType" : "app",
-  "label" : "EAPMM Demo Revenue Operations Analytics",
+  "label" : "Demo | Revenue Operations Analytics",
   "name" : "EAPMM_Demo_Revenue_Operations_Analytics",
   "description" : "Demo version of EA for Revenue Operations",
   "customAttributes": [
@@ -71,26 +71,57 @@
   ],
   "eltDataflows" : [
     {
-      "label" : "Demo | Revenue Operations - Generate Snapshots",
-      "name" : "Demo_Revenue_Operations_Generate_Snapshots",
-      "condition" : "${Variables.Overrides.createDataflow}",
-      "file" : "dataflow/Revenue_Operations_Generate_Snapshots.json"
-    },
-    {
-      "label" : "Demo | Revenue Operations std Snapshots",
-      "name" : "Demo_Revenue_Operations_std_Snapshots",
-      "condition" : "${Variables.Overrides.createDataflow}",
-      "file" : "dataflow/Revenue_Operations_std_Snapshots.json"
-    },
-    {
-      "label" : "Demo | Revenue Operations",
-      "name" : "Demo_Revenue_Operations",
+      "label" : "- Main",
+      "name" : "Demo_RevOps_Main",
       "condition" : "${Variables.Overrides.createDataflow}",
       "file" : "dataflow/Revenue_Operations.json"
+    },
+    {
+      "label" : "- Generate Snapshots",
+      "name" : "Demo_RevOps_Generate_Snapshots",
+      "condition" : "${Variables.Overrides.createDataflow}",
+      "file" : "dataflow/Revenue_Operations_Generate_Snapshots.json"
     }
   ],
   "recipes" : [ ],
-  "datasetFiles" : [ ],
+  "datasetFiles" : [ 
+    {
+      "label" : "Account",
+      "name" : "account",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd" : "dataset_files/account_XMD.json"
+    },
+    {
+      "label" : "Forecast",
+      "name" : "forecast",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd" : "dataset_files/forecast_XMD.json"
+    },
+    {
+      "label" : "Forecasting Quota",
+      "name" : "forecastingquota",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd" : "dataset_files/forecastingquota_XMD.json"
+    },
+    {
+      "label" : "Opportunity",
+      "name" : "opportunity",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd" : "dataset_files/opportunity_XMD.json"
+    },
+    {
+      "label" : "Opportunity Splits",
+      "name" : "opportunitysplits",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd" : "dataset_files/opportunitysplits_XMD.json"
+    },
+    {
+      "label" : "User Roles",
+      "name" : "userroles",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd" : "dataset_files/userroles_XMD.json"
+    }
+  ],
   "storedQueries" : [ ],
   "imageFiles" : [
     {
