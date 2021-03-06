@@ -1,5 +1,5 @@
 {
-  "name" : "Service_Resources_Performance_Dashboard4_tp",
+  "name" : "Service_Resources_Performance_tp",
   "label" : "Service Resources Performance",
   "folder" : {
     "id" : "${App.Folder.Id}"
@@ -16,7 +16,7 @@
             "parameters" : {
               "bins" : [
                 {
-                  "formatValue" : "#00B531",
+                  "formatValue" : "rgb(0, 181, 49)",
                   "bin" : "*"
                 },
                 {
@@ -32,34 +32,6 @@
           }
         },
         "field" : "Duration_Comparison_1.A",
-        "format" : {
-          "delimiters" : { }
-        }
-      },
-      {
-        "conditionalFormatting" : {
-          "backgroundColor" : {
-            "referenceField" : "C",
-            "type" : "multiple",
-            "parameters" : {
-              "bins" : [
-                {
-                  "formatValue" : "#00B531",
-                  "bin" : "*"
-                },
-                {
-                  "formatValue" : "#7D98B3",
-                  "bin" : "0"
-                },
-                {
-                  "formatValue" : "rgb(234, 62, 82)",
-                  "bin" : "0.01"
-                }
-              ]
-            }
-          }
-        },
-        "field" : "Duration_Comparison_1.C",
         "format" : {
           "delimiters" : { }
         }
@@ -123,7 +95,7 @@
     "filters" : [
       {
         "dataset" : {
-          "name" : "${App.Datasets.ServiceAppointment_tp.Name}"
+          "name" : "${App.Datasets.ServiceAppointmentApptDemo.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -135,7 +107,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.ServiceAppointment_tp.Name}"
+          "name" : "${App.Datasets.ServiceAppointmentApptDemo.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -147,7 +119,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.ServiceAppointment_tp.Name}"
+          "name" : "${App.Datasets.ServiceAppointmentApptDemo.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -159,7 +131,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.ServiceAppointment_tp.Name}"
+          "name" : "${App.Datasets.ServiceAppointmentApptDemo.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -171,7 +143,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.ServiceAppointment_tp.Name}"
+          "name" : "${App.Datasets.ServiceAppointmentApptDemo.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -978,7 +950,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.ServiceAppointment_tp.Name}"
+            "name" : "${App.Datasets.ServiceAppointmentApptDemo.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1070,7 +1042,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.ServiceAppointment_tp.Name}"
+            "name" : "${App.Datasets.ServiceAppointmentApptDemo.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1172,7 +1144,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.ServiceAppointment_tp.Name}"
+            "name" : "${App.Datasets.ServiceAppointmentApptDemo.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1276,7 +1248,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.ServiceAppointment_tp.Name}"
+            "name" : "${App.Datasets.ServiceAppointmentApptDemo.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1394,7 +1366,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.ServiceAppointment_tp.Name}"
+            "name" : "${App.Datasets.ServiceAppointmentApptDemo.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1525,7 +1497,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.ServiceAppointment_tp.Name}"
+            "name" : "${App.Datasets.ServiceAppointmentApptDemo.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1676,7 +1648,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.ServiceAppointment_tp.Name}"
+            "name" : "${App.Datasets.ServiceAppointmentApptDemo.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1795,7 +1767,7 @@
         "groups" : [ ],
         "label" : "StatusCategory_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.ServiceAppointment_tp.FullyQualifiedName}\";\nq = filter q by 'StatusCategory' in [\"CannotComplete\", \"Completed\"];\nq = group q by 'StatusCategory';\nq = foreach q generate 'StatusCategory' as 'StatusCategory', count() as 'count';\nq = order q by 'StatusCategory' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.ServiceAppointmentApptDemo.FullyQualifiedName}\";\nq = filter q by 'StatusCategory' in [\"CannotComplete\", \"Completed\"];\nq = group q by 'StatusCategory';\nq = foreach q generate 'StatusCategory' as 'StatusCategory', count() as 'count';\nq = order q by 'StatusCategory' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1923,7 +1895,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.ServiceAppointment_tp.Name}"
+            "name" : "${App.Datasets.ServiceAppointmentApptDemo.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1991,7 +1963,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.ServiceAppointment_tp.Name}"
+            "name" : "${App.Datasets.ServiceAppointmentApptDemo.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2089,7 +2061,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.ServiceAppointment_tp.Name}"
+            "name" : "${App.Datasets.ServiceAppointmentApptDemo.Name}"
           }
         ],
         "isGlobal" : false,
@@ -3070,7 +3042,10 @@
       },
       "number_5" : {
         "parameters" : {
-          "showActionMenu" : true
+          "showActionMenu" : true,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
         },
         "type" : "number"
       },
@@ -3109,7 +3084,10 @@
       },
       "number_4" : {
         "parameters" : {
-          "showActionMenu" : true
+          "showActionMenu" : true,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
         },
         "type" : "number"
       },
@@ -3124,7 +3102,10 @@
           "step" : "__of_Appts_1",
           "textAlignment" : "left",
           "titleColor" : "#091A3E",
-          "titleSize" : 32
+          "titleSize" : 32,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
         },
         "type" : "number"
       },
@@ -3140,7 +3121,10 @@
           "textAlignment" : "left",
           "title" : "vs Avg Scheduled",
           "titleColor" : "#E6ECF2",
-          "titleSize" : 14
+          "titleSize" : 14,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
         },
         "type" : "number"
       },
@@ -3156,7 +3140,10 @@
           "textAlignment" : "left",
           "title" : "",
           "titleColor" : "#091A3E",
-          "titleSize" : 16
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
         },
         "type" : "number"
       },
@@ -3174,7 +3161,7 @@
           "alignmentY" : "top",
           "fit" : "fitheight",
           "image" : {
-            "name" : "${App.Images['service_appt_logo8'].Name}",
+            "name" : "${App.Images['service_appt_logo8png'].Name}",
             "namespace" : "${Org.Namespace}"
           }
         },

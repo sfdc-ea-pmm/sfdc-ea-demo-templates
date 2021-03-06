@@ -1,0 +1,242 @@
+{
+  "isDeletable": true,
+  "notificationLevel": "Never",
+  "workflowDefinition": {
+    "Compute_Aux_ServiceAppointmentApptDemo": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_ServiceAppointmentApptDemo",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "EarliestStartTime_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('EarliestStartTime_sec_epoch')",
+            "label": "EarliestStartTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "DueDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('DueDate_sec_epoch')",
+            "label": "DueDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ActualEndTime_Aux",
+            "saqlExpression": "toDate('ActualEndTime_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "ActualEndTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('ActualStartTime_sec_epoch')",
+            "name": "ActualStartTime_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "ActualStartTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ArrivalWindowEndTime_Aux",
+            "saqlExpression": "toDate('ArrivalWindowEndTime_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "ArrivalWindowEndTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('ArrivalWindowStartTime_sec_epoch')",
+            "name": "ArrivalWindowStartTime_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "ArrivalWindowStartTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "SchedEndTime_Aux",
+            "saqlExpression": "toDate('SchedEndTime_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "SchedEndTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "SchedStartTime_Aux",
+            "saqlExpression": "toDate('SchedStartTime_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "SchedStartTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_ServiceAppointmentApptDemo": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "ServiceAppointmentApptDemo",
+        "alias": "${App.Datasets.ServiceAppointmentApptDemo.FullyQualifiedName}",
+        "source": "Drop_Aux_ServiceAppointmentApptDemo"
+      }
+    },
+    "Drop_Dates_ServiceAppointmentApptDemo": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_ServiceAppointmentApptDemo",
+        "fields": [
+          {"name": "ArrivalWindowStartTime"},
+          {"name": "EarliestStartTime"},
+          {"name": "ActualEndTime"},
+          {"name": "CreatedDate"},
+          {"name": "SchedStartTime"},
+          {"name": "DueDate"},
+          {"name": "SchedEndTime"},
+          {"name": "ActualStartTime"},
+          {"name": "ArrivalWindowEndTime"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Load_Dataset_ServiceAppointmentApptDemo": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.ServiceAppointmentApptDemo.FullyQualifiedName}"}
+    },
+    "Shift_Dates_ServiceAppointmentApptDemo": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_ServiceAppointmentApptDemo",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "EarliestStartTime",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('EarliestStartTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "EarliestStartTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "DueDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('DueDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "DueDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ActualEndTime",
+            "saqlExpression": "toDate('ActualEndTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "ActualEndTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('ActualStartTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "ActualStartTime",
+            "format": "yyyy-MM-dd",
+            "label": "ActualStartTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('ArrivalWindowEndTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "ArrivalWindowEndTime",
+            "format": "yyyy-MM-dd",
+            "label": "ArrivalWindowEndTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('ArrivalWindowStartTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "ArrivalWindowStartTime",
+            "format": "yyyy-MM-dd",
+            "label": "ArrivalWindowStartTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('SchedEndTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "SchedEndTime",
+            "format": "yyyy-MM-dd",
+            "label": "SchedEndTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('SchedStartTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "SchedStartTime",
+            "format": "yyyy-MM-dd",
+            "label": "SchedStartTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Aux_ServiceAppointmentApptDemo": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_ServiceAppointmentApptDemo",
+        "fields": [
+          {"name": "ElapsedSeconds"},
+          {"name": "EarliestStartTime_Aux"},
+          {"name": "CreatedDate_Aux"},
+          {"name": "DueDate_Aux"},
+          {"name": "ActualEndTime_Aux"},
+          {"name": "ActualStartTime_Aux"},
+          {"name": "ArrivalWindowEndTime_Aux"},
+          {"name": "ArrivalWindowStartTime_Aux"},
+          {"name": "SchedEndTime_Aux"},
+          {"name": "SchedStartTime_Aux"}
+        ]
+      }
+    }
+  },
+  "DataflowType": "USER",
+  "_type": "dataflow",
+  "name": "Service_Appointment_Timeshifting",
+  "MasterLabel": "Service Appointment Timeshifting",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": "",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive"
+}

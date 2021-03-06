@@ -1,5 +1,5 @@
 {
-  "name" : "Service_Resource_Page_212_update2_tp",
+  "name" : "Service_Resource_Page1_tp",
   "label" : "Service Resource Page",
   "folder" : {
     "id" : "${App.Folder.Id}"
@@ -44,7 +44,7 @@
                 "colspan" : 19,
                 "column" : 1,
                 "name" : "text_Detail_Table",
-                "row" : 66,
+                "row" : 40,
                 "rowspan" : 4,
                 "widgetStyle" : {
                   "borderEdges" : [ ]
@@ -55,7 +55,7 @@
                 "column" : 0,
                 "name" : "container_12",
                 "row" : 14,
-                "rowspan" : 86,
+                "rowspan" : 75,
                 "widgetStyle" : {
                   "backgroundColor" : "#FFFFFF",
                   "borderColor" : "#E6ECF2",
@@ -107,7 +107,7 @@
                 }
               },
               {
-                "colspan" : 46,
+                "colspan" : 23,
                 "column" : 1,
                 "name" : "chart_AvgActualDurationByWorkType",
                 "row" : 16,
@@ -123,10 +123,10 @@
                 }
               },
               {
-                "colspan" : 46,
-                "column" : 1,
+                "colspan" : 23,
+                "column" : 24,
                 "name" : "chart_ActualvsEstimatedWorkTime",
-                "row" : 41,
+                "row" : 16,
                 "rowspan" : 23,
                 "widgetStyle" : {
                   "backgroundColor" : "#FFFFFF",
@@ -142,7 +142,7 @@
                 "colspan" : 46,
                 "column" : 1,
                 "name" : "table_GrainTable",
-                "row" : 70,
+                "row" : 44,
                 "rowspan" : 28,
                 "widgetStyle" : {
                   "borderEdges" : [ ]
@@ -215,14 +215,14 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.ServiceAppointment3_tp.Name}"
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
           }
         ],
         "isGlobal" : false,
         "label" : "AvgCompletedJobsPerDay",
         "query" : {
           "query" : {
-            "pigql" : "q = load \"${App.Datasets.ServiceAppointment3_tp.FullyQualifiedName}\"; q = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; q = filter q by {{column(AssignedResource_Ser_1.result, [\"AssignedResource_ServiceResourceId\"]).asEquality(\"AssignedResource_ServiceResourceId\")}}; q = filter q by {{column(AvgActualDurationByWorkType.selection, [\"ParentRecordId_WorkTypeId_Name\"]).asEquality(\"ParentRecordId_WorkTypeId_Name\")}}; q = filter q by 'StatusCategory' == \"Completed\"; q = group q by all; q = foreach q generate count()/{{column(Time_Selection.selection, [\"NumberOfDays\"]).asObject()}} as avg_jobs_completed_by_day;",
+            "pigql" : "q = load \"ServiceAppointmentDemo\"; q = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; q = filter q by {{column(AssignedResource_Ser_1.result, [\"AssignedResource_ServiceResourceId\"]).asEquality(\"AssignedResource_ServiceResourceId\")}}; q = filter q by {{column(AvgActualDurationByWorkType.selection, [\"ParentRecordId_WorkTypeId_Name\"]).asEquality(\"ParentRecordId_WorkTypeId_Name\")}}; q = filter q by 'StatusCategory' == \"Completed\"; q = group q by all; q = foreach q generate count()/{{column(Time_Selection.selection, [\"NumberOfDays\"]).asObject()}} as avg_jobs_completed_by_day;",
             "measures" : [
               [
                 "avg",
@@ -339,7 +339,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.ServiceAppointment3_tp.Name}"
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
           }
         ],
         "isGlobal" : false,
@@ -928,7 +928,7 @@
         "broadcastFacet" : true,
         "groups" : [ ],
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.ServiceAppointment3_tp.FullyQualifiedName}\"; q = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; q = filter q by {{column(AssignedResource_Ser_1.result, [\"AssignedResource_ServiceResourceId\"]).asEquality(\"AssignedResource_ServiceResourceId\")}}; q = foreach q generate 'AppointmentNumber' as 'AppointmentNumber',  first('ParentRecordId_WorkOrderNumber') as 'ParentRecordId_WorkOrderNumber', first('ParentRecordId_AccountId_Name') as 'ParentRecordId_AccountId_Name', first('StatusCategory') as 'StatusCategory'; q = order q by 'AppointmentNumber' asc;q = limit q 100;",
+        "query" : "q = load \"${App.Datasets.ServiceAppointmentDemo.FullyQualifiedName}\"; q = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; q = filter q by {{column(AssignedResource_Ser_1.result, [\"AssignedResource_ServiceResourceId\"]).asEquality(\"AssignedResource_ServiceResourceId\")}}; q = foreach q generate 'AppointmentNumber' as 'AppointmentNumber',  first('ParentRecordId_WorkOrderNumber') as 'ParentRecordId_WorkOrderNumber', first('ParentRecordId_AccountId_Name') as 'ParentRecordId_AccountId_Name', first('StatusCategory') as 'StatusCategory'; q = order q by 'AppointmentNumber' asc;q = limit q 100;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -942,7 +942,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.ServiceAppointment3_tp.Name}"
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1054,7 +1054,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.ServiceAppointment3_tp.Name}"
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1165,14 +1165,14 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.ServiceAppointment3_tp.Name}"
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
           }
         ],
         "isGlobal" : false,
         "label" : "FirstTimeFixRate",
         "query" : {
           "query" : {
-            "pigql" : "q = load \"${App.Datasets.ServiceAppointment3_tp.FullyQualifiedName}\"; q = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; q = filter q by {{column(AssignedResource_Ser_1.result, [\"AssignedResource_ServiceResourceId\"]).asEquality(\"AssignedResource_ServiceResourceId\")}}; q = filter q by {{column(AvgActualDurationByWorkType.selection, [\"ParentRecordId_WorkTypeId_Name\"]).asEquality(\"ParentRecordId_WorkTypeId_Name\")}}; i = filter q by 'StatusCategory' == \"CannotComplete\"; g = group q by all left, i by all; g = foreach g generate (1-(count(i)/count(q)))*100 as sum_first_time_fix;",
+            "pigql" : "q = load \"ServiceAppointmentDemo\"; q = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; q = filter q by {{column(AssignedResource_Ser_1.result, [\"AssignedResource_ServiceResourceId\"]).asEquality(\"AssignedResource_ServiceResourceId\")}}; q = filter q by {{column(AvgActualDurationByWorkType.selection, [\"ParentRecordId_WorkTypeId_Name\"]).asEquality(\"ParentRecordId_WorkTypeId_Name\")}}; i = filter q by 'StatusCategory' == \"CannotComplete\"; g = group q by all left, i by all; g = foreach g generate (1-(count(i)/count(q)))*100 as sum_first_time_fix;",
             "measures" : [
               [
                 "sum",
@@ -1257,7 +1257,10 @@
           "textAlignment" : "center",
           "title" : "",
           "titleColor" : "#335779",
-          "titleSize" : 18
+          "titleSize" : 18,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
         },
         "type" : "number"
       },
@@ -1625,7 +1628,10 @@
           "textAlignment" : "center",
           "title" : "",
           "titleColor" : "#335779",
-          "titleSize" : 16
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
         },
         "type" : "number"
       },
@@ -1792,9 +1798,7 @@
           },
           "innerMajorBorderColor" : "#a8b7c7",
           "innerMinorBorderColor" : "#e0e5ee",
-          "maxColumnWidth" : 300,
-          "minColumnWidth" : 40,
-          "mode" : "variable",
+          "mode" : "fittocontainer",
           "numberOfLines" : 1,
           "showActionMenu" : true,
           "step" : "GrainTable",

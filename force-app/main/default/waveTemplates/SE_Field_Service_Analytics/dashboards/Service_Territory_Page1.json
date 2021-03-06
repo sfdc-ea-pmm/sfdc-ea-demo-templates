@@ -1,5 +1,5 @@
 {
-  "name" : "Service_Territory_Page_212_update2_tp",
+  "name" : "Service_Territory_Page1_tp",
   "label" : "Service Territory Page",
   "folder" : {
     "id" : "${App.Folder.Id}"
@@ -44,7 +44,7 @@
                 "colspan" : 19,
                 "column" : 1,
                 "name" : "text_Detail_Table",
-                "row" : 66,
+                "row" : 40,
                 "rowspan" : 4,
                 "widgetStyle" : {
                   "borderEdges" : [ ]
@@ -55,7 +55,7 @@
                 "column" : 0,
                 "name" : "container_12",
                 "row" : 14,
-                "rowspan" : 86,
+                "rowspan" : 77,
                 "widgetStyle" : {
                   "backgroundColor" : "#FFFFFF",
                   "borderColor" : "#E6ECF2",
@@ -107,7 +107,7 @@
                 }
               },
               {
-                "colspan" : 46,
+                "colspan" : 23,
                 "column" : 1,
                 "name" : "chart_NumberCompletedJobsByWorkType",
                 "row" : 16,
@@ -123,10 +123,10 @@
                 }
               },
               {
-                "colspan" : 46,
-                "column" : 1,
+                "colspan" : 23,
+                "column" : 24,
                 "name" : "chart_ActualvsEstimatedWorkTime",
-                "row" : 41,
+                "row" : 16,
                 "rowspan" : 23,
                 "widgetStyle" : {
                   "backgroundColor" : "#FFFFFF",
@@ -142,7 +142,7 @@
                 "colspan" : 46,
                 "column" : 1,
                 "name" : "table_GrainTable",
-                "row" : 70,
+                "row" : 44,
                 "rowspan" : 28,
                 "widgetStyle" : {
                   "borderEdges" : [ ]
@@ -215,14 +215,14 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.ServiceAppointment3_tp.Name}"
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
           }
         ],
         "isGlobal" : false,
         "label" : "AvgCompletedJobsPerDay",
         "query" : {
           "query" : {
-            "pigql" : "q = load \"${App.Datasets.ServiceAppointment3_tp.FullyQualifiedName}\"; q = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; q = filter q by {{column(ServiceTerritoryId_1.result, [\"ServiceTerritoryId\"]).asEquality(\"ServiceTerritoryId\")}}; q = filter q by {{column(NumberCompletedJobsByWorkType.selection, [\"ParentRecordId_WorkTypeId_Name\"]).asEquality(\"ParentRecordId_WorkTypeId_Name\")}}; q = filter q by 'StatusCategory' == \"Completed\"; q = group q by all; q = foreach q generate count()/{{column(Time_Selection.selection, [\"NumberOfDays\"]).asObject()}} as avg_jobs_completed_by_day;",
+            "pigql" : "q = load \"ServiceAppointmentDemo\"; q = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; q = filter q by {{column(ServiceTerritoryId_1.result, [\"ServiceTerritoryId\"]).asEquality(\"ServiceTerritoryId\")}}; q = filter q by {{column(NumberCompletedJobsByWorkType.selection, [\"ParentRecordId_WorkTypeId_Name\"]).asEquality(\"ParentRecordId_WorkTypeId_Name\")}}; q = filter q by 'StatusCategory' == \"Completed\"; q = group q by all; q = foreach q generate count()/{{column(Time_Selection.selection, [\"NumberOfDays\"]).asObject()}} as avg_jobs_completed_by_day;",
             "measures" : [
               [
                 "avg",
@@ -339,7 +339,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.ServiceAppointment3_tp.Name}"
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
           }
         ],
         "isGlobal" : false,
@@ -964,7 +964,7 @@
         "broadcastFacet" : true,
         "groups" : [ ],
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.ServiceAppointment3_tp.FullyQualifiedName}\"; q = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; q = filter q by {{column(ServiceTerritoryId_1.result, [\"ServiceTerritoryId\"]).asEquality(\"ServiceTerritoryId\")}}; q = foreach q generate 'AppointmentNumber' as 'AppointmentNumber',  first('ParentRecordId_WorkOrderNumber') as 'ParentRecordId_WorkOrderNumber', first('ParentRecordId_AccountId_Name') as 'ParentRecordId_AccountId_Name'; q = order q by 'AppointmentNumber' asc;q = limit q 100;",
+        "query" : "q = load \"${App.Datasets.ServiceAppointmentDemo.FullyQualifiedName}\"; q = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; q = filter q by {{column(ServiceTerritoryId_1.result, [\"ServiceTerritoryId\"]).asEquality(\"ServiceTerritoryId\")}}; q = foreach q generate 'AppointmentNumber' as 'AppointmentNumber',  first('ParentRecordId_WorkOrderNumber') as 'ParentRecordId_WorkOrderNumber', first('ParentRecordId_AccountId_Name') as 'ParentRecordId_AccountId_Name'; q = order q by 'AppointmentNumber' asc;q = limit q 100;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -978,7 +978,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.ServiceAppointment3_tp.Name}"
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1089,14 +1089,14 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.ServiceAppointment3_tp.Name}"
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
           }
         ],
         "isGlobal" : false,
         "label" : "TechnicialUtilizationRate",
         "query" : {
           "query" : {
-            "pigql" : "a = load \"${App.Datasets.ServiceAppointment3_tp.FullyQualifiedName}\"; a = filter a by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; a = filter a by {{column(ServiceTerritoryId_1.result, [\"ServiceTerritoryId\"]).asEquality(\"ServiceTerritoryId\")}}; a = filter a by {{column(NumberCompletedJobsByWorkType.selection, [\"ParentRecordId_WorkTypeId_Name\"]).asEquality(\"ParentRecordId_WorkTypeId_Name\")}}; sa = group a by 'Id'; sa = foreach sa generate sum('ActualDuration') as 'sum_ActualDuration', 'Id' as 'Id', first('ServiceTerritoryId_OperatingHoursId') as 'ServiceTerritoryId_OperatingHoursId';  ar = load \"${App.Datasets.AssignedResource3_tp.FullyQualifiedName}\"; ar = cogroup ar by 'ServiceAppointmentId' inner, sa by 'Id'; ar = foreach ar generate sum(ar['ActualTravelTime']) as 'sum_ActualTravelTime', first(ar['ServiceResourceId']) as 'ServiceResourceId', first(sa['ServiceTerritoryId_OperatingHoursId']) as 'ServiceTerritoryId_OperatingHoursId'; ra = load \"${App.Datasets.ResourceAbsence3_tp.FullyQualifiedName}\"; ra = cogroup ra by 'ResourceId' inner, ar by 'ServiceResourceId'; ra = foreach ra generate sum(ra['AbsenceMinutes']) as 'sum_AbsenceMinutes'; ts = load \"${App.Datasets.TimeSlot3_tp.FullyQualifiedName}\"; ts = cogroup ts by 'OperatingHoursId' inner, sa by 'ServiceTerritoryId_OperatingHoursId'; ts = foreach ts generate sum(ts['AvailableTime']) as 'sum_AvailableTime'; t = group a by 'AssignedResource_User_User_Name'; t = foreach t generate unique('AssignedResource_User_User_Name') as 'unique_AssignedResource_User_User_Name'; q = union sa,ar,ra,ts,t; q = group q by all; q = foreach q generate coalesce(((sum('sum_ActualDuration') + sum('sum_ActualTravelTime')) / (sum('sum_AvailableTime') - sum('sum_AbsenceMinutes'))) / unique('unique_AssignedResource_User_User_Name'),0) as 'avg_util_rate';",
+            "pigql" : "a = load \"ServiceAppointmentDemo\"; a = filter a by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; a = filter a by {{column(ServiceTerritoryId_1.result, [\"ServiceTerritoryId\"]).asEquality(\"ServiceTerritoryId\")}}; a = filter a by {{column(NumberCompletedJobsByWorkType.selection, [\"ParentRecordId_WorkTypeId_Name\"]).asEquality(\"ParentRecordId_WorkTypeId_Name\")}}; sa = group a by 'Id'; sa = foreach sa generate sum('ActualDuration') as 'sum_ActualDuration', 'Id' as 'Id', first('ServiceTerritoryId_OperatingHoursId') as 'ServiceTerritoryId_OperatingHoursId';  ar = load \"AssignedResourceDemo\"; ar = cogroup ar by 'ServiceAppointmentId' inner, sa by 'Id'; ar = foreach ar generate sum(ar['ActualTravelTime']) as 'sum_ActualTravelTime', first(ar['ServiceResourceId']) as 'ServiceResourceId', first(sa['ServiceTerritoryId_OperatingHoursId']) as 'ServiceTerritoryId_OperatingHoursId'; ra = load \"ResourceAbsenceDemo\"; ra = cogroup ra by 'ResourceId' inner, ar by 'ServiceResourceId'; ra = foreach ra generate sum(ra['AbsenceMinutes']) as 'sum_AbsenceMinutes'; ts = load \"TimeSlotDemo\"; ts = cogroup ts by 'OperatingHoursId' inner, sa by 'ServiceTerritoryId_OperatingHoursId'; ts = foreach ts generate sum(ts['AvailableTime']) as 'sum_AvailableTime'; t = group a by 'AssignedResource_User_User_Name'; t = foreach t generate unique('AssignedResource_User_User_Name') as 'unique_AssignedResource_User_User_Name'; q = union sa,ar,ra,ts,t; q = group q by all; q = foreach q generate coalesce(((sum('sum_ActualDuration') + sum('sum_ActualTravelTime')) / (sum('sum_AvailableTime') - sum('sum_AbsenceMinutes'))) / unique('unique_AssignedResource_User_User_Name'),0) as 'avg_util_rate';",
             "measures" : [
               [
                 "avg",
@@ -1128,7 +1128,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.ServiceAppointment3_tp.Name}"
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1565,7 +1565,10 @@
           "textAlignment" : "center",
           "title" : "",
           "titleColor" : "#335779",
-          "titleSize" : 16
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
         },
         "type" : "number"
       },
@@ -1700,7 +1703,10 @@
           "textAlignment" : "center",
           "title" : "",
           "titleColor" : "#335779",
-          "titleSize" : 18
+          "titleSize" : 18,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
         },
         "type" : "number"
       },
@@ -1748,9 +1754,7 @@
           },
           "innerMajorBorderColor" : "#a8b7c7",
           "innerMinorBorderColor" : "#e0e5ee",
-          "maxColumnWidth" : 300,
-          "minColumnWidth" : 40,
-          "mode" : "variable",
+          "mode" : "fittocontainer",
           "numberOfLines" : 1,
           "showActionMenu" : true,
           "step" : "GrainTable",
