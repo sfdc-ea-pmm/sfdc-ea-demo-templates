@@ -1,24 +1,28 @@
 {
   "templateType" : "app",
-  "label" : "SE Demo | Field Service Analytics",
+  "label" : "SE Demo - Field Service",
   "name" : "SE_Field_Service_Analytics",
   "description" : "Demo version of Field Service Analytics.",
   "customAttributes": [
     {
       "label": "Author(s)",
-      "values": ["Siegbert D'Haese (sdhaese@salesforce.com)", "EA PMM"]
+      "values": [
+        "Siegbert D'Haese (sdhaese@salesforce.com)", 
+        "Rodrigo Mercader (rmercader@salesforce.com)", 
+        "TCRM PMM"
+      ]
     },
     {
       "label": "Demo Version",
-      "values": ["v2020.41"]
+      "values": ["v2021.09"]
     },
     {
       "label": "Source Version",
-      "values": ["v228"]
+      "values": ["v230"]
     }
   ],
   "tags": ["SE Demo", "Service", "Field Service Lightning"],
-  "assetVersion" : 49.0,
+  "assetVersion" : 51.0,
   "variableDefinition" : "variables.json",
   "uiDefinition" : "ui.json",
   "rules" : [
@@ -36,125 +40,127 @@
     "notesFile" : "releaseNotes.html"
   },
   "folderDefinition" : "folder.json",
-  "externalFiles" : [{
-    "label" : "AssignedResource",
-    "name" : "AssignedResource3_tp",
-    "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-    "userXmd" : "external_files/AssignedResource3_XMD.json",
-    "file": "external_files/AssignedResource3.csv",
-      "type": "CSV",
-      "schema": "external_files/AssignedResource3.json"
-  },
-  {
-    "label" : "ProductConsumed",
-    "name" : "ProductConsumed3_tp",
-    "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-    "userXmd" : "external_files/ProductConsumed3_XMD.json",
-    "file": "external_files/ProductConsumed3.csv",
-      "type": "CSV",
-      "schema": "external_files/ProductConsumed3.json"
-  },
-  {
-    "label" : "ResourceAbsence",
-    "name" : "ResourceAbsence3_tp",
-    "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-    "userXmd" : "external_files/ResourceAbsence3_XMD.json",
-    "file": "external_files/ResourceAbsence3.csv",
-      "type": "CSV",
-      "schema": "external_files/ResourceAbsence3.json"
-  },
-  {
-    "label" : "ServiceAppointment",
-    "name" : "ServiceAppointment3_tp",
-    "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-    "userXmd" : "external_files/ServiceAppointment3_XMD.json",
-    "file": "external_files/ServiceAppointment3.csv",
-      "type": "CSV",
-      "schema": "external_files/ServiceAppointment3.json"
-  },
-  {
-    "label" : "ServiceResourceCapacity",
-    "name" : "ServiceResourceCapacity2_tp",
-    "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-    "userXmd" : "external_files/ServiceResourceCapacity2_XMD.json",
-    "file": "external_files/ServiceResourceCapacity2.csv",
-      "type": "CSV",
-      "schema": "external_files/ServiceResourceCapacity2.json"
-  },
-  {
-    "label" : "ServiceResourceSkill",
-    "name" : "ServiceResourceSkill2_tp",
-    "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-    "userXmd" : "external_files/ServiceResourceSkill2_XMD.json",
-    "file": "external_files/ServiceResourceSkill2.csv",
-      "type": "CSV",
-      "schema": "external_files/ServiceResourceSkill2.json"
-  },
-  {
-    "label" : "ServiceTerritoryMember",
-    "name" : "ServiceTerritoryMember2_tp",
-    "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-    "userXmd" : "external_files/ServiceTerritoryMember2_XMD.json",
-    "file": "external_files/ServiceTerritoryMember2.csv",
-      "type": "CSV",
-      "schema": "external_files/ServiceTerritoryMember2.json"
-  },
-  {
-    "label" : "SkillRequirement",
-    "name" : "SkillRequirement2_tp",
-    "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-    "userXmd" : "external_files/SkillRequirement2_XMD.json",
-    "file": "external_files/SkillRequirement2.csv",
-      "type": "CSV",
-      "schema": "external_files/SkillRequirement2.json"
-  },
-  {
-    "label" : "TimeSlot",
-    "name" : "TimeSlot3_tp",
-    "condition" : "${Variables.Overrides.createAllDatasetFiles}",
-    "userXmd" : "external_files/TimeSlot3_XMD.json",
-    "file": "external_files/TimeSlot3.csv",
-      "type": "CSV",
-      "schema": "external_files/TimeSlot3.json"
-  } ],
+  "externalFiles" : [
+    {
+      "label" : "AssignedResource",
+      "name" : "AssignedResourceDemo",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/AssignedResourceDemo.csv",
+      "type" : "CSV",
+      "schema" : "external_files/AssignedResourceDemo.json",
+      "userXmd" : "external_files/AssignedResourceDemo_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "ResourceAbsence",
+      "name" : "ResourceAbsenceDemo",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/ResourceAbsenceDemo.csv",
+      "type" : "CSV",
+      "schema" : "external_files/ResourceAbsenceDemo.json",
+      "userXmd" : "external_files/ResourceAbsenceDemo_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "ServiceAppointment",
+      "name" : "ServiceAppointmentDemo",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/ServiceAppointmentDemo.csv",
+      "type" : "CSV",
+      "schema" : "external_files/ServiceAppointmentDemo.json",
+      "userXmd" : "external_files/ServiceAppointmentDemo_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "TimeSlot",
+      "name" : "TimeSlotDemo",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/TimeSlotDemo.csv",
+      "type" : "CSV",
+      "schema" : "external_files/TimeSlotDemo.json",
+      "userXmd" : "external_files/TimeSlotDemo_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "ServiceResourceCapacity",
+      "name" : "ServiceResourceCapacityDemo",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/ServiceResourceCapacityDemo.csv",
+      "type" : "CSV",
+      "schema" : "external_files/ServiceResourceCapacityDemo.json",
+      "userXmd" : "external_files/ServiceResourceCapacityDemo_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "ServiceResourceSkill",
+      "name" : "ServiceResourceSkillDemo",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/ServiceResourceSkillDemo.csv",
+      "type" : "CSV",
+      "schema" : "external_files/ServiceResourceSkillDemo.json",
+      "userXmd" : "external_files/ServiceResourceSkillDemo_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "SkillRequirement",
+      "name" : "SkillRequirementDemo",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/SkillRequirementDemo.csv",
+      "type" : "CSV",
+      "schema" : "external_files/SkillRequirementDemo.json",
+      "userXmd" : "external_files/SkillRequirementDemo_XMD.json",
+      "rows" : 5
+    }
+  ],
   "lenses" : [ ],
   "dashboards" : [
     {
       "label" : "Service Resource Page",
-      "name" : "Service_Resource_Page_212_update2_tp",
+      "name" : "Service_Resource_Page1_tp",
       "condition" : "${Variables.Overrides.createAllDashboards}",
-      "file" : "dashboards/Service_Resource_Page_212_update2.json"    
+      "file" : "dashboards/Service_Resource_Page1.json"
     },
     {
       "label" : "Service Territory Page",
-      "name" : "Service_Territory_Page_212_update2_tp",
+      "name" : "Service_Territory_Page1_tp",
       "condition" : "${Variables.Overrides.createAllDashboards}",
-      "file" : "dashboards/Service_Territory_Page_212_update2.json"
+      "file" : "dashboards/Service_Territory_Page1.json"
     },
     {
       "label" : "Technician Performance",
-      "name" : "Technician_Performance_with_global_filters_too2_tp",
+      "name" : "Technician_Performance1_tp",
       "condition" : "${Variables.Overrides.createAllDashboards}",
-      "file" : "dashboards/Technician_Performance_with_global_filters_too2.json"
+      "file" : "dashboards/Technician_Performance1.json"
     },
     {
       "label" : "Work Order Backlog",
-      "name" : "Work_Order_Backlog2_tp",
+      "name" : "Work_Order_Backlog_tp",
       "condition" : "${Variables.Overrides.createAllDashboards}",
-      "file" : "dashboards/Work_Order_Backlog2.json"
+      "file" : "dashboards/Work_Order_Backlog.json"
     },
     {
       "label" : "Work Order Overview",
-      "name" : "Work_Order_Overview_w_global_filters_too2_tp",
+      "name" : "Work_Order_Overview1_tp",
       "condition" : "${Variables.Overrides.createAllDashboards}",
-      "file" : "dashboards/Work_Order_Overview_w_global_filters_too2.json"
+      "file" : "dashboards/Work_Order_Overview1.json"
+    },
+    {
+      "label" : "Work Type Duration Analysis",
+      "name" : "Work_Type_Duration_Analysis1_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Work_Type_Duration_Analysis1.json"
     }
   ],
-  "eltDataflows" : [ ],
-  "recipes" : [ ],
-  "datasetFiles" : [
-    
+  "eltDataflows" : [ 
+    {
+      "label" : "- AF and Timeshifting",
+      "name" : "AF_and_Timeshifting_Field_Service",
+      "condition" : "${Variables.Overrides.createDataflow}",
+      "file" : "dataflow/AF_and_Timeshifting.json"
+    }
   ],
+  "recipes" : [ ],
+  "datasetFiles" : [ ],
   "storedQueries" : [ ],
   "imageFiles" : [ ],
   "extendedTypes" : { },
@@ -175,7 +181,7 @@
       {
         "name": "demo_template_guide_0",
         "label": "How to Use this Template",
-        "description": "This demo template is decoupled from core objects and does not require any additional licenses (only EA+). To customize the data, download the datasets, modify with the tools of your choice and upload to update the datasets.¥"
+        "description": "This demo template is decoupled from core objects and does not require any additional licenses (only TCRM+). To customize the data, download the datasets, modify with the tools of your choice and upload to update the datasets."
       }
     ]
   }
