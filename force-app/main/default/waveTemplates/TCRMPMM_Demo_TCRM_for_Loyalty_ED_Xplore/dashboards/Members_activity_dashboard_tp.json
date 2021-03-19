@@ -1236,7 +1236,7 @@
         "groups" : [ ],
         "label" : "Score distribution by channel",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.ED_Members_Activity_tp.FullyQualifiedName}\";\nq = foreach q generate \n(case when 'Engagement_Score'> 75 then \"Score >75\" when ('Engagement_Score'<= 75 || 'Engagement_Score' >= 50) then \"Score between 50 and 75\" when ('Engagement_Score'<= 50 || 'Engagement_Score' >= 25) then \"Score between 25 and 50\" else \"Score <25\" end)\n as 'Scores', EnrollmentChannel, Id;\nq = group q by ('EnrollmentChannel', 'Scores');\nq = foreach q generate 'EnrollmentChannel' as 'EnrollmentChannel', 'Scores', unique('Id') as 'unique_Id';\nq = order q by 'Scores' asc;\nq = limit q 2000; ",
+        "query" : "q = load \"${App.Datasets.ED_Members_Activity_tp.FullyQualifiedName}\";\nq = foreach q generate \n(case when 'Engagement_Score'> 75 then \"Score >75\" when ('Engagement_Score'<= 75 || 'Engagement_Score' >= 50) then \"Score between 50 and 75\" when ('Engagement_Score'<= 50 || 'Engagement_Score' >= 25) then \"Score between 25 and 50\" else \"Score <25\" end)\n as 'Einstein Discovery scores', EnrollmentChannel, Id;\nq = group q by ('EnrollmentChannel', 'Einstein Discovery scores');\nq = foreach q generate 'EnrollmentChannel' as 'EnrollmentChannel', 'Einstein Discovery scores', unique('Id') as 'unique_Id';\nq = order q by 'Einstein Discovery scores' asc;\nq = limit q 2000; ",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
