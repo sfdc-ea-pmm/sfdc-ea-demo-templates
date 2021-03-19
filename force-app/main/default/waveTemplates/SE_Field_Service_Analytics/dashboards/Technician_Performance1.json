@@ -1,0 +1,4995 @@
+{
+  "name" : "Technician_Performance1_tp",
+  "label" : "Technician Performance",
+  "folder" : {
+    "id" : "${App.Folder.Id}"
+  },
+  "dateVersion" : 1,
+  "mobileDisabled" : false,
+  "xmd" : {
+    "measures" : [ ],
+    "derivedDimensions" : [ ],
+    "organizations" : [ ],
+    "showDetailsDefaultFields" : [ ],
+    "dates" : [ ],
+    "derivedMeasures" : [ ],
+    "dimensions" : [ ]
+  },
+  "state" : {
+    "dataSourceLinks" : [
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.ServiceAppointmentDemo.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "ServiceTerritoryId_Name"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.AssignedResourceDemo.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "SA_ServiceTerritoryId_Name"
+          }
+        ],
+        "label" : "SA-AssignedResource|Territory",
+        "name" : "Link_6179"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.ServiceAppointmentDemo.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "ParentRecordId_AccountId_Name"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.AssignedResourceDemo.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "SA_ParentRecordId_AccountId_Name"
+          }
+        ],
+        "label" : "SA-AssignedResource|Account",
+        "name" : "Link_6190"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.ServiceAppointmentDemo.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "AssignedResource_User_User_Name"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.AssignedResourceDemo.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "User_User_Name"
+          }
+        ],
+        "label" : "SA-AssignedResource|Resource",
+        "name" : "Link_6201"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.ServiceAppointmentDemo.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "StatusCategory"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.AssignedResourceDemo.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "SA_StatusCategory"
+          }
+        ],
+        "label" : "SA-AssignedResource|Status",
+        "name" : "Link_6219"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.ServiceAppointmentDemo.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "ParentRecordId_Priority"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.AssignedResourceDemo.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "SA_ParentRecordId_Priority"
+          }
+        ],
+        "label" : "SA-AssignedResource|Priority",
+        "name" : "Link_6232"
+      }
+    ],
+    "filters" : [
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "ServiceTerritoryId_Name"
+        ],
+        "label" : "Territory",
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "ParentRecordId_AccountId_Name"
+        ],
+        "label" : "Account",
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "AssignedResource_User_User_Name"
+        ],
+        "label" : "Resource",
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "StatusCategory"
+        ],
+        "label" : "Status",
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "ParentRecordId_Priority"
+        ],
+        "label" : "Priority",
+        "locked" : false,
+        "operator" : "in"
+      }
+    ],
+    "gridLayouts" : [
+      {
+        "maxWidth" : 1360,
+        "name" : "Default",
+        "numColumns" : 48,
+        "pages" : [
+          {
+            "label" : "Untitled",
+            "name" : "f88be8e4-19a3-407a-9de5-060750d7058c",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 5,
+                "column" : 42,
+                "name" : "listselector_Time_Selection",
+                "row" : 15,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 35,
+                "name" : "text__Work_Orders",
+                "row" : 27,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 35,
+                "name" : "number_ParentRecordId_1",
+                "row" : 30,
+                "rowspan" : 5,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 40,
+                "name" : "chart_ParentRecordId_Creat_1",
+                "row" : 28,
+                "rowspan" : 9,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 35,
+                "name" : "number_WO_prev_compare_1",
+                "row" : 35,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(WO_prev_compare_1.result, 0, \"color\"),\"#091A3E\").asString()}}",
+                  "borderColor" : "rgb(0, 0, 0)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 4
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 35,
+                "name" : "chart_Status_3",
+                "row" : 40,
+                "rowspan" : 15,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 35,
+                "name" : "chart_ParentRecordId_Prior_1",
+                "row" : 55,
+                "rowspan" : 15,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 34,
+                "column" : 0,
+                "name" : "container_3",
+                "row" : 22,
+                "rowspan" : 49,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(9, 26, 62)",
+                  "borderColor" : "rgba(51, 87, 121, 0.5)",
+                  "borderEdges" : [
+                    "right"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 14,
+                "column" : 34,
+                "name" : "container_2",
+                "row" : 22,
+                "rowspan" : 49,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "rgb(5, 19, 89)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 44,
+                "column" : 2,
+                "name" : "text__Metrics_compared_to_prior_period",
+                "row" : 73,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 2,
+                "name" : "text_Avg_Travel_Time_min_",
+                "row" : 77,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 18,
+                "name" : "text_First_Time_Fix",
+                "row" : 77,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 34,
+                "name" : "text_Mean_Time_to_Repair_min_",
+                "row" : 77,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 2,
+                "name" : "number_Avg_Travel_Time_2",
+                "row" : 80,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 6,
+                "name" : "chart_CreatedDate_Year_Cre_2",
+                "row" : 80,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "borderColor" : "#FFFFFF",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 2,
+                "name" : "number_all_2",
+                "row" : 84,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(all_2.result, 0, \"color\"),\"#ffffff\").asString()}}",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 4
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 22,
+                "name" : "chart_FirstTimeFixChart_1",
+                "row" : 80,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "borderColor" : "#FFFFFF",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 34,
+                "name" : "number_ActualDuration_1",
+                "row" : 80,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 38,
+                "name" : "chart_CreatedDate_Year_Cre_1",
+                "row" : 80,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "borderColor" : "#FFFFFF",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 18,
+                "name" : "number_FirstTimeFix_1",
+                "row" : 80,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 18,
+                "name" : "number_all_3",
+                "row" : 84,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(all_3.result, 0, \"color\"),\"#ffffff\").asString()}}",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 4
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 34,
+                "name" : "number_Mean_Time_to_Repair_1",
+                "row" : 84,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(Mean_Time_to_Repair__1.result, 0, \"color\"),\"#ffffff\").asString()}}",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 4
+                }
+              },
+              {
+                "colspan" : 10,
+                "column" : 1,
+                "name" : "container_7",
+                "row" : 92,
+                "rowspan" : 8,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(ViolationsCompare_1.result, 0, \"left_color\"),\"#54698D\").asString()}}",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 17,
+                "name" : "text_Avg_SLA_Violations_Technician",
+                "row" : 92,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(44, 149, 92, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 10,
+                "column" : 17,
+                "name" : "container_9",
+                "row" : 92,
+                "rowspan" : 8,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(SLAViolationsCompare_1.selection, 0, \"left_color\"),\"#54698D\").asString()}}",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 10,
+                "column" : 33,
+                "name" : "container_10",
+                "row" : 92,
+                "rowspan" : 8,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(all_3.result, 0, \"left_color\"),\"#54698D\").asString()}}",
+                  "borderColor" : "#FFFFFF",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 2,
+                "name" : "pillbox_Sort_1",
+                "row" : 123,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "borderEdges" : [ ],
+                  "borderRadius" : 4
+                }
+              },
+              {
+                "colspan" : 44,
+                "column" : 1,
+                "name" : "text_Work_Order_Detail_Table",
+                "row" : 132,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 33,
+                "name" : "text_First_Time_Fix_Rate",
+                "row" : 92,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(44, 149, 92, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 0,
+                "name" : "container_6",
+                "row" : 89,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [
+                    "top",
+                    "left",
+                    "right"
+                  ]
+                }
+              },
+              {
+                "colspan" : 14,
+                "column" : 1,
+                "name" : "container_16",
+                "row" : 100,
+                "rowspan" : 27,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 36,
+                "name" : "text_Metrics_compared_to_prior_period",
+                "row" : 24,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 1,
+                "name" : "text_Work_Order_Volume",
+                "row" : 24,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 32,
+                "column" : 1,
+                "name" : "chart_WO_Scatter_1",
+                "row" : 29,
+                "rowspan" : 39,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 11,
+                "name" : "number_ViolationsCompare_1",
+                "row" : 95,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(ViolationsCompare_1.result, 0, \"color\"),\"#54698D\").asString()}}",
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 18,
+                "name" : "chart_SLAViolationsChart_1",
+                "row" : 102,
+                "rowspan" : 19,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 34,
+                "name" : "chart_FirstTimeFixChart_2",
+                "row" : 102,
+                "rowspan" : 23,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 43,
+                "name" : "number_all_31",
+                "row" : 95,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(84, 105, 141, 0)",
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 1,
+                "name" : "text_Due_Date_Violations_Technician",
+                "row" : 92,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(84, 105, 141, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 1,
+                "name" : "number_ViolationsPerAgent_1",
+                "row" : 95,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 2,
+                "name" : "chart_ViolationsChart_1",
+                "row" : 102,
+                "rowspan" : 19,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 17,
+                "name" : "number_SLAViolations_1",
+                "row" : 95,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 14,
+                "column" : 17,
+                "name" : "container_5",
+                "row" : 100,
+                "rowspan" : 27,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "left",
+                    "right",
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 18,
+                "name" : "pillbox_SLA_Sort_1",
+                "row" : 123,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 27,
+                "name" : "number_SLAViolationsCompare_1",
+                "row" : 95,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(SLAViolationsCompare_1.selection, 0, \"color\"),\"#54698D\").asString()}}",
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 33,
+                "name" : "number_FirstTimeFix_11",
+                "row" : 95,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 0,
+                "name" : "container_8",
+                "row" : 130,
+                "rowspan" : 38,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 11,
+                "name" : "container_11",
+                "row" : 92,
+                "rowspan" : 8,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(ViolationsCompare_1.result, 0, \"color\"),\"#54698D\").asString()}}",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 14,
+                "column" : 33,
+                "name" : "container_12",
+                "row" : 100,
+                "rowspan" : 27,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 27,
+                "name" : "container_13",
+                "row" : 92,
+                "rowspan" : 8,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(SLAViolationsCompare_1.selection, 0, \"color\"),\"#54698D\").asString()}}",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 43,
+                "name" : "container_14",
+                "row" : 92,
+                "rowspan" : 8,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(all_3.result, 0, \"color\"),\"#54698D\").asString()}}",
+                  "borderColor" : "#FFFFFF",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 0,
+                "name" : "container_15",
+                "row" : 92,
+                "rowspan" : 38,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "left"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 47,
+                "name" : "container_17",
+                "row" : 92,
+                "rowspan" : 38,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "right"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 0,
+                "name" : "container_18",
+                "row" : 71,
+                "rowspan" : 18,
+                "widgetStyle" : {
+                  "borderEdges" : [
+                    "left"
+                  ]
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 0,
+                "name" : "container_4",
+                "row" : 3,
+                "rowspan" : 8,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#634F95",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 18,
+                "column" : 1,
+                "name" : "text_Technician_Performance1",
+                "row" : 3,
+                "rowspan" : 8,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 26,
+                "name" : "link_Work_Order_Overview",
+                "row" : 8,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 15,
+                "name" : "container_19",
+                "row" : 92,
+                "rowspan" : 35,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 31,
+                "name" : "container_20",
+                "row" : 92,
+                "rowspan" : 35,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 46,
+                "column" : 1,
+                "name" : "container_21",
+                "row" : 127,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 33,
+                "name" : "text_Technician_Performance",
+                "row" : 8,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "rgb(99, 79, 149)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 2
+                }
+              },
+              {
+                "colspan" : 46,
+                "column" : 1,
+                "name" : "table_lens_21",
+                "row" : 136,
+                "rowspan" : 29,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 36,
+                "column" : 0,
+                "name" : "filterpanel_1",
+                "row" : 12,
+                "rowspan" : 8,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 0,
+                "name" : "container_22",
+                "row" : 11,
+                "rowspan" : 11,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 40,
+                "name" : "link_Work_Order_Backlog",
+                "row" : 8,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight" : "fine",
+        "selectors" : [ ],
+        "style" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "backgroundColor" : "#C5D3E0",
+          "cellSpacingX" : 0,
+          "cellSpacingY" : 0,
+          "fit" : "original",
+          "gutterColor" : "#C5D3E0"
+        },
+        "version" : 1.0
+      },
+      {
+        "name" : "iPhone",
+        "numColumns" : 4,
+        "pages" : [
+          {
+            "label" : "Untitled",
+            "name" : "f88be8e4-19a3-407a-9de5-060750d7058c",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "listselector_Time_Selection",
+                "row" : 2,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "container_1",
+                "row" : 0,
+                "rowspan" : 19,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 1,
+                "name" : "text_Work_Order_Volume",
+                "row" : 21,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "chart_WO_Scatter_1",
+                "row" : 26,
+                "rowspan" : 36,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "rgb(92, 122, 153)",
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "container_3",
+                "row" : 19,
+                "rowspan" : 47,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(9, 26, 62)",
+                  "borderColor" : "rgba(51, 87, 121, 0.5)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "text_Metrics_compared_to_prior_period",
+                "row" : 70,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 0,
+                "name" : "text__Work_Orders",
+                "row" : 76,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "chart_ParentRecordId_Creat_1",
+                "row" : 81,
+                "rowspan" : 9,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 2,
+                "name" : "number_ParentRecordId_1",
+                "row" : 76,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 3,
+                "name" : "number_WO_prev_compare_1",
+                "row" : 76,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(WO_prev_compare_1.result, 0, \"color\"),\"#091A3E\").asString()}}",
+                  "borderColor" : "rgb(0, 0, 0)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 4
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "chart_Status_3",
+                "row" : 96,
+                "rowspan" : 22,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "chart_ParentRecordId_Prior_1",
+                "row" : 121,
+                "rowspan" : 22,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "container_2",
+                "row" : 66,
+                "rowspan" : 79,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "#5C7A99",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "text__Metrics_compared_to_prior_period",
+                "row" : 147,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 0,
+                "name" : "text_Avg_Travel_Time_min_",
+                "row" : 151,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 0,
+                "name" : "text_First_Time_Fix",
+                "row" : 169,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 0,
+                "name" : "text_Mean_Time_to_Repair_min_",
+                "row" : 187,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 2,
+                "name" : "number_Avg_Travel_Time_2",
+                "row" : 151,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "chart_CreatedDate_Year_Cre_2",
+                "row" : 156,
+                "rowspan" : 8,
+                "widgetStyle" : {
+                  "borderColor" : "#FFFFFF",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 2,
+                "name" : "number_FirstTimeFix_1",
+                "row" : 169,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "chart_FirstTimeFixChart_1",
+                "row" : 174,
+                "rowspan" : 8,
+                "widgetStyle" : {
+                  "borderColor" : "#FFFFFF",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 2,
+                "name" : "number_ActualDuration_1",
+                "row" : 187,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "chart_CreatedDate_Year_Cre_1",
+                "row" : 193,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "borderColor" : "#FFFFFF",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 3,
+                "name" : "number_all_2",
+                "row" : 151,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(all_2.result, 0, \"color\"),\"#ffffff\").asString()}}",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 4
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 3,
+                "name" : "number_all_3",
+                "row" : 169,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(all_3.result, 0, \"color\"),\"#ffffff\").asString()}}",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 4
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 3,
+                "name" : "number_Mean_Time_to_Repair_1",
+                "row" : 187,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(Mean_Time_to_Repair__1.result, 0, \"color\"),\"#ffffff\").asString()}}",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 4
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "container_18",
+                "row" : 145,
+                "rowspan" : 22,
+                "widgetStyle" : {
+                  "borderColor" : "#091A3E",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderWidth" : 2
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 0,
+                "name" : "text_Due_Date_Violations_Technician",
+                "row" : 204,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(84, 105, 141, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 0,
+                "name" : "number_ViolationsPerAgent_1",
+                "row" : 206,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 0,
+                "name" : "container_7",
+                "row" : 203,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(ViolationsCompare_1.result, 0, \"left_color\"),\"#54698D\").asString()}}",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 3,
+                "name" : "number_ViolationsCompare_1",
+                "row" : 206,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(ViolationsCompare_1.result, 0, \"color\"),\"#54698D\").asString()}}",
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 3,
+                "name" : "container_11",
+                "row" : 203,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(ViolationsCompare_1.result, 0, \"color\"),\"#54698D\").asString()}}",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 0,
+                "name" : "text_Avg_SLA_Violations_Technician",
+                "row" : 236,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(44, 149, 92, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 0,
+                "name" : "number_SLAViolations_1",
+                "row" : 238,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 0,
+                "name" : "container_9",
+                "row" : 235,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(SLAViolationsCompare_1.selection, 0, \"left_color\"),\"#54698D\").asString()}}",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 3,
+                "name" : "number_SLAViolationsCompare_1",
+                "row" : 238,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(SLAViolationsCompare_1.selection, 0, \"color\"),\"#54698D\").asString()}}",
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 3,
+                "name" : "container_13",
+                "row" : 235,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(SLAViolationsCompare_1.selection, 0, \"color\"),\"#54698D\").asString()}}",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 0,
+                "name" : "text_First_Time_Fix_Rate",
+                "row" : 268,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(44, 149, 92, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 0,
+                "name" : "number_FirstTimeFix_11",
+                "row" : 270,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 0,
+                "name" : "container_10",
+                "row" : 267,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(all_3.result, 0, \"left_color\"),\"#54698D\").asString()}}",
+                  "borderColor" : "#FFFFFF",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 3,
+                "name" : "number_all_31",
+                "row" : 270,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(84, 105, 141, 0)",
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 3,
+                "name" : "container_14",
+                "row" : 267,
+                "rowspan" : 7,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(all_3.result, 0, \"color\"),\"#54698D\").asString()}}",
+                  "borderColor" : "#FFFFFF",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "chart_ViolationsChart_1",
+                "row" : 212,
+                "rowspan" : 19,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "pillbox_Sort_1",
+                "row" : 232,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "borderEdges" : [ ],
+                  "borderRadius" : 4
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "container_16",
+                "row" : 210,
+                "rowspan" : 25,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "chart_SLAViolationsChart_1",
+                "row" : 244,
+                "rowspan" : 19,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "pillbox_SLA_Sort_1",
+                "row" : 264,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "container_5",
+                "row" : 242,
+                "rowspan" : 25,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "left",
+                    "right",
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "chart_FirstTimeFixChart_2",
+                "row" : 276,
+                "rowspan" : 22,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "container_12",
+                "row" : 274,
+                "rowspan" : 25,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 1,
+                "name" : "text_Work_Order_Detail_Table",
+                "row" : 301,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "container_8",
+                "row" : 299,
+                "rowspan" : 35,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "table_lens_2",
+                "row" : 304,
+                "rowspan" : 28,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "container_23",
+                "row" : 185,
+                "rowspan" : 18,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#091A3E",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 2
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "container_24",
+                "row" : 167,
+                "rowspan" : 18,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#091A3E",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "filterpanel_3",
+                "row" : 6,
+                "rowspan" : 13,
+                "widgetStyle" : {
+                  "backgroundColor" : "#E6ECF2",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight" : "fine",
+        "selectors" : [
+          "maxWidth(599)"
+        ],
+        "style" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "backgroundColor" : "#F2F6FA",
+          "cellSpacingX" : 0,
+          "cellSpacingY" : 0,
+          "fit" : "original",
+          "gutterColor" : "#F2F6FA"
+        },
+        "version" : 1.0
+      }
+    ],
+    "layouts" : [ ],
+    "steps" : {
+      "ViolationsCompare_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "ViolationsCompare",
+        "query" : {
+          "query" : {
+            "pigql" : "q=load \"ServiceAppointmentDemo\"; curr = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; prev = filter q by {{cell(Time_Selection.selection, 0, \"LastPeriodCompare\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; curr = group curr by 'Id'; curr = foreach curr generate sum('ActualEndTime_sec_epoch') as 'ActualEndTime_sec_epoch', sum('DueDate_sec_epoch') as 'DueDate_sec_epoch', 'Id' as 'Id', first('AssignedResource_User_User_Name') as 'AssignedResource_User_User_Name'; curr = filter curr by 'ActualEndTime_sec_epoch' > 'DueDate_sec_epoch'; curr = group curr by all; curr = foreach curr generate count() / unique('AssignedResource_User_User_Name') as 'avg_curr_violations_per_agent'; prev = group prev by 'Id'; prev = foreach prev generate sum('ActualEndTime_sec_epoch') as 'ActualEndTime_sec_epoch', sum('DueDate_sec_epoch') as 'DueDate_sec_epoch', 'Id' as 'Id', first('AssignedResource_User_User_Name') as 'AssignedResource_User_User_Name'; prev = filter prev by 'ActualEndTime_sec_epoch' > 'DueDate_sec_epoch'; prev = group prev by all; prev = foreach prev generate count() / unique('AssignedResource_User_User_Name') as 'avg_prev_violations_per_agent'; z = union curr,prev; z = group z by all; z = foreach z generate 100*(sum('avg_curr_violations_per_agent') - sum('avg_prev_violations_per_agent') / sum('avg_prev_violations_per_agent')) as 'perc_violations_compare', (case when 100*(sum('avg_curr_violations_per_agent') - sum('avg_prev_violations_per_agent') / sum('avg_prev_violations_per_agent')) < 0 then \"#039264\" when 100*(sum('avg_curr_violations_per_agent') - sum('avg_prev_violations_per_agent') / sum('avg_prev_violations_per_agent')) > 0 then \"#C03757\" else \"#54698D\" end) as 'color', (case when 100*(sum('avg_curr_violations_per_agent') - sum('avg_prev_violations_per_agent') / sum('avg_prev_violations_per_agent')) < 0 then \"#0BA976\" when 100*(sum('avg_curr_violations_per_agent') - sum('avg_prev_violations_per_agent') / sum('avg_prev_violations_per_agent')) > 0 then \"#D14062\" else \"#54698D\" end) as 'left_color'; ",
+            "measures" : [
+              [
+                "perc",
+                "violations_compare"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "Sort_1" : {
+        "broadcastFacet" : false,
+        "columns" : { },
+        "isGlobal" : false,
+        "selectMode" : "singlerequired",
+        "start" : {
+          "display" : [
+            "Descending"
+          ]
+        },
+        "type" : "staticflex",
+        "useGlobal" : false,
+        "values" : [
+          {
+            "display" : "Ascending",
+            "value" : "asc",
+            "compact_value" : true
+          },
+          {
+            "display" : "Descending",
+            "value" : "desc",
+            "compact_value" : false
+          }
+        ]
+      },
+      "FirstTimeFixChart_2" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "FirstTimeFixChart",
+        "query" : {
+          "query" : {
+            "pigql" : "q = load \"ServiceAppointmentDemo\"; q = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; i = filter q by 'StatusCategory' == \"CannotComplete\"; g = group q by 'ParentRecordId_WorkTypeId_Name' left, i by 'ParentRecordId_WorkTypeId_Name'; g = foreach g generate (1-(count(i)/count(q)))*100 as sum_first_time_fix, q['ParentRecordId_WorkTypeId_Name'] as 'ParentRecordId_WorkTypeId_Name';",
+            "measures" : [
+              [
+                "sum",
+                "first_time_fix"
+              ]
+            ],
+            "groups" : [
+              "ParentRecordId_WorkTypeId_Name"
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "none",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "FirstTimeFixChart_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "FirstTimeFixChart",
+        "query" : {
+          "query" : {
+            "pigql" : "q = load \"ServiceAppointmentDemo\"; q = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; i = filter q by 'StatusCategory' == \"CannotComplete\"; g = group q by {{cell(Time_Selection.selection, 0, \"GroupbyEarliestStartTime\").asObject()}} left, i by {{cell(Time_Selection.selection, 0, \"GroupbyEarliestStartTime\").asObject()}}; g = foreach g generate (1-(count(i)/count(q)))*100 as sum_first_time_fix, {{cell(Time_Selection.selection, 0, \"cogroupGenerateEarliestStartTime\").asObject()}};",
+            "measures" : [
+              [
+                "sum",
+                "first_time_fix"
+              ]
+            ],
+            "groups" : [
+              "{{cell(Time_Selection.selection, 0, \"compactGroup\").asObject()}}"
+            ],
+            "filters" : [
+              [
+                "EarliestStartTime",
+                "{{column(Time_Selection.selection, [\"Compact\"]).asObject()}}"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "vbar"
+        }
+      },
+      "WO_prev_compare_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "WO_prev_compare",
+        "query" : {
+          "query" : {
+            "pigql" : "q = load \"ServiceAppointmentDemo\"; r = filter q by {{cell(Time_Selection.selection, 0, \"LastPeriodCompare\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; s = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; t = group r by all, s by all;  t = foreach t generate coalesce(100*((count(s)-count(r))/count(r)), 0) as 'perc_Percent', (case when 100*((count(s)-count(r))/count(r)) < 0 then \"#D14062\" when 100*((count(s)-count(r))/count(r)) > 0 then \"#0BA976\" else \"#54698D\" end) as 'color';",
+            "measures" : [
+              [
+                "perc",
+                "Percent"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "WO_Scatter_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "WO_Scatter",
+        "query" : {
+          "query" : {
+            "pigql" : "a = load \"ServiceAppointmentDemo\"; a = filter a by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}};   b=load \"AssignedResourceDemo\"; b = filter b by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('SA_EarliestStartTime_Year','SA_EarliestStartTime_Month','SA_EarliestStartTime_Day')\")}}; c = group a by 'AssignedResource_User_User_Name', b by 'User_User_Name'; c = foreach c generate a.'AssignedResource_User_User_Name' as 'AssignedResource_User_User_Name', b.'User_User_Name' as 'User_User_Name', avg(a.'ActualDuration') as 'avg_ActualDuration', avg(b.'ActualTravelTime') as 'avg_ActualTravelTime', count(a) as 'count'; c = order c by 'AssignedResource_User_User_Name' asc; c = limit c 2000;",
+            "measures" : [
+              [
+                "avg",
+                "ActualDuration"
+              ],
+              [
+                "avg",
+                "ActualTravelTime"
+              ],
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              "AssignedResource_User_User_Name"
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "SLAViolationsChart_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "SLAViolationsChart",
+        "query" : {
+          "query" : {
+            "pigql" : "q=load \"ServiceAppointmentDemo\"; q = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; q = filter q by 'ActualStartTime_sec_epoch' > 0; q = filter q by 'ArrivalWindowEndTime_sec_epoch' > 0; q = group q by 'Id'; q = foreach q generate sum('ActualStartTime_sec_epoch') as 'ActualStartTime_sec_epoch', sum('ArrivalWindowEndTime_sec_epoch') as 'ArrivalWindowEndTime_sec_epoch', first('AssignedResource_User_User_Name') as 'AssignedResource_User_User_Name', first('ParentRecordId_WorkTypeId_Name') as 'ParentRecordId_WorkTypeId_Name'; q = filter q by 'ActualStartTime_sec_epoch' > 'ArrivalWindowEndTime_sec_epoch'; q = group q by ('AssignedResource_User_User_Name','ParentRecordId_WorkTypeId_Name'); q = foreach q generate count() as count, 'AssignedResource_User_User_Name' as 'AssignedResource_User_User_Name', 'ParentRecordId_WorkTypeId_Name' as 'ParentRecordId_WorkTypeId_Name'; q = order q by count {{cell(SLA_Sort_1.selection, 0, \"value\").asString()}}",
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              "AssignedResource_User_User_Name",
+              "ParentRecordId_WorkTypeId_Name"
+            ],
+            "order" : [
+              [
+                -1,
+                {
+                  "ascending" : "{{cell(SLA_Sort_1.selection, 0, \"compact_value\").asObject()}}"
+                }
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "none",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "ViolationsChart_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "ViolationsChart",
+        "query" : {
+          "query" : {
+            "pigql" : "q=load \"ServiceAppointmentDemo\"; q = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; q = group q by 'Id'; q = foreach q generate sum('ActualEndTime_sec_epoch') as 'ActualEndTime_sec_epoch', sum('DueDate_sec_epoch') as 'DueDate_sec_epoch', first('AssignedResource_User_User_Name') as 'AssignedResource_User_User_Name', first('ParentRecordId_WorkTypeId_Name') as 'ParentRecordId_WorkTypeId_Name'; q = filter q by 'ActualEndTime_sec_epoch' > 'DueDate_sec_epoch'; q = group q by ('AssignedResource_User_User_Name','ParentRecordId_WorkTypeId_Name'); q = foreach q generate count() as count, 'AssignedResource_User_User_Name' as 'AssignedResource_User_User_Name', 'ParentRecordId_WorkTypeId_Name' as 'ParentRecordId_WorkTypeId_Name'; q = order q by count {{cell(Sort_1.selection, 0, \"value\").asString()}}",
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              "AssignedResource_User_User_Name",
+              "ParentRecordId_WorkTypeId_Name"
+            ],
+            "order" : [
+              [
+                -1,
+                {
+                  "ascending" : "{{cell(Sort_1.selection, 0, \"compact_value\").asObject()}}"
+                }
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "none",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "ParentRecordId_Creat_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              [
+                "EarliestStartTime_Year",
+                "EarliestStartTime_Month",
+                "EarliestStartTime_Day"
+              ]
+            ],
+            "filters" : [
+              [
+                "EarliestStartTime",
+                "{{column(Time_Selection.selection, [\"Compact\"]).asObject()}}"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "none",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "time"
+        }
+      },
+      "ParentRecordId_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "filters" : [
+              [
+                "EarliestStartTime",
+                "{{column(Time_Selection.selection, [\"Compact\"]).asObject()}}"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "Time_Selection" : {
+        "broadcastFacet" : false,
+        "columns" : { },
+        "isGlobal" : false,
+        "selectMode" : "singlerequired",
+        "start" : {
+          "display" : [
+            "Last 30 Days"
+          ]
+        },
+        "type" : "staticflex",
+        "useGlobal" : false,
+        "values" : [
+          {
+            "display" : "YTD",
+            "text_display" : "vs previous YTD",
+            "Backlog30DayClose" : "[\"current day - 395 days\"..\"current day - 1 year\"]",
+            "BacklogCompare" : [
+              "current day - 1 year",
+              "current day"
+            ],
+            "BacklogLabel" : "Backlog Last Year",
+            "ClosedField" : "'ClosedDate_Month'",
+            "CoGroup" : "('EarliestStartTime_Month')",
+            "Compact" : [
+              [
+                "year",
+                0
+              ],
+              [
+                "year",
+                0
+              ]
+            ],
+            "CreatedField" : "'EarliestStartTime_Month'",
+            "CreatedProjection" : "created['EarliestStartTime_Month']",
+            "Current" : [
+              "current year",
+              "current day"
+            ],
+            "FullGroup" : "EarliestStartTime_Year~~~EarliestStartTime_Month",
+            "GenerateClosedDate" : "'ClosedDate_Year'+\"~~~\"+'ClosedDate_Month' as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "GenerateCoGroupDate" : "created['EarliestStartTime_Year']+\"~~~\"+created['EarliestStartTime_Month'] as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "GenerateEarliestStartTime" : "'EarliestStartTime_Year'+\"~~~\"+'EarliestStartTime_Month' as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "cogroupGenerateEarliestStartTime" : "q['EarliestStartTime_Year']+\"~~~\"+q['EarliestStartTime_Month'] as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "SAGenerateEarliestStartTime" : "'SA_EarliestStartTime_Year'+\"~~~\"+'SA_EarliestStartTime_Month' as 'SA_EarliestStartTime_Year~~~SA_EarliestStartTime_Month'",
+            "GroupbyClosedDate" : "('ClosedDate_Year','ClosedDate_Month')",
+            "GroupbyEarliestStartTime" : "('EarliestStartTime_Year','EarliestStartTime_Month')",
+            "SAGroupbyEarliestStartTime" : "('SA_EarliestStartTime_Year','SA_EarliestStartTime_Month')",
+            "Grouping" : "EarliestStartTime_Year~~~EarliestStartTime_Month",
+            "LastPeriodCompare" : [
+              "current year - 1 year",
+              "current day - 1 year"
+            ],
+            "LastYearCompare" : [
+              "current year - 1 year",
+              "current day - 1 year"
+            ],
+            "Measure" : [
+              "Backlog",
+              "Count",
+              null,
+              {
+                "display" : "Backlog Count at Start of Month"
+              }
+            ],
+            "compactGroup" : [
+              "EarliestStartTime_Year",
+              "EarliestStartTime_Month"
+            ],
+            "icompactGroup" : [
+              "i[EarliestStartTime_Year]",
+              "i[EarliestStartTime_Month]"
+            ],
+            "SAcompactGroup" : [
+              "SA_EarliestStartTime_Year",
+              "SA_EarliestStartTime_Month"
+            ],
+            "filter" : "year",
+            "queryCogroupNew" : "first(ThisYear['EarliestStartTime_Year'])+\"~~~\"+ThisYear['EarliestStartTime_Month'] as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "SAQL" : "coalesce((avg(ThisYear['Duration__c'])-avg(LastYear['Duration__c']))/avg(LastYear['Duration__c']),0)*100 as sum_Percent",
+            "trendProjection" : "toString(now(), \"yyyy\")+\"~~~\"+toString(now(), \"99\")"
+          },
+          {
+            "display" : "QTD",
+            "text_display" : "vs previous QTD",
+            "Backlog30DayClose" : "[\"current day - 120 days\"..\"current day - 1 quarter\"]",
+            "BacklogCompare" : [
+              "current day - 1 quarter",
+              "current day"
+            ],
+            "BacklogLabel" : "Backlog Last Quarter",
+            "ClosedField" : "'ClosedDate_Week'",
+            "CoGroup" : "('EarliestStartTime_Week')",
+            "Compact" : [
+              [
+                "quarter",
+                0
+              ],
+              [
+                "quarter",
+                0
+              ]
+            ],
+            "CreatedField" : "'EarliestStartTime_Week'",
+            "CreatedProjection" : "created['EarliestStartTime_Week']",
+            "Current" : [
+              "current quarter",
+              "current day"
+            ],
+            "FullGroup" : "EarliestStartTime_Year~~~EarliestStartTime_Week",
+            "GenerateClosedDate" : "'ClosedDate_Year'+\"~~~\"+'ClosedDate_Week' as 'EarliestStartTime_Year~~~EarliestStartTime_Week'",
+            "GenerateCoGroupDate" : "created['EarliestStartTime_Year']+\"~~~\"+created['EarliestStartTime_Week'] as 'EarliestStartTime_Year~~~EarliestStartTime_Week'",
+            "GenerateEarliestStartTime" : "'EarliestStartTime_Year'+\"~~~\"+'EarliestStartTime_Week' as 'EarliestStartTime_Year~~~EarliestStartTime_Week'",
+            "cogroupGenerateEarliestStartTime" : "q['EarliestStartTime_Year']+\"~~~\"+q['EarliestStartTime_Week'] as 'EarliestStartTime_Year~~~EarliestStartTime_Week'",
+            "SAGenerateEarliestStartTime" : "'SA_EarliestStartTime_Year'+\"~~~\"+'SA_EarliestStartTime_Week' as 'SA_EarliestStartTime_Year~~~SA_EarliestStartTime_Week'",
+            "GroupbyClosedDate" : "('ClosedDate_Year','ClosedDate_Week')",
+            "GroupbyEarliestStartTime" : "('EarliestStartTime_Year','EarliestStartTime_Week')",
+            "SAGroupbyEarliestStartTime" : "('SA_EarliestStartTime_Year','SA_EarliestStartTime_Week')",
+            "Grouping" : "EarliestStartTime_Year~~~EarliestStartTime_Week",
+            "LastPeriodCompare" : [
+              "current quarter - 1 quarter",
+              "current day - 1 quarter"
+            ],
+            "LastYearCompare" : [
+              "current quarter - 1 year",
+              "current day - 1 year"
+            ],
+            "Measure" : [
+              "Backlog",
+              "Count",
+              null,
+              {
+                "display" : "Backlog Count at Start of Week"
+              }
+            ],
+            "compactGroup" : [
+              "EarliestStartTime_Year",
+              "EarliestStartTime_Week"
+            ],
+            "icompactGroup" : [
+              "i[EarliestStartTime_Year]",
+              "i[EarliestStartTime_Week]"
+            ],
+            "SAcompactGroup" : [
+              "SA_EarliestStartTime_Year",
+              "SA_EarliestStartTime_Week"
+            ],
+            "filter" : "quarter",
+            "queryCogroupNew" : "first(ThisYear['EarliestStartTime_Year'])+\"~~~\"+ThisYear['EarliestStartTime_Week'] as 'EarliestStartTime_Year~~~EarliestStartTime_Week'",
+            "SAQL" : "coalesce((avg(ThisYear['Duration__c'])-avg(LastYear['Duration__c']))/avg(LastYear['Duration__c']),0)*100 as sum_Percent",
+            "trendProjection" : "toString(now(), \"yyyy\")+\"~~~\"+toString(now(), \"99\")"
+          },
+          {
+            "display" : "MTD",
+            "text_display" : "vs previous MTD",
+            "Backlog30DayClose" : "[\"current day - 60 days\"..\"current day - 1 month\"]",
+            "BacklogCompare" : [
+              "current day - 1 month",
+              "current day"
+            ],
+            "BacklogLabel" : "Backlog Last Month",
+            "ClosedField" : "'ClosedDate_Month','ClosedDate_Day'",
+            "CoGroup" : "('EarliestStartTime_Month','EarliestStartTime_Day')",
+            "Compact" : [
+              [
+                "month",
+                0
+              ],
+              [
+                "month",
+                0
+              ]
+            ],
+            "CreatedField" : "'EarliestStartTime_Month','EarliestStartTime_Day'",
+            "CreatedProjection" : "created['EarliestStartTime_Month'] +\"~~~\" + created['EarliestStartTime_Day']",
+            "Current" : [
+              "current month",
+              "current month"
+            ],
+            "FullGroup" : "EarliestStartTime_Year~~~EarliestStartTime_Month~~~EarliestStartTime_Day",
+            "GenerateClosedDate" : "'ClosedDate_Year'+\"~~~\"+'ClosedDate_Month'+\"~~~\"+'ClosedDate_Day' as 'EarliestStartTime_Year~~~EarliestStartTime_Month~~~EarliestStartTime_Day'",
+            "GenerateCoGroupDate" : "created['EarliestStartTime_Year']+\"~~~\"+created['EarliestStartTime_Month']+\"~~~\"+created['EarliestStartTime_Day'] as 'EarliestStartTime_Year~~~EarliestStartTime_Month~~~EarliestStartTime_Day'",
+            "GenerateEarliestStartTime" : "'EarliestStartTime_Year'+\"~~~\"+'EarliestStartTime_Month'+\"~~~\"+'EarliestStartTime_Day' as 'EarliestStartTime_Year~~~EarliestStartTime_Month~~~EarliestStartTime_Day'",
+            "cogroupGenerateEarliestStartTime" : "q['EarliestStartTime_Year']+\"~~~\"+q['EarliestStartTime_Month']+\"~~~\"+q['EarliestStartTime_Day'] as 'EarliestStartTime_Year~~~EarliestStartTime_Month~~~EarliestStartTime_Day'",
+            "SAGenerateEarliestStartTime" : "'SA_EarliestStartTime_Year'+\"~~~\"+'SA_EarliestStartTime_Month'+\"~~~\"+'SA_EarliestStartTime_Day' as 'SA_EarliestStartTime_Year~~~SA_EarliestStartTime_Month~~~SA_EarliestStartTime_Day'",
+            "GroupbyClosedDate" : "('ClosedDate_Year','ClosedDate_Month','ClosedDate_Day')",
+            "GroupbyEarliestStartTime" : "('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')",
+            "SAGroupbyEarliestStartTime" : "('SA_EarliestStartTime_Year','SA_EarliestStartTime_Month','SA_EarliestStartTime_Day')",
+            "Grouping" : "EarliestStartTime_Year~~~EarliestStartTime_Month~~~EarliestStartTime_Day",
+            "LastPeriodCompare" : [
+              "current month - 1 month",
+              "current day - 1 month"
+            ],
+            "LastYearCompare" : [
+              "current month - 1 year",
+              "current day - 1 year"
+            ],
+            "Measure" : [
+              "Backlog",
+              "Count",
+              null,
+              {
+                "display" : "Backlog Count at Start of Day"
+              }
+            ],
+            "compactGroup" : [
+              "EarliestStartTime_Year",
+              "EarliestStartTime_Month",
+              "EarliestStartTime_Day"
+            ],
+            "icompactGroup" : [
+              "i[EarliestStartTime_Year]",
+              "i[EarliestStartTime_Month]",
+              "i[EarliestStartTime_Day]"
+            ],
+            "SAcompactGroup" : [
+              "SA_EarliestStartTime_Year",
+              "SA_EarliestStartTime_Month",
+              "SA_EarliestStartTime_Day"
+            ],
+            "filter" : "month",
+            "queryCogroupNew" : "first(ThisYear['EarliestStartTime_Year'])+\"~~~\"+ThisYear['EarliestStartTime_Month']+\"~~~\"+ThisYear['EarliestStartTime_Day'] as 'EarliestStartTime_Year~~~EarliestStartTime_Month~~~EarliestStartTime_Day'",
+            "trendProjection" : "toString(now(), \"yyyy~~~MM\")+\"~~~\"+toString(now(), \"99\")"
+          },
+          {
+            "display" : "Last 7 Days",
+            "text_display" : "vs previous 7 days",
+            "Backlog30DayClose" : "[\"current day - 37 days\"..\"current day - 7 days\"]",
+            "BacklogCompare" : [
+              "current day - 1 week",
+              "current day"
+            ],
+            "BacklogLabel" : "Backlog Last 7 Days",
+            "ClosedField" : "'ClosedDate_Month','ClosedDate_Day'",
+            "CoGroup" : "('EarliestStartTime_Month','EarliestStartTime_Day')",
+            "Compact" : [
+              [
+                "day",
+                -7
+              ],
+              [
+                "day",
+                0
+              ]
+            ],
+            "CreatedField" : "'EarliestStartTime_Month','EarliestStartTime_Day'",
+            "CreatedProjection" : "created['EarliestStartTime_Month'] +\"~~~\" + created['EarliestStartTime_Day']",
+            "Current" : [
+              "7 days ago",
+              "current day"
+            ],
+            "FullGroup" : "EarliestStartTime_Year~~~EarliestStartTime_Month~~~EarliestStartTime_Day",
+            "GenerateClosedDate" : "'ClosedDate_Year'+\"~~~\"+'ClosedDate_Month'+\"~~~\"+'ClosedDate_Day' as 'EarliestStartTime_Year~~~EarliestStartTime_Month~~~EarliestStartTime_Day'",
+            "GenerateCoGroupDate" : "created['EarliestStartTime_Year']+\"~~~\"+created['EarliestStartTime_Month']+\"~~~\"+created['EarliestStartTime_Day'] as 'EarliestStartTime_Year~~~EarliestStartTime_Month~~~EarliestStartTime_Day'",
+            "GenerateEarliestStartTime" : "'EarliestStartTime_Year'+\"~~~\"+'EarliestStartTime_Month'+\"~~~\"+'EarliestStartTime_Day' as 'EarliestStartTime_Year~~~EarliestStartTime_Month~~~EarliestStartTime_Day'",
+            "cogroupGenerateEarliestStartTime" : "q['EarliestStartTime_Year']+\"~~~\"+q['EarliestStartTime_Month']+\"~~~\"+q['EarliestStartTime_Day'] as 'EarliestStartTime_Year~~~EarliestStartTime_Month~~~EarliestStartTime_Day'",
+            "SAGenerateEarliestStartTime" : "'SA_EarliestStartTime_Year'+\"~~~\"+'SA_EarliestStartTime_Month'+\"~~~\"+'SA_EarliestStartTime_Day' as 'SA_EarliestStartTime_Year~~~SA_EarliestStartTime_Month~~~SA_EarliestStartTime_Day'",
+            "GroupbyClosedDate" : "('ClosedDate_Year','ClosedDate_Month','ClosedDate_Day')",
+            "GroupbyEarliestStartTime" : "('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')",
+            "SAGroupbyEarliestStartTime" : "('SA_EarliestStartTime_Year','SA_EarliestStartTime_Month','SA_EarliestStartTime_Day')",
+            "Grouping" : "EarliestStartTime_Year~~~EarliestStartTime_Month~~~EarliestStartTime_Day",
+            "LastPeriodCompare" : [
+              "7 days ago - 1 week",
+              "current day - 1 week"
+            ],
+            "LastYearCompare" : [
+              "7 days ago - 1 year",
+              "current day - 1 year"
+            ],
+            "Measure" : [
+              "Backlog",
+              "Count",
+              null,
+              {
+                "display" : "Backlog Count at Start of Day"
+              }
+            ],
+            "compactGroup" : [
+              "EarliestStartTime_Year",
+              "EarliestStartTime_Month",
+              "EarliestStartTime_Day"
+            ],
+            "icompactGroup" : [
+              "i[EarliestStartTime_Year]",
+              "i[EarliestStartTime_Month]",
+              "i[EarliestStartTime_Day]"
+            ],
+            "SAcompactGroup" : [
+              "SA_EarliestStartTime_Year",
+              "SA_EarliestStartTime_Month",
+              "SA_EarliestStartTime_Day"
+            ],
+            "filter" : "week",
+            "queryCogroupNew" : "first(ThisYear['EarliestStartTime_Year'])+\"~~~\"+ThisYear['EarliestStartTime_Month']+\"~~~\"+ThisYear['EarliestStartTime_Day'] as 'EarliestStartTime_Year~~~EarliestStartTime_Month~~~EarliestStartTime_Day'",
+            "trendProjection" : "toString(now(), \"yyyy~~~MM\")+\"~~~\"+toString(now(), \"99\")"
+          },
+          {
+            "display" : "Last 30 Days",
+            "text_display" : "vs previous 30 days",
+            "Backlog30DayClose" : "[\"current day - 60 days\"..\"current day - 30 days\"]",
+            "BacklogCompare" : [
+              "current day - 30 days",
+              "current day"
+            ],
+            "BacklogLabel" : "Backlog Last 30 Days",
+            "ClosedField" : "'ClosedDate_Week'",
+            "CoGroup" : "('EarliestStartTime_Week')",
+            "Compact" : [
+              [
+                "day",
+                -30
+              ],
+              [
+                "day",
+                0
+              ]
+            ],
+            "CreatedField" : "'EarliestStartTime_Week'",
+            "CreatedProjection" : "created['EarliestStartTime_Week']",
+            "Current" : [
+              "30 days ago",
+              "current day"
+            ],
+            "FullGroup" : "EarliestStartTime_Year~~~EarliestStartTime_Week",
+            "GenerateClosedDate" : "'ClosedDate_Year'+\"~~~\"+'ClosedDate_Week' as 'EarliestStartTime_Year~~~EarliestStartTime_Week'",
+            "GenerateCoGroupDate" : "created['EarliestStartTime_Year']+\"~~~\"+created['EarliestStartTime_Week'] as 'EarliestStartTime_Year~~~EarliestStartTime_Week'",
+            "GenerateEarliestStartTime" : "'EarliestStartTime_Year'+\"~~~\"+'EarliestStartTime_Week' as 'EarliestStartTime_Year~~~EarliestStartTime_Week'",
+            "cogroupGenerateEarliestStartTime" : "q['EarliestStartTime_Year']+\"~~~\"+q['EarliestStartTime_Week'] as 'EarliestStartTime_Year~~~EarliestStartTime_Week'",
+            "SAGenerateEarliestStartTime" : "'SA_EarliestStartTime_Year'+\"~~~\"+'SA_EarliestStartTime_Week' as 'SA_EarliestStartTime_Year~~~SA_EarliestStartTime_Week'",
+            "GroupbyClosedDate" : "('ClosedDate_Year','ClosedDate_Week')",
+            "GroupbyEarliestStartTime" : "('EarliestStartTime_Year','EarliestStartTime_Week')",
+            "SAGroupbyEarliestStartTime" : "('SA_EarliestStartTime_Year','SA_EarliestStartTime_Week')",
+            "Grouping" : "EarliestStartTime_Year~~~EarliestStartTime_Week",
+            "LastPeriodCompare" : [
+              "30 days ago - 30 days",
+              "current day - 30 days"
+            ],
+            "LastYearCompare" : [
+              "30 days ago - 1 year",
+              "current day - 1 year"
+            ],
+            "Measure" : [
+              "Backlog",
+              "Count",
+              null,
+              {
+                "display" : "Backlog Count at Start of Week"
+              }
+            ],
+            "compactGroup" : [
+              "EarliestStartTime_Year",
+              "EarliestStartTime_Week"
+            ],
+            "icompactGroup" : [
+              "i[EarliestStartTime_Year]",
+              "i[EarliestStartTime_Week]"
+            ],
+            "SAcompactGroup" : [
+              "SA_EarliestStartTime_Year",
+              "SA_EarliestStartTime_Week"
+            ],
+            "filter" : "month",
+            "queryCogroupNew" : "first(ThisYear['EarliestStartTime_Year'])+\"~~~\"+ThisYear['EarliestStartTime_Week'] as 'EarliestStartTime_Year~~~EarliestStartTime_Week'",
+            "trendProjection" : "toString(now(), \"yyyy~~~MM\")+\"~~~\"+toString(now(), \"99\")"
+          },
+          {
+            "display" : "Last 180 Days",
+            "text_display" : "vs previous 180 days",
+            "Backlog30DayClose" : "[\"current day - 240 days\"..\"current day - 180 days\"]",
+            "BacklogCompare" : [
+              "current day - 180 days",
+              "current day"
+            ],
+            "BacklogLabel" : "Backlog Last 180 Days",
+            "ClosedField" : "'ClosedDate_Month'",
+            "CoGroup" : "('EarliestStartTime_Month')",
+            "Compact" : [
+              [
+                "day",
+                -180
+              ],
+              [
+                "day",
+                0
+              ]
+            ],
+            "CreatedField" : "'EarliestStartTime_Month'",
+            "CreatedProjection" : "created['EarliestStartTime_Month']",
+            "Current" : [
+              "180 days ago",
+              "current day"
+            ],
+            "FullGroup" : "EarliestStartTime_Year~~~EarliestStartTime_Month",
+            "GenerateClosedDate" : "'ClosedDate_Year'+\"~~~\"+'ClosedDate_Month' as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "GenerateCoGroupDate" : "created['EarliestStartTime_Year']+\"~~~\"+created['EarliestStartTime_Month'] as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "GenerateEarliestStartTime" : "'EarliestStartTime_Year'+\"~~~\"+'EarliestStartTime_Month' as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "cogroupGenerateEarliestStartTime" : "q['EarliestStartTime_Year']+\"~~~\"+q['EarliestStartTime_Month'] as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "SAGenerateEarliestStartTime" : "'SA_EarliestStartTime_Year'+\"~~~\"+'SA_EarliestStartTime_Month' as 'SA_EarliestStartTime_Year~~~SA_EarliestStartTime_Month'",
+            "GroupbyClosedDate" : "('ClosedDate_Year','ClosedDate_Month')",
+            "GroupbyEarliestStartTime" : "('EarliestStartTime_Year','EarliestStartTime_Month')",
+            "SAGroupbyEarliestStartTime" : "('SA_EarliestStartTime_Year','SA_EarliestStartTime_Month')",
+            "Grouping" : "EarliestStartTime_Year~~~EarliestStartTime_Month",
+            "LastPeriodCompare" : [
+              "180 days ago - 180 days",
+              "current day - 180 days"
+            ],
+            "LastYearCompare" : [
+              "180 days ago - 1 year",
+              "current day - 1 year"
+            ],
+            "Measure" : [
+              "Backlog",
+              "Count",
+              null,
+              {
+                "display" : "Backlog Count at Start of Month"
+              }
+            ],
+            "compactGroup" : [
+              "EarliestStartTime_Year",
+              "EarliestStartTime_Month"
+            ],
+            "icompactGroup" : [
+              "i[EarliestStartTime_Year]",
+              "i[EarliestStartTime_Month]"
+            ],
+            "SAcompactGroup" : [
+              "SA_EarliestStartTime_Year",
+              "SA_EarliestStartTime_Month"
+            ],
+            "filter" : "month",
+            "queryCogroupNew" : "first(ThisYear['EarliestStartTime_Year'])+\"~~~\"+ThisYear['EarliestStartTime_Month'] as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "trendProjection" : "toString(now(), \"yyyy\")+\"~~~\"+toString(now(), \"99\")"
+          },
+          {
+            "display" : "Last 2 years",
+            "text_display" : "vs previous 2 years",
+            "Backlog30DayClose" : "[\"current day - 690 days\"..\"current day - 2 years\"]",
+            "BacklogCompare" : [
+              "current day - 2 years",
+              "current day"
+            ],
+            "BacklogLabel" : "Backlog Last 2 years",
+            "ClosedField" : "'ClosedDate_Month'",
+            "CoGroup" : "('EarliestStartTime_Month')",
+            "Compact" : [
+              [
+                "day",
+                -720
+              ],
+              [
+                "day",
+                0
+              ]
+            ],
+            "CreatedField" : "'EarliestStartTime_Month'",
+            "CreatedProjection" : "created['EarliestStartTime_Month']",
+            "Current" : [
+              "2 years ago",
+              "current day"
+            ],
+            "FullGroup" : "EarliestStartTime_Year~~~EarliestStartTime_Month",
+            "GenerateClosedDate" : "'ClosedDate_Year'+\"~~~\"+'ClosedDate_Month' as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "GenerateCoGroupDate" : "created['EarliestStartTime_Year']+\"~~~\"+created['EarliestStartTime_Month'] as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "GenerateEarliestStartTime" : "'EarliestStartTime_Year'+\"~~~\"+'EarliestStartTime_Month' as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "cogroupGenerateEarliestStartTime" : "q['EarliestStartTime_Year']+\"~~~\"+q['EarliestStartTime_Month'] as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "SAGenerateEarliestStartTime" : "'SA_EarliestStartTime_Year'+\"~~~\"+'SA_EarliestStartTime_Month' as 'SA_EarliestStartTime_Year~~~SA_EarliestStartTime_Month'",
+            "GroupbyClosedDate" : "('ClosedDate_Year','ClosedDate_Month')",
+            "GroupbyEarliestStartTime" : "('EarliestStartTime_Year','EarliestStartTime_Month')",
+            "SAGroupbyEarliestStartTime" : "('SA_EarliestStartTime_Year','SA_EarliestStartTime_Month')",
+            "Grouping" : "EarliestStartTime_Year~~~EarliestStartTime_Month",
+            "LastPeriodCompare" : [
+              "2 years ago - 2 years",
+              "current day - 2 years"
+            ],
+            "LastYearCompare" : [
+              "2 years ago - 4 years",
+              "current day - 2 years"
+            ],
+            "Measure" : [
+              "Backlog",
+              "Count",
+              null,
+              {
+                "display" : "Backlog Count at Start of Month"
+              }
+            ],
+            "compactGroup" : [
+              "EarliestStartTime_Year",
+              "EarliestStartTime_Month"
+            ],
+            "icompactGroup" : [
+              "i[EarliestStartTime_Year]",
+              "i[EarliestStartTime_Month]"
+            ],
+            "SAcompactGroup" : [
+              "SA_EarliestStartTime_Year",
+              "SA_EarliestStartTime_Month"
+            ],
+            "filter" : "month",
+            "queryCogroupNew" : "first(ThisYear['EarliestStartTime_Year'])+\"~~~\"+ThisYear['EarliestStartTime_Month'] as 'EarliestStartTime_Year~~~EarliestStartTime_Month'",
+            "trendProjection" : "toString(now(), \"yyyy\")+\"~~~\"+toString(now(), \"99\")"
+          }
+        ]
+      },
+      "SLAViolations_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "SLAViolations",
+        "query" : {
+          "query" : {
+            "pigql" : "q=load \"ServiceAppointmentDemo\"; q = filter q by 'ArrivalWindowEndTime_sec_epoch' > 0; q = filter q by 'ActualStartTime_sec_epoch' > 0; curr = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; curr = group curr by 'Id'; curr = foreach curr generate sum('ActualStartTime_sec_epoch') as 'ActualStartTime_sec_epoch', sum('ArrivalWindowEndTime_sec_epoch') as 'ArrivalWindowEndTime_sec_epoch', 'Id' as 'Id', first('AssignedResource_User_User_Name') as 'AssignedResource_User_User_Name';  curr = filter curr by 'ActualStartTime_sec_epoch' > 'ArrivalWindowEndTime_sec_epoch'; curr = group curr by all; curr = foreach curr generate count() / unique('AssignedResource_User_User_Name') as 'avg_sla_violations';",
+            "measures" : [
+              [
+                "avg",
+                "sla_violations"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "all_3" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "pigql" : "q=load \"ServiceAppointmentDemo\";  w = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; r = filter w by 'StatusCategory' == \"CannotComplete\"; prev = filter q by {{cell(Time_Selection.selection, 0, \"LastPeriodCompare\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; prev_inc = filter prev by 'StatusCategory' == \"CannotComplete\";  g = group w by all left, r by all, prev by all left, prev_inc by all; z = foreach g generate 1-(count(r) / count(w))*100 as 'sum_first_time_fix', 1-count(prev_inc) / count(prev)*100 as 'sum_prev_first_time_fix', 100*(((1-(count(r) / count(w)))*100)-((1-(count(prev_inc) / count(prev)))*100)) / ((1-(count(prev_inc) / count(prev)))*100) as 'perc_first_time_fix', (case when 100*(((1-(count(r) / count(w)))*100)-((1-(count(prev_inc) / count(prev)))*100)) / ((1-(count(prev_inc) / count(prev)))*100) < 0 then \"#D14062\" when 100*(((1-(count(r) / count(w)))*100)-((1-(count(prev_inc) / count(prev)))*100)) / ((1-(count(prev_inc) / count(prev)))*100) > 0 then \"#0BA976\" else \"#54698D\" end) as 'color', (case when 100*(((1-(count(r) / count(w)))*100)-((1-(count(prev_inc) / count(prev)))*100)) / ((1-(count(prev_inc) / count(prev)))*100) < 0 then \"#D14062\" when 100*(((1-(count(r) / count(w)))*100)-((1-(count(prev_inc) / count(prev)))*100)) / ((1-(count(prev_inc) / count(prev)))*100) > 0 then \"#0BA976\" else \"#54698D\" end) as 'left_color';",
+            "measures" : [
+              [
+                "perc",
+                "first_time_fix"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "none",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "ActualDuration_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "avg",
+                "ActualDuration"
+              ]
+            ],
+            "filters" : [
+              [
+                "EarliestStartTime",
+                "{{column(Time_Selection.selection, [\"Compact\"]).asObject()}}"
+              ],
+              [
+                "ActualDuration",
+                [
+                  [
+                    0
+                  ]
+                ],
+                ">"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "all_2" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.AssignedResourceDemo.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "pigql" : "q=load \"AssignedResourceDemo\"; q = filter q by 'ActualTravelTime' > 0; w = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('SA_EarliestStartTime_Year','SA_EarliestStartTime_Month','SA_EarliestStartTime_Day')\")}}; p = filter q by {{cell(Time_Selection.selection, 0, \"LastPeriodCompare\").asDateRange(\"date('SA_EarliestStartTime_Year','SA_EarliestStartTime_Month','SA_EarliestStartTime_Day')\")}}; g = group w by all, p by all; z = foreach g generate 100*(avg(w['ActualTravelTime']) - avg(p['ActualTravelTime'])) / avg(p['ActualTravelTime']) as 'perc_actual_travel_time_compare', (case when 100*(avg(w['ActualTravelTime']) - avg(p['ActualTravelTime'])) / avg(p['ActualTravelTime']) < 0 then \"#0BA976\" when 100*(avg(w['ActualTravelTime']) - avg(p['ActualTravelTime'])) / avg(p['ActualTravelTime']) > 0 then \"#D14062\" else \"#54698D\" end) as 'color';",
+            "measures" : [
+              [
+                "perc",
+                "actual_travel_time_compare"
+              ]
+            ],
+            "filters" : [
+              [
+                "SA_EarliestStartTime",
+                "{{column(Time_Selection.selection, [\"Compact\"]).asObject()}}"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "ViolationsPerAgent_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "ViolationsPerAgent",
+        "query" : {
+          "query" : {
+            "pigql" : "q=load \"ServiceAppointmentDemo\"; q = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; q = group q by 'Id'; q = foreach q generate sum('ActualEndTime_sec_epoch') as 'ActualEndTime_sec_epoch', sum('DueDate_sec_epoch') as 'DueDate_sec_epoch', 'Id' as 'Id', first('AssignedResource_User_User_Name') as 'AssignedResource_User_User_Name'; q = filter q by 'ActualEndTime_sec_epoch' > 'DueDate_sec_epoch'; q = group q by all; q = foreach q generate count() / unique('AssignedResource_User_User_Name') as 'avg_violations_per_agent';",
+            "measures" : [
+              [
+                "avg",
+                "violations_per_agent"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "SLAViolationsCompare_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "SLAViolationsCompare",
+        "query" : {
+          "query" : {
+            "pigql" : "q=load \"ServiceAppointmentDemo\"; q = filter q by 'ArrivalWindowEndTime_sec_epoch' > 0; q = filter q by 'ActualStartTime_sec_epoch' > 0; curr = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; curr = group curr by 'Id'; curr = foreach curr generate sum('ActualStartTime_sec_epoch') as 'ActualStartTime_sec_epoch', sum('ArrivalWindowEndTime_sec_epoch') as 'ArrivalWindowEndTime_sec_epoch', 'Id' as 'Id', first('AssignedResource_User_User_Name') as 'AssignedResource_User_User_Name';  curr = filter curr by 'ActualStartTime_sec_epoch' > 'ArrivalWindowEndTime_sec_epoch'; curr = group curr by all; curr = foreach curr generate count() / unique('AssignedResource_User_User_Name') as 'curr_sla_violations'; prev = filter q by {{cell(Time_Selection.selection, 0, \"LastPeriodCompare\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; prev = group prev by 'Id'; prev = foreach prev generate sum('ActualStartTime_sec_epoch') as 'ActualStartTime_sec_epoch', sum('ArrivalWindowEndTime_sec_epoch') as 'ArrivalWindowEndTime_sec_epoch', 'Id' as 'Id', first('AssignedResource_User_User_Name') as 'AssignedResource_User_User_Name';  prev = filter prev by 'ActualStartTime_sec_epoch' > 'ArrivalWindowEndTime_sec_epoch'; prev = group prev by all; prev = foreach prev generate count() / unique('AssignedResource_User_User_Name') as prev_sla_violations; u = union curr,prev; u = group u by all; u = foreach u generate coalesce(100*(sum('curr_sla_violations')-sum('prev_sla_violations') / sum('prev_sla_violations')), 0) as perc_sla_violations;",
+            "measures" : [
+              [
+                "perc",
+                "sla_violations"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "ParentRecordId_Prior_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              "ParentRecordId_Priority"
+            ],
+            "filters" : [
+              [
+                "EarliestStartTime",
+                "{{column(Time_Selection.selection, [\"Compact\"]).asObject()}}"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "CreatedDate_Year_Cre_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "avg",
+                "ActualDuration"
+              ]
+            ],
+            "groups" : [
+              "{{cell(Time_Selection.selection, 0, \"compactGroup\").asObject()}}"
+            ],
+            "filters" : [
+              [
+                "EarliestStartTime",
+                "{{column(Time_Selection.selection, [\"Compact\"]).asObject()}}"
+              ],
+              [
+                "ActualDuration",
+                [
+                  [
+                    0
+                  ]
+                ],
+                ">"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "vbar"
+        }
+      },
+      "Status_3" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              "StatusCategory"
+            ],
+            "filters" : [
+              [
+                "EarliestStartTime",
+                "{{column(Time_Selection.selection, [\"Compact\"]).asObject()}}"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "FirstTimeFix_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "FirstTimeFix",
+        "query" : {
+          "query" : {
+            "pigql" : "q = load \"ServiceAppointmentDemo\"; q = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; i = filter q by 'StatusCategory' == \"CannotComplete\"; g = group q by all left, i by all; g = foreach g generate (1-(count(i)/count(q)))*100 as sum_first_time_fix;",
+            "measures" : [
+              [
+                "sum",
+                "first_time_fix"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "SLA_Sort_1" : {
+        "broadcastFacet" : false,
+        "columns" : { },
+        "isGlobal" : false,
+        "label" : "SLA_Sort",
+        "selectMode" : "singlerequired",
+        "start" : {
+          "display" : [
+            "Descending"
+          ]
+        },
+        "type" : "staticflex",
+        "useGlobal" : false,
+        "values" : [
+          {
+            "display" : "Ascending",
+            "value" : "asc",
+            "compact_value" : true
+          },
+          {
+            "display" : "Descending",
+            "value" : "desc",
+            "compact_value" : false
+          }
+        ]
+      },
+      "CreatedDate_Year_Cre_2" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.AssignedResourceDemo.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "pigql" : "q=load \"AssignedResourceDemo\"; q = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('SA_EarliestStartTime_Year','SA_EarliestStartTime_Month','SA_EarliestStartTime_Day')\")}}; q = filter q by 'ActualTravelTime' > 0; q = group q by {{cell(Time_Selection.selection, 0, \"SAGroupbyEarliestStartTime\").asObject()}}; z = foreach q generate avg('ActualTravelTime') as 'avg_ActualTravelTime', {{cell(Time_Selection.selection, 0, \"SAGenerateEarliestStartTime\").asObject()}};",
+            "measures" : [
+              [
+                "avg",
+                "ActualTravelTime"
+              ]
+            ],
+            "groups" : [
+              "{{cell(Time_Selection.selection, 0, \"SAcompactGroup\").asObject()}}"
+            ],
+            "filters" : [
+              [
+                "SA_EarliestStartTime",
+                "{{column(Time_Selection.selection, [\"Compact\"]).asObject()}}"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "time"
+        }
+      },
+      "Avg_Travel_Time_2" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.AssignedResourceDemo.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "Avg_Travel_Time",
+        "query" : {
+          "query" : {
+            "pigql" : "q=load \"AssignedResourceDemo\"; q = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('SA_EarliestStartTime_Year','SA_EarliestStartTime_Month','SA_EarliestStartTime_Day')\")}}; q = filter q by 'ActualTravelTime' > 0; q = group q by all; z = foreach q generate coalesce(avg('ActualTravelTime'),0) as 'avg_ActualTravelTime';",
+            "measures" : [
+              [
+                "avg",
+                "ActualTravelTime"
+              ]
+            ],
+            "filters" : [
+              [
+                "SA_EarliestStartTime",
+                "{{column(Time_Selection.selection, [\"Compact\"]).asObject()}}"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "Mean_Time_to_Repair__1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.ServiceAppointmentDemo.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "Mean_Time_to_Repair_compare",
+        "query" : {
+          "query" : {
+            "pigql" : "q=load \"ServiceAppointmentDemo\"; q = filter q by 'ActualDuration' > 0; curr = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; prev = filter q by {{cell(Time_Selection.selection, 0, \"LastPeriodCompare\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; g = group curr by all, prev by all; z = foreach g generate 100*((avg(curr['ActualDuration'])-avg(prev['ActualDuration']))/avg(prev['ActualDuration'])) as 'perc_mean_time_to_repair', (case when 100*((avg(curr['ActualDuration'])-avg(prev['ActualDuration']))/avg(prev['ActualDuration'])) < 0 then \"#0BA976\" when 100*(avg(curr['ActualDuration'])-avg(prev['ActualDuration']))/avg(prev['ActualDuration']) > 0 then \"#D14062\" else \"#54698D\" end) as 'color';",
+            "measures" : [
+              [
+                "perc",
+                "mean_time_to_repair"
+              ]
+            ],
+            "filters" : [
+              [
+                "EarliestStartTime",
+                "{{column(Time_Selection.selection, [\"Compact\"]).asObject()}}"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "visualizationType" : "hbar"
+        }
+      },
+      "lens_2" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.ServiceAppointmentDemo.FullyQualifiedName}\";  q = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('EarliestStartTime_Year','EarliestStartTime_Month','EarliestStartTime_Day')\")}}; q = foreach q generate 'AppointmentNumber' as 'AppointmentNumber',  first('ParentRecordId_WorkOrderNumber') as 'ParentRecordId_WorkOrderNumber', first('ParentRecordId_WorkTypeId_Name') as 'ParentRecordId_WorkTypeId_Name', first('AssignedResource_User_User_SmallPhotoUrl') as 'AssignedResource_User_User_SmallPhotoUrl', first('AssignedResource_User_User_Name') as 'AssignedResource_User_User_Name', sum('DurationInMinutes') as 'DurationInMinutes', sum('ActualDuration') as 'ActualDuration', first('ParentRecordId_AccountId_Name') as 'ParentRecordId_AccountId_Name', first('ServiceTerritoryId_Name') as 'ServiceTerritoryId_Name', first('ParentRecordId_Priority') as 'ParentRecordId_Priority', first('StatusCategory') as 'StatusCategory', first('DueDate') as 'DueDate', first('ProductConsumed_ProductName') as 'ProductConsumed_ProductName', first('ParentRecordId_CaseId') as 'ParentRecordId_CaseId'; q = order q by 'AppointmentNumber' asc;q = limit q 100;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : false
+      }
+    },
+    "widgetStyle" : {
+      "backgroundColor" : "#FFFFFF",
+      "borderColor" : "#E6ECF2",
+      "borderEdges" : [ ],
+      "borderRadius" : 0,
+      "borderWidth" : 1
+    },
+    "widgets" : {
+      "container_19" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_18" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_17" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_16" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_15" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_14" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_13" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "number_Mean_Time_to_Repair_1" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "perc_mean_time_to_repair",
+          "numberColor" : "#ffffff",
+          "numberSize" : 12,
+          "showActionMenu" : true,
+          "step" : "Mean_Time_to_Repair__1",
+          "textAlignment" : "center",
+          "title" : "",
+          "titleColor" : "#335779",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "link_Work_Order_Overview" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "${App.Dashboards['Work Order Overview'].Name}",
+            "namespace" : "${Org.Namespace}"
+          },
+          "destinationType" : "dashboard",
+          "fontSize" : 12,
+          "includeState" : true,
+          "text" : "Work Order Overview",
+          "textAlignment" : "center",
+          "textColor" : "#091A3E"
+        },
+        "type" : "link"
+      },
+      "container_1" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_2" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "number_FirstTimeFix_11" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "sum_first_time_fix",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 32,
+          "showActionMenu" : true,
+          "step" : "FirstTimeFix_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#335779",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "container_3" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_4" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "chart_ViolationsChart_1" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "totalValue" : "computeTotal",
+          "showValues" : false,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "bottom-center",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "totalSumMode" : "none",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "stackhbar",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "totalLabel" : "",
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : false,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "normalize" : false,
+          "step" : "ViolationsChart_1",
+          "theme" : "light",
+          "dimensionAxis" : {
+            "showTitle" : false,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : false
+        },
+        "type" : "chart"
+      },
+      "container_5" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_6" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_23" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_7" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_22" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_8" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_21" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_9" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_20" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_First_Time_Fix" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "First Time Fix"
+          },
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text__Work_Orders" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "# Work Orders"
+          },
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "chart_ParentRecordId_Prior_1" : {
+        "parameters" : {
+          "centerText" : "",
+          "totalValue" : "computeTotal",
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : 40,
+            "position" : "right-top",
+            "inside" : false
+          },
+          "showMeasureTitle" : false,
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "pie",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "Work Order Priority",
+            "align" : "left",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "textColor" : "#FFFFFF",
+          "inner" : 70,
+          "totalLabel" : "",
+          "showActionMenu" : true,
+          "centerValueType" : "none",
+          "valueType" : "compactNumber",
+          "step" : "ParentRecordId_Prior_1",
+          "theme" : "dark",
+          "applyConditionalFormatting" : false
+        },
+        "type" : "chart"
+      },
+      "filterpanel_1" : {
+        "parameters" : {
+          "filterItemOptions" : {
+            "backgroundColor" : "#FFFFFF",
+            "borderColor" : "#E6ECF2",
+            "borderRadius" : 4,
+            "borderWidth" : 1,
+            "propertyColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "filters" : [ ],
+          "itemsPerRow" : 6,
+          "showAllFilters" : true,
+          "title" : {
+            "separatorColor" : "#E6ECF2",
+            "text" : {
+              "align" : "left",
+              "color" : "#091A3E",
+              "fontSize" : 16,
+              "label" : "Filters"
+            },
+            "visible" : true
+          }
+        },
+        "type" : "filterpanel"
+      },
+      "number_all_31" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "perc_first_time_fix",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 16,
+          "showActionMenu" : true,
+          "step" : "all_3",
+          "textAlignment" : "center",
+          "title" : "",
+          "titleColor" : "#335779",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "table_lens_21" : {
+        "parameters" : {
+          "borderColor" : "#e1e5ee",
+          "borderWidth" : 1,
+          "cell" : {
+            "backgroundColor" : "#f2f6fa",
+            "fontColor" : "#16325c",
+            "fontSize" : 12
+          },
+          "columnProperties" : {
+            "AssignedResource_User_User_SmallPhotoUrl" : {
+              "parameters" : {
+                "alignment" : "center",
+                "height" : 50,
+                "width" : 110
+              },
+              "type" : "image"
+            }
+          },
+          "columns" : [ ],
+          "customBulkActions" : [ ],
+          "evenRowColor" : "#f2f6fa",
+          "exploreLink" : true,
+          "header" : {
+            "backgroundColor" : "#e4ecf2",
+            "fontColor" : "#5c7a99",
+            "fontSize" : 12
+          },
+          "innerMajorBorderColor" : "#a9b7c7",
+          "innerMinorBorderColor" : "#e1e5ee",
+          "maxColumnWidth" : 300,
+          "minColumnWidth" : 40,
+          "mode" : "variable",
+          "numberOfLines" : 1,
+          "oddRowColor" : "#ffffff",
+          "showActionMenu" : true,
+          "showRowIndexColumn" : false,
+          "step" : "lens_2",
+          "totals" : true,
+          "verticalPadding" : 8
+        },
+        "type" : "table"
+      },
+      "text_Avg_Travel_Time_min_" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Avg Travel Time (min)"
+          },
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "pillbox_Sort_1" : {
+        "parameters" : {
+          "compact" : false,
+          "displayTemplate" : "[]",
+          "exploreLink" : false,
+          "fontSize" : 16,
+          "selectedTab" : {
+            "backgroundColor" : "#677A97",
+            "borderColor" : "#C6D3E1",
+            "borderEdges" : [ ],
+            "borderWidth" : 1,
+            "textColor" : "#FFFFFF"
+          },
+          "showActionMenu" : true,
+          "step" : "Sort_1",
+          "textColor" : "#5C7A99"
+        },
+        "type" : "pillbox"
+      },
+      "chart_CreatedDate_Year_Cre_2" : {
+        "parameters" : {
+          "totalValue" : "computeTotal",
+          "showPoints" : false,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : true
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "time",
+          "missingValue" : "connect",
+          "dashLine" : {
+            "measures" : "",
+            "showDashLine" : false
+          },
+          "exploreLink" : false,
+          "timeAxis" : {
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "Earliest Start Permitted"
+          },
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : false,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "totalLabel" : "",
+          "fillArea" : true,
+          "showActionMenu" : true,
+          "showZero" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : false,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "valueType" : "none",
+          "step" : "CreatedDate_Year_Cre_2",
+          "theme" : "light",
+          "applyConditionalFormatting" : false,
+          "drawArea" : {
+            "measure" : "",
+            "showDrawArea" : false,
+            "bounding1" : "",
+            "bounding2" : ""
+          }
+        },
+        "type" : "chart"
+      },
+      "chart_CreatedDate_Year_Cre_1" : {
+        "parameters" : {
+          "totalValue" : "computeTotal",
+          "showPoints" : false,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "time",
+          "missingValue" : "connect",
+          "dashLine" : {
+            "measures" : "",
+            "showDashLine" : false
+          },
+          "exploreLink" : true,
+          "timeAxis" : {
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "Earliest Start Permitted"
+          },
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "totalLabel" : "",
+          "fillArea" : true,
+          "showActionMenu" : true,
+          "showZero" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : false,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "valueType" : "none",
+          "step" : "CreatedDate_Year_Cre_1",
+          "theme" : "light",
+          "applyConditionalFormatting" : false,
+          "drawArea" : {
+            "measure" : "",
+            "showDrawArea" : false,
+            "bounding1" : "",
+            "bounding2" : ""
+          }
+        },
+        "type" : "chart"
+      },
+      "number_SLAViolations_1" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "avg_sla_violations",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 32,
+          "showActionMenu" : true,
+          "step" : "SLAViolations_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#335779",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "table_lens_2" : {
+        "parameters" : {
+          "borderColor" : "#e0e5ee",
+          "borderWidth" : 1,
+          "cell" : {
+            "backgroundColor" : "#ffffff",
+            "fontColor" : "#16325c",
+            "fontSize" : 12
+          },
+          "columnProperties" : { },
+          "columns" : [ ],
+          "customBulkActions" : [ ],
+          "exploreLink" : true,
+          "header" : {
+            "backgroundColor" : "#f4f6f9",
+            "fontColor" : "#16325c",
+            "fontSize" : 12
+          },
+          "innerMajorBorderColor" : "#a8b7c7",
+          "innerMinorBorderColor" : "#e0e5ee",
+          "maxColumnWidth" : 300,
+          "minColumnWidth" : 40,
+          "mode" : "variable",
+          "numberOfLines" : 1,
+          "showActionMenu" : true,
+          "step" : "lens_2",
+          "totals" : true,
+          "verticalPadding" : 8
+        },
+        "type" : "table"
+      },
+      "container_12" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_11" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "chart_FirstTimeFixChart_21" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "totalValue" : "computeTotal",
+          "showValues" : true,
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "hbar",
+          "exploreLink" : false,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "binValues" : false,
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "totalLabel" : "",
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "theme" : "wave",
+          "step" : "FirstTimeFixChart_2",
+          "dimensionAxis" : {
+            "showTitle" : true,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : false
+        },
+        "type" : "chart"
+      },
+      "container_10" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "chart_Status_3" : {
+        "parameters" : {
+          "centerText" : "",
+          "totalValue" : "computeTotal",
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : 40,
+            "position" : "right-top",
+            "inside" : false
+          },
+          "showMeasureTitle" : false,
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "pie",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "Work Order Status",
+            "align" : "left",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "textColor" : "#FFFFFF",
+          "inner" : 70,
+          "totalLabel" : "",
+          "showActionMenu" : true,
+          "centerValueType" : "none",
+          "valueType" : "compactNumber",
+          "step" : "Status_3",
+          "theme" : "dark",
+          "applyConditionalFormatting" : false
+        },
+        "type" : "chart"
+      },
+      "number_Avg_Travel_Time_2" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : false,
+          "measureField" : "avg_ActualTravelTime",
+          "numberColor" : "#335779",
+          "numberSize" : 16,
+          "showActionMenu" : true,
+          "step" : "Avg_Travel_Time_2",
+          "textAlignment" : "center",
+          "title" : "",
+          "titleColor" : "#335779",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "number_ViolationsCompare_1" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "perc_violations_compare",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 16,
+          "showActionMenu" : true,
+          "step" : "ViolationsCompare_1",
+          "textAlignment" : "center",
+          "title" : "",
+          "titleColor" : "#335779",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "number_all_3" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "perc_first_time_fix",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 12,
+          "showActionMenu" : true,
+          "step" : "all_3",
+          "textAlignment" : "center",
+          "title" : "",
+          "titleColor" : "#335779",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "number_all_2" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "perc_actual_travel_time_compare",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 12,
+          "showActionMenu" : true,
+          "step" : "all_2",
+          "textAlignment" : "center",
+          "title" : "",
+          "titleColor" : "#335779",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "number_ActualDuration_1" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "avg_ActualDuration",
+          "numberColor" : "#335779",
+          "numberSize" : 18,
+          "showActionMenu" : true,
+          "step" : "ActualDuration_1",
+          "textAlignment" : "center",
+          "title" : "",
+          "titleColor" : "#335779",
+          "titleSize" : 18,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "pillbox_SLA_Sort_1" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : false,
+          "fontSize" : 16,
+          "selectedTab" : {
+            "backgroundColor" : "#677A97",
+            "borderColor" : "#C6D3E1",
+            "borderEdges" : [ ],
+            "borderWidth" : 1,
+            "textColor" : "#FFFFFF"
+          },
+          "showActionMenu" : true,
+          "step" : "SLA_Sort_1",
+          "textColor" : "#5C7A99"
+        },
+        "type" : "pillbox"
+      },
+      "chart_FirstTimeFixChart_1" : {
+        "parameters" : {
+          "totalValue" : "computeTotal",
+          "showPoints" : false,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "time",
+          "missingValue" : "connect",
+          "dashLine" : {
+            "measures" : "",
+            "showDashLine" : false
+          },
+          "exploreLink" : false,
+          "timeAxis" : {
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "Earliest Start Permitted"
+          },
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "totalLabel" : "",
+          "fillArea" : true,
+          "showActionMenu" : true,
+          "showZero" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : false,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "valueType" : "none",
+          "step" : "FirstTimeFixChart_1",
+          "theme" : "light",
+          "applyConditionalFormatting" : false,
+          "drawArea" : {
+            "measure" : "",
+            "showDrawArea" : false,
+            "bounding1" : "",
+            "bounding2" : ""
+          }
+        },
+        "type" : "chart"
+      },
+      "text_Mean_Time_to_Repair_min_" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Mean Time to Repair (min)"
+          },
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "chart_ParentRecordId_Creat_1" : {
+        "parameters" : {
+          "totalValue" : "computeTotal",
+          "showPoints" : false,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "time",
+          "missingValue" : "connect",
+          "dashLine" : {
+            "measures" : "",
+            "showDashLine" : false
+          },
+          "timeAxis" : {
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "Earliest Start Permitted"
+          },
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "textColor" : "#FFFFFF",
+          "totalLabel" : "",
+          "fillArea" : true,
+          "showActionMenu" : true,
+          "showZero" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : false,
+            "title" : "#WO",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "valueType" : "none",
+          "step" : "ParentRecordId_Creat_1",
+          "theme" : "dark",
+          "applyConditionalFormatting" : false,
+          "drawArea" : {
+            "measure" : "",
+            "showDrawArea" : false,
+            "bounding1" : "",
+            "bounding2" : ""
+          }
+        },
+        "type" : "chart"
+      },
+      "text_Technician_Performance" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Technician Performance"
+          },
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "textAlignment" : "center",
+          "textColor" : "rgb(99, 79, 149)"
+        },
+        "type" : "text"
+      },
+      "chart_WO_Scatter_1" : {
+        "parameters" : {
+          "totalValue" : "computeTotal",
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "scatter",
+          "exploreLink" : false,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              150,
+              150
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "radiusRatio" : 5,
+          "totalLabel" : "",
+          "showActionMenu" : true,
+          "x" : {
+            "sqrtScale" : false,
+            "showZero" : true,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "y" : {
+            "sqrtScale" : false,
+            "showZero" : true,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "step" : "WO_Scatter_1",
+          "theme" : "dark",
+          "applyConditionalFormatting" : false
+        },
+        "type" : "chart"
+      },
+      "number_WO_prev_compare_1" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "perc_Percent",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 16,
+          "showActionMenu" : true,
+          "step" : "WO_prev_compare_1",
+          "textAlignment" : "center",
+          "title" : "",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "number_SLAViolationsCompare_1" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "perc_sla_violations",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 16,
+          "showActionMenu" : true,
+          "step" : "SLAViolationsCompare_1",
+          "textAlignment" : "center",
+          "title" : "",
+          "titleColor" : "#335779",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "filterpanel_3" : {
+        "parameters" : {
+          "filterItemOptions" : {
+            "backgroundColor" : "#FFFFFF",
+            "borderColor" : "#E6ECF2",
+            "borderRadius" : 4,
+            "borderWidth" : 1,
+            "propertyColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "filters" : [ ],
+          "itemsPerRow" : 6,
+          "showAllFilters" : true,
+          "title" : {
+            "separatorColor" : "#E6ECF2",
+            "text" : {
+              "align" : "left",
+              "color" : "#091A3E",
+              "fontSize" : 16,
+              "label" : "Filters"
+            },
+            "visible" : true
+          }
+        },
+        "type" : "filterpanel"
+      },
+      "link_Work_Order_Backlog" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "${App.Dashboards['Work Order Backlog'].Name}",
+            "namespace" : "${Org.Namespace}"
+          },
+          "destinationType" : "dashboard",
+          "fontSize" : 12,
+          "includeState" : true,
+          "text" : "Work Order Backlog",
+          "textAlignment" : "center",
+          "textColor" : "#091A3E"
+        },
+        "type" : "link"
+      },
+      "chart_SLAViolationsChart_1" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "totalValue" : "computeTotal",
+          "showValues" : false,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "bottom-center",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "totalSumMode" : "none",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "stackhbar",
+          "exploreLink" : false,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "totalLabel" : "",
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : false,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "normalize" : false,
+          "step" : "SLAViolationsChart_1",
+          "theme" : "light",
+          "dimensionAxis" : {
+            "showTitle" : false,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : false
+        },
+        "type" : "chart"
+      },
+      "chart_FirstTimeFixChart_2" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "totalValue" : "computeTotal",
+          "showValues" : false,
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "bottom-center",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "hbar",
+          "exploreLink" : false,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "binValues" : false,
+          "totalLabel" : "",
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : false,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "step" : "FirstTimeFixChart_2",
+          "theme" : "light",
+          "dimensionAxis" : {
+            "showTitle" : false,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : false
+        },
+        "type" : "chart"
+      },
+      "text_Metrics_compared_to_prior_period" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Metrics compared to prior period"
+          },
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "textAlignment" : "center",
+          "textColor" : "#5C7A99"
+        },
+        "type" : "text"
+      },
+      "text_Due_Date_Violations_Technician" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Due Date Violations / Technician"
+          },
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text__Metrics_compared_to_prior_period" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "* Metrics compared to prior period"
+          },
+          "fontSize" : 12,
+          "showActionMenu" : true,
+          "textAlignment" : "center",
+          "textColor" : "#5C7A99"
+        },
+        "type" : "text"
+      },
+      "listselector_Time_Selection" : {
+        "parameters" : {
+          "compact" : false,
+          "displayMode" : "combo",
+          "expanded" : true,
+          "exploreLink" : false,
+          "filterStyle" : {
+            "titleColor" : "#091A3E",
+            "valueColor" : "#17324D"
+          },
+          "instant" : true,
+          "showActionMenu" : false,
+          "step" : "Time_Selection",
+          "title" : "Date Range"
+        },
+        "type" : "listselector"
+      },
+      "text_Work_Order_Volume" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Work Order Volume"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "number_ViolationsPerAgent_1" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "avg_violations_per_agent",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 32,
+          "showActionMenu" : true,
+          "step" : "ViolationsPerAgent_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#335779",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "container_24" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "number_ParentRecordId_1" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "count",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 24,
+          "showActionMenu" : true,
+          "step" : "ParentRecordId_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#335779",
+          "titleSize" : 10,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "text_Technician_Performance1" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Technician Performance"
+          },
+          "fontSize" : 24,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "text_Avg_SLA_Violations_Technician" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Avg SLA Violations / Technician"
+          },
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      },
+      "text_Work_Order_Detail_Table" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "Work Order Detail Table"
+          },
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "number_FirstTimeFix_1" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "sum_first_time_fix",
+          "numberColor" : "#335779",
+          "numberSize" : 18,
+          "showActionMenu" : true,
+          "step" : "FirstTimeFix_1",
+          "textAlignment" : "center",
+          "title" : "",
+          "titleColor" : "#335779",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "text_First_Time_Fix_Rate" : {
+        "parameters" : {
+          "content" : {
+            "displayTemplate" : "First Time Fix Rate"
+          },
+          "fontSize" : 14,
+          "showActionMenu" : true,
+          "textAlignment" : "left",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "text"
+      }
+    }
+  }
+}
