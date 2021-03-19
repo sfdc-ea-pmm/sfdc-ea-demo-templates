@@ -1,0 +1,1196 @@
+{
+  "isDeletable": true,
+  "notificationLevel": "Never",
+  "workflowDefinition": {
+    "Drop_Aux_LoyaltyMemberCurrency7": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_LoyaltyMemberCurrency7",
+        "fields": [
+          {"name": "ElapsedSeconds"},
+          {"name": "LoyaltyProgramMember_EnrollmentDate_Aux"},
+          {"name": "LastExpirationProcessRunDate_Aux"},
+          {"name": "LastResetDate_Aux"},
+          {"name": "LoyaltyProgramMember_LastActivityDate_Aux"},
+          {"name": "LoyaltyProgramMember_MembershipEndDate_Aux"},
+          {"name": "NextResetDate_Aux"}
+        ]
+      }
+    },
+    "Shift_Dates_LoyaltyMemberTier7": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_LoyaltyMemberTier7",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LoyaltyProgramMember_EnrollmentDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LoyaltyProgramMember_EnrollmentDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "LoyaltyProgramMember_EnrollmentDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "EffectiveDate",
+            "saqlExpression": "toDate('EffectiveDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "EffectiveDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LoyaltyProgramMember_MembershipEndDate",
+            "saqlExpression": "toDate('LoyaltyProgramMember_MembershipEndDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "LoyaltyProgramMember_MembershipEndDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LoyaltyProgramMember_MembershipLastRenewalDate",
+            "saqlExpression": "toDate('LoyaltyProgramMember_MembershipLastRenewalDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "LoyaltyProgramMember_MembershipLastRenewalDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LoyaltyProgramMember_TransactionJournal_FirstAccrualDate",
+            "saqlExpression": "toDate('LoyaltyProgramMember_TransactionJournal_FirstAccrualDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "LoyaltyProgramMember_TransactionJournal_FirstAccrualDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LoyaltyProgramMember_TransactionJournal_SecondAccrualDate",
+            "saqlExpression": "toDate('LoyaltyProgramMember_TransactionJournal_SecondAccrualDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "LoyaltyProgramMember_TransactionJournal_SecondAccrualDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "TierExpirationDate",
+            "saqlExpression": "toDate('TierExpirationDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "TierExpirationDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Dates_LoyaltyMemberTierHistory7": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_LoyaltyMemberTierHistory7",
+        "fields": [
+          {"name": "LoyaltyMemberTier_LoyaltyProgramMember_EnrollmentDate"},
+          {"name": "CreatedDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Drop_Aux_LoyaltyMemberTier7": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_LoyaltyMemberTier7",
+        "fields": [
+          {"name": "ElapsedSeconds"},
+          {"name": "LoyaltyProgramMember_EnrollmentDate_Aux"},
+          {"name": "TierExpirationDate_Aux"},
+          {"name": "LoyaltyProgramMember_TransactionJournal_SecondAccrualDate_Aux"},
+          {"name": "LoyaltyProgramMember_TransactionJournal_FirstAccrualDate_Aux"},
+          {"name": "LoyaltyProgramMember_MembershipLastRenewalDate_Aux"},
+          {"name": "LoyaltyProgramMember_MembershipEndDate_Aux"},
+          {"name": "EffectiveDate_Aux"}
+        ]
+      }
+    },
+    "Shift_Dates_TransactionJournal7": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_TransactionJournal7",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LastModifiedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "LastModifiedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LoyaltyProgramMember_EnrollmentDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LoyaltyProgramMember_EnrollmentDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "LoyaltyProgramMember.EnrollmentDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ActivityDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ActivityDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "ActivityDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "JournalDate",
+            "saqlExpression": "toDate('JournalDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "JournalDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LoyaltyProgramMember_MembershipEndDate",
+            "saqlExpression": "toDate('LoyaltyProgramMember_MembershipEndDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "LoyaltyProgramMember_MembershipEndDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Compute_Aux_LoyaltyLedger7": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_LoyaltyLedger7",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "LastModifiedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_sec_epoch')",
+            "label": "LastModifiedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "TransactionJournal_LoyaltyProgramMember_EnrollmentDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('TransactionJournal_LoyaltyProgramMember_EnrollmentDate_sec_epoch')",
+            "label": "TransactionJournal_LoyaltyProgramMember_EnrollmentDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ActivityDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ActivityDate_sec_epoch')",
+            "label": "ActivityDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "TransactionJournal_ActivityDate_Aux",
+            "saqlExpression": "toDate('TransactionJournal_ActivityDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "TransactionJournal_ActivityDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ExpiryDate_Aux",
+            "saqlExpression": "toDate('ExpiryDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "ExpiryDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "TransactionJournal_JournalDate_Aux",
+            "saqlExpression": "toDate('TransactionJournal_JournalDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "TransactionJournal_JournalDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "TransactionJournal_LoyaltyProgramMember_LastActivityDate_Aux",
+            "saqlExpression": "toDate('TransactionJournal_LoyaltyProgramMember_LastActivityDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "TransactionJournal_LoyaltyProgramMember_LastActivityDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Aux_LoyaltyMemberTierHistory7": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_LoyaltyMemberTierHistory7",
+        "fields": [
+          {"name": "ElapsedSeconds"},
+          {"name": "LoyaltyMemberTier_LoyaltyProgramMember_EnrollmentDate_Aux"},
+          {"name": "CreatedDate_Aux"}
+        ]
+      }
+    },
+    "Shift_Dates_LoyaltyLedger_ManualActions7": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_LoyaltyLedger_ManualActions7",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LastModifiedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "LastModifiedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "TransactionJournal_JournalDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('TransactionJournal_JournalDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "TransactionJournal_JournalDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "TransactionJournal_LoyaltyProgramMember_EnrollmentDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('TransactionJournal_LoyaltyProgramMember_EnrollmentDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "TransactionJournal_LoyaltyProgramMember_EnrollmentDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "TransactionJournal_LoyaltyProgramMember_LastActivityDate",
+            "saqlExpression": "toDate('TransactionJournal_LoyaltyProgramMember_LastActivityDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "TransactionJournal_LoyaltyProgramMember_LastActivityDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "TransactionJournal_LoyaltyProgramMember_MembershipEndDate",
+            "saqlExpression": "toDate('TransactionJournal_LoyaltyProgramMember_MembershipEndDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "TransactionJournal_LoyaltyProgramMember_MembershipEndDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "TransactionJournal_ActivityDate",
+            "saqlExpression": "toDate('TransactionJournal_ActivityDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "TransactionJournal_ActivityDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ExpiryDate",
+            "saqlExpression": "toDate('ExpiryDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "ExpiryDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Load_Dataset_LoyaltyMemberTier7": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.LoyaltyMemberTier7.FullyQualifiedName}"}
+    },
+    "Register_Shifted_Dataset_LoyaltyLedger7": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "LoyaltyLedger",
+        "alias": "${App.Datasets.LoyaltyLedger7.FullyQualifiedName}",
+        "source": "Drop_Aux_LoyaltyLedger7"
+      }
+    },
+    "Compute_Aux_LoyaltyMemberTier7": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_LoyaltyMemberTier7",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "LoyaltyProgramMember_EnrollmentDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LoyaltyProgramMember_EnrollmentDate_sec_epoch')",
+            "label": "LoyaltyProgramMember_EnrollmentDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "EffectiveDate_Aux",
+            "saqlExpression": "toDate('EffectiveDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "EffectiveDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LoyaltyProgramMember_MembershipEndDate_Aux",
+            "saqlExpression": "toDate('LoyaltyProgramMember_MembershipEndDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "LoyaltyProgramMember_MembershipEndDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LoyaltyProgramMember_MembershipLastRenewalDate_Aux",
+            "saqlExpression": "toDate('LoyaltyProgramMember_MembershipLastRenewalDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "LoyaltyProgramMember_MembershipLastRenewalDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LoyaltyProgramMember_TransactionJournal_FirstAccrualDate_Aux",
+            "saqlExpression": "toDate('LoyaltyProgramMember_TransactionJournal_FirstAccrualDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "LoyaltyProgramMember_TransactionJournal_FirstAccrualDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LoyaltyProgramMember_TransactionJournal_SecondAccrualDate_Aux",
+            "saqlExpression": "toDate('LoyaltyProgramMember_TransactionJournal_SecondAccrualDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "LoyaltyProgramMember_TransactionJournal_SecondAccrualDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "TierExpirationDate_Aux",
+            "saqlExpression": "toDate('TierExpirationDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "TierExpirationDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_LoyaltyMemberCurrency7": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "LoyaltyMemberCurrency",
+        "alias": "${App.Datasets.LoyaltyMemberCurrency7.FullyQualifiedName}",
+        "source": "Drop_Aux_LoyaltyMemberCurrency7"
+      }
+    },
+    "Compute_Aux_TransactionJournal7": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_TransactionJournal7",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "LastModifiedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_sec_epoch')",
+            "label": "LastModifiedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LoyaltyProgramMember_EnrollmentDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LoyaltyProgramMember_EnrollmentDate_sec_epoch')",
+            "label": "LoyaltyProgramMember_EnrollmentDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ActivityDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ActivityDate_sec_epoch')",
+            "label": "ActivityDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "JournalDate_Aux",
+            "saqlExpression": "toDate('JournalDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "JournalDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LoyaltyProgramMember_MembershipEndDate_Aux",
+            "saqlExpression": "toDate('LoyaltyProgramMember_MembershipEndDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "LoyaltyProgramMember_MembershipEndDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Load_Dataset_SurveyQuestionResponse2": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.SurveyQuestionResponse2.FullyQualifiedName}"}
+    },
+    "Drop_Dates_TransactionJournal7": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_TransactionJournal7",
+        "fields": [
+          {"name": "LastModifiedDate"},
+          {"name": "LoyaltyProgramMember_EnrollmentDate"},
+          {"name": "ActivityDate"},
+          {"name": "CreatedDate"},
+          {"name": "LoyaltyProgramMember_MembershipEndDate"},
+          {"name": "JournalDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Compute_Aux_LoyaltyMemberCurrency7": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_LoyaltyMemberCurrency7",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "LoyaltyProgramMember_EnrollmentDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LoyaltyProgramMember_EnrollmentDate_sec_epoch')",
+            "label": "LoyaltyProgramMember_EnrollmentDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LastExpirationProcessRunDate_Aux",
+            "saqlExpression": "toDate('LastExpirationProcessRunDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "LastExpirationProcessRunDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('LastResetDate_sec_epoch')",
+            "name": "LastResetDate_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "LastResetDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LoyaltyProgramMember_LastActivityDate_Aux",
+            "saqlExpression": "toDate('LoyaltyProgramMember_LastActivityDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "LoyaltyProgramMember_LastActivityDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LoyaltyProgramMember_MembershipEndDate_Aux",
+            "saqlExpression": "toDate('LoyaltyProgramMember_MembershipEndDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "LoyaltyProgramMember_MembershipEndDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "NextResetDate_Aux",
+            "saqlExpression": "toDate('NextResetDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "NextResetDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Dates_LoyaltyMemberTier7": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_LoyaltyMemberTier7",
+        "fields": [
+          {"name": "LoyaltyProgramMember_EnrollmentDate"},
+          {"name": "LoyaltyProgramMember_MembershipEndDate"},
+          {"name": "LoyaltyProgramMember_TransactionJournal_SecondAccrualDate"},
+          {"name": "LoyaltyProgramMember_MembershipLastRenewalDate"},
+          {"name": "TierExpirationDate"},
+          {"name": "LoyaltyProgramMember_TransactionJournal_FirstAccrualDate"},
+          {"name": "EffectiveDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Shift_Dates_SurveyQuestionResponse2": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_SurveyQuestionResponse2",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LastModifiedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "LastModifiedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "SurveyResponse_CompletionDateTime",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('SurveyResponse_CompletionDateTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "SurveyResponse_CompletionDateTime",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "SystemModstamp",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('SystemModstamp_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "SystemModstamp",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Compute_Aux_LoyaltyLedger_ManualActions7": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_LoyaltyLedger_ManualActions7",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "LastModifiedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_sec_epoch')",
+            "label": "LastModifiedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "TransactionJournal_JournalDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('TransactionJournal_JournalDate_sec_epoch')",
+            "label": "TransactionJournal_JournalDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "TransactionJournal_LoyaltyProgramMember_EnrollmentDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('TransactionJournal_LoyaltyProgramMember_EnrollmentDate_sec_epoch')",
+            "label": "TransactionJournal_LoyaltyProgramMember_EnrollmentDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "TransactionJournal_ActivityDate_Aux",
+            "saqlExpression": "toDate('TransactionJournal_ActivityDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "TransactionJournal_ActivityDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ExpiryDate_Aux",
+            "saqlExpression": "toDate('ExpiryDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "ExpiryDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "TransactionJournal_LoyaltyProgramMember_LastActivityDate_Aux",
+            "saqlExpression": "toDate('TransactionJournal_LoyaltyProgramMember_LastActivityDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "TransactionJournal_LoyaltyProgramMember_LastActivityDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "TransactionJournal_LoyaltyProgramMember_MembershipEndDate_Aux",
+            "saqlExpression": "toDate('TransactionJournal_LoyaltyProgramMember_MembershipEndDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "TransactionJournal_LoyaltyProgramMember_MembershipEndDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_LoyaltyMemberTierHistory7": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "LoyaltyMemberTierHistory",
+        "alias": "${App.Datasets.LoyaltyMemberTierHistory7.FullyQualifiedName}",
+        "source": "Drop_Aux_LoyaltyMemberTierHistory7"
+      }
+    },
+    "Register_Shifted_Dataset_LoyaltyLedger_ManualActions7": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "LoyaltyLedger_ManualActions",
+        "alias": "${App.Datasets.LoyaltyLedger_ManualActions7.FullyQualifiedName}",
+        "source": "Drop_Aux_LoyaltyLedger_ManualActions7"
+      }
+    },
+    "Shift_Dates_LoyaltyMemberTierHistory7": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_LoyaltyMemberTierHistory7",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LoyaltyMemberTier_LoyaltyProgramMember_EnrollmentDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LoyaltyMemberTier_LoyaltyProgramMember_EnrollmentDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "LoyaltyMemberTier_LoyaltyProgramMember_EnrollmentDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Dates_LoyaltyMemberCurrency7": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_LoyaltyMemberCurrency7",
+        "fields": [
+          {"name": "NextResetDate"},
+          {"name": "LastResetDate"},
+          {"name": "LoyaltyProgramMember_EnrollmentDate"},
+          {"name": "LoyaltyProgramMember_MembershipEndDate"},
+          {"name": "LoyaltyProgramMember_LastActivityDate"},
+          {"name": "LastExpirationProcessRunDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Load_Dataset_TransactionJournal7": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.TransactionJournal7.FullyQualifiedName}"}
+    },
+    "Drop_Aux_SurveyQuestionResponse2": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_SurveyQuestionResponse2",
+        "fields": [
+          {"name": "LastModifiedDate_Aux"},
+          {"name": "CreatedDate_Aux"},
+          {"name": "SurveyResponse_CompletionDateTime_Aux"},
+          {"name": "SystemModstamp_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_LoyaltyMemberTier7": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "LoyaltyMemberTier",
+        "alias": "${App.Datasets.LoyaltyMemberTier7.FullyQualifiedName}",
+        "source": "Drop_Aux_LoyaltyMemberTier7"
+      }
+    },
+    "Register_Shifted_Dataset_SurveyQuestionResponse2": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "SurveyQuestionResponse",
+        "alias": "${App.Datasets.SurveyQuestionResponse2.FullyQualifiedName}",
+        "source": "Drop_Aux_SurveyQuestionResponse2"
+      }
+    },
+    "Load_Dataset_LoyaltyMemberTierHistory7": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.LoyaltyMemberTierHistory7.FullyQualifiedName}"}
+    },
+    "Load_Dataset_LoyaltyLedger7": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.LoyaltyLedger7.FullyQualifiedName}"}
+    },
+    "Register_Shifted_Dataset_TransactionJournal7": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "TransactionJournal",
+        "alias": "${App.Datasets.TransactionJournal7.FullyQualifiedName}",
+        "source": "Drop_Aux_TransactionJournal7"
+      }
+    },
+    "Drop_Dates_SurveyQuestionResponse2": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_SurveyQuestionResponse2",
+        "fields": [
+          {"name": "LastModifiedDate"},
+          {"name": "CreatedDate"},
+          {"name": "SurveyResponse_CompletionDateTime"},
+          {"name": "SystemModstamp"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Drop_Aux_LoyaltyLedger_ManualActions7": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_LoyaltyLedger_ManualActions7",
+        "fields": [
+          {"name": "ElapsedSeconds"},
+          {"name": "LastModifiedDate_Aux"},
+          {"name": "TransactionJournal_JournalDate_Aux"},
+          {"name": "TransactionJournal_LoyaltyProgramMember_EnrollmentDate_Aux"},
+          {"name": "CreatedDate_Aux"},
+          {"name": "TransactionJournal_LoyaltyProgramMember_MembershipEndDate_Aux"},
+          {"name": "TransactionJournal_LoyaltyProgramMember_LastActivityDate_Aux"},
+          {"name": "ExpiryDate_Aux"},
+          {"name": "TransactionJournal_ActivityDate_Aux"}
+        ]
+      }
+    },
+    "Shift_Dates_LoyaltyLedger7": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_LoyaltyLedger7",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LastModifiedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "LastModifiedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "TransactionJournal_LoyaltyProgramMember_EnrollmentDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('TransactionJournal_LoyaltyProgramMember_EnrollmentDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "TransactionJournal_LoyaltyProgramMember_EnrollmentDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ActivityDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ActivityDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "ActivityDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "TransactionJournal_ActivityDate",
+            "saqlExpression": "toDate('TransactionJournal_ActivityDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "TransactionJournal_ActivityDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ExpiryDate",
+            "saqlExpression": "toDate('ExpiryDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "ExpiryDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "TransactionJournal_JournalDate",
+            "saqlExpression": "toDate('TransactionJournal_JournalDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "TransactionJournal_JournalDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "TransactionJournal_LoyaltyProgramMember_LastActivityDate",
+            "saqlExpression": "toDate('TransactionJournal_LoyaltyProgramMember_LastActivityDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "TransactionJournal_LoyaltyProgramMember_LastActivityDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Dates_LoyaltyLedger7": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_LoyaltyLedger7",
+        "fields": [
+          {"name": "TransactionJournal_ActivityDate"},
+          {"name": "LastModifiedDate"},
+          {"name": "ExpiryDate"},
+          {"name": "TransactionJournal_JournalDate"},
+          {"name": "TransactionJournal_LoyaltyProgramMember_EnrollmentDate"},
+          {"name": "ActivityDate"},
+          {"name": "TransactionJournal_LoyaltyProgramMember_LastActivityDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Drop_Aux_LoyaltyLedger7": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_LoyaltyLedger7",
+        "fields": [
+          {"name": "ElapsedSeconds"},
+          {"name": "LastModifiedDate_Aux"},
+          {"name": "TransactionJournal_LoyaltyProgramMember_EnrollmentDate_Aux"},
+          {"name": "ActivityDate_Aux"},
+          {"name": "TransactionJournal_LoyaltyProgramMember_LastActivityDate_Aux"},
+          {"name": "TransactionJournal_JournalDate_Aux"},
+          {"name": "ExpiryDate_Aux"},
+          {"name": "TransactionJournal_ActivityDate_Aux"}
+        ]
+      }
+    },
+    "Shift_Dates_LoyaltyMemberCurrency7": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_LoyaltyMemberCurrency7",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LoyaltyProgramMember_EnrollmentDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LoyaltyProgramMember_EnrollmentDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "LoyaltyProgramMember_EnrollmentDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('LastExpirationProcessRunDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "LastExpirationProcessRunDate",
+            "format": "yyyy-MM-dd",
+            "label": "LastExpirationProcessRunDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LastResetDate",
+            "saqlExpression": "toDate('LastResetDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "LastResetDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LoyaltyProgramMember_LastActivityDate",
+            "saqlExpression": "toDate('LoyaltyProgramMember_LastActivityDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "LoyaltyProgramMember_LastActivityDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LoyaltyProgramMember_MembershipEndDate",
+            "saqlExpression": "toDate('LoyaltyProgramMember_MembershipEndDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "LoyaltyProgramMember_MembershipEndDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "NextResetDate",
+            "saqlExpression": "toDate('NextResetDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "NextResetDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Load_Dataset_LoyaltyMemberCurrency7": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.LoyaltyMemberCurrency7.FullyQualifiedName}"}
+    },
+    "Drop_Dates_LoyaltyLedger_ManualActions7": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_LoyaltyLedger_ManualActions7",
+        "fields": [
+          {"name": "TransactionJournal_ActivityDate"},
+          {"name": "LastModifiedDate"},
+          {"name": "ExpiryDate"},
+          {"name": "TransactionJournal_LoyaltyProgramMember_MembershipEndDate"},
+          {"name": "TransactionJournal_JournalDate"},
+          {"name": "TransactionJournal_LoyaltyProgramMember_EnrollmentDate"},
+          {"name": "CreatedDate"},
+          {"name": "TransactionJournal_LoyaltyProgramMember_LastActivityDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Compute_Aux_SurveyQuestionResponse2": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_SurveyQuestionResponse2",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "LastModifiedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_sec_epoch')",
+            "label": "LastModifiedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "SurveyResponse_CompletionDateTime_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('SurveyResponse_CompletionDateTime_sec_epoch')",
+            "label": "SurveyResponse_CompletionDateTime_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "SystemModstamp_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('SystemModstamp_sec_epoch')",
+            "label": "SystemModstamp_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Load_Dataset_LoyaltyLedger_ManualActions7": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.LoyaltyLedger_ManualActions7.FullyQualifiedName}"}
+    },
+    "Drop_Aux_TransactionJournal7": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_TransactionJournal7",
+        "fields": [
+          {"name": "ElapsedSeconds"},
+          {"name": "LastModifiedDate_Aux"},
+          {"name": "LoyaltyProgramMember_EnrollmentDate_Aux"},
+          {"name": "ActivityDate_Aux"},
+          {"name": "CreatedDate_Aux"},
+          {"name": "LoyaltyProgramMember_MembershipEndDate_Aux"},
+          {"name": "JournalDate_Aux"}
+        ]
+      }
+    },
+    "Compute_Aux_LoyaltyMemberTierHistory7": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_LoyaltyMemberTierHistory7",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "LoyaltyMemberTier_LoyaltyProgramMember_EnrollmentDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LoyaltyMemberTier_LoyaltyProgramMember_EnrollmentDate_sec_epoch')",
+            "label": "LoyaltyMemberTier_LoyaltyProgramMember_EnrollmentDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    }
+  },
+  "DataflowType": "USER",
+  "_type": "dataflow",
+  "name": "Loyalty_Xperience_Timeshifting",
+  "MasterLabel": "Loyalty Xperience - Timeshifting",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": "",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive"
+}
