@@ -1,0 +1,4394 @@
+{
+  "name" : "EA_Starter_Pack_5_tp",
+  "label" : "5.集客(EA Starter Pack)",
+  "folder" : {
+    "id" : "${App.Folder.Id}"
+  },
+  "dateVersion" : 1,
+  "mobileDisabled" : false,
+  "xmd" : {
+    "measures" : [ ],
+    "derivedDimensions" : [ ],
+    "organizations" : [ ],
+    "showDetailsDefaultFields" : [ ],
+    "dates" : [ ],
+    "derivedMeasures" : [ ],
+    "dimensions" : [ ]
+  },
+  "state" : {
+    "dataSourceLinks" : [
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.SFDC_EA_SP_Campaign.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Name"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.SFDC_EA_SP_CampaignMember.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "campaign.Name"
+          }
+        ],
+        "label" : "キャンペーン名",
+        "name" : "Link_9331"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.SFDC_EA_SP_Campaign.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "IsActive"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.SFDC_EA_SP_CampaignMember.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "campaign.IsActive"
+          }
+        ],
+        "label" : "有効フラグ",
+        "name" : "Link_9344"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.SFDC_EA_SP_Campaign.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Status"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.SFDC_EA_SP_CampaignMember.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "campaign.Status"
+          }
+        ],
+        "label" : "状況",
+        "name" : "Link_9359"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.SFDC_EA_SP_Campaign.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "Type"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.SFDC_EA_SP_CampaignMember.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "campaign.Type"
+          }
+        ],
+        "label" : "キャンペーン種別",
+        "name" : "Link_9380"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.SFDC_EA_SP_Campaign.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "StartDate"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.SFDC_EA_SP_CampaignMember.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "saql",
+            "fieldName" : "campaign.StartDate"
+          }
+        ],
+        "label" : "キャンペーンStartDate",
+        "name" : "Link_9399"
+      }
+    ],
+    "filters" : [
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.SFDC_EA_SP_Campaign.Name}"
+        },
+        "dependent" : true,
+        "fields" : [
+          "Name"
+        ],
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.SFDC_EA_SP_Campaign.Name}"
+        },
+        "dependent" : true,
+        "fields" : [
+          "IsActive"
+        ],
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.SFDC_EA_SP_Campaign.Name}"
+        },
+        "dependent" : true,
+        "fields" : [
+          "Status"
+        ],
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.SFDC_EA_SP_Campaign.Name}"
+        },
+        "dependent" : true,
+        "fields" : [
+          "Type"
+        ],
+        "locked" : false,
+        "operator" : "in"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.SFDC_EA_SP_Campaign.Name}"
+        },
+        "dependent" : true,
+        "fields" : [
+          "StartDate"
+        ],
+        "locked" : false,
+        "operator" : ">=<="
+      }
+    ],
+    "gridLayouts" : [
+      {
+        "maxWidth" : 1400,
+        "name" : "デフォルト",
+        "numColumns" : 50,
+        "pages" : [
+          {
+            "label" : "集客状況",
+            "name" : "e259fc66-c426-420a-bd9a-747865836500",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 9,
+                "column" : 6,
+                "name" : "link_3",
+                "row" : 7,
+                "rowspan" : 5,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 40,
+                "name" : "link_5",
+                "row" : 10,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0.3)",
+                  "borderColor" : "#C6D3E1",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 8,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 33,
+                "name" : "link_4",
+                "row" : 10,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(33, 92, 160)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 8,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 3,
+                "name" : "container_4",
+                "row" : 7,
+                "rowspan" : 5,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 3,
+                "name" : "container_3",
+                "row" : 1,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 40,
+                "column" : 5,
+                "name" : "filterpanel_1",
+                "row" : 14,
+                "rowspan" : 5,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 31,
+                "name" : "container_5",
+                "row" : 3,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 33,
+                "name" : "link_7",
+                "row" : 4,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 21,
+                "name" : "container_6",
+                "row" : 3,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 23,
+                "name" : "link_8",
+                "row" : 4,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 26,
+                "name" : "container_7",
+                "row" : 3,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 28,
+                "name" : "link_9",
+                "row" : 4,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 38,
+                "name" : "link_10",
+                "row" : 4,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 36,
+                "name" : "container_8",
+                "row" : 3,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 43,
+                "name" : "link_11",
+                "row" : 4,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 41,
+                "name" : "container_9",
+                "row" : 3,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 5,
+                "name" : "number_1",
+                "row" : 20,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 9,
+                "name" : "number_2",
+                "row" : 20,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(222, 205, 176)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 13,
+                "name" : "number_3",
+                "row" : 20,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(222, 205, 176)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 18,
+                "name" : "number_7",
+                "row" : 20,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 28,
+                "name" : "number_8",
+                "row" : 20,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 22,
+                "name" : "number_9",
+                "row" : 20,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(222, 205, 176)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 32,
+                "name" : "number_11",
+                "row" : 20,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(222, 205, 176)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 37,
+                "name" : "number_12",
+                "row" : 20,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 41,
+                "name" : "number_13",
+                "row" : 20,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(222, 205, 176)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 4,
+                "name" : "chart_3",
+                "row" : 49,
+                "rowspan" : 17,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 4,
+                "name" : "chart_4",
+                "row" : 31,
+                "rowspan" : 17,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 30,
+                "column" : 16,
+                "name" : "table_2",
+                "row" : 28,
+                "rowspan" : 38,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 42,
+                "column" : 4,
+                "name" : "text_1",
+                "row" : 67,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 6,
+                "name" : "link_6",
+                "row" : 2,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 6,
+                "name" : "link_15",
+                "row" : 1,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 16,
+                "name" : "container_10",
+                "row" : 3,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 18,
+                "name" : "link_16",
+                "row" : 4,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 42,
+                "column" : 4,
+                "name" : "container_11",
+                "row" : 13,
+                "rowspan" : 14,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(33, 92, 160)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 8,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 40,
+                "column" : 5,
+                "name" : "text_2",
+                "row" : 19,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#C6D3E1",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "text_4",
+                "row" : 69,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 37,
+                "name" : "link_17",
+                "row" : 0,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              }
+            ]
+          },
+          {
+            "label" : "参加者",
+            "name" : "27258d6b-35d1-45d9-b7c7-3fc3b72c2b20",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 3,
+                "column" : 3,
+                "name" : "container_4",
+                "row" : 7,
+                "rowspan" : 5,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 6,
+                "name" : "link_6",
+                "row" : 2,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 3,
+                "name" : "container_3",
+                "row" : 1,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 40,
+                "name" : "link_13",
+                "row" : 10,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(33, 92, 160)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 8,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 33,
+                "name" : "link_14",
+                "row" : 10,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0.3)",
+                  "borderColor" : "#C6D3E1",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 8,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 4,
+                "name" : "chart_1",
+                "row" : 28,
+                "rowspan" : 14,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 13,
+                "column" : 18,
+                "name" : "chart_2",
+                "row" : 28,
+                "rowspan" : 14,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 14,
+                "column" : 32,
+                "name" : "chart_5",
+                "row" : 28,
+                "rowspan" : 14,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 42,
+                "column" : 4,
+                "name" : "table_1",
+                "row" : 43,
+                "rowspan" : 23,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 6,
+                "name" : "link_12",
+                "row" : 7,
+                "rowspan" : 5,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 42,
+                "column" : 4,
+                "name" : "text_1",
+                "row" : 67,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 6,
+                "name" : "link_15",
+                "row" : 1,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 16,
+                "name" : "container_10",
+                "row" : 3,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 18,
+                "name" : "link_16",
+                "row" : 4,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 21,
+                "name" : "container_6",
+                "row" : 3,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 23,
+                "name" : "link_8",
+                "row" : 4,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 26,
+                "name" : "container_7",
+                "row" : 3,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 28,
+                "name" : "link_9",
+                "row" : 4,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 31,
+                "name" : "container_5",
+                "row" : 3,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 33,
+                "name" : "link_7",
+                "row" : 4,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 36,
+                "name" : "container_8",
+                "row" : 3,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 38,
+                "name" : "link_10",
+                "row" : 4,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 41,
+                "name" : "container_9",
+                "row" : 3,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 43,
+                "name" : "link_11",
+                "row" : 4,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 42,
+                "column" : 4,
+                "name" : "container_11",
+                "row" : 13,
+                "rowspan" : 14,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(33, 92, 160)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 8,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 40,
+                "column" : 5,
+                "name" : "filterpanel_1",
+                "row" : 14,
+                "rowspan" : 5,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 5,
+                "name" : "number_1",
+                "row" : 20,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 9,
+                "name" : "number_2",
+                "row" : 20,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(222, 205, 176)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 13,
+                "name" : "number_3",
+                "row" : 20,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(222, 205, 176)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 18,
+                "name" : "number_7",
+                "row" : 20,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 28,
+                "name" : "number_8",
+                "row" : 20,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 22,
+                "name" : "number_9",
+                "row" : 20,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(222, 205, 176)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 32,
+                "name" : "number_11",
+                "row" : 20,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(222, 205, 176)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 37,
+                "name" : "number_12",
+                "row" : 20,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 41,
+                "name" : "number_13",
+                "row" : 20,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(222, 205, 176)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 40,
+                "column" : 5,
+                "name" : "text_2",
+                "row" : 19,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#C6D3E1",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 50,
+                "column" : 0,
+                "name" : "text_4",
+                "row" : 69,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 37,
+                "name" : "link_17",
+                "row" : 0,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight" : "fine",
+        "selectors" : [ ],
+        "style" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "backgroundColor" : "rgb(245, 242, 242)",
+          "cellSpacingX" : 0,
+          "cellSpacingY" : 0,
+          "fit" : "tile",
+          "gutterColor" : "#C5D3E0",
+          "image" : {
+            "name" : "${App.Images['easp_img_backjpg'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "version" : 1.0
+      },
+      {
+        "name" : "モバイル",
+        "numColumns" : 11,
+        "pages" : [
+          {
+            "label" : "集客状況",
+            "name" : "e259fc66-c426-420a-bd9a-747865836500",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "container_3",
+                "row" : 1,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 4,
+                "name" : "link_15",
+                "row" : 1,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 4,
+                "name" : "link_6",
+                "row" : 2,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 1,
+                "name" : "container_10",
+                "row" : 6,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 0,
+                "name" : "container_4",
+                "row" : 15,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 4,
+                "name" : "container_6",
+                "row" : 6,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 7,
+                "name" : "container_7",
+                "row" : 6,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 1,
+                "name" : "container_5",
+                "row" : 10,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 4,
+                "name" : "container_8",
+                "row" : 10,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 7,
+                "name" : "container_9",
+                "row" : 10,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 2,
+                "name" : "link_16",
+                "row" : 7,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 5,
+                "name" : "link_8",
+                "row" : 7,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 8,
+                "name" : "link_9",
+                "row" : 7,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 2,
+                "name" : "link_7",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 5,
+                "name" : "link_10",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 8,
+                "name" : "link_11",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 8,
+                "column" : 2,
+                "name" : "link_3",
+                "row" : 15,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 1,
+                "name" : "link_4",
+                "row" : 20,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(33, 92, 160)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 8,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 6,
+                "name" : "link_5",
+                "row" : 20,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0.3)",
+                  "borderColor" : "#C6D3E1",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 8,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 1,
+                "name" : "container_11",
+                "row" : 24,
+                "rowspan" : 46,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(33, 92, 160)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 8,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 2,
+                "name" : "text_2",
+                "row" : 38,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#C6D3E1",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 2,
+                "name" : "number_1",
+                "row" : 39,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 2,
+                "name" : "number_2",
+                "row" : 45,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(222, 205, 176)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 2,
+                "name" : "number_3",
+                "row" : 51,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(222, 205, 176)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 6,
+                "name" : "number_7",
+                "row" : 39,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 6,
+                "name" : "number_9",
+                "row" : 57,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(222, 205, 176)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 6,
+                "name" : "number_8",
+                "row" : 45,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 6,
+                "name" : "number_11",
+                "row" : 51,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(222, 205, 176)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 2,
+                "name" : "number_12",
+                "row" : 57,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 6,
+                "name" : "number_13",
+                "row" : 63,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(222, 205, 176)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 1,
+                "name" : "table_2",
+                "row" : 107,
+                "rowspan" : 38,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 1,
+                "name" : "chart_4",
+                "row" : 71,
+                "rowspan" : 17,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 1,
+                "name" : "chart_3",
+                "row" : 89,
+                "rowspan" : 17,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 1,
+                "name" : "text_1",
+                "row" : 146,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 0,
+                "name" : "text_4",
+                "row" : 148,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 2,
+                "name" : "filterpanel_2",
+                "row" : 25,
+                "rowspan" : 13,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              }
+            ]
+          },
+          {
+            "label" : "参加者",
+            "name" : "27258d6b-35d1-45d9-b7c7-3fc3b72c2b20",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 8,
+                "column" : 2,
+                "name" : "link_12",
+                "row" : 15,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 1,
+                "name" : "link_14",
+                "row" : 20,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0.3)",
+                  "borderColor" : "#C6D3E1",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 8,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 6,
+                "name" : "link_13",
+                "row" : 20,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(33, 92, 160)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 8,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 1,
+                "name" : "chart_1",
+                "row" : 71,
+                "rowspan" : 14,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 1,
+                "name" : "chart_2",
+                "row" : 86,
+                "rowspan" : 14,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 1,
+                "name" : "chart_5",
+                "row" : 101,
+                "rowspan" : 14,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 1,
+                "name" : "table_1",
+                "row" : 116,
+                "rowspan" : 23,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 1,
+                "name" : "text_1",
+                "row" : 140,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 0,
+                "name" : "text_4",
+                "row" : 142,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 0,
+                "name" : "container_3",
+                "row" : 1,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 4,
+                "name" : "link_15",
+                "row" : 1,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 4,
+                "name" : "link_6",
+                "row" : 2,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 1,
+                "name" : "container_10",
+                "row" : 6,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 2,
+                "name" : "link_16",
+                "row" : 7,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 4,
+                "name" : "container_6",
+                "row" : 6,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 5,
+                "name" : "link_8",
+                "row" : 7,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 7,
+                "name" : "container_7",
+                "row" : 6,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 8,
+                "name" : "link_9",
+                "row" : 7,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 8,
+                "name" : "link_11",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 7,
+                "name" : "container_9",
+                "row" : 10,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 5,
+                "name" : "link_10",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 4,
+                "name" : "container_8",
+                "row" : 10,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 2,
+                "name" : "link_7",
+                "row" : 11,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(33, 92, 160)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 1,
+                "column" : 1,
+                "name" : "container_5",
+                "row" : 10,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 0,
+                "name" : "container_4",
+                "row" : 15,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 1,
+                "name" : "container_11",
+                "row" : 24,
+                "rowspan" : 46,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(33, 92, 160)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 8,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 2,
+                "name" : "text_2",
+                "row" : 38,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#C6D3E1",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 2,
+                "name" : "number_1",
+                "row" : 39,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 2,
+                "name" : "number_2",
+                "row" : 45,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(222, 205, 176)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 2,
+                "name" : "number_3",
+                "row" : 51,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(222, 205, 176)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 6,
+                "name" : "number_7",
+                "row" : 39,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 6,
+                "name" : "number_9",
+                "row" : 57,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(222, 205, 176)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 6,
+                "name" : "number_8",
+                "row" : 45,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 6,
+                "name" : "number_11",
+                "row" : 51,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(222, 205, 176)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 2,
+                "name" : "number_12",
+                "row" : 57,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 6,
+                "name" : "number_13",
+                "row" : 63,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(222, 205, 176)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 2,
+                "name" : "filterpanel_2",
+                "row" : 25,
+                "rowspan" : 13,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight" : "fine",
+        "selectors" : [
+          "maxWidth(599)"
+        ],
+        "style" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "backgroundColor" : "rgb(245, 242, 242)",
+          "cellSpacingX" : 0,
+          "cellSpacingY" : 0,
+          "fit" : "original",
+          "gutterColor" : "#C5D3E0",
+          "image" : {
+            "name" : "${App.Images['easp_img_back_mobilejpg'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "version" : 1.0
+      }
+    ],
+    "layouts" : [ ],
+    "steps" : {
+      "CampaignMemberList" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.SFDC_EA_SP_CampaignMember.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "CampaignMemberList",
+        "query" : {
+          "query" : {
+            "values" : [
+              "campaign.Name",
+              "Type",
+              "Name",
+              "Status",
+              "Email",
+              "Phone",
+              "MobilePhone",
+              "LeadOrContactId"
+            ],
+            "limit" : 1000
+          },
+          "version" : -1.0
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "parameters" : {
+            "borderColor" : "#a8b7c7",
+            "borderWidth" : 0,
+            "cell" : {
+              "backgroundColor" : "rgba(255, 255, 255, 0.3)",
+              "fontColor" : "rgb(33, 92, 160)",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "rgb(33, 92, 160)",
+              "fontColor" : "#ffffff",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#54698d",
+            "innerMinorBorderColor" : "#a8b7c7",
+            "maxColumnWidth" : 200,
+            "minColumnWidth" : 30,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "pivoted" : false,
+            "showActionMenu" : true,
+            "showRowIndexColumn" : false,
+            "totals" : true,
+            "verticalPadding" : 4
+          },
+          "type" : "table"
+        }
+      },
+      "CampaignSummaryList" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.SFDC_EA_SP_Campaign.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "CampaignSummaryList",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "sum",
+                "NumberOfLeads",
+                "LeadCnt"
+              ],
+              [
+                "sum",
+                "NumberOfContacts",
+                "ContactCnt"
+              ],
+              [
+                "sum",
+                "NumberOfContacts",
+                "TotalMemberCnt"
+              ],
+              [
+                "sum",
+                "NumberOfOpportunities",
+                "OpportunityCnt"
+              ],
+              [
+                "sum",
+                "NumberOfOpportunities",
+                "E"
+              ],
+              [
+                "sum",
+                "AmountAllOpportunities",
+                "OpportunityAmount"
+              ],
+              [
+                "sum",
+                "NumberOfWonOpportunities",
+                "OpportunityWonCnt"
+              ],
+              [
+                "sum",
+                "AmountWonOpportunities",
+                "OpportunityWonAmount"
+              ],
+              [
+                "count",
+                "*",
+                "CloseRate_Cnt"
+              ],
+              [
+                "count",
+                "*",
+                "CloseRate_Amt"
+              ]
+            ],
+            "columns" : [
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "sum",
+                      "NumberOfLeads"
+                    ]
+                  ],
+                  "groups" : [
+                    "Name"
+                  ]
+                },
+                "name" : "LeadCnt",
+                "header" : "リード数"
+              },
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "sum",
+                      "NumberOfContacts"
+                    ]
+                  ],
+                  "groups" : [
+                    "Name"
+                  ]
+                },
+                "name" : "ContactCnt",
+                "header" : "取引先責任者数"
+              },
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "sum",
+                      "NumberOfContacts"
+                    ]
+                  ],
+                  "formula" : "LeadCnt + ContactCnt",
+                  "groups" : [
+                    "Name"
+                  ]
+                },
+                "name" : "TotalMemberCnt",
+                "header" : "参加者数"
+              },
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "sum",
+                      "NumberOfOpportunities"
+                    ]
+                  ],
+                  "groups" : [
+                    "Name"
+                  ]
+                },
+                "name" : "OpportunityCnt",
+                "header" : "商談数"
+              },
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "sum",
+                      "NumberOfOpportunities"
+                    ]
+                  ],
+                  "formula" : "OpportunityCnt/TotalMemberCnt",
+                  "groups" : [
+                    "Name"
+                  ]
+                },
+                "header" : "商談化率(#)"
+              },
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "sum",
+                      "AmountAllOpportunities"
+                    ]
+                  ],
+                  "groups" : [
+                    "Name"
+                  ]
+                },
+                "name" : "OpportunityAmount",
+                "header" : "商談金額"
+              },
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "sum",
+                      "NumberOfWonOpportunities"
+                    ]
+                  ],
+                  "groups" : [
+                    "Name"
+                  ]
+                },
+                "name" : "OpportunityWonCnt",
+                "header" : "成立商談数"
+              },
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "sum",
+                      "AmountWonOpportunities"
+                    ]
+                  ],
+                  "groups" : [
+                    "Name"
+                  ]
+                },
+                "name" : "OpportunityWonAmount",
+                "header" : "成立商談金額"
+              },
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "count",
+                      "*"
+                    ]
+                  ],
+                  "formula" : "OpportunityWonCnt/OpportunityCnt",
+                  "groups" : [
+                    "Name"
+                  ]
+                },
+                "name" : "CloseRate_Cnt",
+                "header" : "成約率(#)"
+              },
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "count",
+                      "*"
+                    ]
+                  ],
+                  "formula" : "OpportunityWonAmount/OpportunityAmount",
+                  "groups" : [
+                    "Name"
+                  ]
+                },
+                "name" : "CloseRate_Amt",
+                "header" : "成約率($)"
+              }
+            ],
+            "groups" : [
+              "Name"
+            ]
+          },
+          "version" : -1.0
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "showRowIndexColumn" : false,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "CampaignStatus" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.SFDC_EA_SP_Campaign.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "CampaignStatus",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "unique",
+                "Id"
+              ]
+            ],
+            "groups" : [
+              "Status"
+            ],
+            "order" : [
+              [
+                "unique_Id",
+                {
+                  "ascending" : false
+                }
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "centerText" : "",
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : false,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "showMeasureTitle" : false,
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "pie",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "キャンペーン種別",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "inner" : 60,
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimension" : [
+                "Status"
+              ],
+              "plots" : [
+                "unique_Id"
+              ]
+            },
+            "showActionMenu" : false,
+            "centerValueType" : "number",
+            "valueType" : "compactNumber",
+            "theme" : "wave",
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "CampaignMemberType" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.SFDC_EA_SP_CampaignMember.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "CampaignMemberType",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "unique",
+                "Id"
+              ]
+            ],
+            "groups" : [
+              "Type"
+            ]
+          },
+          "version" : -1.0
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "centerText" : "",
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : false,
+              "show" : true,
+              "customSize" : 40,
+              "position" : "right-top",
+              "inside" : false
+            },
+            "showMeasureTitle" : false,
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "pie",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "参加者種別",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "inner" : 60,
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimension" : [
+                "Type"
+              ],
+              "plots" : [
+                "unique_Id"
+              ]
+            },
+            "showActionMenu" : false,
+            "centerValueType" : "number",
+            "valueType" : "compactNumber",
+            "theme" : "wave",
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "CampaignMemberStatus" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.SFDC_EA_SP_CampaignMember.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "CampaignMemberStatus",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "unique",
+                "Id"
+              ]
+            ],
+            "groups" : [
+              "Status"
+            ]
+          },
+          "version" : -1.0
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "centerText" : "",
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : false,
+              "show" : true,
+              "customSize" : 40,
+              "position" : "right-top",
+              "inside" : false
+            },
+            "showMeasureTitle" : false,
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "pie",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "参加状況",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "inner" : 60,
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimension" : [
+                "Status"
+              ],
+              "plots" : [
+                "unique_Id"
+              ]
+            },
+            "showActionMenu" : false,
+            "centerValueType" : "number",
+            "valueType" : "compactNumber",
+            "theme" : "wave",
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "CampaignMemberTitle" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.SFDC_EA_SP_CampaignMember.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "CampaignMemberTitle",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "unique",
+                "Id"
+              ]
+            ],
+            "groups" : [
+              "Title"
+            ]
+          },
+          "version" : -1.0
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "centerText" : "",
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : false,
+              "show" : true,
+              "customSize" : 40,
+              "position" : "right-top",
+              "inside" : false
+            },
+            "showMeasureTitle" : false,
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "pie",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "参加者 役職",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "inner" : 60,
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimension" : [
+                "Title"
+              ],
+              "plots" : [
+                "unique_Id"
+              ]
+            },
+            "showActionMenu" : false,
+            "centerValueType" : "number",
+            "valueType" : "compactNumber",
+            "theme" : "wave",
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "CampaignSummary" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.SFDC_EA_SP_Campaign.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "sum",
+                "NumberOfLeads",
+                "LeadCnt"
+              ],
+              [
+                "sum",
+                "NumberOfContacts",
+                "ContactCnt"
+              ],
+              [
+                "sum",
+                "NumberOfContacts",
+                "TotalMemberCnt"
+              ],
+              [
+                "sum",
+                "NumberOfOpportunities",
+                "OpportunityCnt"
+              ],
+              [
+                "sum",
+                "NumberOfOpportunities",
+                "E"
+              ],
+              [
+                "sum",
+                "AmountAllOpportunities",
+                "OpportunityAmount"
+              ],
+              [
+                "sum",
+                "NumberOfWonOpportunities",
+                "OpportunityWonCnt"
+              ],
+              [
+                "sum",
+                "AmountWonOpportunities",
+                "OpportunityWonAmount"
+              ],
+              [
+                "count",
+                "*",
+                "CloseRate_Cnt"
+              ],
+              [
+                "count",
+                "*",
+                "CloseRate_Amt"
+              ]
+            ],
+            "columns" : [
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "sum",
+                      "NumberOfLeads"
+                    ]
+                  ]
+                },
+                "name" : "LeadCnt",
+                "header" : "リード数"
+              },
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "sum",
+                      "NumberOfContacts"
+                    ]
+                  ]
+                },
+                "name" : "ContactCnt",
+                "header" : "取引先責任者数"
+              },
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "sum",
+                      "NumberOfContacts"
+                    ]
+                  ],
+                  "formula" : "LeadCnt + ContactCnt"
+                },
+                "name" : "TotalMemberCnt",
+                "header" : "参加者数"
+              },
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "sum",
+                      "NumberOfOpportunities"
+                    ]
+                  ]
+                },
+                "name" : "OpportunityCnt",
+                "header" : "商談数"
+              },
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "sum",
+                      "NumberOfOpportunities"
+                    ]
+                  ],
+                  "formula" : "OpportunityCnt/TotalMemberCnt"
+                },
+                "header" : "商談化率(#)"
+              },
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "sum",
+                      "AmountAllOpportunities"
+                    ]
+                  ]
+                },
+                "name" : "OpportunityAmount",
+                "header" : "商談金額"
+              },
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "sum",
+                      "NumberOfWonOpportunities"
+                    ]
+                  ]
+                },
+                "name" : "OpportunityWonCnt",
+                "header" : "成立商談数"
+              },
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "sum",
+                      "AmountWonOpportunities"
+                    ]
+                  ]
+                },
+                "name" : "OpportunityWonAmount",
+                "header" : "成立商談金額"
+              },
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "count",
+                      "*"
+                    ]
+                  ],
+                  "formula" : "OpportunityWonCnt/OpportunityCnt"
+                },
+                "name" : "CloseRate_Cnt",
+                "header" : "成約率(#)"
+              },
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "count",
+                      "*"
+                    ]
+                  ],
+                  "formula" : "OpportunityWonAmount/OpportunityAmount"
+                },
+                "name" : "CloseRate_Amt",
+                "header" : "成約率($)"
+              }
+            ]
+          },
+          "version" : -1.0
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "showRowIndexColumn" : false,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "CampaignType" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.SFDC_EA_SP_Campaign.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "unique",
+                "Id"
+              ]
+            ],
+            "groups" : [
+              "Type"
+            ],
+            "order" : [
+              [
+                "unique_Id",
+                {
+                  "ascending" : false
+                }
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "centerText" : "",
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "showMeasureTitle" : true,
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "pie",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "inner" : 60,
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimension" : [
+                "Type"
+              ],
+              "plots" : [
+                "unique_Id"
+              ]
+            },
+            "showActionMenu" : true,
+            "centerValueType" : "number",
+            "valueType" : "compactNumber",
+            "theme" : "wave",
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      }
+    },
+    "widgetStyle" : {
+      "backgroundColor" : "#FFFFFF",
+      "borderColor" : "#E6ECF2",
+      "borderEdges" : [ ],
+      "borderRadius" : 0,
+      "borderWidth" : 1
+    },
+    "widgets" : {
+      "number_12" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "CloseRate_Cnt",
+          "noResultsLabel" : "0",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : false,
+          "step" : "CampaignSummary",
+          "textAlignment" : "center",
+          "title" : "成約率(件数)",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 12
+        },
+        "type" : "number"
+      },
+      "number_11" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "OpportunityWonAmount",
+          "noResultsLabel" : "0",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : false,
+          "step" : "CampaignSummary",
+          "textAlignment" : "center",
+          "title" : "成立金額",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 12
+        },
+        "type" : "number"
+      },
+      "link_16" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "${App.Dashboards['2.見込客(EA Starter Pack)'].Name}",
+            "namespace" : "${Org.Namespace}"
+          },
+          "destinationType" : "dashboard",
+          "fontSize" : 14,
+          "includeState" : false,
+          "text" : "見込客",
+          "textAlignment" : "center",
+          "textColor" : "rgb(33, 92, 160)"
+        },
+        "type" : "link"
+      },
+      "link_17" : {
+        "parameters" : {
+          "destinationLink" : {
+            "tooltip" : "操作ガイド",
+            "url" : "https://salesforce.quip.com/cnqVAE5ht3pL"
+          },
+          "destinationType" : "url",
+          "fontSize" : 12,
+          "includeState" : false,
+          "text" : "操作ガイド",
+          "textAlignment" : "right",
+          "textColor" : "#0070D2"
+        },
+        "type" : "link"
+      },
+      "link_14" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "e259fc66-c426-420a-bd9a-747865836500"
+          },
+          "destinationType" : "page",
+          "fontSize" : 12,
+          "includeState" : false,
+          "text" : "集客状況",
+          "textAlignment" : "center",
+          "textColor" : "rgb(33, 92, 160)"
+        },
+        "type" : "link"
+      },
+      "link_15" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "${App.Dashboards['1.目次(EA Starter Pack)'].Name}",
+            "namespace" : "${Org.Namespace}"
+          },
+          "destinationType" : "dashboard",
+          "fontSize" : 10,
+          "includeState" : true,
+          "text" : "Einstein Analytics",
+          "textAlignment" : "left",
+          "textColor" : "rgb(33, 92, 160)"
+        },
+        "type" : "link"
+      },
+      "link_12" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "e259fc66-c426-420a-bd9a-747865836500"
+          },
+          "destinationType" : "page",
+          "fontSize" : 24,
+          "includeState" : false,
+          "text" : "参加者",
+          "textAlignment" : "center",
+          "textColor" : "rgb(33, 92, 160)"
+        },
+        "type" : "link"
+      },
+      "link_13" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "27258d6b-35d1-45d9-b7c7-3fc3b72c2b20"
+          },
+          "destinationType" : "page",
+          "fontSize" : 14,
+          "includeState" : false,
+          "text" : "参加者",
+          "textAlignment" : "center",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "link"
+      },
+      "link_10" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "${App.Dashboards['6.活動(EA Starter Pack)'].Name}",
+            "namespace" : "${Org.Namespace}"
+          },
+          "destinationType" : "dashboard",
+          "fontSize" : 14,
+          "includeState" : false,
+          "text" : "活動",
+          "textAlignment" : "center",
+          "textColor" : "rgb(33, 92, 160)"
+        },
+        "type" : "link"
+      },
+      "link_11" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "${App.Dashboards['7.問合せ(EA Starter Pack)'].Name}",
+            "namespace" : "${Org.Namespace}"
+          },
+          "destinationType" : "dashboard",
+          "fontSize" : 14,
+          "includeState" : false,
+          "text" : "問合せ",
+          "textAlignment" : "center",
+          "textColor" : "rgb(33, 92, 160)"
+        },
+        "type" : "link"
+      },
+      "number_13" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "CloseRate_Amt",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : false,
+          "step" : "CampaignSummary",
+          "textAlignment" : "center",
+          "title" : "成約率(金額)",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 12
+        },
+        "type" : "number"
+      },
+      "container_2" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_3" : {
+        "parameters" : {
+          "alignmentX" : "right",
+          "alignmentY" : "center",
+          "fit" : "fitheight",
+          "image" : {
+            "name" : "${App.Images['easp_img_logopng'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "type" : "container"
+      },
+      "container_4" : {
+        "parameters" : {
+          "alignmentX" : "right",
+          "alignmentY" : "center",
+          "fit" : "fitheight",
+          "image" : {
+            "name" : "${App.Images['easp_img_campaignpng'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "type" : "container"
+      },
+      "container_5" : {
+        "parameters" : {
+          "alignmentX" : "right",
+          "alignmentY" : "center",
+          "fit" : "fitheight",
+          "image" : {
+            "name" : "${App.Images['easp_img_campaignpng'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "type" : "container"
+      },
+      "text_3" : {
+        "parameters" : {
+          "fontSize" : 16,
+          "showActionMenu" : true,
+          "text" : "",
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "container_6" : {
+        "parameters" : {
+          "alignmentX" : "right",
+          "alignmentY" : "center",
+          "fit" : "fitheight",
+          "image" : {
+            "name" : "${App.Images['easp_img_accountpng'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "type" : "container"
+      },
+      "container_7" : {
+        "parameters" : {
+          "alignmentX" : "right",
+          "alignmentY" : "center",
+          "fit" : "fitheight",
+          "image" : {
+            "name" : "${App.Images['easp_img_opportunitypng'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "type" : "container"
+      },
+      "chart_5" : {
+        "parameters" : {
+          "centerText" : "",
+          "autoFitMode" : "keepLabels",
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : 40,
+            "position" : "right-top",
+            "inside" : false
+          },
+          "showMeasureTitle" : false,
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "pie",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "参加者 役職",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "inner" : 60,
+          "columnMap" : {
+            "trellis" : [ ],
+            "dimension" : [
+              "Title"
+            ],
+            "plots" : [
+              "unique_Id"
+            ]
+          },
+          "showActionMenu" : false,
+          "centerValueType" : "number",
+          "valueType" : "compactNumber",
+          "theme" : "waterLight",
+          "step" : "CampaignMemberTitle",
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "text_2" : {
+        "parameters" : {
+          "fontSize" : 16,
+          "showActionMenu" : false,
+          "text" : "",
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "container_8" : {
+        "parameters" : {
+          "alignmentX" : "right",
+          "alignmentY" : "center",
+          "fit" : "fitheight",
+          "image" : {
+            "name" : "${App.Images['easp_img_taskpng'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "type" : "container"
+      },
+      "container_9" : {
+        "parameters" : {
+          "alignmentX" : "right",
+          "alignmentY" : "center",
+          "fit" : "fitheight",
+          "image" : {
+            "name" : "${App.Images['easp_img_casepng'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "type" : "container"
+      },
+      "text_4" : {
+        "parameters" : {
+          "fontSize" : 16,
+          "showActionMenu" : false,
+          "text" : "",
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "chart_2" : {
+        "parameters" : {
+          "centerText" : "",
+          "autoFitMode" : "keepLabels",
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : 40,
+            "position" : "right-top",
+            "inside" : false
+          },
+          "showMeasureTitle" : false,
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "pie",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "参加状況",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "inner" : 60,
+          "columnMap" : {
+            "trellis" : [ ],
+            "dimension" : [
+              "Status"
+            ],
+            "plots" : [
+              "unique_Id"
+            ]
+          },
+          "showActionMenu" : false,
+          "centerValueType" : "number",
+          "valueType" : "compactNumber",
+          "theme" : "waterLight",
+          "step" : "CampaignMemberStatus",
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "chart_1" : {
+        "parameters" : {
+          "centerText" : "",
+          "autoFitMode" : "keepLabels",
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : 40,
+            "position" : "right-top",
+            "inside" : false
+          },
+          "showMeasureTitle" : false,
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "pie",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "参加者種別",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "inner" : 60,
+          "columnMap" : {
+            "trellis" : [ ],
+            "dimension" : [
+              "Type"
+            ],
+            "plots" : [
+              "unique_Id"
+            ]
+          },
+          "showActionMenu" : false,
+          "centerValueType" : "number",
+          "valueType" : "compactNumber",
+          "theme" : "waterLight",
+          "step" : "CampaignMemberType",
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "chart_4" : {
+        "parameters" : {
+          "centerText" : "",
+          "autoFitMode" : "keepLabels",
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : 40,
+            "position" : "right-top",
+            "inside" : false
+          },
+          "showMeasureTitle" : false,
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "pie",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "実施状況",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "inner" : 60,
+          "columnMap" : {
+            "trellis" : [ ],
+            "dimension" : [
+              "Status"
+            ],
+            "plots" : [
+              "unique_Id"
+            ]
+          },
+          "showActionMenu" : false,
+          "centerValueType" : "number",
+          "valueType" : "compactNumber",
+          "theme" : "waterLight",
+          "step" : "CampaignStatus",
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "chart_3" : {
+        "parameters" : {
+          "centerText" : "",
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : 40,
+            "position" : "right-top",
+            "inside" : false
+          },
+          "showMeasureTitle" : false,
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "pie",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "キャンペーン種別",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "inner" : 60,
+          "columnMap" : {
+            "trellis" : [ ],
+            "dimension" : [
+              "Type"
+            ],
+            "plots" : [
+              "unique_Id"
+            ]
+          },
+          "showActionMenu" : false,
+          "centerValueType" : "number",
+          "valueType" : "compactNumber",
+          "theme" : "waterLight",
+          "step" : "CampaignType",
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "text_1" : {
+        "parameters" : {
+          "fontSize" : 16,
+          "showActionMenu" : false,
+          "text" : "",
+          "textAlignment" : "left",
+          "textColor" : "#091A3E"
+        },
+        "type" : "text"
+      },
+      "filterpanel_2" : {
+        "parameters" : {
+          "filterItemOptions" : {
+            "backgroundColor" : "rgba(255, 255, 255, 0)",
+            "borderColor" : "rgba(255, 255, 255, 0)",
+            "borderRadius" : 24,
+            "borderWidth" : 1,
+            "propertyColor" : "#FFFFFF",
+            "valueColor" : "#FFFFFF"
+          },
+          "filters" : [ ],
+          "itemsPerRow" : 2,
+          "showAllFilters" : true,
+          "title" : {
+            "separatorColor" : "#E6ECF2",
+            "text" : {
+              "align" : "left",
+              "color" : "rgb(33, 92, 160)",
+              "fontSize" : 16,
+              "label" : "検索条件"
+            },
+            "visible" : false
+          }
+        },
+        "type" : "filterpanel"
+      },
+      "filterpanel_1" : {
+        "parameters" : {
+          "filterItemOptions" : {
+            "backgroundColor" : "rgba(255, 255, 255, 0)",
+            "borderColor" : "rgba(255, 255, 255, 0)",
+            "borderRadius" : 24,
+            "borderWidth" : 1,
+            "propertyColor" : "#FFFFFF",
+            "valueColor" : "#FFFFFF"
+          },
+          "filters" : [ ],
+          "itemsPerRow" : 5,
+          "showAllFilters" : true,
+          "title" : {
+            "separatorColor" : "#E6ECF2",
+            "text" : {
+              "align" : "left",
+              "color" : "rgb(33, 92, 160)",
+              "fontSize" : 16,
+              "label" : "検索条件"
+            },
+            "visible" : false
+          }
+        },
+        "type" : "filterpanel"
+      },
+      "number_3" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "TotalMemberCnt",
+          "noResultsLabel" : "0",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : false,
+          "step" : "CampaignSummary",
+          "textAlignment" : "center",
+          "title" : "参加者数合計",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 12
+        },
+        "type" : "number"
+      },
+      "number_2" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "ContactCnt",
+          "noResultsLabel" : "0",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : false,
+          "step" : "CampaignSummary",
+          "textAlignment" : "center",
+          "title" : "取引先責任者数",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 12
+        },
+        "type" : "number"
+      },
+      "number_1" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "LeadCnt",
+          "noResultsLabel" : "0",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "CampaignSummary",
+          "textAlignment" : "center",
+          "title" : "リード数",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 12
+        },
+        "type" : "number"
+      },
+      "container_11" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_10" : {
+        "parameters" : {
+          "alignmentX" : "right",
+          "alignmentY" : "center",
+          "fit" : "fitheight",
+          "image" : {
+            "name" : "${App.Images['easp_img_leadpng'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "type" : "container"
+      },
+      "number_9" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "OpportunityAmount",
+          "noResultsLabel" : "0",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : false,
+          "step" : "CampaignSummary",
+          "textAlignment" : "center",
+          "title" : "商談金額",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 12
+        },
+        "type" : "number"
+      },
+      "number_8" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "OpportunityWonCnt",
+          "noResultsLabel" : "0",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : false,
+          "step" : "CampaignSummary",
+          "textAlignment" : "center",
+          "title" : "成立数",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 12
+        },
+        "type" : "number"
+      },
+      "number_7" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "OpportunityCnt",
+          "noResultsLabel" : "0",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : false,
+          "step" : "CampaignSummary",
+          "textAlignment" : "center",
+          "title" : "商談数",
+          "titleColor" : "#FFFFFF",
+          "titleSize" : 12
+        },
+        "type" : "number"
+      },
+      "link_3" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "e259fc66-c426-420a-bd9a-747865836500"
+          },
+          "destinationType" : "page",
+          "fontSize" : 24,
+          "includeState" : false,
+          "text" : "集客状況",
+          "textAlignment" : "center",
+          "textColor" : "rgb(33, 92, 160)"
+        },
+        "type" : "link"
+      },
+      "link_4" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "e259fc66-c426-420a-bd9a-747865836500"
+          },
+          "destinationType" : "page",
+          "fontSize" : 14,
+          "includeState" : false,
+          "text" : "集客状況",
+          "textAlignment" : "center",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "link"
+      },
+      "link_1" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "e259fc66-c426-420a-bd9a-747865836500"
+          },
+          "destinationType" : "page",
+          "fontSize" : 12,
+          "includeState" : false,
+          "text" : "商談作成",
+          "textAlignment" : "center",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "link"
+      },
+      "link_2" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "13b37a0f-b554-4fe4-bb67-eb32a3c7c82a"
+          },
+          "destinationType" : "page",
+          "fontSize" : 12,
+          "includeState" : false,
+          "text" : "進行中商談",
+          "textAlignment" : "center",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "link"
+      },
+      "table_1" : {
+        "parameters" : {
+          "borderColor" : "#a8b7c7",
+          "borderWidth" : 0,
+          "cell" : {
+            "backgroundColor" : "rgba(255, 255, 255, 0.3)",
+            "fontColor" : "rgb(33, 92, 160)",
+            "fontSize" : 12
+          },
+          "columnProperties" : { },
+          "columns" : [ ],
+          "customBulkActions" : [ ],
+          "exploreLink" : true,
+          "header" : {
+            "backgroundColor" : "rgb(33, 92, 160)",
+            "fontColor" : "#ffffff",
+            "fontSize" : 12
+          },
+          "innerMajorBorderColor" : "#54698d",
+          "innerMinorBorderColor" : "#a8b7c7",
+          "maxColumnWidth" : 200,
+          "minColumnWidth" : 30,
+          "mode" : "variable",
+          "numberOfLines" : 1,
+          "pivoted" : false,
+          "showActionMenu" : true,
+          "showRowIndexColumn" : false,
+          "step" : "CampaignMemberList",
+          "totals" : true,
+          "verticalPadding" : 4
+        },
+        "type" : "table"
+      },
+      "table_2" : {
+        "parameters" : {
+          "borderColor" : "#a8b7c7",
+          "borderWidth" : 0,
+          "cell" : {
+            "backgroundColor" : "rgba(255, 255, 255, 0.3)",
+            "fontColor" : "rgb(33, 92, 160)",
+            "fontSize" : 12
+          },
+          "columnProperties" : { },
+          "columns" : [ ],
+          "customBulkActions" : [ ],
+          "exploreLink" : true,
+          "header" : {
+            "backgroundColor" : "rgb(33, 92, 160)",
+            "fontColor" : "#ffffff",
+            "fontSize" : 12
+          },
+          "innerMajorBorderColor" : "#54698d",
+          "innerMinorBorderColor" : "#a8b7c7",
+          "maxColumnWidth" : 200,
+          "minColumnWidth" : 30,
+          "mode" : "variable",
+          "numberOfLines" : 1,
+          "pivoted" : false,
+          "showActionMenu" : true,
+          "showRowIndexColumn" : false,
+          "step" : "CampaignSummaryList",
+          "totals" : true,
+          "verticalPadding" : 4
+        },
+        "type" : "table"
+      },
+      "link_9" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "${App.Dashboards['4.商談(EA Starter Pack)'].Name}",
+            "namespace" : "${Org.Namespace}"
+          },
+          "destinationType" : "dashboard",
+          "fontSize" : 14,
+          "includeState" : false,
+          "text" : "商談",
+          "textAlignment" : "center",
+          "textColor" : "rgb(33, 92, 160)"
+        },
+        "type" : "link"
+      },
+      "link_7" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "e259fc66-c426-420a-bd9a-747865836500"
+          },
+          "destinationType" : "page",
+          "fontSize" : 14,
+          "includeState" : false,
+          "text" : "集客",
+          "textAlignment" : "center",
+          "textColor" : "rgb(33, 92, 160)"
+        },
+        "type" : "link"
+      },
+      "link_8" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "${App.Dashboards['3.顧客(EA Starter Pack)'].Name}",
+            "namespace" : "${Org.Namespace}"
+          },
+          "destinationType" : "dashboard",
+          "fontSize" : 14,
+          "includeState" : false,
+          "text" : "顧客",
+          "textAlignment" : "center",
+          "textColor" : "rgb(33, 92, 160)"
+        },
+        "type" : "link"
+      },
+      "link_5" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "27258d6b-35d1-45d9-b7c7-3fc3b72c2b20"
+          },
+          "destinationType" : "page",
+          "fontSize" : 12,
+          "includeState" : false,
+          "text" : "参加者",
+          "textAlignment" : "center",
+          "textColor" : "rgb(33, 92, 160)"
+        },
+        "type" : "link"
+      },
+      "link_6" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "${App.Dashboards['1.目次(EA Starter Pack)'].Name}",
+            "namespace" : "${Org.Namespace}"
+          },
+          "destinationType" : "dashboard",
+          "fontSize" : 20,
+          "includeState" : true,
+          "text" : "EA Starter Pack",
+          "textAlignment" : "left",
+          "textColor" : "rgb(33, 92, 160)"
+        },
+        "type" : "link"
+      }
+    }
+  }
+}

@@ -1,0 +1,1548 @@
+{
+  "notificationLevel": "",
+  "workflowDefinition": {
+    "SFDC_EA_SP_Contact": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "取引先責任者(EA Starter Pack)",
+        "alias": "${App.Datasets.SFDC_EA_SP_Contact.FullyQualifiedName}",
+        "source": "Contact_Account"
+      }
+    },
+    "Opportunity_AddLastCloseDate": {
+      "action": "computeRelative",
+      "parameters": {
+        "partitionBy": ["AccountId"],
+        "orderBy": [{
+          "name": "CloseDate",
+          "direction": "asc"
+        }],
+        "source": "Opportunity_Won",
+        "computedFields": [
+          {
+            "expression": {
+              "sourceField": "CloseDate",
+              "offset": "current()"
+            },
+            "name": "LastCloseDate",
+            "description": "最終受注日",
+            "label": "最終受注日"
+          },
+          {
+            "expression": {
+              "sourceField": "CloseDate",
+              "offset": "first()"
+            },
+            "name": "FirstCloseDate",
+            "description": "初回受注日",
+            "label": "初回受注日"
+          }
+        ]
+      }
+    },
+    "SFDC_EA_SP_Activity": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "活動(EA Starter Pack)",
+        "alias": "${App.Datasets.SFDC_EA_SP_Activity.FullyQualifiedName}",
+        "source": "Activity_AddColumn"
+      }
+    },
+    "SFDC_EA_SP_Account": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "rowLevelSecurityFilter": "",
+        "name": "取引先(EA Starter Pack)",
+        "alias": "${App.Datasets.SFDC_EA_SP_Account.FullyQualifiedName}",
+        "source": "Account_AddOpportunityColumnSum"
+      }
+    },
+    "SFDC_EA_SP_OpportunityLineItem": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "商談商品(EA Starter Pack)",
+        "alias": "${App.Datasets.SFDC_EA_SP_OpportunityLineItem.FullyQualifiedName}",
+        "source": "OpportunityLineItem_Product"
+      }
+    },
+    "Account_AddColumn": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Account_User",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "defaultValue": "0",
+            "precision": 18,
+            "name": "LastActivityDays",
+            "saqlExpression": "daysBetween(toDate('LastActivityDate_sec_epoch'),now())\n",
+            "scale": 0,
+            "label": "最終活動経過日数",
+            "type": "Numeric"
+          },
+          {
+            "name": "SubGraphDim1",
+            "saqlExpression": "'AccountSource'",
+            "label": "取引先ソース(カスタムSub)",
+            "type": "Text"
+          },
+          {
+            "name": "SubGraphDim2",
+            "saqlExpression": "'Rating'",
+            "label": "取引先 評価(カスタムSub)",
+            "type": "Text"
+          },
+          {
+            "name": "MainGraphDim1",
+            "saqlExpression": "'owner.Name'",
+            "label": "所有者(カスタム)",
+            "type": "Text"
+          },
+          {
+            "name": "MainGraphDim2",
+            "saqlExpression": "'AccountSource'",
+            "label": "取引先ソース(カスタム)",
+            "type": "Text"
+          },
+          {
+            "name": "MainGraphDim3",
+            "saqlExpression": "'Rating'",
+            "label": "取引先 評価(カスタム)",
+            "type": "Text"
+          },
+          {
+            "name": "MainGraphDim4",
+            "saqlExpression": "'Industry'",
+            "label": "業種(カスタム)",
+            "type": "Text"
+          },
+          {
+            "name": "MainGraphDim5",
+            "saqlExpression": "'owner.role.Name'",
+            "label": "ロール(カスタム)",
+            "type": "Text"
+          },
+          {
+            "name": "MainGraphTotalDim",
+            "saqlExpression": "\"合計\"",
+            "label": "合計",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "Account_User": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "AccountBase",
+        "left_key": ["OwnerId"],
+        "right_select": [
+          "Department",
+          "Email",
+          "EmployeeNumber",
+          "Name",
+          "SmallPhotoUrl",
+          "Title",
+          "Username",
+          "UserRoleId",
+          "UserType",
+          "ManagerId",
+          "FullPhotoUrl",
+          "MediumPhotoUrl",
+          "IsActive",
+          "role.Name",
+          "manager.Name",
+          "manager.Department",
+          "manager.Title",
+          "manager.FullPhotoUrl",
+          "manager.MediumPhotoUrl",
+          "manager.SmallPhotoUrl",
+          "manager.UserRoleId",
+          "manager.Email",
+          "manager.EmployeeNumber",
+          "manager.IsActive",
+          "manager.role.Name"
+        ],
+        "right": "User_UserManager",
+        "relationship": "owner",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "User_UserManager": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "User_UserRole",
+        "left_key": ["ManagerId"],
+        "right_select": [
+          "Name",
+          "Department",
+          "Title",
+          "FullPhotoUrl",
+          "MediumPhotoUrl",
+          "SmallPhotoUrl",
+          "UserRoleId",
+          "Email",
+          "EmployeeNumber",
+          "IsActive",
+          "role.Name"
+        ],
+        "right": "Manager_ManagerRole",
+        "relationship": "manager",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Lead_Opportunity": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "Lead_Account",
+        "left_key": ["ConvertedOpportunityId"],
+        "right_select": [
+          "Amount",
+          "CloseDate",
+          "IsClosed",
+          "IsWon",
+          "Name",
+          "StageName",
+          "Type",
+          "OpportunityDays",
+          "LastActivityDays",
+          "FiscalFirstMonth",
+          "FiscalMonthDiv"
+        ],
+        "right": "Opportunity_Campaign",
+        "relationship": "opportunity",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "ManagerRoleBase": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "Name"}
+        ],
+        "object": "UserRole"
+      }
+    },
+    "Event_AddColumn": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "EventBase",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "IsClosed",
+          "saqlExpression": "case when toDate('ActivityDate_sec_epoch') < now() then \"true\"\n         else \"false\" end ",
+          "label": "完了フラグ",
+          "type": "Text"
+        }]
+      }
+    },
+    "Opportunity_Won": {
+      "action": "filter",
+      "parameters": {
+        "source": "Opportunity_User",
+        "saqlFilter": "'IsWon' == \"true\""
+      }
+    },
+    "Case_User": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CaseBase",
+        "left_key": ["OwnerId"],
+        "right_select": [
+          "FullPhotoUrl",
+          "Name"
+        ],
+        "right": "User_UserManager",
+        "relationship": "owner",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "ContactBase": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {
+            "fiscalMonthOffset": 3,
+            "name": "CreatedDate",
+            "isYearEndFiscalYear": true
+          },
+          {"name": "Department"},
+          {"name": "Email"},
+          {"name": "Fax"},
+          {"name": "Id"},
+          {
+            "fiscalMonthOffset": 3,
+            "name": "LastActivityDate",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "fiscalMonthOffset": 3,
+            "name": "LastModifiedDate",
+            "isYearEndFiscalYear": true
+          },
+          {"name": "Name"},
+          {"name": "MobilePhone"},
+          {"name": "OwnerId"},
+          {"name": "Phone"},
+          {"name": "PhotoUrl"},
+          {"name": "Title"}
+        ],
+        "complexFilterConditions": "IsDeleted = false",
+        "object": "Contact"
+      }
+    },
+    "Opportunity_Campaign": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "Opportunity_AddColumn",
+        "left_key": ["CampaignId"],
+        "right_select": ["Name"],
+        "right": "CampaignBase",
+        "relationship": "campaign",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Case_Account": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "Case_User",
+        "left_key": ["AccountId"],
+        "right_select": [
+          "Name",
+          "AnnualRevenue",
+          "Industry",
+          "NumberOfEmployees",
+          "LastActivityDays",
+          "SubGraphDim1",
+          "SubGraphDim2",
+          "MainGraphDim1",
+          "MainGraphDim2",
+          "MainGraphDim3",
+          "MainGraphDim4",
+          "MainGraphDim5",
+          "MainGraphTotalDim",
+          "opportunity.FirstCloseDate",
+          "opportunity.FirstCloseDate_Days",
+          "opportunity.LastCloseDate_Days_Range",
+          "opportunity.FirstCloseDate_Days_Range",
+          "AccountNumber",
+          "AccountSource",
+          "BillingState",
+          "oppsum.WonCnt",
+          "oppsum.Amount",
+          "Rating",
+          "Site",
+          "Phone"
+        ],
+        "right": "Account_AddOpportunityColumnSum",
+        "relationship": "account",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "EventBase": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {
+            "fiscalMonthOffset": 3,
+            "name": "ActivityDate",
+            "isYearEndFiscalYear": true
+          },
+          {"name": "Description"},
+          {"name": "Id"},
+          {"name": "OwnerId"},
+          {"name": "Subject"},
+          {"name": "WhatId"},
+          {"name": "WhoId"},
+          {
+            "fiscalMonthOffset": 3,
+            "name": "StartDateTime",
+            "isYearEndFiscalYear": true
+          }
+        ],
+        "complexFilterConditions": "IsDeleted = false",
+        "object": "Event"
+      }
+    },
+    "Contact_User": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "ContactBase",
+        "left_key": ["OwnerId"],
+        "right_select": [
+          "Department",
+          "Email",
+          "EmployeeNumber",
+          "Name",
+          "SmallPhotoUrl",
+          "Title",
+          "Username",
+          "UserRoleId",
+          "UserType",
+          "ManagerId",
+          "FullPhotoUrl",
+          "MediumPhotoUrl",
+          "IsActive",
+          "role.Name",
+          "manager.Name",
+          "manager.Department",
+          "manager.Title",
+          "manager.FullPhotoUrl",
+          "manager.MediumPhotoUrl",
+          "manager.SmallPhotoUrl",
+          "manager.UserRoleId",
+          "manager.Email",
+          "manager.EmployeeNumber",
+          "manager.IsActive",
+          "manager.role.Name"
+        ],
+        "right": "User_UserManager",
+        "relationship": "owner",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "SFDC_EA_SP_CampaignMember": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "キャンペーンメンバー(EA Starter Pack)",
+        "alias": "${App.Datasets.SFDC_EA_SP_CampaignMember.FullyQualifiedName}",
+        "source": "CampaignMember_User"
+      }
+    },
+    "Lead_User": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "LeadBase",
+        "left_key": ["OwnerId"],
+        "right_select": [
+          "Department",
+          "Email",
+          "EmployeeNumber",
+          "Name",
+          "SmallPhotoUrl",
+          "Title",
+          "Username",
+          "UserRoleId",
+          "UserType",
+          "ManagerId",
+          "FullPhotoUrl",
+          "MediumPhotoUrl",
+          "IsActive",
+          "role.Name",
+          "manager.Name",
+          "manager.Department",
+          "manager.Title",
+          "manager.FullPhotoUrl",
+          "manager.MediumPhotoUrl",
+          "manager.SmallPhotoUrl",
+          "manager.UserRoleId",
+          "manager.Email",
+          "manager.EmployeeNumber",
+          "manager.IsActive",
+          "manager.role.Name"
+        ],
+        "right": "User_UserManager",
+        "relationship": "owner",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CampaignMember_User": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CampaignMember_Contact",
+        "left_key": ["LeadOrContactOwnerId"],
+        "right_select": ["Name"],
+        "right": "User_UserManager",
+        "relationship": "owner",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Contact_AddColumn": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Contact_User",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "defaultValue": "0",
+          "precision": 18,
+          "name": "LastActivityDays",
+          "saqlExpression": "daysBetween(toDate('LastActivityDate_sec_epoch'),now())\n",
+          "scale": 0,
+          "label": "最終活動経過日数",
+          "type": "Numeric"
+        }]
+      }
+    },
+    "OpportunityLineItem_Opportunity": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "OpportunityLineItemBase",
+        "left_key": ["OpportunityId"],
+        "right_select": [
+          "Amount",
+          "CloseDate",
+          "CreatedDate",
+          "Description",
+          "IsClosed",
+          "IsWon",
+          "LeadSource",
+          "Name",
+          "NextStep",
+          "OwnerId",
+          "Probability",
+          "StageName",
+          "ContactId",
+          "CampaignId",
+          "LastActivityDate",
+          "LastModifiedDate",
+          "owner.Department",
+          "owner.Email",
+          "owner.EmployeeNumber",
+          "owner.Name",
+          "owner.SmallPhotoUrl",
+          "owner.Title",
+          "owner.Username",
+          "owner.UserRoleId",
+          "owner.UserType",
+          "owner.ManagerId",
+          "owner.FullPhotoUrl",
+          "owner.MediumPhotoUrl",
+          "owner.IsActive",
+          "owner.role.Name",
+          "owner.manager.Name",
+          "owner.manager.Department",
+          "owner.manager.Title",
+          "owner.manager.FullPhotoUrl",
+          "owner.manager.MediumPhotoUrl",
+          "owner.manager.SmallPhotoUrl",
+          "owner.manager.UserRoleId",
+          "owner.manager.Email",
+          "owner.manager.EmployeeNumber",
+          "owner.manager.IsActive",
+          "owner.manager.role.Name",
+          "account.AccountNumber",
+          "account.AccountSource",
+          "account.AnnualRevenue",
+          "account.BillingState",
+          "account.Industry",
+          "account.MainGraphDim1",
+          "account.MainGraphDim2",
+          "account.MainGraphDim3",
+          "account.MainGraphDim4",
+          "account.MainGraphDim5",
+          "account.MainGraphTotalDim",
+          "account.Name",
+          "account.NumberOfEmployees",
+          "account.opportunity.FirstCloseDate",
+          "account.opportunity.FirstCloseDate_Days",
+          "account.opportunity.FirstCloseDate_Days_Range",
+          "account.opportunity.LastCloseDate",
+          "account.opportunity.LastCloseDate_Days",
+          "account.opportunity.LastCloseDate_Days_Range",
+          "account.oppsum.Amount",
+          "account.oppsum.WonCnt",
+          "account.Phone",
+          "account.Rating",
+          "account.Site",
+          "account.SubGraphDim1",
+          "account.SubGraphDim2",
+          "AccountId",
+          "Type"
+        ],
+        "right": "Opportunity_Account",
+        "relationship": "opportunity",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "SFDC_EA_SP_Campaign": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "キャンペーン(EA Starter Pack)",
+        "alias": "${App.Datasets.SFDC_EA_SP_Campaign.FullyQualifiedName}",
+        "source": "CampaignBase"
+      }
+    },
+    "Opportunity_Won_AddColumn": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Opportunity_AddLastCloseDate",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 10,
+            "name": "LastCloseDate_Days",
+            "saqlExpression": "daysBetween(toDate('LastCloseDate_sec_epoch'),now())\n",
+            "scale": 0,
+            "label": "最終受注経過日数",
+            "type": "Numeric"
+          },
+          {
+            "defaultValue": "0",
+            "precision": 18,
+            "name": "WonCnt",
+            "saqlExpression": "1",
+            "scale": 0,
+            "label": "WonCnt",
+            "type": "Numeric"
+          },
+          {
+            "precision": 10,
+            "name": "FirstCloseDate_Days",
+            "saqlExpression": "daysBetween(toDate('FirstCloseDate_sec_epoch'),now())\n",
+            "scale": 0,
+            "label": "初回受注経過日数",
+            "type": "Numeric"
+          },
+          {
+            "name": "LastCloseDate_Days_Range",
+            "saqlExpression": "case when 'LastCloseDate' is null then null\n     when daysBetween(toDate('LastCloseDate_sec_epoch'),now()) < 10 then \"01. < 10日\"\n     when daysBetween(toDate('LastCloseDate_sec_epoch'),now()) < 30 then \"02. < 30日\"\n     when daysBetween(toDate('LastCloseDate_sec_epoch'),now()) < 60 then \"03. < 60日\"\n     when daysBetween(toDate('LastCloseDate_sec_epoch'),now()) < 90 then \"04. < 90日\"\n     when daysBetween(toDate('LastCloseDate_sec_epoch'),now()) < 180 then \"05. < 180日\"\n     when daysBetween(toDate('LastCloseDate_sec_epoch'),now()) < 365 then \"06. < 1年\"\n     else \"07. >= 1年\" end\n",
+            "label": "最終受注経過日数帯",
+            "type": "Text"
+          },
+          {
+            "name": "FirstCloseDate_Days_Range",
+            "saqlExpression": "case when 'FirstCloseDate' is null then null\n     when daysBetween(toDate('FirstCloseDate_sec_epoch'),now()) < 10   then \"01. < 10日\"\n     when daysBetween(toDate('FirstCloseDate_sec_epoch'),now()) < 30   then \"02. < 30日\"\n     when daysBetween(toDate('FirstCloseDate_sec_epoch'),now()) < 60   then \"03. < 60日\"\n     when daysBetween(toDate('FirstCloseDate_sec_epoch'),now()) < 90   then \"04. < 90日\"\n     when daysBetween(toDate('FirstCloseDate_sec_epoch'),now()) < 180  then \"05. < 180日\"\n     when daysBetween(toDate('FirstCloseDate_sec_epoch'),now()) < 365  then \"06. < 1年\"\n     when daysBetween(toDate('FirstCloseDate_sec_epoch'),now()) < 730  then \"07. < 2年\"\n     when daysBetween(toDate('FirstCloseDate_sec_epoch'),now()) < 1095 then \"08. < 3年\"\n     when daysBetween(toDate('FirstCloseDate_sec_epoch'),now()) < 1460 then \"09. < 4年\"\n     else \"10. >= 5年\" end\n",
+            "label": "初回受注経過日数帯",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "Activity_AddColumn": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Activity_Account",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "ActivityWhatType",
+            "saqlExpression": "case when starts_with('WhatId', \"500\") then \"3.ケース\"\n         when starts_with('WhatId', \"006\") then \"2.商談\"\n         when starts_with('WhatId', \"001\") then \"1.取引先\"\n         else \"4.その他\" end ",
+            "label": "関連先種別",
+            "type": "Text"
+          },
+          {
+            "precision": 18,
+            "name": "ActivityDate_Days",
+            "saqlExpression": "daysBetween(toDate('ActivityDate_sec_epoch'),now())",
+            "scale": 0,
+            "label": "活動経過日数",
+            "type": "Numeric"
+          },
+          {
+            "name": "ActivityDate_Days_Range",
+            "saqlExpression": "case when 'ActivityDate' is null then null\n     when daysBetween(toDate('ActivityDate_sec_epoch'),now()) < 10 then \"01. < 10日\"\n     when daysBetween(toDate('ActivityDate_sec_epoch'),now()) < 30 then \"02. < 30日\"\n     when daysBetween(toDate('ActivityDate_sec_epoch'),now()) < 60 then \"03. < 60日\"\n     when daysBetween(toDate('ActivityDate_sec_epoch'),now()) < 90 then \"04. < 90日\"\n     when daysBetween(toDate('ActivityDate_sec_epoch'),now()) < 180 then \"05. < 180日\"\n     when daysBetween(toDate('ActivityDate_sec_epoch'),now()) < 365 then \"06. < 1年\"\n     else \"07. >= 1年\" end\n",
+            "label": "活動経過日数帯",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "CampaignBase": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Name"},
+          {"name": "Id"},
+          {"name": "ActualCost"},
+          {"name": "AmountAllOpportunities"},
+          {"name": "AmountWonOpportunities"},
+          {"name": "BudgetedCost"},
+          {"name": "CampaignMemberRecordTypeId"},
+          {
+            "fiscalMonthOffset": 3,
+            "name": "CreatedDate",
+            "isYearEndFiscalYear": true
+          },
+          {"name": "CreatedById"},
+          {"name": "Description"},
+          {
+            "fiscalMonthOffset": 3,
+            "name": "EndDate",
+            "isYearEndFiscalYear": true
+          },
+          {"name": "ExpectedResponse"},
+          {"name": "ExpectedRevenue"},
+          {"name": "IsActive"},
+          {
+            "fiscalMonthOffset": 3,
+            "name": "LastActivityDate",
+            "isYearEndFiscalYear": true
+          },
+          {"name": "LastModifiedById"},
+          {
+            "fiscalMonthOffset": 3,
+            "name": "LastModifiedDate",
+            "isYearEndFiscalYear": true
+          },
+          {"name": "NumberOfContacts"},
+          {"name": "NumberOfConvertedLeads"},
+          {"name": "NumberOfLeads"},
+          {"name": "NumberOfOpportunities"},
+          {"name": "NumberOfResponses"},
+          {"name": "NumberOfWonOpportunities"},
+          {"name": "NumberSent"},
+          {"name": "OwnerId"},
+          {
+            "fiscalMonthOffset": 3,
+            "name": "StartDate",
+            "isYearEndFiscalYear": true
+          },
+          {"name": "Status"},
+          {"name": "Type"}
+        ],
+        "complexFilterConditions": "IsDeleted = false",
+        "object": "Campaign"
+      }
+    },
+    "SFDC_EA_SP_Case": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "ケース(EA Starter Pack)",
+        "alias": "${App.Datasets.SFDC_EA_SP_Case.FullyQualifiedName}",
+        "source": "Case_AddColumn"
+      }
+    },
+    "Case_Contact": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "Case_Account",
+        "left_key": ["ContactId"],
+        "right_select": [
+          "Name",
+          "Title",
+          "LastActivityDays"
+        ],
+        "right": "Contact_Account",
+        "relationship": "contact",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "UserBase": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Department"},
+          {"name": "Email"},
+          {"name": "EmployeeNumber"},
+          {"name": "Id"},
+          {"name": "Name"},
+          {"name": "SmallPhotoUrl"},
+          {"name": "Title"},
+          {"name": "Username"},
+          {"name": "UserRoleId"},
+          {"name": "UserType"},
+          {"name": "ManagerId"},
+          {"name": "FullPhotoUrl"},
+          {"name": "MediumPhotoUrl"},
+          {"name": "IsActive"}
+        ],
+        "object": "User"
+      }
+    },
+    "Activity_User": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "ActivityBase",
+        "left_key": ["OwnerId"],
+        "right_select": [
+          "Department",
+          "Email",
+          "EmployeeNumber",
+          "Name",
+          "SmallPhotoUrl",
+          "Title",
+          "Username",
+          "UserRoleId",
+          "UserType",
+          "ManagerId",
+          "FullPhotoUrl",
+          "MediumPhotoUrl",
+          "IsActive",
+          "role.Name",
+          "manager.Name",
+          "manager.Department",
+          "manager.Title",
+          "manager.FullPhotoUrl",
+          "manager.MediumPhotoUrl",
+          "manager.SmallPhotoUrl",
+          "manager.UserRoleId",
+          "manager.Email",
+          "manager.EmployeeNumber",
+          "manager.IsActive",
+          "manager.role.Name"
+        ],
+        "right": "User_UserManager",
+        "relationship": "owner",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Opportunity_AddColumn": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Opportunity_AddFiscalFirstMonth",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "CloseDate_m",
+            "saqlExpression": "'CloseDate_Month'",
+            "label": "完了予定日(月)",
+            "type": "Text"
+          },
+          {
+            "name": "ProbabilityRange",
+            "saqlExpression": "case when 'Probability' >= 10 and 'Probability' < 30 then \"≧ 10\"\n         when 'Probability' >= 30 and 'Probability' < 60 then \"≧ 30\"\n         when 'Probability' >= 60 and 'Probability' < 100 then \"≧ 60\"\n         else null end\n",
+            "label": "確度帯",
+            "type": "Text"
+          },
+          {
+            "defaultValue": "0",
+            "precision": 18,
+            "name": "OpportunityDays",
+            "saqlExpression": "daysBetween(toDate('CreatedDate_sec_epoch'),now())",
+            "scale": 0,
+            "label": "商談日数",
+            "type": "Numeric"
+          },
+          {
+            "defaultValue": "0",
+            "precision": 18,
+            "name": "LastActivityDays",
+            "saqlExpression": "daysBetween(toDate('LastActivityDate_sec_epoch'),now())",
+            "scale": 0,
+            "label": "最終活動経過日数",
+            "type": "Numeric"
+          },
+          {
+            "name": "Fiscal_CloseDate_m",
+            "saqlExpression": "case when 'FiscalFirstMonth' == \"1\" then\n     case when 'CloseDate_Month' == \"01\" then \"01.  1月\"\n          when 'CloseDate_Month' == \"02\" then \"02.  2月\"\n          when 'CloseDate_Month' == \"03\" then \"03.  3月\"\n          when 'CloseDate_Month' == \"04\" then \"04.  4月\"\n          when 'CloseDate_Month' == \"05\" then \"05.  5月\"\n          when 'CloseDate_Month' == \"06\" then \"06.  6月\" \n          when 'CloseDate_Month' == \"07\" then \"07.  7月\" \n          when 'CloseDate_Month' == \"08\" then \"08.  8月\" \n          when 'CloseDate_Month' == \"09\" then \"09.  9月\" \n          when 'CloseDate_Month' == \"10\" then \"10. 10月\"\n          when 'CloseDate_Month' == \"11\" then \"11. 11月\"\n          when 'CloseDate_Month' == \"12\" then \"12. 12月\"\n          else null end\n     when 'FiscalFirstMonth' == \"2\" then\n     case when 'CloseDate_Month' == \"01\" then \"12.  1月\"\n          when 'CloseDate_Month' == \"02\" then \"01.  2月\"\n          when 'CloseDate_Month' == \"03\" then \"02.  3月\"\n          when 'CloseDate_Month' == \"04\" then \"03.  4月\"\n          when 'CloseDate_Month' == \"05\" then \"04.  5月\"\n          when 'CloseDate_Month' == \"06\" then \"05.  6月\" \n          when 'CloseDate_Month' == \"07\" then \"06.  7月\" \n          when 'CloseDate_Month' == \"08\" then \"07.  8月\" \n          when 'CloseDate_Month' == \"09\" then \"08.  9月\" \n          when 'CloseDate_Month' == \"10\" then \"09. 10月\"\n          when 'CloseDate_Month' == \"11\" then \"10. 11月\"\n          when 'CloseDate_Month' == \"12\" then \"11. 12月\"\n          else null end\n     when 'FiscalFirstMonth' == \"3\" then\n     case when 'CloseDate_Month' == \"01\" then \"11.  1月\"\n          when 'CloseDate_Month' == \"02\" then \"12.  2月\"\n          when 'CloseDate_Month' == \"03\" then \"01.  3月\"\n          when 'CloseDate_Month' == \"04\" then \"02.  4月\"\n          when 'CloseDate_Month' == \"05\" then \"03.  5月\"\n          when 'CloseDate_Month' == \"06\" then \"04.  6月\" \n          when 'CloseDate_Month' == \"07\" then \"05.  7月\" \n          when 'CloseDate_Month' == \"08\" then \"06.  8月\" \n          when 'CloseDate_Month' == \"09\" then \"07.  9月\" \n          when 'CloseDate_Month' == \"10\" then \"08. 10月\"\n          when 'CloseDate_Month' == \"11\" then \"09. 11月\"\n          when 'CloseDate_Month' == \"12\" then \"10. 12月\"\n          else null end\n     when 'FiscalFirstMonth' == \"4\" then\n     case when 'CloseDate_Month' == \"01\" then \"10.  1月\"\n          when 'CloseDate_Month' == \"02\" then \"11.  2月\"\n          when 'CloseDate_Month' == \"03\" then \"12.  3月\"\n          when 'CloseDate_Month' == \"04\" then \"01.  4月\"\n          when 'CloseDate_Month' == \"05\" then \"02.  5月\"\n          when 'CloseDate_Month' == \"06\" then \"03.  6月\" \n          when 'CloseDate_Month' == \"07\" then \"04.  7月\" \n          when 'CloseDate_Month' == \"08\" then \"05.  8月\" \n          when 'CloseDate_Month' == \"09\" then \"06.  9月\" \n          when 'CloseDate_Month' == \"10\" then \"07. 10月\"\n          when 'CloseDate_Month' == \"11\" then \"08. 11月\"\n          when 'CloseDate_Month' == \"12\" then \"09. 12月\"\n          else null end\n     when 'FiscalFirstMonth' == \"5\" then\n     case when 'CloseDate_Month' == \"01\" then \"09.  1月\"\n          when 'CloseDate_Month' == \"02\" then \"10.  2月\"\n          when 'CloseDate_Month' == \"03\" then \"11.  3月\"\n          when 'CloseDate_Month' == \"04\" then \"12.  4月\"\n          when 'CloseDate_Month' == \"05\" then \"01.  5月\"\n          when 'CloseDate_Month' == \"06\" then \"02.  6月\" \n          when 'CloseDate_Month' == \"07\" then \"03.  7月\" \n          when 'CloseDate_Month' == \"08\" then \"04.  8月\" \n          when 'CloseDate_Month' == \"09\" then \"05.  9月\" \n          when 'CloseDate_Month' == \"10\" then \"06. 10月\"\n          when 'CloseDate_Month' == \"11\" then \"07. 11月\"\n          when 'CloseDate_Month' == \"12\" then \"08. 12月\"\n          else null end\n     when 'FiscalFirstMonth' == \"6\" then\n     case when 'CloseDate_Month' == \"01\" then \"08.  1月\"\n          when 'CloseDate_Month' == \"02\" then \"09.  2月\"\n          when 'CloseDate_Month' == \"03\" then \"10.  3月\"\n          when 'CloseDate_Month' == \"04\" then \"11.  4月\"\n          when 'CloseDate_Month' == \"05\" then \"12.  5月\"\n          when 'CloseDate_Month' == \"06\" then \"01.  6月\" \n          when 'CloseDate_Month' == \"07\" then \"02.  7月\" \n          when 'CloseDate_Month' == \"08\" then \"03.  8月\" \n          when 'CloseDate_Month' == \"09\" then \"04.  9月\" \n          when 'CloseDate_Month' == \"10\" then \"05. 10月\"\n          when 'CloseDate_Month' == \"11\" then \"06. 11月\"\n          when 'CloseDate_Month' == \"12\" then \"07. 12月\"\n          else null end\n     when 'FiscalFirstMonth' == \"7\" then\n     case when 'CloseDate_Month' == \"01\" then \"07.  1月\"\n          when 'CloseDate_Month' == \"02\" then \"08.  2月\"\n          when 'CloseDate_Month' == \"03\" then \"09.  3月\"\n          when 'CloseDate_Month' == \"04\" then \"10.  4月\"\n          when 'CloseDate_Month' == \"05\" then \"11.  5月\"\n          when 'CloseDate_Month' == \"06\" then \"12.  6月\" \n          when 'CloseDate_Month' == \"07\" then \"01.  7月\" \n          when 'CloseDate_Month' == \"08\" then \"02.  8月\" \n          when 'CloseDate_Month' == \"09\" then \"03.  9月\" \n          when 'CloseDate_Month' == \"10\" then \"04. 10月\"\n          when 'CloseDate_Month' == \"11\" then \"05. 11月\"\n          when 'CloseDate_Month' == \"12\" then \"06. 12月\"\n          else null end\n     when 'FiscalFirstMonth' == \"8\" then\n     case when 'CloseDate_Month' == \"01\" then \"06.  1月\"\n          when 'CloseDate_Month' == \"02\" then \"07.  2月\"\n          when 'CloseDate_Month' == \"03\" then \"08.  3月\"\n          when 'CloseDate_Month' == \"04\" then \"09.  4月\"\n          when 'CloseDate_Month' == \"05\" then \"10.  5月\"\n          when 'CloseDate_Month' == \"06\" then \"11.  6月\" \n          when 'CloseDate_Month' == \"07\" then \"12.  7月\" \n          when 'CloseDate_Month' == \"08\" then \"01.  8月\" \n          when 'CloseDate_Month' == \"09\" then \"02.  9月\" \n          when 'CloseDate_Month' == \"10\" then \"03. 10月\"\n          when 'CloseDate_Month' == \"11\" then \"04. 11月\"\n          when 'CloseDate_Month' == \"12\" then \"05. 12月\"\n          else null end\n     when 'FiscalFirstMonth' == \"9\" then\n     case when 'CloseDate_Month' == \"01\" then \"05.  1月\"\n          when 'CloseDate_Month' == \"02\" then \"06.  2月\"\n          when 'CloseDate_Month' == \"03\" then \"07.  3月\"\n          when 'CloseDate_Month' == \"04\" then \"08.  4月\"\n          when 'CloseDate_Month' == \"05\" then \"09.  5月\"\n          when 'CloseDate_Month' == \"06\" then \"10.  6月\" \n          when 'CloseDate_Month' == \"07\" then \"11.  7月\" \n          when 'CloseDate_Month' == \"08\" then \"12.  8月\" \n          when 'CloseDate_Month' == \"09\" then \"01.  9月\" \n          when 'CloseDate_Month' == \"10\" then \"02. 10月\"\n          when 'CloseDate_Month' == \"11\" then \"03. 11月\"\n          when 'CloseDate_Month' == \"12\" then \"04. 12月\"\n          else null end\n     when 'FiscalFirstMonth' == \"10\" then\n     case when 'CloseDate_Month' == \"01\" then \"04.  1月\"\n          when 'CloseDate_Month' == \"02\" then \"05.  2月\"\n          when 'CloseDate_Month' == \"03\" then \"06.  3月\"\n          when 'CloseDate_Month' == \"04\" then \"07.  4月\"\n          when 'CloseDate_Month' == \"05\" then \"08.  5月\"\n          when 'CloseDate_Month' == \"06\" then \"09.  6月\" \n          when 'CloseDate_Month' == \"07\" then \"10.  7月\" \n          when 'CloseDate_Month' == \"08\" then \"11.  8月\" \n          when 'CloseDate_Month' == \"09\" then \"12.  9月\" \n          when 'CloseDate_Month' == \"10\" then \"01. 10月\"\n          when 'CloseDate_Month' == \"11\" then \"02. 11月\"\n          when 'CloseDate_Month' == \"12\" then \"03. 12月\"\n          else null end\n     when 'FiscalFirstMonth' == \"11\" then\n     case when 'CloseDate_Month' == \"01\" then \"03.  1月\"\n          when 'CloseDate_Month' == \"02\" then \"04.  2月\"\n          when 'CloseDate_Month' == \"03\" then \"05.  3月\"\n          when 'CloseDate_Month' == \"04\" then \"06.  4月\"\n          when 'CloseDate_Month' == \"05\" then \"07.  5月\"\n          when 'CloseDate_Month' == \"06\" then \"08.  6月\" \n          when 'CloseDate_Month' == \"07\" then \"09.  7月\" \n          when 'CloseDate_Month' == \"08\" then \"10.  8月\" \n          when 'CloseDate_Month' == \"09\" then \"11.  9月\" \n          when 'CloseDate_Month' == \"10\" then \"12. 10月\"\n          when 'CloseDate_Month' == \"11\" then \"01. 11月\"\n          when 'CloseDate_Month' == \"12\" then \"02. 12月\"\n          else null end\n     when 'FiscalFirstMonth' == \"12\" then\n     case when 'CloseDate_Month' == \"01\" then \"02.  1月\"\n          when 'CloseDate_Month' == \"02\" then \"03.  2月\"\n          when 'CloseDate_Month' == \"03\" then \"04.  3月\"\n          when 'CloseDate_Month' == \"04\" then \"05.  4月\"\n          when 'CloseDate_Month' == \"05\" then \"06.  5月\"\n          when 'CloseDate_Month' == \"06\" then \"07.  6月\" \n          when 'CloseDate_Month' == \"07\" then \"08.  7月\" \n          when 'CloseDate_Month' == \"08\" then \"09.  8月\" \n          when 'CloseDate_Month' == \"09\" then \"10.  9月\" \n          when 'CloseDate_Month' == \"10\" then \"11. 10月\"\n          when 'CloseDate_Month' == \"11\" then \"12. 11月\"\n          when 'CloseDate_Month' == \"12\" then \"01. 12月\"\n          else null end\n     else\n     case when 'CloseDate_Month' == \"01\" then \"02.  1月\"\n          when 'CloseDate_Month' == \"02\" then \"03.  2月\"\n          when 'CloseDate_Month' == \"03\" then \"04.  3月\"\n          when 'CloseDate_Month' == \"04\" then \"05.  4月\"\n          when 'CloseDate_Month' == \"05\" then \"06.  5月\"\n          when 'CloseDate_Month' == \"06\" then \"07.  6月\" \n          when 'CloseDate_Month' == \"07\" then \"08.  7月\" \n          when 'CloseDate_Month' == \"08\" then \"09.  8月\" \n          when 'CloseDate_Month' == \"09\" then \"10.  9月\" \n          when 'CloseDate_Month' == \"10\" then \"11. 10月\"\n          when 'CloseDate_Month' == \"11\" then \"12. 11月\"\n          when 'CloseDate_Month' == \"12\" then \"01. 12月\"\n          else null end\n     end\n",
+            "label": "完了予定日(会計月)",
+            "type": "Text"
+          },
+          {
+            "name": "FiscalMonthDiv",
+            "saqlExpression": "case when 'FiscalFirstMonth' == \"1\" then\n     case when 'CloseDate_Month' == \"01\" then \"1\"\n          when 'CloseDate_Month' == \"02\" then \"2\"\n          when 'CloseDate_Month' == \"03\" then \"3\"\n          when 'CloseDate_Month' == \"04\" then \"4\"\n          when 'CloseDate_Month' == \"05\" then \"5\"\n          when 'CloseDate_Month' == \"06\" then \"6\" \n          when 'CloseDate_Month' == \"07\" then \"7\" \n          when 'CloseDate_Month' == \"08\" then \"8\" \n          when 'CloseDate_Month' == \"09\" then \"9\" \n          when 'CloseDate_Month' == \"10\" then \"10\"\n          when 'CloseDate_Month' == \"11\" then \"11\"\n          when 'CloseDate_Month' == \"12\" then \"12\"\n          else null end\n     when 'FiscalFirstMonth' == \"2\" then\n     case when 'CloseDate_Month' == \"01\" then \"12\"\n          when 'CloseDate_Month' == \"02\" then \"1\"\n          when 'CloseDate_Month' == \"03\" then \"2\"\n          when 'CloseDate_Month' == \"04\" then \"3\"\n          when 'CloseDate_Month' == \"05\" then \"4\"\n          when 'CloseDate_Month' == \"06\" then \"5\" \n          when 'CloseDate_Month' == \"07\" then \"6\" \n          when 'CloseDate_Month' == \"08\" then \"7\" \n          when 'CloseDate_Month' == \"09\" then \"8\" \n          when 'CloseDate_Month' == \"10\" then \"9\"\n          when 'CloseDate_Month' == \"11\" then \"10\"\n          when 'CloseDate_Month' == \"12\" then \"11\"\n          else null end\n     when 'FiscalFirstMonth' == \"3\" then\n     case when 'CloseDate_Month' == \"01\" then \"11\"\n          when 'CloseDate_Month' == \"02\" then \"12\"\n          when 'CloseDate_Month' == \"03\" then \"1\"\n          when 'CloseDate_Month' == \"04\" then \"2\"\n          when 'CloseDate_Month' == \"05\" then \"3\"\n          when 'CloseDate_Month' == \"06\" then \"4\" \n          when 'CloseDate_Month' == \"07\" then \"5\" \n          when 'CloseDate_Month' == \"08\" then \"6\" \n          when 'CloseDate_Month' == \"09\" then \"7\" \n          when 'CloseDate_Month' == \"10\" then \"8\"\n          when 'CloseDate_Month' == \"11\" then \"9\"\n          when 'CloseDate_Month' == \"12\" then \"10\"\n          else null end\n     when 'FiscalFirstMonth' == \"4\" then\n     case when 'CloseDate_Month' == \"01\" then \"10\"\n          when 'CloseDate_Month' == \"02\" then \"11\"\n          when 'CloseDate_Month' == \"03\" then \"12\"\n          when 'CloseDate_Month' == \"04\" then \"1\"\n          when 'CloseDate_Month' == \"05\" then \"2\"\n          when 'CloseDate_Month' == \"06\" then \"3\" \n          when 'CloseDate_Month' == \"07\" then \"4\" \n          when 'CloseDate_Month' == \"08\" then \"5\" \n          when 'CloseDate_Month' == \"09\" then \"6\" \n          when 'CloseDate_Month' == \"10\" then \"7\"\n          when 'CloseDate_Month' == \"11\" then \"8\"\n          when 'CloseDate_Month' == \"12\" then \"9\"\n          else null end\n     when 'FiscalFirstMonth' == \"5\" then\n     case when 'CloseDate_Month' == \"01\" then \"9\"\n          when 'CloseDate_Month' == \"02\" then \"10\"\n          when 'CloseDate_Month' == \"03\" then \"11\"\n          when 'CloseDate_Month' == \"04\" then \"12\"\n          when 'CloseDate_Month' == \"05\" then \"1\"\n          when 'CloseDate_Month' == \"06\" then \"2\" \n          when 'CloseDate_Month' == \"07\" then \"3\" \n          when 'CloseDate_Month' == \"08\" then \"4\" \n          when 'CloseDate_Month' == \"09\" then \"5\" \n          when 'CloseDate_Month' == \"10\" then \"6\"\n          when 'CloseDate_Month' == \"11\" then \"7\"\n          when 'CloseDate_Month' == \"12\" then \"8\"\n          else null end\n     when 'FiscalFirstMonth' == \"6\" then\n     case when 'CloseDate_Month' == \"01\" then \"8\"\n          when 'CloseDate_Month' == \"02\" then \"9\"\n          when 'CloseDate_Month' == \"03\" then \"10\"\n          when 'CloseDate_Month' == \"04\" then \"11\"\n          when 'CloseDate_Month' == \"05\" then \"12\"\n          when 'CloseDate_Month' == \"06\" then \"1\" \n          when 'CloseDate_Month' == \"07\" then \"2\" \n          when 'CloseDate_Month' == \"08\" then \"3\" \n          when 'CloseDate_Month' == \"09\" then \"4\" \n          when 'CloseDate_Month' == \"10\" then \"5\"\n          when 'CloseDate_Month' == \"11\" then \"6\"\n          when 'CloseDate_Month' == \"12\" then \"7\"\n          else null end\n     when 'FiscalFirstMonth' == \"7\" then\n     case when 'CloseDate_Month' == \"01\" then \"7\"\n          when 'CloseDate_Month' == \"02\" then \"8\"\n          when 'CloseDate_Month' == \"03\" then \"9\"\n          when 'CloseDate_Month' == \"04\" then \"10\"\n          when 'CloseDate_Month' == \"05\" then \"11\"\n          when 'CloseDate_Month' == \"06\" then \"12\" \n          when 'CloseDate_Month' == \"07\" then \"1\" \n          when 'CloseDate_Month' == \"08\" then \"2\" \n          when 'CloseDate_Month' == \"09\" then \"3\" \n          when 'CloseDate_Month' == \"10\" then \"4\"\n          when 'CloseDate_Month' == \"11\" then \"5\"\n          when 'CloseDate_Month' == \"12\" then \"6\"\n          else null end\n     when 'FiscalFirstMonth' == \"8\" then\n     case when 'CloseDate_Month' == \"01\" then \"6\"\n          when 'CloseDate_Month' == \"02\" then \"7\"\n          when 'CloseDate_Month' == \"03\" then \"8\"\n          when 'CloseDate_Month' == \"04\" then \"9\"\n          when 'CloseDate_Month' == \"05\" then \"10\"\n          when 'CloseDate_Month' == \"06\" then \"11\" \n          when 'CloseDate_Month' == \"07\" then \"12\" \n          when 'CloseDate_Month' == \"08\" then \"1\" \n          when 'CloseDate_Month' == \"09\" then \"2\" \n          when 'CloseDate_Month' == \"10\" then \"3\"\n          when 'CloseDate_Month' == \"11\" then \"4\"\n          when 'CloseDate_Month' == \"12\" then \"5\"\n          else null end\n     when 'FiscalFirstMonth' == \"9\" then\n     case when 'CloseDate_Month' == \"01\" then \"5\"\n          when 'CloseDate_Month' == \"02\" then \"6\"\n          when 'CloseDate_Month' == \"03\" then \"7\"\n          when 'CloseDate_Month' == \"04\" then \"8\"\n          when 'CloseDate_Month' == \"05\" then \"9\"\n          when 'CloseDate_Month' == \"06\" then \"10\" \n          when 'CloseDate_Month' == \"07\" then \"11\" \n          when 'CloseDate_Month' == \"08\" then \"12\" \n          when 'CloseDate_Month' == \"09\" then \"1\" \n          when 'CloseDate_Month' == \"10\" then \"2\"\n          when 'CloseDate_Month' == \"11\" then \"3\"\n          when 'CloseDate_Month' == \"12\" then \"4\"\n          else null end\n     when 'FiscalFirstMonth' == \"10\" then\n     case when 'CloseDate_Month' == \"01\" then \"4\"\n          when 'CloseDate_Month' == \"02\" then \"5\"\n          when 'CloseDate_Month' == \"03\" then \"6\"\n          when 'CloseDate_Month' == \"04\" then \"7\"\n          when 'CloseDate_Month' == \"05\" then \"8\"\n          when 'CloseDate_Month' == \"06\" then \"9\" \n          when 'CloseDate_Month' == \"07\" then \"10\" \n          when 'CloseDate_Month' == \"08\" then \"11\" \n          when 'CloseDate_Month' == \"09\" then \"12\" \n          when 'CloseDate_Month' == \"10\" then \"1\"\n          when 'CloseDate_Month' == \"11\" then \"2\"\n          when 'CloseDate_Month' == \"12\" then \"3\"\n          else null end\n     when 'FiscalFirstMonth' == \"11\" then\n     case when 'CloseDate_Month' == \"01\" then \"3\"\n          when 'CloseDate_Month' == \"02\" then \"4\"\n          when 'CloseDate_Month' == \"03\" then \"5\"\n          when 'CloseDate_Month' == \"04\" then \"6\"\n          when 'CloseDate_Month' == \"05\" then \"7\"\n          when 'CloseDate_Month' == \"06\" then \"8\" \n          when 'CloseDate_Month' == \"07\" then \"9\" \n          when 'CloseDate_Month' == \"08\" then \"10\" \n          when 'CloseDate_Month' == \"09\" then \"11\" \n          when 'CloseDate_Month' == \"10\" then \"12\"\n          when 'CloseDate_Month' == \"11\" then \"1\"\n          when 'CloseDate_Month' == \"12\" then \"2\"\n          else null end\n     when 'FiscalFirstMonth' == \"12\" then\n     case when 'CloseDate_Month' == \"01\" then \"2\"\n          when 'CloseDate_Month' == \"02\" then \"3\"\n          when 'CloseDate_Month' == \"03\" then \"4\"\n          when 'CloseDate_Month' == \"04\" then \"5\"\n          when 'CloseDate_Month' == \"05\" then \"6\"\n          when 'CloseDate_Month' == \"06\" then \"7\" \n          when 'CloseDate_Month' == \"07\" then \"8\" \n          when 'CloseDate_Month' == \"08\" then \"9\" \n          when 'CloseDate_Month' == \"09\" then \"10\" \n          when 'CloseDate_Month' == \"10\" then \"11\"\n          when 'CloseDate_Month' == \"11\" then \"12\"\n          when 'CloseDate_Month' == \"12\" then \"1\"\n          else null end\n     else\n     case when 'CloseDate_Month' == \"01\" then \"1\"\n          when 'CloseDate_Month' == \"02\" then \"2\"\n          when 'CloseDate_Month' == \"03\" then \"3\"\n          when 'CloseDate_Month' == \"04\" then \"4\"\n          when 'CloseDate_Month' == \"05\" then \"5\"\n          when 'CloseDate_Month' == \"06\" then \"6\" \n          when 'CloseDate_Month' == \"07\" then \"7\" \n          when 'CloseDate_Month' == \"08\" then \"8\" \n          when 'CloseDate_Month' == \"09\" then \"9\" \n          when 'CloseDate_Month' == \"10\" then \"10\"\n          when 'CloseDate_Month' == \"11\" then \"11\"\n          when 'CloseDate_Month' == \"12\" then \"12\"\n          else null end\n     end\n",
+            "label": "FiscalMonthDiv",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "SFDC_EA_SP_Opportunity": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "rowLevelSecurityFilter": "",
+        "name": "商談(EA Starter Pack)",
+        "alias": "${App.Datasets.SFDC_EA_SP_Opportunity.FullyQualifiedName}",
+        "source": "Opportunity_Campaign"
+      }
+    },
+    "Account_AddOpportunityColumn": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["AccountId"],
+        "left": "Account_AddColumn",
+        "left_key": ["Id"],
+        "right_select": [
+          "LastCloseDate",
+          "LastCloseDate_Days",
+          "WonCnt",
+          "FirstCloseDate",
+          "FirstCloseDate_Days",
+          "LastCloseDate_Days_Range",
+          "FirstCloseDate_Days_Range"
+        ],
+        "right": "Opportunity_Won_AddColumn",
+        "relationship": "opportunity",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "ProductBase": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Description"},
+          {"name": "Family"},
+          {"name": "Id"},
+          {"name": "IsActive"},
+          {"name": "IsArchived"},
+          {"name": "Name"},
+          {"name": "ProductCode"},
+          {"name": "StockKeepingUnit"},
+          {"name": "QuantityUnitOfMeasure"}
+        ],
+        "complexFilterConditions": "IsDeleted = false",
+        "object": "Product2"
+      }
+    },
+    "LeadBase": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "LastName"},
+          {"name": "FirstName"},
+          {"name": "Name"},
+          {"name": "Phone"},
+          {"name": "MobilePhone"},
+          {"name": "Status"},
+          {"name": "Email"},
+          {"name": "Industry"},
+          {"name": "Company"},
+          {"name": "Country"},
+          {"name": "City"},
+          {
+            "fiscalMonthOffset": 3,
+            "name": "LastActivityDate",
+            "isYearEndFiscalYear": true
+          },
+          {"name": "LeadSource"},
+          {"name": "OwnerId"},
+          {"name": "PostalCode"},
+          {"name": "Rating"},
+          {"name": "State"},
+          {"name": "Title"},
+          {
+            "fiscalMonthOffset": 3,
+            "name": "CreatedDate",
+            "isYearEndFiscalYear": true
+          },
+          {"name": "ConvertedContactId"},
+          {"name": "ConvertedAccountId"},
+          {
+            "fiscalMonthOffset": 3,
+            "name": "ConvertedDate",
+            "isYearEndFiscalYear": true
+          },
+          {"name": "ConvertedOpportunityId"},
+          {"name": "IsConverted"},
+          {"name": "CreatedById"},
+          {
+            "fiscalMonthOffset": 3,
+            "name": "LastModifiedDate",
+            "isYearEndFiscalYear": true
+          },
+          {"name": "NumberOfEmployees"},
+          {"name": "Website"},
+          {
+            "fiscalMonthOffset": 3,
+            "name": "EmailBouncedDate",
+            "isYearEndFiscalYear": true
+          },
+          {"name": "EmailBouncedReason"}
+        ],
+        "complexFilterConditions": "IsDeleted = false",
+        "object": "Lead"
+      }
+    },
+    "Opportunity_AddFiscalFirstMonth": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Opportunity_Account",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "FiscalFirstMonth",
+          "saqlExpression": "\"4\"",
+          "label": "期初月",
+          "type": "Text"
+        }]
+      }
+    },
+    "Contact_Account": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "Contact_AddColumn",
+        "left_key": ["AccountId"],
+        "right_select": [
+          "Name",
+          "AccountSource",
+          "AnnualRevenue",
+          "BillingState",
+          "Industry",
+          "NumberOfEmployees",
+          "Rating",
+          "Type",
+          "opportunity.FirstCloseDate",
+          "opportunity.LastCloseDate_Days",
+          "opportunity.FirstCloseDate_Days",
+          "opportunity.LastCloseDate_Days_Range",
+          "opportunity.FirstCloseDate_Days_Range",
+          "oppsum.Amount",
+          "oppsum.WonCnt",
+          "opportunity.LastCloseDate",
+          "SubGraphDim1",
+          "SubGraphDim2",
+          "MainGraphDim1",
+          "MainGraphDim2",
+          "MainGraphDim3",
+          "MainGraphDim4",
+          "MainGraphDim5",
+          "MainGraphTotalDim"
+        ],
+        "right": "Account_AddOpportunityColumnSum",
+        "relationship": "account",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "OpportunityBase": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {"name": "Amount"},
+          {
+            "fiscalMonthOffset": 3,
+            "name": "CloseDate",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "fiscalMonthOffset": 3,
+            "name": "CreatedDate",
+            "isYearEndFiscalYear": true
+          },
+          {"name": "Description"},
+          {"name": "Id"},
+          {"name": "IsClosed"},
+          {"name": "IsWon"},
+          {"name": "LeadSource"},
+          {"name": "Name"},
+          {"name": "NextStep"},
+          {"name": "OwnerId"},
+          {"name": "Probability"},
+          {"name": "StageName"},
+          {"name": "Type"},
+          {"name": "ContactId"},
+          {"name": "CampaignId"},
+          {
+            "fiscalMonthOffset": 3,
+            "name": "LastActivityDate",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "fiscalMonthOffset": 3,
+            "name": "LastModifiedDate",
+            "isYearEndFiscalYear": true
+          }
+        ],
+        "complexFilterConditions": "IsDeleted = false",
+        "object": "Opportunity"
+      }
+    },
+    "CampaignMember_Campaign": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CampaignMemberBase",
+        "left_key": ["CampaignId"],
+        "right_select": [
+          "Name",
+          "IsActive",
+          "StartDate",
+          "Status",
+          "Type"
+        ],
+        "right": "CampaignBase",
+        "relationship": "campaign",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "ManagerBase": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Name"},
+          {"name": "Id"},
+          {"name": "Department"},
+          {"name": "Title"},
+          {"name": "FullPhotoUrl"},
+          {"name": "MediumPhotoUrl"},
+          {"name": "SmallPhotoUrl"},
+          {"name": "UserRoleId"},
+          {"name": "Email"},
+          {"name": "EmployeeNumber"},
+          {"name": "IsActive"}
+        ],
+        "object": "User"
+      }
+    },
+    "TaskBase": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {
+            "fiscalMonthOffset": 3,
+            "name": "ActivityDate",
+            "isYearEndFiscalYear": true
+          },
+          {"name": "AccountId"},
+          {"name": "Id"},
+          {"name": "IsClosed"},
+          {"name": "OwnerId"},
+          {"name": "Priority"},
+          {"name": "Subject"},
+          {"name": "Status"},
+          {"name": "Description"},
+          {"name": "WhatId"},
+          {"name": "WhoId"}
+        ],
+        "complexFilterConditions": "IsDeleted = false",
+        "object": "Task"
+      }
+    },
+    "User_UserRole": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "UserBase",
+        "left_key": ["UserRoleId"],
+        "right_select": ["Name"],
+        "right": "UserRoleBase",
+        "relationship": "role",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CaseBase": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {
+            "fiscalMonthOffset": 3,
+            "name": "ClosedDate",
+            "isYearEndFiscalYear": true
+          },
+          {"name": "CaseNumber"},
+          {"name": "Comments"},
+          {"name": "ContactId"},
+          {"name": "Description"},
+          {"name": "Id"},
+          {"name": "IsClosed"},
+          {"name": "IsEscalated"},
+          {
+            "fiscalMonthOffset": 3,
+            "name": "LastModifiedDate",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "fiscalMonthOffset": 3,
+            "name": "CreatedDate",
+            "isYearEndFiscalYear": true
+          },
+          {"name": "Origin"},
+          {"name": "OwnerId"},
+          {"name": "ParentId"},
+          {"name": "Priority"},
+          {"name": "Reason"},
+          {"name": "Status"},
+          {"name": "Subject"},
+          {"name": "Type"}
+        ],
+        "complexFilterConditions": "isDeleted = false",
+        "object": "Case"
+      }
+    },
+    "CampaignMemberBase": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "CampaignId"},
+          {"name": "Id"},
+          {"name": "LeadOrContactOwnerId"},
+          {"name": "HasResponded"},
+          {"name": "HasOptedOutOfEmail"},
+          {"name": "HasOptedOutOfFax"},
+          {"name": "FirstRespondedDate"},
+          {"name": "Status"},
+          {"name": "City"},
+          {"name": "CompanyOrAccount"},
+          {"name": "Description"},
+          {"name": "Email"},
+          {"name": "DoNotCall"},
+          {"name": "Fax"},
+          {"name": "LeadOrContactId"},
+          {"name": "LeadSource"},
+          {"name": "MobilePhone"},
+          {"name": "Name"},
+          {"name": "Phone"},
+          {"name": "State"},
+          {"name": "PostalCode"},
+          {"name": "Street"},
+          {"name": "Title"},
+          {"name": "Type"}
+        ],
+        "complexFilterConditions": "isDeleted = false",
+        "object": "CampaignMember"
+      }
+    },
+    "OpportunityLineItemBase": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "ListPrice"},
+          {"name": "Name"},
+          {"name": "OpportunityId"},
+          {"name": "PricebookEntryId"},
+          {"name": "Product2Id"},
+          {"name": "ProductCode"},
+          {"name": "Quantity"},
+          {"name": "ServiceDate"},
+          {"name": "TotalPrice"},
+          {"name": "UnitPrice"},
+          {"name": "SortOrder"},
+          {"name": "Description"}
+        ],
+        "complexFilterConditions": "IsDeleted = false",
+        "object": "OpportunityLineItem"
+      }
+    },
+    "OpportunityLineItem_Product": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "OpportunityLineItem_Opportunity",
+        "left_key": ["Product2Id"],
+        "right_select": [
+          "Description",
+          "Family",
+          "IsActive",
+          "IsArchived",
+          "Name",
+          "ProductCode",
+          "StockKeepingUnit",
+          "QuantityUnitOfMeasure"
+        ],
+        "right": "ProductBase",
+        "relationship": "product",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Manager_ManagerRole": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "ManagerBase",
+        "left_key": ["UserRoleId"],
+        "right_select": ["Name"],
+        "right": "ManagerRoleBase",
+        "relationship": "role",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Lead_Account": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "Lead_User",
+        "left_key": ["ConvertedAccountId"],
+        "right_select": [
+          "Name",
+          "SubGraphDim1",
+          "SubGraphDim2",
+          "MainGraphDim1",
+          "MainGraphDim2",
+          "MainGraphDim3",
+          "MainGraphDim4",
+          "MainGraphDim5",
+          "MainGraphTotalDim",
+          "AccountNumber",
+          "AccountSource",
+          "AnnualRevenue",
+          "BillingState",
+          "Industry",
+          "NumberOfEmployees",
+          "oppsum.Amount",
+          "oppsum.WonCnt",
+          "opportunity.FirstCloseDate",
+          "opportunity.FirstCloseDate_Days",
+          "opportunity.FirstCloseDate_Days_Range",
+          "opportunity.LastCloseDate",
+          "opportunity.LastCloseDate_Days",
+          "opportunity.LastCloseDate_Days_Range",
+          "Phone",
+          "Site",
+          "Rating"
+        ],
+        "right": "Account_AddOpportunityColumnSum",
+        "relationship": "account",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Opportunity_Account": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "Opportunity_User",
+        "left_key": ["AccountId"],
+        "right_select": [
+          "AccountNumber",
+          "AccountSource",
+          "AnnualRevenue",
+          "BillingState",
+          "Industry",
+          "MainGraphDim1",
+          "MainGraphDim2",
+          "MainGraphDim3",
+          "MainGraphDim4",
+          "MainGraphDim5",
+          "MainGraphTotalDim",
+          "Name",
+          "NumberOfEmployees",
+          "opportunity.FirstCloseDate",
+          "opportunity.FirstCloseDate_Days",
+          "opportunity.FirstCloseDate_Days_Range",
+          "opportunity.LastCloseDate",
+          "opportunity.LastCloseDate_Days",
+          "opportunity.LastCloseDate_Days_Range",
+          "oppsum.Amount",
+          "oppsum.WonCnt",
+          "Phone",
+          "Rating",
+          "Site",
+          "SubGraphDim2",
+          "SubGraphDim1"
+        ],
+        "right": "Account_AddOpportunityColumnSum",
+        "relationship": "account",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Case_AddColumn": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Case_Contact",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "precision": 18,
+          "name": "CaseDays",
+          "saqlExpression": "case when 'IsClosed' == \"false\" then daysBetween(toDate('CreatedDate_sec_epoch'), now())\nelse daysBetween(toDate('CreatedDate_sec_epoch'), toDate('ClosedDate_sec_epoch')) end",
+          "scale": 0,
+          "label": "問合せ対応日数",
+          "type": "Numeric"
+        }]
+      }
+    },
+    "UserRoleBase": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "Name"}
+        ],
+        "object": "UserRole"
+      }
+    },
+    "Lead_AddColumn": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Lead_Opportunity",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "CreatedDate_Days",
+            "saqlExpression": "daysBetween(toDate('CreatedDate_sec_epoch'),now())",
+            "scale": 0,
+            "label": "リード作成経過日数",
+            "type": "Numeric"
+          },
+          {
+            "name": "CreatedDate_Days_Range",
+            "saqlExpression": "case when 'CreatedDate' is null then null\n     when daysBetween(toDate('CreatedDate_sec_epoch'),now()) < 1 then \"01. < 1日\"\n     when daysBetween(toDate('CreatedDate_sec_epoch'),now()) < 2 then \"02. < 2日\"\n     when daysBetween(toDate('CreatedDate_sec_epoch'),now()) < 5 then \"03. < 5日\"\n     when daysBetween(toDate('CreatedDate_sec_epoch'),now()) < 10 then \"04. < 10日\"\n     when daysBetween(toDate('CreatedDate_sec_epoch'),now()) < 30 then \"05. < 30日\"\n     when daysBetween(toDate('CreatedDate_sec_epoch'),now()) < 60 then \"06. < 60日\"\n     when daysBetween(toDate('CreatedDate_sec_epoch'),now()) < 90 then \"07. < 90日\"\n     when daysBetween(toDate('CreatedDate_sec_epoch'),now()) < 180 then \"08. < 180日\"\n     when daysBetween(toDate('CreatedDate_sec_epoch'),now()) < 365 then \"09. < 1年\"\n     else \"10. >= 1年\" end",
+            "label": "リード作成経過日数帯",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "Opportunity_User": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "OpportunityBase",
+        "left_key": ["OwnerId"],
+        "right_select": [
+          "Department",
+          "Email",
+          "EmployeeNumber",
+          "Name",
+          "SmallPhotoUrl",
+          "Title",
+          "Username",
+          "UserRoleId",
+          "UserType",
+          "ManagerId",
+          "FullPhotoUrl",
+          "MediumPhotoUrl",
+          "IsActive",
+          "role.Name",
+          "manager.Name",
+          "manager.Department",
+          "manager.Title",
+          "manager.FullPhotoUrl",
+          "manager.MediumPhotoUrl",
+          "manager.SmallPhotoUrl",
+          "manager.UserRoleId",
+          "manager.Email",
+          "manager.EmployeeNumber",
+          "manager.IsActive",
+          "manager.role.Name"
+        ],
+        "right": "User_UserManager",
+        "relationship": "owner",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "Account_AddOpportunityColumnSum": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["AccountId"],
+        "left": "Account_AddOpportunityColumn",
+        "left_key": ["Id"],
+        "right_select": [
+          "WonCnt",
+          "Amount"
+        ],
+        "right": "Opportunity_Won_AddColumn",
+        "relationship": "oppsum",
+        "operation": "LookupMultiValue"
+      }
+    },
+    "Activity_Account": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "Activity_User",
+        "left_key": ["AccountId"],
+        "right_select": [
+          "Name",
+          "AnnualRevenue",
+          "BillingState",
+          "Industry",
+          "NumberOfEmployees",
+          "Rating",
+          "Type",
+          "SubGraphDim1",
+          "SubGraphDim2",
+          "MainGraphDim1",
+          "MainGraphDim2",
+          "MainGraphDim3",
+          "MainGraphDim4",
+          "MainGraphDim5",
+          "MainGraphTotalDim",
+          "opportunity.LastCloseDate",
+          "opportunity.FirstCloseDate",
+          "opportunity.LastCloseDate_Days",
+          "opportunity.FirstCloseDate_Days",
+          "opportunity.LastCloseDate_Days_Range",
+          "opportunity.FirstCloseDate_Days_Range",
+          "oppsum.Amount",
+          "oppsum.WonCnt",
+          "AccountNumber",
+          "AccountSource",
+          "Phone",
+          "Site"
+        ],
+        "right": "Account_AddOpportunityColumnSum",
+        "relationship": "account",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "CampaignMember_Contact": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "CampaignMember_Campaign",
+        "left_key": ["LeadOrContactId"],
+        "right_select": ["Name"],
+        "right": "Contact_Account",
+        "relationship": "contact",
+        "operation": "LookupSingleValue"
+      }
+    },
+    "ActivityBase": {
+      "action": "append",
+      "parameters": {
+        "enableDisjointedSchemaMerge": true,
+        "sources": [
+          "Event_AddColumn",
+          "TaskBase"
+        ]
+      }
+    },
+    "SFDC_EA_SP_Lead": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "リード(EA Starter Pack)",
+        "alias": "${App.Datasets.SFDC_EA_SP_Lead.FullyQualifiedName}",
+        "source": "Lead_AddColumn"
+      }
+    },
+    "AccountBase": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "Name"},
+          {"name": "AccountSource"},
+          {"name": "AccountNumber"},
+          {"name": "AnnualRevenue"},
+          {"name": "BillingState"},
+          {"name": "Description"},
+          {
+            "fiscalMonthOffset": 3,
+            "name": "CreatedDate",
+            "isYearEndFiscalYear": true
+          },
+          {"name": "Industry"},
+          {"name": "NumberOfEmployees"},
+          {"name": "OwnerId"},
+          {"name": "Phone"},
+          {"name": "PhotoUrl"},
+          {"name": "Rating"},
+          {"name": "Site"},
+          {"name": "Type"},
+          {"name": "Website"},
+          {
+            "fiscalMonthOffset": 3,
+            "name": "LastActivityDate",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "fiscalMonthOffset": 3,
+            "name": "LastModifiedDate",
+            "isYearEndFiscalYear": true
+          }
+        ],
+        "complexFilterConditions": "IsDeleted = false",
+        "object": "Account"
+      }
+    }
+  },
+  "_type": "dataflow",
+  "description": "Extract, load, and transform for application [Einstein Analytics Starter Pack].",
+  "MasterLabel": "Einstein Analytics Starter Pack",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive",
+  "isDeletable": true,
+  "longRunningAlertInMins": "",
+  "DataflowType": "USER",
+  "name": "Einstein_Analytics_Starter_Pack",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": ""
+}
