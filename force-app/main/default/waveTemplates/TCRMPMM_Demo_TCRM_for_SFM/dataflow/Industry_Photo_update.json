@@ -1,0 +1,48 @@
+{
+  "isDeletable": true,
+  "notificationLevel": "Never",
+  "workflowDefinition": {
+    "Load_Dataset": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.Team_Performance.FullyQualifiedName}"}
+    },
+    "Update": {
+      "action": "update",
+      "parameters": {
+        "right_key": ["Name"],
+        "left": "Load_Dataset",
+        "left_key": ["Name"],
+        "update_columns": {"SmallPhotoUrl": "SmallPhotoUrl"},
+        "right": "Extract_User"
+      }
+    },
+    "Extract_User": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Name"},
+          {"name": "SmallPhotoUrl"},
+          {"name": "Id"}
+        ],
+        "object": "User"
+      }
+    },
+    "Register_Dataset": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Team Performance",
+        "alias": "${App.Datasets.Team_Performance.FullyQualifiedName}",
+        "source": "Update"
+      }
+    }
+  },
+  "DataflowType": "USER",
+  "_type": "dataflow",
+  "name": "Industry_Photo_update",
+  "description": "Industry Photo update",
+  "MasterLabel": "Industry Photo update",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": "",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive"
+}
