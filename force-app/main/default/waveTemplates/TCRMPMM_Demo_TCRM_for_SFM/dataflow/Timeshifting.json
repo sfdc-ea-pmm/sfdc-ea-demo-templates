@@ -21,10 +21,10 @@
         "mode": "drop",
         "source": "Compute_Aux_Insurance_Policy",
         "fields": [
+          {"name": "LastProcessedDate"},
           {"name": "RenewalDate"},
           {"name": "ExpirationDate"},
-          {"name": "EffectiveDate"},
-          {"name": "LastProcessedDate"}
+          {"name": "EffectiveDate"}
         ]
       }
     },
@@ -32,7 +32,7 @@
       "action": "sfdcRegister",
       "parameters": {
         "name": "Insurance_Policy",
-        "alias": "${App.Datasets.Insurance_Policy.FullyQualifiedName}",
+        "alias": "${App.Datasets.Insurance_Policy3.FullyQualifiedName}",
         "source": "Drop_Aux_Insurance_Policy"
       }
     },
@@ -45,7 +45,7 @@
           {
             "precision": 18,
             "name": "ElapsedSeconds",
-            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "saqlExpression": "(86400 * 30) * date_diff(\"month\", toDate('LastProcessedDate_sec_epoch'), now())",
             "scale": 0,
             "label": "ElapsedSeconds",
             "type": "Numeric"
@@ -120,12 +120,13 @@
     },
     "Load_Dataset_Insurance_Policy": {
       "action": "edgemart",
-      "parameters": {"alias": "${App.Datasets.Insurance_Policy.FullyQualifiedName}"}
+      "parameters": {"alias": "${App.Datasets.Insurance_Policy3.FullyQualifiedName}"}
     }
   },
   "DataflowType": "USER",
   "_type": "dataflow",
   "name": "Timeshifting",
+  "description": "Extract, load, and transform for application [testeo_Timeshifting].",
   "MasterLabel": "Demo - SFM - Timeshifting",
   "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
   "_uid": "",
