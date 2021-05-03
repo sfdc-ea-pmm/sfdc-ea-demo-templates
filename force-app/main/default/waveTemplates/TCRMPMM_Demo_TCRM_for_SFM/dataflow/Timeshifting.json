@@ -1,0 +1,135 @@
+{
+  "isDeletable": true,
+  "notificationLevel": "Never",
+  "workflowDefinition": {
+    "Drop_Aux_Insurance_Policy": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_Insurance_Policy",
+        "fields": [
+          {"name": "RenewalDate_Aux"},
+          {"name": "ExpirationDate_Aux"},
+          {"name": "EffectiveDate_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Drop_Dates_Insurance_Policy": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_Insurance_Policy",
+        "fields": [
+          {"name": "LastProcessedDate"},
+          {"name": "RenewalDate"},
+          {"name": "ExpirationDate"},
+          {"name": "EffectiveDate"}
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_Insurance_Policy": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Insurance_Policy",
+        "alias": "${App.Datasets.Insurance_Policy3.FullyQualifiedName}",
+        "source": "Drop_Aux_Insurance_Policy"
+      }
+    },
+    "Compute_Aux_Insurance_Policy": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_Insurance_Policy",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "(86400 * 30) * date_diff(\"month\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "RenewalDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('RenewalDate_sec_epoch')",
+            "label": "RenewalDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ExpirationDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ExpirationDate_sec_epoch')",
+            "label": "ExpirationDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "EffectiveDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('EffectiveDate_sec_epoch')",
+            "label": "EffectiveDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Shift_Dates_Insurance_Policy": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_Insurance_Policy",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "RenewalDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('RenewalDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "RenewalDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ExpirationDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ExpirationDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "ExpirationDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "EffectiveDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('EffectiveDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "EffectiveDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Load_Dataset_Insurance_Policy": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.Insurance_Policy3.FullyQualifiedName}"}
+    }
+  },
+  "DataflowType": "USER",
+  "_type": "dataflow",
+  "name": "Timeshifting",
+  "description": "Extract, load, and transform for application [testeo_Timeshifting].",
+  "MasterLabel": "Demo - SFM - Timeshifting",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": "",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive"
+}
