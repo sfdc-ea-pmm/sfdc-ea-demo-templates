@@ -1,0 +1,286 @@
+{
+  "notificationLevel": "",
+  "workflowDefinition": {
+    "Drop_Aux_Quote_FOR_DEMO1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_Quote_FOR_DEMO1",
+        "fields": [
+          {"name": "Account_Created_Date_Aux"},
+          {"name": "CreatedDate_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Load_Dataset_Opportunity_FOR_DEMO1": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.Opportunity_FOR_DEMO1.FullyQualifiedName}"}
+    },
+    "Load_Dataset_Quota_FOR_DEMO1": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.Quota_FOR_DEMO1.FullyQualifiedName}"}
+    },
+    "Drop_Dates_Quote_FOR_DEMO1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_Quote_FOR_DEMO1",
+        "fields": [
+          {"name": "Account_Created_Date"},
+          {"name": "CreatedDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Compute_Aux_Opportunity_FOR_DEMO1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_Opportunity_FOR_DEMO1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "CloseDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CloseDate_sec_epoch')",
+            "label": "CloseDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Dates_Opportunity_FOR_DEMO1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_Opportunity_FOR_DEMO1",
+        "fields": [
+          {"name": "CloseDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Drop_Aux_Opportunity_FOR_DEMO1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_Opportunity_FOR_DEMO1",
+        "fields": [
+          {"name": "CloseDate_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_Quota_FOR_DEMO1": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Quota_FOR_DEMO1",
+        "alias": "${App.Datasets.Quota_FOR_DEMO1.FullyQualifiedName}",
+        "source": "Drop_Aux_Quota_FOR_DEMO1"
+      }
+    },
+    "Drop_Aux_Quota_FOR_DEMO1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_Quota_FOR_DEMO1",
+        "fields": [
+          {"name": "StartDate_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Shift_Dates_Quota_FOR_DEMO1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_Quota_FOR_DEMO1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "StartDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('StartDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "﻿StartDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Compute_Aux_Quota_FOR_DEMO1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_Quota_FOR_DEMO1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "StartDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('StartDate_sec_epoch')",
+            "label": "StartDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Shift_Dates_Opportunity_FOR_DEMO1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_Opportunity_FOR_DEMO1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CloseDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CloseDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CloseDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_Opportunity_FOR_DEMO1": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Opportunity_FOR_DEMO1",
+        "alias": "${App.Datasets.Opportunity_FOR_DEMO1.FullyQualifiedName}",
+        "source": "Drop_Aux_Opportunity_FOR_DEMO1"
+      }
+    },
+    "Drop_Dates_Quota_FOR_DEMO1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_Quota_FOR_DEMO1",
+        "fields": [
+          {"name": "StartDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Load_Dataset_Quote_FOR_DEMO1": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.Quote_FOR_DEMO1.FullyQualifiedName}"}
+    },
+    "Register_Shifted_Dataset_Quote_FOR_DEMO1": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Quote_FOR_DEMO1",
+        "alias": "${App.Datasets.Quote_FOR_DEMO1.FullyQualifiedName}",
+        "source": "Drop_Aux_Quote_FOR_DEMO1"
+      }
+    },
+    "Compute_Aux_Quote_FOR_DEMO1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_Quote_FOR_DEMO1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "Account_Created_Date_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Account_Created_Date_sec_epoch')",
+            "label": "Account_Created_Date_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Shift_Dates_Quote_FOR_DEMO1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_Quote_FOR_DEMO1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Account_Created_Date",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Account_Created_Date_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Account.Created Date",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    }
+  },
+  "_type": "dataflow",
+  "description": "Demo | B2B - Timeshifting",
+  "MasterLabel": "Demo | B2B - Timeshifting",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive",
+  "isDeletable": true,
+  "longRunningAlertInMins": "",
+  "DataflowType": "USER",
+  "name": "Demo_B2B_Timeshifting",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": ""
+}

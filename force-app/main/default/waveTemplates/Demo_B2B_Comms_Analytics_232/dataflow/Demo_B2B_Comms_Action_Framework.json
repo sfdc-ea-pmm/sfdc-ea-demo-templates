@@ -1,0 +1,157 @@
+{
+  "notificationLevel": "",
+  "workflowDefinition": {
+    "Update_Order_Account": {
+      "action": "update",
+      "parameters": {
+        "right_key": ["Name"],
+        "left": "Edg_Order",
+        "left_key": ["Account_Name"],
+        "update_columns": {"Account_ID": "Id"},
+        "right": "Digest_Account"
+      }
+    },
+    "Update_Quote_ID": {
+      "action": "update",
+      "parameters": {
+        "right_key": ["Name"],
+        "left": "Update_Quote_Account",
+        "left_key": ["Quote_Name"],
+        "update_columns": {"Quote_ID": "Id"},
+        "right": "Digest_Quote"
+      }
+    },
+    "Edg_Order": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.Order_FOR_DEMO1.FullyQualifiedName}"}
+    },
+    "Update_QuoteMember_Quote": {
+      "action": "update",
+      "parameters": {
+        "right_key": ["Name"],
+        "left": "Edg_QuoteMember",
+        "left_key": ["Quote_Name"],
+        "update_columns": {"Quote": "Id"},
+        "right": "Digest_Quote"
+      }
+    },
+    "Digest_Account": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Name"},
+          {"name": "Id"}
+        ],
+        "object": "Account"
+      }
+    },
+    "Register_Quote": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Quote - Demo",
+        "alias": "${App.Datasets.Quote_FOR_DEMO1.FullyQualifiedName}",
+        "source": "Update_Quote_ID"
+      }
+    },
+    "Digest_Quote": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Name"},
+          {"name": "QuoteNumber"},
+          {"name": "Id"}
+        ],
+        "object": "Quote"
+      }
+    },
+    "Update_OrderItem": {
+      "action": "update",
+      "parameters": {
+        "right_key": ["Name"],
+        "left": "Edg_OrderItem",
+        "left_key": ["Quote_Name"],
+        "update_columns": {"Quote": "Id"},
+        "right": "Digest_Quote"
+      }
+    },
+    "Edg_Opportunity": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.Opportunity_FOR_DEMO1.FullyQualifiedName}"}
+    },
+    "Edg_Quote": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.Quote_FOR_DEMO1.FullyQualifiedName}"}
+    },
+    "Update_Opportunity_Account": {
+      "action": "update",
+      "parameters": {
+        "right_key": ["Name"],
+        "left": "Edg_Opportunity",
+        "left_key": ["Account_Name"],
+        "update_columns": {"Account_ID": "Id"},
+        "right": "Digest_Account"
+      }
+    },
+    "Register_OrderItem": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Order Item - Demo",
+        "alias": "${App.Datasets.OrderItem_FOR_DEMO1.FullyQualifiedName}",
+        "source": "Update_OrderItem"
+      }
+    },
+    "Edg_QuoteMember": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.QuoteMember_FOR_DEMO1.FullyQualifiedName}"}
+    },
+    "Register_Order": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Order - Demo",
+        "alias": "${App.Datasets.Order_FOR_DEMO1.FullyQualifiedName}",
+        "source": "Update_Order_Account"
+      }
+    },
+    "Edg_OrderItem": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.OrderItem_FOR_DEMO1.FullyQualifiedName}"}
+    },
+    "Update_Quote_Account": {
+      "action": "update",
+      "parameters": {
+        "right_key": ["Name"],
+        "left": "Edg_Quote",
+        "left_key": ["Account_Name"],
+        "update_columns": {"Account_ID": "Id"},
+        "right": "Digest_Account"
+      }
+    },
+    "Register_Opportunity": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Opportunity - Demo",
+        "alias": "${App.Datasets.Opportunity_FOR_DEMO1.FullyQualifiedName}",
+        "source": "Update_Opportunity_Account"
+      }
+    },
+    "Register_QuoteMember": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Quote Member - Demo",
+        "alias": "${App.Datasets.QuoteMember_FOR_DEMO1.FullyQualifiedName}",
+        "source": "Update_QuoteMember_Quote"
+      }
+    }
+  },
+  "_type": "dataflow",
+  "description": "Demo B2B Comms - Action Framework",
+  "MasterLabel": "Demo B2B Comms - Action Framework",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive",
+  "isDeletable": true,
+  "longRunningAlertInMins": "",
+  "DataflowType": "USER",
+  "name": "Demo_B2B_Comms_Action_Framework",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": ""
+}
