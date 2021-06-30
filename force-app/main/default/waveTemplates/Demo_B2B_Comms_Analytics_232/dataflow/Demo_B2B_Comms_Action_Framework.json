@@ -74,9 +74,41 @@
         "right": "Digest_Quote"
       }
     },
+    "Update_Order_Orch": {
+      "action": "update",
+      "parameters": {
+        "right_key": ["AccountId"],
+        "left": "Update_AccountID_Orch",
+        "left_key": ["Account_ID"],
+        "update_columns": {"Order_ID": "Id"},
+        "right": "Digest_Order"
+      }
+    },
+    "Edg_Orchestration": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.Orchestration_FOR_DEMO1.FullyQualifiedName}"}
+    },
     "Edg_Opportunity": {
       "action": "edgemart",
       "parameters": {"alias": "${App.Datasets.Opportunity_FOR_DEMO1.FullyQualifiedName}"}
+    },
+    "Update_AccountID_Orch": {
+      "action": "update",
+      "parameters": {
+        "right_key": ["Name"],
+        "left": "Edg_Orchestration",
+        "left_key": ["Account_Name"],
+        "update_columns": {"Account_ID": "Id"},
+        "right": "Digest_Account"
+      }
+    },
+    "Register_Orch": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Orchestration - Demo",
+        "alias": "${App.Datasets.Orchestration_FOR_DEMO1.FullyQualifiedName}",
+        "source": "Update_Order_Orch"
+      }
     },
     "Edg_Quote": {
       "action": "edgemart",
@@ -132,6 +164,16 @@
         "name": "Opportunity - Demo",
         "alias": "${App.Datasets.Opportunity_FOR_DEMO1.FullyQualifiedName}",
         "source": "Update_Opportunity_Account"
+      }
+    },
+    "Digest_Order": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "AccountId"},
+          {"name": "Id"}
+        ],
+        "object": "Order"
       }
     },
     "Register_QuoteMember": {
