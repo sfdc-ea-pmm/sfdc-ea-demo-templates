@@ -1,0 +1,121 @@
+{
+  "isDeletable": true,
+  "notificationLevel": "Never",
+  "workflowDefinition": {
+    "Update_Activities_Intelligence": {
+      "action": "update",
+      "parameters": {
+        "right_key": ["Name"],
+        "left": "Edg_ActivitiesIntelligence",
+        "left_key": ["OwnerName"],
+        "update_columns": {
+          "SmallPhotoUrl": "SmallPhotoUrl",
+          "OwnerId": "Id"
+        },
+        "right": "Extract_User"
+      }
+    },
+    "edg_Revenue_Forecasting": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.ForecastSnapshotDemo.FullyQualifiedName}"}
+    },
+    "Register_Activities_Intelligence": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Activities Intelligence",
+        "alias": "${App.Datasets.RevOps_v2_Activities_Intelligence.FullyQualifiedName}",
+        "source": "Update_Activities_Intelligence"
+      }
+    },
+    "edg_Oppty_Snapshots": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.Opportunity_Snapshot_v2.FullyQualifiedName}"}
+    },
+    "Edg_ActivitiesIntelligence": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.RevOps_v2_Activities_Intelligence.FullyQualifiedName}"}
+    },
+    "Extract_Opportunity": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "Name"}
+        ],
+        "object": "Opportunity"
+      }
+    },
+    "Update_Revenue_Forecasting": {
+      "action": "update",
+      "parameters": {
+        "right_key": ["Name"],
+        "left": "edg_Revenue_Forecasting",
+        "left_key": ["OwnerName"],
+        "update_columns": {
+          "SmallPhotoUrl": "SmallPhotoUrl",
+          "OwnerId": "Id"
+        },
+        "right": "Extract_User"
+      }
+    },
+    "Update_Oppty_Name": {
+      "action": "update",
+      "parameters": {
+        "right_key": ["Name"],
+        "left": "Update_Oppty_Snapshots",
+        "left_key": ["OpportunityName"],
+        "update_columns": {"OpportunityId": "Id"},
+        "right": "Extract_Opportunity"
+      }
+    },
+    "Update_Oppty_Snapshots": {
+      "action": "update",
+      "parameters": {
+        "right_key": ["Name"],
+        "left": "edg_Oppty_Snapshots",
+        "left_key": ["OwnerName"],
+        "update_columns": {
+          "SmallPhotoUrl": "SmallPhotoUrl",
+          "OwnerId": "Id"
+        },
+        "right": "Extract_User"
+      }
+    },
+    "Register_Opportunity_Snapshot_v2": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Opportunity Snapshot v2",
+        "alias": "${App.Datasets.Opportunity_Snapshot_v2.FullyQualifiedName}",
+        "source": "Update_Oppty_Name"
+      }
+    },
+    "Extract_User": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "Name"},
+          {"name": "SmallPhotoUrl"}
+        ],
+        "object": "User"
+      }
+    },
+    "Register_Revenue_Forecasting_v2": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "ForecastSnapshotDemo",
+        "alias": "${App.Datasets.ForecastSnapshotDemo.FullyQualifiedName}",
+        "source": "Update_Revenue_Forecasting"
+      }
+    }
+  },
+  "DataflowType": "USER",
+  "_type": "dataflow",
+  "name": "Revenue_Operations_v2_AF",
+  "description": "Revenue Operations v2 - AF",
+  "MasterLabel": "Revenue Operations v2 - AF",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": "",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive"
+}
