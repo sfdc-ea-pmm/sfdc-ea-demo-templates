@@ -1,0 +1,1758 @@
+{
+  "name" : "BKP_DEMO_Subscription_Embedded_w_External_Data_tp",
+  "label" : "[DEMO] Subscription Embedded w/ External Data",
+  "folder" : {
+    "id" : "${App.Folder.Id}"
+  },
+  "dateVersion" : 1,
+  "mobileDisabled" : false,
+  "xmd" : {
+    "measures" : [
+      {
+        "conditionalFormatting" : {
+          "color" : {
+            "referenceField" : "MonthlySpend_Change_Percentage",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "rgb(255, 118, 118)",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "rgb(145, 158, 179)",
+                  "bin" : "0"
+                },
+                {
+                  "formatValue" : "rgb(83, 229, 112)",
+                  "bin" : "0.00001"
+                }
+              ]
+            }
+          }
+        },
+        "field" : "AvgMonthlySpend_1.MonthlySpend_Change_Percentage",
+        "format" : {
+          "delimiters" : { }
+        }
+      },
+      {
+        "conditionalFormatting" : {
+          "color" : {
+            "referenceField" : "DataUsage_Change_Percentage",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "rgb(255, 118, 118)",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "rgb(145, 158, 179)",
+                  "bin" : "0"
+                },
+                {
+                  "formatValue" : "rgb(83, 229, 112)",
+                  "bin" : "0.00001"
+                }
+              ]
+            }
+          }
+        },
+        "field" : "AvgDataUsage_1.DataUsage_Change_Percentage",
+        "format" : {
+          "delimiters" : { }
+        }
+      },
+      {
+        "conditionalFormatting" : {
+          "color" : {
+            "referenceField" : "Frequency Days percent change",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "rgb(255, 118, 118)",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "rgb(145, 158, 179)",
+                  "bin" : "0"
+                },
+                {
+                  "formatValue" : "rgb(83, 229, 112)",
+                  "bin" : "0.00001"
+                }
+              ]
+            }
+          }
+        },
+        "field" : "TopUpFrequency_1.Frequency Days percent change",
+        "format" : {
+          "delimiters" : { }
+        }
+      },
+      {
+        "conditionalFormatting" : {
+          "color" : {
+            "referenceField" : "AHT",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "rgb(83, 229, 112)",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "rgb(255, 118, 118)",
+                  "bin" : "250"
+                }
+              ]
+            }
+          }
+        },
+        "field" : "AHT_1.AHT",
+        "format" : {
+          "delimiters" : { }
+        }
+      }
+    ],
+    "derivedDimensions" : [ ],
+    "organizations" : [ ],
+    "showDetailsDefaultFields" : [ ],
+    "dates" : [ ],
+    "derivedMeasures" : [ ],
+    "dimensions" : [
+      {
+        "recordDisplayFields" : [ ],
+        "conditionalFormatting" : { },
+        "defaultAction" : "openActionsMenu",
+        "salesforceActions" : [ ],
+        "field" : "CustomerInteractions_2.Case.CaseNumber",
+        "members" : [ ],
+        "customActions" : [ ]
+      },
+      {
+        "recordDisplayFields" : [ ],
+        "conditionalFormatting" : { },
+        "defaultAction" : "openActionsMenu",
+        "salesforceActions" : [ ],
+        "field" : "CustomerInteractions_2.Name",
+        "members" : [ ],
+        "customActions" : [ ]
+      },
+      {
+        "recordDisplayFields" : [ ],
+        "conditionalFormatting" : { },
+        "defaultAction" : "openActionsMenu",
+        "salesforceActions" : [ ],
+        "field" : "CustomerInteractions_2.Order.OrderNumber",
+        "members" : [ ],
+        "customActions" : [ ]
+      },
+      {
+        "recordDisplayFields" : [ ],
+        "conditionalFormatting" : {
+          "color" : {
+            "referenceField" : "DurationInSeconds",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "rgb(83, 229, 112)",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "rgb(255, 118, 118)",
+                  "bin" : "250"
+                }
+              ]
+            }
+          }
+        },
+        "salesforceActions" : [ ],
+        "field" : "CustomerInteractions_2.DurationInSecondsText",
+        "members" : [ ],
+        "customActions" : [ ]
+      }
+    ]
+  },
+  "state" : {
+    "dataSourceLinks" : [
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.B2C_Comms_TopUp_and_Usage_Demo_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "Subscription_vlocity_cmt_ServiceIdentifier__c"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.B2C_Comms_CustomerInteractionTopic_Demo_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "SubscriptionId"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.B2C_Comms_Subscription_Demo_tp.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "ServiceIdentifier"
+          }
+        ],
+        "label" : "Subscription",
+        "name" : "Link_3828"
+      }
+    ],
+    "filters" : [ ],
+    "gridLayouts" : [
+      {
+        "maxWidth" : 1500,
+        "name" : "Default",
+        "numColumns" : 49,
+        "pages" : [
+          {
+            "label" : "Subscription",
+            "name" : "d7f4e0af-8e69-4136-8eda-a4c65c159c68",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 13,
+                "column" : 1,
+                "name" : "text_1",
+                "row" : 1,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 1,
+                "name" : "container_1",
+                "row" : 5,
+                "rowspan" : 11,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(22, 40, 84)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 1,
+                "name" : "text_6",
+                "row" : 5,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(AHT_1.result, 0, \"AHT indicator color\"), \"rgb(83, 229, 112)\").asObject()}}",
+                  "borderColor" : "rgb(22, 40, 84)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 1,
+                "name" : "text_10",
+                "row" : 7,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [
+                    "left"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 6,
+                "name" : "number_8",
+                "row" : 10,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(255, 255, 255, 0)",
+                  "borderEdges" : [
+                    "right"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 7,
+                "name" : "text_17",
+                "row" : 12,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [
+                    "right"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 13,
+                "name" : "container_2",
+                "row" : 5,
+                "rowspan" : 11,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(22, 40, 84)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 13,
+                "name" : "text_7",
+                "row" : 5,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(AvgDataUsage_1.result, 0, \"Data Usage indicator color\"), \"rgb(83, 229, 112)\").asObject()}}",
+                  "borderColor" : "rgb(22, 40, 84)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 13,
+                "name" : "text_11",
+                "row" : 7,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [
+                    "left"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 13,
+                "name" : "number_9",
+                "row" : 9,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(255, 255, 255, 0)",
+                  "borderEdges" : [
+                    "left"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 19,
+                "name" : "number_10",
+                "row" : 10,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(255, 255, 255, 0)",
+                  "borderEdges" : [
+                    "right"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 10,
+                "column" : 14,
+                "name" : "text_20",
+                "row" : 12,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [
+                    "right"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 25,
+                "name" : "container_4",
+                "row" : 5,
+                "rowspan" : 11,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(22, 40, 84)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 25,
+                "name" : "text_9",
+                "row" : 5,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(AvgMonthlySpend_1.result, 0,\"MonthlySpend indicator color\"),\"rgb(83, 229, 112)\").asObject()}}",
+                  "borderColor" : "rgb(22, 40, 84)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 25,
+                "name" : "text_13",
+                "row" : 7,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [
+                    "left"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 25,
+                "name" : "number_7",
+                "row" : 9,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [
+                    "left"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 31,
+                "name" : "number_5",
+                "row" : 10,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(255, 255, 255, 0)",
+                  "borderEdges" : [
+                    "right"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 10,
+                "column" : 26,
+                "name" : "text_24",
+                "row" : 12,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [
+                    "right"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 37,
+                "name" : "container_3",
+                "row" : 5,
+                "rowspan" : 11,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(22, 40, 84)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 37,
+                "name" : "text_8",
+                "row" : 5,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "{{coalesce(cell(TopUpFrequency_1.result, 0, \"Frequency Days indicator color\"),\"rgb(83, 229, 112)\").asObject()}}",
+                  "borderColor" : "rgb(22, 40, 84)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 37,
+                "name" : "text_12",
+                "row" : 7,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [
+                    "left"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 37,
+                "name" : "number_6",
+                "row" : 9,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [
+                    "left"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 43,
+                "name" : "number_1",
+                "row" : 10,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(255, 255, 255, 0)",
+                  "borderEdges" : [
+                    "right"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 10,
+                "column" : 38,
+                "name" : "text_3",
+                "row" : 12,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [
+                    "right"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 7,
+                "column" : 1,
+                "name" : "image_1",
+                "row" : 17,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 42,
+                "name" : "text_2",
+                "row" : 1,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 33,
+                "name" : "text_4",
+                "row" : 1,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 1,
+                "name" : "number_2",
+                "row" : 9,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [
+                    "left"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 8
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight" : "fine",
+        "selectors" : [ ],
+        "style" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "backgroundColor" : "rgb(12, 25, 61)",
+          "cellSpacingX" : 0,
+          "cellSpacingY" : 0,
+          "fit" : "original",
+          "gutterColor" : "#C5D3E0"
+        },
+        "version" : 1.0
+      }
+    ],
+    "layouts" : [ ],
+    "steps" : {
+      "CustomerInteractions_2" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "CustomerInteractions_Tooltip",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.B2C_Comms_CustomerInteractionTopic_Demo_tp.FullyQualifiedName}\";\nq = filter q by date('InteractionDate_Year', 'InteractionDate_Month', 'InteractionDate_Day') in [\"14 days ago\"..\"current day\"];\n\nq = foreach q generate 'CustomerInteractionId', coalesce('SubscriptionId', \"\") as 'SubscriptionId', 'InteractionTopic', 'ProcessName', 'Outcome', 'InteractionDate_Year','InteractionDate_Month','InteractionDate_Day',coalesce('CaseNumber', \"\") as 'CaseNumber', coalesce('CaseReason', \"\") as 'CaseReason', coalesce('CaseStatus', \"\") as 'CaseStatus', coalesce('OrderNumber', \"\") as 'OrderNumber', coalesce('OrderStatus', \"\") as 'OrderStatus', 'DurationInMinute'*60 as 'DurationInMinute', number_to_string('DurationInMinute'*60, \"#,##0\") as 'DurationInSecondsText';\nq = group q by ('CustomerInteractionId', 'SubscriptionId','InteractionTopic', 'ProcessName', 'InteractionDate_Year', 'InteractionDate_Month', 'InteractionDate_Day', 'Outcome', 'CaseNumber', 'CaseReason', 'CaseStatus', 'OrderNumber', 'OrderStatus', 'DurationInSecondsText');\n\nq = foreach q generate 'CustomerInteractionId' as 'CustomerInteractionId', 'SubscriptionId' as 'SubscriptionId', q.'InteractionDate_Year' + \"-\" + q.'InteractionDate_Month' + \"-\" + q.'InteractionDate_Day' as 'InteractionDate', 'CaseNumber' as 'CaseNumber', 'CaseReason' as 'CaseReason', 'CaseStatus' as 'CaseStatus', 'InteractionTopic' as 'InteractionTopic', 'ProcessName' as 'ProcessName',  'Outcome' as 'Outcome', 'OrderNumber' as 'OrderNumber', 'OrderStatus' as 'OrderStatus', first('DurationInMinute') as 'DurationInSeconds', 'DurationInSecondsText';\nq = order q by ('InteractionDate' desc, 'SubscriptionId' asc nulls last);\nq = limit q 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#54698d",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#16325c",
+              "fontColor" : "#ffffff",
+              "fontSize" : 12
+            },
+            "columnProperties" : {
+              "InteractionTopic" : {
+                "parameters" : {
+                  "alignment" : "left",
+                  "styles" : {
+                    "linkColor" : "rgb(94, 180, 255)"
+                  }
+                },
+                "type" : "text"
+              },
+              "CaseNumber" : {
+                "parameters" : {
+                  "alignment" : "left",
+                  "styles" : {
+                    "linkColor" : "rgb(94, 180, 255)"
+                  }
+                },
+                "type" : "text"
+              },
+              "OrderNumber" : {
+                "parameters" : {
+                  "alignment" : "left",
+                  "styles" : {
+                    "linkColor" : "rgb(94, 180, 255)"
+                  }
+                },
+                "type" : "text"
+              }
+            },
+            "columns" : [
+              "InteractionDate",
+              "DurationInSecondsText",
+              "SubscriptionId",
+              "CaseNumber",
+              "CaseReason",
+              "CaseStatus",
+              "InteractionTopic",
+              "ProcessName",
+              "Outcome",
+              "OrderNumber",
+              "OrderStatus"
+            ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#091A3E",
+              "fontColor" : "#ffffff",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#54698d",
+            "innerMinorBorderColor" : "#54698d",
+            "maxColumnWidth" : 200,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfFrozenColumns" : 2,
+            "numberOfLines" : 1,
+            "pivoted" : false,
+            "showActionMenu" : true,
+            "showRowIndexColumn" : false,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "AHT_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "AHT",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.B2C_Comms_CustomerInteractionTopic_Demo_tp.FullyQualifiedName}\";\nq = filter q by date('InteractionDate_Year', 'InteractionDate_Month', 'InteractionDate_Day') in [\"14 days ago\"..\"current day\"];\nq = group q by 'CustomerInteractionId';\nq = foreach q generate 'CustomerInteractionId' as 'CustomerInteractionId', first('DurationInMinute') as 'Duration';\nq= group q by all;\nq = foreach q generate avg('Duration')*60 as 'AHT', case when avg('Duration')*60 <= 250 then \"rgb(75, 202, 129)\" when avg('Duration')*60 > 250 then \"rgb(224, 26, 59)\" else \"rgb(216, 222, 232)\" end as 'AHT indicator color', count() as 'count';",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "AvgDataUsage_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "AvgDataUsage",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.B2C_Comms_TopUp_and_Usage_Demo_tp.FullyQualifiedName}\";\nq_B = filter q by date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day') in [\"30 days ago\"..\"current day\"];\nq_C = filter q by date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day') in [\"120 days ago\"..\"31 days ago\"];\nresult = group q by 'SubscriptionID' full, q_B by 'SubscriptionID' full, q_C by 'SubscriptionID';\nresult = foreach result generate coalesce(q.'SubscriptionID', q_B.'SubscriptionID', q_C.'SubscriptionID') as 'SubscriptionID', first(q.'Subscription_DaysSinceSubscription') as 'DaysSinceSubscription', coalesce(sum(q_B.'DataUsageInGB'),0) as 'DataUsageInGB_Last30Days', sum(q_C.'DataUsageInGB')/3 as 'DataUsageInGB_Prev3MonthsWith30DayAvg';\nresult = foreach result generate 'SubscriptionID', 'DaysSinceSubscription', 'DataUsageInGB_Last30Days', 'DataUsageInGB_Prev3MonthsWith30DayAvg', case when 'DaysSinceSubscription' >= 120 then ('DataUsageInGB_Last30Days' - 'DataUsageInGB_Prev3MonthsWith30DayAvg') / 'DataUsageInGB_Prev3MonthsWith30DayAvg' end as 'DataUsage_Change_Percentage', case when 'DaysSinceSubscription' >= 120 then \"Vs. Last 90 Days\" else \"\" end as 'DataUsage_Change_Percentage_Label', case when 'DaysSinceSubscription' >= 120 then \"Total data usage during the last 30 days versus the daily average of 30-day intervals for the last 90 days.\" else \"\" end as 'DataUsage_Change_Percentage_Label_Tooltip', case when 'DaysSinceSubscription' >= 120 then \"rgb(255,255,255)\" else \"rgba(255,255,255,0)\" end as 'Color',\ncase when 'DaysSinceSubscription' < 120 then  \"rgb(75, 202, 129)\" when 'DataUsageInGB_Last30Days' > 'DataUsageInGB_Prev3MonthsWith30DayAvg' then \"rgb(75, 202, 129)\" when 'DataUsageInGB_Last30Days' == 'DataUsageInGB_Prev3MonthsWith30DayAvg' then \"rgb(103, 122, 151)\" when 'DataUsageInGB_Last30Days' < 'DataUsageInGB_Prev3MonthsWith30DayAvg' then \"rgb(224, 26, 59)\"  else  \"rgb(75, 202, 129)\" end as 'Data Usage indicator color';\nresult = order result by ('SubscriptionID' asc);\nresult = limit result 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "TopUpFrequency_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "TopUpFrequency",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.B2C_Comms_TopUp_and_Usage_Demo_tp.FullyQualifiedName}\";\nq = filter q by 'TopupAmount' > 0;\n\ncurrentperiod = filter q by date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day') in [\"90 days ago\"..\"current day\"];\ncurrentperiod = group currentperiod by ('SubscriptionID', 'ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day');\ncurrentperiod = foreach currentperiod generate 'SubscriptionID' as 'SubscriptionID',\ncurrentperiod.'ActivityDate_Year' as 'ActivityDate_Year' , currentperiod.'ActivityDate_Month' as 'ActivityDate_Month', currentperiod.'ActivityDate_Day' as 'ActivityDate_Day',first(ActivityDate_sec_epoch) as 'A';\ncurrentperiod = group currentperiod by ('SubscriptionID', 'ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day');\ncurrentperiod = foreach currentperiod generate 'SubscriptionID' as 'SubscriptionID','ActivityDate_Year' + \"~~~\" + 'ActivityDate_Month' + \"~~~\" + 'ActivityDate_Day' as 'ActivityDate_Year~~~ActivityDate_Month~~~ActivityDate_Day', first(A) as 'A', sum(A) - sum(sum(A)) over ([-1..-1] partition by all order by ('ActivityDate_Year','ActivityDate_Month','ActivityDate_Day')) as 'B';\ncurrentperiod = filter currentperiod by B is not null;\n\nprevperiod = filter q by date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day') in [\"180 days ago\"..\"91 days ago\"];\nprevperiod = group prevperiod by ('SubscriptionID', 'ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day');\nprevperiod = foreach prevperiod generate 'SubscriptionID' as 'SubscriptionID',\nprevperiod.'ActivityDate_Year' as 'ActivityDate_Year' , prevperiod.'ActivityDate_Month' as 'ActivityDate_Month', prevperiod.'ActivityDate_Day' as 'ActivityDate_Day',first(ActivityDate_sec_epoch) as 'A';\nprevperiod = group prevperiod by ('SubscriptionID', 'ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day');\nprevperiod = foreach prevperiod generate 'SubscriptionID' as 'SubscriptionID', 'ActivityDate_Year' + \"~~~\" + 'ActivityDate_Month' + \"~~~\" + 'ActivityDate_Day' as 'ActivityDate_Year~~~ActivityDate_Month~~~ActivityDate_Day', first(A) as 'A', sum(A) - sum(sum(A)) over ([-1..-1] partition by all order by ('ActivityDate_Year','ActivityDate_Month','ActivityDate_Day')) as 'B';\nprevperiod = filter prevperiod by B is not null;\n\nresult = group q by 'SubscriptionID' full, currentperiod by 'SubscriptionID' full, prevperiod by 'SubscriptionID';\nresult = foreach result generate q.'SubscriptionID' as 'SubscriptionID', first(q.'Subscription_Name') as 'Subscription Name', case when first(q.'Subscription_DaysSinceSubscription') < 180 then daysBetween(toDate(last(q.'ActivityDate_sec_epoch')), now()) else avg(currentperiod.B)/60/60/24 end  as 'Frequency Days currentperiod'\n,case when first(q.'Subscription_DaysSinceSubscription') < 180 then 0 else avg(prevperiod.B)/60/60/24 end as 'Frequency Days prevperiod', \ncase when first(q.'Subscription_DaysSinceSubscription') >= 180 then (avg(currentperiod.B) - avg(prevperiod.B))/avg(prevperiod.B) *100 end as 'Frequency Days percent change', \ncase when first(q.'Subscription_DaysSinceSubscription') < 180 then \"rgb(75, 202, 129)\" when (avg(currentperiod.B) - avg(prevperiod.B))/avg(prevperiod.B) *100 > 0 then \"rgb(75, 202, 129)\" when (avg(currentperiod.B) - avg(prevperiod.B))/avg(prevperiod.B) *100 == 0 then \"rgb(103, 122, 151)\" when (avg(currentperiod.B) - avg(prevperiod.B))/avg(prevperiod.B) *100 <0 then \"rgb(224, 26, 59)\"  else \"rgb(75, 202, 129)\" end as 'Frequency Days indicator color'\n,case when first(q.'Subscription_DaysSinceSubscription') < 180 then \"Days Since Last Payment\" else \"Payment Frequency (Days)\" end as 'Label',case when first(q.'Subscription_DaysSinceSubscription') < 180 then \"\" else \"Vs. Last 90 Days\" end as 'LastTopup_Change_Percentage_Label'\n,case when first(q.'Subscription_DaysSinceSubscription') < 180 then \"rgba(255,255,255,0)\" else \"rgb(255,255,255)\" end as 'Color';\n",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimensionAxis" : [
+                "SubscriptionID"
+              ],
+              "plots" : [
+                "Frequency Days currentperiod",
+                "Frequency Days prevperiod",
+                "Frequency Days percent change"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Subscription_KPI_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Subscription_KPI",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.B2C_Comms_Subscription_Demo_tp.FullyQualifiedName}\";\nq = foreach q generate 'ServiceIdentifier' as 'vlocity_cmt__ServiceIdentifier__c', toString(toDate('CreatedDate_sec_epoch'),\"yyyy-MM-dd\") as 'SubscriptionDate';\nq = limit q 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "AvgMonthlySpend_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "AvgMonthlySpend",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.B2C_Comms_TopUp_and_Usage_Demo_tp.FullyQualifiedName}\";\nq_B = filter q by date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day') in [\"30 days ago\"..\"current day\"];\nq_C = filter q by date('ActivityDate_Year', 'ActivityDate_Month', 'ActivityDate_Day') in [\"120 days ago\"..\"31 days ago\"];\nresult = group q by 'SubscriptionID' full, q_B by 'SubscriptionID' full, q_C by 'SubscriptionID';\nresult = foreach result generate coalesce(q.'SubscriptionID', q_B.'SubscriptionID', q_C.'SubscriptionID') as 'SubscriptionID', first(q.'Subscription_DaysSinceSubscription') as 'DaysSinceSubscription', coalesce(sum(q_B.'TopupAmount'),0) as 'MonthlySpend_Last30Days', sum(q_C.'TopupAmount')/3 as 'MonthlySpend_Prev3MonthsWith30DayAvg';\nresult = foreach result generate 'SubscriptionID', 'DaysSinceSubscription', 'MonthlySpend_Last30Days', 'MonthlySpend_Prev3MonthsWith30DayAvg', case when 'DaysSinceSubscription' >= 120 then ('MonthlySpend_Last30Days' - 'MonthlySpend_Prev3MonthsWith30DayAvg') / 'MonthlySpend_Prev3MonthsWith30DayAvg' end as 'MonthlySpend_Change_Percentage', case when 'DaysSinceSubscription' >= 120 then \"Vs. Last 90 Days\" else \"\" end as 'MonthlySpend_Change_Percentage_Label', case when 'DaysSinceSubscription' >= 120 then \"Total amount spent during the last 30 days versus the daily average of 30-day intervals for the last 90 days.\" else \"\" end as 'MonthlySpend_Change_Percentage_Label_Tooltip', case when 'DaysSinceSubscription' >= 120 then \"rgb(255,255,255)\" else \"rgba(255,255,255,0)\" end as 'Color',\ncase when 'DaysSinceSubscription' < 120 then \"rgb(75, 202, 129)\" when 'MonthlySpend_Last30Days' > 'MonthlySpend_Prev3MonthsWith30DayAvg' then \"rgb(75, 202, 129)\" when 'MonthlySpend_Last30Days' == 'MonthlySpend_Prev3MonthsWith30DayAvg' then \"rgb(103, 122, 151)\" when 'MonthlySpend_Last30Days' < 'MonthlySpend_Prev3MonthsWith30DayAvg' then \"rgb(224, 26, 59)\"  else \"rgb(75, 202, 129)\" end as 'MonthlySpend indicator color';\nresult = order result by ('SubscriptionID' asc);\nresult = limit result 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      }
+    },
+    "widgetStyle" : {
+      "backgroundColor" : "#FFFFFF",
+      "borderColor" : "#E6ECF2",
+      "borderEdges" : [ ],
+      "borderRadius" : 0,
+      "borderWidth" : 1
+    },
+    "widgets" : {
+      "number_10" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "DataUsage_Change_Percentage",
+          "noResultsLabel" : "",
+          "numberColor" : "{{cell(AvgDataUsage_1.result, 0, \"Color\").asString()}}",
+          "numberSize" : 14,
+          "showActionMenu" : false,
+          "step" : "AvgDataUsage_1",
+          "textAlignment" : "right",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "text_17" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "12px",
+                  "color" : "rgb(191, 201, 216)",
+                  "align" : "right"
+                },
+                "insert" : "AHT (Secs)"
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "text_13" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "12px",
+                  "color" : "rgb(216, 222, 232)",
+                  "align" : "left"
+                },
+                "insert" : "Last 30 Days Spend"
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "text_10" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "12px",
+                  "color" : "rgb(216, 222, 232)",
+                  "align" : "left"
+                },
+                "insert" : "Customer Interactions (14 Days)"
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "number_9" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "DataUsageInGB_Last30Days",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 32,
+          "showActionMenu" : true,
+          "step" : "AvgDataUsage_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "number_8" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "AHT",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 14,
+          "showActionMenu" : true,
+          "step" : "AHT_1",
+          "textAlignment" : "right",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "text_12" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "12px",
+                  "color" : "rgb(216, 222, 232)",
+                  "align" : "left"
+                },
+                "insert" : "{{coalesce(cell(TopUpFrequency_1.result,0,\"Label\"),\"Topup Frequency\").asObject()}}"
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "number_7" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "MonthlySpend_Last30Days",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 32,
+          "showActionMenu" : true,
+          "step" : "AvgMonthlySpend_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "text_11" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "12px",
+                  "color" : "rgb(216, 222, 232)",
+                  "align" : "left"
+                },
+                "insert" : "Last 30 Days Usage (GB)"
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "number_6" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "Frequency Days currentperiod",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 32,
+          "showActionMenu" : true,
+          "step" : "TopUpFrequency_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "container_1" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_2" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_3" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_4" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_3" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "12px",
+                  "color" : "rgb(191, 201, 216)",
+                  "align" : "right"
+                },
+                "insert" : "[LastTopup_Change_Per]"
+              }
+            ],
+            "values" : {
+              "LastTopup_Change_Per" : {
+                "field" : "LastTopup_Change_Percentage_Label",
+                "sourceType" : "result",
+                "step" : "TopUpFrequency_1"
+              }
+            }
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "text_2" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "16px",
+                  "color" : "#ffffff"
+                },
+                "insert" : "[SubscriptionDate]"
+              },
+              {
+                "attributes" : {
+                  "align" : "right"
+                },
+                "insert" : "\n"
+              }
+            ],
+            "values" : {
+              "SubscriptionDate" : {
+                "field" : "SubscriptionDate",
+                "sourceType" : "result",
+                "step" : "Subscription_KPI_1"
+              }
+            }
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "text_4" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "14px",
+                  "color" : "#d8dee8"
+                },
+                "insert" : "Subscription Date"
+              },
+              {
+                "attributes" : { },
+                "insert" : "\n"
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "text_7" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "16px",
+                  "color" : "#091A3E",
+                  "align" : "left"
+                },
+                "insert" : ""
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "text_6" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "16px",
+                  "color" : "#091A3E",
+                  "align" : "left"
+                },
+                "insert" : ""
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "text_9" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "16px",
+                  "color" : "#091A3E",
+                  "align" : "left"
+                },
+                "insert" : ""
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "text_8" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "16px",
+                  "color" : "rgb(103, 122, 151)",
+                  "align" : "left"
+                },
+                "insert" : ""
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "text_1" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "20px",
+                  "color" : "#FFFFFF",
+                  "align" : "left"
+                },
+                "insert" : "Subscription Highlights"
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "text_25" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "16px",
+                  "color" : "#091A3E",
+                  "align" : "left"
+                },
+                "insert" : ""
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "text_24" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "12px",
+                  "color" : "rgb(191, 201, 216)",
+                  "align" : "right"
+                },
+                "insert" : "[MonthlySpend_Change_]"
+              }
+            ],
+            "values" : {
+              "MonthlySpend_Change_" : {
+                "field" : "MonthlySpend_Change_Percentage_Label",
+                "sourceType" : "result",
+                "step" : "AvgMonthlySpend_1"
+              }
+            }
+          },
+          "showActionMenu" : true,
+          "tooltip" : "{{cell(AvgMonthlySpend_1.result, 0, \"MonthlySpend_Change_Percentage_Label_Tooltip\").asString()}}"
+        },
+        "type" : "text"
+      },
+      "text_20" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "12px",
+                  "color" : "rgb(191, 201, 216)",
+                  "align" : "right"
+                },
+                "insert" : "[DataUsage_Change_Per]"
+              }
+            ],
+            "values" : {
+              "DataUsage_Change_Per" : {
+                "field" : "DataUsage_Change_Percentage_Label",
+                "sourceType" : "result",
+                "step" : "AvgDataUsage_1"
+              }
+            }
+          },
+          "showActionMenu" : true,
+          "tooltip" : "{{cell(AvgDataUsage_1.result, 0, \"DataUsage_Change_Percentage_Label_Tooltip\").asString()}}"
+        },
+        "type" : "text"
+      },
+      "number_5" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "MonthlySpend_Change_Percentage",
+          "noResultsLabel" : "",
+          "numberColor" : "{{cell(AvgMonthlySpend_1.result, 0, \"Color\").asString()}}",
+          "numberSize" : 14,
+          "showActionMenu" : false,
+          "step" : "AvgMonthlySpend_1",
+          "textAlignment" : "right",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "table_2" : {
+        "parameters" : {
+          "borderColor" : "#54698d",
+          "borderWidth" : 1,
+          "cell" : {
+            "backgroundColor" : "#16325c",
+            "fontColor" : "#ffffff",
+            "fontSize" : 12
+          },
+          "columnProperties" : {
+            "InteractionTopic" : {
+              "parameters" : {
+                "alignment" : "left",
+                "styles" : {
+                  "linkColor" : "rgb(94, 180, 255)"
+                }
+              },
+              "type" : "text"
+            },
+            "CaseNumber" : {
+              "parameters" : {
+                "alignment" : "left",
+                "styles" : {
+                  "linkColor" : "rgb(94, 180, 255)"
+                }
+              },
+              "type" : "text"
+            },
+            "OrderNumber" : {
+              "parameters" : {
+                "alignment" : "left",
+                "styles" : {
+                  "linkColor" : "rgb(94, 180, 255)"
+                }
+              },
+              "type" : "text"
+            }
+          },
+          "columns" : [
+            "InteractionDate",
+            "DurationInSecondsText",
+            "SubscriptionId",
+            "CaseNumber",
+            "CaseReason",
+            "CaseStatus",
+            "InteractionTopic",
+            "ProcessName",
+            "Outcome",
+            "OrderNumber",
+            "OrderStatus"
+          ],
+          "customBulkActions" : [ ],
+          "exploreLink" : true,
+          "header" : {
+            "backgroundColor" : "#091A3E",
+            "fontColor" : "#ffffff",
+            "fontSize" : 12
+          },
+          "innerMajorBorderColor" : "#54698d",
+          "innerMinorBorderColor" : "#54698d",
+          "maxColumnWidth" : 200,
+          "minColumnWidth" : 40,
+          "mode" : "variable",
+          "numberOfFrozenColumns" : 2,
+          "numberOfLines" : 1,
+          "pivoted" : false,
+          "showActionMenu" : true,
+          "showRowIndexColumn" : false,
+          "step" : "CustomerInteractions_2",
+          "totals" : true,
+          "verticalPadding" : 8
+        },
+        "type" : "table"
+      },
+      "number_2" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "count",
+          "numberColor" : "rgb(94, 180, 255)",
+          "numberSize" : 32,
+          "showActionMenu" : true,
+          "step" : "AHT_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16,
+          "tooltip" : {
+            "content" : {
+              "body" : {
+                "height" : 150,
+                "source" : {
+                  "name" : "table_2",
+                  "type" : "widget"
+                },
+                "width" : 1020
+              }
+            },
+            "customizeTooltip" : true
+          }
+        },
+        "type" : "number"
+      },
+      "number_1" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "Frequency Days percent change",
+          "noResultsLabel" : "",
+          "numberColor" : "{{cell(TopUpFrequency_1.result, 0, \"Color\").asString()}}",
+          "numberSize" : 14,
+          "showActionMenu" : false,
+          "step" : "TopUpFrequency_1",
+          "textAlignment" : "right",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "image_1" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "center",
+          "fit" : "fitwidth",
+          "image" : {
+            "name" : "${App.Images['TCRM_Logopng5'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "type" : "image"
+      }
+    }
+  }
+}

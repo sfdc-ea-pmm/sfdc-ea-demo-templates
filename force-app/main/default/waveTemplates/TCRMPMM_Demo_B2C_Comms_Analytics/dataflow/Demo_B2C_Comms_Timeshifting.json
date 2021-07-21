@@ -1,0 +1,405 @@
+{
+  "isDeletable": true,
+  "longRunningAlertInMins": "",
+  "notificationLevel": "",
+  "workflowDefinition": {
+    "Shift_Dates_B2C_Comms_CustomerInteractionTopic_Demo": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_B2C_Comms_CustomerInteractionTopic_Demo",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "InteractionDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('InteractionDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "InteractionDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_B2C_Comms_Subscription_Demo": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "B2C_Comms_Subscription_Demo",
+        "alias": "${App.Datasets.B2C_Comms_Subscription_Demo_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_B2C_Comms_Subscription_Demo"
+      }
+    },
+    "Load_Dataset_B2C_Comms_CustomerInteractionTopic_Demo": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.B2C_Comms_CustomerInteractionTopic_Demo_tp.FullyQualifiedName}"}
+    },
+    "Shift_Dates_B2C_Comms_OrderItem_Demo": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_B2C_Comms_OrderItem_Demo",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "OrderCreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('OrderCreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "OrderCreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Compute_Aux_B2C_Comms_CustomerInteractionTopic_Demo": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_B2C_Comms_CustomerInteractionTopic_Demo",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "InteractionDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('InteractionDate_sec_epoch')",
+            "label": "InteractionDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Aux_B2C_Comms_TopUp_and_Usage": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_B2C_Comms_TopUp_and_Usage",
+        "fields": [
+          {"name": "Subscription_CreatedDate_Aux"},
+          {"name": "Subscription_Account_vlocity_cmt_CustomerSinceDate__c_Aux"},
+          {"name": "ActivityDate_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Drop_Aux_B2C_Comms_Subscription_Demo": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_B2C_Comms_Subscription_Demo",
+        "fields": [
+          {"name": "ElapsedSeconds"},
+          {"name": "CreatedDate_Aux"},
+          {"name": "AccountCustomerSinceDate_Aux"}
+        ]
+      }
+    },
+    "Load_Dataset_B2C_Comms_Subscription_Demo": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.B2C_Comms_Subscription_Demo_tp.FullyQualifiedName}"}
+    },
+    "Compute_Aux_B2C_Comms_TopUp_and_Usage": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_B2C_Comms_TopUp_and_Usage",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "Subscription_CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Subscription_CreatedDate_sec_epoch')",
+            "label": "Subscription_CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Subscription_Account_vlocity_cmt_CustomerSinceDate__c_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Subscription_Account_vlocity_cmt_CustomerSinceDate__c_sec_epoch')",
+            "label": "Subscription_Account_vlocity_cmt_CustomerSinceDate__c_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ActivityDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ActivityDate_sec_epoch')",
+            "label": "ActivityDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_B2C_Comms_TopUp_and_Usage": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "B2C_Comms_TopUp_and_Usage_Demo",
+        "alias": "${App.Datasets.B2C_Comms_TopUp_and_Usage_Demo_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_B2C_Comms_TopUp_and_Usage"
+      }
+    },
+    "Shift_Dates_B2C_Comms_TopUp_and_Usage": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_B2C_Comms_TopUp_and_Usage",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Subscription_CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Subscription_CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Subscription.Created Date",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Subscription_Account_vlocity_cmt_CustomerSinceDate__c",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Subscription_Account_vlocity_cmt_CustomerSinceDate__c_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Subscription.Account.Customer Since Date",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ActivityDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ActivityDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "ActivityDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Dates_B2C_Comms_TopUp_and_Usage": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_B2C_Comms_TopUp_and_Usage",
+        "fields": [
+          {"name": "Subscription_CreatedDate"},
+          {"name": "Subscription_Account_vlocity_cmt_CustomerSinceDate__c"},
+          {"name": "ActivityDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Compute_Aux_B2C_Comms_OrderItem_Demo": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_B2C_Comms_OrderItem_Demo",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "OrderCreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('OrderCreatedDate_sec_epoch')",
+            "label": "OrderCreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Shift_Dates_B2C_Comms_Subscription_Demo": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_B2C_Comms_Subscription_Demo",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('AccountCustomerSinceDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "name": "AccountCustomerSinceDate",
+            "format": "yyyy-MM-dd",
+            "label": "AccountCustomerSinceDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Dates_B2C_Comms_OrderItem_Demo": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_B2C_Comms_OrderItem_Demo",
+        "fields": [
+          {"name": "OrderCreatedDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Drop_Aux_B2C_Comms_OrderItem_Demo": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_B2C_Comms_OrderItem_Demo",
+        "fields": [
+          {"name": "OrderCreatedDate_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Compute_Aux_B2C_Comms_Subscription_Demo": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_B2C_Comms_Subscription_Demo",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('AccountCustomerSinceDate_sec_epoch')",
+            "name": "AccountCustomerSinceDate_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "AccountCustomerSinceDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Load_Dataset_B2C_Comms_TopUp_and_Usage": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.B2C_Comms_TopUp_and_Usage_Demo_tp.FullyQualifiedName}"}
+    },
+    "Register_Shifted_Dataset_B2C_Comms_CustomerInteractionTopic_Demo": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "B2C_Comms_CustomerInteractionTopic_Demo",
+        "alias": "${App.Datasets.B2C_Comms_CustomerInteractionTopic_Demo_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_B2C_Comms_CustomerInteractionTopic_Demo"
+      }
+    },
+    "Drop_Dates_B2C_Comms_Subscription_Demo": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_B2C_Comms_Subscription_Demo",
+        "fields": [
+          {"name": "AccountCustomerSinceDate"},
+          {"name": "CreatedDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Drop_Dates_B2C_Comms_CustomerInteractionTopic_Demo": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_B2C_Comms_CustomerInteractionTopic_Demo",
+        "fields": [
+          {"name": "InteractionDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Load_Dataset_B2C_Comms_OrderItem_Demo": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.B2C_Comms_OrderItem_Demo_tp.FullyQualifiedName}"}
+    },
+    "Register_Shifted_Dataset_B2C_Comms_OrderItem_Demo": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "B2C_Comms_OrderItem_Demo",
+        "alias": "${App.Datasets.B2C_Comms_OrderItem_Demo_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_B2C_Comms_OrderItem_Demo"
+      }
+    },
+    "Drop_Aux_B2C_Comms_CustomerInteractionTopic_Demo": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_B2C_Comms_CustomerInteractionTopic_Demo",
+        "fields": [
+          {"name": "InteractionDate_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    }
+  },
+  "DataflowType": "USER",
+  "_type": "dataflow",
+  "name": "Demo_B2C_Comms_Timeshifting",
+  "MasterLabel": "- Timeshifting",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": "",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive"
+}
