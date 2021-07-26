@@ -1,0 +1,325 @@
+{
+  "isDeletable": true,
+  "notificationLevel": "Never",
+  "workflowDefinition": {
+    "Register_Shifted_Dataset": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Opportunity Snapshot v2",
+        "alias": "${App.Datasets.Opportunity_Snapshot_v2.FullyQualifiedName}",
+        "source": "Drop_Aux_Opportunity_Snapshot_v2"
+      }
+    },
+    "Shift_Dates_Revenue_Forecasting_v2": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_Revenue_Forecasting_v2",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "PeriodAuxDate",
+            "saqlExpression": "toDate('PeriodAuxDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "PeriodAuxDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LastProcessedDate",
+            "saqlExpression": "now()",
+            "format": "yyyy-MM-dd",
+            "label": "LastProcessedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "PeriodEndDate",
+            "saqlExpression": "toDate('PeriodEndDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "PeriodEndDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "PeriodStartDate",
+            "saqlExpression": "toDate('PeriodStartDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "PeriodStartDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "SnapshotDate",
+            "saqlExpression": "toDate('SnapshotDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "SnapshotDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "SnapshotTextDate",
+            "saqlExpression": "toString('SnapshotDate', \"yyyy-MM-dd\")",
+            "label": "SnapshotTextDate",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "Shift_Dates_Opportunity_Snapshot_v2": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_Opportunity_Snapshot_v2",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "saqlExpression": "now()",
+            "format": "yyyy-MM-dd",
+            "label": "LastProcessedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CloseDate",
+            "saqlExpression": "toDate('CloseDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "CloseDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "PeriodEndDate",
+            "saqlExpression": "toDate('PeriodEndDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "PeriodEndDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "PeriodStartDate",
+            "saqlExpression": "toDate('PeriodStartDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "PeriodStartDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "SnapshotDate",
+            "saqlExpression": "toDate('SnapshotDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "format": "yyyy-MM-dd",
+            "label": "SnapshotDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "SnapshotTextDate",
+            "saqlExpression": "toString('SnapshotDate', \"yyyy-MM-dd\")",
+            "label": "SnapshotTextDate",
+            "type": "Text"
+          }
+        ]
+      }
+    },
+    "Drop_Aux_Opportunity_Snapshot_v2": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_Opportunity_Snapshot_v2",
+        "fields": [
+          {"name": "CloseDate_Aux"},
+          {"name": "CreatedDate_Aux"},
+          {"name": "ElapsedSeconds"},
+          {"name": "PeriodEndDate_Aux"},
+          {"name": "PeriodStartDate_Aux"},
+          {"name": "SnapshotDate_Aux"}
+        ]
+      }
+    },
+    "Register_Revenue_Forecastin_v2": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "ForecastSnapshotDemo",
+        "alias": "${App.Datasets.ForecastSnapshotDemo.FullyQualifiedName}",
+        "source": "Drop_Aux_Revenue_Forecasting_v2"
+      }
+    },
+    "Compute_Aux_ Revenue_Forecasting_v2": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Revenue_Forecasting_v2",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "PeriodAuxDate_Aux",
+            "saqlExpression": "toDate('PeriodAuxDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "PeriodAuxDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "PeriodEndDate_Aux",
+            "saqlExpression": "toDate('PeriodEndDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "PeriodEndDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('PeriodStartDate_sec_epoch')",
+            "name": "PeriodStartDate_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "PeriodStartDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "SnapshotDate_Aux",
+            "saqlExpression": "toDate('SnapshotDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "SnapshotDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "defaultValue": "0",
+            "precision": 18,
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "name": "ElapsedSeconds",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          }
+        ]
+      }
+    },
+    "Load_Opportunity_Snapshot_v2": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.Opportunity_Snapshot_v2.FullyQualifiedName}"}
+    },
+    "Drop_Aux_Revenue_Forecasting_v2": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_Revenue_Forecasting_v2",
+        "fields": [
+          {"name": "PeriodAuxDate_Aux"},
+          {"name": "PeriodEndDate_Aux"},
+          {"name": "PeriodStartDate_Aux"},
+          {"name": "SnapshotDate_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Drop_Dates_Revenue_Forecasting_v2": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_ Revenue_Forecasting_v2",
+        "fields": [
+          {"name": "LastProcessedDate"},
+          {"name": "PeriodAuxDate"},
+          {"name": "PeriodEndDate"},
+          {"name": "PeriodStartDate"},
+          {"name": "SnapshotDate"},
+          {"name": "SnapshotTextDate"}
+        ]
+      }
+    },
+    "Load_Revenue_Forecasting_v2": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.ForecastSnapshotDemo.FullyQualifiedName}"}
+    },
+    "Drop_Dates_Opportunity_Snapshot_v2": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_Opportunity_Snapshot_v2",
+        "fields": [
+          {"name": "CloseDate"},
+          {"name": "CreatedDate"},
+          {"name": "LastProcessedDate"},
+          {"name": "PeriodEndDate"},
+          {"name": "PeriodStartDate"},
+          {"name": "SnapshotDate"},
+          {"name": "SnapshotTextDate"}
+        ]
+      }
+    },
+    "Compute_Aux_Opportunity_Snapshot_v2": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Opportunity_Snapshot_v2",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "defaultValue": "0",
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "CloseDate_Aux",
+            "saqlExpression": "toDate('CloseDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "CloseDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "saqlExpression": "toDate('PeriodEndDate_sec_epoch')\n",
+            "name": "PeriodEndDate_Aux",
+            "format": "yyyy-MM-dd",
+            "label": "PeriodEndDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "PeriodStartDate_Aux",
+            "saqlExpression": "toDate('PeriodStartDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "PeriodStartDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "SnapshotDate_Aux",
+            "saqlExpression": "toDate('SnapshotDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "SnapshotDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "format": "yyyy-MM-dd",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    }
+  },
+  "DataflowType": "USER",
+  "_type": "dataflow",
+  "name": "Revenue_Operations_v2_Timeshifting",
+  "description": "Revenue Operations v2 - Timeshifting",
+  "MasterLabel": "Revenue Operations v2 - Timeshifting",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": "",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive"
+}
