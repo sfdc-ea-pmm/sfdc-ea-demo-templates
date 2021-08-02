@@ -23,7 +23,7 @@
       "parameters": {
         "name": "${App.Datasets.B2C_Comms_Subscription_Demo_tp.FullyQualifiedName}",
         "alias": "${App.Datasets.B2C_Comms_Subscription_Demo_tp.FullyQualifiedName}",
-        "source": "Update_Subscription_w_Account"
+        "source": "Update_Subscription_ServiceId"
       }
     },
     "Edg_TopUpAndUsage": {
@@ -65,7 +65,7 @@
       "parameters": {
         "name": "${App.Datasets.B2C_Comms_TopUp_and_Usage_Demo_tp.FullyQualifiedName}",
         "alias": "${App.Datasets.B2C_Comms_TopUp_and_Usage_Demo_tp.FullyQualifiedName}",
-        "source": "Update_TopUpAndUsage"
+        "source": "Update_TopUpAndUsage_ServiceId"
       }
     },
     "Update_TopUpAndUsage": {
@@ -136,6 +136,38 @@
           "SubscriptionId": "vlocity_cmt__ServiceIdentifier__c"
         },
         "right": "Extract_Subscription"
+      }
+    },
+    "Update_Subscription_ServiceId": {
+      "action": "update",
+      "parameters": {
+        "left": "Update_Subscription_w_Account",
+        "right": "Extract_Subscription",
+        "left_key": [
+          "AccountName"
+        ],
+        "right_key": [
+          "Name"
+        ],
+        "update_columns": {
+          "ServiceIdentifier": "vlocity_cmt__ServiceIdentifier__c"
+        }
+      }
+    },
+    "Update_TopUpAndUsage_ServiceId": {
+      "action": "update",
+      "parameters": {
+        "left": "Update_TopUpAndUsage",
+        "right": "Extract_Subscription",
+        "left_key": [
+          "Subscription_Name"
+        ],
+        "right_key": [
+          "Name"
+        ],
+        "update_columns": {
+          "Subscription_vlocity_cmt_ServiceIdentifier__c": "vlocity_cmt__ServiceIdentifier__c"
+        }
       }
     }
   },
