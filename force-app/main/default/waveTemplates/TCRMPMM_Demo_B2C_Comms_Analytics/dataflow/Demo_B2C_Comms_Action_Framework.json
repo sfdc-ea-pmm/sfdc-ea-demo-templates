@@ -1,0 +1,185 @@
+{
+  "notificationLevel": "",
+  "workflowDefinition": {
+    "Extract_Subscription": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {
+            "name": "Id"
+          },
+          {
+            "name": "Name"
+          },
+          {
+            "name": "vlocity_cmt__ServiceIdentifier__c"
+          }
+        ],
+        "object": "vlocity_cmt__Subscription__c"
+      }
+    },
+    "Register_Subscription": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "${App.Datasets.B2C_Comms_Subscription_Demo_tp.FullyQualifiedName}",
+        "alias": "${App.Datasets.B2C_Comms_Subscription_Demo_tp.FullyQualifiedName}",
+        "source": "Update_Subscription_ServiceId"
+      }
+    },
+    "Edg_TopUpAndUsage": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.B2C_Comms_TopUp_and_Usage_Demo_tp.FullyQualifiedName}"
+      }
+    },
+    "Update_Subscription_w_Account": {
+      "action": "update",
+      "parameters": {
+        "right_key": [
+          "Name"
+        ],
+        "left": "Edg_Subscription",
+        "left_key": [
+          "AccountName"
+        ],
+        "update_columns": {
+          "AccountId": "Id"
+        },
+        "right": "Extract_Account"
+      }
+    },
+    "Edg_Interaction": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.B2C_Comms_CustomerInteractionTopic_Demo_tp.FullyQualifiedName}"
+      }
+    },
+    "Edg_Subscription": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.B2C_Comms_Subscription_Demo_tp.FullyQualifiedName}"
+      }
+    },
+    "Register_TopUpAndUsage": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "${App.Datasets.B2C_Comms_TopUp_and_Usage_Demo_tp.FullyQualifiedName}",
+        "alias": "${App.Datasets.B2C_Comms_TopUp_and_Usage_Demo_tp.FullyQualifiedName}",
+        "source": "Update_TopUpAndUsage_ServiceId"
+      }
+    },
+    "Update_TopUpAndUsage": {
+      "action": "update",
+      "parameters": {
+        "right_key": [
+          "Name"
+        ],
+        "left": "Edg_TopUpAndUsage",
+        "left_key": [
+          "Subscription_Account_Name"
+        ],
+        "update_columns": {
+          "Subscription_vlocity_cmt_AccountId__c": "Id"
+        },
+        "right": "Extract_Account"
+      }
+    },
+    "Update_Interaction": {
+      "action": "update",
+      "parameters": {
+        "right_key": [
+          "Name"
+        ],
+        "left": "Edg_Interaction",
+        "left_key": [
+          "SubscriptionName"
+        ],
+        "update_columns": {
+          "AccountId": "Id"
+        },
+        "right": "Extract_Account"
+      }
+    },
+    "Register_Interaction": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "${App.Datasets.B2C_Comms_CustomerInteractionTopic_Demo_tp.FullyQualifiedName}",
+        "alias": "${App.Datasets.B2C_Comms_CustomerInteractionTopic_Demo_tp.FullyQualifiedName}",
+        "source": "Update_Interaction_w_Subscription"
+      }
+    },
+    "Extract_Account": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {
+            "name": "Name"
+          },
+          {
+            "name": "Id"
+          }
+        ],
+        "object": "Account"
+      }
+    },
+    "Update_Interaction_w_Subscription": {
+      "action": "update",
+      "parameters": {
+        "right_key": [
+          "Name"
+        ],
+        "left": "Update_Interaction",
+        "left_key": [
+          "SubscriptionName"
+        ],
+        "update_columns": {
+          "SubscriptionId": "vlocity_cmt__ServiceIdentifier__c"
+        },
+        "right": "Extract_Subscription"
+      }
+    },
+    "Update_Subscription_ServiceId": {
+      "action": "update",
+      "parameters": {
+        "left": "Update_Subscription_w_Account",
+        "right": "Extract_Subscription",
+        "left_key": [
+          "AccountName"
+        ],
+        "right_key": [
+          "Name"
+        ],
+        "update_columns": {
+          "ServiceIdentifier": "vlocity_cmt__ServiceIdentifier__c"
+        }
+      }
+    },
+    "Update_TopUpAndUsage_ServiceId": {
+      "action": "update",
+      "parameters": {
+        "left": "Update_TopUpAndUsage",
+        "right": "Extract_Subscription",
+        "left_key": [
+          "Subscription_Name"
+        ],
+        "right_key": [
+          "Name"
+        ],
+        "update_columns": {
+          "Subscription_vlocity_cmt_ServiceIdentifier__c": "vlocity_cmt__ServiceIdentifier__c"
+        }
+      }
+    }
+  },
+  "_type": "dataflow",
+  "description": "- Action Framework",
+  "MasterLabel": "- Action Framework",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive",
+  "isDeletable": true,
+  "longRunningAlertInMins": "",
+  "DataflowType": "USER",
+  "name": "Demo_B2C_Comms_Action_Framework",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": ""
+}
