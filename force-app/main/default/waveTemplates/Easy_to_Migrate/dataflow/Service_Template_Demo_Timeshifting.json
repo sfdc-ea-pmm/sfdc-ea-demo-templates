@@ -1,0 +1,1160 @@
+{
+  "isDeletable": true,
+  "notificationLevel": "Never",
+  "workflowDefinition": {
+    "Load_Dataset_ServiceCase1_easymigrate": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.ServiceCase1_easymigrate_tp.FullyQualifiedName}"}
+    },
+    "Load_Dataset_SiebelData": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.SiebelData_tp.FullyQualifiedName}"}
+    },
+    "Compute_Aux_CaseHistoryData_AF": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_CaseHistoryData_AF",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "Created_Date_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Created_Date_sec_epoch')",
+            "label": "Created_Date_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_ServiceAccount360_CaseEmbed": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "ServiceAccount360_CaseEmbed",
+        "alias": "${App.Datasets.ServiceAccount360_CaseEmbed_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_ServiceAccount360_CaseEmbed"
+      }
+    },
+    "Drop_Dates_CarDetails": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_CarDetails",
+        "fields": [
+          {"name": "AppDate_OLD"},
+          {"name": "AppDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_InvoiceData": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "InvoiceData",
+        "alias": "${App.Datasets.InvoiceData_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_InvoiceData"
+      }
+    },
+    "Shift_Dates_activity": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_activity",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LastModifiedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Last Modified Date",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Dates_Case_Easy_Migrate": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_Case_Easy_Migrate",
+        "fields": [
+          {"name": "ValidToWithNow"},
+          {"name": "CurrentDate"},
+          {"name": "CreatedDate"},
+          {"name": "Last_Modified_Date"},
+          {"name": "ClosedDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Shift_Dates_ServiceCase1_easymigrate": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_ServiceCase1_easymigrate",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LastModifiedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Last Modified Date",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ValidToWithNow",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ValidToWithNow_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "ValidToWithNow",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CurrentDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CurrentDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CurrentDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ClosedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ClosedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "ClosedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Aux_Opportunities_Amills_EasyMigrate": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_Opportunities_Amills_EasyMigrate",
+        "fields": [
+          {"name": "CreatedDate_Aux"},
+          {"name": "CloseDate_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Compute_Aux_SiebelData": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_SiebelData",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "Date_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Date_sec_epoch')",
+            "label": "Date_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Load_Dataset_CaseHistoryData_AF": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.CaseHistoryData_AF_tp.FullyQualifiedName}"}
+    },
+    "Load_Dataset_Acc360": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.Acc360_tp.FullyQualifiedName}"}
+    },
+    "Load_Dataset_activity": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.activity.FullyQualifiedName}"}
+    },
+    "Register_Shifted_Dataset_ServiceCase1_easymigrate": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "ServiceCase1_easymigrate",
+        "alias": "${App.Datasets.ServiceCase1_easymigrate_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_ServiceCase1_easymigrate"
+      }
+    },
+    "Load_Dataset_InvoiceData": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.InvoiceData_tp.FullyQualifiedName}"}
+    },
+    "Drop_Dates_Opportunities_Amills_EasyMigrate": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_Opportunities_Amills_EasyMigrate",
+        "fields": [
+          {"name": "CreatedDate"},
+          {"name": "CloseDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Compute_Aux_CarDetails": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_CarDetails",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "AppDate_OLD_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('AppDate_OLD_sec_epoch')",
+            "label": "AppDate_OLD_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "AppDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('AppDate_sec_epoch')",
+            "label": "AppDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_CaseHistoryData_AF": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CaseHistoryData_AF",
+        "alias": "${App.Datasets.CaseHistoryData_AF_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_CaseHistoryData_AF"
+      }
+    },
+    "Load_Dataset_CarDetails": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.CarDetails_tp.FullyQualifiedName}"}
+    },
+    "Compute_Aux_ServiceAccount360_CaseEmbed": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_ServiceAccount360_CaseEmbed",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "ValidToWithNow_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ValidToWithNow_sec_epoch')",
+            "label": "ValidToWithNow_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CurrentDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CurrentDate_sec_epoch')",
+            "label": "CurrentDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Last_Modified_Date_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Last_Modified_Date_sec_epoch')",
+            "label": "Last_Modified_Date_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ClosedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ClosedDate_sec_epoch')",
+            "label": "ClosedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Aux_Acc360": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_Acc360",
+        "fields": [
+          {"name": "EndDate_Aux"},
+          {"name": "StartDate_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Shift_Dates_Case_Easy_Migrate": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_Case_Easy_Migrate",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ValidToWithNow",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ValidToWithNow_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "ValidToWithNow",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CurrentDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CurrentDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CurrentDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Last_Modified_Date",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Last_Modified_Date_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Last Modified Date",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ClosedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ClosedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "ClosedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Aux_CaseHistoryData_AF": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_CaseHistoryData_AF",
+        "fields": [
+          {"name": "Created_Date_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_Opportunities_Amills_EasyMigrate": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Opportunities_Amills_EasyMigrate",
+        "alias": "${App.Datasets.Opportunities_Amills_EasyMigrate_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_Opportunities_Amills_EasyMigrate"
+      }
+    },
+    "Shift_Dates_Opportunities_Amills_EasyMigrate": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_Opportunities_Amills_EasyMigrate",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CloseDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CloseDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CloseDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_SiebelData": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "SiebelData",
+        "alias": "${App.Datasets.SiebelData_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_SiebelData"
+      }
+    },
+    "Drop_Aux_Case_Easy_Migrate": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_Case_Easy_Migrate",
+        "fields": [
+          {"name": "ValidToWithNow_Aux"},
+          {"name": "CurrentDate_Aux"},
+          {"name": "CreatedDate_Aux"},
+          {"name": "Last_Modified_Date_Aux"},
+          {"name": "ClosedDate_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Drop_Dates_ServiceAccount360_CaseEmbed": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_ServiceAccount360_CaseEmbed",
+        "fields": [
+          {"name": "ValidToWithNow"},
+          {"name": "CurrentDate"},
+          {"name": "CreatedDate"},
+          {"name": "Last_Modified_Date"},
+          {"name": "ClosedDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Load_Dataset_ServiceAccount360_CaseEmbed": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.ServiceAccount360_CaseEmbed_tp.FullyQualifiedName}"}
+    },
+    "Drop_Dates_activity": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_activity",
+        "fields": [
+          {"name": "LastModifiedDate"},
+          {"name": "CreatedDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Shift_Dates_CaseHistoryData_AF": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_CaseHistoryData_AF",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Created_Date",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Created_Date_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Created Date",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Compute_Aux_ServiceCase1_easymigrate": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_ServiceCase1_easymigrate",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "LastModifiedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_sec_epoch')",
+            "label": "LastModifiedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ValidToWithNow_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ValidToWithNow_sec_epoch')",
+            "label": "ValidToWithNow_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CurrentDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CurrentDate_sec_epoch')",
+            "label": "CurrentDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ClosedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ClosedDate_sec_epoch')",
+            "label": "ClosedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Dates_ServiceCase1_easymigrate": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_ServiceCase1_easymigrate",
+        "fields": [
+          {"name": "LastModifiedDate"},
+          {"name": "ValidToWithNow"},
+          {"name": "CurrentDate"},
+          {"name": "CreatedDate"},
+          {"name": "ClosedDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Drop_Dates_Acc360": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_Acc360",
+        "fields": [
+          {"name": "EndDate"},
+          {"name": "StartDate"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Drop_Dates_CaseHistoryData_AF": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_CaseHistoryData_AF",
+        "fields": [
+          {"name": "Created_Date"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Drop_Aux_SiebelData": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_SiebelData",
+        "fields": [
+          {"name": "Date_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Load_Dataset_Case_Easy_Migrate": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.Case_Easy_Migrate_tp.FullyQualifiedName}"}
+    },
+    "Compute_Aux_Acc360": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_Acc360",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "EndDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('EndDate_sec_epoch')",
+            "label": "EndDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "StartDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('StartDate_sec_epoch')",
+            "label": "StartDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Dates_InvoiceData": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_InvoiceData",
+        "fields": [
+          {"name": "Due_Date"},
+          {"name": "Date"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_CarDetails": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CarDetails",
+        "alias": "${App.Datasets.CarDetails_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_CarDetails"
+      }
+    },
+    "Load_Dataset_Opportunities_Amills_EasyMigrate": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.Opportunities_Amills_EasyMigrate_tp.FullyQualifiedName}"}
+    },
+    "Compute_Aux_Opportunities_Amills_EasyMigrate": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_Opportunities_Amills_EasyMigrate",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CloseDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CloseDate_sec_epoch')",
+            "label": "CloseDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Shift_Dates_ServiceAccount360_CaseEmbed": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_ServiceAccount360_CaseEmbed",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ValidToWithNow",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ValidToWithNow_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "ValidToWithNow",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CurrentDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CurrentDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CurrentDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Last_Modified_Date",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Last_Modified_Date_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Last Modified Date",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ClosedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ClosedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "ClosedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Aux_ServiceCase1_easymigrate": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_ServiceCase1_easymigrate",
+        "fields": [
+          {"name": "LastModifiedDate_Aux"},
+          {"name": "ValidToWithNow_Aux"},
+          {"name": "CurrentDate_Aux"},
+          {"name": "CreatedDate_Aux"},
+          {"name": "ClosedDate_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_activity": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "activity",
+        "alias": "${App.Datasets.activity.FullyQualifiedName}",
+        "source": "Drop_Aux_activity"
+      }
+    },
+    "Shift_Dates_CarDetails": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_CarDetails",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "AppDate_OLD",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('AppDate_OLD_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "AppDate-OLD",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "AppDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('AppDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "AppDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Aux_activity": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_activity",
+        "fields": [
+          {"name": "LastModifiedDate_Aux"},
+          {"name": "CreatedDate_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Drop_Aux_CarDetails": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_CarDetails",
+        "fields": [
+          {"name": "AppDate_OLD_Aux"},
+          {"name": "AppDate_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Compute_Aux_Case_Easy_Migrate": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_Case_Easy_Migrate",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "ValidToWithNow_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ValidToWithNow_sec_epoch')",
+            "label": "ValidToWithNow_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CurrentDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CurrentDate_sec_epoch')",
+            "label": "CurrentDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Last_Modified_Date_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Last_Modified_Date_sec_epoch')",
+            "label": "Last_Modified_Date_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ClosedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ClosedDate_sec_epoch')",
+            "label": "ClosedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Shift_Dates_Acc360": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_Acc360",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "EndDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('EndDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "EndDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "StartDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('StartDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "StartDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Compute_Aux_activity": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_activity",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "LastModifiedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_sec_epoch')",
+            "label": "LastModifiedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_Acc360": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Acc360",
+        "alias": "${App.Datasets.Acc360_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_Acc360"
+      }
+    },
+    "Shift_Dates_InvoiceData": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_InvoiceData",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Due_Date",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Due_Date_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Due Date",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Date",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Date_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Date",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Aux_ServiceAccount360_CaseEmbed": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_ServiceAccount360_CaseEmbed",
+        "fields": [
+          {"name": "ValidToWithNow_Aux"},
+          {"name": "CurrentDate_Aux"},
+          {"name": "CreatedDate_Aux"},
+          {"name": "Last_Modified_Date_Aux"},
+          {"name": "ClosedDate_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Drop_Aux_InvoiceData": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_InvoiceData",
+        "fields": [
+          {"name": "Due_Date_Aux"},
+          {"name": "Date_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Shift_Dates_SiebelData": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_SiebelData",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Date",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Date_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Date",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Dates_SiebelData": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_SiebelData",
+        "fields": [
+          {"name": "Date"},
+          {"name": "LastProcessedDate"}
+        ]
+      }
+    },
+    "Compute_Aux_InvoiceData": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_InvoiceData",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "Due_Date_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Due_Date_sec_epoch')",
+            "label": "Due_Date_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Date_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Date_sec_epoch')",
+            "label": "Date_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_Case_Easy_Migrate": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Case_Easy_Migrate",
+        "alias": "${App.Datasets.Case_Easy_Migrate_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_Case_Easy_Migrate"
+      }
+    }
+  },
+  "DataflowType": "USER",
+  "_type": "dataflow",
+  "name": "Service_Template_Demo_Timeshifting",
+  "MasterLabel": "Service Template Demo - Timeshifting",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": "",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive"
+}
