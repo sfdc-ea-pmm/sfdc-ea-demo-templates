@@ -25,24 +25,6 @@
           },
           "customFormat" : "[\"0%\",1]"
         }
-      },
-      {
-        "conditionalFormatting" : { },
-        "field" : "Clone_of_Order_KPIs_1.PercOrdersActivated_format",
-        "format" : {
-          "delimiters" : {
-            "thousands" : ",",
-            "decimal" : "."
-          },
-          "customFormat" : "[\"#,###.##%\",1]"
-        }
-      },
-      {
-        "conditionalFormatting" : { },
-        "field" : "Order_Status_1.count",
-        "format" : {
-          "delimiters" : { }
-        }
       }
     ],
     "derivedDimensions" : [ ],
@@ -56,14 +38,6 @@
         "conditionalFormatting" : { },
         "salesforceActions" : [ ],
         "field" : "Quota_Attainment_1.ALL",
-        "members" : [ ],
-        "customActions" : [ ]
-      },
-      {
-        "recordDisplayFields" : [ ],
-        "conditionalFormatting" : { },
-        "salesforceActions" : [ ],
-        "field" : "Order_Status_1.ALL",
         "members" : [ ],
         "customActions" : [ ]
       }
@@ -1055,6 +1029,16 @@
                 }
               },
               {
+                "colspan" : 15,
+                "column" : 1,
+                "name" : "chart_12",
+                "row" : 33,
+                "rowspan" : 20,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
                 "colspan" : 14,
                 "column" : 33,
                 "name" : "chart_14",
@@ -1285,16 +1269,6 @@
                 "widgetStyle" : {
                   "borderEdges" : [ ]
                 }
-              },
-              {
-                "colspan" : 15,
-                "column" : 1,
-                "name" : "chart_35",
-                "row" : 33,
-                "rowspan" : 20,
-                "widgetStyle" : {
-                  "borderEdges" : [ ]
-                }
               }
             ]
           }
@@ -1334,18 +1308,14 @@
             "autoFitMode" : "keepLabels",
             "max" : 100,
             "tooltip" : {
-              "content" : {
-                "legend" : {
-                  "showBinLabel" : true,
-                  "measures" : [ ],
-                  "showNullValues" : true,
-                  "customizeLegend" : false,
-                  "showPercentage" : true,
-                  "showDimensions" : true,
-                  "showMeasures" : true,
-                  "dimensions" : [ ]
-                }
-              }
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
             },
             "visualizationType" : "flatgauge",
             "medium" : 33,
@@ -1533,21 +1503,17 @@
             },
             "axisMode" : "multi",
             "tooltip" : {
-              "content" : {
-                "legend" : {
-                  "showBinLabel" : true,
-                  "measures" : [
-                    "PercOrdersActivated_format"
-                  ],
-                  "showNullValues" : true,
-                  "customizeLegend" : false,
-                  "showPercentage" : false,
-                  "showDimensions" : true,
-                  "showMeasures" : false,
-                  "dimensions" : [ ]
-                },
-                "description" : "% of Activated Orders"
-              }
+              "showBinLabel" : true,
+              "measures" : [
+                "PercOrdersActivated_format"
+              ],
+              "showNullValues" : true,
+              "showPercentage" : false,
+              "customText" : "% of Activated Orders",
+              "showDimensions" : true,
+              "showMeasures" : false,
+              "customizeTooltip" : false,
+              "dimensions" : ""
             },
             "visualizationType" : "flatgauge",
             "medium" : 33,
@@ -1803,160 +1769,6 @@
           "type" : "table"
         }
       },
-      "Order_Status_1" : {
-        "broadcastFacet" : true,
-        "datasets" : [
-          {
-            "name" : "${App.Datasets.Order_FOR_DEMO1.Name}"
-          }
-        ],
-        "isGlobal" : false,
-        "label" : "Order_Status_1",
-        "query" : {
-          "query" : {
-            "measures" : [
-              [
-                "count",
-                "*"
-              ]
-            ],
-            "groups" : [
-              "Order_Status"
-            ],
-            "filters" : [
-              [
-                "UniqueUserName",
-                [
-                  "Isabel Bozzo"
-                ],
-                "in"
-              ]
-            ]
-          },
-          "version" : -1.0
-        },
-        "receiveFacetSource" : {
-          "mode" : "all",
-          "steps" : [ ]
-        },
-        "selectMode" : "single",
-        "type" : "aggregateflex",
-        "useGlobal" : true,
-        "visualizationParameters" : {
-          "parameters" : {
-            "autoFitMode" : "keepLabels",
-            "showValues" : true,
-            "bins" : {
-              "breakpoints" : {
-                "high" : 100,
-                "low" : 0
-              },
-              "bands" : {
-                "high" : {
-                  "color" : "#008000",
-                  "label" : ""
-                },
-                "low" : {
-                  "color" : "#B22222",
-                  "label" : ""
-                },
-                "medium" : {
-                  "color" : "#ffa500",
-                  "label" : ""
-                }
-              }
-            },
-            "legend" : {
-              "descOrder" : false,
-              "showHeader" : true,
-              "show" : true,
-              "customSize" : "auto",
-              "position" : "bottom-center",
-              "inside" : false
-            },
-            "axisMode" : "multi",
-            "tooltip" : {
-              "content" : {
-                "legend" : {
-                  "showBinLabel" : true,
-                  "measures" : [ ],
-                  "showNullValues" : true,
-                  "customizeLegend" : false,
-                  "showPercentage" : true,
-                  "showDimensions" : true,
-                  "showMeasures" : true,
-                  "dimensions" : [ ]
-                }
-              }
-            },
-            "visualizationType" : "treemap",
-            "title" : {
-              "fontSize" : 14,
-              "subtitleFontSize" : 11,
-              "label" : "",
-              "align" : "center",
-              "subtitleLabel" : ""
-            },
-            "binValues" : false,
-            "trellis" : {
-              "flipLabels" : false,
-              "showGridLines" : true,
-              "size" : [
-                100,
-                100
-              ],
-              "enable" : false,
-              "type" : "x",
-              "chartsPerLine" : 4
-            },
-            "columnMap" : {
-              "trellis" : [ ],
-              "dimension" : [
-                "Order_Status"
-              ],
-              "plots" : [
-                "count"
-              ]
-            },
-            "showActionMenu" : true,
-            "measureAxis2" : {
-              "sqrtScale" : false,
-              "showTitle" : true,
-              "showAxis" : true,
-              "title" : "",
-              "customDomain" : {
-                "showDomain" : false
-              }
-            },
-            "measureAxis1" : {
-              "sqrtScale" : false,
-              "showTitle" : true,
-              "showAxis" : true,
-              "title" : "",
-              "customDomain" : {
-                "showDomain" : false
-              }
-            },
-            "theme" : "wave",
-            "dimensionAxis" : {
-              "showTitle" : true,
-              "customSize" : "auto",
-              "showAxis" : true,
-              "title" : "",
-              "icons" : {
-                "useIcons" : false,
-                "iconProps" : {
-                  "fit" : "cover",
-                  "column" : "",
-                  "type" : "round"
-                }
-              }
-            },
-            "applyConditionalFormatting" : true
-          },
-          "type" : "chart"
-        }
-      },
       "Top_Draft_Quotes_1" : {
         "broadcastFacet" : true,
         "datasets" : [
@@ -2040,18 +1852,14 @@
             },
             "axisMode" : "multi",
             "tooltip" : {
-              "content" : {
-                "legend" : {
-                  "showBinLabel" : true,
-                  "measures" : [ ],
-                  "showNullValues" : true,
-                  "customizeLegend" : false,
-                  "showPercentage" : true,
-                  "showDimensions" : true,
-                  "showMeasures" : true,
-                  "dimensions" : [ ]
-                }
-              }
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
             },
             "visualizationType" : "hbar",
             "title" : {
@@ -2443,18 +2251,14 @@
             },
             "axisMode" : "multi",
             "tooltip" : {
-              "content" : {
-                "legend" : {
-                  "showBinLabel" : true,
-                  "measures" : [ ],
-                  "showNullValues" : true,
-                  "customizeLegend" : false,
-                  "showPercentage" : true,
-                  "showDimensions" : true,
-                  "showMeasures" : true,
-                  "dimensions" : [ ]
-                }
-              }
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
             },
             "visualizationType" : "hbar",
             "title" : {
@@ -2852,18 +2656,14 @@
             },
             "axisMode" : "multi",
             "tooltip" : {
-              "content" : {
-                "legend" : {
-                  "showBinLabel" : true,
-                  "measures" : [ ],
-                  "showNullValues" : true,
-                  "customizeLegend" : false,
-                  "showPercentage" : true,
-                  "showDimensions" : true,
-                  "showMeasures" : true,
-                  "dimensions" : [ ]
-                }
-              }
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
             },
             "visualizationType" : "hbar",
             "title" : {
@@ -3006,18 +2806,14 @@
             },
             "axisMode" : "multi",
             "tooltip" : {
-              "content" : {
-                "legend" : {
-                  "showBinLabel" : true,
-                  "measures" : [ ],
-                  "showNullValues" : true,
-                  "customizeLegend" : false,
-                  "showPercentage" : true,
-                  "showDimensions" : true,
-                  "showMeasures" : true,
-                  "dimensions" : [ ]
-                }
-              }
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
             },
             "visualizationType" : "treemap",
             "title" : {
@@ -3174,18 +2970,14 @@
             },
             "axisMode" : "multi",
             "tooltip" : {
-              "content" : {
-                "legend" : {
-                  "showBinLabel" : true,
-                  "measures" : [ ],
-                  "showNullValues" : true,
-                  "customizeLegend" : false,
-                  "showPercentage" : true,
-                  "showDimensions" : true,
-                  "showMeasures" : true,
-                  "dimensions" : [ ]
-                }
-              }
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
             },
             "visualizationType" : "hbar",
             "title" : {
@@ -3362,18 +3154,14 @@
             },
             "axisMode" : "multi",
             "tooltip" : {
-              "content" : {
-                "legend" : {
-                  "showBinLabel" : true,
-                  "measures" : [ ],
-                  "showNullValues" : true,
-                  "customizeLegend" : false,
-                  "showPercentage" : true,
-                  "showDimensions" : true,
-                  "showMeasures" : true,
-                  "dimensions" : [ ]
-                }
-              }
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
             },
             "visualizationType" : "hbar",
             "title" : {
@@ -3532,18 +3320,14 @@
             },
             "axisMode" : "multi",
             "tooltip" : {
-              "content" : {
-                "legend" : {
-                  "showBinLabel" : true,
-                  "measures" : [ ],
-                  "showNullValues" : true,
-                  "customizeLegend" : false,
-                  "showPercentage" : true,
-                  "showDimensions" : true,
-                  "showMeasures" : true,
-                  "dimensions" : [ ]
-                }
-              }
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
             },
             "visualizationType" : "hbar",
             "title" : {
@@ -3695,18 +3479,14 @@
             },
             "axisMode" : "multi",
             "tooltip" : {
-              "content" : {
-                "legend" : {
-                  "showBinLabel" : true,
-                  "measures" : [ ],
-                  "showNullValues" : true,
-                  "customizeLegend" : false,
-                  "showPercentage" : true,
-                  "showDimensions" : true,
-                  "showMeasures" : true,
-                  "dimensions" : [ ]
-                }
-              }
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
             },
             "visualizationType" : "hbar",
             "title" : {
@@ -3880,18 +3660,14 @@
             },
             "axisMode" : "multi",
             "tooltip" : {
-              "content" : {
-                "legend" : {
-                  "showBinLabel" : true,
-                  "measures" : [ ],
-                  "showNullValues" : true,
-                  "customizeLegend" : false,
-                  "showPercentage" : true,
-                  "showDimensions" : true,
-                  "showMeasures" : true,
-                  "dimensions" : [ ]
-                }
-              }
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
             },
             "visualizationType" : "hbar",
             "title" : {
@@ -4173,18 +3949,14 @@
             },
             "axisMode" : "multi",
             "tooltip" : {
-              "content" : {
-                "legend" : {
-                  "showBinLabel" : true,
-                  "measures" : [ ],
-                  "showNullValues" : true,
-                  "customizeLegend" : false,
-                  "showPercentage" : true,
-                  "showDimensions" : true,
-                  "showMeasures" : true,
-                  "dimensions" : [ ]
-                }
-              }
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
             },
             "visualizationType" : "hbar",
             "title" : {
@@ -4395,21 +4167,17 @@
             },
             "axisMode" : "multi",
             "tooltip" : {
-              "content" : {
-                "legend" : {
-                  "showBinLabel" : true,
-                  "measures" : [
-                    "QuotesAccepted_format"
-                  ],
-                  "showNullValues" : false,
-                  "customizeLegend" : true,
-                  "showPercentage" : false,
-                  "showDimensions" : true,
-                  "showMeasures" : false,
-                  "dimensions" : [ ]
-                },
-                "description" : "% of Accepted Quotes"
-              }
+              "showBinLabel" : true,
+              "measures" : [
+                "QuotesAccepted_format"
+              ],
+              "showNullValues" : false,
+              "showPercentage" : false,
+              "customText" : "% of Accepted Quotes",
+              "showDimensions" : true,
+              "showMeasures" : false,
+              "customizeTooltip" : true,
+              "dimensions" : ""
             },
             "visualizationType" : "flatgauge",
             "medium" : 33,
@@ -4767,18 +4535,14 @@
           },
           "axisMode" : "multi",
           "tooltip" : {
-            "content" : {
-              "legend" : {
-                "showBinLabel" : true,
-                "measures" : [ ],
-                "showNullValues" : true,
-                "customizeLegend" : false,
-                "showPercentage" : true,
-                "showDimensions" : true,
-                "showMeasures" : true,
-                "dimensions" : [ ]
-              }
-            }
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
           },
           "visualizationType" : "hbar",
           "exploreLink" : true,
@@ -4885,18 +4649,14 @@
           },
           "axisMode" : "multi",
           "tooltip" : {
-            "content" : {
-              "legend" : {
-                "showBinLabel" : true,
-                "measures" : [ ],
-                "showNullValues" : true,
-                "customizeLegend" : false,
-                "showPercentage" : true,
-                "showDimensions" : true,
-                "showMeasures" : true,
-                "dimensions" : [ ]
-              }
-            }
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
           },
           "visualizationType" : "hbar",
           "exploreLink" : true,
@@ -5003,18 +4763,14 @@
           },
           "axisMode" : "multi",
           "tooltip" : {
-            "content" : {
-              "legend" : {
-                "showBinLabel" : true,
-                "measures" : [ ],
-                "showNullValues" : true,
-                "customizeLegend" : false,
-                "showPercentage" : true,
-                "showDimensions" : true,
-                "showMeasures" : true,
-                "dimensions" : [ ]
-              }
-            }
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
           },
           "visualizationType" : "hbar",
           "exploreLink" : true,
@@ -5100,21 +4856,17 @@
           },
           "axisMode" : "multi",
           "tooltip" : {
-            "content" : {
-              "legend" : {
-                "showBinLabel" : true,
-                "measures" : [
-                  "PercOrdersActivated_format"
-                ],
-                "showNullValues" : true,
-                "customizeLegend" : false,
-                "showPercentage" : false,
-                "showDimensions" : true,
-                "showMeasures" : false,
-                "dimensions" : [ ]
-              },
-              "description" : "% of Activated Orders"
-            }
+            "showBinLabel" : true,
+            "measures" : [
+              "PercOrdersActivated_format"
+            ],
+            "showNullValues" : true,
+            "showPercentage" : false,
+            "customText" : "% of Activated Orders",
+            "showDimensions" : true,
+            "showMeasures" : false,
+            "customizeTooltip" : false,
+            "dimensions" : ""
           },
           "visualizationType" : "flatgauge",
           "medium" : 33,
@@ -5252,18 +5004,14 @@
           },
           "axisMode" : "multi",
           "tooltip" : {
-            "content" : {
-              "legend" : {
-                "showBinLabel" : true,
-                "measures" : [ ],
-                "showNullValues" : true,
-                "customizeLegend" : false,
-                "showPercentage" : true,
-                "showDimensions" : true,
-                "showMeasures" : true,
-                "dimensions" : [ ]
-              }
-            }
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
           },
           "visualizationType" : "hbar",
           "exploreLink" : true,
@@ -5349,18 +5097,14 @@
           },
           "axisMode" : "multi",
           "tooltip" : {
-            "content" : {
-              "legend" : {
-                "showBinLabel" : true,
-                "measures" : [ ],
-                "showNullValues" : true,
-                "customizeLegend" : false,
-                "showPercentage" : true,
-                "showDimensions" : true,
-                "showMeasures" : true,
-                "dimensions" : [ ]
-              }
-            }
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
           },
           "visualizationType" : "flatgauge",
           "medium" : 33,
@@ -5521,18 +5265,14 @@
           },
           "axisMode" : "multi",
           "tooltip" : {
-            "content" : {
-              "legend" : {
-                "showBinLabel" : true,
-                "measures" : [ ],
-                "showNullValues" : true,
-                "customizeLegend" : false,
-                "showPercentage" : true,
-                "showDimensions" : true,
-                "showMeasures" : true,
-                "dimensions" : [ ]
-              }
-            }
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
           },
           "visualizationType" : "hbar",
           "exploreLink" : true,
@@ -5619,21 +5359,17 @@
           },
           "axisMode" : "multi",
           "tooltip" : {
-            "content" : {
-              "legend" : {
-                "showBinLabel" : true,
-                "measures" : [
-                  "QuotesAccepted_format"
-                ],
-                "showNullValues" : false,
-                "customizeLegend" : false,
-                "showPercentage" : false,
-                "showDimensions" : true,
-                "showMeasures" : false,
-                "dimensions" : [ ]
-              },
-              "description" : "% of Accepted Quotes"
-            }
+            "showBinLabel" : true,
+            "measures" : [
+              "QuotesAccepted_format"
+            ],
+            "showNullValues" : false,
+            "showPercentage" : false,
+            "customText" : "% of Accepted Quotes",
+            "showDimensions" : true,
+            "showMeasures" : false,
+            "customizeTooltip" : false,
+            "dimensions" : ""
           },
           "visualizationType" : "flatgauge",
           "medium" : 33,
@@ -5829,12 +5565,15 @@
           "titleSize" : 14,
           "tooltip" : {
             "content" : {
+              "body" : {
+                "source" : {
+                  "name" : "table_7",
+                  "type" : "widget"
+                },
+                "width" : 850
+              },
               "description" : {
                 "displayTemplate" : "# Quotes Presented "
-              },
-              "widget" : {
-                "name" : "table_7",
-                "width" : 850
               }
             },
             "customizeTooltip" : true
@@ -5857,12 +5596,15 @@
           "titleSize" : 16,
           "tooltip" : {
             "content" : {
+              "body" : {
+                "source" : {
+                  "name" : "table_5",
+                  "type" : "widget"
+                },
+                "width" : 450
+              },
               "description" : {
                 "displayTemplate" : ""
-              },
-              "widget" : {
-                "name" : "table_5",
-                "width" : 450
               }
             },
             "customizeTooltip" : true
@@ -5960,18 +5702,14 @@
           },
           "axisMode" : "multi",
           "tooltip" : {
-            "content" : {
-              "legend" : {
-                "showBinLabel" : true,
-                "measures" : [ ],
-                "showNullValues" : true,
-                "customizeLegend" : false,
-                "showPercentage" : true,
-                "showDimensions" : true,
-                "showMeasures" : true,
-                "dimensions" : [ ]
-              }
-            }
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
           },
           "visualizationType" : "hbar",
           "exploreLink" : true,
@@ -6045,6 +5783,120 @@
         },
         "type" : "chart"
       },
+      "chart_12" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showValues" : true,
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "bottom-center",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "treemap",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "binValues" : false,
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "parameters" : { },
+            "chartsPerLine" : 4
+          },
+          "columnMap" : {
+            "trellis" : [ ],
+            "dimension" : [
+              "Order_Status"
+            ],
+            "plots" : [
+              "count"
+            ]
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "theme" : "light",
+          "step" : "Orders_by_Status_1",
+          "dimensionAxis" : {
+            "showTitle" : true,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round",
+                "parameters" : { }
+              }
+            }
+          },
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
       "chart_10" : {
         "parameters" : {
           "autoFitMode" : "keepLabels",
@@ -6079,18 +5931,14 @@
           },
           "axisMode" : "multi",
           "tooltip" : {
-            "content" : {
-              "legend" : {
-                "showBinLabel" : true,
-                "measures" : [ ],
-                "showNullValues" : true,
-                "customizeLegend" : false,
-                "showPercentage" : true,
-                "showDimensions" : true,
-                "showMeasures" : true,
-                "dimensions" : [ ]
-              }
-            }
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
           },
           "visualizationType" : "hbar",
           "exploreLink" : true,
@@ -6661,7 +6509,9 @@
           },
           "innerMajorBorderColor" : "#54698d",
           "innerMinorBorderColor" : "#54698d",
-          "mode" : "fittocontainer",
+          "maxColumnWidth" : 300,
+          "minColumnWidth" : 40,
+          "mode" : "variable",
           "numberOfLines" : 1,
           "pivoted" : false,
           "showActionMenu" : true,
@@ -6748,7 +6598,9 @@
           },
           "innerMajorBorderColor" : "#54698d",
           "innerMinorBorderColor" : "#54698d",
-          "mode" : "fittocontainer",
+          "maxColumnWidth" : 300,
+          "minColumnWidth" : 40,
+          "mode" : "variable",
           "numberOfLines" : 1,
           "showActionMenu" : true,
           "showRowIndexColumn" : true,
@@ -6757,122 +6609,6 @@
           "verticalPadding" : 8
         },
         "type" : "table"
-      },
-      "chart_35" : {
-        "parameters" : {
-          "autoFitMode" : "keepLabels",
-          "showValues" : true,
-          "bins" : {
-            "breakpoints" : {
-              "high" : 100,
-              "low" : 0
-            },
-            "bands" : {
-              "high" : {
-                "color" : "#008000",
-                "label" : ""
-              },
-              "low" : {
-                "color" : "#B22222",
-                "label" : ""
-              },
-              "medium" : {
-                "color" : "#ffa500",
-                "label" : ""
-              }
-            }
-          },
-          "legend" : {
-            "descOrder" : false,
-            "showHeader" : true,
-            "show" : true,
-            "customSize" : "auto",
-            "position" : "bottom-center",
-            "inside" : false
-          },
-          "axisMode" : "multi",
-          "tooltip" : {
-            "content" : {
-              "legend" : {
-                "showBinLabel" : true,
-                "measures" : [ ],
-                "showNullValues" : true,
-                "customizeLegend" : false,
-                "showPercentage" : true,
-                "showDimensions" : true,
-                "showMeasures" : true,
-                "dimensions" : [ ]
-              }
-            }
-          },
-          "visualizationType" : "treemap",
-          "exploreLink" : true,
-          "title" : {
-            "fontSize" : 14,
-            "subtitleFontSize" : 11,
-            "label" : "",
-            "align" : "center",
-            "subtitleLabel" : ""
-          },
-          "binValues" : false,
-          "trellis" : {
-            "flipLabels" : false,
-            "showGridLines" : true,
-            "size" : [
-              100,
-              100
-            ],
-            "enable" : false,
-            "type" : "x",
-            "chartsPerLine" : 4
-          },
-          "columnMap" : {
-            "trellis" : [ ],
-            "dimension" : [
-              "Order_Status"
-            ],
-            "plots" : [
-              "count"
-            ]
-          },
-          "showActionMenu" : true,
-          "measureAxis2" : {
-            "sqrtScale" : false,
-            "showTitle" : true,
-            "showAxis" : true,
-            "title" : "",
-            "customDomain" : {
-              "showDomain" : false
-            }
-          },
-          "measureAxis1" : {
-            "sqrtScale" : false,
-            "showTitle" : true,
-            "showAxis" : true,
-            "title" : "",
-            "customDomain" : {
-              "showDomain" : false
-            }
-          },
-          "theme" : "light",
-          "step" : "Order_Status_1",
-          "dimensionAxis" : {
-            "showTitle" : true,
-            "customSize" : "auto",
-            "showAxis" : true,
-            "title" : "",
-            "icons" : {
-              "useIcons" : false,
-              "iconProps" : {
-                "fit" : "cover",
-                "column" : "",
-                "type" : "round"
-              }
-            }
-          },
-          "applyConditionalFormatting" : true
-        },
-        "type" : "chart"
       }
     }
   }
