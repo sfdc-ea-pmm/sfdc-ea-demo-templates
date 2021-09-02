@@ -1,6 +1,36 @@
 {
   "notificationLevel": "",
   "workflowDefinition": {
+    "Extract_Case": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {
+            "name": "CaseNumber"
+          },
+          {
+            "name": "Id"
+          }
+        ],
+        "object": "Case"
+      }
+    },
+    "Update_Interaction_with_Case": {
+      "action": "update",
+      "parameters": {
+        "left": "Update_Interaction_w_Subscription",
+        "right": "Extract_Case",
+        "left_key": [
+          "CaseNumber"
+        ],
+        "right_key": [
+          "CaseNumber"
+        ],
+        "update_columns": {
+          "CaseId": "Id"
+        }
+      }
+    },
     "Extract_Subscription": {
       "action": "sfdcDigest",
       "parameters": {
@@ -105,7 +135,7 @@
       "parameters": {
         "name": "${App.Datasets.B2C_Comms_CustomerInteractionTopic_Demo_tp.FullyQualifiedName}",
         "alias": "${App.Datasets.B2C_Comms_CustomerInteractionTopic_Demo_tp.FullyQualifiedName}",
-        "source": "Update_Interaction_w_Subscription"
+        "source": "Update_Interaction_with_Case"
       }
     },
     "Extract_Account": {
