@@ -1,0 +1,364 @@
+{
+    "isDeletable": true,
+    "notificationLevel": "Never",
+    "workflowDefinition": {
+        "digest_Account": {
+          "action": "sfdcDigest",
+          "parameters": {
+            "fields": [
+              {
+                "name": "Id"
+              },
+              {
+                "name": "Name"
+              },
+              {
+                "name": "External_ID__c"
+              }
+            ],
+            "object": "Account"
+          }
+        },
+        "DropDates": {
+          "action": "sliceDataset",
+          "parameters": {
+            "mode": "drop",
+            "source": "ComputeDates",
+            "fields": [
+              {
+                "name": "Time"
+              },
+              {
+                "name": "LastProcessedDate"
+              }
+            ]
+          }
+        },
+        "DropForecastAux": {
+          "action": "sliceDataset",
+          "parameters": {
+            "mode": "drop",
+            "source": "ShiftForecastDates",
+            "fields": [
+              {
+                "name": "TimeAux"
+              },
+              {
+                "name": "ElapsedSeconds"
+              }
+            ]
+          }
+        },
+        "ShiftForecastDates": {
+          "action": "computeExpression",
+          "parameters": {
+            "source": "DropForecastDates",
+            "mergeWithSource": true,
+            "computedFields": [
+              {
+                "name": "Time",
+                "saqlExpression": "toDate('TimeAux_sec_epoch' + 'ElapsedSeconds')",
+                "format": "yyyy-MM-dd",
+                "label": "Time",
+                "type": "Date",
+                "isYearEndFiscalYear": true
+              }
+            ]
+          }
+        },
+        "DropForecastDates": {
+          "action": "sliceDataset",
+          "parameters": {
+            "mode": "drop",
+            "source": "ComputeForecastDates",
+            "fields": [
+              {
+                "name": "Time"
+              },
+              {
+                "name": "LastProcessedDate"
+              }
+            ]
+          }
+        },
+        "RegisterForecastDemoData": {
+          "action": "sfdcRegister",
+          "parameters": {
+            "name": "MFG_Forecasts_Demo",
+            "alias": "${App.Datasets.MFG_Forecasts_Demo1.FullyQualifiedName}",
+            "source": "AddForecastToday"
+          }
+        },
+        "AddForecastToday": {
+          "action": "computeExpression",
+          "parameters": {
+            "source": "DropForecastAux",
+            "mergeWithSource": true,
+            "computedFields": [
+              {
+                "saqlExpression": "now()",
+                "name": "LastProcessedDate",
+                "format": "yyyy-MM-dd",
+                "label": "LastProcessedDate",
+                "type": "Date",
+                "isYearEndFiscalYear": true
+              }
+            ]
+          }
+        },
+        "edg_MFG_for_RCG_Forecasts_Data": {
+          "action": "edgemart",
+          "parameters": {
+            "alias": "${App.Datasets.MFG_Forecasts_Demo1.FullyQualifiedName}"
+          }
+        },
+        "ComputeDates": {
+          "action": "computeExpression",
+          "parameters": {
+            "source": "Lookup_Account_Id",
+            "mergeWithSource": true,
+            "computedFields": [
+              {
+                "name": "TimeAux",
+                "saqlExpression": "toDate('Time_sec_epoch')",
+                "format": "yyyy-MM-dd",
+                "label": "TimeAux",
+                "type": "Date",
+                "isYearEndFiscalYear": true
+              },
+              {
+                "precision": 16,
+                "name": "ElapsedSeconds",
+                "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+                "scale": 0,
+                "label": "ElapsedSeconds",
+                "type": "Numeric"
+              }
+            ]
+          }
+        },
+        "ShiftDates": {
+          "action": "computeExpression",
+          "parameters": {
+            "source": "DropDates",
+            "mergeWithSource": true,
+            "computedFields": [
+              {
+                "name": "Time",
+                "saqlExpression": "toDate('TimeAux_sec_epoch' + 'ElapsedSeconds')",
+                "format": "yyyy-MM-dd",
+                "label": "Time",
+                "type": "Date",
+                "isYearEndFiscalYear": true
+              }
+            ]
+          }
+        },
+        "AddToday": {
+          "action": "computeExpression",
+          "parameters": {
+            "source": "DropAux",
+            "mergeWithSource": true,
+            "computedFields": [
+              {
+                "saqlExpression": "now()",
+                "name": "LastProcessedDate",
+                "format": "yyyy-MM-dd",
+                "label": "LastProcessedDate",
+                "type": "Date",
+                "isYearEndFiscalYear": true
+              }
+            ]
+          }
+        },
+        "ComputeForecastDates": {
+          "action": "computeExpression",
+          "parameters": {
+            "source": "Lookup_ForecastAccount_Id",
+            "mergeWithSource": true,
+            "computedFields": [
+              {
+                "name": "TimeAux",
+                "saqlExpression": "toDate('Time_sec_epoch')",
+                "format": "yyyy-MM-dd",
+                "label": "TimeAux",
+                "type": "Date",
+                "isYearEndFiscalYear": true
+              },
+              {
+                "precision": 16,
+                "name": "ElapsedSeconds",
+                "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+                "scale": 0,
+                "label": "ElapsedSeconds",
+                "type": "Numeric"
+              }
+            ]
+          }
+        },
+        "edg_MFG_for_RCG_Demo_Data": {
+          "action": "edgemart",
+          "parameters": {
+            "alias": "${App.Datasets.MFG_Data_Demo1.FullyQualifiedName}"
+          }
+        },
+        "DropAux": {
+          "action": "sliceDataset",
+          "parameters": {
+            "mode": "drop",
+            "source": "ShiftDates",
+            "fields": [
+              {
+                "name": "TimeAux"
+              },
+              {
+                "name": "ElapsedSeconds"
+              }
+            ]
+          }
+        },
+        "RegisterDemoData": {
+          "action": "sfdcRegister",
+          "parameters": {
+            "name": "MFG_Data_Demo",
+            "alias": "${App.Datasets.MFG_Data_Demo1.FullyQualifiedName}",
+            "source": "AddToday"
+          }
+        },
+        "Lookup_ForecastAccount_Id": {
+          "action": "update",
+          "parameters": {
+            "right_key": [
+              "Name"
+            ],
+            "left": "edg_MFG_for_RCG_Forecasts_Data",
+            "left_key": [
+              "AccountName"
+            ],
+            "update_columns": {
+              "AccountId": "Id"
+            },
+            "right": "digest_Account"
+          }
+        },
+        "Lookup_Account_Id": {
+          "action": "update",
+          "parameters": {
+            "right_key": [
+              "Name"
+            ],
+            "left": "edg_MFG_for_RCG_Demo_Data",
+            "left_key": [
+              "AccountName"
+            ],
+            "update_columns": {
+              "AccountId": "Id"
+            },
+            "right": "digest_Account"
+          }
+        },
+        "Load_Dataset_OrderProduct": {
+          "action": "edgemart",
+          "parameters": {
+            "alias": "${App.Datasets.MFG_Order_Product1.FullyQualifiedName}"
+          }
+        },
+        "Compute_Aux_OrderProduct": {
+          "action": "computeExpression",
+          "parameters": {
+            "mergeWithSource": true,
+            "source": "Load_Dataset_OrderProduct",
+            "computedFields": [
+              {
+                "type": "Numeric",
+                "name": "ElapsedSeconds",
+                "label": "ElapsedSeconds",
+                "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+                "precision": 18,
+                "scale": 0
+              },
+              {
+                "type": "Date",
+                "saqlExpression": "toDate('OrderEffectiveDate_sec_epoch')",
+                "isYearEndFiscalYear": true,
+                "format": "yyyy-MM-dd",
+                "name": "OrderEffectiveDate_Aux",
+                "label": "OrderEffectiveDate_Aux"
+              }
+            ]
+          }
+        },
+        "Drop_Date_OrderProduct": {
+          "action": "sliceDataset",
+          "parameters": {
+            "mode": "drop",
+            "fields": [
+              {
+                "name": "LastProcessedDate"
+              },
+              {
+                "name": "OrderEffectiveDate"
+              }
+            ],
+            "source": "Compute_Aux_OrderProduct"
+          }
+        },
+        "Shift_Dates_OrderProduct": {
+          "action": "computeExpression",
+          "parameters": {
+            "mergeWithSource": true,
+            "source": "Drop_Date_OrderProduct",
+            "computedFields": [
+              {
+                "type": "Date",
+                "name": "LastProcessedDate",
+                "label": "LastProcessedDate",
+                "isYearEndFiscalYear": true,
+                "saqlExpression": "now()",
+                "format": "yyyy-MM-dd"
+              },
+              {
+                "type": "Date",
+                "name": "OrderEffectiveDate",
+                "label": "OrderEffectiveDate",
+                "isYearEndFiscalYear": true,
+                "saqlExpression": "toDate('OrderEffectiveDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+                "format": "yyyy-MM-dd"
+              }
+            ]
+          }
+        },
+        "Drop_Aux_OrderProduct": {
+          "action": "sliceDataset",
+          "parameters": {
+            "mode": "drop",
+            "fields": [
+              {
+                "name": "ElapsedSeconds"
+              },
+              {
+                "name": "OrderEffectiveDate_Aux"
+              }
+            ],
+            "source": "Shift_Dates_OrderProduct"
+          }
+        },
+        "Register_Shifted_Dataset_OrderProduct": {
+          "action": "sfdcRegister",
+          "parameters": {
+            "source": "Drop_Aux_OrderProduct",
+            "alias": "${App.Datasets.MFG_Order_Product1.FullyQualifiedName}",
+            "name": "MFG_Order_Product1"
+          }
+        }
+      },
+    "DataflowType": "USER",
+    "_type": "dataflow",
+    "name": "Demo_MFG_for_RCG1",
+    "description": "Demo | MFG for RCG - TS/AF",
+    "MasterLabel": "Demo | MFG for RCG - TS/AF",
+    "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+    "_uid": "",
+    "nextRun": "",
+    "WorkflowStatus": "Inactive"
+  }
