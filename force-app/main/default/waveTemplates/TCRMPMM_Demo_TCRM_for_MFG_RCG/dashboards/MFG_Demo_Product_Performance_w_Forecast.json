@@ -1,5 +1,5 @@
 {
-  "name" : "MFG_Demo_Product_Performance_w_Forecast_tp",
+  "name" : "MFG_Demo_Product_Performance_w_Forecast1_tp",
   "label" : "MFG Demo - Product Performance w. Forecast",
   "folder" : {
     "id" : "${App.Folder.Id}"
@@ -20,7 +20,7 @@
     "filters" : [
       {
         "dataset" : {
-          "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+          "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -31,7 +31,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+          "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -43,7 +43,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+          "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -54,7 +54,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+          "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -65,7 +65,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+          "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -77,7 +77,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+          "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -89,7 +89,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+          "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -100,7 +100,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+          "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -1686,7 +1686,7 @@
         "groups" : [ ],
         "label" : "DemandByProduct",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.MFG_Data_Demo.FullyQualifiedName}\";\nq = group q by 'ProductName';\nq = foreach q generate 'ProductName' as 'ProductName', sum('Actual') / sum('Plan') as 'DemandMet';\nq = order q by 'DemandMet' desc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.MFG_Data_Demo1.FullyQualifiedName}\";\nq = group q by 'ProductName';\nq = foreach q generate 'ProductName' as 'ProductName', sum('Actual') / sum('Plan') as 'DemandMet';\nq = order q by 'DemandMet' desc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1801,7 +1801,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1976,7 +1976,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2124,7 +2124,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2251,7 +2251,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2356,7 +2356,7 @@
         "groups" : [ ],
         "label" : "ActualvsPlan",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.MFG_Data_Demo.FullyQualifiedName}\";\nq = group q by ('AccountName', 'ProductName');\nq = foreach q generate 'AccountName' as 'AccountName', 'ProductName' as 'ProductName', sum('Actual') - sum('Plan') as 'sum_Plan';\nq = order q by ('AccountName' asc, 'ProductName' asc);\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.MFG_Data_Demo1.FullyQualifiedName}\";\nq = group q by ('AccountName', 'ProductName');\nq = foreach q generate 'AccountName' as 'AccountName', 'ProductName' as 'ProductName', sum('Actual') - sum('Plan') as 'sum_Plan';\nq = order q by ('AccountName' asc, 'ProductName' asc);\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2438,7 +2438,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2614,7 +2614,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2744,7 +2744,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2880,7 +2880,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2924,7 +2924,7 @@
         "groups" : [ ],
         "label" : "DetailsTable",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.MFG_Data_Demo.FullyQualifiedName}\";\nresult = group q by ('ProductFamily', 'ProductName', 'AccountName', 'ForecastStatus');\nresult = foreach result generate q.'ProductFamily' as 'ProductFamily', q.'ProductName' as 'ProductName', q.'AccountName' as 'AccountName', q.'ForecastStatus' as 'Status', sum(q.'Plan') as 'Planned Revenue', sum(q.'Actual') as 'Actual Revenue';\nresult = order result by ('ProductFamily' asc, 'ProductName' asc, 'AccountName' asc, 'Status' asc);\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.MFG_Data_Demo1.FullyQualifiedName}\";\nresult = group q by ('ProductFamily', 'ProductName', 'AccountName', 'ForecastStatus');\nresult = foreach result generate q.'ProductFamily' as 'ProductFamily', q.'ProductName' as 'ProductName', q.'AccountName' as 'AccountName', q.'ForecastStatus' as 'Status', sum(q.'Plan') as 'Planned Revenue', sum(q.'Actual') as 'Actual Revenue';\nresult = order result by ('ProductFamily' asc, 'ProductName' asc, 'AccountName' asc, 'Status' asc);\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2967,7 +2967,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -3174,7 +3174,7 @@
         "groups" : [ ],
         "label" : "DetailsTable",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.MFG_Data_Demo.FullyQualifiedName}\";\nresult = group q by ('ProductFamily', 'ProductName', 'AccountName', 'ForecastStatus');\nresult = foreach result generate q.'ProductFamily' as 'ProductFamily', q.'ProductName' as 'ProductName', q.'AccountName' as 'AccountName', q.'ForecastStatus' as 'Status', sum(q.'Actual') as 'Actual Revenue', sum(q.'Forecast') as 'Forecasted Revenue';\nresult = order result by ('ProductFamily' asc, 'ProductName' asc, 'AccountName' asc, 'Status' asc);\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.MFG_Data_Demo1.FullyQualifiedName}\";\nresult = group q by ('ProductFamily', 'ProductName', 'AccountName', 'ForecastStatus');\nresult = foreach result generate q.'ProductFamily' as 'ProductFamily', q.'ProductName' as 'ProductName', q.'AccountName' as 'AccountName', q.'ForecastStatus' as 'Status', sum(q.'Actual') as 'Actual Revenue', sum(q.'Forecast') as 'Forecasted Revenue';\nresult = order result by ('ProductFamily' asc, 'ProductName' asc, 'AccountName' asc, 'Status' asc);\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -3217,7 +3217,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -3368,7 +3368,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -3504,7 +3504,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -3608,7 +3608,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -3742,7 +3742,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -3910,7 +3910,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -4118,7 +4118,7 @@
         "groups" : [ ],
         "label" : "lens_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.MFG_Data_Demo.FullyQualifiedName}\";\nq = group q by ('SalesAgreementName', 'ForecastStatus');\nq = foreach q generate 'SalesAgreementName' as 'SalesAgreementName', 'ForecastStatus' as 'ForecastStatus', avg('TopAgreements') as 'avg_TopAgreements';\nq = order q by 'avg_TopAgreements' desc;\nq = limit q 6;",
+        "query" : "q = load \"${App.Datasets.MFG_Data_Demo1.FullyQualifiedName}\";\nq = group q by ('SalesAgreementName', 'ForecastStatus');\nq = foreach q generate 'SalesAgreementName' as 'SalesAgreementName', 'ForecastStatus' as 'ForecastStatus', avg('TopAgreements') as 'avg_TopAgreements';\nq = order q by 'avg_TopAgreements' desc;\nq = limit q 6;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
