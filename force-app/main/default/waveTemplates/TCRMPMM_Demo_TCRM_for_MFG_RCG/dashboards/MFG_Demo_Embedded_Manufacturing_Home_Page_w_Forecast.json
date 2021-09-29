@@ -1,5 +1,5 @@
 {
-  "name" : "MFG_Demo_Embedded_Manufacturing_Home_Page_w_Forecast_tp",
+  "name" : "MFG_Demo_Embedded_Manufacturing_Home_Page_w_Forecast1_tp",
   "label" : "MFG Demo - Embedded - Manufacturing Home Page w. Forecast",
   "folder" : {
     "id" : "${App.Folder.Id}"
@@ -639,7 +639,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -732,7 +732,7 @@
         "groups" : [ ],
         "label" : "UpcomingRenewal",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.MFG_Data_Demo.FullyQualifiedName}\";\nq = filter q by 'DerivedStatus' == \"Upcoming Renewal\";\nq = group q by all;\nq = foreach q generate sum('Plan') as 'Upcoming_Renewal';\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.MFG_Data_Demo1.FullyQualifiedName}\";\nq = filter q by 'DerivedStatus' == \"Upcoming Renewal\";\nq = group q by all;\nq = foreach q generate sum('Plan') as 'Upcoming_Renewal';\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -854,7 +854,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1016,7 +1016,7 @@
         "groups" : [ ],
         "label" : "Attainment",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.MFG_Data_Demo.FullyQualifiedName}\";\nq = group q by 'AccountName';\nq = foreach q generate 'AccountName' as 'AccountName', avg('Attainment') as 'Attainment';\nq = order q by 'Attainment' desc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.MFG_Data_Demo1.FullyQualifiedName}\";\nq = group q by 'AccountName';\nq = foreach q generate 'AccountName' as 'AccountName', avg('Attainment') as 'Attainment';\nq = order q by 'Attainment' desc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1131,7 +1131,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1410,7 +1410,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1495,7 +1495,7 @@
         "groups" : [ ],
         "label" : "ActualAmount",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.MFG_Data_Demo.FullyQualifiedName}\";\nq = group q by all;\nq = foreach q generate sum('Actual') as 'sum_Actual';\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.MFG_Data_Demo1.FullyQualifiedName}\";\nq = group q by all;\nq = foreach q generate sum('Actual') as 'sum_Actual';\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]

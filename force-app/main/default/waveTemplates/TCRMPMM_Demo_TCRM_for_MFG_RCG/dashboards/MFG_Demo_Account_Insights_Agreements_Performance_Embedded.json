@@ -1,5 +1,5 @@
 {
-  "name" : "MFG_Demo_Account_Insights_Agreements_Performance_Embedded_tp",
+  "name" : "MFG_Demo_Account_Insights_Agreements_Performance_Embedded1_tp",
   "label" : "MFG Demo - Account Insights - Agreements Performance (Embedded)",
   "folder" : {
     "id" : "${App.Folder.Id}"
@@ -2111,7 +2111,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2309,7 +2309,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2451,7 +2451,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2594,7 +2594,7 @@
         "groups" : [ ],
         "label" : "CurrentPeriod",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.MFG_Data_Demo.FullyQualifiedName}\";\nq_A = filter q by date('Time_Year', 'Time_Month', 'Time_Day') in [\"current year\"..\"current year\"];\nq_B = filter q by date('Time_Year', 'Time_Month', 'Time_Day') in [\"1 year ago\"..\"1 year ago\"];\nresult = group q_A by all full, q_B by all;\nresult = foreach result generate sum(q_A.'Plan') as 'A', sum(q_B.'Plan') as 'B';\nresult = foreach result generate 'A', 'B', ((A-B)/B) as 'PlannedRevenue';\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.MFG_Data_Demo1.FullyQualifiedName}\";\nq_A = filter q by date('Time_Year', 'Time_Month', 'Time_Day') in [\"current year\"..\"current year\"];\nq_B = filter q by date('Time_Year', 'Time_Month', 'Time_Day') in [\"1 year ago\"..\"1 year ago\"];\nresult = group q_A by all full, q_B by all;\nresult = foreach result generate sum(q_A.'Plan') as 'A', sum(q_B.'Plan') as 'B';\nresult = foreach result generate 'A', 'B', ((A-B)/B) as 'PlannedRevenue';\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "exclude",
           "steps" : [
@@ -2643,7 +2643,7 @@
         "groups" : [ ],
         "label" : "CurrentPeriod",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.MFG_Data_Demo.FullyQualifiedName}\";\nq_A = filter q by date('Time_Year', 'Time_Month', 'Time_Day') in [\"current year\"..\"current year\"];\nq_B = filter q by date('Time_Year', 'Time_Month', 'Time_Day') in [\"1 year ago\"..\"1 year ago\"];\nresult = group q_A by all full, q_B by all;\nresult = foreach result generate sum(q_A.'Actual') as 'A', sum(q_B.'Actual') as 'B';\nresult = foreach result generate 'A', 'B', ((A-B)/B) as 'ActualRevenueAux';\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.MFG_Data_Demo1.FullyQualifiedName}\";\nq_A = filter q by date('Time_Year', 'Time_Month', 'Time_Day') in [\"current year\"..\"current year\"];\nq_B = filter q by date('Time_Year', 'Time_Month', 'Time_Day') in [\"1 year ago\"..\"1 year ago\"];\nresult = group q_A by all full, q_B by all;\nresult = foreach result generate sum(q_A.'Actual') as 'A', sum(q_B.'Actual') as 'B';\nresult = foreach result generate 'A', 'B', ((A-B)/B) as 'ActualRevenueAux';\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "exclude",
           "steps" : [
@@ -2725,7 +2725,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2876,7 +2876,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -3059,7 +3059,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -3103,7 +3103,7 @@
         "groups" : [ ],
         "label" : "CurrentPeriod",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.MFG_Data_Demo.FullyQualifiedName}\";\nq_A = filter q by date('Time_Year', 'Time_Month', 'Time_Day') in [\"current year\"..\"current year\"];\nq_B = filter q by date('Time_Year', 'Time_Month', 'Time_Day') in [\"current year\"..\"current year\"];\nq_E = filter q by date('Time_Year', 'Time_Month', 'Time_Day') in [\"1 year ago\"..\"1 year ago\"];\nq_F = filter q by date('Time_Year', 'Time_Month', 'Time_Day') in [\"1 year ago\"..\"1 year ago\"];\nresult = group q_A by all full, q_B by all full, q_E by all full, q_F by all;\nresult = foreach result generate sum(q_A.'Actual') as 'A', sum(q_B.'Plan') as 'B', sum(q_E.'Actual') as 'E', sum(q_F.'Plan') as 'F';\nresult = foreach result generate 'A', 'B', 'E', 'F', A-B as 'C', abs((B-A)/B) as 'D', E-F as 'G', ((A-B)-(E-F))/(E-F) as 'ActualVsPlannedDiff';\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.MFG_Data_Demo1.FullyQualifiedName}\";\nq_A = filter q by date('Time_Year', 'Time_Month', 'Time_Day') in [\"current year\"..\"current year\"];\nq_B = filter q by date('Time_Year', 'Time_Month', 'Time_Day') in [\"current year\"..\"current year\"];\nq_E = filter q by date('Time_Year', 'Time_Month', 'Time_Day') in [\"1 year ago\"..\"1 year ago\"];\nq_F = filter q by date('Time_Year', 'Time_Month', 'Time_Day') in [\"1 year ago\"..\"1 year ago\"];\nresult = group q_A by all full, q_B by all full, q_E by all full, q_F by all;\nresult = foreach result generate sum(q_A.'Actual') as 'A', sum(q_B.'Plan') as 'B', sum(q_E.'Actual') as 'E', sum(q_F.'Plan') as 'F';\nresult = foreach result generate 'A', 'B', 'E', 'F', A-B as 'C', abs((B-A)/B) as 'D', E-F as 'G', ((A-B)-(E-F))/(E-F) as 'ActualVsPlannedDiff';\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "exclude",
           "steps" : [
@@ -3152,7 +3152,7 @@
         "groups" : [ ],
         "label" : "CurrentPeriod",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.MFG_Data_Demo.FullyQualifiedName}\";\nq_A = filter q by date('Time_Year', 'Time_Month', 'Time_Day') in [\"current year\"..\"current year\"];\nq_B = filter q by date('Time_Year', 'Time_Month', 'Time_Day') in [\"current year\"..\"current year\"];\nq_D = filter q by date('Time_Year', 'Time_Month', 'Time_Day') in [\"1 year ago\"..\"1 year ago\"];\nq_E = filter q by date('Time_Year', 'Time_Month', 'Time_Day') in [\"1 year ago\"..\"1 year ago\"];\nresult = group q_A by all full, q_B by all full, q_D by all full, q_E by all;\nresult = foreach result generate sum(q_A.'Actual') as 'A', sum(q_B.'Plan') as 'B', sum(q_D.'Actual') as 'D', sum(q_E.'Plan') as 'E';\nresult = foreach result generate 'A', 'B', 'D', 'E', A/B as 'RevenueRealization', D/E as 'F', ((A/B)-(D/E))/(D/E) as 'RevenueRealizationDiff';\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.MFG_Data_Demo1.FullyQualifiedName}\";\nq_A = filter q by date('Time_Year', 'Time_Month', 'Time_Day') in [\"current year\"..\"current year\"];\nq_B = filter q by date('Time_Year', 'Time_Month', 'Time_Day') in [\"current year\"..\"current year\"];\nq_D = filter q by date('Time_Year', 'Time_Month', 'Time_Day') in [\"1 year ago\"..\"1 year ago\"];\nq_E = filter q by date('Time_Year', 'Time_Month', 'Time_Day') in [\"1 year ago\"..\"1 year ago\"];\nresult = group q_A by all full, q_B by all full, q_D by all full, q_E by all;\nresult = foreach result generate sum(q_A.'Actual') as 'A', sum(q_B.'Plan') as 'B', sum(q_D.'Actual') as 'D', sum(q_E.'Plan') as 'E';\nresult = foreach result generate 'A', 'B', 'D', 'E', A/B as 'RevenueRealization', D/E as 'F', ((A/B)-(D/E))/(D/E) as 'RevenueRealizationDiff';\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "exclude",
           "steps" : [
@@ -3200,7 +3200,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -3342,7 +3342,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -3385,7 +3385,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -3417,7 +3417,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -3460,7 +3460,7 @@
         "broadcastFacet" : false,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -3892,7 +3892,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -3935,7 +3935,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -4077,7 +4077,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -4284,7 +4284,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -4426,7 +4426,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -4571,7 +4571,7 @@
         "groups" : [ ],
         "label" : "Cumulative Timeseries",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.MFG_Data_Demo.FullyQualifiedName}\";\nresult = group q by ('Time_Year', 'Time_Month');\nresult = foreach result generate q.'Time_Year' + \"~~~\" + q.'Time_Month' as 'Time_Year~~~Time_Month', 'Time_Year' as 'Time_Year', 'Time_Month' as 'Time_Month', sum(q.'Actual') as 'sum_Actual', sum(q.'Plan') as 'sum_Plan';\nresult = group result by 'Time_Year~~~Time_Month';\nresult = foreach result generate 'Time_Year~~~Time_Month', first('Time_Year') as 'Time_Year', first('Time_Month') as 'Time_Month', first('sum_Actual') as 'sum_Actual', first('sum_Plan') as 'sum_Plan', sum(sum('sum_Actual')) over ([..0] partition by all order by ('Time_Year~~~Time_Month')) as 'cumm_Actual', sum(sum(sum_Plan)) over ([..0] partition by all order by ('Time_Year~~~Time_Month')) as 'cumm_Planned';\nresult = foreach result generate 'Time_Year~~~Time_Month', 'Time_Year', 'Time_Month', 'sum_Actual' as 'sum_Actual', 'sum_Plan' as 'sum_Plan', 'cumm_Actual' as 'cumm_Actual', 'cumm_Planned' as 'cumm_Planned';\nresult = fill result by (dateCols=('Time_Year','Time_Month', \"Y-M\"));\nresult = timeseries result generate 'cumm_Actual' as 'cummActual' with (length=12, predictionInterval=95, dateCols=('Time_Year','Time_Month', \"Y-M\"));\nresult = foreach result generate 'Time_Year' + \"~~~\" + 'Time_Month' as 'Time_Year~~~Time_Month', coalesce(cumm_Actual,cummActual) as 'Cumulative Actual Revenue', 'cummActual_low_95' as 'Min Confidence Line', 'cummActual_high_95' as 'Max Confidence Line', 'sum_Actual' as 'Actual Revenue', 'cumm_Planned' as 'Cumulative Planned Revenue';\n\n-- result = order result by ('Time_Year~~~Time_Month' asc);\n",
+        "query" : "q = load \"${App.Datasets.MFG_Data_Demo1.FullyQualifiedName}\";\nresult = group q by ('Time_Year', 'Time_Month');\nresult = foreach result generate q.'Time_Year' + \"~~~\" + q.'Time_Month' as 'Time_Year~~~Time_Month', 'Time_Year' as 'Time_Year', 'Time_Month' as 'Time_Month', sum(q.'Actual') as 'sum_Actual', sum(q.'Plan') as 'sum_Plan';\nresult = group result by 'Time_Year~~~Time_Month';\nresult = foreach result generate 'Time_Year~~~Time_Month', first('Time_Year') as 'Time_Year', first('Time_Month') as 'Time_Month', first('sum_Actual') as 'sum_Actual', first('sum_Plan') as 'sum_Plan', sum(sum('sum_Actual')) over ([..0] partition by all order by ('Time_Year~~~Time_Month')) as 'cumm_Actual', sum(sum(sum_Plan)) over ([..0] partition by all order by ('Time_Year~~~Time_Month')) as 'cumm_Planned';\nresult = foreach result generate 'Time_Year~~~Time_Month', 'Time_Year', 'Time_Month', 'sum_Actual' as 'sum_Actual', 'sum_Plan' as 'sum_Plan', 'cumm_Actual' as 'cumm_Actual', 'cumm_Planned' as 'cumm_Planned';\nresult = fill result by (dateCols=('Time_Year','Time_Month', \"Y-M\"));\nresult = timeseries result generate 'cumm_Actual' as 'cummActual' with (length=12, predictionInterval=95, dateCols=('Time_Year','Time_Month', \"Y-M\"));\nresult = foreach result generate 'Time_Year' + \"~~~\" + 'Time_Month' as 'Time_Year~~~Time_Month', coalesce(cumm_Actual,cummActual) as 'Cumulative Actual Revenue', 'cummActual_low_95' as 'Min Confidence Line', 'cummActual_high_95' as 'Max Confidence Line', 'sum_Actual' as 'Actual Revenue', 'cumm_Planned' as 'Cumulative Planned Revenue';\n\n-- result = order result by ('Time_Year~~~Time_Month' asc);\n",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -4690,7 +4690,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
@@ -4851,7 +4851,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.MFG_Data_Demo.Name}"
+            "name" : "${App.Datasets.MFG_Data_Demo1.Name}"
           }
         ],
         "isGlobal" : false,
