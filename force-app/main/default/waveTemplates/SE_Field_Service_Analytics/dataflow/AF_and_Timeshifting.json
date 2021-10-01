@@ -412,7 +412,7 @@
     },
     "Load_Dataset_WorkOrderVolume2": {
       "action": "edgemart",
-      "parameters": {"alias": "${App.Datasets.WorkOrderVolume2.FullyQualifiedName}"}
+      "parameters": {"alias": "${App.Datasets.WorkOrderVolumeAuxDemo.FullyQualifiedName}"}
     },
     "Shift_Dates_WorkOrderVolume2": {
       "action": "computeExpression",
@@ -442,8 +442,8 @@
     "Register_Shifted_Dataset_WorkOrderVolume2": {
       "action": "sfdcRegister",
       "parameters": {
-        "name": "WorkOrderVolume2",
-        "alias": "${App.Datasets.WorkOrderVolume2.FullyQualifiedName}",
+        "name": "WorkOrderVolume Aux",
+        "alias": "${App.Datasets.WorkOrderVolumeAuxDemo.FullyQualifiedName}",
         "source": "Drop_Aux_WorkOrderVolume2"
       }
     },
@@ -476,7 +476,7 @@
       "action": "sfdcRegister",
       "parameters": {
         "name": "WorkOrderVolume",
-        "alias": "${App.Datasets.WorkOrderVolume.FullyQualifiedName}",
+        "alias": "${App.Datasets.WorkOrderVolumeDemo.FullyQualifiedName}",
         "source": "Drop_Aux_WorkOrderVolume"
       }
     },
@@ -521,7 +521,7 @@
       "parameters": {
         "mode": "drop",
         "source": "Compute_Aux_WorkOrderVolume",
-        "fields": [{"name": "DateSold_Year_Month"}]
+        "fields": [{"name": "DateSold_Year_Month"}, {"name": "LastProcessedDate"}]
       }
     },
     "Drop_Aux_WorkOrderVolume2": {
@@ -535,26 +535,26 @@
         ]
       }
     },
-    "Drop_Dates_FSL_Capacity": {
+    "Drop_Dates_FSLCapacityDemo": {
       "action": "sliceDataset",
       "parameters": {
         "mode": "drop",
-        "source": "Compute_Aux_FSL_Capacity",
-        "fields": [{"name": "Capacity_Date__c"}]
+        "source": "Compute_Aux_FSLCapacityDemo",
+        "fields": [{"name": "Capacity_Date__c"}, {"name": "LastProcessedDate"}]
       }
     },
-    "Register_Shifted_Dataset_FSL_Capacity": {
+    "Register_Shifted_Dataset_FSLCapacityDemo": {
       "action": "sfdcRegister",
       "parameters": {
-        "name": "FSL_Capacity",
-        "alias": "${App.Datasets.FSL_Capacity.FullyQualifiedName}",
+        "name": "FSL Capacity",
+        "alias": "${App.Datasets.FSLCapacityDemo.FullyQualifiedName}",
         "source": "UpdateCapacity"
       }
     },
-    "Shift_Dates_FSL_Capacity": {
+    "Shift_Dates_FSLCapacityDemo": {
       "action": "computeExpression",
       "parameters": {
-        "source": "Drop_Dates_FSL_Capacity",
+        "source": "Drop_Dates_FSLCapacityDemo",
         "mergeWithSource": true,
         "computedFields": [
           {
@@ -576,21 +576,21 @@
         ]
       }
     },
-    "Drop_Aux_FSL_Capacity": {
+    "Drop_Aux_FSLCapacityDemo": {
       "action": "sliceDataset",
       "parameters": {
         "mode": "drop",
-        "source": "Shift_Dates_FSL_Capacity",
+        "source": "Shift_Dates_FSLCapacityDemo",
         "fields": [
           {"name": "Capacity_Date__c_Aux"},
           {"name": "ElapsedSeconds"}
         ]
       }
     },
-    "Compute_Aux_FSL_Capacity": {
+    "Compute_Aux_FSLCapacityDemo": {
       "action": "computeExpression",
       "parameters": {
-        "source": "Load_Dataset_FSL_Capacity",
+        "source": "Load_Dataset_FSLCapacityDemo",
         "mergeWithSource": true,
         "computedFields": [
           {
@@ -614,7 +614,7 @@
     },
     "Load_Dataset_WorkOrderVolume": {
       "action": "edgemart",
-      "parameters": {"alias": "${App.Datasets.WorkOrderVolume.FullyQualifiedName}"}
+      "parameters": {"alias": "${App.Datasets.WorkOrderVolumeDemo.FullyQualifiedName}"}
     },
     "Compute_Aux_WorkOrderVolume2": {
       "action": "computeExpression",
@@ -646,12 +646,12 @@
       "parameters": {
         "mode": "drop",
         "source": "Compute_Aux_WorkOrderVolume2",
-        "fields": [{"name": "Date_Completed__c"}]
+        "fields": [{"name": "Date_Completed__c"}, {"name": "LastProcessedDate"}]
       }
     },
-    "Load_Dataset_FSL_Capacity": {
+    "Load_Dataset_FSLCapacityDemo": {
       "action": "edgemart",
-      "parameters": {"alias": "${App.Datasets.FSL_Capacity.FullyQualifiedName}"}
+      "parameters": {"alias": "${App.Datasets.FSLCapacityDemo.FullyQualifiedName}"}
     },
     "Extract_Field_Capacity": {
       "action": "sfdcDigest",
@@ -667,7 +667,7 @@
       "action": "update",
       "parameters": {
         "right_key": ["Name"],
-        "left": "Drop_Aux_FSL_Capacity",
+        "left": "Drop_Aux_FSLCapacityDemo",
         "left_key": ["Name"],
         "update_columns": {"Id": "Id"},
         "right": "Extract_Field_Capacity"

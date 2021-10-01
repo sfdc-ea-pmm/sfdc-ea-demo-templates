@@ -102,7 +102,7 @@
     "filters" : [
       {
         "dataset" : {
-          "name" : "${App.Datasets.WorkOrderVolume.Name}"
+          "name" : "${App.Datasets.WorkOrderVolumeDemo.Name}"
         },
         "dependent" : false,
         "fields" : [
@@ -115,7 +115,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.WorkOrderVolume.Name}"
+          "name" : "${App.Datasets.WorkOrderVolumeDemo.Name}"
         },
         "dependent" : false,
         "fields" : [
@@ -270,7 +270,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.FSL_Capacity.Name}"
+            "name" : "${App.Datasets.FSLCapacityDemo.Name}"
           }
         ],
         "isGlobal" : false,
@@ -284,7 +284,7 @@
               ]
             ],
             "groups" : [
-              "Service_Territory__c_Name",
+              "Service_Territory_c_Name",
               [
                 "Capacity_Date__c_Year",
                 "Capacity_Date__c_Month"
@@ -365,7 +365,7 @@
             },
             "columnMap" : {
               "trellis" : [
-                "Service_Territory__c_Name"
+                "Service_Territory_c_Name"
               ],
               "dimensionAxis" : [
                 "Capacity_Date__c_Year~~~Capacity_Date__c_Month"
@@ -418,7 +418,7 @@
         "groups" : [ ],
         "label" : "DateSold_Year_Month__1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.WorkOrderVolume.FullyQualifiedName}\";\nq = group q by ('DateSold_Year_Month_Year', 'DateSold_Year_Month_Month', 'Service_Territory');\nq = foreach q generate 'DateSold_Year_Month_Year','DateSold_Year_Month_Month','Service_Territory' as 'Service_Territory', sum('num_WorkOrder') as 'sum_num_WorkOrder';\nq = fill q by (dateCols=(DateSold_Year_Month_Year, DateSold_Year_Month_Month, \"Y-M\"), partition='Service_Territory');\nq = timeseries q generate 'sum_num_WorkOrder' as fnum_WorkOrder with (partition='Service_Territory', length={{ coalesce(cell(Forecast_Duration_2_1.selection, 0, \"value\"), 0).asObject() }}, dateCols=('DateSold_Year_Month_Year','DateSold_Year_Month_Month', \"Y-M\"), seasonality= 12, predictionInterval=80);\nq = foreach q generate 'DateSold_Year_Month_Year' + \"~~~\" + 'DateSold_Year_Month_Month' as 'DateSold_Year_Month_Year~~~DateSold_Year_Month_Month', 'Service_Territory' as 'Service_Territory', fnum_WorkOrder,fnum_WorkOrder_high_80, fnum_WorkOrder_low_80;\n",
+        "query" : "q = load \"${App.Datasets.WorkOrderVolumeDemo.FullyQualifiedName}\";\nq = group q by ('DateSold_Year_Month_Year', 'DateSold_Year_Month_Month', 'Service_Territory');\nq = foreach q generate 'DateSold_Year_Month_Year','DateSold_Year_Month_Month','Service_Territory' as 'Service_Territory', sum('num_WorkOrder') as 'sum_num_WorkOrder';\nq = fill q by (dateCols=(DateSold_Year_Month_Year, DateSold_Year_Month_Month, \"Y-M\"), partition='Service_Territory');\nq = timeseries q generate 'sum_num_WorkOrder' as fnum_WorkOrder with (partition='Service_Territory', length={{ coalesce(cell(Forecast_Duration_2_1.selection, 0, \"value\"), 0).asObject() }}, dateCols=('DateSold_Year_Month_Year','DateSold_Year_Month_Month', \"Y-M\"), seasonality= 12, predictionInterval=80);\nq = foreach q generate 'DateSold_Year_Month_Year' + \"~~~\" + 'DateSold_Year_Month_Month' as 'DateSold_Year_Month_Year~~~DateSold_Year_Month_Month', 'Service_Territory' as 'Service_Territory', fnum_WorkOrder,fnum_WorkOrder_high_80, fnum_WorkOrder_low_80;\n",
         "receiveFacetSource" : {
           "mode" : "none",
           "steps" : [ ]
@@ -537,7 +537,7 @@
       "Field_Capacity_Table_1" : {
         "datasets" : [
           {
-            "name" : "${App.Datasets.FSL_Capacity.Name}"
+            "name" : "${App.Datasets.FSLCapacityDemo.Name}"
           }
         ],
         "isFacet" : true,
@@ -547,7 +547,7 @@
           "query" : {
             "values" : [
               "Name",
-              "Service_Territory__c_Name",
+              "Service_Territory_c_Name",
               "Capacity_Date__c",
               "Forecasted_Capacity__c",
               "Forecasted_Demand__c",
@@ -596,7 +596,7 @@
         "groups" : [ ],
         "label" : "Forecasted Demand Table",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.WorkOrderVolume.FullyQualifiedName}\";\nq = group q by ('DateSold_Year_Month_Year', 'DateSold_Year_Month_Month', 'Service_Territory');\nq = foreach q generate 'DateSold_Year_Month_Year','DateSold_Year_Month_Month','Service_Territory' as 'Service_Territory', sum('num_WorkOrder') as 'sum_num_WorkOrder';\nq = fill q by (dateCols=(DateSold_Year_Month_Year, DateSold_Year_Month_Month, \"Y-M\"), partition='Service_Territory');\nq = timeseries q generate 'sum_num_WorkOrder' as fnum_WorkOrder with (partition='Service_Territory', length={{ coalesce(cell(Forecast_Duration_2_1.selection, 0, \"value\"), 0).asObject() }}, dateCols=('DateSold_Year_Month_Year','DateSold_Year_Month_Month', \"Y-M\"), seasonality= 12, predictionInterval=80);\nq = foreach q generate 'DateSold_Year_Month_Year' + \"~~~\" + 'DateSold_Year_Month_Month' as 'Date (Year-Month)', 'Service_Territory' as 'Service Territory', fnum_WorkOrder as 'Forecasted Work Order Volume',fnum_WorkOrder_high_80 as 'Forecasted Maximum', fnum_WorkOrder_low_80 as 'Forecasted Minimum';\nq = filter q by 'Forecasted Maximum' is not null",
+        "query" : "q = load \"${App.Datasets.WorkOrderVolumeDemo.FullyQualifiedName}\";\nq = group q by ('DateSold_Year_Month_Year', 'DateSold_Year_Month_Month', 'Service_Territory');\nq = foreach q generate 'DateSold_Year_Month_Year','DateSold_Year_Month_Month','Service_Territory' as 'Service_Territory', sum('num_WorkOrder') as 'sum_num_WorkOrder';\nq = fill q by (dateCols=(DateSold_Year_Month_Year, DateSold_Year_Month_Month, \"Y-M\"), partition='Service_Territory');\nq = timeseries q generate 'sum_num_WorkOrder' as fnum_WorkOrder with (partition='Service_Territory', length={{ coalesce(cell(Forecast_Duration_2_1.selection, 0, \"value\"), 0).asObject() }}, dateCols=('DateSold_Year_Month_Year','DateSold_Year_Month_Month', \"Y-M\"), seasonality= 12, predictionInterval=80);\nq = foreach q generate 'DateSold_Year_Month_Year' + \"~~~\" + 'DateSold_Year_Month_Month' as 'Date (Year-Month)', 'Service_Territory' as 'Service Territory', fnum_WorkOrder as 'Forecasted Work Order Volume',fnum_WorkOrder_high_80 as 'Forecasted Maximum', fnum_WorkOrder_low_80 as 'Forecasted Minimum';\nq = filter q by 'Forecasted Maximum' is not null",
         "receiveFacetSource" : {
           "mode" : "none",
           "steps" : [ ]
@@ -665,7 +665,7 @@
         "groups" : [ ],
         "label" : "WorkOrderVolumeDemand",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.WorkOrderVolume2.FullyQualifiedName}\";\nq = group q by ('Date_Completed__c_Year', 'Date_Completed__c_Month', 'Service_Territory__c_Name');\nq = foreach q generate 'Date_Completed__c_Year', 'Date_Completed__c_Month', 'Service_Territory__c_Name' as 'Service Territory', sum(Total_Work_Order_Volume__c) as 'sum_Total_Work_Order_Volume__c';\nq = fill q by (dateCols=(Date_Completed__c_Year, Date_Completed__c_Month, \"Y-M\"), partition='Service Territory');\nq = timeseries q generate 'sum_Total_Work_Order_Volume__c' as fTotal_Work_Order_Volume__c with (partition='Service Territory', length={{ coalesce(cell(Forecast_Duration_2_1.selection, 0, \"value\"), 0).asObject() }}, dateCols=('Date_Completed__c_Year','Date_Completed__c_Month', \"Y-M\"), seasonality= 12, predictionInterval=80);\nq = foreach q generate 'Date_Completed__c_Year' + \"~~~\" + 'Date_Completed__c_Month' as 'Date_Completed__c_Year~~~Date_Completed__c_Month', 'Service Territory', fTotal_Work_Order_Volume__c, fTotal_Work_Order_Volume__c_high_80, fTotal_Work_Order_Volume__c_low_80;",
+        "query" : "q = load \"${App.Datasets.WorkOrderVolumeAuxDemo.Name}\";\nq = group q by ('Date_Completed__c_Year', 'Date_Completed__c_Month', 'Service_Territory_c_Name');\nq = foreach q generate 'Date_Completed__c_Year', 'Date_Completed__c_Month', 'Service_Territory_c_Name' as 'Service Territory', sum(Total_Work_Order_Volume__c) as 'sum_Total_Work_Order_Volume__c';\nq = fill q by (dateCols=(Date_Completed__c_Year, Date_Completed__c_Month, \"Y-M\"), partition='Service Territory');\nq = timeseries q generate 'sum_Total_Work_Order_Volume__c' as fTotal_Work_Order_Volume__c with (partition='Service Territory', length={{ coalesce(cell(Forecast_Duration_2_1.selection, 0, \"value\"), 0).asObject() }}, dateCols=('Date_Completed__c_Year','Date_Completed__c_Month', \"Y-M\"), seasonality= 12, predictionInterval=80);\nq = foreach q generate 'Date_Completed__c_Year' + \"~~~\" + 'Date_Completed__c_Month' as 'Date_Completed__c_Year~~~Date_Completed__c_Month', 'Service Territory', fTotal_Work_Order_Volume__c, fTotal_Work_Order_Volume__c_high_80, fTotal_Work_Order_Volume__c_low_80;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -992,7 +992,7 @@
           },
           "columnMap" : {
             "trellis" : [
-              "Service_Territory__c_Name"
+              "Service_Territory_c_Name"
             ],
             "dimensionAxis" : [
               "Capacity_Date__c_Year~~~Capacity_Date__c_Month"
