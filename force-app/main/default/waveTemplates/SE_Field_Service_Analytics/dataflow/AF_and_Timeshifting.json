@@ -409,6 +409,269 @@
         "alias": "${App.Datasets.ServiceResourceCapacityDemo.FullyQualifiedName}",
         "source": "Drop_Aux_ServiceResourceCapacityDemo"
       }
+    },
+    "Load_Dataset_WorkOrderVolume2": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.WorkOrderVolumeAuxDemo.FullyQualifiedName}"}
+    },
+    "Shift_Dates_WorkOrderVolume2": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_WorkOrderVolume2",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Date_Completed__c",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Date_Completed__c_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Date Completed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_WorkOrderVolume2": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "WorkOrderVolume Aux",
+        "alias": "${App.Datasets.WorkOrderVolumeAuxDemo.FullyQualifiedName}",
+        "source": "Drop_Aux_WorkOrderVolume2"
+      }
+    },
+    "Shift_Dates_WorkOrderVolume": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_WorkOrderVolume",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "DateSold_Year_Month",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('DateSold_Year_Month_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "DateSold (Year-Month)",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_WorkOrderVolume": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "WorkOrderVolume",
+        "alias": "${App.Datasets.WorkOrderVolumeDemo.FullyQualifiedName}",
+        "source": "Drop_Aux_WorkOrderVolume"
+      }
+    },
+    "Compute_Aux_WorkOrderVolume": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_WorkOrderVolume",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "DateSold_Year_Month_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('DateSold_Year_Month_sec_epoch')",
+            "label": "DateSold_Year_Month_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Aux_WorkOrderVolume": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_WorkOrderVolume",
+        "fields": [
+          {"name": "DateSold_Year_Month_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Drop_Dates_WorkOrderVolume": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_WorkOrderVolume",
+        "fields": [{"name": "DateSold_Year_Month"}, {"name": "LastProcessedDate"}]
+      }
+    },
+    "Drop_Aux_WorkOrderVolume2": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_WorkOrderVolume2",
+        "fields": [
+          {"name": "Date_Completed__c_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Drop_Dates_FSLCapacityDemo": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_FSLCapacityDemo",
+        "fields": [{"name": "Capacity_Date__c"}, {"name": "LastProcessedDate"}]
+      }
+    },
+    "Register_Shifted_Dataset_FSLCapacityDemo": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "FSL Capacity",
+        "alias": "${App.Datasets.FSLCapacityDemo.FullyQualifiedName}",
+        "source": "UpdateCapacity"
+      }
+    },
+    "Shift_Dates_FSLCapacityDemo": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_FSLCapacityDemo",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Capacity_Date__c",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Capacity_Date__c_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Capacity Date",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Aux_FSLCapacityDemo": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_FSLCapacityDemo",
+        "fields": [
+          {"name": "Capacity_Date__c_Aux"},
+          {"name": "ElapsedSeconds"}
+        ]
+      }
+    },
+    "Compute_Aux_FSLCapacityDemo": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_FSLCapacityDemo",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "Capacity_Date__c_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Capacity_Date__c_sec_epoch')",
+            "label": "Capacity_Date__c_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Load_Dataset_WorkOrderVolume": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.WorkOrderVolumeDemo.FullyQualifiedName}"}
+    },
+    "Compute_Aux_WorkOrderVolume2": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_WorkOrderVolume2",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "Date_Completed__c_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Date_Completed__c_sec_epoch')",
+            "label": "Date_Completed__c_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Dates_WorkOrderVolume2": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_WorkOrderVolume2",
+        "fields": [{"name": "Date_Completed__c"}, {"name": "LastProcessedDate"}]
+      }
+    },
+    "Load_Dataset_FSLCapacityDemo": {
+      "action": "edgemart",
+      "parameters": {"alias": "${App.Datasets.FSLCapacityDemo.FullyQualifiedName}"}
+    },
+    "Extract_Field_Capacity": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Id"},
+          {"name": "Name"}
+        ],
+        "object": "SDO_SFS_Field_Capacity__c"
+      }
+    },
+    "UpdateCapacity": {
+      "action": "update",
+      "parameters": {
+        "right_key": ["Name"],
+        "left": "Drop_Aux_FSLCapacityDemo",
+        "left_key": ["Name"],
+        "update_columns": {"Id": "Id"},
+        "right": "Extract_Field_Capacity"
+      }
     }
   },
   "DataflowType": "USER",
