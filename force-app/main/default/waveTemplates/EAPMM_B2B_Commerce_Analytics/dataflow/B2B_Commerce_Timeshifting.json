@@ -1,0 +1,110 @@
+{
+  "notificationLevel": "",
+  "workflowDefinition": {
+    "Shift_Dates_CloudCraze_OrderItems": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_CloudCraze_OrderItems",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ccrz_Order_c_ccrz_OrderDate__c",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ccrz_Order_c_ccrz_OrderDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "ccrz__Order__c.OrderDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Load_Dataset_CloudCraze_OrderItems": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.CloudCraze_OrderItems_tp.FullyQualifiedName}"
+      }
+    },
+    "Register_Shifted_Dataset_CloudCraze_OrderItems": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "CloudCraze_OrderItems",
+        "alias": "${App.Datasets.CloudCraze_OrderItems_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_CloudCraze_OrderItems"
+      }
+    },
+    "Drop_Aux_CloudCraze_OrderItems": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_CloudCraze_OrderItems",
+        "fields": [
+          {
+            "name": "ElapsedSeconds"
+          },
+          {
+            "name": "ccrz_Order_c_ccrz_OrderDate_Aux"
+          }
+        ]
+      }
+    },
+    "Compute_Aux_CloudCraze_OrderItems": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_CloudCraze_OrderItems",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "ccrz_Order_c_ccrz_OrderDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ccrz_Order_c_ccrz_OrderDate__c_sec_epoch')",
+            "label": "ccrz_Order_c_ccrz_OrderDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Dates_CloudCraze_OrderItems": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_CloudCraze_OrderItems",
+        "fields": [
+          {
+            "name": "ccrz_Order_c_ccrz_OrderDate__c"
+          },
+          {
+            "name": "LastProcessedDate"
+          }
+        ]
+      }
+    }
+  },
+  "_type": "dataflow",
+  "description": "- Timeshifting",
+  "MasterLabel": "- Timeshifting",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive",
+  "isDeletable": true,
+  "longRunningAlertInMins": "",
+  "DataflowType": "USER",
+  "name": "B2B_Commerce_Timeshifting",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": ""
+}
