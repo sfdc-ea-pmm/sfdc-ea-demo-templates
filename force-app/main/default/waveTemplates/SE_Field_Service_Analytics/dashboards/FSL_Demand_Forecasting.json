@@ -1,0 +1,1175 @@
+{
+  "name" : "FSL_Demand_Forecasting_tp",
+  "label" : "FSL Demand Forecasting",
+  "folder" : {
+    "id" : "${App.Folder.Id}"
+  },
+  "dateVersion" : 1,
+  "mobileDisabled" : false,
+  "xmd" : {
+    "measures" : [
+      {
+        "conditionalFormatting" : {
+          "chartColor" : {
+            "referenceField" : "sum_Forecasted_Gap__c",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "#F71979",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "#FED444",
+                  "bin" : "-500"
+                },
+                {
+                  "formatValue" : "#00B531",
+                  "bin" : "500"
+                }
+              ]
+            }
+          }
+        },
+        "field" : "Service_Territory__c_1.sum_Forecasted_Gap__c",
+        "format" : {
+          "delimiters" : { }
+        }
+      },
+      {
+        "conditionalFormatting" : {
+          "backgroundColor" : {
+            "referenceField" : "Forecasted_Gap__c",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "#E84340",
+                  "bin" : "*"
+                },
+                {
+                  "bin" : "-500"
+                }
+              ]
+            }
+          }
+        },
+        "field" : "Field_Capacity_Table_1.Forecasted_Gap__c",
+        "format" : {
+          "delimiters" : { }
+        }
+      }
+    ],
+    "derivedDimensions" : [ ],
+    "organizations" : [ ],
+    "showDetailsDefaultFields" : [ ],
+    "dates" : [ ],
+    "derivedMeasures" : [ ],
+    "dimensions" : [
+      {
+        "recordDisplayFields" : [ ],
+        "conditionalFormatting" : {
+          "chartColor" : {
+            "referenceField" : "sum_Forecasted_Gap__c",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "#F71979",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "#FED444",
+                  "bin" : "-500"
+                },
+                {
+                  "formatValue" : "#00B531",
+                  "bin" : "500"
+                }
+              ]
+            }
+          }
+        },
+        "salesforceActions" : [ ],
+        "field" : "Service_Territory__c_1.ALL",
+        "members" : [ ],
+        "customActions" : [ ]
+      }
+    ]
+  },
+  "state" : {
+    "dataSourceLinks" : [
+      {
+        "name": "Link_298",
+        "label": "Territory",
+        "fields": [
+          {
+            "fieldName": "Service_Territory",
+            "dataSourceName": "${App.Datasets.WorkOrderVolumeDemo.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType": "dataset"
+          },
+          {
+            "fieldName": "Service_Territory_c_Name",
+            "dataSourceName": "${App.Datasets.FSLCapacityDemo.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType": "dataset"
+          },
+          {
+            "fieldName": "Service_Territory_c_Name",
+            "dataSourceName": "${App.Datasets.WorkOrderVolumeAuxDemo.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType": "dataset"
+          }
+        ]
+      }
+    ],
+    "filters" : [
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.WorkOrderVolumeDemo.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "Service_Territory"
+        ],
+        "label" : "Service_Territory",
+        "locked" : false,
+        "operator" : "in",
+        "value" : "[\"Los Angeles\",\"San Francisco\"]"
+      },
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.WorkOrderVolumeDemo.Name}"
+        },
+        "dependent" : false,
+        "fields" : [
+          "Type"
+        ],
+        "label" : "Type",
+        "locked" : false,
+        "operator" : "in"
+      }
+    ],
+    "gridLayouts" : [
+      {
+        "name" : "Default",
+        "numColumns" : 12,
+        "pages" : [
+          {
+            "label" : "Demand Forecasting",
+            "name" : "063d65b3-0b0c-4882-9421-2c9e7d8233f0",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 9,
+                "column" : 0,
+                "name" : "pillbox_1",
+                "row" : 3,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#006714",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 3,
+                "column" : 9,
+                "name" : "filterpanel_1",
+                "row" : 1,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 0,
+                "name" : "navigation_1",
+                "row" : 0,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 0,
+                "name" : "text_2",
+                "row" : 4,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 0,
+                "name" : "text_4",
+                "row" : 1,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 0,
+                "name" : "chart_3",
+                "row" : 5,
+                "rowspan" : 8,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              }
+            ]
+          },
+          {
+            "label" : "Capacity Planning",
+            "name" : "7042e726-5bea-4f3d-a530-367c748b959a",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 12,
+                "column" : 0,
+                "name" : "chart_1",
+                "row" : 1,
+                "rowspan" : 9,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 0,
+                "name" : "navigation_1",
+                "row" : 0,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 0,
+                "name" : "table_1",
+                "row" : 10,
+                "rowspan" : 17,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight" : "normal",
+        "selectors" : [ ],
+        "style" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "backgroundColor" : "#F2F6FA",
+          "cellSpacingX" : 8,
+          "cellSpacingY" : 8,
+          "fit" : "original",
+          "gutterColor" : "#C5D3E0"
+        },
+        "version" : 1.0
+      }
+    ],
+    "layouts" : [ ],
+    "steps" : {
+      "Service_Territory__c_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.FSLCapacityDemo.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "Field Capacity Comparison",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "sum",
+                "Forecasted_Gap__c"
+              ]
+            ],
+            "groups" : [
+              "Service_Territory_c_Name",
+              [
+                "Capacity_Date__c_Year",
+                "Capacity_Date__c_Month"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : true,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "trellis" : [
+                "Service_Territory_c_Name"
+              ],
+              "dimensionAxis" : [
+                "Capacity_Date__c_Year~~~Capacity_Date__c_Month"
+              ],
+              "plots" : [
+                "sum_Forecasted_Gap__c"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "DateSold_Year_Month__1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "DateSold_Year_Month__1",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.WorkOrderVolumeDemo.FullyQualifiedName}\";\nq = group q by ('DateSold_Year_Month_Year', 'DateSold_Year_Month_Month', 'Service_Territory');\nq = foreach q generate 'DateSold_Year_Month_Year','DateSold_Year_Month_Month','Service_Territory' as 'Service_Territory', sum('num_WorkOrder') as 'sum_num_WorkOrder';\nq = fill q by (dateCols=(DateSold_Year_Month_Year, DateSold_Year_Month_Month, \"Y-M\"), partition='Service_Territory');\nq = timeseries q generate 'sum_num_WorkOrder' as fnum_WorkOrder with (partition='Service_Territory', length={{ coalesce(cell(Forecast_Duration_2_1.selection, 0, \"value\"), 0).asObject() }}, dateCols=('DateSold_Year_Month_Year','DateSold_Year_Month_Month', \"Y-M\"), seasonality= 12, predictionInterval=80);\nq = foreach q generate 'DateSold_Year_Month_Year' + \"~~~\" + 'DateSold_Year_Month_Month' as 'DateSold_Year_Month_Year~~~DateSold_Year_Month_Month', 'Service_Territory' as 'Service_Territory', fnum_WorkOrder,fnum_WorkOrder_high_80, fnum_WorkOrder_low_80;\n",
+        "receiveFacetSource" : {
+          "mode" : "none",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showPoints" : false,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "sync",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "time",
+            "missingValue" : "connect",
+            "dashLine" : {
+              "measures" : [
+                "fnum_WorkOrder"
+              ],
+              "showDashLine" : false
+            },
+            "timeAxis" : {
+              "showTitle" : true,
+              "predictiveLine" : {
+                "color" : "#8932ED",
+                "time" : "2018/10",
+                "label" : "TODAY"
+              },
+              "showAxis" : true,
+              "title" : ""
+            },
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "fillArea" : true,
+            "columnMap" : {
+              "split" : [
+                "Service_Territory"
+              ],
+              "timeAxis" : [
+                "DateSold_Year_Month_Year~~~DateSold_Year_Month_Month"
+              ],
+              "trellis" : [ ],
+              "plots" : [
+                "fnum_WorkOrder",
+                "fnum_WorkOrder_high_80",
+                "fnum_WorkOrder_low_80"
+              ]
+            },
+            "showActionMenu" : true,
+            "showZero" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "valueType" : "none",
+            "theme" : "wave",
+            "applyConditionalFormatting" : true,
+            "drawArea" : {
+              "measure" : "fnum_WorkOrder",
+              "showDrawArea" : true,
+              "bounding1" : "fnum_WorkOrder_high_80",
+              "bounding2" : "fnum_WorkOrder_low_80"
+            }
+          },
+          "type" : "chart"
+        }
+      },
+      "Field_Capacity_Table_1" : {
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.FSLCapacityDemo.Name}"
+          }
+        ],
+        "isFacet" : true,
+        "isGlobal" : false,
+        "label" : "Field Capacity Table",
+        "query" : {
+          "query" : {
+            "values" : [
+              "Name",
+              "Service_Territory_c_Name",
+              "Capacity_Date__c",
+              "Forecasted_Capacity__c",
+              "Forecasted_Demand__c",
+              "Forecasted_Gap__c"
+            ]
+          },
+          "version" : -1.0
+        },
+        "type" : "grain",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "parameters" : {
+            "borderColor" : "#e1e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#f2f6fa",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "evenRowColor" : "#f2f6fa",
+            "header" : {
+              "backgroundColor" : "#e4ecf2",
+              "fontColor" : "#5c7a99",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a9b7c7",
+            "innerMinorBorderColor" : "#e1e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "oddRowColor" : "#ffffff",
+            "showActionMenu" : true,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "Forecasted_Demand_Ta_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Forecasted Demand Table",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.WorkOrderVolumeDemo.FullyQualifiedName}\";\nq = group q by ('DateSold_Year_Month_Year', 'DateSold_Year_Month_Month', 'Service_Territory');\nq = foreach q generate 'DateSold_Year_Month_Year','DateSold_Year_Month_Month','Service_Territory' as 'Service_Territory', sum('num_WorkOrder') as 'sum_num_WorkOrder';\nq = fill q by (dateCols=(DateSold_Year_Month_Year, DateSold_Year_Month_Month, \"Y-M\"), partition='Service_Territory');\nq = timeseries q generate 'sum_num_WorkOrder' as fnum_WorkOrder with (partition='Service_Territory', length={{ coalesce(cell(Forecast_Duration_2_1.selection, 0, \"value\"), 0).asObject() }}, dateCols=('DateSold_Year_Month_Year','DateSold_Year_Month_Month', \"Y-M\"), seasonality= 12, predictionInterval=80);\nq = foreach q generate 'DateSold_Year_Month_Year' + \"~~~\" + 'DateSold_Year_Month_Month' as 'Date (Year-Month)', 'Service_Territory' as 'Service Territory', fnum_WorkOrder as 'Forecasted Work Order Volume',fnum_WorkOrder_high_80 as 'Forecasted Maximum', fnum_WorkOrder_low_80 as 'Forecasted Minimum';\nq = filter q by 'Forecasted Maximum' is not null",
+        "receiveFacetSource" : {
+          "mode" : "none",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "Forecast_Duration_2_1" : {
+        "broadcastFacet" : true,
+        "columns" : { },
+        "label" : "Forecast_Duration_2",
+        "selectMode" : "single",
+        "type" : "staticflex",
+        "values" : [
+          {
+            "display" : "6 Month Forecast",
+            "value" : 6
+          },
+          {
+            "display" : "12 Month Forecast",
+            "value" : 12
+          },
+          {
+            "display" : "18 Month Forecast",
+            "value" : 18
+          },
+          {
+            "display" : "24 Month Forecast",
+            "value" : 24
+          }
+        ]
+      },
+      "lens_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "WorkOrderVolumeDemand",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.WorkOrderVolumeAuxDemo.Name}\";\nq = group q by ('Date_Completed__c_Year', 'Date_Completed__c_Month', 'Service_Territory_c_Name');\nq = foreach q generate 'Date_Completed__c_Year', 'Date_Completed__c_Month', 'Service_Territory_c_Name' as 'Service Territory', sum(Total_Work_Order_Volume__c) as 'sum_Total_Work_Order_Volume__c';\nq = fill q by (dateCols=(Date_Completed__c_Year, Date_Completed__c_Month, \"Y-M\"), partition='Service Territory');\nq = timeseries q generate 'sum_Total_Work_Order_Volume__c' as fTotal_Work_Order_Volume__c with (partition='Service Territory', length={{ coalesce(cell(Forecast_Duration_2_1.selection, 0, \"value\"), 0).asObject() }}, dateCols=('Date_Completed__c_Year','Date_Completed__c_Month', \"Y-M\"), seasonality= 12, predictionInterval=80);\nq = foreach q generate 'Date_Completed__c_Year' + \"~~~\" + 'Date_Completed__c_Month' as 'Date_Completed__c_Year~~~Date_Completed__c_Month', 'Service Territory', fTotal_Work_Order_Volume__c, fTotal_Work_Order_Volume__c_high_80, fTotal_Work_Order_Volume__c_low_80;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showPoints" : false,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "top-center",
+              "inside" : false
+            },
+            "axisMode" : "sync",
+            "tooltip" : {
+              "showBinLabel" : true,
+              "measures" : "",
+              "showNullValues" : true,
+              "showPercentage" : true,
+              "showDimensions" : true,
+              "showMeasures" : true,
+              "customizeTooltip" : false,
+              "dimensions" : ""
+            },
+            "visualizationType" : "time",
+            "missingValue" : "connect",
+            "dashLine" : {
+              "measures" : "",
+              "showDashLine" : false
+            },
+            "timeAxis" : {
+              "showTitle" : true,
+              "predictiveLine" : {
+                "color" : "#8932ED",
+                "label" : "TODAY"
+              },
+              "showAxis" : true,
+              "title" : ""
+            },
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "split" : [
+                "Service Territory"
+              ],
+              "timeAxis" : [
+                "Date_Completed__c_Year~~~Date_Completed__c_Month"
+              ],
+              "trellis" : [ ],
+              "plots" : [
+                "fTotal_Work_Order_Volume__c",
+                "fTotal_Work_Order_Volume__c_high_80",
+                "fTotal_Work_Order_Volume__c_low_80"
+              ]
+            },
+            "fillArea" : true,
+            "showActionMenu" : true,
+            "showZero" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "Work Order Volume",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "valueType" : "none",
+            "theme" : "wave",
+            "applyConditionalFormatting" : true,
+            "drawArea" : {
+              "measure" : "fTotal_Work_Order_Volume__c",
+              "showDrawArea" : true,
+              "bounding1" : "fTotal_Work_Order_Volume__c_high_80",
+              "bounding2" : "fTotal_Work_Order_Volume__c_low_80"
+            }
+          },
+          "type" : "chart"
+        }
+      }
+    },
+    "widgetStyle" : {
+      "backgroundColor" : "#FFFFFF",
+      "borderColor" : "#E6ECF2",
+      "borderEdges" : [ ],
+      "borderRadius" : 0,
+      "borderWidth" : 1
+    },
+    "widgets" : {
+      "table_1" : {
+        "parameters" : {
+          "borderColor" : "#e1e5ee",
+          "borderWidth" : 1,
+          "cell" : {
+            "backgroundColor" : "#f2f6fa",
+            "fontColor" : "#16325c",
+            "fontSize" : 12
+          },
+          "columnProperties" : { },
+          "columns" : [ ],
+          "customBulkActions" : [ ],
+          "evenRowColor" : "#f2f6fa",
+          "exploreLink" : true,
+          "header" : {
+            "backgroundColor" : "#e4ecf2",
+            "fontColor" : "#5c7a99",
+            "fontSize" : 12
+          },
+          "innerMajorBorderColor" : "#a9b7c7",
+          "innerMinorBorderColor" : "#e1e5ee",
+          "mode" : "fittocontainer",
+          "numberOfLines" : 1,
+          "oddRowColor" : "#ffffff",
+          "showActionMenu" : true,
+          "step" : "Field_Capacity_Table_1",
+          "totals" : true,
+          "verticalPadding" : 8
+        },
+        "type" : "table"
+      },
+      "pillbox_1" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : false,
+          "fontSize" : 16,
+          "measureField" : "none",
+          "selectedTab" : {
+            "backgroundColor" : "#677A97",
+            "borderColor" : "#C6D3E1",
+            "borderEdges" : [ ],
+            "borderWidth" : 1,
+            "textColor" : "#FFFFFF"
+          },
+          "showActionMenu" : true,
+          "step" : "Forecast_Duration_2_1",
+          "textColor" : "#5C7A99"
+        },
+        "type" : "pillbox"
+      },
+      "filterpanel_1" : {
+        "parameters" : {
+          "filterItemOptions" : {
+            "backgroundColor" : "#FFFFFF",
+            "borderColor" : "#E6ECF2",
+            "borderRadius" : 4,
+            "borderWidth" : 1,
+            "propertyColor" : "#54698D",
+            "valueColor" : "#16325C"
+          },
+          "filters" : [ ],
+          "itemsPerRow" : 1,
+          "showAllFilters" : true,
+          "title" : {
+            "separatorColor" : "#E6ECF2",
+            "text" : {
+              "align" : "left",
+              "color" : "#091A3E",
+              "fontSize" : 16,
+              "label" : "Filters"
+            },
+            "visible" : true
+          }
+        },
+        "type" : "filterpanel"
+      },
+      "text_2" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "18px",
+                  "color" : "#091A3E"
+                },
+                "insert" : "Work Order Volume by Service Territory"
+              },
+              {
+                "attributes" : {
+                  "align" : "left"
+                },
+                "insert" : "\n"
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "text_4" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "14px",
+                  "color" : "#091A3E"
+                },
+                "insert" : "Welcome to Tableau CRM Forecasting Services! Please select forecast interval below."
+              },
+              {
+                "attributes" : {
+                  "align" : "center"
+                },
+                "insert" : "\n"
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "navigation_1" : {
+        "parameters" : {
+          "fontSize" : 14,
+          "selectedTab" : {
+            "backgroundColor" : "#FFFFFF",
+            "borderColor" : "#091A3E",
+            "borderEdges" : [
+              "bottom"
+            ],
+            "borderWidth" : 2,
+            "textColor" : "#0070D2"
+          },
+          "tabCount" : 5,
+          "textColor" : "#091A3E"
+        },
+        "type" : "navigation"
+      },
+      "chart_1" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showValues" : true,
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "hbar",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "binValues" : false,
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : true,
+            "type" : "x",
+            "chartsPerLine" : 4
+          },
+          "columnMap" : {
+            "trellis" : [
+              "Service_Territory_c_Name"
+            ],
+            "dimensionAxis" : [
+              "Capacity_Date__c_Year~~~Capacity_Date__c_Month"
+            ],
+            "plots" : [
+              "sum_Forecasted_Gap__c"
+            ]
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "theme" : "wave",
+          "step" : "Service_Territory__c_1",
+          "dimensionAxis" : {
+            "showTitle" : true,
+            "customSize" : "auto",
+            "showAxis" : true,
+            "title" : "",
+            "icons" : {
+              "useIcons" : false,
+              "iconProps" : {
+                "fit" : "cover",
+                "column" : "",
+                "type" : "round"
+              }
+            }
+          },
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "chart_3" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showPoints" : false,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "top-center",
+            "inside" : false
+          },
+          "axisMode" : "sync",
+          "tooltip" : {
+            "showBinLabel" : true,
+            "measures" : "",
+            "showNullValues" : true,
+            "showPercentage" : true,
+            "showDimensions" : true,
+            "showMeasures" : true,
+            "customizeTooltip" : false,
+            "dimensions" : ""
+          },
+          "visualizationType" : "time",
+          "missingValue" : "connect",
+          "dashLine" : {
+            "measures" : "",
+            "showDashLine" : false
+          },
+          "timeAxis" : {
+            "showTitle" : true,
+            "predictiveLine" : {
+              "color" : "#8932ED",
+              "label" : "TODAY"
+            },
+            "showAxis" : true,
+            "title" : ""
+          },
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "chartsPerLine" : 4
+          },
+          "columnMap" : {
+            "split" : [
+              "Service Territory"
+            ],
+            "timeAxis" : [
+              "Date_Completed__c_Year~~~Date_Completed__c_Month"
+            ],
+            "trellis" : [ ],
+            "plots" : [
+              "fTotal_Work_Order_Volume__c",
+              "fTotal_Work_Order_Volume__c_high_80",
+              "fTotal_Work_Order_Volume__c_low_80"
+            ]
+          },
+          "fillArea" : true,
+          "showActionMenu" : true,
+          "showZero" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "Work Order Volume",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "valueType" : "none",
+          "theme" : "wave",
+          "step" : "lens_1",
+          "applyConditionalFormatting" : true,
+          "drawArea" : {
+            "measure" : "fTotal_Work_Order_Volume__c",
+            "showDrawArea" : true,
+            "bounding1" : "fTotal_Work_Order_Volume__c_high_80",
+            "bounding2" : "fTotal_Work_Order_Volume__c_low_80"
+          }
+        },
+        "type" : "chart"
+      }
+    }
+  }
+}

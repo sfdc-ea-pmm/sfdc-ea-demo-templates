@@ -7,72 +7,63 @@
       "parameters": {
         "source": "Drop_Dates_ServiceAppointmentDemo",
         "mergeWithSource": true,
-        "computedFields": [
-          {
-            "name": "LastProcessedDate",
-            "format": "yyyy-MM-dd",
-            "saqlExpression": "now()",
-            "label": "Last Processed",
-            "type": "Date",
-            "isYearEndFiscalYear": true
-          },
-          {
-            "name": "EarliestStartTime",
-            "format": "yyyy-MM-dd",
-            "saqlExpression": "toDate('EarliestStartTime_Aux_sec_epoch' + 'ElapsedSeconds')",
-            "label": "EarliestStartTime",
-            "type": "Date",
-            "isYearEndFiscalYear": true
-          },
-          {
-            "name": "CreatedDate",
-            "format": "yyyy-MM-dd",
-            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
-            "label": "CreatedDate",
-            "type": "Date",
-            "isYearEndFiscalYear": true
-          },
-          {
-            "name": "DueDate",
-            "format": "yyyy-MM-dd",
-            "saqlExpression": "toDate('DueDate_Aux_sec_epoch' + 'ElapsedSeconds')",
-            "label": "DueDate",
-            "type": "Date",
-            "isYearEndFiscalYear": true
-          },
-          {
-            "saqlExpression": "toDate('ActualStartTime_Aux_sec_epoch' + 'ElapsedSeconds')",
-            "name": "ActualStartTime",
-            "format": "yyyy-MM-dd",
-            "label": "ActualStartTime",
-            "type": "Date",
-            "isYearEndFiscalYear": true
-          },
-          {
-            "saqlExpression": "toDate('ActualEndTime_Aux_sec_epoch' + 'ElapsedSeconds')",
-            "name": "ActualEndTime",
-            "format": "yyyy-MM-dd",
-            "label": "ActualEndTime",
-            "type": "Date",
-            "isYearEndFiscalYear": true
-          },
-          {
-            "saqlExpression": "toDate('ArrivalWindowEndTime_Aux_sec_epoch' + 'ElapsedSeconds')",
-            "name": "ArrivalWindowEndTime",
-            "format": "yyyy-MM-dd",
-            "label": "ArrivalWindowEndTime",
-            "type": "Date",
-            "isYearEndFiscalYear": true
-          },
-          {
-            "saqlExpression": "toDate('ArrivalWindowStartTime_Aux_sec_epoch' + 'ElapsedSeconds')",
-            "name": "ArrivalWindowStartTime",
-            "format": "yyyy-MM-dd",
-            "label": "ArrivalWindowStartTime",
-            "type": "Date",
-            "isYearEndFiscalYear": true
-          }
-        ]
+        "computedFields": [{
+          "name": "LastProcessedDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "now()",
+          "label": "Last Processed",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "EarliestStartTime",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('EarliestStartTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "label": "EarliestStartTime",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "CreatedDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "label": "CreatedDate",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "DueDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('DueDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "label": "DueDate",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "saqlExpression": "toDate('ActualStartTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "name": "ActualStartTime",
+          "format": "yyyy-MM-dd",
+          "label": "ActualStartTime",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "saqlExpression": "toDate('ActualEndTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "name": "ActualEndTime",
+          "format": "yyyy-MM-dd",
+          "label": "ActualEndTime",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "saqlExpression": "toDate('ArrivalWindowEndTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "name": "ArrivalWindowEndTime",
+          "format": "yyyy-MM-dd",
+          "label": "ArrivalWindowEndTime",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "saqlExpression": "toDate('ArrivalWindowStartTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "name": "ArrivalWindowStartTime",
+          "format": "yyyy-MM-dd",
+          "label": "ArrivalWindowStartTime",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
       }
     },
     "Compute_Aux_ServiceAppointmentDemo": {
@@ -80,72 +71,63 @@
       "parameters": {
         "source": "Load_Dataset_ServiceAppointment",
         "mergeWithSource": true,
-        "computedFields": [
-          {
-            "precision": 18,
-            "name": "ElapsedSeconds",
-            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
-            "scale": 0,
-            "label": "ElapsedSeconds",
-            "type": "Numeric"
-          },
-          {
-            "name": "EarliestStartTime_Aux",
-            "format": "yyyy-MM-dd",
-            "saqlExpression": "toDate('EarliestStartTime_sec_epoch')",
-            "label": "EarliestStartTime_Aux",
-            "type": "Date",
-            "isYearEndFiscalYear": true
-          },
-          {
-            "name": "CreatedDate_Aux",
-            "format": "yyyy-MM-dd",
-            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
-            "label": "CreatedDate_Aux",
-            "type": "Date",
-            "isYearEndFiscalYear": true
-          },
-          {
-            "name": "DueDate_Aux",
-            "format": "yyyy-MM-dd",
-            "saqlExpression": "toDate('DueDate_sec_epoch')",
-            "label": "DueDate_Aux",
-            "type": "Date",
-            "isYearEndFiscalYear": true
-          },
-          {
-            "name": "ActualStartTime_Aux",
-            "saqlExpression": "toDate('ActualStartTime_sec_epoch')",
-            "format": "yyyy-MM-dd",
-            "label": "ActualStartTime_Aux",
-            "type": "Date",
-            "isYearEndFiscalYear": true
-          },
-          {
-            "name": "ArrivalWindowEndTime_Aux",
-            "saqlExpression": "toDate('ArrivalWindowEndTime_sec_epoch')",
-            "format": "yyyy-MM-dd",
-            "label": "ArrivalWindowEndTime_Aux",
-            "type": "Date",
-            "isYearEndFiscalYear": true
-          },
-          {
-            "saqlExpression": "toDate('ArrivalWindowStartTime_sec_epoch')",
-            "name": "ArrivalWindowStartTime_Aux",
-            "format": "yyyy-MM-dd",
-            "label": "ArrivalWindowStartTime_Aux",
-            "type": "Date",
-            "isYearEndFiscalYear": true
-          },
-          {
-            "name": "ActualEndTime_Aux",
-            "saqlExpression": "toDate('ActualEndTime_sec_epoch')",
-            "format": "yyyy-MM-dd",
-            "label": "ActualEndTime_Aux",
-            "type": "Date",
-            "isYearEndFiscalYear": true
-          }
-        ]
+        "computedFields": [{
+          "precision": 18,
+          "name": "ElapsedSeconds",
+          "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+          "scale": 0,
+          "label": "ElapsedSeconds",
+          "type": "Numeric"
+        }, {
+          "name": "EarliestStartTime_Aux",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('EarliestStartTime_sec_epoch')",
+          "label": "EarliestStartTime_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "CreatedDate_Aux",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+          "label": "CreatedDate_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "DueDate_Aux",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('DueDate_sec_epoch')",
+          "label": "DueDate_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "ActualStartTime_Aux",
+          "saqlExpression": "toDate('ActualStartTime_sec_epoch')",
+          "format": "yyyy-MM-dd",
+          "label": "ActualStartTime_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "ArrivalWindowEndTime_Aux",
+          "saqlExpression": "toDate('ArrivalWindowEndTime_sec_epoch')",
+          "format": "yyyy-MM-dd",
+          "label": "ArrivalWindowEndTime_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "saqlExpression": "toDate('ArrivalWindowStartTime_sec_epoch')",
+          "name": "ArrivalWindowStartTime_Aux",
+          "format": "yyyy-MM-dd",
+          "label": "ArrivalWindowStartTime_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "ActualEndTime_Aux",
+          "saqlExpression": "toDate('ActualEndTime_sec_epoch')",
+          "format": "yyyy-MM-dd",
+          "label": "ActualEndTime_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
       }
     },
     "Register_AssignedResource": {
@@ -161,32 +143,23 @@
       "parameters": {
         "mode": "drop",
         "source": "Compute_Aux_ServiceAppointmentDemo",
-        "fields": [
-          {
-            "name": "ArrivalWindowStartTime"
-          },
-          {
-            "name": "EarliestStartTime"
-          },
-          {
-            "name": "ActualEndTime"
-          },
-          {
-            "name": "CreatedDate"
-          },
-          {
-            "name": "DueDate"
-          },
-          {
-            "name": "ActualStartTime"
-          },
-          {
-            "name": "ArrivalWindowEndTime"
-          },
-          {
-            "name": "LastProcessedDate"
-          }
-        ]
+        "fields": [{
+          "name": "ArrivalWindowStartTime"
+        }, {
+          "name": "EarliestStartTime"
+        }, {
+          "name": "ActualEndTime"
+        }, {
+          "name": "CreatedDate"
+        }, {
+          "name": "DueDate"
+        }, {
+          "name": "ActualStartTime"
+        }, {
+          "name": "ArrivalWindowEndTime"
+        }, {
+          "name": "LastProcessedDate"
+        }]
       }
     },
     "Update_ServiceAppointment_w_User": {
@@ -211,7 +184,7 @@
       "parameters": {
         "name": "ServiceAppointment",
         "alias": "${App.Datasets.ServiceAppointmentDemo.FullyQualifiedName}",
-        "source": "Update_ServiceAppointment_w_User"
+        "source": "Update_ServiceAppointment_WorkNum"
       }
     },
     "Drop_Aux_ServiceResourceCapacityDemo": {
@@ -219,17 +192,13 @@
       "parameters": {
         "mode": "drop",
         "source": "Shift_Dates_ServiceResourceCapacityDemo",
-        "fields": [
-          {
-            "name": "EndDate_Aux"
-          },
-          {
-            "name": "StartDate_Aux"
-          },
-          {
-            "name": "ElapsedSeconds"
-          }
-        ]
+        "fields": [{
+          "name": "EndDate_Aux"
+        }, {
+          "name": "StartDate_Aux"
+        }, {
+          "name": "ElapsedSeconds"
+        }]
       }
     },
     "Load_Dataset_ServiceResourceCapacityDemo": {
@@ -241,17 +210,13 @@
     "Extract_User": {
       "action": "sfdcDigest",
       "parameters": {
-        "fields": [
-          {
-            "name": "Id"
-          },
-          {
-            "name": "Name"
-          },
-          {
-            "name": "SmallPhotoUrl"
-          }
-        ],
+        "fields": [{
+          "name": "Id"
+        }, {
+          "name": "Name"
+        }, {
+          "name": "SmallPhotoUrl"
+        }],
         "object": "User"
       }
     },
@@ -266,32 +231,23 @@
       "parameters": {
         "mode": "drop",
         "source": "Shift_Dates_ServiceAppointmentDemo",
-        "fields": [
-          {
-            "name": "ElapsedSeconds"
-          },
-          {
-            "name": "EarliestStartTime_Aux"
-          },
-          {
-            "name": "CreatedDate_Aux"
-          },
-          {
-            "name": "DueDate_Aux"
-          },
-          {
-            "name": "ActualEndTime_Aux"
-          },
-          {
-            "name": "ActualStartTime_Aux"
-          },
-          {
-            "name": "ArrivalWindowEndTime_Aux"
-          },
-          {
-            "name": "ArrivalWindowStartTime_Aux"
-          }
-        ]
+        "fields": [{
+          "name": "ElapsedSeconds"
+        }, {
+          "name": "EarliestStartTime_Aux"
+        }, {
+          "name": "CreatedDate_Aux"
+        }, {
+          "name": "DueDate_Aux"
+        }, {
+          "name": "ActualEndTime_Aux"
+        }, {
+          "name": "ActualStartTime_Aux"
+        }, {
+          "name": "ArrivalWindowEndTime_Aux"
+        }, {
+          "name": "ArrivalWindowStartTime_Aux"
+        }]
       }
     },
     "Shift_Dates_ServiceResourceCapacityDemo": {
@@ -299,32 +255,28 @@
       "parameters": {
         "source": "Drop_Dates_ServiceResourceCapacityDemo",
         "mergeWithSource": true,
-        "computedFields": [
-          {
-            "name": "EndDate",
-            "format": "yyyy-MM-dd",
-            "saqlExpression": "toDate('EndDate_Aux_sec_epoch' + 'ElapsedSeconds')",
-            "label": "EndDate",
-            "type": "Date",
-            "isYearEndFiscalYear": true
-          },
-          {
-            "name": "StartDate",
-            "format": "yyyy-MM-dd",
-            "saqlExpression": "toDate('StartDate_Aux_sec_epoch' + 'ElapsedSeconds')",
-            "label": "StartDate",
-            "type": "Date",
-            "isYearEndFiscalYear": true
-          },
-          {
-            "type": "Date",
-            "name": "LastProcessedDate",
-            "label": "LastProcessed",
-            "isYearEndFiscalYear": true,
-            "saqlExpression": "now()",
-            "format": "yyyy-MM-dd"
-          }
-        ]
+        "computedFields": [{
+          "name": "EndDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('EndDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "label": "EndDate",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "StartDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('StartDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "label": "StartDate",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "type": "Date",
+          "name": "LastProcessedDate",
+          "label": "LastProcessed",
+          "isYearEndFiscalYear": true,
+          "saqlExpression": "now()",
+          "format": "yyyy-MM-dd"
+        }]
       }
     },
     "Compute_Aux_ServiceResourceCapacityDemo": {
@@ -332,32 +284,28 @@
       "parameters": {
         "source": "Load_Dataset_ServiceResourceCapacityDemo",
         "mergeWithSource": true,
-        "computedFields": [
-          {
-            "precision": 18,
-            "name": "ElapsedSeconds",
-            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
-            "scale": 0,
-            "label": "ElapsedSeconds",
-            "type": "Numeric"
-          },
-          {
-            "name": "EndDate_Aux",
-            "format": "yyyy-MM-dd",
-            "saqlExpression": "toDate('EndDate_sec_epoch')",
-            "label": "EndDate_Aux",
-            "type": "Date",
-            "isYearEndFiscalYear": true
-          },
-          {
-            "name": "StartDate_Aux",
-            "format": "yyyy-MM-dd",
-            "saqlExpression": "toDate('StartDate_sec_epoch')",
-            "label": "StartDate_Aux",
-            "type": "Date",
-            "isYearEndFiscalYear": true
-          }
-        ]
+        "computedFields": [{
+          "precision": 18,
+          "name": "ElapsedSeconds",
+          "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+          "scale": 0,
+          "label": "ElapsedSeconds",
+          "type": "Numeric"
+        }, {
+          "name": "EndDate_Aux",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('EndDate_sec_epoch')",
+          "label": "EndDate_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "StartDate_Aux",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('StartDate_sec_epoch')",
+          "label": "StartDate_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
       }
     },
     "Drop_Dates_ServiceResourceCapacityDemo": {
@@ -365,17 +313,13 @@
       "parameters": {
         "mode": "drop",
         "source": "Compute_Aux_ServiceResourceCapacityDemo",
-        "fields": [
-          {
-            "name": "EndDate"
-          },
-          {
-            "name": "StartDate"
-          },
-          {
-            "name": "LastProcessedDate"
-          }
-        ]
+        "fields": [{
+          "name": "EndDate"
+        }, {
+          "name": "StartDate"
+        }, {
+          "name": "LastProcessedDate"
+        }]
       }
     },
     "Load_Dataset_AssignedResource": {
@@ -408,6 +352,331 @@
         "name": "ServiceResourceCapacity",
         "alias": "${App.Datasets.ServiceResourceCapacityDemo.FullyQualifiedName}",
         "source": "Drop_Aux_ServiceResourceCapacityDemo"
+      }
+    },
+    "Load_Dataset_WorkOrderVolume2": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.WorkOrderVolumeAuxDemo.FullyQualifiedName}"
+      }
+    },
+    "Shift_Dates_WorkOrderVolume2": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_WorkOrderVolume2",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "LastProcessedDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "now()",
+          "label": "Last Processed",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "Date_Completed__c",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('Date_Completed__c_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "label": "Date Completed",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Register_Shifted_Dataset_WorkOrderVolume2": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "WorkOrderVolume Aux",
+        "alias": "${App.Datasets.WorkOrderVolumeAuxDemo.FullyQualifiedName}",
+        "source": "Drop_Aux_WorkOrderVolume2"
+      }
+    },
+    "Shift_Dates_WorkOrderVolume": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_WorkOrderVolume",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "LastProcessedDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "now()",
+          "label": "Last Processed",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "DateSold_Year_Month",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('DateSold_Year_Month_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "label": "DateSold (Year-Month)",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Register_Shifted_Dataset_WorkOrderVolume": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "WorkOrderVolume",
+        "alias": "${App.Datasets.WorkOrderVolumeDemo.FullyQualifiedName}",
+        "source": "Drop_Aux_WorkOrderVolume"
+      }
+    },
+    "Compute_Aux_WorkOrderVolume": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_WorkOrderVolume",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "precision": 18,
+          "name": "ElapsedSeconds",
+          "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+          "scale": 0,
+          "label": "ElapsedSeconds",
+          "type": "Numeric"
+        }, {
+          "name": "DateSold_Year_Month_Aux",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('DateSold_Year_Month_sec_epoch')",
+          "label": "DateSold_Year_Month_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Drop_Aux_WorkOrderVolume": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_WorkOrderVolume",
+        "fields": [{
+          "name": "DateSold_Year_Month_Aux"
+        }, {
+          "name": "ElapsedSeconds"
+        }]
+      }
+    },
+    "Drop_Dates_WorkOrderVolume": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_WorkOrderVolume",
+        "fields": [{
+          "name": "DateSold_Year_Month"
+        }, {
+          "name": "LastProcessedDate"
+        }]
+      }
+    },
+    "Drop_Aux_WorkOrderVolume2": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_WorkOrderVolume2",
+        "fields": [{
+          "name": "Date_Completed__c_Aux"
+        }, {
+          "name": "ElapsedSeconds"
+        }]
+      }
+    },
+    "Drop_Dates_FSLCapacityDemo": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_FSLCapacityDemo",
+        "fields": [{
+          "name": "Capacity_Date__c"
+        }, {
+          "name": "LastProcessedDate"
+        }]
+      }
+    },
+    "Register_Shifted_Dataset_FSLCapacityDemo": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "FSL Capacity",
+        "alias": "${App.Datasets.FSLCapacityDemo.FullyQualifiedName}",
+        "source": "UpdateCapacity"
+      }
+    },
+    "Shift_Dates_FSLCapacityDemo": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_FSLCapacityDemo",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "LastProcessedDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "now()",
+          "label": "Last Processed",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "Capacity_Date__c",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('Capacity_Date__c_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "label": "Capacity Date",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Drop_Aux_FSLCapacityDemo": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_FSLCapacityDemo",
+        "fields": [{
+          "name": "Capacity_Date__c_Aux"
+        }, {
+          "name": "ElapsedSeconds"
+        }]
+      }
+    },
+    "Compute_Aux_FSLCapacityDemo": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_FSLCapacityDemo",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "precision": 18,
+          "name": "ElapsedSeconds",
+          "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+          "scale": 0,
+          "label": "ElapsedSeconds",
+          "type": "Numeric"
+        }, {
+          "name": "Capacity_Date__c_Aux",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('Capacity_Date__c_sec_epoch')",
+          "label": "Capacity_Date__c_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Load_Dataset_WorkOrderVolume": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.WorkOrderVolumeDemo.FullyQualifiedName}"
+      }
+    },
+    "Compute_Aux_WorkOrderVolume2": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_WorkOrderVolume2",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "precision": 18,
+          "name": "ElapsedSeconds",
+          "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+          "scale": 0,
+          "label": "ElapsedSeconds",
+          "type": "Numeric"
+        }, {
+          "name": "Date_Completed__c_Aux",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('Date_Completed__c_sec_epoch')",
+          "label": "Date_Completed__c_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Drop_Dates_WorkOrderVolume2": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_WorkOrderVolume2",
+        "fields": [{
+          "name": "Date_Completed__c"
+        }, {
+          "name": "LastProcessedDate"
+        }]
+      }
+    },
+    "Load_Dataset_FSLCapacityDemo": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.FSLCapacityDemo.FullyQualifiedName}"
+      }
+    },
+    "Extract_Field_Capacity": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [{
+          "name": "Id"
+        }, {
+          "name": "Name"
+        }],
+        "object": "SDO_SFS_Field_Capacity__c"
+      }
+    },
+    "UpdateCapacity": {
+      "action": "update",
+      "parameters": {
+        "right_key": ["Name"],
+        "left": "Drop_Aux_FSLCapacityDemo",
+        "left_key": ["Name"],
+        "update_columns": {
+          "Id": "Id"
+        },
+        "right": "Extract_Field_Capacity"
+      }
+    },
+    "Digest_ServiceAppointment": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [{
+          "name": "Id"
+        }, {
+          "name": "AppointmentNumber"
+        }],
+        "object": "ServiceAppointment"
+      }
+    },
+    "Digest_WorkOrder": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [{
+          "name": "WorkOrderNumber"
+        }, {
+          "name": "ParentWorkOrderId"
+        }, {
+          "name": "Id"
+        }],
+        "object": "WorkOrder"
+      }
+    },
+    "Update_ServiceAppointment_AppNum": {
+      "action": "update",
+      "parameters": {
+        "right_key": [
+          "AppointmentNumber"
+        ],
+        "left": "Update_ServiceAppointment_w_User",
+        "left_key": [
+          "AppointmentNumber"
+        ],
+        "update_columns": {
+          "Id": "Id"
+        },
+        "right": "Digest_ServiceAppointment"
+      }
+    },
+    "Update_ServiceAppointment_WorkNum": {
+      "action": "update",
+      "parameters": {
+        "left": "Update_ServiceAppointment_AppNum",
+        "update_columns": {
+          "ParentRecordId": "Id"
+        },
+        "right": "Digest_WorkOrder",
+        "left_key": [
+          "ParentRecordId_WorkOrderNumber"
+        ],
+        "right_key": [
+          "WorkOrderNumber"
+        ]
       }
     }
   },
