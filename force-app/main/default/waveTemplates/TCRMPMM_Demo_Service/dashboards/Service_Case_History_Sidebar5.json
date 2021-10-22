@@ -1,0 +1,690 @@
+{
+  "name": "Service_Case_History_Sidebar5_tp",
+  "label": "Service Agent Sidebar By Case History",
+  "folder": {
+    "id": "${App.Folder.Id}"
+  },
+  "dateVersion": 1,
+  "mobileDisabled": false,
+  "xmd": {
+    "measures": [],
+    "derivedDimensions": [],
+    "organizations": [],
+    "showDetailsDefaultFields": [],
+    "dates": [],
+    "derivedMeasures": [],
+    "dimensions": []
+  },
+  "state": {
+    "dataSourceLinks": [],
+    "filters": [],
+    "gridLayouts": [
+      {
+        "maxWidth": 500,
+        "name": "Default",
+        "numColumns": 12,
+        "pages": [
+          {
+            "label": "Untitled",
+            "name": "e7b64a50-66d3-475f-8f06-82f685e61865",
+            "navigationHidden": false,
+            "widgets": [
+              {
+                "colspan": 6,
+                "column": 6,
+                "name": "number_OwnerChangeCount",
+                "row": 0,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgb(231, 237, 244)",
+                  "borderColor": "#091A3E",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 8
+                }
+              },
+              {
+                "colspan": 6,
+                "column": 0,
+                "name": "number_TotalCaseDuration",
+                "row": 0,
+                "rowspan": 2,
+                "widgetStyle": {
+                  "backgroundColor": "rgb(231, 237, 244)",
+                  "borderColor": "#FFFFFF",
+                  "borderEdges": [],
+                  "borderRadius": 0,
+                  "borderWidth": 8
+                }
+              },
+              {
+                "colspan": 12,
+                "column": 0,
+                "name": "chart_CaseOwnershipChanges",
+                "row": 2,
+                "rowspan": 6,
+                "widgetStyle": {
+                  "backgroundColor": "rgb(244, 246, 249)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["all"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 12,
+                "column": 0,
+                "name": "chart_StageDurationVsAverage",
+                "row": 8,
+                "rowspan": 10,
+                "widgetStyle": {
+                  "backgroundColor": "rgb(244, 246, 249)",
+                  "borderColor": "#E6ECF2",
+                  "borderEdges": ["bottom", "right", "left"],
+                  "borderRadius": 0,
+                  "borderWidth": 1
+                }
+              },
+              {
+                "colspan": 12,
+                "column": 0,
+                "name": "table_lens_1",
+                "row": 18,
+                "rowspan": 7,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight": "normal",
+        "selectors": [],
+        "style": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "backgroundColor": "rgb(244, 246, 249)",
+          "cellSpacingX": 0,
+          "cellSpacingY": 0,
+          "documentId": "",
+          "fit": "original"
+        },
+        "version": 1.0
+      },
+      {
+        "name": "iphone",
+        "numColumns": 1,
+        "pages": [
+          {
+            "label": "Untitled",
+            "name": "e7b64a50-66d3-475f-8f06-82f685e61865",
+            "navigationHidden": false,
+            "widgets": [
+              {
+                "colspan": 1,
+                "column": 0,
+                "name": "text_desktop_only",
+                "row": 24,
+                "rowspan": 6,
+                "widgetStyle": {
+                  "borderEdges": []
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight": "fine",
+        "selectors": ["maxWidth(599)", "platform(iOS,Android)"],
+        "style": {
+          "alignmentX": "left",
+          "alignmentY": "top",
+          "backgroundColor": "#F2F6FA",
+          "cellSpacingX": 8,
+          "cellSpacingY": 0,
+          "fit": "original",
+          "gutterColor": "#C5D3E0"
+        },
+        "version": 1.0
+      }
+    ],
+    "layouts": [],
+    "steps": {
+      "StageDurationVsAverage": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.ServiceCaseHistory_tp.Name}"
+          },
+          {
+            "name": "${App.Datasets.ServiceCase_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [
+              ["sum", "Duration", null],
+              ["avg", "Duration", null]
+            ],
+            "pigql": "q = load \"${App.Datasets.ServiceCaseHistory_tp.FullyQualifiedName}\"; q = filter q by ChangeAfterCloseDate == \"false\"; q = filter q by 'Field' == \"Status\"; average = filter q by {{coalesce(column(Product_Select.result, [\"Product_Family_KB__c\"]), \"NA\").asEquality(\"Case_Product_Family_KB__c\")}}; average = filter average by {{coalesce(column(Reason_Select.result, [\"Reason\"]), \"NA\").asEquality(\"Case_Reason\")}}; averageOld = group average by 'OldValue';averageOld = foreach averageOld generate 'OldValue' as 'Status', avg(DateDiffOld) as 'Duration';averageNew = filter average by 'IsLastChange' == \"true\";  averageNew = group averageNew by 'NewValue';averageNew = foreach averageNew generate 'NewValue' as 'Status', avg(DateDiffNew) as 'Duration';averageTotal = union averageOld,averageNew;averageTotal = group averageTotal by 'Status';averageTotal = foreach averageTotal generate 'Status' as 'Status', avg(Duration) as 'avg_Duration';currentCase = filter q by {{coalesce(column(CaseIDSelect.result, [\"Id\"]), \"NA\").asEquality(\"CaseId\")}}; currentCaseOld = group currentCase by 'OldValue';currentCaseOld = foreach currentCaseOld generate 'OldValue' as 'Status', sum(DateDiffOld) as 'Duration';currentCaseNew = filter currentCase by 'IsLastChange' == \"true\"; currentCaseNew = group currentCaseNew by 'NewValue';currentCaseNew = foreach currentCaseNew generate 'NewValue' as 'Status', sum(DateDiffNew) as 'Duration';currentCaseTotal = union currentCaseOld,currentCaseNew;currentCaseTotal = group currentCaseTotal by 'Status';currentCaseTotal = foreach currentCaseTotal generate 'Status' as 'Status', sum(Duration) as 'sum_Duration';CaseRecord = load \"${App.Datasets.ServiceCase_tp.FullyQualifiedName}\"; CaseRecord = filter CaseRecord by {{coalesce(column(CaseIDSelect.result, [\"Id\"]), \"NA\").asEquality(\"Id\")}}; CaseRecord = group CaseRecord by 'Status'; CaseRecord = foreach CaseRecord generate 'Status' as 'Status', sum('Time_Open__c') as 'sum_Duration';FinalChart = group CaseRecord by 'Status' full, currentCaseTotal by 'Status', averageTotal by 'Status';FinalChart = foreach FinalChart generate (case when count(currentCaseTotal) == 0 then CaseRecord['Status'] else currentCaseTotal['Status'] end) as 'Status', (case when count(currentCaseTotal) == 0 then sum(CaseRecord['sum_Duration']) else sum(currentCaseTotal['sum_Duration']) end) as 'sum_Duration', avg(averageTotal['avg_Duration']) as 'avg_Duration'; order FinalChart by 'sum_Duration' desc;",
+            "groups": ["Status"]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "none",
+          "steps": []
+        },
+        "selectMode": "none",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "visualizationType": "hbar"
+        }
+      },
+      "CaseIDSelect": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.ServiceCase_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["count", "*"]],
+            "groups": ["Id"],
+            "order": [
+              [
+                -1,
+                {
+                  "ascending": false
+                }
+              ]
+            ]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "visualizationType": "hbar"
+        }
+      },
+      "Reason_Select": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.ServiceCase_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["count", "*"]],
+            "groups": ["Reason"]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "visualizationType": "hbar"
+        }
+      },
+      "TotalCaseDuration": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.ServiceCaseHistory_tp.Name}"
+          },
+          {
+            "name": "${App.Datasets.ServiceCase_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["sum", "Duration"]],
+            "pigql": "q = load \"${App.Datasets.ServiceCaseHistory_tp.FullyQualifiedName}\"; q = filter q by ChangeAfterCloseDate == \"false\"; q = filter q by 'Field' == \"Owner\";q = filter q by {{coalesce(column(CaseIDSelect.result, [\"Id\"]), \"NA\").asEquality(\"CaseId\")}};mockTable = group q by ('CreatedDate', 'CaseId');mockTable = foreach mockTable generate 'CaseId' as 'CaseId', last('NewOwner_Id') as 'NewValue', first('DateDiffNew') as 'FirstDateDiffNew', last('DateDiffNew') as 'LastDateDiffNew',  sum('DateDiffNew') as 'DateDiffNew', last('OldOwner_Id')as'OldValue', sum('DateDiffOld') as 'DateDiffOld', 'CreatedDate' as 'CreatedDate', last('IsLastChange') as 'IsLastChange';mockTable = order mockTable by 'CreatedDate'; currentCase = filter mockTable by {{coalesce(column(CaseIDSelect.result, [\"Id\"]), \"NA\").asEquality(\"CaseId\")}};currentCaseOld = group currentCase by 'OldValue';currentCaseOld = foreach currentCaseOld generate 'OldValue' as 'Owner', sum(DateDiffOld) as 'Duration';currentCaseNew = filter currentCase by 'IsLastChange' == \"true\"; currentCaseNew = group currentCaseNew by 'NewValue';currentCaseNew = foreach currentCaseNew generate 'NewValue' as 'Owner', sum(DateDiffNew) as 'Duration';currentCaseTotal = union currentCaseOld,currentCaseNew;currentCaseTotal = group currentCaseTotal by 'Owner';currentCaseTotal = foreach currentCaseTotal generate 'Owner' as 'Owner', sum(Duration) as 'sum_Duration'; CaseRecord = load \"${App.Datasets.ServiceCase_tp.FullyQualifiedName}\"; CaseRecord = filter CaseRecord by {{coalesce(column(CaseIDSelect.result, [\"Id\"]), \"NA\").asEquality(\"Id\")}}; CaseRecord = group CaseRecord by 'Owner_Id'; CaseRecord = foreach CaseRecord generate 'Owner_Id' as 'Owner', sum('Time_Open__c') as 'sum_Duration';  FinalChart = group CaseRecord by 'Owner' full, currentCaseTotal by 'Owner'; FinalChart = foreach FinalChart generate (case when count(currentCaseTotal) == 0 then CaseRecord['Owner'] else currentCaseTotal['Owner'] end) as 'Owner', (case when count(currentCaseTotal) == 0 then sum(CaseRecord['sum_Duration']) else sum(currentCaseTotal['sum_Duration']) end) as 'sum_Duration'; FinalChart = filter FinalChart by  {{coalesce(column(CaseOwnerIdSelect.result, [\"OwnerId\"]), \"NA\").asEquality(\"Owner\")}};"
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "none",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "visualizationType": "hbar"
+        }
+      },
+      "HistoryRawTable": {
+        "broadcastFacet": true,
+        "groups": [],
+        "numbers": [],
+        "query": "q = load \"${App.Datasets.ServiceCaseHistory_tp.FullyQualifiedName}\";q = filter q by {{coalesce(column(CaseIDSelect.result, [\"Id\"]), \"NA\").asEquality(\"CaseId\")}};Owner = filter q by 'Field' == \"Owner\"; Owner = filter Owner by ('NewOwner' matches \"005\" || 'NewOwner' matches \"00G\");Owner = foreach Owner generate avg('Case_Time_Open__c') as 'avg_Time_Open__c', toString(toDate(CreatedDate_sec_epoch) , \"yyyy-MM-dd hh:mm:ss a\") as 'CreatedDate', 'CreatedDate' as 'CreatedDateSort', 'NewOwner_Name' as 'NewOwner', 'NewStatus' as 'NewStatus';Status = filter q by 'Field' == \"Status\";Status = foreach Status generate toString(toDate(CreatedDate_sec_epoch) , \"yyyy-MM-dd hh:mm:ss a\") as 'CreatedDate','CreatedDate' as 'CreatedDateSort', avg('Case_Time_Open__c') as 'avg_Time_Open__c', 'NewOwner_Name' as 'NewOwner', 'NewStatus' as 'NewStatus';CombinedTable = union Status, Owner;CombinedTable = order CombinedTable by 'CreatedDateSort';",
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "strings": [],
+        "type": "saql",
+        "useGlobal": false
+      },
+      "Product_Select": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.ServiceCase_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["count", "*"]],
+            "groups": ["Product_Family_KB__c"]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "visualizationType": "hbar"
+        }
+      },
+      "CaseOwnerIdSelect": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.ServiceCase_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["count", "*"]],
+            "groups": ["OwnerId"]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "visualizationType": "hbar"
+        }
+      },
+      "CaseId_1": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.ServiceCaseHistory_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["count", "*"]],
+            "groups": ["CaseId"]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": false,
+        "visualizationParameters": {}
+      },
+      "OwnerChangeCount": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.ServiceCaseHistory_tp.Name}"
+          },
+          {
+            "name": "${App.Datasets.ServiceCase_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["count", "*"]],
+            "pigql": "q = load \"${App.Datasets.ServiceCaseHistory_tp.FullyQualifiedName}\"; q = filter q by ChangeAfterCloseDate == \"false\";q = filter q by 'Field' == \"Owner\"; q = filter q by {{coalesce(column(CaseIDSelect.result, [\"Id\"]), \"NA\").asEquality(\"CaseId\")}};mockTable = group q by ('CreatedDate', 'CaseId');mockTable = foreach mockTable generate 'CaseId' as 'CaseId', last('NewOwner_Name') as 'NewValue', first('DateDiffNew') as 'FirstDateDiffNew', last('DateDiffNew') as 'LastDateDiffNew',  sum('DateDiffNew') as 'DateDiffNew', last('OldOwner_Name')as'OldValue', sum('DateDiffOld') as 'DateDiffOld';currentCase = filter mockTable by {{coalesce(column(CaseIDSelect.result, [\"Id\"]), \"NA\").asEquality(\"CaseId\")}};currentCaseOld = group currentCase by 'OldValue';currentCaseOld = foreach currentCaseOld generate 'OldValue' as 'Owner', sum(DateDiffOld) as 'Duration';currentCaseNew = group currentCase by 'NewValue';currentCaseNew = foreach currentCaseNew generate 'NewValue' as 'Owner', sum(DateDiffNew) as 'Duration';currentCaseTotal = union currentCaseOld,currentCaseNew;currentCaseTotal = group currentCaseTotal by 'Owner';currentCaseTotal = foreach currentCaseTotal generate 'Owner' as 'Owner', sum(Duration) as 'sum_Duration'; CaseRecord = load \"${App.Datasets.ServiceCase_tp.FullyQualifiedName}\"; CaseRecord = filter CaseRecord by {{coalesce(column(CaseIDSelect.result, [\"Id\"]), \"NA\").asEquality(\"Id\")}}; CaseRecord = group CaseRecord by 'Owner_Name'; CaseRecord = foreach CaseRecord generate 'Owner_Name' as 'Owner', sum('Time_Open__c') as 'sum_Duration';  FinalChart = group CaseRecord by all full, currentCaseTotal by all; FinalChart = foreach FinalChart generate  (case when count(currentCaseTotal) == 0 then 1 else count(currentCaseTotal) end) as 'count';"
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "none",
+          "steps": []
+        },
+        "selectMode": "single",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "visualizationType": "hbar"
+        }
+      },
+      "CaseOwnershipChanges": {
+        "broadcastFacet": true,
+        "datasets": [
+          {
+            "name": "${App.Datasets.ServiceCaseHistory_tp.Name}"
+          },
+          {
+            "name": "${App.Datasets.ServiceCase_tp.Name}"
+          }
+        ],
+        "isGlobal": false,
+        "query": {
+          "query": {
+            "measures": [["sum", "Duration"]],
+            "pigql": "q = load \"${App.Datasets.ServiceCaseHistory_tp.FullyQualifiedName}\"; q = filter q by ChangeAfterCloseDate == \"false\";q = filter q by 'Field' == \"Owner\";q = filter q by {{coalesce(column(CaseIDSelect.result, [\"Id\"]), \"NA\").asEquality(\"CaseId\")}}; mockTable = group q by ('CreatedDate', 'CaseId');mockTable = foreach mockTable generate 'CaseId' as 'CaseId', last('NewOwner_Name') as 'NewValue', first('DateDiffNew') as 'FirstDateDiffNew', last('DateDiffNew') as 'LastDateDiffNew',  sum('DateDiffNew') as 'DateDiffNew', last('IsLastChange') as 'IsLastChange', last('OldOwner_Name')as'OldValue', sum('DateDiffOld') as 'DateDiffOld';currentCase = filter mockTable by {{coalesce(column(CaseIDSelect.result, [\"Id\"]), \"NA\").asEquality(\"CaseId\")}};averageOld = group mockTable by 'OldValue';averageOld = foreach averageOld generate 'OldValue' as 'Owner', avg(DateDiffOld) as 'Duration';averageNew = filter mockTable by 'IsLastChange' == \"true\"; averageNew = group averageNew by 'NewValue';averageNew = foreach averageNew generate 'NewValue' as 'Owner', avg(DateDiffNew) as 'Duration';averageTotal = union averageOld,averageNew;averageTotal = group averageTotal by 'Owner';averageTotal = foreach averageTotal generate 'Owner' as 'Owner', avg(Duration) as 'avg_Duration';currentCaseOld = group currentCase by 'OldValue';currentCaseOld = foreach currentCaseOld generate 'OldValue' as 'Owner', sum(DateDiffOld) as 'Duration';currentCaseNew = filter currentCase by 'IsLastChange' == \"true\"; currentCaseNew = group currentCaseNew by 'NewValue';currentCaseNew = foreach currentCaseNew generate 'NewValue' as 'Owner', sum(DateDiffNew) as 'Duration';currentCaseTotal = union currentCaseOld,currentCaseNew;currentCaseTotal = group currentCaseTotal by 'Owner';currentCaseTotal = foreach currentCaseTotal generate 'Owner' as 'Owner', sum(Duration) as 'sum_Duration';CaseRecord = load \"${App.Datasets.ServiceCase_tp.FullyQualifiedName}\"; CaseRecord = filter CaseRecord by {{coalesce(column(CaseIDSelect.result, [\"Id\"]), \"NA\").asEquality(\"Id\")}}; CaseRecord = group CaseRecord by 'Owner_Name'; CaseRecord = foreach CaseRecord generate 'Owner_Name' as 'Owner', sum('Time_Open__c') as 'sum_Duration';  FinalChart = group CaseRecord by 'Owner' full, currentCaseTotal by 'Owner' full, averageTotal by 'Owner'; FinalChart = foreach FinalChart generate (case when count(currentCaseTotal) == 0 then CaseRecord['Owner'] else currentCaseTotal['Owner'] end) as 'OldOwner_Name', (case when count(currentCaseTotal) == 0 then sum(CaseRecord['sum_Duration']) else sum(currentCaseTotal['sum_Duration']) end) as 'sum_Duration', avg(averageTotal['avg_Duration']) as 'avg_Duration'; FinalChart = order FinalChart by 'sum_Duration' desc",
+            "groups": ["OldOwner_Name"]
+          },
+          "version": -1.0
+        },
+        "receiveFacetSource": {
+          "mode": "none",
+          "steps": []
+        },
+        "selectMode": "none",
+        "type": "aggregateflex",
+        "useGlobal": true,
+        "visualizationParameters": {
+          "options": {},
+          "visualizationType": "hbar"
+        }
+      },
+      "lens_1": {
+        "broadcastFacet": true,
+        "groups": [],
+        "numbers": [],
+        "query": "q = load \"${App.Datasets.ServiceCaseHistory_tp.FullyQualifiedName}\";q = foreach q generate 'Case_Account_Name' as 'Case_Account_Name', 'Case_Origin' as 'Case_Origin', 'Case_Priority' as 'Case_Priority', 'Case_RecordType_Name' as 'Case_RecordType_Name';q = limit q 100;",
+        "receiveFacetSource": {
+          "mode": "all",
+          "steps": []
+        },
+        "selectMode": "single",
+        "strings": [],
+        "type": "saql",
+        "useGlobal": false
+      }
+    },
+    "widgetStyle": {
+      "backgroundColor": "#FFFFFF",
+      "borderColor": "#E6ECF2",
+      "borderEdges": [],
+      "borderRadius": 0,
+      "borderWidth": 1
+    },
+    "widgets": {
+      "number_OwnerChangeCount": {
+        "parameters": {
+          "compact": false,
+          "exploreLink": false,
+          "fontSize": 32,
+          "measureField": "count",
+          "numberColor": "#091A3E",
+          "numberSize": 24,
+          "showActionMenu": true,
+          "step": "OwnerChangeCount",
+          "textAlignment": "center",
+          "textColor": "rgb(41, 71, 102)",
+          "title": "Total Case Owners",
+          "titleColor": "#5C7A99",
+          "titleSize": 14
+        },
+        "type": "number"
+      },
+      "chart_CaseOwnershipChanges": {
+        "parameters": {
+          "totalValue": "computeTotal",
+          "centerText": "",
+          "legend": {
+            "descOrder": false,
+            "showHeader": false,
+            "show": true,
+            "customSize": "auto",
+            "position": "right-top",
+            "inside": false
+          },
+          "showMeasureTitle": false,
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "pie",
+          "exploreLink": false,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "Duration by Case Owner",
+            "align": "left",
+            "subtitleLabel": "Sum of Duration"
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "inner": 70,
+          "totalLabel": "",
+          "showActionMenu": true,
+          "centerValueType": "none",
+          "valueType": "compactNumber",
+          "step": "CaseOwnershipChanges",
+          "theme": "light",
+          "applyConditionalFormatting": false
+        },
+        "type": "chart"
+      },
+      "chart_StageDurationVsAverage": {
+        "parameters": {
+          "autoFitMode": "fit",
+          "totalValue": "computeTotal",
+          "showValues": true,
+          "bins": {
+            "breakpoints": {
+              "high": 100,
+              "low": 0
+            },
+            "bands": {
+              "high": {
+                "color": "#008000",
+                "label": ""
+              },
+              "low": {
+                "color": "#B22222",
+                "label": ""
+              },
+              "medium": {
+                "color": "#ffa500",
+                "label": ""
+              }
+            }
+          },
+          "legend": {
+            "descOrder": false,
+            "showHeader": false,
+            "show": true,
+            "customSize": "auto",
+            "position": "top-center",
+            "inside": false
+          },
+          "axisMode": "sync",
+          "tooltip": {
+            "showBinLabel": true,
+            "measures": "",
+            "showNullValues": true,
+            "showPercentage": true,
+            "showDimensions": true,
+            "showMeasures": true,
+            "customizeTooltip": false,
+            "dimensions": ""
+          },
+          "visualizationType": "vbar",
+          "exploreLink": false,
+          "title": {
+            "fontSize": 14,
+            "subtitleFontSize": 11,
+            "label": "Duration in Status vs Average",
+            "align": "left",
+            "subtitleLabel": "Sum of Duration"
+          },
+          "trellis": {
+            "flipLabels": false,
+            "showGridLines": true,
+            "size": [100, 100],
+            "enable": false,
+            "type": "x",
+            "parameters": {},
+            "chartsPerLine": 4
+          },
+          "binValues": false,
+          "totalLabel": "",
+          "showActionMenu": true,
+          "measureAxis2": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "measureAxis1": {
+            "sqrtScale": false,
+            "showTitle": true,
+            "showAxis": true,
+            "title": "Duration",
+            "customDomain": {
+              "showDomain": false
+            }
+          },
+          "step": "StageDurationVsAverage",
+          "theme": "light",
+          "dimensionAxis": {
+            "showTitle": false,
+            "customSize": "auto",
+            "showAxis": true,
+            "title": "",
+            "icons": {
+              "useIcons": false,
+              "iconProps": {
+                "fit": "cover",
+                "column": "",
+                "type": "round",
+                "parameters": {}
+              }
+            }
+          },
+          "applyConditionalFormatting": false
+        },
+        "type": "chart"
+      },
+      "table_lens_1": {
+        "parameters": {
+          "borderColor": "#e0e5ee",
+          "borderWidth": 1,
+          "cell": {
+            "backgroundColor": "#ffffff",
+            "fontColor": "#16325c",
+            "fontSize": 12
+          },
+          "columnProperties": {},
+          "columns": [],
+          "customBulkActions": [],
+          "exploreLink": true,
+          "header": {
+            "backgroundColor": "#f4f6f9",
+            "fontColor": "#16325c",
+            "fontSize": 12
+          },
+          "innerMajorBorderColor": "#a8b7c7",
+          "innerMinorBorderColor": "#e0e5ee",
+          "maxColumnWidth": 300,
+          "minColumnWidth": 40,
+          "mode": "variable",
+          "numberOfLines": 1,
+          "showActionMenu": true,
+          "step": "HistoryRawTable",
+          "verticalPadding": 8
+        },
+        "type": "table"
+      },
+      "number_TotalCaseDuration": {
+        "parameters": {
+          "compact": false,
+          "exploreLink": false,
+          "fontSize": 32,
+          "measureField": "sum_Duration",
+          "numberColor": "#091A3E",
+          "numberSize": 24,
+          "showActionMenu": true,
+          "step": "TotalCaseDuration",
+          "textAlignment": "center",
+          "textColor": "rgb(41, 71, 102)",
+          "title": "Current Owner Duration",
+          "titleColor": "#5C7A99",
+          "titleSize": 14
+        },
+        "type": "number"
+      },
+      "text_desktop_only": {
+        "parameters": {
+          "content": {
+            "displayTemplate": "This dashboard is designed for \n desktop viewing only"
+          },
+          "fontSize": 20,
+          "showActionMenu": true,
+          "textAlignment": "center",
+          "textColor": "#091A3E"
+        },
+        "type": "text"
+      }
+    }
+  }
+}
