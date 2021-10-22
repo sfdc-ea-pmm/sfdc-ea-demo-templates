@@ -1,0 +1,113 @@
+{
+  "name" : "Sales_Stage_Details2_tp",
+  "label" : "Sales Stage Details",
+  "description" : "Get details about where deals stand in the sales process. Select a bubble, then click the drill down button that appears at top right to learn the specifics about a deal, such as its forecast category, stage, owner, age, and so on.",
+  "folder" : {
+    "id" : "${App.Folder.Id}"
+  },
+  "visualizationType" : "matrix",
+  "dateVersion" : 1,
+  "datasets" : [
+    {
+      "id" : "${App.Datasets.pipeline_trending_tp.Id}"
+    }
+  ],
+  "xmd" : {
+    "measures" : [ ],
+    "derivedDimensions" : [ ],
+    "organizations" : [ ],
+    "showDetailsDefaultFields" : [ ],
+    "dates" : [ ],
+    "derivedMeasures" : [ ],
+    "dimensions" : [ ]
+  },
+  "state" : {
+    "dataSourceLinks" : [ ],
+    "filters" : [ ],
+    "gridLayouts" : [ ],
+    "layouts" : [ ],
+    "steps" : {
+      "aggregateflex" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.pipeline_trending_tp.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              "StageNamePrev",
+              "StageName"
+            ],
+            "filters" : [
+              [
+                "Stage_isUpdated",
+                [
+                  "1"
+                ],
+                "in"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "visualizationType" : "matrix"
+        }
+      }
+    },
+    "widgets" : {
+      "aggregateflex_chart" : {
+        "parameters" : {
+          "autoFitMode" : "fit",
+          "totalValue" : "computeTotal",
+          "legend" : {
+            "showHeader" : true,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "highColor" : "#009DDF",
+          "lowColor" : "#E2F4FC",
+          "visualizationType" : "matrix",
+          "exploreLink" : true,
+          "title" : {
+            "label" : "Deals moving through sales stages",
+            "align" : "center",
+            "subtitleLabel" : "Select a bubble to open the drill-down button. Click the button to view deal specifics."
+          },
+          "totalLabel" : "",
+          "showActionMenu" : true,
+          "x" : {
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "To Stage"
+          },
+          "y" : {
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "From Stage"
+          },
+          "theme" : "wave",
+          "step" : "aggregateflex"
+        },
+        "type" : "chart"
+      }
+    }
+  }
+}

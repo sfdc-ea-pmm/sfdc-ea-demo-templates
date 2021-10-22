@@ -1,0 +1,1379 @@
+{
+  "isDeletable": true,
+  "notificationLevel": "Never",
+  "workflowDefinition": {
+    "Drop_Aux_forecasting_item1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_forecasting_item1",
+        "fields": [
+          {
+            "name": "Period_EndDate_Aux"
+          },
+          {
+            "name": "Period_StartDate_Aux"
+          },
+          {
+            "name": "ElapsedSeconds"
+          }
+        ]
+      }
+    },
+    "Drop_Dates_case1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_case1",
+        "fields": [
+          {
+            "name": "LastModifiedDate"
+          },
+          {
+            "name": "CreatedDate"
+          },
+          {
+            "name": "LastProcessedDate"
+          }
+        ]
+      }
+    },
+    "Shift_Dates_Account1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_Account1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LastModifiedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "LastModifiedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Aux_Opportunity_ED_Causes": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_Opportunity_ED_Causes",
+        "fields": [
+          {
+            "name": "CloseDate_Aux"
+          },
+          {
+            "name": "ElapsedSeconds"
+          }
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_forecasting_item1": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "ForecastingItem",
+        "alias": "${App.Datasets.forecasting_item_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_forecasting_item1"
+      }
+    },
+    "Compute_Aux_case1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_case1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "LastModifiedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_sec_epoch')",
+            "label": "LastModifiedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_Sample_Superstore_with_Goals1": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Sample - Superstore with Goals",
+        "alias": "${App.Datasets.Sample_Superstore_with_Goals_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_Sample_Superstore_with_Goals1"
+      }
+    },
+    "Shift_Dates_lead1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_lead1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LastModifiedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "LastModifiedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CurrentDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CurrentDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CurrentDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Shift_Dates_Opportunity_ED_Causes": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_Opportunity_ED_Causes",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CloseDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CloseDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CloseDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Load_Dataset_opportunity_products1": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.opportunity_products_tp.FullyQualifiedName}"
+      }
+    },
+    "Drop_Dates_quota1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_quota1",
+        "fields": [
+          {
+            "name": "StartDate"
+          },
+          {
+            "name": "LastProcessedDate"
+          }
+        ]
+      }
+    },
+    "Drop_Aux_opportunity1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_opportunity1",
+        "fields": [
+          {
+            "name": "Predicted_Close_Date__c_Aux"
+          },
+          {
+            "name": "CloseDate_Aux"
+          },
+          {
+            "name": "LastActivityDate_Aux"
+          },
+          {
+            "name": "CreatedDate_Aux"
+          },
+          {
+            "name": "ElapsedSeconds"
+          }
+        ]
+      }
+    },
+    "Load_Dataset_case1": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.case_tp.FullyQualifiedName}"
+      }
+    },
+    "Drop_Aux_Sample_Superstore_with_Goals1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_Sample_Superstore_with_Goals1",
+        "fields": [
+          {
+            "name": "Ship_Date_Aux"
+          },
+          {
+            "name": "ElapsedSeconds"
+          }
+        ]
+      }
+    },
+    "Drop_Dates_pipeline_trending1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_pipeline_trending1",
+        "fields": [
+          {
+            "name": "CloseDate"
+          },
+          {
+            "name": "ValidFromDate"
+          },
+          {
+            "name": "OpportunityCreatedDate"
+          },
+          {
+            "name": "ValidToDate"
+          },
+          {
+            "name": "CreatedDate"
+          },
+          {
+            "name": "CloseDatePrev"
+          },
+          {
+            "name": "LastProcessedDate"
+          }
+        ]
+      }
+    },
+    "Load_Dataset_Activity1": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.Activity_tp.FullyQualifiedName}"
+      }
+    },
+    "Register_Shifted_Dataset_opportunity_products1": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Oppty Products",
+        "alias": "${App.Datasets.opportunity_products_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_opportunity_products1"
+      }
+    },
+    "Drop_Dates_opportunity_products1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_opportunity_products1",
+        "fields": [
+          {
+            "name": "Opportunity_Predicted_Close_Date__c"
+          },
+          {
+            "name": "Opportunity_CreatedDate"
+          },
+          {
+            "name": "Opportunity_CloseDate"
+          },
+          {
+            "name": "LastProcessedDate"
+          }
+        ]
+      }
+    },
+    "Drop_Dates_Activity1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_Activity1",
+        "fields": [
+          {
+            "name": "LastModifiedDate"
+          },
+          {
+            "name": "LastProcessedDate"
+          }
+        ]
+      }
+    },
+    "Drop_Dates_Opportunity_ED_Causes": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_Opportunity_ED_Causes",
+        "fields": [
+          {
+            "name": "CloseDate"
+          },
+          {
+            "name": "LastProcessedDate"
+          }
+        ]
+      }
+    },
+    "Shift_Dates_Sample_Superstore_with_Goals1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_Sample_Superstore_with_Goals1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Ship_Date",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Ship_Date_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Ship_Date",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Aux_Activity1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_Activity1",
+        "fields": [
+          {
+            "name": "LastModifiedDate_Aux"
+          },
+          {
+            "name": "ElapsedSeconds"
+          }
+        ]
+      }
+    },
+    "Shift_Dates_opportunity_products1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_opportunity_products1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Opportunity_Predicted_Close_Date__c",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Opportunity_Predicted_Close_Date__c_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Opportunity.Predicted_Close_Date__c",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Opportunity_CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Opportunity_CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Opportunity.CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Opportunity_CloseDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Opportunity_CloseDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Close Date",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Compute_Aux_lead1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_lead1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "LastModifiedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_sec_epoch')",
+            "label": "LastModifiedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CurrentDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CurrentDate_sec_epoch')",
+            "label": "CurrentDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Aux_pipeline_trending1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_pipeline_trending1",
+        "fields": [
+          {
+            "name": "CloseDate_Aux"
+          },
+          {
+            "name": "ValidFromDate_Aux"
+          },
+          {
+            "name": "OpportunityCreatedDate_Aux"
+          },
+          {
+            "name": "ValidToDate_Aux"
+          },
+          {
+            "name": "CreatedDate_Aux"
+          },
+          {
+            "name": "CloseDatePrev_Aux"
+          },
+          {
+            "name": "ElapsedSeconds"
+          }
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_opportunity1": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Opportunities",
+        "alias": "${App.Datasets.opportunity_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_opportunity1"
+      }
+    },
+    "Drop_Aux_quota1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_quota1",
+        "fields": [
+          {
+            "name": "StartDate_Aux"
+          },
+          {
+            "name": "ElapsedSeconds"
+          }
+        ]
+      }
+    },
+    "Load_Dataset_forecasting_item1": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.forecasting_item_tp.FullyQualifiedName}"
+      }
+    },
+    "Load_Dataset_opportunity1": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.opportunity_tp.FullyQualifiedName}"
+      }
+    },
+    "Load_Dataset_Account1": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.Account_tp.FullyQualifiedName}"
+      }
+    },
+    "Register_Shifted_Dataset_Opportunity_ED_Causes": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Opportunity ED Causes",
+        "alias": "${App.Datasets.Opportunity_ED_Causes_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_Opportunity_ED_Causes"
+      }
+    },
+    "Compute_Aux_opportunity_products1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_opportunity_products1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "Opportunity_Predicted_Close_Date__c_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Opportunity_Predicted_Close_Date__c_sec_epoch')",
+            "label": "Opportunity_Predicted_Close_Date__c_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Opportunity_CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Opportunity_CreatedDate_sec_epoch')",
+            "label": "Opportunity_CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Opportunity_CloseDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Opportunity_CloseDate_sec_epoch')",
+            "label": "Opportunity_CloseDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_case1": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Cases",
+        "alias": "${App.Datasets.case_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_case1"
+      }
+    },
+    "Shift_Dates_opportunity1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_opportunity1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Predicted_Close_Date__c",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Predicted_Close_Date__c_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Predicted_Close_Date__c",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CloseDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CloseDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Close Date",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LastActivityDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastActivityDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "LastActivityDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Dates_lead1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_lead1",
+        "fields": [
+          {
+            "name": "LastModifiedDate"
+          },
+          {
+            "name": "CurrentDate"
+          },
+          {
+            "name": "CreatedDate"
+          },
+          {
+            "name": "LastProcessedDate"
+          }
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_Activity1": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Activities",
+        "alias": "${App.Datasets.Activity_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_Activity1"
+      }
+    },
+    "Drop_Aux_lead1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_lead1",
+        "fields": [
+          {
+            "name": "LastModifiedDate_Aux"
+          },
+          {
+            "name": "CurrentDate_Aux"
+          },
+          {
+            "name": "CreatedDate_Aux"
+          },
+          {
+            "name": "ElapsedSeconds"
+          }
+        ]
+      }
+    },
+    "Load_Dataset_lead1": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.lead_tp.FullyQualifiedName}"
+      }
+    },
+    "Load_Dataset_Opportunity_ED_Causes": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.Opportunity_ED_Causes_tp.FullyQualifiedName}"
+      }
+    },
+    "Shift_Dates_quota1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_quota1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "StartDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('StartDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "StartDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Dates_Account1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_Account1",
+        "fields": [
+          {
+            "name": "LastModifiedDate"
+          },
+          {
+            "name": "CreatedDate"
+          },
+          {
+            "name": "LastProcessedDate"
+          }
+        ]
+      }
+    },
+    "Compute_Aux_Sample_Superstore_with_Goals1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_Sample_Superstore_with_Goals1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "Ship_Date_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Ship_Date_sec_epoch')",
+            "label": "Ship_Date_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Compute_Aux_Opportunity_ED_Causes": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_Opportunity_ED_Causes",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "CloseDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CloseDate_sec_epoch')",
+            "label": "CloseDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Dates_forecasting_item1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_forecasting_item1",
+        "fields": [
+          {
+            "name": "Period_EndDate"
+          },
+          {
+            "name": "Period_StartDate"
+          },
+          {
+            "name": "LastProcessedDate"
+          }
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_pipeline_trending1": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Pipeline Trending",
+        "alias": "${App.Datasets.pipeline_trending_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_pipeline_trending1"
+      }
+    },
+    "Shift_Dates_case1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_case1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LastModifiedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "LastModifiedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Shift_Dates_pipeline_trending1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_pipeline_trending1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CloseDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CloseDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CloseDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ValidFromDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ValidFromDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "ValidFromDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "OpportunityCreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('OpportunityCreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "OpportunityCreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ValidToDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ValidToDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "ValidToDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CreatedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CloseDatePrev",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CloseDatePrev_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "CloseDatePrev",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Compute_Aux_quota1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_quota1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "StartDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('StartDate_sec_epoch')",
+            "label": "StartDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Compute_Aux_forecasting_item1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_forecasting_item1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "Period_EndDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Period_EndDate_sec_epoch')",
+            "label": "Period_EndDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Period_StartDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Period_StartDate_sec_epoch')",
+            "label": "Period_StartDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Compute_Aux_Activity1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_Activity1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "LastModifiedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_sec_epoch')",
+            "label": "LastModifiedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Aux_Account1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_Account1",
+        "fields": [
+          {
+            "name": "LastModifiedDate_Aux"
+          },
+          {
+            "name": "CreatedDate_Aux"
+          },
+          {
+            "name": "ElapsedSeconds"
+          }
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_Account1": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Accounts",
+        "alias": "${App.Datasets.Account_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_Account1"
+      }
+    },
+    "Load_Dataset_quota1": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.quota_tp.FullyQualifiedName}"
+      }
+    },
+    "Register_Shifted_Dataset_lead1": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Leads",
+        "alias": "${App.Datasets.lead_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_lead1"
+      }
+    },
+    "Drop_Dates_Sample_Superstore_with_Goals1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_Sample_Superstore_with_Goals1",
+        "fields": [
+          {
+            "name": "Ship_Date"
+          },
+          {
+            "name": "LastProcessedDate"
+          }
+        ]
+      }
+    },
+    "Compute_Aux_Account1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_Account1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "LastModifiedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_sec_epoch')",
+            "label": "LastModifiedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Load_Dataset_pipeline_trending1": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.pipeline_trending_tp.FullyQualifiedName}"
+      }
+    },
+    "Shift_Dates_Activity1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_Activity1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LastModifiedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastModifiedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "LastModifiedDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Shift_Dates_forecasting_item1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_forecasting_item1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "name": "LastProcessedDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "now()",
+            "label": "Last Processed",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Period_EndDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Period_EndDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Period.EndDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "Period_StartDate",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Period_StartDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+            "label": "Period.StartDate",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Compute_Aux_opportunity1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_opportunity1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "Predicted_Close_Date__c_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('Predicted_Close_Date__c_sec_epoch')",
+            "label": "Predicted_Close_Date__c_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CloseDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CloseDate_sec_epoch')",
+            "label": "CloseDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "LastActivityDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('LastActivityDate_sec_epoch')",
+            "label": "LastActivityDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Register_Shifted_Dataset_quota1": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "User Allocation - Quotas",
+        "alias": "${App.Datasets.quota_tp.FullyQualifiedName}",
+        "source": "Drop_Aux_quota1"
+      }
+    },
+    "Compute_Aux_pipeline_trending1": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_pipeline_trending1",
+        "mergeWithSource": true,
+        "computedFields": [
+          {
+            "precision": 18,
+            "name": "ElapsedSeconds",
+            "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+            "scale": 0,
+            "label": "ElapsedSeconds",
+            "type": "Numeric"
+          },
+          {
+            "name": "CloseDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CloseDate_sec_epoch')",
+            "label": "CloseDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ValidFromDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ValidFromDate_sec_epoch')",
+            "label": "ValidFromDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "OpportunityCreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('OpportunityCreatedDate_sec_epoch')",
+            "label": "OpportunityCreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "ValidToDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('ValidToDate_sec_epoch')",
+            "label": "ValidToDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CreatedDate_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+            "label": "CreatedDate_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          },
+          {
+            "name": "CloseDatePrev_Aux",
+            "format": "yyyy-MM-dd",
+            "saqlExpression": "toDate('CloseDatePrev_sec_epoch')",
+            "label": "CloseDatePrev_Aux",
+            "type": "Date",
+            "isYearEndFiscalYear": true
+          }
+        ]
+      }
+    },
+    "Drop_Dates_opportunity1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_opportunity1",
+        "fields": [
+          {
+            "name": "Predicted_Close_Date__c"
+          },
+          {
+            "name": "CloseDate"
+          },
+          {
+            "name": "LastActivityDate"
+          },
+          {
+            "name": "CreatedDate"
+          },
+          {
+            "name": "LastProcessedDate"
+          }
+        ]
+      }
+    },
+    "Drop_Aux_opportunity_products1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_opportunity_products1",
+        "fields": [
+          {
+            "name": "Opportunity_Predicted_Close_Date__c_Aux"
+          },
+          {
+            "name": "Opportunity_CreatedDate_Aux"
+          },
+          {
+            "name": "Opportunity_CloseDate_Aux"
+          },
+          {
+            "name": "ElapsedSeconds"
+          }
+        ]
+      }
+    },
+    "Load_Dataset_Sample_Superstore_with_Goals1": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.Sample_Superstore_with_Goals_tp.FullyQualifiedName}"
+      }
+    },
+    "Drop_Aux_case1": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_case1",
+        "fields": [
+          {
+            "name": "LastModifiedDate_Aux"
+          },
+          {
+            "name": "CreatedDate_Aux"
+          },
+          {
+            "name": "ElapsedSeconds"
+          }
+        ]
+      }
+    }
+  },
+  "DataflowType": "USER",
+  "_type": "dataflow",
+  "name": "Demo_Sales_Timeshifting",
+  "description": "- Timeshifting",
+  "MasterLabel": "- Timeshifting",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": "",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive"
+}
