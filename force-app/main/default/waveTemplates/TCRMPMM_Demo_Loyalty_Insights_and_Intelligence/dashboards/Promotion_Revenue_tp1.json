@@ -129,7 +129,7 @@
         "conditionalFormatting" : { },
         "defaultAction" : "openSfdcRecord",
         "salesforceActions" : [ ],
-        "field" : "Promotion_Name_Promo_1.Promotion.Name",
+        "field" : "Promotion_Name_Promo_1.Promotion_Name",
         "members" : [ ],
         "customActions" : [ ]
       },
@@ -138,7 +138,7 @@
         "conditionalFormatting" : { },
         "defaultAction" : "openSfdcRecord",
         "salesforceActions" : [ ],
-        "field" : "lens_1.Member.MembershipNumber",
+        "field" : "lens_1.Member_MembershipNumber",
         "members" : [ ],
         "customActions" : [ ]
       }
@@ -1479,7 +1479,7 @@
         "groups" : [ ],
         "label" : "Top Negative",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\r\nq = filter q by {{column(Members_MemberCurren_1.selection, [\"Market Segment\"]).asEquality(\"Member_Segment.Market_Segment_1\")}} or {{column(Members_MemberCurren_1.selection, [\"Market Segment\"]).asEquality(\"Member_Segment.Market_Segment_2\")}};\nq = filter q by {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Member_Segment.Market_Segment_1\")}} or {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Member_Segment.Market_Segment_2\")}};\r\nPredict1 = group q by 'Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor';\nPredict1 = foreach Predict1 generate replace(replace(replace(replace('Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor', \":\", \" is \"), \",\", \" and \"), \"__c\", \"\"), \"_\",\" \") as 'predictor', sum('Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor_impact') as 'sum_impact', count() as 'Count';\nPredict2 = group q by 'Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor1';\nPredict2 = foreach Predict2 generate replace(replace(replace(replace('Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor1', \":\", \" is \"), \",\", \" and \"), \"__c\", \"\"), \"_\",\" \") as 'predictor', sum('Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor_impact1') as 'sum_impact', count() as 'Count';\nPredict3 = group q by 'Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor2';\nPredict3 = foreach Predict3 generate replace(replace(replace(replace('Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor2', \":\", \" is \"), \",\", \" and \"), \"__c\", \"\"), \"_\",\" \") as 'predictor', sum('Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor_impact2') as 'sum_impact',count() as 'Count';\nq = group Predict1 by predictor full, Predict2 by predictor full, Predict3 by predictor;\nq = foreach q generate coalesce(Predict1.'predictor', Predict2.'predictor', Predict3.'predictor') as 'top predictor',(coalesce(sum(Predict1['sum_impact']),0) +coalesce(sum(Predict2['sum_impact']),0) +coalesce(sum(Predict3['sum_impact']),0)) as 'Impact', (coalesce(sum(Predict1['Count']),0) +coalesce(sum(Predict2['Count']),0) +coalesce(sum(Predict3['Count']),0)) as 'Count',  {{cell(lens_2.result, 0, \"Predicted Revenue\").asString()}} as 'PredictedRevenue';\nq = foreach q generate replace('top predictor', \".00000000000000000\",\"\") as 'top predictor', 'Impact','PredictedRevenue', number_to_string(('Impact'/'PredictedRevenue'), \"#0.00%\") as 'PercentageImpact','Count';\nq = filter q by 'Impact' <0;\nq = order q by 'Impact' asc;\nq = limit q 10;",
+        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\r\nq = filter q by {{column(Members_MemberCurren_1.selection, [\"Market Segment\"]).asEquality(\"Member_Segment_Market_Segment_1\")}} or {{column(Members_MemberCurren_1.selection, [\"Market Segment\"]).asEquality(\"Member_Segment_Market_Segment_2\")}};\nq = filter q by {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Member_Segment_Market_Segment_1\")}} or {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Member_Segment_Market_Segment_2\")}};\r\nPredict1 = group q by 'Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor';\nPredict1 = foreach Predict1 generate replace(replace(replace(replace('Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor', \":\", \" is \"), \",\", \" and \"), \"__c\", \"\"), \"_\",\" \") as 'predictor', sum('Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor_impact') as 'sum_impact', count() as 'Count';\nPredict2 = group q by 'Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor1';\nPredict2 = foreach Predict2 generate replace(replace(replace(replace('Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor1', \":\", \" is \"), \",\", \" and \"), \"__c\", \"\"), \"_\",\" \") as 'predictor', sum('Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor_impact1') as 'sum_impact', count() as 'Count';\nPredict3 = group q by 'Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor2';\nPredict3 = foreach Predict3 generate replace(replace(replace(replace('Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor2', \":\", \" is \"), \",\", \" and \"), \"__c\", \"\"), \"_\",\" \") as 'predictor', sum('Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor_impact2') as 'sum_impact',count() as 'Count';\nq = group Predict1 by predictor full, Predict2 by predictor full, Predict3 by predictor;\nq = foreach q generate coalesce(Predict1.'predictor', Predict2.'predictor', Predict3.'predictor') as 'top predictor',(coalesce(sum(Predict1['sum_impact']),0) +coalesce(sum(Predict2['sum_impact']),0) +coalesce(sum(Predict3['sum_impact']),0)) as 'Impact', (coalesce(sum(Predict1['Count']),0) +coalesce(sum(Predict2['Count']),0) +coalesce(sum(Predict3['Count']),0)) as 'Count',  {{cell(lens_2.result, 0, \"Predicted Revenue\").asString()}} as 'PredictedRevenue';\nq = foreach q generate replace('top predictor', \".00000000000000000\",\"\") as 'top predictor', 'Impact','PredictedRevenue', number_to_string(('Impact'/'PredictedRevenue'), \"#0.00%\") as 'PercentageImpact','Count';\nq = filter q by 'Impact' <0;\nq = order q by 'Impact' asc;\nq = limit q 10;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1599,7 +1599,7 @@
         "groups" : [ ],
         "label" : "Members_MemberCurren_2",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\nq_A = foreach q generate  'Members.MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue', 'Member_Segment.Market_Segment_1' as 'Market Segment','Members.Tier.Name';\nq_B = foreach q generate  'Members.MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue', 'Member_Segment.Market_Segment_2' as 'Market Segment','Members.Tier.Name';\nresult = union q_A,q_B;\r\nresult = filter result by {{column(Members_MemberCurren_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\nresult = filter result by {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\nresult = group result by ('ap','Members.Tier.Name');\nresult = foreach result generate 'Members.Tier.Name', sum(first('Revenue')) over([.. 0] partition by 'ap' order by 'ap') as 'Revenue';\nresult = group result by 'Members.Tier.Name';\nresult = foreach result generate 'Members.Tier.Name' as 'Members.Tier.Name', sum('Revenue') as 'Predicted Revenue';",
+        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\nq_A = foreach q generate  'Members_MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue', 'Member_Segment_Market_Segment_1' as 'Market Segment','Members_Tier_Name';\nq_B = foreach q generate  'Members_MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue', 'Member_Segment_Market_Segment_2' as 'Market Segment','Members_Tier_Name';\nresult = union q_A,q_B;\r\nresult = filter result by {{column(Members_MemberCurren_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\nresult = filter result by {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\nresult = group result by ('ap','Members_Tier_Name');\nresult = foreach result generate 'Members_Tier_Name', sum(first('Revenue')) over([.. 0] partition by 'ap' order by 'ap') as 'Revenue';\nresult = group result by 'Members_Tier_Name';\nresult = foreach result generate 'Members_Tier_Name' as 'Members_Tier_Name', sum('Revenue') as 'Predicted Revenue';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1626,7 +1626,7 @@
                 "legend" : {
                   "showBinLabel" : true,
                   "measures" : [
-                    "sum_Members.Transaction.TransactionAmount"
+                    "sum_Members_Transaction_TransactionAmount"
                   ],
                   "showNullValues" : true,
                   "customizeLegend" : false,
@@ -1634,7 +1634,7 @@
                   "showDimensions" : true,
                   "showMeasures" : true,
                   "dimensions" : [
-                    "Members.Tier.Name"
+                    "Members_Tier_Name"
                   ]
                 }
               }
@@ -1662,7 +1662,7 @@
             "columnMap" : {
               "trellis" : [ ],
               "dimension" : [
-                "Members.Tier.Name"
+                "Members_Tier_Name"
               ],
               "plots" : [
                 "Predicted Revenue"
@@ -1682,7 +1682,7 @@
         "groups" : [ ],
         "label" : "Members_Transaction__1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\nq_A = foreach q generate  'Members.MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue', 'Member_Segment.Market_Segment_1' as 'Market Segment','Members.Contact.MailingState';\nq_B = foreach q generate  'Members.MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue', 'Member_Segment.Market_Segment_2' as 'Market Segment','Members.Contact.MailingState';\nresult = union q_A,q_B;\r\nresult = filter result by {{column(Members_MemberCurren_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\nresult = filter result by {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\nresult = group result by ('ap','Members.Contact.MailingState');\nresult = foreach result generate 'Members.Contact.MailingState', sum(first('Revenue')) over([.. 0] partition by 'ap' order by 'ap') as 'Revenue';\nresult = group result by 'Members.Contact.MailingState';\nresult = foreach result generate 'Members.Contact.MailingState', sum('Revenue') as 'Predicted Revenue';",
+        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\nq_A = foreach q generate  'Members_MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue', 'Member_Segment_Market_Segment_1' as 'Market Segment','Members_Contact_MailingState';\nq_B = foreach q generate  'Members_MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue', 'Member_Segment_Market_Segment_2' as 'Market Segment','Members_Contact_MailingState';\nresult = union q_A,q_B;\r\nresult = filter result by {{column(Members_MemberCurren_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\nresult = filter result by {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\nresult = group result by ('ap','Members_Contact_MailingState');\nresult = foreach result generate 'Members_Contact_MailingState', sum(first('Revenue')) over([.. 0] partition by 'ap' order by 'ap') as 'Revenue';\nresult = group result by 'Members_Contact_MailingState';\nresult = foreach result generate 'Members_Contact_MailingState', sum('Revenue') as 'Predicted Revenue';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1807,7 +1807,7 @@
         "groups" : [ ],
         "label" : "StartDate_Year_Start_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\nq = foreach q generate toString(toDate('Promotion.StartDate_sec_epoch'),\"MMM dd, yyyy\") as 'Date', count() as 'count';\nq = order q by 'Date' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\nq = foreach q generate toString(toDate('Promotion_StartDate_sec_epoch'),\"MMM dd, yyyy\") as 'Date', count() as 'count';\nq = order q by 'Date' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1927,7 +1927,7 @@
         "groups" : [ ],
         "label" : "Members_MemberCurren_1",
         "numbers" : [ ],
-        "query" : "\n\nq = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\nq_A = foreach q generate  'Members.MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue Uplift', 'Member_Segment.Market_Segment_1' as 'Market Segment';\nq_B = foreach q generate  'Members.MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue Uplift', 'Member_Segment.Market_Segment_2' as 'Market Segment';\nresult = union q_A,q_B;\nresult = filter result by {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\nresult = group result by ('Market Segment');\nresult = foreach result generate 'Market Segment',sum('Revenue Uplift') as 'Predicted Revenue', unique('ap') as 'Members';\nresult = filter result by 'Market Segment' is not null;",
+        "query" : "\n\nq = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\nq_A = foreach q generate  'Members_MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue Uplift', 'Member_Segment_Market_Segment_1' as 'Market Segment';\nq_B = foreach q generate  'Members_MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue Uplift', 'Member_Segment_Market_Segment_2' as 'Market Segment';\nresult = union q_A,q_B;\nresult = filter result by {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\nresult = group result by ('Market Segment');\nresult = foreach result generate 'Market Segment',sum('Revenue Uplift') as 'Predicted Revenue', unique('ap') as 'Members';\nresult = filter result by 'Market Segment' is not null;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2047,7 +2047,7 @@
         "groups" : [ ],
         "label" : "Bind_Target  Mem Percentage",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\r\nq_A = foreach q generate  'Members.MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue', 'Member_Segment.Market_Segment_1' as 'Market Segment';\r\nq_B = foreach q generate  'Members.MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue', 'Member_Segment.Market_Segment_2' as 'Market Segment';\r\nresult = union q_A,q_B;\r\nresult_Segment = filter result by {{column(Members_MemberCurren_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\r\nresult_Segment = filter result_Segment by {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\r\nresult_Segment = group result_Segment by ('ap');\r\nresult_Segment = foreach result_Segment generate 'ap', first('Revenue') as 'Revenue';\r\nresult_Segment = group result_Segment by all;\r\nresult_Segment = foreach result_Segment generate unique('ap') as 'TargetMembers', sum('Revenue') as 'Predicted Revenue';\r\nresult_Segment = foreach result_Segment generate ('TargetMembers'/{{cell(BindingTotalMember_1.result, 0, \"TotalMember\").asString()}}) as 'MemberPercentage' ,'Predicted Revenue';",
+        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\r\nq_A = foreach q generate  'Members_MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue', 'Member_Segment_Market_Segment_1' as 'Market Segment';\r\nq_B = foreach q generate  'Members_MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue', 'Member_Segment_Market_Segment_2' as 'Market Segment';\r\nresult = union q_A,q_B;\r\nresult_Segment = filter result by {{column(Members_MemberCurren_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\r\nresult_Segment = filter result_Segment by {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\r\nresult_Segment = group result_Segment by ('ap');\r\nresult_Segment = foreach result_Segment generate 'ap', first('Revenue') as 'Revenue';\r\nresult_Segment = group result_Segment by all;\r\nresult_Segment = foreach result_Segment generate unique('ap') as 'TargetMembers', sum('Revenue') as 'Predicted Revenue';\r\nresult_Segment = foreach result_Segment generate ('TargetMembers'/{{cell(BindingTotalMember_1.result, 0, \"TotalMember\").asString()}}) as 'MemberPercentage' ,'Predicted Revenue';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2174,7 +2174,7 @@
         "groups" : [ ],
         "label" : "Promotion_Name_Promo_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\nq_A = foreach q generate 'Promotion.Name' ,'Member_Segment.Market_Segment_1' as 'Market Segment', 'Members.MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Predicted Revenue' ;\nq_B = foreach q generate  'Promotion.Name', 'Member_Segment.Market_Segment_2' as 'Market Segment', 'Members.MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Predicted Revenue' ;\nresult = union q_A,q_B;\r\nresult = filter result by {{column(Members_MemberCurren_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\nresult = filter result by {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\nresult = group result by ('Promotion.Name','ap','Market Segment');\nresult = foreach result generate 'Promotion.Name', 'Market Segment', unique('ap') as 'Target Member', sum(first('Predicted Revenue')) over([.. 0] partition by 'ap' order by 'ap') as 'Predicted Revenue';\nresult = group result by ('Promotion.Name','Market Segment');\nresult = foreach result generate 'Promotion.Name','Market Segment', sum('Target Member') as 'Target Member',sum('Predicted Revenue') as 'Predicted Revenue';\nresult = filter result by 'Market Segment' is not null;\n",
+        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\nq_A = foreach q generate 'Promotion_Name' ,'Member_Segment_Market_Segment_1' as 'Market Segment', 'Members_MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Predicted Revenue' ;\nq_B = foreach q generate  'Promotion_Name', 'Member_Segment_Market_Segment_2' as 'Market Segment', 'Members_MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Predicted Revenue' ;\nresult = union q_A,q_B;\r\nresult = filter result by {{column(Members_MemberCurren_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\nresult = filter result by {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\nresult = group result by ('Promotion_Name','ap','Market Segment');\nresult = foreach result generate 'Promotion_Name', 'Market Segment', unique('ap') as 'Target Member', sum(first('Predicted Revenue')) over([.. 0] partition by 'ap' order by 'ap') as 'Predicted Revenue';\nresult = group result by ('Promotion_Name','Market Segment');\nresult = foreach result generate 'Promotion_Name','Market Segment', sum('Target Member') as 'Target Member',sum('Predicted Revenue') as 'Predicted Revenue';\nresult = filter result by 'Market Segment' is not null;\n",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2229,7 +2229,7 @@
               ]
             ],
             "groups" : [
-              "Members.Tier.Name"
+              "Members_Tier_Name"
             ]
           },
           "version" : -1.0
@@ -2248,7 +2248,7 @@
         "groups" : [ ],
         "label" : "End date",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\nq = foreach q generate toString(toDate('Promotion.EndDate_sec_epoch'), \"MMM dd, yyyy\") as 'Date', count() as 'count';\nq = order q by 'Date' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\nq = foreach q generate toString(toDate('Promotion_EndDate_sec_epoch'), \"MMM dd, yyyy\") as 'Date', count() as 'count';\nq = order q by 'Date' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2368,7 +2368,7 @@
         "groups" : [ ],
         "label" : "BindingTotalMember",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\nq_A = foreach q generate  'Members.MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue', 'Member_Segment.Market_Segment_1' as 'Market Segment';\nq_B = foreach q generate  'Members.MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue', 'Member_Segment.Market_Segment_2' as 'Market Segment';\nresult = union q_A,q_B;\nresult_Total = group result by ('ap');\nresult_Total = foreach result_Total generate 'ap';\nresult_Total = group result_Total by all;\nresult_Total = foreach result_Total generate unique('ap') as 'TotalMember';",
+        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\nq_A = foreach q generate  'Members_MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue', 'Member_Segment_Market_Segment_1' as 'Market Segment';\nq_B = foreach q generate  'Members_MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue', 'Member_Segment_Market_Segment_2' as 'Market Segment';\nresult = union q_A,q_B;\nresult_Total = group result by ('ap');\nresult_Total = foreach result_Total generate 'ap';\nresult_Total = group result_Total by all;\nresult_Total = foreach result_Total generate unique('ap') as 'TotalMember';",
         "receiveFacetSource" : {
           "mode" : "include",
           "steps" : [
@@ -2503,11 +2503,11 @@
               ]
             ],
             "groups" : [
-              "Members.Program.Name"
+              "Members_Program_Name"
             ],
             "filters" : [
               [
-                "Promotion.Name",
+                "Promotion_Name",
                 [
                   "{{cell(Name_1.selection, 0, \"Name\").asString()}}"
                 ],
@@ -2596,7 +2596,7 @@
             "columnMap" : {
               "trellis" : [ ],
               "dimensionAxis" : [
-                "Members.Program.Name"
+                "Members_Program_Name"
               ],
               "plots" : [
                 "count"
@@ -2646,7 +2646,7 @@
         "groups" : [ ],
         "label" : "Member_Segment_Segme_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\r\nq_A = foreach q generate 'Member_Segment.Market_Segment_1' as 'Market Segment', 'Members.MembershipNumber'+'Id' as 'ap';\r\nq_B = foreach q generate  'Member_Segment.Market_Segment_2' as 'Market Segment', 'Members.MembershipNumber'+'Id' as 'ap' ;\r\nresult = union q_A,q_B;\r\nresult = group result by ('Market Segment');\r\nresult = foreach result generate 'Market Segment', unique('ap') as 'count';\r\nresult = filter result by 'Market Segment' is not null;",
+        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\r\nq_A = foreach q generate 'Member_Segment_Market_Segment_1' as 'Market Segment', 'Members_MembershipNumber'+'Id' as 'ap';\r\nq_B = foreach q generate  'Member_Segment_Market_Segment_2' as 'Market Segment', 'Members_MembershipNumber'+'Id' as 'ap' ;\r\nresult = union q_A,q_B;\r\nresult = group result by ('Market Segment');\r\nresult = foreach result generate 'Market Segment', unique('ap') as 'count';\r\nresult = filter result by 'Market Segment' is not null;",
         "receiveFacetSource" : {
           "mode" : "none",
           "steps" : [ ]
@@ -2778,7 +2778,7 @@
               ]
             ],
             "groups" : [
-              "Members.Contact.MailingState"
+              "Members_Contact_MailingState"
             ]
           },
           "version" : -1.0
@@ -2811,7 +2811,7 @@
               ]
             ],
             "groups" : [
-              "Members.Contact.MailingCity"
+              "Members_Contact_MailingCity"
             ]
           },
           "version" : -1.0
@@ -2832,7 +2832,7 @@
         "groups" : [ ],
         "label" : "TopPositive",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\r\nq = filter q by {{column(Members_MemberCurren_1.selection, [\"Market Segment\"]).asEquality(\"Member_Segment.Market_Segment_1\")}} or {{column(Members_MemberCurren_1.selection, [\"Market Segment\"]).asEquality(\"Member_Segment.Market_Segment_2\")}};\nq = filter q by {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Member_Segment.Market_Segment_1\")}} or {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Member_Segment.Market_Segment_2\")}};\r\nPredict1 = group q by 'Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor';\nPredict1 = foreach Predict1 generate replace(replace(replace(replace('Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor', \":\", \" is \"), \",\", \" and \"), \"__c\", \"\"), \"_\",\" \") as 'predictor', sum('Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor_impact') as 'sum_impact', count() as 'Count';\nPredict2 = group q by 'Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor1';\nPredict2 = foreach Predict2 generate replace(replace(replace(replace('Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor1', \":\", \" is \"), \",\", \" and \"), \"__c\", \"\"), \"_\",\" \") as 'predictor', sum('Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor_impact1') as 'sum_impact', count() as 'Count';\nPredict3 = group q by 'Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor2';\nPredict3 = foreach Predict3 generate replace(replace(replace(replace('Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor2', \":\", \" is \"), \",\", \" and \"), \"__c\", \"\"), \"_\",\" \") as 'predictor', sum('Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor_impact2') as 'sum_impact',count() as 'Count';\nq = group Predict1 by predictor full, Predict2 by predictor full, Predict3 by predictor;\nq = foreach q generate coalesce(Predict1.'predictor', Predict2.'predictor', Predict3.'predictor') as 'top predictor',(coalesce(sum(Predict1['sum_impact']),0) +coalesce(sum(Predict2['sum_impact']),0) +coalesce(sum(Predict3['sum_impact']),0)) as 'Impact', (coalesce(sum(Predict1['Count']),0) +coalesce(sum(Predict2['Count']),0) +coalesce(sum(Predict3['Count']),0)) as 'Count',  {{cell(lens_2.result, 0, \"Predicted Revenue\").asString()}} as 'PredictedRevenue';\nq = foreach q generate replace('top predictor', \".00000000000000000\",\"\") as 'top predictor', 'Impact','PredictedRevenue', number_to_string(('Impact'/'PredictedRevenue'), \"#0.00%\") as 'PercentageImpact','Count';\nq = filter q by 'Impact' >0;\nq = order q by 'PercentageImpact' desc;\nq = limit q 10;",
+        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\r\nq = filter q by {{column(Members_MemberCurren_1.selection, [\"Market Segment\"]).asEquality(\"Member_Segment_Market_Segment_1\")}} or {{column(Members_MemberCurren_1.selection, [\"Market Segment\"]).asEquality(\"Member_Segment_Market_Segment_2\")}};\nq = filter q by {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Member_Segment_Market_Segment_1\")}} or {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Member_Segment_Market_Segment_2\")}};\r\nPredict1 = group q by 'Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor';\nPredict1 = foreach Predict1 generate replace(replace(replace(replace('Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor', \":\", \" is \"), \",\", \" and \"), \"__c\", \"\"), \"_\",\" \") as 'predictor', sum('Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor_impact') as 'sum_impact', count() as 'Count';\nPredict2 = group q by 'Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor1';\nPredict2 = foreach Predict2 generate replace(replace(replace(replace('Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor1', \":\", \" is \"), \",\", \" and \"), \"__c\", \"\"), \"_\",\" \") as 'predictor', sum('Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor_impact1') as 'sum_impact', count() as 'Count';\nPredict3 = group q by 'Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor2';\nPredict3 = foreach Predict3 generate replace(replace(replace(replace('Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor2', \":\", \" is \"), \",\", \" and \"), \"__c\", \"\"), \"_\",\" \") as 'predictor', sum('Maximize_Promotion_Influenced_Revenue_Prediction_1_predictor_impact2') as 'sum_impact',count() as 'Count';\nq = group Predict1 by predictor full, Predict2 by predictor full, Predict3 by predictor;\nq = foreach q generate coalesce(Predict1.'predictor', Predict2.'predictor', Predict3.'predictor') as 'top predictor',(coalesce(sum(Predict1['sum_impact']),0) +coalesce(sum(Predict2['sum_impact']),0) +coalesce(sum(Predict3['sum_impact']),0)) as 'Impact', (coalesce(sum(Predict1['Count']),0) +coalesce(sum(Predict2['Count']),0) +coalesce(sum(Predict3['Count']),0)) as 'Count',  {{cell(lens_2.result, 0, \"Predicted Revenue\").asString()}} as 'PredictedRevenue';\nq = foreach q generate replace('top predictor', \".00000000000000000\",\"\") as 'top predictor', 'Impact','PredictedRevenue', number_to_string(('Impact'/'PredictedRevenue'), \"#0.00%\") as 'PercentageImpact','Count';\nq = filter q by 'Impact' >0;\nq = order q by 'PercentageImpact' desc;\nq = limit q 10;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2952,7 +2952,7 @@
         "groups" : [ ],
         "label" : "Members_EnrollmentCh_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\nq_A = foreach q generate  'Members.MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue', 'Member_Segment.Market_Segment_1' as 'Market Segment','Member_Segment.Hobby';\nq_B = foreach q generate  'Members.MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue', 'Member_Segment.Market_Segment_2' as 'Market Segment','Member_Segment.Hobby';\nresult = union q_A,q_B;\r\nresult = filter result by {{column(Members_MemberCurren_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\nresult = filter result by {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\nresult = group result by ('ap','Member_Segment.Hobby');\nresult = foreach result generate 'Member_Segment.Hobby', sum(first('Revenue')) over([.. 0] partition by 'ap' order by 'ap') as 'Revenue';\nresult = group result by 'Member_Segment.Hobby';\nresult = foreach result generate 'Member_Segment.Hobby' as 'Member_Segment.Hobby', sum('Revenue') as 'Predicted Revenue';",
+        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\nq_A = foreach q generate  'Members_MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue', 'Member_Segment_Market_Segment_1' as 'Market Segment','Member_Segment_Hobby';\nq_B = foreach q generate  'Members_MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue', 'Member_Segment_Market_Segment_2' as 'Market Segment','Member_Segment_Hobby';\nresult = union q_A,q_B;\r\nresult = filter result by {{column(Members_MemberCurren_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\nresult = filter result by {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\nresult = group result by ('ap','Member_Segment_Hobby');\nresult = foreach result generate 'Member_Segment_Hobby', sum(first('Revenue')) over([.. 0] partition by 'ap' order by 'ap') as 'Revenue';\nresult = group result by 'Member_Segment_Hobby';\nresult = foreach result generate 'Member_Segment_Hobby' as 'Member_Segment_Hobby', sum('Revenue') as 'Predicted Revenue';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -3112,7 +3112,7 @@
         "groups" : [ ],
         "label" : "lens_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\nq = filter q by {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Member_Segment.Market_Segment_1\")}} or {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Member_Segment.Market_Segment_2\")}};\r\nq = filter q by {{column(Members_MemberCurren_1.selection, [\"Market Segment\"]).asEquality(\"Member_Segment.Market_Segment_1\")}} or {{column(Members_MemberCurren_1.selection, [\"Market Segment\"]).asEquality(\"Member_Segment.Market_Segment_2\")}};\nq = foreach q generate 'Member.MembershipNumber','Members.Contact.Name','Members.Tier.Name' as 'Tier',  'Member_Segment.Market_Segment_1' as 'Member_Segment.Market_Segment_1', 'Member_Segment.Market_Segment_2' as 'Member_Segment.Market_Segment_2', 'Member_Segment.Hobby' as 'Interest','Members.Contact.MailingState' as 'State', 'Members.Contact.MailingCity' as 'City','Members.Age' as 'Age','Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Predicted Revenue';\nq = limit q 100;",
+        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\nq = filter q by {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Member_Segment_Market_Segment_1\")}} or {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Member_Segment_Market_Segment_2\")}};\r\nq = filter q by {{column(Members_MemberCurren_1.selection, [\"Market Segment\"]).asEquality(\"Member_Segment_Market_Segment_1\")}} or {{column(Members_MemberCurren_1.selection, [\"Market Segment\"]).asEquality(\"Member_Segment_Market_Segment_2\")}};\nq = foreach q generate 'Member_MembershipNumber','Members_Contact_Name','Members_Tier_Name' as 'Tier',  'Member_Segment_Market_Segment_1' as 'Member_Segment_Market_Segment_1', 'Member_Segment_Market_Segment_2' as 'Member_Segment_Market_Segment_2', 'Member_Segment_Hobby' as 'Interest','Members_Contact_MailingState' as 'State', 'Members_Contact_MailingCity' as 'City','Members_Age' as 'Age','Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Predicted Revenue';\nq = limit q 100;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -3159,7 +3159,7 @@
           "TargetMembers",
           "Predicted Revenue"
         ],
-        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\r\nq_A = foreach q generate  'Members.MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue', 'Member_Segment.Market_Segment_1' as 'Market Segment';\r\nq_B = foreach q generate  'Members.MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue', 'Member_Segment.Market_Segment_2' as 'Market Segment';\r\nresult = union q_A,q_B;\r\nresult = filter result by {{column(Members_MemberCurren_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\nresult = filter result by {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\r\nresult = group result by ('ap');\r\nresult = foreach result generate 'ap', first('Revenue') as 'Revenue';\r\nresult = group result by all;\r\nresult = foreach result generate unique('ap') as 'TargetMembers', sum('Revenue') as 'Predicted Revenue';",
+        "query" : "q = load \"${App.Datasets.Promotion_Members59.FullyQualifiedName}\";\r\nq_A = foreach q generate  'Members_MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue', 'Member_Segment_Market_Segment_1' as 'Market Segment';\r\nq_B = foreach q generate  'Members_MembershipNumber'+'Id' as 'ap', 'Maximize_Promotion_Influenced_Revenue_Prediction_1_prediction' as 'Revenue', 'Member_Segment_Market_Segment_2' as 'Market Segment';\r\nresult = union q_A,q_B;\r\nresult = filter result by {{column(Members_MemberCurren_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\nresult = filter result by {{column(Member_Segment_Segme_1.selection, [\"Market Segment\"]).asEquality(\"Market Segment\")}};\r\nresult = group result by ('ap');\r\nresult = foreach result generate 'ap', first('Revenue') as 'Revenue';\r\nresult = group result by all;\r\nresult = foreach result generate unique('ap') as 'TargetMembers', sum('Revenue') as 'Predicted Revenue';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -3516,7 +3516,7 @@
             ],
             "values" : {
               "Program_Name" : {
-                "field" : "Members.Program.Name",
+                "field" : "Members_Program_Name",
                 "sourceType" : "result",
                 "step" : "Program_Name_1"
               }
@@ -3864,7 +3864,7 @@
               "legend" : {
                 "showBinLabel" : true,
                 "measures" : [
-                  "sum_Members.Transaction.TransactionAmount"
+                  "sum_Members_Transaction_TransactionAmount"
                 ],
                 "showNullValues" : true,
                 "customizeLegend" : false,
@@ -3872,7 +3872,7 @@
                 "showDimensions" : true,
                 "showMeasures" : true,
                 "dimensions" : [
-                  "Members.Tier.Name"
+                  "Members_Tier_Name"
                 ]
               }
             }
@@ -3901,7 +3901,7 @@
           "columnMap" : {
             "trellis" : [ ],
             "dimension" : [
-              "Members.Tier.Name"
+              "Members_Tier_Name"
             ],
             "plots" : [
               "Predicted Revenue"
@@ -4005,7 +4005,7 @@
           "columnMap" : {
             "trellis" : [ ],
             "dimension" : [
-              "Member_Segment.Hobby"
+              "Member_Segment_Hobby"
             ],
             "plots" : [
               "Predicted Revenue"
@@ -4458,7 +4458,7 @@
             "fontSize" : 12
           },
           "columnProperties" : {
-            "Member.MembershipNumber" : {
+            "Member_MembershipNumber" : {
               "parameters" : {
                 "alignment" : "left",
                 "styles" : {
@@ -4511,7 +4511,7 @@
               },
               "type" : "text"
             },
-            "Promotion.Name" : {
+            "Promotion_Name" : {
               "parameters" : {
                 "alignment" : "left",
                 "styles" : {

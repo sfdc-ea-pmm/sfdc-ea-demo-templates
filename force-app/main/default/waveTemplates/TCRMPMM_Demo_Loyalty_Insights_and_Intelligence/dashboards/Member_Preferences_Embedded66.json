@@ -23,13 +23,13 @@
             "dataSourceName" : "${App.Datasets.LoyaltyLedger66.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
-            "fieldName" : "LoyaltyProgramCurrency.NQP_Currency"
+            "fieldName" : "LoyaltyProgramCurrency_NQP_Currency"
           },
           {
             "dataSourceName" : "${App.Datasets.LoyaltyMemberCurrency66.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
-            "fieldName" : "LoyaltyProgramCurrency.NQP_Currency"
+            "fieldName" : "LoyaltyProgramCurrency_NQP_Currency"
           }
         ],
         "label" : "NQP",
@@ -272,7 +272,7 @@
                     ]
                   ],
                   "groups" : [
-                    "TransactionJournal.LoyaltyProgramPartner.Partner.Name"
+                    "TransactionJournal_LoyaltyProgramPartner_Partner_Name"
                   ]
                 },
                 "name" : "Transactions",
@@ -287,7 +287,7 @@
                     ]
                   ],
                   "groups" : [
-                    "TransactionJournal.LoyaltyProgramPartner.Partner.Name"
+                    "TransactionJournal_LoyaltyProgramPartner_Partner_Name"
                   ],
                   "order" : [
                     [
@@ -304,7 +304,7 @@
               }
             ],
             "groups" : [
-              "TransactionJournal.LoyaltyProgramPartner.Partner.Name"
+              "TransactionJournal_LoyaltyProgramPartner_Partner_Name"
             ],
             "filters" : [
               [
@@ -393,7 +393,7 @@
             },
             "binValues" : false,
             "columnProperties" : {
-              "TransactionJournal.LoyaltyProgramPartner.Partner.Name" : {
+              "TransactionJournal_LoyaltyProgramPartner_Partner_Name" : {
                 "type" : "text",
                 "parameters" : {
                   "styles" : {
@@ -406,7 +406,7 @@
             "columnMap" : {
               "trellis" : [ ],
               "dimensionAxis" : [
-                "TransactionJournal.LoyaltyProgramPartner.Partner.Name"
+                "TransactionJournal_LoyaltyProgramPartner_Partner_Name"
               ],
               "plots" : [
                 "NQP_Redeemed",
@@ -485,7 +485,7 @@
                     ]
                   ],
                   "groups" : [
-                    "TransactionJournal.Product_or_ProductCategory"
+                    "TransactionJournal_Product_or_ProductCategory"
                   ]
                 },
                 "name" : "Transactions",
@@ -500,7 +500,7 @@
                     ]
                   ],
                   "groups" : [
-                    "TransactionJournal.Product_or_ProductCategory"
+                    "TransactionJournal_Product_or_ProductCategory"
                   ],
                   "order" : [
                     [
@@ -517,7 +517,7 @@
               }
             ],
             "groups" : [
-              "TransactionJournal.Product_or_ProductCategory"
+              "TransactionJournal_Product_or_ProductCategory"
             ],
             "filters" : [
               [
@@ -606,7 +606,7 @@
             },
             "binValues" : false,
             "columnProperties" : {
-              "TransactionJournal.Product_or_ProductCategory" : {
+              "TransactionJournal_Product_or_ProductCategory" : {
                 "type" : "text",
                 "parameters" : {
                   "styles" : { },
@@ -617,7 +617,7 @@
             "columnMap" : {
               "trellis" : [ ],
               "dimensionAxis" : [
-                "TransactionJournal.Product_or_ProductCategory"
+                "TransactionJournal_Product_or_ProductCategory"
               ],
               "plots" : [
                 "NQP_Redeemed",
@@ -668,7 +668,7 @@
         "groups" : [ ],
         "label" : "NQP",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.LoyaltyMemberCurrency66.FullyQualifiedName}\";\nq = group q by ('LoyaltyProgramCurrency.NQP_Currency','LoyaltyProgramCurrency.IsPrimary');\nq = order q by 'LoyaltyProgramCurrency.IsPrimary' desc;\nq = foreach q generate 'LoyaltyProgramCurrency.NQP_Currency' as 'LoyaltyProgramCurrency.NQP_Currency', count() as 'count';\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.LoyaltyMemberCurrency66.FullyQualifiedName}\";\nq = group q by ('LoyaltyProgramCurrency_NQP_Currency','LoyaltyProgramCurrency.IsPrimary');\nq = order q by 'LoyaltyProgramCurrency.IsPrimary' desc;\nq = foreach q generate 'LoyaltyProgramCurrency_NQP_Currency' as 'LoyaltyProgramCurrency_NQP_Currency', count() as 'count';\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1040,7 +1040,7 @@
           },
           "binValues" : false,
           "columnProperties" : {
-            "TransactionJournal.LoyaltyProgramPartner.Partner.Name" : {
+            "TransactionJournal_LoyaltyProgramPartner_Partner_Name" : {
               "type" : "text",
               "parameters" : {
                 "styles" : {
@@ -1053,7 +1053,7 @@
           "columnMap" : {
             "trellis" : [ ],
             "dimensionAxis" : [
-              "TransactionJournal.LoyaltyProgramPartner.Partner.Name"
+              "TransactionJournal_LoyaltyProgramPartner_Partner_Name"
             ],
             "plots" : [
               "NQP_Redeemed",
@@ -1168,7 +1168,7 @@
           },
           "binValues" : false,
           "columnProperties" : {
-            "TransactionJournal.Product_or_ProductCategory" : {
+            "TransactionJournal_Product_or_ProductCategory" : {
               "type" : "text",
               "parameters" : {
                 "styles" : { },
@@ -1179,7 +1179,7 @@
           "columnMap" : {
             "trellis" : [ ],
             "dimensionAxis" : [
-              "TransactionJournal.Product_or_ProductCategory"
+              "TransactionJournal_Product_or_ProductCategory"
             ],
             "plots" : [
               "NQP_Redeemed",

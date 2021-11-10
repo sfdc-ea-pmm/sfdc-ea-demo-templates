@@ -155,13 +155,13 @@
             "dataSourceName" : "${App.Datasets.LoyaltyProgramTier66.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
-            "fieldName" : "LoyaltyProgram.Name"
+            "fieldName" : "LoyaltyProgram_Name"
           },
           {
             "dataSourceName" : "${App.Datasets.SurveyQuestionResponse53.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
-            "fieldName" : "SurveySubject.LoyaltyProgramTier.LoyaltyProgram.Name"
+            "fieldName" : "SurveySubject_LoyaltyProgramTier_LoyaltyProgram_Name"
           }
         ],
         "label" : "Program",
@@ -175,7 +175,7 @@
         },
         "dependent" : true,
         "fields" : [
-          "SurveySubject.SubjectEntityType"
+          "SurveySubject_SubjectEntityType"
         ],
         "locked" : true,
         "operator" : "in",
@@ -447,13 +447,13 @@
                     ]
                   ],
                   "groups" : [
-                    "LoyaltyProgram.Name"
+                    "LoyaltyProgram_Name"
                   ]
                 }
               }
             ],
             "groups" : [
-              "LoyaltyProgram.Name"
+              "LoyaltyProgram_Name"
             ]
           },
           "version" : -1.0
@@ -503,7 +503,7 @@
         "groups" : [ ],
         "label" : "NPS_KPIs",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.SurveyQuestionResponse53.FullyQualifiedName}\";\nq = filter q by 'SurveyQuestion.QuestionType' == \"NPS\";\nPromoters = filter q by 'NPS_Response_Bucket' == \"Promoters\";\nDetractors = filter q by 'NPS_Response_Bucket' == \"Detractors\";\nresult = group q by all left, Promoters by all full, Detractors by all;\nresult = foreach result generate  (coalesce(count(Promoters) - count(Detractors),0) / coalesce(count(q),0))*100 as 'Program_NPS', 0 as 'Average_NPS', 100 as 'Max_NPS', case when (coalesce(count(Promoters) - count(Detractors),0) / coalesce(count(q),0))*100 < 0 then \n\"rgb(232, 67, 64)\" else \"rgb(58, 232, 103)\" end as 'Bar_Color_NPS';",
+        "query" : "q = load \"${App.Datasets.SurveyQuestionResponse53.FullyQualifiedName}\";\nq = filter q by 'SurveyQuestion_QuestionType' == \"NPS\";\nPromoters = filter q by 'NPS_Response_Bucket' == \"Promoters\";\nDetractors = filter q by 'NPS_Response_Bucket' == \"Detractors\";\nresult = group q by all left, Promoters by all full, Detractors by all;\nresult = foreach result generate  (coalesce(count(Promoters) - count(Detractors),0) / coalesce(count(q),0))*100 as 'Program_NPS', 0 as 'Average_NPS', 100 as 'Max_NPS', case when (coalesce(count(Promoters) - count(Detractors),0) / coalesce(count(q),0))*100 < 0 then \n\"rgb(232, 67, 64)\" else \"rgb(58, 232, 103)\" end as 'Bar_Color_NPS';",
         "receiveFacetSource" : {
           "mode" : "exclude",
           "steps" : [
@@ -589,7 +589,7 @@
               ]
             ],
             "groups" : [
-              "SurveyResponse.CompletionDateTime"
+              "SurveyResponse_CompletionDateTime"
             ]
           },
           "version" : -1.0
@@ -633,11 +633,11 @@
               ]
             ],
             "groups" : [
-              "SurveyQuestion.Name"
+              "SurveyQuestion_Name"
             ],
             "filters" : [
               [
-                "SurveyQuestion.QuestionType",
+                "SurveyQuestion_QuestionType",
                 [
                   "Rating"
                 ],
@@ -727,7 +727,7 @@
             "columnMap" : {
               "trellis" : [ ],
               "dimensionAxis" : [
-                "SurveyQuestion.Name"
+                "SurveyQuestion_Name"
               ],
               "plots" : [
                 "count"
@@ -777,7 +777,7 @@
         "groups" : [ ],
         "label" : "Average_CSAT",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.SurveyQuestionResponse53.FullyQualifiedName}\";\nq = filter q by 'SurveyQuestion.QuestionType' == \"Rating\";\nresult = foreach q generate first('NumberValue')/first('QuestionChoice.MaxValue') as 'Value', count(q) as 'Count', first('Scale') as 'Scale';\nresult = group result by all;\nresult = foreach result generate round((sum(Value)/sum(Count)) * first('Scale'),2)  as 'Program_CSAT', round(first('Scale')/2,2) as 'CSAT_Avg', first('Scale') as 'CSAT_Max', case when round((sum(Value)/sum(Count)) * first('Scale'),2) < round(first('Scale')/2,2) then \"rgb(232, 67, 64)\" else \"rgb(58, 232, 103)\" end as 'Bar_Color_CSAT';",
+        "query" : "q = load \"${App.Datasets.SurveyQuestionResponse53.FullyQualifiedName}\";\nq = filter q by 'SurveyQuestion_QuestionType' == \"Rating\";\nresult = foreach q generate first('NumberValue')/first('QuestionChoice_MaxValue') as 'Value', count(q) as 'Count', first('Scale') as 'Scale';\nresult = group result by all;\nresult = foreach result generate round((sum(Value)/sum(Count)) * first('Scale'),2)  as 'Program_CSAT', round(first('Scale')/2,2) as 'CSAT_Avg', first('Scale') as 'CSAT_Max', case when round((sum(Value)/sum(Count)) * first('Scale'),2) < round(first('Scale')/2,2) then \"rgb(232, 67, 64)\" else \"rgb(58, 232, 103)\" end as 'Bar_Color_CSAT';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]

@@ -35,7 +35,7 @@
           }
         },
         "salesforceActions" : [ ],
-        "field" : "Program_name_and_NQP_1.MemberCurrency.Name",
+        "field" : "Program_name_and_NQP_1.MemberCurrency_Name",
         "members" : [ ],
         "customActions" : [ ]
       },
@@ -60,7 +60,7 @@
           }
         },
         "salesforceActions" : [ ],
-        "field" : "Program_name_and_NQP_1.MemberTier.TierGroup.Program.Name",
+        "field" : "Program_name_and_NQP_1.MemberTier.TierGroup.Program_Name",
         "members" : [ ],
         "customActions" : [ ]
       }
@@ -1435,7 +1435,7 @@
         "groups" : [ ],
         "label" : "Details",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.ED_Members_Activity37.FullyQualifiedName}\";\nq = foreach q generate 'LeadOrContactId', 'LeadOrContactName' as 'Name', 'Contact_MailingCity' as 'Contact_MailingCity', 'Contact_MailingState' as 'Contact_MailingState', 'DaysSinceLastActivity' as 'DaysSinceLastActivity', 'Engagement_Score' as 'Engagement_Score', 'EnrollmentChannel' as 'EnrollmentChannel', 'MemberCurrency.Ledger.Current_Accrued_Points' as 'MemberCurrency.Ledger.Current_Accrued_Points', 'MemberCurrency.Ledger.Current_Expired_Points' as 'MemberCurrency.Ledger.Current_Expired_Points', 'MemberCurrency.Ledger.Current_Redeemed_Points' as 'MemberCurrency.Ledger.Current_Redeemed_Points', 'MemberCurrency.PointsBalance' as 'MemberCurrency.PointsBalance', 'MemberName' as 'MemberName', 'MemberTenure' as 'MemberTenure', 'MemberTier.Name' as 'MemberTier.Name', 'MemberTier.TierGroup.Name' as 'MemberTier.TierGroup.Name', 'MemberType' as 'MemberType', 'Transactions.Accrual_Transactions_Current_Period' as 'Transactions.Accrual_Transactions_Current_Period', 'Transactions.Redemption_Transactions_Current_Period' as 'Transactions.Redemption_Transactions_Current_Period', 'Transactions.Transaction_Amount_Current_Period' as 'Transactions.Transaction_Amount_Current_Period', 'Id';\nq = order q by 'MemberName' asc nulls last;\nq = limit q 100;",
+        "query" : "q = load \"${App.Datasets.ED_Members_Activity37.FullyQualifiedName}\";\nq = foreach q generate 'LeadOrContactId', 'LeadOrContactName' as 'Name', 'Contact_MailingCity' as 'Contact_MailingCity', 'Contact_MailingState' as 'Contact_MailingState', 'DaysSinceLastActivity' as 'DaysSinceLastActivity', 'Engagement_Score' as 'Engagement_Score', 'EnrollmentChannel' as 'EnrollmentChannel', 'MemberCurrency_Ledger_Current_Accrued_Points' as 'MemberCurrency_Ledger_Current_Accrued_Points', 'MemberCurrency_Ledger_Current_Expired_Points' as 'MemberCurrency_Ledger_Current_Expired_Points', 'MemberCurrency_Ledger.Current_Redeemed_Points' as 'MemberCurrency_Ledger.Current_Redeemed_Points', 'MemberCurrency_PointsBalance' as 'MemberCurrency_PointsBalance', 'MemberName' as 'MemberName', 'MemberTenure' as 'MemberTenure', 'MemberTier_Name' as 'MemberTier_Name', 'MemberTier.TierGroup.Name' as 'MemberTier.TierGroup.Name', 'MemberType' as 'MemberType', 'Transactions.Accrual_Transactions_Current_Period' as 'Transactions.Accrual_Transactions_Current_Period', 'Transactions.Redemption_Transactions_Current_Period' as 'Transactions.Redemption_Transactions_Current_Period', 'Transactions.Transaction_Amount_Current_Period' as 'Transactions.Transaction_Amount_Current_Period', 'Id';\nq = order q by 'MemberName' asc nulls last;\nq = limit q 100;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1479,7 +1479,7 @@
         "groups" : [ ],
         "label" : "DaysSinceLastActivit_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.ED_Members_Activity37.FullyQualifiedName}\";\nq = foreach q generate 'InactivityScore', 'Id', 'DaysSinceLastActivity', 'MemberCurrency.Ledger.Current_Accrued_Points', 'MemberCurrency.Ledger.Current_Redeemed_Points', 'MemberCurrency.Ledger.Current_Expired_Points', 'MemberCurrency.PointsBalance', coalesce('Transactions.Accrual_Transactions_Current_Period',0)+coalesce('Transactions.Redemption_Transactions_Current_Period',0) as 'count_Transactions', 'Transactions.Transaction_Amount_Current_Period';\nq = group q by all;\nq = foreach q generate min('DaysSinceLastActivity') as 'min_DaysSinceLastActivity', max('DaysSinceLastActivity') as 'max_DaysSinceLastActivity', min('MemberCurrency.Ledger.Current_Accrued_Points') as 'min_Current_Accrued_Points', max('MemberCurrency.Ledger.Current_Accrued_Points') as 'max_Current_Accrued_Points', min('MemberCurrency.Ledger.Current_Redeemed_Points') as 'min_Current_Redeemed_Points', max('MemberCurrency.Ledger.Current_Redeemed_Points') as 'max_Current_Redeemed_Points', min('MemberCurrency.Ledger.Current_Expired_Points') as 'min_Current_Expired_Points', max('MemberCurrency.Ledger.Current_Expired_Points') as 'max_Current_Expired_Points', min('MemberCurrency.PointsBalance') as 'min_PointsBalance', max('MemberCurrency.PointsBalance') as 'max_PointsBalance', min('count_Transactions') as 'min_count_Transactions', max('count_Transactions') as 'max_count_Transactions', min('Transactions.Transaction_Amount_Current_Period') as 'min_Transaction_Amount', max('Transactions.Transaction_Amount_Current_Period') as 'max_Transaction_Amount';\nq = foreach q generate '{{cell(static_1.selection, 0, \"min\").asObject()}}' as 'min', '{{cell(static_1.selection, 0, \"max\").asObject()}}' as 'max';\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.ED_Members_Activity37.FullyQualifiedName}\";\nq = foreach q generate 'InactivityScore', 'Id', 'DaysSinceLastActivity', 'MemberCurrency_Ledger_Current_Accrued_Points', 'MemberCurrency_Ledger.Current_Redeemed_Points', 'MemberCurrency_Ledger_Current_Expired_Points', 'MemberCurrency_PointsBalance', coalesce('Transactions.Accrual_Transactions_Current_Period',0)+coalesce('Transactions.Redemption_Transactions_Current_Period',0) as 'count_Transactions', 'Transactions.Transaction_Amount_Current_Period';\nq = group q by all;\nq = foreach q generate min('DaysSinceLastActivity') as 'min_DaysSinceLastActivity', max('DaysSinceLastActivity') as 'max_DaysSinceLastActivity', min('MemberCurrency_Ledger_Current_Accrued_Points') as 'min_Current_Accrued_Points', max('MemberCurrency_Ledger_Current_Accrued_Points') as 'max_Current_Accrued_Points', min('MemberCurrency_Ledger.Current_Redeemed_Points') as 'min_Current_Redeemed_Points', max('MemberCurrency_Ledger.Current_Redeemed_Points') as 'max_Current_Redeemed_Points', min('MemberCurrency_Ledger_Current_Expired_Points') as 'min_Current_Expired_Points', max('MemberCurrency_Ledger_Current_Expired_Points') as 'max_Current_Expired_Points', min('MemberCurrency_PointsBalance') as 'min_PointsBalance', max('MemberCurrency_PointsBalance') as 'max_PointsBalance', min('count_Transactions') as 'min_count_Transactions', max('count_Transactions') as 'max_count_Transactions', min('Transactions.Transaction_Amount_Current_Period') as 'min_Transaction_Amount', max('Transactions.Transaction_Amount_Current_Period') as 'max_Transaction_Amount';\nq = foreach q generate '{{cell(static_1.selection, 0, \"min\").asObject()}}' as 'min', '{{cell(static_1.selection, 0, \"max\").asObject()}}' as 'max';\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1613,8 +1613,8 @@
             ],
             "limit" : 1,
             "groups" : [
-              "MemberTier.TierGroup.Program.Name",
-              "MemberCurrency.Name"
+              "MemberTier.TierGroup.Program_Name",
+              "MemberCurrency_Name"
             ]
           },
           "version" : -1.0
@@ -1696,8 +1696,8 @@
             "columnMap" : {
               "trellis" : [ ],
               "dimensionAxis" : [
-                "MemberTier.TierGroup.Program.Name",
-                "MemberCurrency.Name"
+                "MemberTier.TierGroup.Program_Name",
+                "MemberCurrency_Name"
               ],
               "plots" : [
                 "count"
@@ -1745,7 +1745,7 @@
       "Engagement_Across_Ti_1" : {
         "broadcastFacet" : true,
         "groups" : [
-          "MemberTier.Name"
+          "MemberTier_Name"
         ],
         "label" : "Engagement Across Tiers",
         "numbers" : [
@@ -1753,14 +1753,14 @@
           "Members",
           "avg_Engagement_Score"
         ],
-        "query" : "q = load \"${App.Datasets.ED_Members_Activity37.FullyQualifiedName}\";\nq = group q by 'MemberTier.Name';\nq = foreach q generate 'MemberTier.Name' as 'MemberTier.Name', 0.01 as 'count', unique('Id') as 'Members', avg('Engagement_Score') as 'avg_Engagement_Score';\nq = order q by 'MemberTier.Name' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.ED_Members_Activity37.FullyQualifiedName}\";\nq = group q by 'MemberTier_Name';\nq = foreach q generate 'MemberTier_Name' as 'MemberTier_Name', 0.01 as 'count', unique('Id') as 'Members', avg('Engagement_Score') as 'avg_Engagement_Score';\nq = order q by 'MemberTier_Name' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
         },
         "selectMode" : "single",
         "strings" : [
-          "MemberTier.Name"
+          "MemberTier_Name"
         ],
         "type" : "saql",
         "useGlobal" : true,
@@ -1815,7 +1815,7 @@
               "split" : [ ],
               "trellis" : [ ],
               "dimensionAxis" : [
-                "MemberTier.Name"
+                "MemberTier_Name"
               ],
               "plots" : [
                 "avg_Engagement_Score"
@@ -1857,7 +1857,7 @@
         "groups" : [ ],
         "label" : "Score distribution by transaction KPIs",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.ED_Members_Activity37.FullyQualifiedName}\";\nq = foreach q generate 'Engagement_Score', 'MemberName', 'DaysSinceLastActivity', 'MemberCurrency.Ledger.Current_Accrued_Points', 'MemberCurrency.Ledger.Current_Redeemed_Points', 'MemberCurrency.Ledger.Current_Expired_Points', 'MemberCurrency.PointsBalance', coalesce('Transactions.Accrual_Transactions_Current_Period',0)+coalesce('Transactions.Redemption_Transactions_Current_Period',0) as 'count_Transactions', 'Transactions.Transaction_Amount_Current_Period';\nq = foreach q generate 'Engagement_Score', 'MemberName', 'DaysSinceLastActivity', 'MemberCurrency.Ledger.Current_Accrued_Points', 'MemberCurrency.Ledger.Current_Redeemed_Points', 'MemberCurrency.Ledger.Current_Expired_Points', 'MemberCurrency.PointsBalance', 'count_Transactions', 'Transactions.Transaction_Amount_Current_Period', '{{cell(static_1.selection, 0, \"Api_name_y\").asObject()}}' as 'selected';\nq = filter q by {{row(DaysSinceLastActivit_1.selection, [0] , [\"min\", \"max\"]).asRange('selected')}};\nq = group q by 'MemberName';\nq = foreach q generate 'MemberName' as 'MemberName', coalesce(sum('{{cell(static_1.selection, 0, \"Api_name_y\").asObject()}}'),0) as '{{cell(static_1.selection, 0, \"Display\").asObject()}}', avg('Engagement_Score') as 'avg_Engagement_Score';\nq = order q by 'MemberName' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.ED_Members_Activity37.FullyQualifiedName}\";\nq = foreach q generate 'Engagement_Score', 'MemberName', 'DaysSinceLastActivity', 'MemberCurrency_Ledger_Current_Accrued_Points', 'MemberCurrency_Ledger.Current_Redeemed_Points', 'MemberCurrency_Ledger_Current_Expired_Points', 'MemberCurrency_PointsBalance', coalesce('Transactions.Accrual_Transactions_Current_Period',0)+coalesce('Transactions.Redemption_Transactions_Current_Period',0) as 'count_Transactions', 'Transactions.Transaction_Amount_Current_Period';\nq = foreach q generate 'Engagement_Score', 'MemberName', 'DaysSinceLastActivity', 'MemberCurrency_Ledger_Current_Accrued_Points', 'MemberCurrency_Ledger.Current_Redeemed_Points', 'MemberCurrency_Ledger_Current_Expired_Points', 'MemberCurrency_PointsBalance', 'count_Transactions', 'Transactions.Transaction_Amount_Current_Period', '{{cell(static_1.selection, 0, \"Api_name_y\").asObject()}}' as 'selected';\nq = filter q by {{row(DaysSinceLastActivit_1.selection, [0] , [\"min\", \"max\"]).asRange('selected')}};\nq = group q by 'MemberName';\nq = foreach q generate 'MemberName' as 'MemberName', coalesce(sum('{{cell(static_1.selection, 0, \"Api_name_y\").asObject()}}'),0) as '{{cell(static_1.selection, 0, \"Display\").asObject()}}', avg('Engagement_Score') as 'avg_Engagement_Score';\nq = order q by 'MemberName' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1944,7 +1944,7 @@
         "groups" : [ ],
         "label" : "KPIs by transactions",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.ED_Members_Activity37.FullyQualifiedName}\";\nq = foreach q generate 'Engagement_Score', 'Id', 'DaysSinceLastActivity', 'MemberCurrency.Ledger.Current_Accrued_Points', 'MemberCurrency.Ledger.Current_Redeemed_Points', 'MemberCurrency.Ledger.Current_Expired_Points', 'MemberCurrency.PointsBalance', coalesce('Transactions.Accrual_Transactions_Current_Period',0)+coalesce('Transactions.Redemption_Transactions_Current_Period',0) as 'count_Transactions', 'Transactions.Transaction_Amount_Current_Period';\nq = foreach q generate 'Engagement_Score', 'Id', 'DaysSinceLastActivity', 'MemberCurrency.Ledger.Current_Accrued_Points', 'MemberCurrency.Ledger.Current_Redeemed_Points', 'MemberCurrency.Ledger.Current_Expired_Points', 'MemberCurrency.PointsBalance', 'count_Transactions','Transactions.Transaction_Amount_Current_Period', '{{cell(static_1.selection, 0, \"Api_name_y\").asObject()}}' as 'selected';\nq = filter q by {{row(DaysSinceLastActivit_1.selection, [0] , [\"min\", \"max\"]).asRange('selected')}};\nq = group q by all;\nq = foreach q generate coalesce(sum('MemberCurrency.PointsBalance'),0) as 'Points Balance', avg('Engagement_Score') as 'avg_Engagement_Score', unique('Id') as 'count_Members';",
+        "query" : "q = load \"${App.Datasets.ED_Members_Activity37.FullyQualifiedName}\";\nq = foreach q generate 'Engagement_Score', 'Id', 'DaysSinceLastActivity', 'MemberCurrency_Ledger_Current_Accrued_Points', 'MemberCurrency_Ledger.Current_Redeemed_Points', 'MemberCurrency_Ledger_Current_Expired_Points', 'MemberCurrency_PointsBalance', coalesce('Transactions.Accrual_Transactions_Current_Period',0)+coalesce('Transactions.Redemption_Transactions_Current_Period',0) as 'count_Transactions', 'Transactions.Transaction_Amount_Current_Period';\nq = foreach q generate 'Engagement_Score', 'Id', 'DaysSinceLastActivity', 'MemberCurrency_Ledger_Current_Accrued_Points', 'MemberCurrency_Ledger.Current_Redeemed_Points', 'MemberCurrency_Ledger_Current_Expired_Points', 'MemberCurrency_PointsBalance', 'count_Transactions','Transactions.Transaction_Amount_Current_Period', '{{cell(static_1.selection, 0, \"Api_name_y\").asObject()}}' as 'selected';\nq = filter q by {{row(DaysSinceLastActivit_1.selection, [0] , [\"min\", \"max\"]).asRange('selected')}};\nq = group q by all;\nq = foreach q generate coalesce(sum('MemberCurrency_PointsBalance'),0) as 'Points Balance', avg('Engagement_Score') as 'avg_Engagement_Score', unique('Id') as 'count_Members';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2319,25 +2319,25 @@
           },
           {
             "Display" : "NQP Accrued",
-            "Api_name_y" : "MemberCurrency.Ledger.Current_Accrued_Points",
+            "Api_name_y" : "MemberCurrency_Ledger_Current_Accrued_Points",
             "min" : "min_Current_Accrued_Points",
             "max" : "max_Current_Accrued_Points"
           },
           {
             "Display" : "NQP Redeemed",
-            "Api_name_y" : "MemberCurrency.Ledger.Current_Redeemed_Points",
+            "Api_name_y" : "MemberCurrency_Ledger.Current_Redeemed_Points",
             "min" : "min_Current_Redeemed_Points",
             "max" : "max_Current_Redeemed_Points"
           },
           {
             "Display" : "NQP Expired",
-            "Api_name_y" : "MemberCurrency.Ledger.Current_Expired_Points",
+            "Api_name_y" : "MemberCurrency_Ledger_Current_Expired_Points",
             "min" : "min_Current_Expired_Points",
             "max" : "max_Current_Expired_Points"
           },
           {
             "Display" : "Points Balance",
-            "Api_name_y" : "MemberCurrency.PointsBalance",
+            "Api_name_y" : "MemberCurrency_PointsBalance",
             "min" : "min_PointsBalance",
             "max" : "max_PointsBalance"
           },
@@ -2368,7 +2368,7 @@
             "measures" : [
               [
                 "sum",
-                "MemberCurrency.PointsBalance"
+                "MemberCurrency_PointsBalance"
               ]
             ]
           },
@@ -3078,7 +3078,7 @@
             ],
             "x" : [ ],
             "y" : [
-              "MemberTier.Name"
+              "MemberTier_Name"
             ]
           },
           "showActionMenu" : true,
@@ -3362,12 +3362,12 @@
             ],
             "values" : {
               "MemberTier_TierGroup" : {
-                "field" : "MemberTier.TierGroup.Program.Name",
+                "field" : "MemberTier.TierGroup.Program_Name",
                 "sourceType" : "result",
                 "step" : "Program_name_and_NQP_1"
               },
               "MemberCurrency_Name_1" : {
-                "field" : "MemberCurrency.Name",
+                "field" : "MemberCurrency_Name",
                 "sourceType" : "result",
                 "step" : "Program_name_and_NQP_1"
               }
@@ -3469,16 +3469,16 @@
           "columns" : [
             "MemberName",
             "Engagement_Score",
-            "MemberCurrency.PointsBalance",
-            "MemberCurrency.Ledger.Current_Accrued_Points",
-            "MemberCurrency.Ledger.Current_Redeemed_Points",
-            "MemberCurrency.Ledger.Current_Expired_Points",
+            "MemberCurrency_PointsBalance",
+            "MemberCurrency_Ledger_Current_Accrued_Points",
+            "MemberCurrency_Ledger.Current_Redeemed_Points",
+            "MemberCurrency_Ledger_Current_Expired_Points",
             "DaysSinceLastActivity",
             "Transactions.Accrual_Transactions_Current_Period",
             "Transactions.Redemption_Transactions_Current_Period",
             "Transactions.Transaction_Amount_Current_Period",
             "MemberTier.TierGroup.Name",
-            "MemberTier.Name",
+            "MemberTier_Name",
             "MemberType",
             "EnrollmentChannel",
             "MemberTenure",
