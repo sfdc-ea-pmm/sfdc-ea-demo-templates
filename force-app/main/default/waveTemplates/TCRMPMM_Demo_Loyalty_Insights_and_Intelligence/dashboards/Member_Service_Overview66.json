@@ -1,0 +1,2357 @@
+{
+  "name" : "Member_Service_Overview66_tp",
+  "label" : "Member Services Manager Home",
+  "folder" : {
+    "id" : "${App.Folder.Id}"
+  },
+  "dateVersion" : 1,
+  "mobileDisabled" : false,
+  "xmd" : {
+    "measures" : [
+      {
+        "conditionalFormatting" : { },
+        "field" : "Points_Awarded_Reduc_1.B",
+        "format" : {
+          "delimiters" : { },
+          "customFormat" : "[\"#,###\",1]"
+        }
+      },
+      {
+        "conditionalFormatting" : { },
+        "field" : "Points_Awarded_Reduc_1.A",
+        "format" : {
+          "delimiters" : { },
+          "customFormat" : "[\"#,###\",1]"
+        }
+      }
+    ],
+    "derivedDimensions" : [ ],
+    "organizations" : [ ],
+    "showDetailsDefaultFields" : [ ],
+    "dates" : [ ],
+    "derivedMeasures" : [ ],
+    "dimensions" : [ ]
+  },
+  "state" : {
+    "dataSourceLinks" : [
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyMemberTierHistory40.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "CreatedDate"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyLedger_ManualActions66.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "ActivityDate"
+          }
+        ],
+        "label" : "Duration",
+        "name" : "Link_977"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyLedger_ManualActions66.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "TransactionJournal.LoyaltyProgramMember.LoyaltyProgram.Name"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyMemberTierHistory40.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "LoyaltyMemberTier.LoyaltyProgramMember.LoyaltyProgram.Name"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyProgramTier66.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "LoyaltyProgram.Name"
+          }
+        ],
+        "label" : "Program Name",
+        "name" : "Link_2706"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyMemberTierHistory40.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "LoyaltyMemberTier.LoyaltyTier.LoyaltyTierGroup.Name"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyLedger_ManualActions66.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "LoyaltyTierMember.LoyaltyTier.LoyaltyTierGroup.Name"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyProgramTier66.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "LoyaltyTierGroup.Name"
+          }
+        ],
+        "label" : "Tier Group",
+        "name" : "Link_2722"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyMemberTierHistory40.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "LoyaltyMemberTier.LoyaltyMemberCurrency.LoyaltyProgramCurrency.NQP_Currency"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyProgramTier66.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "LoyaltyProgramCurrency.NQP_Currency"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyProgramCurrency62.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "NQP_Currency"
+          }
+        ],
+        "label" : "NQP Currency",
+        "name" : "Link_2804"
+      },
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyMemberTierHistory40.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "TransactionType"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyLedger_ManualActions66.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "TransactionType"
+          }
+        ],
+        "label" : "TransactionType",
+        "name" : "Link_1763"
+      }
+    ],
+    "filters" : [ ],
+    "gridLayouts" : [
+      {
+        "maxWidth" : 1500,
+        "name" : "Default",
+        "numColumns" : 50,
+        "pages" : [
+          {
+            "label" : "Member Services with Tier History",
+            "name" : "62d3f239-6ab0-4a98-b66c-1626304e9d9d",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 2,
+                "column" : 1,
+                "name" : "image_1",
+                "row" : 2,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(7, 22, 64)",
+                  "borderColor" : "rgb(7, 22, 64)",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 21,
+                "column" : 3,
+                "name" : "text_1",
+                "row" : 2,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 1,
+                "name" : "listselector_1",
+                "row" : 7,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(65, 83, 120)",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 13,
+                "name" : "listselector_2",
+                "row" : 7,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(65, 83, 120)",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 25,
+                "name" : "listselector_3",
+                "row" : 7,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(65, 83, 120)",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 37,
+                "name" : "dateselector_1",
+                "row" : 7,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgb(65, 83, 120)",
+                  "borderEdges" : [
+                    "left",
+                    "right",
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 37,
+                "name" : "text_2",
+                "row" : 10,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "#091A3E",
+                  "borderColor" : "rgb(65, 83, 120)",
+                  "borderEdges" : [
+                    "bottom",
+                    "left",
+                    "right"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 1,
+                "name" : "chart_1",
+                "row" : 25,
+                "rowspan" : 28,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 36,
+                "column" : 13,
+                "name" : "chart_2",
+                "row" : 19,
+                "rowspan" : 13,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 3,
+                "name" : "number_1",
+                "row" : 17,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [
+                    "bottom"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 1,
+                "name" : "container_1",
+                "row" : 14,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(31, 45, 84)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 3,
+                "name" : "text_3",
+                "row" : 14,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 18,
+                "column" : 13,
+                "name" : "container_2",
+                "row" : 33,
+                "rowspan" : 18,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(22, 40, 84)",
+                  "borderColor" : "rgb(12, 25, 61)",
+                  "borderEdges" : [
+                    "right"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 2
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 13,
+                "name" : "text_4",
+                "row" : 34,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 18,
+                "column" : 31,
+                "name" : "container_3",
+                "row" : 33,
+                "rowspan" : 18,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgb(22, 40, 84)",
+                  "borderColor" : "rgb(12, 25, 61)",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 2
+                }
+              },
+              {
+                "colspan" : 5,
+                "column" : 31,
+                "name" : "text_5",
+                "row" : 34,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 18,
+                "column" : 13,
+                "name" : "chart_6",
+                "row" : 39,
+                "rowspan" : 12,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 18,
+                "column" : 31,
+                "name" : "chart_8",
+                "row" : 39,
+                "rowspan" : 12,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 1,
+                "name" : "image_3",
+                "row" : 14,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 36,
+                "column" : 13,
+                "name" : "container_5",
+                "row" : 13,
+                "rowspan" : 19,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(20, 39, 96, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 6,
+                "column" : 13,
+                "name" : "text_6",
+                "row" : 14,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 13,
+                "name" : "number_5",
+                "row" : 16,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 16,
+                "column" : 14,
+                "name" : "link_1",
+                "row" : 52,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 2,
+                "column" : 30,
+                "name" : "image_2",
+                "row" : 52,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 13,
+                "name" : "number_2",
+                "row" : 36,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 9,
+                "column" : 31,
+                "name" : "number_3",
+                "row" : 36,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 11,
+                "column" : 1,
+                "name" : "text_7",
+                "row" : 21,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight" : "fine",
+        "selectors" : [ ],
+        "style" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "backgroundColor" : "rgb(12, 25, 61)",
+          "cellSpacingX" : 0,
+          "cellSpacingY" : 0,
+          "fit" : "original",
+          "gutterColor" : "#C5D3E0"
+        },
+        "version" : 1.0
+      }
+    ],
+    "layouts" : [ ],
+    "steps" : {
+      "PointsAwarded_Chart_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "PointsAwarded_Chart",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.LoyaltyLedger_ManualActions66.FullyQualifiedName}\";\nq = filter q by {{column(NQPCurrency_Name_1.selection, [\"NQP_Currency\"]).asEquality('LoyaltyProgramCurrency.NQP_Currency')}};\nq = filter q by 'TransactionType' == \"AdjustedPoints_Positive\";\nq = group q by ('ActivityDate_Year', 'ActivityDate_Month');\nq = foreach q generate 'ActivityDate_Year' , 'ActivityDate_Month' , sum('Points') as 'sum_Points';\nq = fill q by (dateCols=('ActivityDate_Year','ActivityDate_Month', \"Y-M\"));\nq = foreach q generate 'ActivityDate_Year' +\"~~~\"+ 'ActivityDate_Month' as 'ActivityDate_Year~~~ActivityDate_Month', sum(q.'sum_Points') as 'AdjustedPoints_Positive';\nq = order q by ('ActivityDate_Year~~~ActivityDate_Month' asc);\nq = limit q 2000;",
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "Actions_1"
+          ]
+        },
+        "selectMode" : "single",
+        "start" : [ ],
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : false,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "content" : {
+                "legend" : {
+                  "showBinLabel" : true,
+                  "measures" : [ ],
+                  "showNullValues" : true,
+                  "customizeLegend" : false,
+                  "showPercentage" : true,
+                  "showDimensions" : true,
+                  "showMeasures" : true,
+                  "dimensions" : [ ]
+                }
+              }
+            },
+            "visualizationType" : "vbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : false,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : false,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "LoyaltyTierGroup_Name_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "LoyaltyTierGroup_Name_1",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.LoyaltyProgramTier66.FullyQualifiedName}\";\nq = filter q by 'LoyaltyProgram.Name' == \"{{cell(LoyaltyProgram_Name_1.selection, 0, \"LoyaltyProgram.Name\").asString()}}\";\nq = group q by ('LoyaltyTierGroup.Name','LoyaltyTierGroup.IsPrimary');\nq = order q by 'LoyaltyTierGroup.IsPrimary' desc;\nq = foreach q generate 'LoyaltyTierGroup.Name' as 'LoyaltyTierGroup.Name', count() as 'count';\nq = limit q 2000;",
+        "receiveFacetSource" : {
+          "mode" : "none",
+          "steps" : [ ]
+        },
+        "selectMode" : "singlerequired",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "content" : {
+                "legend" : {
+                  "showBinLabel" : true,
+                  "measures" : [ ],
+                  "showNullValues" : true,
+                  "customizeLegend" : false,
+                  "showPercentage" : true,
+                  "showDimensions" : true,
+                  "showMeasures" : true,
+                  "dimensions" : [ ]
+                }
+              }
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Actions_per_agent_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Actions per Agent",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.LoyaltyLedger_ManualActions66.FullyQualifiedName}\";q = filter q by 'IncludeInManualActions' == \"True\";q = filter q by {{column(NQPCurrency_Name_1.selection, [\"NQP_Currency\"]).asEquality('LoyaltyProgramCurrency.NQP_Currency')}} or ('LoyaltyProgramCurrency.QP_Currency' is not null && 'LoyaltyProgramCurrency.QP_Currency' in all);\nq = group q by ('User.UniqueUserName','TransactionType');\nq = foreach q generate unique('TransactionJournalId') as 'Count','User.UniqueUserName' as 'User.UniqueUserName', 'TransactionType';\nhist = load \"${App.Datasets.LoyaltyMemberTierHistory40.FullyQualifiedName}\";\nhist = group hist by ('CreatedById','TransactionType');\nhist = foreach hist generate 'TransactionType','CreatedById' as 'User.UniqueUserName', count() as 'Count';\nresult = union hist, q;\nresult = group result by all;\nresult = foreach result generate  round(sum('Count')/ unique('User.UniqueUserName'),2) as 'Action_per_agent';",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "centerText" : "",
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : false,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "bottom-center",
+              "inside" : false
+            },
+            "showMeasureTitle" : false,
+            "tooltip" : {
+              "content" : {
+                "legend" : {
+                  "showBinLabel" : true,
+                  "measures" : [ ],
+                  "showNullValues" : true,
+                  "customizeLegend" : false,
+                  "showPercentage" : true,
+                  "showDimensions" : true,
+                  "showMeasures" : true,
+                  "dimensions" : [ ]
+                }
+              }
+            },
+            "visualizationType" : "pie",
+            "title" : {
+              "fontSize" : 16,
+              "subtitleFontSize" : 11,
+              "label" : "Actions",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "inner" : 60,
+            "showActionMenu" : true,
+            "centerValueType" : "number",
+            "valueType" : "compactNumber",
+            "theme" : "wave",
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "NQPCurrency_Name_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "NQPCurrency_Name_1",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.LoyaltyProgramCurrency62.FullyQualifiedName}\";\nq = filter q by 'CurrencyType' == \"NonQualifying\";\nq = filter q by 'LoyaltyProgram.Name' == \"{{cell(LoyaltyProgram_Name_1.selection, 0, \"LoyaltyProgram.Name\").asString()}}\";\nq = group q by ('CurrencyType', 'NQP_Currency','IsPrimary');\nq = order q by ('CurrencyType' asc, 'IsPrimary' desc);\nq = foreach q generate 'CurrencyType' as 'LoyaltyProgramCurrency.CurrencyType', 'NQP_Currency' as 'NQP_Currency', count() as 'count';\nq = limit q 2000;",
+        "receiveFacetSource" : {
+          "mode" : "none",
+          "steps" : [ ]
+        },
+        "selectMode" : "singlerequired",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "content" : {
+                "legend" : {
+                  "showBinLabel" : true,
+                  "measures" : [ ],
+                  "showNullValues" : true,
+                  "customizeLegend" : false,
+                  "showPercentage" : true,
+                  "showDimensions" : true,
+                  "showMeasures" : true,
+                  "dimensions" : [ ]
+                }
+              }
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "MembersServicedKPI_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "MembersServicedKPI",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.LoyaltyLedger_ManualActions66.FullyQualifiedName}\";q = filter q by 'IncludeInManualActions' == \"True\";q = filter q by {{column(NQPCurrency_Name_1.selection, [\"NQP_Currency\"]).asEquality('LoyaltyProgramCurrency.NQP_Currency')}} or ('LoyaltyProgramCurrency.QP_Currency' is not null && 'LoyaltyProgramCurrency.QP_Currency' in all);\nq =  group q by ('LoyaltyProgramMemberId','TransactionType');\nq = foreach q generate 'LoyaltyProgramMemberId' as 'LoyaltyMemberId', 'TransactionType';\nhist = load \"${App.Datasets.LoyaltyMemberTierHistory40.FullyQualifiedName}\";\nhist = group hist by ('LoyaltyMemberTier.LoyaltyMemberId','TransactionType');\nhist = foreach hist generate 'TransactionType', 'LoyaltyMemberTier.LoyaltyMemberId' as 'LoyaltyMemberId';\nresult = union q, hist;\nresult = group result by all;\nresult = foreach result  generate unique('LoyaltyMemberId') as 'count';",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "content" : {
+                "legend" : {
+                  "showBinLabel" : true,
+                  "measures" : [ ],
+                  "showNullValues" : true,
+                  "customizeLegend" : false,
+                  "showPercentage" : true,
+                  "showDimensions" : true,
+                  "showMeasures" : true,
+                  "dimensions" : [ ]
+                }
+              }
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "MembersService_Timel_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "MembersService_Timeline",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.LoyaltyLedger_ManualActions66.FullyQualifiedName}\";q = filter q by 'IncludeInManualActions' == \"True\";q = filter q by {{column(NQPCurrency_Name_1.selection, [\"NQP_Currency\"]).asEquality('LoyaltyProgramCurrency.NQP_Currency')}} or ('LoyaltyProgramCurrency.QP_Currency' is not null && 'LoyaltyProgramCurrency.QP_Currency' in all);\nq =  group q by ('ActivityDate_Year', 'ActivityDate_Month','LoyaltyProgramMemberId','TransactionType');\nq = foreach q generate 'ActivityDate_Year' + \"~~~\" + 'ActivityDate_Month' as 'ActivityDate_Year~~~ActivityDate_Month', 'LoyaltyProgramMemberId' as 'LoyaltyMemberId', 'TransactionType';\nhist = load \"${App.Datasets.LoyaltyMemberTierHistory40.FullyQualifiedName}\";\nhist = group hist by ('CreatedDate_Year', 'CreatedDate_Month','LoyaltyMemberTier.LoyaltyMemberId','TransactionType');\nhist = foreach hist generate 'CreatedDate_Year' + \"~~~\" + 'CreatedDate_Month' as 'ActivityDate_Year~~~ActivityDate_Month', 'LoyaltyMemberTier.LoyaltyMemberId' as 'LoyaltyMemberId',  'TransactionType';\nresult = union q, hist;\nresult = group result by ('ActivityDate_Year~~~ActivityDate_Month'); \nresult = foreach result  generate  'ActivityDate_Year~~~ActivityDate_Month' as 'ActivityDate_Year~~~ActivityDate_Month', unique('LoyaltyMemberId') as 'Members_with_Actions';",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "start" : [ ],
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showPoints" : false,
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : false,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "content" : {
+                "legend" : {
+                  "showBinLabel" : true,
+                  "measures" : [ ],
+                  "showNullValues" : true,
+                  "customizeLegend" : false,
+                  "showPercentage" : true,
+                  "showDimensions" : true,
+                  "showMeasures" : true,
+                  "dimensions" : [ ]
+                }
+              }
+            },
+            "visualizationType" : "time",
+            "missingValue" : "connect",
+            "dashLine" : {
+              "measures" : "",
+              "showDashLine" : false
+            },
+            "timeAxis" : {
+              "showTitle" : false,
+              "showAxis" : true,
+              "title" : ""
+            },
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "fillArea" : true,
+            "showActionMenu" : true,
+            "showZero" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : false,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "valueType" : "none",
+            "theme" : "wave",
+            "applyConditionalFormatting" : true,
+            "drawArea" : {
+              "measure" : "",
+              "showDrawArea" : false,
+              "bounding1" : "",
+              "bounding2" : ""
+            }
+          },
+          "type" : "chart"
+        }
+      },
+      "Points_Awarded_Reduc_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Points_Awarded_Reduced",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.LoyaltyLedger_ManualActions66.FullyQualifiedName}\";q = filter q by {{column(NQPCurrency_Name_1.selection, [\"NQP_Currency\"]).asEquality('LoyaltyProgramCurrency.NQP_Currency')}};\nq_A = filter q by 'TransactionType' == \"AdjustedPoints_Positive\";\nq_B = filter q by 'TransactionType' == \"AdjustedPoints_Negative\";\nresult = group q_A by all full, q_B by all;\nresult = foreach result generate sum(q_A.'Points') as 'PointsAwarded', sum(q_B.'Points') as 'PointsReduced';\nresult = limit result 2000; ",
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "Actions_1"
+          ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "LoyaltyProgram_Name_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "LoyaltyProgram_Name_1",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.LoyaltyProgramTier66.FullyQualifiedName}\";\nq = group q by 'LoyaltyProgram.Name';\nq = foreach q generate 'LoyaltyProgram.Name' as 'LoyaltyProgram.Name', count() as 'count';\nq = order q by 'LoyaltyProgram.Name' asc;\nq = limit q 500;",
+        "receiveFacetSource" : {
+          "mode" : "none",
+          "steps" : [ ]
+        },
+        "selectMode" : "singlerequired",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "content" : {
+                "legend" : {
+                  "showBinLabel" : true,
+                  "measures" : [ ],
+                  "showNullValues" : true,
+                  "customizeLegend" : false,
+                  "showPercentage" : true,
+                  "showDimensions" : true,
+                  "showMeasures" : true,
+                  "dimensions" : [ ]
+                }
+              }
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Actions_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Actions",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.LoyaltyLedger_ManualActions66.FullyQualifiedName}\";q = filter q by 'IncludeInManualActions' == \"True\";q = filter q by {{column(NQPCurrency_Name_1.selection, [\"NQP_Currency\"]).asEquality('LoyaltyProgramCurrency.NQP_Currency')}} or ('LoyaltyProgramCurrency.QP_Currency' is not null && 'LoyaltyProgramCurrency.QP_Currency' in all);\nq = group q by 'TransactionType';\nq = foreach q generate 'TransactionType' as 'TransactionType', unique('TransactionJournalId') as 'Count';\nhist = load \"${App.Datasets.LoyaltyMemberTierHistory40.FullyQualifiedName}\";\nhist = group hist by 'TransactionType';\nhist = foreach hist generate  'TransactionType', count() as 'Count';\nresult = group q by 'TransactionType' full, hist by 'TransactionType';\nresult = foreach result generate coalesce(q.'TransactionType', hist.'TransactionType') as 'TransactionType', coalesce(sum(q.'Count'), sum(hist.'Count')) as 'Modifications';\nresult = order result by 'Modifications' desc;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "start" : [ ],
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "centerText" : "",
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : false,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "bottom-center",
+              "inside" : false
+            },
+            "showMeasureTitle" : false,
+            "tooltip" : {
+              "content" : {
+                "legend" : {
+                  "showBinLabel" : true,
+                  "measures" : [ ],
+                  "showNullValues" : true,
+                  "customizeLegend" : false,
+                  "showPercentage" : true,
+                  "showDimensions" : true,
+                  "showMeasures" : true,
+                  "dimensions" : [ ]
+                }
+              }
+            },
+            "visualizationType" : "pie",
+            "title" : {
+              "fontSize" : 18,
+              "subtitleFontSize" : 11,
+              "label" : "Actions",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "inner" : 60,
+            "showActionMenu" : true,
+            "centerValueType" : "number",
+            "valueType" : "compactNumber",
+            "theme" : "wave",
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "ActivityDate_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.LoyaltyLedger_ManualActions66.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              "ActivityDate"
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "start" : [
+          [
+            [
+              "year",
+              0
+            ],
+            [
+              "year",
+              0
+            ]
+          ]
+        ],
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : { }
+      },
+      "PointsReducedChart_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "PointsReducedChart",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.LoyaltyLedger_ManualActions66.FullyQualifiedName}\";\nq = filter q by 'TransactionType' == \"AdjustedPoints_Negative\";q = filter q by {{column(NQPCurrency_Name_1.selection, [\"NQP_Currency\"]).asEquality('LoyaltyProgramCurrency.NQP_Currency')}};\nq = group q by ('ActivityDate_Year', 'ActivityDate_Month');\nq = foreach q generate 'ActivityDate_Year' , 'ActivityDate_Month' , sum('Points') as 'sum_Points';\nq = fill q by (dateCols=('ActivityDate_Year','ActivityDate_Month', \"Y-M\"));\nq = foreach q generate 'ActivityDate_Year' +\"~~~\"+ 'ActivityDate_Month' as 'ActivityDate_Year~~~ActivityDate_Month',sum(q.'sum_Points') as 'AdjustedPoints_Negative';\nq = order q by ('ActivityDate_Year~~~ActivityDate_Month' asc);\nq = limit q 2000;",
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "Actions_1"
+          ]
+        },
+        "selectMode" : "single",
+        "start" : [ ],
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : false,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "content" : {
+                "legend" : {
+                  "showBinLabel" : true,
+                  "measures" : [ ],
+                  "showNullValues" : true,
+                  "customizeLegend" : false,
+                  "showPercentage" : true,
+                  "showDimensions" : true,
+                  "showMeasures" : true,
+                  "dimensions" : [ ]
+                }
+              }
+            },
+            "visualizationType" : "vbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : false,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : false,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      }
+    },
+    "widgetStyle" : {
+      "backgroundColor" : "#FFFFFF",
+      "borderColor" : "#E6ECF2",
+      "borderEdges" : [ ],
+      "borderRadius" : 0,
+      "borderWidth" : 1
+    },
+    "widgets" : {
+      "container_1" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_2" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_3" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "container_5" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_3" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "14px",
+                  "color" : "#FFFFFF",
+                  "align" : "left"
+                },
+                "insert" : "Modifications per Agent"
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "chart_6" : {
+        "parameters" : {
+          "showValues" : true,
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "content" : {
+              "legend" : {
+                "showBinLabel" : true,
+                "measures" : [ ],
+                "showNullValues" : true,
+                "customizeLegend" : false,
+                "showPercentage" : true,
+                "showDimensions" : true,
+                "showMeasures" : true,
+                "dimensions" : [ ]
+              }
+            }
+          },
+          "visualizationType" : "time-bar",
+          "exploreLink" : true,
+          "timeAxis" : {
+            "showTitle" : false,
+            "showAxis" : true,
+            "title" : ""
+          },
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "binValues" : false,
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "chartsPerLine" : 4
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : false,
+            "showAxis" : false,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "theme" : "dark",
+          "step" : "PointsAwarded_Chart_1",
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "text_2" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "16px",
+                  "color" : "#091A3E",
+                  "align" : "left"
+                },
+                "insert" : ""
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "text_5" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "12px",
+                  "color" : "#bfc9d8"
+                },
+                "insert" : "NQP Debited"
+              },
+              {
+                "attributes" : { },
+                "insert" : "\n"
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "chart_8" : {
+        "parameters" : {
+          "showValues" : true,
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "content" : {
+              "legend" : {
+                "showBinLabel" : true,
+                "measures" : [ ],
+                "showNullValues" : true,
+                "customizeLegend" : false,
+                "showPercentage" : true,
+                "showDimensions" : true,
+                "showMeasures" : true,
+                "dimensions" : [ ]
+              }
+            }
+          },
+          "visualizationType" : "time-bar",
+          "exploreLink" : true,
+          "timeAxis" : {
+            "showTitle" : false,
+            "showAxis" : true,
+            "title" : ""
+          },
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "binValues" : false,
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "chartsPerLine" : 4
+          },
+          "showActionMenu" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : false,
+            "showAxis" : false,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "theme" : "dark",
+          "step" : "PointsReducedChart_1",
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "text_4" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "12px",
+                  "color" : "#bfc9d8"
+                },
+                "insert" : "NQP Credited"
+              },
+              {
+                "attributes" : { },
+                "insert" : "\n"
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "chart_2" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "showPoints" : true,
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : true,
+            "show" : false,
+            "customSize" : "auto",
+            "position" : "right-top",
+            "inside" : false
+          },
+          "axisMode" : "multi",
+          "tooltip" : {
+            "content" : {
+              "legend" : {
+                "showBinLabel" : true,
+                "measures" : [ ],
+                "showNullValues" : true,
+                "customizeLegend" : false,
+                "showPercentage" : true,
+                "showDimensions" : true,
+                "showMeasures" : true,
+                "dimensions" : [ ]
+              },
+              "description" : "[ActivityDate_Year~~~ActivityDate_Month]"
+            }
+          },
+          "visualizationType" : "time",
+          "missingValue" : "connect",
+          "dashLine" : {
+            "measures" : "",
+            "showDashLine" : false
+          },
+          "exploreLink" : true,
+          "timeAxis" : {
+            "showTitle" : false,
+            "showAxis" : true,
+            "title" : ""
+          },
+          "title" : {
+            "fontSize" : 14,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "chartsPerLine" : 4
+          },
+          "fillArea" : true,
+          "showActionMenu" : true,
+          "showZero" : true,
+          "measureAxis2" : {
+            "sqrtScale" : false,
+            "showTitle" : true,
+            "showAxis" : true,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "measureAxis1" : {
+            "sqrtScale" : false,
+            "showTitle" : false,
+            "showAxis" : false,
+            "title" : "",
+            "customDomain" : {
+              "showDomain" : false
+            }
+          },
+          "valueType" : "none",
+          "theme" : "dark",
+          "step" : "MembersService_Timel_1",
+          "applyConditionalFormatting" : true,
+          "drawArea" : {
+            "measure" : "",
+            "showDrawArea" : false,
+            "bounding1" : "",
+            "bounding2" : ""
+          }
+        },
+        "type" : "chart"
+      },
+      "text_7" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "18px",
+                  "color" : "#FFFFFF",
+                  "align" : "center"
+                },
+                "insert" : "Modifications"
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "chart_1" : {
+        "parameters" : {
+          "autoFitMode" : "keepLabels",
+          "centerText" : "",
+          "legend" : {
+            "descOrder" : false,
+            "showHeader" : false,
+            "show" : true,
+            "customSize" : "auto",
+            "position" : "bottom-center",
+            "inside" : false
+          },
+          "showMeasureTitle" : false,
+          "tooltip" : {
+            "content" : {
+              "legend" : {
+                "showBinLabel" : true,
+                "measures" : [ ],
+                "showNullValues" : true,
+                "customizeLegend" : false,
+                "showPercentage" : true,
+                "showDimensions" : true,
+                "showMeasures" : true,
+                "dimensions" : [ ]
+              }
+            }
+          },
+          "visualizationType" : "pie",
+          "exploreLink" : true,
+          "title" : {
+            "fontSize" : 18,
+            "subtitleFontSize" : 11,
+            "label" : "",
+            "align" : "center",
+            "subtitleLabel" : ""
+          },
+          "trellis" : {
+            "flipLabels" : false,
+            "showGridLines" : true,
+            "size" : [
+              100,
+              100
+            ],
+            "enable" : false,
+            "type" : "x",
+            "chartsPerLine" : 4
+          },
+          "inner" : 60,
+          "showActionMenu" : true,
+          "centerValueType" : "number",
+          "valueType" : "compactNumber",
+          "theme" : "dark",
+          "step" : "Actions_1",
+          "applyConditionalFormatting" : true
+        },
+        "type" : "chart"
+      },
+      "text_6" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "12px",
+                  "color" : "#bfc9d8"
+                },
+                "insert" : " Members Assisted"
+              },
+              {
+                "attributes" : { },
+                "insert" : "\n"
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "listselector_3" : {
+        "parameters" : {
+          "compact" : false,
+          "displayMode" : "filter",
+          "displayTemplate" : "[NQP_Currency]",
+          "exploreLink" : false,
+          "filterStyle" : {
+            "titleColor" : "rgb(172, 190, 221)",
+            "valueColor" : "#FFFFFF"
+          },
+          "instant" : true,
+          "measureField" : "none",
+          "showActionMenu" : true,
+          "step" : "NQPCurrency_Name_1",
+          "title" : "Non-Qualifying Currency"
+        },
+        "type" : "listselector"
+      },
+      "listselector_2" : {
+        "parameters" : {
+          "compact" : false,
+          "displayMode" : "filter",
+          "exploreLink" : false,
+          "filterStyle" : {
+            "titleColor" : "rgb(172, 190, 221)",
+            "valueColor" : "#FFFFFF"
+          },
+          "instant" : true,
+          "measureField" : "none",
+          "showActionMenu" : true,
+          "step" : "LoyaltyTierGroup_Name_1",
+          "title" : "Tier Group"
+        },
+        "type" : "listselector"
+      },
+      "dateselector_1" : {
+        "parameters" : {
+          "absoluteModeEnabled" : true,
+          "calendarTypeSwitchingAllowed" : true,
+          "defaultFiscalMode" : false,
+          "displayMode" : "filter",
+          "filterStyle" : {
+            "titleColor" : "rgb(172, 190, 221)",
+            "valueColor" : "#FFFFFF"
+          },
+          "instant" : false,
+          "presetsEnabled" : true,
+          "relativeModeEnabled" : true,
+          "showActionMenu" : true,
+          "step" : "ActivityDate_1",
+          "title" : "Duration"
+        },
+        "type" : "dateselector"
+      },
+      "text_1" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "16px",
+                  "color" : "#FFFFFF",
+                  "align" : "left"
+                },
+                "insert" : "Loyalty Member Service Overview"
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "link_1" : {
+        "parameters" : {
+          "destinationLink" : {
+            "name" : "${App.Dashboards['Loyalty Member Services'].Name}",
+            "namespace" : "${Org.Namespace}"
+          },
+          "destinationType" : "dashboard",
+          "fontSize" : 12,
+          "includeState" : false,
+          "text" : "View Loyalty Member Services Dashboard",
+          "textAlignment" : "right",
+          "textColor" : "#FFFFFF"
+        },
+        "type" : "link"
+      },
+      "number_5" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "count",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "MembersServicedKPI_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "number_3" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "PointsReduced",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "Points_Awarded_Reduc_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "number_2" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "PointsAwarded",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "Points_Awarded_Reduc_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "number_1" : {
+        "parameters" : {
+          "compact" : true,
+          "exploreLink" : true,
+          "measureField" : "Action_per_agent",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 20,
+          "showActionMenu" : true,
+          "step" : "Actions_per_agent_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 16,
+          "tooltip" : {
+            "customizeTooltip" : false
+          }
+        },
+        "type" : "number"
+      },
+      "image_1" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "center",
+          "fit" : "fitheight",
+          "image" : {
+            "name" : "${App.Images['Loyalty_Member_Service_History_Icon77'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "type" : "image"
+      },
+      "listselector_1" : {
+        "parameters" : {
+          "compact" : false,
+          "displayMode" : "filter",
+          "exploreLink" : false,
+          "filterStyle" : {
+            "titleColor" : "rgb(172, 190, 221)",
+            "valueColor" : "#FFFFFF"
+          },
+          "instant" : true,
+          "measureField" : "none",
+          "showActionMenu" : true,
+          "step" : "LoyaltyProgram_Name_1",
+          "title" : "Program"
+        },
+        "type" : "listselector"
+      },
+      "image_3" : {
+        "parameters" : {
+          "alignmentX" : "center",
+          "alignmentY" : "center",
+          "fit" : "original",
+          "image" : {
+            "name" : "${App.Images['Loyalty_CustomerService_whitepng77'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "type" : "image"
+      },
+      "image_2" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "center",
+          "fit" : "original",
+          "image" : {
+            "name" : "${App.Images['Loyalty_Open_In_New_Tab_Icon_Whitep77'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "type" : "image"
+      }
+    }
+  }
+}
