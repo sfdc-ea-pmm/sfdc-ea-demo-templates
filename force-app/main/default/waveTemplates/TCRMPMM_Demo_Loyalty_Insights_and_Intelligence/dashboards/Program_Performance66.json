@@ -17609,7 +17609,7 @@
         "groups" : [ ],
         "label" : "LoyaltyTierGroup_Name_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.LoyaltyProgramTier66.FullyQualifiedName}\";\nq = filter q by 'LoyaltyProgram_Name' == \"{{cell(LoyaltyProgram_Name_1.selection, 0, \"LoyaltyProgram_Name\").asString()}}\";\nq = group q by ('LoyaltyTierGroup_Name','LoyaltyTierGroup.IsPrimary');\nq = order q by 'LoyaltyTierGroup.IsPrimary' desc;\nq = foreach q generate 'LoyaltyTierGroup_Name' as 'LoyaltyTierGroup_Name', count() as 'count';\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.LoyaltyProgramTier66.FullyQualifiedName}\";\nq = filter q by 'LoyaltyProgram_Name' == \"{{cell(LoyaltyProgram_Name_1.selection, 0, \"LoyaltyProgram_Name\").asString()}}\";\nq = group q by ('LoyaltyTierGroup_Name','LoyaltyTierGroup_IsPrimary');\nq = order q by 'LoyaltyTierGroup_IsPrimary' desc;\nq = foreach q generate 'LoyaltyTierGroup_Name' as 'LoyaltyTierGroup_Name', count() as 'count';\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "none",
           "steps" : [ ]

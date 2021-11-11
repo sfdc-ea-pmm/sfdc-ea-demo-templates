@@ -668,7 +668,7 @@
         "groups" : [ ],
         "label" : "NQP",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.LoyaltyMemberCurrency66.FullyQualifiedName}\";\nq = group q by ('LoyaltyProgramCurrency_NQP_Currency','LoyaltyProgramCurrency.IsPrimary');\nq = order q by 'LoyaltyProgramCurrency.IsPrimary' desc;\nq = foreach q generate 'LoyaltyProgramCurrency_NQP_Currency' as 'LoyaltyProgramCurrency_NQP_Currency', count() as 'count';\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.LoyaltyMemberCurrency66.FullyQualifiedName}\";\nq = group q by ('LoyaltyProgramCurrency_NQP_Currency','LoyaltyProgramCurrency_IsPrimary');\nq = order q by 'LoyaltyProgramCurrency_IsPrimary' desc;\nq = foreach q generate 'LoyaltyProgramCurrency_NQP_Currency' as 'LoyaltyProgramCurrency_NQP_Currency', count() as 'count';\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
