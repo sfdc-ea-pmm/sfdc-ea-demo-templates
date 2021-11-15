@@ -276,7 +276,12 @@
     }
   ],
   "components" : [ ],
-  "eltDataflows" : [ ],
+  "eltDataflows" : [{
+    "label" : "Loyalty Insights Timeshifting - Action Framework",
+    "name" : "Loyalty_Insights_Timeshifting_Action_Framework ",
+    "condition" : "${Variables.Overrides.createDataflow}",
+    "file" : "dataflow/Loyalty Insights Timeshifting - Action Framework.json"
+  }],
   "recipes" : [ ],
   "datasetFiles" : [ ],
   "storedQueries" : [ ],
@@ -507,7 +512,44 @@
       "file" : "images/powered_by_analytics.png"
     }
   ],
-  "extendedTypes" : { },
+  "extendedTypes" : {
+    
+      "discoveryStories": [
+        {
+          "label": "ED_Minimize_Members_Inactivity",
+          "name": "ED_Minimize_Members_Inactivity",
+          "file": "ED_Minimize_Members_Inactivity.json"
+        },
+         {
+          "label": "Maximize Promotion Influenced Revenue (Beta)",
+          "name": "Maximize_Promotion_Influenced_Revenue",
+          "file": "Maximize_Promotion_Influenced_Revenue.json"
+        }
+        
+      ],
+      "predictiveScoring": [
+
+        {
+
+          "condition": "${!empty(App.DiscoveryStories) && App.DiscoveryStories.containsKey('ED_Minimize_Members_Inactivity')}",
+          "label": "ED_Minimize_Members_Inactivity",
+          "name": "ED_Minimize_Members_Inactivity",
+          "file": "stories/scoring.json"
+
+        }, 
+        {
+
+          "condition": "${!empty(App.DiscoveryStories) && App.DiscoveryStories.containsKey('Maximize_Promotion_Influenced_Revenue')}",
+          "label": "Maximize Promotion Influenced Revenue (Beta)",
+          "name": "Maximize_Promotion_Influenced_Revenue",
+          "file": "stories/scoring_maximize.json"
+
+        }
+
+
+  ]
+    
+   },
   "templateDependencies" : [ ],
   "icons": {
     "appBadge": {
