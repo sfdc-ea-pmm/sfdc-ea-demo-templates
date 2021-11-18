@@ -1,0 +1,1084 @@
+{
+  "name" : "Program_Satisfaction_Home_Embedded53_tp",
+  "label" : "Program Satisfaction Home Embedded",
+  "folder" : {
+    "id" : "${App.Folder.Id}"
+  },
+  "dateVersion" : 1,
+  "mobileDisabled" : false,
+  "xmd" : {
+    "measures" : [
+      {
+        "conditionalFormatting" : {
+          "color" : {
+            "referenceField" : "Program_CSAT",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "#FF9897",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "#3AE867",
+                  "bin" : "2.5"
+                }
+              ]
+            }
+          },
+          "chartColor" : {
+            "referenceField" : "Program_CSAT",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "linear-gradient(to bottom, #E6ECF2, #E6ECF2)",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "linear-gradient(to bottom, #E6ECF2, #E6ECF2)",
+                  "bin" : "0"
+                }
+              ]
+            }
+          }
+        },
+        "field" : "Average_CSAT_1.Program_CSAT",
+        "format" : {
+          "delimiters" : { }
+        }
+      },
+      {
+        "conditionalFormatting" : {
+          "color" : {
+            "referenceField" : "Program_NPS",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "#FF9897",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "#3AE867",
+                  "bin" : "0"
+                }
+              ]
+            }
+          },
+          "chartColor" : {
+            "referenceField" : "Program_NPS",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "linear-gradient(to bottom, #E6ECF2, #E6ECF2)",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "linear-gradient(to bottom, #E6ECF2, #E6ECF2)",
+                  "bin" : "0"
+                }
+              ]
+            }
+          }
+        },
+        "field" : "NPS_KPIs_1.Program_NPS",
+        "format" : {
+          "delimiters" : { }
+        }
+      }
+    ],
+    "derivedDimensions" : [ ],
+    "organizations" : [ ],
+    "showDetailsDefaultFields" : [ ],
+    "dates" : [ ],
+    "derivedMeasures" : [ ],
+    "dimensions" : [
+      {
+        "recordDisplayFields" : [ ],
+        "conditionalFormatting" : {
+          "chartColor" : {
+            "referenceField" : "Program_CSAT",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "linear-gradient(to bottom, #E6ECF2, #E6ECF2)",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "linear-gradient(to bottom, #E6ECF2, #E6ECF2)",
+                  "bin" : "0"
+                }
+              ]
+            }
+          }
+        },
+        "salesforceActions" : [ ],
+        "field" : "Average_CSAT_1.ALL",
+        "members" : [ ],
+        "customActions" : [ ]
+      },
+      {
+        "recordDisplayFields" : [ ],
+        "conditionalFormatting" : {
+          "chartColor" : {
+            "referenceField" : "Program_NPS",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "linear-gradient(to bottom, #E6ECF2, #E6ECF2)",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "linear-gradient(to bottom, #E6ECF2, #E6ECF2)",
+                  "bin" : "0"
+                }
+              ]
+            }
+          }
+        },
+        "salesforceActions" : [ ],
+        "field" : "NPS_KPIs_1.ALL",
+        "members" : [ ],
+        "customActions" : [ ]
+      }
+    ]
+  },
+  "state" : {
+    "dataSourceLinks" : [
+      {
+        "fields" : [
+          {
+            "dataSourceName" : "${App.Datasets.LoyaltyProgramTier66.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "LoyaltyProgram_Name"
+          },
+          {
+            "dataSourceName" : "${App.Datasets.SurveyQuestionResponse53.Name}",
+            "dataSourceNamespace" : "${Org.Namespace}",
+            "dataSourceType" : "dataset",
+            "fieldName" : "SurveySubject_LoyaltyProgramTier_LoyaltyProgram_Name"
+          }
+        ],
+        "label" : "Program",
+        "name" : "Link_219"
+      }
+    ],
+    "filters" : [
+      {
+        "dataset" : {
+          "name" : "${App.Datasets.SurveyQuestionResponse53.Name}"
+        },
+        "dependent" : true,
+        "fields" : [
+          "SurveySubject_SubjectEntityType"
+        ],
+        "locked" : true,
+        "operator" : "in",
+        "value" : "[\"LoyaltyProgram\"]"
+      }
+    ],
+    "gridLayouts" : [
+      {
+        "maxWidth" : 500,
+        "name" : "Default",
+        "numColumns" : 50,
+        "pages" : [
+          {
+            "label" : "Untitled",
+            "name" : "ead2ea45-1572-47ef-b0bf-cc3694e936f3",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 39,
+                "column" : 6,
+                "name" : "text_1",
+                "row" : 1,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 4,
+                "column" : 2,
+                "name" : "image_1",
+                "row" : 1,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 23,
+                "column" : 2,
+                "name" : "container_1",
+                "row" : 17,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 19,
+                "column" : 2,
+                "name" : "text_3",
+                "row" : 17,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "rgba(230, 236, 242, 0)",
+                  "borderEdges" : [
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 4
+                }
+              },
+              {
+                "colspan" : 19,
+                "column" : 2,
+                "name" : "number_1",
+                "row" : 20,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 12,
+                "column" : 2,
+                "name" : "image_2",
+                "row" : 24,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 47,
+                "column" : 1,
+                "name" : "container_2",
+                "row" : 0,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 23,
+                "column" : 25,
+                "name" : "container_4",
+                "row" : 17,
+                "rowspan" : 6,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(230, 236, 242, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 46,
+                "column" : 2,
+                "name" : "listselector_1",
+                "row" : 10,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#7D98B3",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 4,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 19,
+                "column" : 26,
+                "name" : "text_4",
+                "row" : 17,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 19,
+                "column" : 26,
+                "name" : "number_2",
+                "row" : 20,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 22,
+                "column" : 2,
+                "name" : "listselector_2",
+                "row" : 5,
+                "rowspan" : 4,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#7D98B3",
+                  "borderEdges" : [
+                    "all"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 23,
+                "column" : 25,
+                "name" : "dateselector_1",
+                "row" : 5,
+                "rowspan" : 3,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#7D98B3",
+                  "borderEdges" : [
+                    "left",
+                    "right",
+                    "top"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 23,
+                "column" : 25,
+                "name" : "text_2",
+                "row" : 8,
+                "rowspan" : 1,
+                "widgetStyle" : {
+                  "backgroundColor" : "rgba(255, 255, 255, 0)",
+                  "borderColor" : "#7D98B3",
+                  "borderEdges" : [
+                    "bottom",
+                    "left",
+                    "right"
+                  ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight" : "fine",
+        "selectors" : [ ],
+        "style" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "backgroundColor" : "rgb(7, 22, 64)",
+          "cellSpacingX" : 0,
+          "cellSpacingY" : 0,
+          "fit" : "original",
+          "gutterColor" : "#C5D3E0"
+        },
+        "version" : 1.0
+      }
+    ],
+    "layouts" : [ ],
+    "steps" : {
+      "Program_2" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.LoyaltyProgramTier66.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "Program",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*",
+                "A"
+              ]
+            ],
+            "columns" : [
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "count",
+                      "*"
+                    ]
+                  ],
+                  "groups" : [
+                    "LoyaltyProgram_Name"
+                  ]
+                }
+              }
+            ],
+            "groups" : [
+              "LoyaltyProgram_Name"
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "none",
+          "steps" : [ ]
+        },
+        "selectMode" : "singlerequired",
+        "start" : [ ],
+        "type" : "aggregateflex",
+        "useGlobal" : false,
+        "visualizationParameters" : {
+          "options" : { },
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "showRowIndexColumn" : false,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
+        }
+      },
+      "NPS_KPIs_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "NPS_KPIs",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.SurveyQuestionResponse53.FullyQualifiedName}\";\nq = filter q by 'SurveyQuestion_QuestionType' == \"NPS\";\nPromoters = filter q by 'NPS_Response_Bucket' == \"Promoters\";\nDetractors = filter q by 'NPS_Response_Bucket' == \"Detractors\";\nresult = group q by all left, Promoters by all full, Detractors by all;\nresult = foreach result generate  (coalesce(count(Promoters) - count(Detractors),0) / coalesce(count(q),0))*100 as 'Program_NPS', 0 as 'Average_NPS', 100 as 'Max_NPS', case when (coalesce(count(Promoters) - count(Detractors),0) / coalesce(count(q),0))*100 < 0 then \n\"rgb(232, 67, 64)\" else \"rgb(58, 232, 103)\" end as 'Bar_Color_NPS';",
+        "receiveFacetSource" : {
+          "mode" : "exclude",
+          "steps" : [
+            "SurveyQuestion_CSAT_1"
+          ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "rangeWeight" : 4,
+            "max" : 100,
+            "visualizationType" : "bullet",
+            "barWeight" : 4,
+            "medium" : 33,
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "barColor" : "black",
+            "colors" : {
+              "mediumColor2" : "#F29946",
+              "mediumColor1" : "#FED444",
+              "lowColor1" : "#F71979",
+              "lowColor2" : "#CC203D",
+              "highColor1" : "#7BDE4E",
+              "highColor2" : "#169913"
+            },
+            "high" : 66,
+            "showActionMenu" : true,
+            "min" : 0,
+            "valueType" : "compactNumber",
+            "theme" : "wave",
+            "referenceLines" : [
+              {
+                "color" : "#7D98B3",
+                "value" : {
+                  "data" : {
+                    "field" : "Average_NPS",
+                    "sourceType" : "result",
+                    "step" : "NPS_KPIs_1"
+                  },
+                  "type" : "dynamic"
+                }
+              }
+            ],
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "SurveyResponse_Compl_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.SurveyQuestionResponse53.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              "SurveyResponse_CompletionDateTime"
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "none",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "start" : [
+          [
+            [
+              "year",
+              0
+            ],
+            [
+              "year",
+              0
+            ]
+          ]
+        ],
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : { }
+      },
+      "SurveyQuestion_CSAT_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.SurveyQuestionResponse53.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "SurveyQuestion_CSAT",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "count",
+                "*"
+              ]
+            ],
+            "groups" : [
+              "SurveyQuestion_Name"
+            ],
+            "filters" : [
+              [
+                "SurveyQuestion_QuestionType",
+                [
+                  "Rating"
+                ],
+                "in"
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "include",
+          "steps" : [
+            "Program_2"
+          ]
+        },
+        "selectMode" : "singlerequired",
+        "start" : [ ],
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "content" : {
+                "legend" : {
+                  "showBinLabel" : true,
+                  "measures" : [ ],
+                  "showNullValues" : true,
+                  "customizeLegend" : false,
+                  "showPercentage" : true,
+                  "showDimensions" : true,
+                  "showMeasures" : true,
+                  "dimensions" : [ ]
+                }
+              }
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimensionAxis" : [
+                "SurveyQuestion_Name"
+              ],
+              "plots" : [
+                "count"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Average_CSAT_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Average_CSAT",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.SurveyQuestionResponse53.FullyQualifiedName}\";\nq = filter q by 'SurveyQuestion_QuestionType' == \"Rating\";\nresult = foreach q generate first('NumberValue')/first('QuestionChoice_MaxValue') as 'Value', count(q) as 'Count', first('Scale') as 'Scale';\nresult = group result by all;\nresult = foreach result generate round((sum(Value)/sum(Count)) * first('Scale'),2)  as 'Program_CSAT', round(first('Scale')/2,2) as 'CSAT_Avg', first('Scale') as 'CSAT_Max', case when round((sum(Value)/sum(Count)) * first('Scale'),2) < round(first('Scale')/2,2) then \"rgb(232, 67, 64)\" else \"rgb(58, 232, 103)\" end as 'Bar_Color_CSAT';",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "rangeWeight" : 4,
+            "max" : 100,
+            "legend" : {
+              "showHeader" : true,
+              "show" : false,
+              "position" : "right-top",
+              "inside" : false
+            },
+            "visualizationType" : "bullet",
+            "barWeight" : 4,
+            "medium" : 33,
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "barColor" : "{{cell(Average_CSAT_1.result, 0, \"Bar_Color_CSAT\").asString()}}",
+            "colors" : {
+              "mediumColor2" : "#F29946",
+              "mediumColor1" : "#FED444",
+              "lowColor1" : "#F71979",
+              "lowColor2" : "#CC203D",
+              "highColor1" : "#7BDE4E",
+              "highColor2" : "#169913"
+            },
+            "high" : 66,
+            "showActionMenu" : true,
+            "min" : 0,
+            "valueType" : "compactNumber",
+            "theme" : "wave",
+            "referenceLines" : [
+              {
+                "value" : {
+                  "data" : {
+                    "field" : "CSAT_Avg",
+                    "sourceType" : "result",
+                    "step" : "Average_CSAT_1"
+                  },
+                  "type" : "dynamic"
+                }
+              }
+            ],
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      }
+    },
+    "widgetStyle" : {
+      "backgroundColor" : "#FFFFFF",
+      "borderColor" : "#E6ECF2",
+      "borderEdges" : [ ],
+      "borderRadius" : 0,
+      "borderWidth" : 1
+    },
+    "widgets" : {
+      "listselector_2" : {
+        "parameters" : {
+          "compact" : false,
+          "displayMode" : "filter",
+          "exploreLink" : false,
+          "filterStyle" : {
+            "titleColor" : "rgb(172, 190, 221)",
+            "valueColor" : "#FFFFFF"
+          },
+          "instant" : true,
+          "measureField" : "none",
+          "showActionMenu" : true,
+          "step" : "Program_2",
+          "title" : "Program"
+        },
+        "type" : "listselector"
+      },
+      "dateselector_1" : {
+        "parameters" : {
+          "absoluteModeEnabled" : true,
+          "calendarTypeSwitchingAllowed" : true,
+          "defaultFiscalMode" : false,
+          "displayMode" : "filter",
+          "filterStyle" : {
+            "titleColor" : "rgb(172, 190, 221)",
+            "valueColor" : "#FFFFFF"
+          },
+          "instant" : false,
+          "presetsEnabled" : true,
+          "relativeModeEnabled" : true,
+          "showActionMenu" : true,
+          "step" : "SurveyResponse_Compl_1",
+          "title" : "Duration"
+        },
+        "type" : "dateselector"
+      },
+      "text_1" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "20px",
+                  "color" : "#FFFFFF",
+                  "align" : "left"
+                },
+                "insert" : "Satisfaction KPIs"
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "container_1" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "number_2" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "Program_CSAT",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 24,
+          "showActionMenu" : true,
+          "step" : "Average_CSAT_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 20,
+          "tooltip" : {
+            "content" : {
+              "description" : {
+                "displayTemplate" : "CSAT Score >= 2.5 is Green\nCSAT Score < 2.5 is Red"
+              }
+            },
+            "customizeTooltip" : true
+          }
+        },
+        "type" : "number"
+      },
+      "container_2" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "number_1" : {
+        "parameters" : {
+          "compact" : false,
+          "exploreLink" : true,
+          "measureField" : "Program_NPS",
+          "numberColor" : "#FFFFFF",
+          "numberSize" : 24,
+          "showActionMenu" : true,
+          "step" : "NPS_KPIs_1",
+          "textAlignment" : "left",
+          "title" : "",
+          "titleColor" : "#091A3E",
+          "titleSize" : 20,
+          "tooltip" : {
+            "content" : {
+              "description" : {
+                "displayTemplate" : "NPS +ve is Green\nNPS -ve is Red"
+              }
+            },
+            "customizeTooltip" : true
+          }
+        },
+        "type" : "number"
+      },
+      "container_4" : {
+        "parameters" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "fit" : "original"
+        },
+        "type" : "container"
+      },
+      "text_3" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "16px",
+                  "color" : "#FFFFFF",
+                  "align" : "left"
+                },
+                "insert" : "Net Promoter Score"
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "image_1" : {
+        "parameters" : {
+          "alignmentX" : "center",
+          "alignmentY" : "center",
+          "fit" : "fitheight",
+          "image" : {
+            "name" : "${App.Images['Loyalty_Member_Snapshot_Iconpng80'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "type" : "image"
+      },
+      "text_2" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "16px",
+                  "color" : "#091A3E",
+                  "align" : "left"
+                },
+                "insert" : ""
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "listselector_1" : {
+        "parameters" : {
+          "compact" : false,
+          "displayMode" : "filter",
+          "exploreLink" : false,
+          "filterStyle" : {
+            "titleColor" : "rgb(172, 190, 221)",
+            "valueColor" : "#FFFFFF"
+          },
+          "instant" : true,
+          "measureField" : "none",
+          "showActionMenu" : true,
+          "step" : "SurveyQuestion_CSAT_1",
+          "title" : "CSAT Question"
+        },
+        "type" : "listselector"
+      },
+      "image_2" : {
+        "parameters" : {
+          "alignmentX" : "center",
+          "alignmentY" : "center",
+          "fit" : "fitwidth",
+          "image" : {
+            "name" : "${App.Images['powered_by_analyticspng77'].Name}",
+            "namespace" : "${Org.Namespace}"
+          }
+        },
+        "type" : "image"
+      },
+      "text_4" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "size" : "16px",
+                  "color" : "#FFFFFF",
+                  "align" : "left"
+                },
+                "insert" : "CSAT Score"
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      }
+    }
+  }
+}
