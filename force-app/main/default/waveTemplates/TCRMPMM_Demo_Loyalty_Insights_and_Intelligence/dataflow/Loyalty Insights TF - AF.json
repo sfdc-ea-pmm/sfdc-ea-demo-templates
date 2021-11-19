@@ -1,0 +1,1051 @@
+{
+  "isDeletable": true,
+  "notificationLevel": "Never",
+  "workflowDefinition": {
+
+    "Load_Dataset_SurveyQuestionResponse_with_TransactionJournalRecords53": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.SurveyQuestionResponse_with_TransactionJournalRecords53.FullyQualifiedName}"
+      }
+    },
+    "Drop_Aux_LoyaltyMemberCurrencyTrending33": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_LoyaltyMemberCurrencyTrending33",
+        "fields": [{
+          "name": "ValidTo_Aux"
+        }, {
+          "name": "ValidFrom_Aux"
+        }, {
+          "name": "ElapsedSeconds"
+        }]
+      }
+    },
+    "Drop_Dates_Voucher46": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_Voucher46",
+        "fields": [{
+          "name": "VoucherDefinition_EffectiveDate"
+        }, {
+          "name": "ExpirationDate"
+        }, {
+          "name": "EffectiveDate"
+        }, {
+          "name": "LastProcessedDate"
+        }]
+      }
+    },
+    "Drop_Aux_TransactionJournal66": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_TransactionJournal66",
+        "fields": [{
+          "name": "ElapsedSeconds"
+        }, {
+          "name": "LoyaltyProgramMember_EnrollmentDate_Aux"
+        }, {
+          "name": "ActivityDate_Aux"
+        }]
+      }
+    },
+    "Register_Shifted_Dataset_LoyaltyMemberTierHistory40": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "LoyaltyMemberTierHistory",
+        "alias": "${App.Datasets.LoyaltyMemberTierHistory40.FullyQualifiedName}",
+        "source": "Drop_Aux_LoyaltyMemberTierHistory40"
+      }
+    },
+    "Register_Ed_Members_Activity": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "ED_Members_Activity",
+        "alias": "${App.Datasets.ED_Members_Activity37.FullyQualifiedName}",
+        "source": "Update_Ed_Members_Activity"
+      }
+    },
+    "Register_Promotion_Members59": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Promotion Members (Beta)",
+        "alias": "${App.Datasets.Promotion_Members59.FullyQualifiedName}",
+        "source": "Update_Loyalty_Program_Member"
+      }
+    },
+    "Digest_Loyalty_Program_Member": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [{
+          "name": "Id"
+        }, {
+          "name": "MembershipNumber"
+        }],
+        "object": "LoyaltyProgramMember"
+      }
+    },
+    "Drop_Aux_Voucher46": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_Voucher46",
+        "fields": [{
+          "name": "VoucherDefinition_EffectiveDate_Aux"
+        }, {
+          "name": "ExpirationDate_Aux"
+        }, {
+          "name": "EffectiveDate_Aux"
+        }, {
+          "name": "ElapsedSeconds"
+        }]
+      }
+    },
+    "Register_Shifted_Dataset_SurveyQuestionResponse53": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "SurveyQuestionResponse",
+        "alias": "${App.Datasets.SurveyQuestionResponse53.FullyQualifiedName}",
+        "source": "Drop_Aux_SurveyQuestionResponse53"
+      }
+    },
+    "Drop_Aux_SurveyQuestionResponse_with_TransactionJournalRecords53": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_SurveyQuestionResponse_with_TransactionJournalRecords53",
+        "fields": [{
+          "name": "SurveyResponse_CompletionDateTime_Aux"
+        }, {
+          "name": "ElapsedSeconds"
+        }]
+      }
+    },
+    "Compute_Aux_LoyaltyLedger66": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_LoyaltyLedger66",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "precision": 18,
+          "name": "ElapsedSeconds",
+          "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+          "scale": 0,
+          "label": "ElapsedSeconds",
+          "type": "Numeric"
+        }, {
+          "name": "ActivityDate_Aux",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('ActivityDate_sec_epoch')",
+          "label": "ActivityDate_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "TransactionJournal_ActivityDate_Aux",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('TransactionJournal_ActivityDate_sec_epoch')",
+          "label": "TransactionJournal_ActivityDate_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Register_Shifted_Dataset_TransactionJournal66": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "TransactionJournal",
+        "alias": "${App.Datasets.TransactionJournal66.FullyQualifiedName}",
+        "source": "Drop_Aux_TransactionJournal66"
+      }
+    },
+    "Load_Dataset_LoyaltyLedger66": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.LoyaltyLedger66.FullyQualifiedName}"
+      }
+    },
+    "Edg_LoyaltyMemberTier66": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.LoyaltyMemberTier66.FullyQualifiedName}"
+      }
+    },
+    "Drop_Dates_LoyaltyLedger66": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_LoyaltyLedger66",
+        "fields": [{
+          "name": "ActivityDate"
+        }, {
+          "name": "TransactionJournal_ActivityDate"
+        }, {
+          "name": "LastProcessedDate"
+        }]
+      }
+    },
+    "Load_Dataset_Voucher46": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.Voucher46.FullyQualifiedName}"
+      }
+    },
+    "Compute_Aux_LoyaltyLedger_ManualActions66": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_LoyaltyLedger_ManualActions66",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "precision": 18,
+          "name": "ElapsedSeconds",
+          "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+          "scale": 0,
+          "label": "ElapsedSeconds",
+          "type": "Numeric"
+        }, {
+          "name": "ActivityDate_Aux",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('ActivityDate_sec_epoch')",
+          "label": "ActivityDate_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "TransactionJournal_ActivityDate_Aux",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('TransactionJournal_ActivityDate_sec_epoch')",
+          "label": "TransactionJournal_ActivityDate_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Load_Dataset_SurveyQuestionResponse53": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.SurveyQuestionResponse53.FullyQualifiedName}"
+      }
+    },
+    "Shift_Dates_SurveyQuestionResponse53": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_SurveyQuestionResponse53",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "LastProcessedDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "now()",
+          "label": "Last Processed",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "SurveyResponse_CompletionDateTime",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('SurveyResponse_CompletionDateTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "label": "Response Completion Date",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Drop_Dates_LoyaltyMemberTierHistory40": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_LoyaltyMemberTierHistory40",
+        "fields": [{
+          "name": "CreatedDate"
+        }, {
+          "name": "LastProcessedDate"
+        }]
+      }
+    },
+    "Register_LoyaltyLedger66": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "LoyaltyLedger",
+        "alias": "${App.Datasets.LoyaltyLedger66.FullyQualifiedName}",
+        "source": "Update_LoyaltyLedger66"
+      }
+    },
+    "Drop_Aux_LoyaltyLedger66": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_LoyaltyLedger66",
+        "fields": [{
+          "name": "ElapsedSeconds"
+        }, {
+          "name": "ActivityDate_Aux"
+        }, {
+          "name": "TransactionJournal_ActivityDate_Aux"
+        }]
+      }
+    },
+    "Drop_Dates_LoyaltyLedger_ManualActions66": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_LoyaltyLedger_ManualActions66",
+        "fields": [{
+          "name": "TransactionJournal_ActivityDate"
+        }, {
+          "name": "LastProcessedDate"
+        }, {
+          "name": "ActivityDate"
+        }]
+      }
+    },
+    "Compute_Aux_LoyaltyMemberTierHistory40": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_LoyaltyMemberTierHistory40",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "precision": 18,
+          "name": "ElapsedSeconds",
+          "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+          "scale": 0,
+          "label": "ElapsedSeconds",
+          "type": "Numeric"
+        }, {
+          "name": "CreatedDate_Aux",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('CreatedDate_sec_epoch')",
+          "label": "CreatedDate_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Shift_Dates_LoyaltyMemberTierHistory40": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_LoyaltyMemberTierHistory40",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "LastProcessedDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "now()",
+          "label": "Last Processed",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "CreatedDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('CreatedDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "label": "Created Date",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Update_LoyaltyMemberTier66": {
+      "action": "update",
+      "parameters": {
+        "right_key": [
+          "MembershipNumber"
+        ],
+        "left": "Edg_LoyaltyMemberTier66",
+        "left_key": [
+          "LoyaltyProgramMember_MembershipNumber"
+        ],
+        "update_columns": {
+          "LoyaltyMemberId": "Id"
+        },
+        "right": "Digest_Loyalty_Program_Member"
+      }
+    },
+    "Shift_Dates_LoyaltyLedger66": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_LoyaltyLedger66",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "LastProcessedDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "now()",
+          "label": "Last Processed",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "ActivityDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('ActivityDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "label": "ActivityDate",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "TransactionJournal_ActivityDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('TransactionJournal_ActivityDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "label": "TransactionJournal_ActivityDate",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Shift_Dates_Voucher46": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_Voucher46",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "LastProcessedDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "now()",
+          "label": "Last Processed",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "VoucherDefinition_EffectiveDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('VoucherDefinition_EffectiveDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "label": "VoucherDefinition_EffectiveDate",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "ExpirationDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('ExpirationDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "label": "Expiration Date",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "EffectiveDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('EffectiveDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "label": "Effective Date",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Drop_Dates_LoyaltyMemberTier": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_LoyaltyMemberTier",
+        "fields": [{
+          "name": "LoyaltyProgramMember_EnrollmentDate"
+        }, {
+          "name": "LastProcessedDate"
+        }]
+      }
+    },
+    "Drop_Dates_LoyaltyMemberCurrencyTrending33": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_LoyaltyMemberCurrencyTrending33",
+        "fields": [{
+          "name": "ValidTo"
+        }, {
+          "name": "ValidFrom"
+        }, {
+          "name": "LastProcessedDate"
+        }]
+      }
+    },
+    "Edg_ Promotion_Members59": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.Promotion_Members59.FullyQualifiedName}"
+      }
+    },
+    "Update_Promotion_Members_(Beta)": {
+      "action": "update",
+      "parameters": {
+        "right_key": [
+          "Name"
+        ],
+        "left": "Edg_ Promotion_Members59",
+        "left_key": [
+          "Promotion_Name"
+        ],
+        "update_columns": {
+          "Id": "Id"
+        },
+        "right": "Digest_Promotion"
+      }
+    },
+    "Drop_Aux_LoyaltyMemberTierHistory40": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_LoyaltyMemberTierHistory40",
+        "fields": [{
+          "name": "CreatedDate_Aux"
+        }, {
+          "name": "ElapsedSeconds"
+        }]
+      }
+    },
+    "Load_Dataset_LoyaltyLedger_ManualActions66": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.LoyaltyLedger_ManualActions66.FullyQualifiedName}"
+      }
+    },
+    "Digest_Promotion": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [{
+          "name": "Id"
+        }, {
+          "name": "Name"
+        }],
+        "object": "Promotion"
+      }
+    },
+    "Compute_Aux_Voucher46": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_Voucher46",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "precision": 18,
+          "name": "ElapsedSeconds",
+          "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+          "scale": 0,
+          "label": "ElapsedSeconds",
+          "type": "Numeric"
+        }, {
+          "name": "VoucherDefinition_EffectiveDate_Aux",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('VoucherDefinition_EffectiveDate_sec_epoch')",
+          "label": "VoucherDefinition_EffectiveDate_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "ExpirationDate_Aux",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('ExpirationDate_sec_epoch')",
+          "label": "ExpirationDate_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "EffectiveDate_Aux",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('EffectiveDate_sec_epoch')",
+          "label": "EffectiveDate_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Load_Dataset_TransactionJournal66": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.TransactionJournal66.FullyQualifiedName}"
+      }
+    },
+    "Register_Shifted_Dataset_SurveyQuestionResponse_with_TransactionJournalRecords53": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "SurveyQuestionResponse_with_TransactionJournalRecords",
+        "alias": "${App.Datasets.SurveyQuestionResponse_with_TransactionJournalRecords53.FullyQualifiedName}",
+        "source": "Drop_Aux_SurveyQuestionResponse_with_TransactionJournalRecords53"
+      }
+    },
+    "Compute_Aux_LoyaltyMemberTier": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_LoyaltyMemberTier",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "precision": 18,
+          "name": "ElapsedSeconds",
+          "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+          "scale": 0,
+          "label": "ElapsedSeconds",
+          "type": "Numeric"
+        }, {
+          "name": "LoyaltyProgramMember_EnrollmentDate_Aux",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('LoyaltyProgramMember_EnrollmentDate_sec_epoch')",
+          "label": "LoyaltyProgramMember_EnrollmentDate_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Drop_Aux_LoyaltyLedger_ManualActions66": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_LoyaltyLedger_ManualActions66",
+        "fields": [{
+          "name": "ActivityDate_Aux"
+        }, {
+          "name": "TransactionJournal_ActivityDate_Aux"
+        }, {
+          "name": "ElapsedSeconds"
+        }]
+      }
+    },
+    "Drop_Dates_SurveyQuestionResponse_with_TransactionJournalRecords53": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_SurveyQuestionResponse_with_TransactionJournalRecords53",
+        "fields": [{
+          "name": "SurveyResponse_CompletionDateTime"
+        }, {
+          "name": "LastProcessedDate"
+        }]
+      }
+    },
+    "Load_Dataset_LoyaltyMemberTier": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.LoyaltyMemberTier66.FullyQualifiedName}"
+      }
+    },
+    "Register_Shifted_Dataset_LoyaltyLedger66": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "LoyaltyLedger",
+        "alias": "${App.Datasets.LoyaltyLedger66.FullyQualifiedName}",
+        "source": "Drop_Aux_LoyaltyLedger66"
+      }
+    },
+    "Drop_Dates_SurveyQuestionResponse53": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_SurveyQuestionResponse53",
+        "fields": [{
+          "name": "SurveyResponse_CompletionDateTime"
+        }, {
+          "name": "LastProcessedDate"
+        }]
+      }
+    },
+    "Edg_LoyaltyLedger66": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.LoyaltyLedger66.FullyQualifiedName}"
+      }
+    },
+    "Register_Shifted_Dataset_LoyaltyLedger_ManualActions66": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "LoyaltyLedger_ManualActions",
+        "alias": "${App.Datasets.LoyaltyLedger_ManualActions66.FullyQualifiedName}",
+        "source": "Drop_Aux_LoyaltyLedger_ManualActions66"
+      }
+    },
+    "Compute_Aux_SurveyQuestionResponse_with_TransactionJournalRecords53": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_SurveyQuestionResponse_with_TransactionJournalRecords53",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "precision": 18,
+          "name": "ElapsedSeconds",
+          "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+          "scale": 0,
+          "label": "ElapsedSeconds",
+          "type": "Numeric"
+        }, {
+          "name": "SurveyResponse_CompletionDateTime_Aux",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('SurveyResponse_CompletionDateTime_sec_epoch')",
+          "label": "SurveyResponse_CompletionDateTime_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Shift_Dates_LoyaltyMemberTier": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_LoyaltyMemberTier",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "LastProcessedDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "now()",
+          "label": "Last Processed",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "LoyaltyProgramMember_EnrollmentDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('LoyaltyProgramMember_EnrollmentDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "label": "Activity Date",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Shift_Dates_SurveyQuestionResponse_with_TransactionJournalRecords53": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_SurveyQuestionResponse_with_TransactionJournalRecords53",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "LastProcessedDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "now()",
+          "label": "Last Processed",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "SurveyResponse_CompletionDateTime",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('SurveyResponse_CompletionDateTime_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "label": "Response Completion Date",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Register_LoyaltyMemberTier66": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "LoyaltyMemberTier",
+        "alias": "${App.Datasets.LoyaltyMemberTier66.FullyQualifiedName}",
+        "source": "Update_LoyaltyMemberTier66"
+      }
+    },
+    "Shift_Dates_LoyaltyMemberCurrencyTrending33": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_LoyaltyMemberCurrencyTrending33",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "LastProcessedDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "now()",
+          "label": "Last Processed",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "ValidTo",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('ValidTo_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "label": "ValidTo",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "ValidFrom",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('ValidFrom_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "label": "ValidFrom",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Drop_Aux_SurveyQuestionResponse53": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_SurveyQuestionResponse53",
+        "fields": [{
+          "name": "SurveyResponse_CompletionDateTime_Aux"
+        }, {
+          "name": "ElapsedSeconds"
+        }]
+      }
+    },
+    "Compute_Aux_LoyaltyMemberCurrencyTrending33": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_LoyaltyMemberCurrencyTrending33",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "precision": 18,
+          "name": "ElapsedSeconds",
+          "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+          "scale": 0,
+          "label": "ElapsedSeconds",
+          "type": "Numeric"
+        }, {
+          "name": "ValidTo_Aux",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('ValidTo_sec_epoch')",
+          "label": "ValidTo_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "ValidFrom_Aux",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('ValidFrom_sec_epoch')",
+          "label": "ValidFrom_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Edg_SurveyQuestionResponse": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.SurveyQuestionResponse53.FullyQualifiedName}"
+      }
+    },
+    "Register_Shifted_Dataset_Voucher46": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "Voucher",
+        "alias": "${App.Datasets.Voucher46.FullyQualifiedName}",
+        "source": "Drop_Aux_Voucher46"
+      }
+    },
+    "Shift_Dates_LoyaltyLedger_ManualActions66": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_LoyaltyLedger_ManualActions66",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "LastProcessedDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "now()",
+          "label": "Last Processed",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "ActivityDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('ActivityDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "label": "Activity Date",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "TransactionJournal_ActivityDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('TransactionJournal_ActivityDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "label": "Activity Date",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Register_Shifted_Dataset_LoyaltyMemberCurrencyTrending33": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "LoyaltyMemberCurrencyTrending",
+        "alias": "${App.Datasets.LoyaltyMemberCurrencyTrending33.FullyQualifiedName}",
+        "source": "Drop_Aux_LoyaltyMemberCurrencyTrending33"
+      }
+    },
+    "Drop_Aux_LoyaltyMemberTier": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Shift_Dates_LoyaltyMemberTier",
+        "fields": [{
+          "name": "LoyaltyProgramMember_EnrollmentDate_Aux"
+        }, {
+          "name": "ElapsedSeconds"
+        }]
+      }
+    },
+    "Load_Dataset_LoyaltyMemberTierHistory40": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.LoyaltyMemberTierHistory40.FullyQualifiedName}"
+      }
+    },
+    "Update_Loyalty_Program_Member": {
+      "action": "update",
+      "parameters": {
+        "right_key": [
+          "MembershipNumber"
+        ],
+        "left": "Update_Promotion_Members_(Beta)",
+        "left_key": [
+          "Member_MembershipNumber"
+        ],
+        "update_columns": {
+          "Member_Id": "Id"
+        },
+        "right": "Digest_Loyalty_Program_Member"
+      }
+    },
+    "Load_Dataset_LoyaltyMemberCurrencyTrending33": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.LoyaltyMemberCurrencyTrending33.FullyQualifiedName}"
+      }
+    },
+    "Shift_Dates_TransactionJournal66": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Drop_Dates_TransactionJournal66",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "name": "LastProcessedDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "now()",
+          "label": "Last Processed",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "LoyaltyProgramMember_EnrollmentDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('LoyaltyProgramMember_EnrollmentDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "label": "LoyaltyProgramMember_EnrollmentDate",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "ActivityDate",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('ActivityDate_Aux_sec_epoch' + 'ElapsedSeconds')",
+          "label": "Activity Date",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Register_Shifted_Dataset_LoyaltyMemberTier": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "LoyaltyMemberTier",
+        "alias": "${App.Datasets.LoyaltyMemberTier66.FullyQualifiedName}",
+        "source": "Drop_Aux_LoyaltyMemberTier"
+      }
+    },
+    "Register_SurveyQuestionResponse": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "SurveyQuestionResponse",
+        "alias": "${App.Datasets.SurveyQuestionResponse53.FullyQualifiedName}",
+        "source": "Update_SurveyQuestionResponse"
+      }
+    },
+    "Compute_Aux_SurveyQuestionResponse53": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_SurveyQuestionResponse53",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "precision": 18,
+          "name": "ElapsedSeconds",
+          "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+          "scale": 0,
+          "label": "ElapsedSeconds",
+          "type": "Numeric"
+        }, {
+          "name": "SurveyResponse_CompletionDateTime_Aux",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('SurveyResponse_CompletionDateTime_sec_epoch')",
+          "label": "SurveyResponse_CompletionDateTime_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    },
+    "Drop_Dates_TransactionJournal66": {
+      "action": "sliceDataset",
+      "parameters": {
+        "mode": "drop",
+        "source": "Compute_Aux_TransactionJournal66",
+        "fields": [{
+          "name": "ActivityDate"
+        }, {
+          "name": "LoyaltyProgramMember_EnrollmentDate"
+        }, {
+          "name": "LastProcessedDate"
+        }]
+      }
+    },
+    "Update_SurveyQuestionResponse": {
+      "action": "update",
+      "parameters": {
+        "right_key": [
+          "MembershipNumber"
+        ],
+        "left": "Edg_SurveyQuestionResponse",
+        "left_key": [
+          "SurveySubject_Participant_LoyaltyProgramMember_MembershipNumber"
+        ],
+        "update_columns": {
+          "SurveySubject_Participant_LoyaltyMemberId": "Id"
+        },
+        "right": "Digest_Loyalty_Program_Member"
+      }
+    },
+    "Edg_ED_Members_Activity": {
+      "action": "edgemart",
+      "parameters": {
+        "alias": "${App.Datasets.ED_Members_Activity37.FullyQualifiedName}"
+      }
+    },
+    "Update_LoyaltyLedger66": {
+      "action": "update",
+      "parameters": {
+        "right_key": [
+          "MembershipNumber"
+        ],
+        "left": "Edg_LoyaltyLedger66",
+        "left_key": [
+          "TransactionJournal_LoyaltyProgramMember_MembershipNumber"
+        ],
+        "update_columns": {
+          "LoyaltyProgramMemberId": "Id"
+        },
+        "right": "Digest_Loyalty_Program_Member"
+      }
+    },
+    "Update_Ed_Members_Activity": {
+      "action": "update",
+      "parameters": {
+        "right_key": [
+          "MembershipNumber"
+        ],
+        "left": "Edg_ED_Members_Activity",
+        "left_key": [
+          "LoyaltyProgramMember_MembershipNumber"
+        ],
+        "update_columns": {
+          "Id": "Id"
+        },
+        "right": "Digest_Loyalty_Program_Member"
+      }
+    },
+    "Compute_Aux_TransactionJournal66": {
+      "action": "computeExpression",
+      "parameters": {
+        "source": "Load_Dataset_TransactionJournal66",
+        "mergeWithSource": true,
+        "computedFields": [{
+          "precision": 18,
+          "name": "ElapsedSeconds",
+          "saqlExpression": "86400 * date_diff(\"day\", toDate('LastProcessedDate_sec_epoch'), now())",
+          "scale": 0,
+          "label": "ElapsedSeconds",
+          "type": "Numeric"
+        }, {
+          "name": "LoyaltyProgramMember_EnrollmentDate_Aux",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('LoyaltyProgramMember_EnrollmentDate_sec_epoch')",
+          "label": "LoyaltyProgramMember_EnrollmentDate_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }, {
+          "name": "ActivityDate_Aux",
+          "format": "yyyy-MM-dd",
+          "saqlExpression": "toDate('ActivityDate_sec_epoch')",
+          "label": "ActivityDate_Aux",
+          "type": "Date",
+          "isYearEndFiscalYear": true
+        }]
+      }
+    }
+
+  },
+  "DataflowType": "USER",
+  "_type": "dataflow",
+  "name": "Loyalty_Insights_TF_AF",
+  "description": "Loyalty Insights TF - AF",
+  "MasterLabel": "Loyalty Insights TF - AF",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": "",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive"
+}

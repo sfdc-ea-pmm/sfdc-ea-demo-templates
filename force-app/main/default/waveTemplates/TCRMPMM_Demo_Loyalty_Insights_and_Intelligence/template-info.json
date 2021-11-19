@@ -1,0 +1,574 @@
+{
+  "templateType" : "app",
+  "label" : "Demo | Loyalty Insights and Intelligence",
+  "name" : "TCRMPMM_Demo_Loyalty_Insights_and_Intelligence",
+  "description" : "Demo version for Loyalty Insights and Intelligence.",
+  "assetVersion" : 53.0,
+  "variableDefinition" : "variables.json",
+  "uiDefinition" : "ui.json",
+  "customAttributes": [
+    {
+      "label": "Author(s)",
+      "values": [
+        "Rodrigo Mercader (rmercader@salesforce.com)", 
+        "Juan Ferreira (juan.ferreira@salesforce.com)", 
+        "TCRM PMM Tech"
+      ]
+    },
+    {
+      "label": "Demo Version",
+      "values": ["v2021.46"]
+    },
+    {
+      "label": "Source Version",
+      "values": ["v234"]
+    }
+  ],
+  "tags": ["Demo", "Loyalty", "Field Service Lightning"],
+  "rules" : [
+    {
+      "type" : "templateToApp",
+      "file" : "template-to-app-rules.json"
+    },
+    {
+      "type" : "appToTemplate",
+      "file" : "app-to-template-rules.json"
+    }
+  ],
+  "releaseInfo" : {
+    "templateVersion" : "1.0",
+    "notesFile" : "releaseNotes.html"
+  },
+  "folderDefinition" : "folder.json",
+  "externalFiles" : [
+    {
+      "label" : "LoyaltyMemberCurrencyTrending",
+      "name" : "LoyaltyMemberCurrencyTrending33",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/LoyaltyMemberCurrencyTrending33.csv",
+      "type" : "CSV",
+      "schema" : "external_files/LoyaltyMemberCurrencyTrending33.json",
+      "userXmd" : "external_files/LoyaltyMemberCurrencyTrending33_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "ED_Members_Activity",
+      "name" : "ED_Members_Activity37",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/ED_Members_Activity37.csv",
+      "type" : "CSV",
+      "schema" : "external_files/ED_Members_Activity37.json",
+      "userXmd" : "external_files/ED_Members_Activity37_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "LoyaltyMemberCurrency",
+      "name" : "LoyaltyMemberCurrency66",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/LoyaltyMemberCurrency66.csv",
+      "type" : "CSV",
+      "schema" : "external_files/LoyaltyMemberCurrency66.json",
+      "userXmd" : "external_files/LoyaltyMemberCurrency66_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "LoyaltyLedger_ManualActions",
+      "name" : "LoyaltyLedger_ManualActions66",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/LoyaltyLedger_ManualActions66.csv",
+      "type" : "CSV",
+      "schema" : "external_files/LoyaltyLedger_ManualActions66.json",
+      "userXmd" : "external_files/LoyaltyLedger_ManualActions66_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "SurveyQuestionResponse",
+      "name" : "SurveyQuestionResponse53",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/SurveyQuestionResponse53.csv",
+      "type" : "CSV",
+      "schema" : "external_files/SurveyQuestionResponse53.json",
+      "userXmd" : "external_files/SurveyQuestionResponse53_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "SurveyQuestionResponse_with_TransactionJournalRecords",
+      "name" : "SurveyQuestionResponse_with_TransactionJournalRecords53",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/SurveyQuestionResponse_with_TransactionJournalRecords53.csv",
+      "type" : "CSV",
+      "schema" : "external_files/SurveyQuestionResponse_with_TransactionJournalRecords53.json",
+      "userXmd" : "external_files/SurveyQuestionResponse_with_TransactionJournalRecords53_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "LoyaltyLedger",
+      "name" : "LoyaltyLedger66",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/LoyaltyLedger66.csv",
+      "type" : "CSV",
+      "schema" : "external_files/LoyaltyLedger66.json",
+      "userXmd" : "external_files/LoyaltyLedger66_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "TransactionJournal",
+      "name" : "TransactionJournal66",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/TransactionJournal66.csv",
+      "type" : "CSV",
+      "schema" : "external_files/TransactionJournal66.json",
+      "userXmd" : "external_files/TransactionJournal66_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "LoyaltyProgramCurrency",
+      "name" : "LoyaltyProgramCurrency62",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/LoyaltyProgramCurrency62.csv",
+      "type" : "CSV",
+      "schema" : "external_files/LoyaltyProgramCurrency62.json",
+      "userXmd" : "external_files/LoyaltyProgramCurrency62_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "Promotion Members (Beta)",
+      "name" : "Promotion_Members59",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/Promotion_Members59.csv",
+      "type" : "CSV",
+      "schema" : "external_files/Promotion_Members59.json",
+      "userXmd" : "external_files/Promotion_Members59_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "LoyaltyProgramTier",
+      "name" : "LoyaltyProgramTier66",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/LoyaltyProgramTier66.csv",
+      "type" : "CSV",
+      "schema" : "external_files/LoyaltyProgramTier66.json",
+      "userXmd" : "external_files/LoyaltyProgramTier66_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "LoyaltyMemberTierHistory",
+      "name" : "LoyaltyMemberTierHistory40",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/LoyaltyMemberTierHistory40.csv",
+      "type" : "CSV",
+      "schema" : "external_files/LoyaltyMemberTierHistory40.json",
+      "userXmd" : "external_files/LoyaltyMemberTierHistory40_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "LoyaltyMemberTier",
+      "name" : "LoyaltyMemberTier66",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/LoyaltyMemberTier66.csv",
+      "type" : "CSV",
+      "schema" : "external_files/LoyaltyMemberTier66.json",
+      "userXmd" : "external_files/LoyaltyMemberTier66_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "Voucher",
+      "name" : "Voucher46",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/Voucher46.csv",
+      "type" : "CSV",
+      "schema" : "external_files/Voucher46.json",
+      "userXmd" : "external_files/Voucher46_XMD.json",
+      "rows" : 5
+    }
+  ],
+  "lenses" : [ ],
+  "dashboards" : [
+    {
+      "label" : "Liability Forecast",
+      "name" : "LiabilityForecast33_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/LiabilityForecast33.json"
+    },
+    {
+      "label" : "Loyalty Member Services",
+      "name" : "Program_Services40_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Program_Services40.json"
+    },
+    {
+      "label" : "Loyalty Program Performance",
+      "name" : "Program_Performance66_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Program_Performance66.json"
+    },
+    {
+      "label" : "Member CSAT Embedded",
+      "name" : "Member_CSAT_Embedded53_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Member_CSAT_Embedded53.json"
+    },
+    {
+      "label" : "Member Engagement",
+      "name" : "Members_activity_dashboard24_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Members_activity_dashboard24.json"
+    },
+    {
+      "label" : "Member NPS Embedded",
+      "name" : "Member_NPS_Embedded53_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Member_NPS_Embedded53.json"
+    },
+    {
+      "label" : "Member Preferences Embedded",
+      "name" : "Member_Preferences_Embedded66_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Member_Preferences_Embedded66.json"
+    },
+    {
+      "label" : "Member Services Manager Home",
+      "name" : "Member_Service_Overview66_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Member_Service_Overview66.json"
+    },
+    {
+      "label" : "Member Summary Embedded",
+      "name" : "Member_Services_Embedded66_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Member_Services_Embedded66.json"
+    },
+    {
+      "label" : "Predicted Revenue for Promotion (Beta)",
+      "name" : "Promotion_Revenue_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Promotion_Revenue_tp.json"
+    },
+    {
+      "label" : "Predicted Revenue for Promotion Embedded (Beta)",
+      "name" : "Promotion_Revenue_Embedded_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Promotion_Revenue_Embedded_tp.json"
+    },
+    {
+      "label" : "Program Manager with Member Services Home",
+      "name" : "Program_Manager_with_Member_Services_Home57_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Program_Manager_with_Member_Services_Home57.json"
+    },
+    {
+      "label" : "Program Overview (Lite)",
+      "name" : "Program_Overview_Lite46_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Program_Overview_Lite46.json"
+    },
+    {
+      "label" : "Program Satisfaction Home Embedded",
+      "name" : "Program_Satisfaction_Home_Embedded53_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Program_Satisfaction_Home_Embedded53.json"
+    },
+    {
+      "label" : "Team Performance",
+      "name" : "Team_Performance66_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Team_Performance66.json"
+    }
+  ],
+  "components" : [ ],
+  "eltDataflows" : [{
+    "label" : "Loyalty Insights TF - AF",
+    "name" : "Loyalty_Insights_TF_AF",
+    "condition" : "${Variables.Overrides.createDataflow}",
+    "file" : "dataflow/Loyalty Insights TF - AF.json"
+  }],
+  "recipes" : [ ],
+  "datasetFiles" : [ ],
+  "storedQueries" : [ ],
+  "imageFiles" : [
+    {
+      "name" : "Loyalty_Logo_Dark_Themepng40png",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Logo_Dark_Themepng40.png"
+    },
+    {
+      "name" : "Loyalty_ProgramServices_Iconpng75pn",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_ProgramServices_Iconpng75.png"
+    },
+    {
+      "name" : "Loyalty_MemberService_Icon_Whitepng77",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_MemberService_Icon_White.png"
+    },
+    {
+      "name" : "Loyalty_TierChanges_Icon_Greypng51",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_TierChanges_Icon_Grey.png"
+    },
+    {
+      "name" : "Loyalty_Currency_Icon_Greypng77",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Currency_Icon_Grey.png"
+    },
+    {
+      "name" : "Loyalty_Program_Dashboard_Iconpng77",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Program_Dashboard_Icon.png"
+    },
+    {
+      "name" : "Loyalty_Currency_Icon_Greypng78",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Currency_Icon_Grey.png"
+    },
+    {
+      "name" : "Powered_by_TCRM_Embeddedpng58",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Powered_by_TCRM_Embedded.png"
+    },
+    {
+      "name" : "Loyalty_Member_Snapshot_Iconpng77",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Member_Snapshot_Icon.png"
+    },
+    {
+      "name" : "Loyalty_Program_Dashboard_Iconpng78",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Program_Dashboard_Icon.png"
+    },
+    {
+      "name" : "Loyalty_Member_Snapshot_Iconpng78",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Member_Snapshot_Icon.png"
+    },
+    {
+      "name" : "Powered_by_TCRM_Embeddedpng59",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Powered_by_TCRM_Embedded.png"
+    },
+    {
+      "name" : "Powered_by_TCRM_Embeddedpng60",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Powered_by_TCRM_Embedded.png"
+    },
+    {
+      "name" : "Loyalty_Member_Service_History_Icon77",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Member_Service_History_Icon.png"
+    },
+    {
+      "name" : "Loyalty_CustomerService_whitepng77",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_CustomerService_white.png"
+    },
+    {
+      "name" : "Loyalty_Open_In_New_Tab_Icon_Whitep77",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Open_In_New_Tab_Icon_White.png"
+    },
+    {
+      "name" : "Powered_by_TCRM_Embeddedpng61",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Powered_by_TCRM_Embedded.png"
+    },
+    {
+      "name" : "Loyalty_Member_Snapshot_Iconpng79",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Member_Snapshot_Icon.png"
+    },
+    {
+      "name" : "Loyalty_Member_Service_History_Icon78",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Member_Service_History_Icon.png"
+    },
+    {
+      "name" : "Loyalty_Currency_Icon_Bluepng77",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Currency_Icon_Blue.png"
+    },
+    {
+      "name" : "Loyalty_Revenue_Icon_Bluepng77",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Revenue_Icon_Blue.png"
+    },
+    {
+      "name" : "Promotion_Iconpng2135",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Promotion_Icon.png"
+    },
+    {
+      "name" : "Powered_by_TCRM_Embeddedpng62",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Powered_by_TCRM_Embedded.png"
+    },
+    {
+      "name" : "X24_x_24png68",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/X24_x_24.png"
+    },
+    {
+      "name" : "chevron_downpng74",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/chevron_down.png"
+    },
+    {
+      "name" : "Loyalty_Watchlist_Icon_Greenpng79",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Watchlist_Icon_Green.png"
+    },
+    {
+      "name" : "chevron_downpng75",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/chevron_down.png"
+    },
+    {
+      "name" : "chevron_rightpng74",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/chevron_right.png"
+    },
+    {
+      "name" : "chevron_rightpng75",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/chevron_right.png"
+    },
+    {
+      "name" : "Loyalty_ProgramServices_Iconpng75pn1",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_ProgramServices_Iconpng75.png"
+    },
+    {
+      "name" : "Loyalty_Program_Dashboard_Iconpng79",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Program_Dashboard_Icon.png"
+    },
+    {
+      "name" : "Loyalty_Einstein_Iconpng77",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Einstein_Icon.png"
+    },
+    {
+      "name" : "Loyalty_Open_In_New_Tab_Icon_Whitep78",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Open_In_New_Tab_Icon_White.png"
+    },
+    {
+      "name" : "Loyalty_Watchlist_Icon_Greenpng77",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Watchlist_Icon_Green.png"
+    },
+    {
+      "name" : "Loyalty_Watchlist_Icon_Greenpng78",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Watchlist_Icon_Green.png"
+    },
+    {
+      "name" : "Loyalty_Watchlist_Icon_Greenpng80",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Watchlist_Icon_Green.png"
+    },
+    {
+      "name" : "Loyalty_Watchlist_Icon_Greenpng81",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Watchlist_Icon_Green.png"
+    },
+    {
+      "name" : "Loyalty_CustomerService_whitepng78",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_CustomerService_white.png"
+    },
+    {
+      "name" : "Loyalty_Member_Service_History_Icon79",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Member_Service_History_Icon.png"
+    },
+    {
+      "name" : "Loyalty_Open_In_New_Tab_Icon_Whitep79",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Open_In_New_Tab_Icon_White.png"
+    },
+    {
+      "name" : "Loyalty_Program_Dashboard_Iconpng80",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Program_Dashboard_Icon.png"
+    },
+    {
+      "name" : "Powered_by_TCRM_Embeddedpng63",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Powered_by_TCRM_Embedded.png"
+    },
+    {
+      "name" : "Loyalty_Member_Snapshot_Iconpng80",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Loyalty_Member_Snapshot_Icon.png"
+    },
+    {
+      "name" : "Powered_by_TCRM_Embeddedpng64",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Powered_by_TCRM_Embedded.png"
+    },
+    {
+      "name" : "powered_by_analyticspng77",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/powered_by_analytics.png"
+    }
+  ],
+  "extendedTypes" : {
+    
+      "discoveryStories": [
+        {
+          "label": "ED_Minimize_Members_Inactivity",
+          "name": "ED_Minimize_Members_Inactivity",
+          "file": "stories/ED_Minimize_Members_Inactivity_story.json"
+        },
+         {
+          "label": "Maximize Promotion Influenced Revenue (Beta)",
+          "name": "Maximize_Promotion_Influenced_Revenue",
+          "file": "stories/Maximize_Promotion_Influenced_Revenue.json"
+        }
+        
+      ],
+      "predictiveScoring": [
+
+        {
+
+          "condition": "${!empty(App.DiscoveryStories) && App.DiscoveryStories.containsKey('ED_Minimize_Members_Inactivity')}",
+          "label": "ED_Minimize_Members_Inactivity",
+          "name": "ED_Minimize_Members_Inactivity",
+          "file": "stories/scoring.json"
+
+        }, 
+        {
+
+          "condition": "${!empty(App.DiscoveryStories) && App.DiscoveryStories.containsKey('Maximize_Promotion_Influenced_Revenue')}",
+          "label": "Maximize Promotion Influenced Revenue (Beta)",
+          "name": "Maximize_Promotion_Influenced_Revenue",
+          "file": "stories/scoring_maximize.json"
+
+        }
+
+
+  ]
+    
+   },
+  "templateDependencies" : [ ],
+  "icons": {
+    "appBadge": {
+      "name": "16.png"
+    },
+    "templateBadge": {
+      "name": "analytics_icon"
+    },
+    "templatePreviews": [
+      {
+        "name": "einstein_scene",
+        "label": "",
+        "description": ""
+      },
+      {
+        "name": "demo_template_guide_0",
+        "label": "How to Use this Template",
+        "description": "This demo template is decoupled from core objects and does not require any additional licenses (only TCRM+). To customize the data, download the datasets, modify with the tools of your choice and upload to update the datasets."
+      }
+    ]
+  }
+}
