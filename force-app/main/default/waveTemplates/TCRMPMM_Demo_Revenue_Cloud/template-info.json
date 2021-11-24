@@ -1,0 +1,91 @@
+{
+  "templateType" : "app",
+  "label" : "Demo | TCRM for Revenue Cloud",
+  "name" : "TCRMPMM_Demo_Revenue_Cloud",
+  "description" : "Demo version for Revenue Cloud.",
+  "assetVersion" : 53.0,
+  "variableDefinition" : "variables.json",
+  "uiDefinition" : "ui.json",
+  "customAttributes": [
+    {
+      "label": "Author(s)",
+      "values": [
+        "Rodrigo Mercader (rmercader@salesforce.com)", 
+        "Juan Ferreira (juan.ferreira@salesforce.com)", 
+        "TCRM PMM Tech"
+      ]
+    },
+    {
+      "label": "Demo Version",
+      "values": ["v2021.47"]
+    },
+    {
+      "label": "Source Version",
+      "values": ["v234"]
+    }
+  ],
+  "rules" : [
+    {
+      "type" : "templateToApp",
+      "file" : "template-to-app-rules.json"
+    },
+    {
+      "type" : "appToTemplate",
+      "file" : "app-to-template-rules.json"
+    }
+  ],
+  "releaseInfo" : {
+    "templateVersion" : "1.1",
+    "notesFile" : "releaseNotes.html"
+  },
+  "folderDefinition" : "folder.json",
+  "externalFiles" : [
+    {
+      "label" : "Revenue_cloud",
+      "name" : "Revenue_cloud",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/Revenue_cloud.csv",
+      "type" : "CSV",
+      "schema" : "external_files/Revenue_cloud.json",
+      "userXmd" : "external_files/Revenue_cloud_XMD.json",
+      "rows" : 5
+    }
+  ],
+  "lenses" : [ ],
+  "dashboards" : [
+    {
+      "label" : "Approvals",
+      "name" : "Approvals_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Approvals.json"
+    }
+  ],
+  "components" : [ ],
+  "eltDataflows" : [ ],
+  "recipes" : [ ],
+  "datasetFiles" : [ ],
+  "storedQueries" : [ ],
+  "imageFiles" : [ ],
+  "extendedTypes" : { },
+  "templateDependencies" : [ ],
+  "icons": {
+    "appBadge": {
+      "name": "16.png"
+    },
+    "templateBadge": {
+      "name": "analytics_icon"
+    },
+    "templatePreviews": [
+      {
+        "name": "einstein_scene",
+        "label": "",
+        "description": ""
+      },
+      {
+        "name": "demo_template_guide_0",
+        "label": "How to Use this Template",
+        "description": "This demo template is decoupled from core objects and does not require any additional licenses (only TCRM+). To customize the data, download the datasets, modify with the tools of your choice and upload to update the datasets."
+      }
+    ]
+  }
+}
