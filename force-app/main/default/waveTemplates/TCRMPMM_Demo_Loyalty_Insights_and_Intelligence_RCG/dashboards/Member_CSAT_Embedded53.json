@@ -20,13 +20,13 @@
       {
         "fields" : [
           {
-            "dataSourceName" : "${App.Datasets.LoyaltyMemberTier66.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_LoyaltyMemberTier66.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "LoyaltyMemberId"
           },
           {
-            "dataSourceName" : "${App.Datasets.SurveyQuestionResponse53.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_SurveyQuestionResponse53.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "SurveySubject_Participant_LoyaltyMemberId"
@@ -39,7 +39,7 @@
     "filters" : [
       {
         "dataset" : {
-          "name" : "${App.Datasets.SurveyQuestionResponse53.Name}"
+          "name" : "${App.Datasets.LoyRcg_SurveyQuestionResponse53.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -287,7 +287,7 @@
         "groups" : [ ],
         "label" : "Average CSAT for all Members",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.SurveyQuestionResponse53.FullyQualifiedName}\";\r\nq = filter q by 'SurveyQuestion_QuestionType' == \"Rating\";\r\nq = filter q by 'SurveySubject_SurveyInvitation_ParticipantId' is not null or 'SurveySubject_SubjectEntityType' == \"TransactionJournal\";\r\nq = filter q by 'SurveySubject_SubjectId' == \"{{cell(Member_1.result, 0, \"LoyaltyProgramMember_ProgramId\").asString()}}\";\nq = group q by ('Id', 'SurveyVersion_SurveyId', 'SurveyVersionId', 'QuestionId');\r\nq = foreach q generate 'Id' , 'SurveyVersion_SurveyId', 'SurveyVersionId', 'QuestionId', first('QuestionChoice_MaxValue') as 'Max Rating', first('SurveyResponse_CompletionDateTime') as 'SurveyResponse_CompletionDateTime',  first('NumberValue') as 'NumberValue';\r\nresult = group q by ('SurveyVersion_SurveyId', 'SurveyVersionId', 'QuestionId');\r\nresult = foreach result generate q.'SurveyVersion_SurveyId' as 'SurveyVersion_SurveyId', q.'SurveyVersionId' as 'SurveyVersionId', q.'QuestionId' as 'QuestionId', (sum(q.'NumberValue')/sum(q.'Max Rating')) * count(q) as 'Value', count(q) as 'Count', first(q.'Max Rating') as 'Max Rating';\r\nresult = group result by all;\r\nresult = foreach result generate round(((sum(Value)/sum(Count)) * case when {{coalesce(cell(Member_Latest_CSAT_1.result,0,\"Max Rating\"),0).asObject()}} > 0 then {{coalesce(cell(Member_Latest_CSAT_1.result,0,\"Max Rating\"),0).asObject()}} else first('Max Rating') end),2)  as 'Avg Score', case when {{coalesce(cell(Member_Latest_CSAT_1.result,0,\"Max Rating\"),0).asObject()}} > 0 then {{coalesce(cell(Member_Latest_CSAT_1.result,0,\"Max Rating\"),0).asObject()}} else first('Max Rating') end as 'Max Rating';",
+        "query" : "q = load \"${App.Datasets.LoyRcg_SurveyQuestionResponse53.FullyQualifiedName}\";\r\nq = filter q by 'SurveyQuestion_QuestionType' == \"Rating\";\r\nq = filter q by 'SurveySubject_SurveyInvitation_ParticipantId' is not null or 'SurveySubject_SubjectEntityType' == \"TransactionJournal\";\r\nq = filter q by 'SurveySubject_SubjectId' == \"{{cell(Member_1.result, 0, \"LoyaltyProgramMember_ProgramId\").asString()}}\";\nq = group q by ('Id', 'SurveyVersion_SurveyId', 'SurveyVersionId', 'QuestionId');\r\nq = foreach q generate 'Id' , 'SurveyVersion_SurveyId', 'SurveyVersionId', 'QuestionId', first('QuestionChoice_MaxValue') as 'Max Rating', first('SurveyResponse_CompletionDateTime') as 'SurveyResponse_CompletionDateTime',  first('NumberValue') as 'NumberValue';\r\nresult = group q by ('SurveyVersion_SurveyId', 'SurveyVersionId', 'QuestionId');\r\nresult = foreach result generate q.'SurveyVersion_SurveyId' as 'SurveyVersion_SurveyId', q.'SurveyVersionId' as 'SurveyVersionId', q.'QuestionId' as 'QuestionId', (sum(q.'NumberValue')/sum(q.'Max Rating')) * count(q) as 'Value', count(q) as 'Count', first(q.'Max Rating') as 'Max Rating';\r\nresult = group result by all;\r\nresult = foreach result generate round(((sum(Value)/sum(Count)) * case when {{coalesce(cell(Member_Latest_CSAT_1.result,0,\"Max Rating\"),0).asObject()}} > 0 then {{coalesce(cell(Member_Latest_CSAT_1.result,0,\"Max Rating\"),0).asObject()}} else first('Max Rating') end),2)  as 'Avg Score', case when {{coalesce(cell(Member_Latest_CSAT_1.result,0,\"Max Rating\"),0).asObject()}} > 0 then {{coalesce(cell(Member_Latest_CSAT_1.result,0,\"Max Rating\"),0).asObject()}} else first('Max Rating') end as 'Max Rating';",
         "receiveFacetSource" : {
           "mode" : "none",
           "steps" : [ ]
@@ -331,7 +331,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.SurveyQuestionResponse53.Name}"
+            "name" : "${App.Datasets.LoyRcg_SurveyQuestionResponse53.Name}"
           }
         ],
         "isGlobal" : false,
@@ -492,7 +492,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.LoyaltyMemberTier66.Name}"
+            "name" : "${App.Datasets.LoyRcg_LoyaltyMemberTier66.Name}"
           }
         ],
         "isGlobal" : false,
@@ -574,7 +574,7 @@
         "groups" : [ ],
         "label" : "Member_Latest_CSAT",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.SurveyQuestionResponse53.FullyQualifiedName}\"; \nq = filter q by 'SurveyQuestion_QuestionType' == \"Rating\"; \nq = filter q by 'SurveySubject_SurveyInvitation_ParticipantId' is not null or 'SurveySubject_SubjectEntityType' == \"TransactionJournal\"; \nq = group q by ('Id', 'SurveyVersion_SurveyId', 'SurveyVersionId', 'QuestionId'); \nq = foreach q generate 'Id' , 'SurveyVersion_SurveyId', 'SurveyVersionId', 'QuestionId', first('QuestionChoice_MaxValue') as 'MaxRating', first('SurveyResponse_CompletionDateTime') as 'SurveyResponse_CompletionDateTime',  first('NumberValue') as 'NumberValue'; \nq = order q by 'SurveyResponse_CompletionDateTime' desc;  \nresult = group q by ('SurveyVersion_SurveyId', 'SurveyVersionId', 'QuestionId'); \nresult = foreach result generate q.'SurveyVersion_SurveyId' as 'SurveyVersion_SurveyId', q.'SurveyVersionId' as 'SurveyVersionId', q.'QuestionId' as 'QuestionId', first(q.'NumberValue') as 'Value', count(q) as 'count', first('MaxRating') as 'Max Rating';",
+        "query" : "q = load \"${App.Datasets.LoyRcg_SurveyQuestionResponse53.FullyQualifiedName}\"; \nq = filter q by 'SurveyQuestion_QuestionType' == \"Rating\"; \nq = filter q by 'SurveySubject_SurveyInvitation_ParticipantId' is not null or 'SurveySubject_SubjectEntityType' == \"TransactionJournal\"; \nq = group q by ('Id', 'SurveyVersion_SurveyId', 'SurveyVersionId', 'QuestionId'); \nq = foreach q generate 'Id' , 'SurveyVersion_SurveyId', 'SurveyVersionId', 'QuestionId', first('QuestionChoice_MaxValue') as 'MaxRating', first('SurveyResponse_CompletionDateTime') as 'SurveyResponse_CompletionDateTime',  first('NumberValue') as 'NumberValue'; \nq = order q by 'SurveyResponse_CompletionDateTime' desc;  \nresult = group q by ('SurveyVersion_SurveyId', 'SurveyVersionId', 'QuestionId'); \nresult = foreach result generate q.'SurveyVersion_SurveyId' as 'SurveyVersion_SurveyId', q.'SurveyVersionId' as 'SurveyVersionId', q.'QuestionId' as 'QuestionId', first(q.'NumberValue') as 'Value', count(q) as 'count', first('MaxRating') as 'Max Rating';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -651,7 +651,7 @@
           "filters" : [
             {
               "dataset" : {
-                "name" : "${App.Datasets.SurveyQuestionResponse53.Name}"
+                "name" : "${App.Datasets.LoyRcg_SurveyQuestionResponse53.Name}"
               },
               "field" : "SurveyResponse_CompletionDateTime"
             }

@@ -71,7 +71,7 @@
     "filters" : [
       {
         "dataset" : {
-          "name" : "${App.Datasets.ED_Members_Activity37.Name}"
+          "name" : "${App.Datasets.LoyRcg_ED_Members_Activity37.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -350,16 +350,6 @@
                 }
               },
               {
-                "colspan" : 48,
-                "column" : 1,
-                "name" : "table_1",
-                "row" : 81,
-                "rowspan" : 23,
-                "widgetStyle" : {
-                  "borderEdges" : [ ]
-                }
-              },
-              {
                 "colspan" : 8,
                 "column" : 32,
                 "name" : "rangeselector_6",
@@ -425,6 +415,16 @@
                 "name" : "text_16",
                 "row" : 49,
                 "rowspan" : 3,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 48,
+                "column" : 1,
+                "name" : "table_2",
+                "row" : 81,
+                "rowspan" : 24,
                 "widgetStyle" : {
                   "borderEdges" : [ ]
                 }
@@ -1276,7 +1276,7 @@
         "groups" : [ ],
         "label" : "Score distribution by channel",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.ED_Members_Activity37.FullyQualifiedName}\";\nq = foreach q generate \n(case when 'Engagement_Score'> 75 then \"Score >75\" when ('Engagement_Score'<= 75 || 'Engagement_Score' >= 50) then \"Score between 50 and 75\" when ('Engagement_Score'<= 50 || 'Engagement_Score' >= 25) then \"Score between 25 and 50\" else \"Score <25\" end)\n as 'Scores', EnrollmentChannel, Id;\nq = group q by ('EnrollmentChannel', 'Scores');\nq = foreach q generate 'EnrollmentChannel' as 'EnrollmentChannel', 'Scores', unique('Id') as 'unique_Id';\nq = order q by 'Scores' asc;\nq = limit q 2000; ",
+        "query" : "q = load \"${App.Datasets.LoyRcg_ED_Members_Activity37.FullyQualifiedName}\";\nq = foreach q generate \n(case when 'Engagement_Score'> 75 then \"Score >75\" when ('Engagement_Score'<= 75 || 'Engagement_Score' >= 50) then \"Score between 50 and 75\" when ('Engagement_Score'<= 50 || 'Engagement_Score' >= 25) then \"Score between 25 and 50\" else \"Score <25\" end)\n as 'Scores', EnrollmentChannel, Id;\nq = group q by ('EnrollmentChannel', 'Scores');\nq = foreach q generate 'EnrollmentChannel' as 'EnrollmentChannel', 'Scores', unique('Id') as 'unique_Id';\nq = order q by 'Scores' asc;\nq = limit q 2000; ",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1331,7 +1331,7 @@
         "groups" : [ ],
         "label" : "Score distribution by member tenure",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.ED_Members_Activity37.FullyQualifiedName}\";\nq = foreach q generate \n'Engagement_Score', 'Id','MemberTenure' as 'MemberTenure';\nq = group q by 'MemberTenure';\nq = foreach q generate 'MemberTenure' as 'MemberTenure', avg('Engagement_Score') as 'avg_Engagement_Score', unique('Id') as 'unique_Id';\nq = order q by 'MemberTenure' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.LoyRcg_ED_Members_Activity37.FullyQualifiedName}\";\nq = foreach q generate \n'Engagement_Score', 'Id','MemberTenure' as 'MemberTenure';\nq = group q by 'MemberTenure';\nq = foreach q generate 'MemberTenure' as 'MemberTenure', avg('Engagement_Score') as 'avg_Engagement_Score', unique('Id') as 'unique_Id';\nq = order q by 'MemberTenure' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1435,7 +1435,7 @@
         "groups" : [ ],
         "label" : "Details",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.ED_Members_Activity37.FullyQualifiedName}\";\nq = foreach q generate 'LeadOrContactId', 'LeadOrContactName' as 'Name', 'Contact_MailingCity' as 'Contact_MailingCity', 'Contact_MailingState' as 'Contact_MailingState', 'DaysSinceLastActivity' as 'DaysSinceLastActivity', 'Engagement_Score' as 'Engagement_Score', 'EnrollmentChannel' as 'EnrollmentChannel', 'MemberCurrency_Ledger_Current_Accrued_Points' as 'MemberCurrency_Ledger_Current_Accrued_Points', 'MemberCurrency_Ledger_Current_Expired_Points' as 'MemberCurrency_Ledger_Current_Expired_Points', 'MemberCurrency_Ledger_Current_Redeemed_Points' as 'MemberCurrency_Ledger_Current_Redeemed_Points', 'MemberCurrency_PointsBalance' as 'MemberCurrency_PointsBalance', 'MemberName' as 'MemberName', 'MemberTenure' as 'MemberTenure', 'MemberTier_Name' as 'MemberTier_Name', 'MemberTier_TierGroup_Name' as 'MemberTier_TierGroup_Name', 'MemberType' as 'MemberType', 'Transactions_Accrual_Transactions_Current_Period' as 'Transactions_Accrual_Transactions_Current_Period', 'Transactions_Redemption_Transactions_Current_Period' as 'Transactions_Redemption_Transactions_Current_Period', 'Transactions_Transaction_Amount_Current_Period' as 'Transactions_Transaction_Amount_Current_Period', 'Id';\nq = order q by 'MemberName' asc nulls last;\nq = limit q 100;",
+        "query" : "q = load \"${App.Datasets.LoyRcg_ED_Members_Activity37.FullyQualifiedName}\";\nq = foreach q generate 'LeadOrContactId', 'LeadOrContactName' as 'Name', 'Contact_MailingCity' as 'Contact_MailingCity', 'Contact_MailingState' as 'Contact_MailingState', 'DaysSinceLastActivity' as 'DaysSinceLastActivity', 'Engagement_Score' as 'Engagement_Score', 'EnrollmentChannel' as 'EnrollmentChannel', 'MemberCurrency_Ledger_Current_Accrued_Points' as 'MemberCurrency_Ledger_Current_Accrued_Points', 'MemberCurrency_Ledger_Current_Expired_Points' as 'MemberCurrency_Ledger_Current_Expired_Points', 'MemberCurrency_Ledger_Current_Redeemed_Points' as 'MemberCurrency_Ledger_Current_Redeemed_Points', 'MemberCurrency_PointsBalance' as 'MemberCurrency_PointsBalance', 'MemberName' as 'MemberName', 'MemberTenure' as 'MemberTenure', 'MemberTier_Name' as 'MemberTier_Name', 'MemberTier_TierGroup_Name' as 'MemberTier_TierGroup_Name', 'MemberType' as 'MemberType', 'Transactions_Accrual_Transactions_Current_Period' as 'Transactions_Accrual_Transactions_Current_Period', 'Transactions_Redemption_Transactions_Current_Period' as 'Transactions_Redemption_Transactions_Current_Period', 'Transactions_Transaction_Amount_Current_Period' as 'Transactions_Transaction_Amount_Current_Period', 'Id';\nq = order q by 'MemberName' asc nulls last;\nq = limit q 100;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1479,7 +1479,7 @@
         "groups" : [ ],
         "label" : "DaysSinceLastActivit_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.ED_Members_Activity37.FullyQualifiedName}\";\nq = foreach q generate 'InactivityScore', 'Id', 'DaysSinceLastActivity', 'MemberCurrency_Ledger_Current_Accrued_Points', 'MemberCurrency_Ledger_Current_Redeemed_Points', 'MemberCurrency_Ledger_Current_Expired_Points', 'MemberCurrency_PointsBalance', coalesce('Transactions_Accrual_Transactions_Current_Period',0)+coalesce('Transactions_Redemption_Transactions_Current_Period',0) as 'count_Transactions', 'Transactions_Transaction_Amount_Current_Period';\nq = group q by all;\nq = foreach q generate min('DaysSinceLastActivity') as 'min_DaysSinceLastActivity', max('DaysSinceLastActivity') as 'max_DaysSinceLastActivity', min('MemberCurrency_Ledger_Current_Accrued_Points') as 'min_Current_Accrued_Points', max('MemberCurrency_Ledger_Current_Accrued_Points') as 'max_Current_Accrued_Points', min('MemberCurrency_Ledger_Current_Redeemed_Points') as 'min_Current_Redeemed_Points', max('MemberCurrency_Ledger_Current_Redeemed_Points') as 'max_Current_Redeemed_Points', min('MemberCurrency_Ledger_Current_Expired_Points') as 'min_Current_Expired_Points', max('MemberCurrency_Ledger_Current_Expired_Points') as 'max_Current_Expired_Points', min('MemberCurrency_PointsBalance') as 'min_PointsBalance', max('MemberCurrency_PointsBalance') as 'max_PointsBalance', min('count_Transactions') as 'min_count_Transactions', max('count_Transactions') as 'max_count_Transactions', min('Transactions_Transaction_Amount_Current_Period') as 'min_Transaction_Amount', max('Transactions_Transaction_Amount_Current_Period') as 'max_Transaction_Amount';\nq = foreach q generate '{{cell(static_1.selection, 0, \"min\").asObject()}}' as 'min', '{{cell(static_1.selection, 0, \"max\").asObject()}}' as 'max';\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.LoyRcg_ED_Members_Activity37.FullyQualifiedName}\";\nq = foreach q generate 'InactivityScore', 'Id', 'DaysSinceLastActivity', 'MemberCurrency_Ledger_Current_Accrued_Points', 'MemberCurrency_Ledger_Current_Redeemed_Points', 'MemberCurrency_Ledger_Current_Expired_Points', 'MemberCurrency_PointsBalance', coalesce('Transactions_Accrual_Transactions_Current_Period',0)+coalesce('Transactions_Redemption_Transactions_Current_Period',0) as 'count_Transactions', 'Transactions_Transaction_Amount_Current_Period';\nq = group q by all;\nq = foreach q generate min('DaysSinceLastActivity') as 'min_DaysSinceLastActivity', max('DaysSinceLastActivity') as 'max_DaysSinceLastActivity', min('MemberCurrency_Ledger_Current_Accrued_Points') as 'min_Current_Accrued_Points', max('MemberCurrency_Ledger_Current_Accrued_Points') as 'max_Current_Accrued_Points', min('MemberCurrency_Ledger_Current_Redeemed_Points') as 'min_Current_Redeemed_Points', max('MemberCurrency_Ledger_Current_Redeemed_Points') as 'max_Current_Redeemed_Points', min('MemberCurrency_Ledger_Current_Expired_Points') as 'min_Current_Expired_Points', max('MemberCurrency_Ledger_Current_Expired_Points') as 'max_Current_Expired_Points', min('MemberCurrency_PointsBalance') as 'min_PointsBalance', max('MemberCurrency_PointsBalance') as 'max_PointsBalance', min('count_Transactions') as 'min_count_Transactions', max('count_Transactions') as 'max_count_Transactions', min('Transactions_Transaction_Amount_Current_Period') as 'min_Transaction_Amount', max('Transactions_Transaction_Amount_Current_Period') as 'max_Transaction_Amount';\nq = foreach q generate '{{cell(static_1.selection, 0, \"min\").asObject()}}' as 'min', '{{cell(static_1.selection, 0, \"max\").asObject()}}' as 'max';\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1598,7 +1598,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.ED_Members_Activity37.Name}"
+            "name" : "${App.Datasets.LoyRcg_ED_Members_Activity37.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1753,7 +1753,7 @@
           "Members",
           "avg_Engagement_Score"
         ],
-        "query" : "q = load \"${App.Datasets.ED_Members_Activity37.FullyQualifiedName}\";\nq = group q by 'MemberTier_Name';\nq = foreach q generate 'MemberTier_Name' as 'MemberTier_Name', 0.01 as 'count', unique('Id') as 'Members', avg('Engagement_Score') as 'avg_Engagement_Score';\nq = order q by 'MemberTier_Name' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.LoyRcg_ED_Members_Activity37.FullyQualifiedName}\";\nq = group q by 'MemberTier_Name';\nq = foreach q generate 'MemberTier_Name' as 'MemberTier_Name', 0.01 as 'count', unique('Id') as 'Members', avg('Engagement_Score') as 'avg_Engagement_Score';\nq = order q by 'MemberTier_Name' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1857,7 +1857,7 @@
         "groups" : [ ],
         "label" : "Score distribution by transaction KPIs",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.ED_Members_Activity37.FullyQualifiedName}\";\nq = foreach q generate 'Engagement_Score', 'MemberName', 'DaysSinceLastActivity', 'MemberCurrency_Ledger_Current_Accrued_Points', 'MemberCurrency_Ledger_Current_Redeemed_Points', 'MemberCurrency_Ledger_Current_Expired_Points', 'MemberCurrency_PointsBalance', coalesce('Transactions_Accrual_Transactions_Current_Period',0)+coalesce('Transactions_Redemption_Transactions_Current_Period',0) as 'count_Transactions', 'Transactions_Transaction_Amount_Current_Period';\nq = foreach q generate 'Engagement_Score', 'MemberName', 'DaysSinceLastActivity', 'MemberCurrency_Ledger_Current_Accrued_Points', 'MemberCurrency_Ledger_Current_Redeemed_Points', 'MemberCurrency_Ledger_Current_Expired_Points', 'MemberCurrency_PointsBalance', 'count_Transactions', 'Transactions_Transaction_Amount_Current_Period', '{{cell(static_1.selection, 0, \"Api_name_y\").asObject()}}' as 'selected';\nq = filter q by {{row(DaysSinceLastActivit_1.selection, [0] , [\"min\", \"max\"]).asRange('selected')}};\nq = group q by 'MemberName';\nq = foreach q generate 'MemberName' as 'MemberName', coalesce(sum('{{cell(static_1.selection, 0, \"Api_name_y\").asObject()}}'),0) as '{{cell(static_1.selection, 0, \"Display\").asObject()}}', avg('Engagement_Score') as 'avg_Engagement_Score';\nq = order q by 'MemberName' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.LoyRcg_ED_Members_Activity37.FullyQualifiedName}\";\nq = foreach q generate 'Engagement_Score', 'MemberName', 'DaysSinceLastActivity', 'MemberCurrency_Ledger_Current_Accrued_Points', 'MemberCurrency_Ledger_Current_Redeemed_Points', 'MemberCurrency_Ledger_Current_Expired_Points', 'MemberCurrency_PointsBalance', coalesce('Transactions_Accrual_Transactions_Current_Period',0)+coalesce('Transactions_Redemption_Transactions_Current_Period',0) as 'count_Transactions', 'Transactions_Transaction_Amount_Current_Period';\nq = foreach q generate 'Engagement_Score', 'MemberName', 'DaysSinceLastActivity', 'MemberCurrency_Ledger_Current_Accrued_Points', 'MemberCurrency_Ledger_Current_Redeemed_Points', 'MemberCurrency_Ledger_Current_Expired_Points', 'MemberCurrency_PointsBalance', 'count_Transactions', 'Transactions_Transaction_Amount_Current_Period', '{{cell(static_1.selection, 0, \"Api_name_y\").asObject()}}' as 'selected';\nq = filter q by {{row(DaysSinceLastActivit_1.selection, [0] , [\"min\", \"max\"]).asRange('selected')}};\nq = group q by 'MemberName';\nq = foreach q generate 'MemberName' as 'MemberName', coalesce(sum('{{cell(static_1.selection, 0, \"Api_name_y\").asObject()}}'),0) as '{{cell(static_1.selection, 0, \"Display\").asObject()}}', avg('Engagement_Score') as 'avg_Engagement_Score';\nq = order q by 'MemberName' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1944,7 +1944,7 @@
         "groups" : [ ],
         "label" : "KPIs by transactions",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.ED_Members_Activity37.FullyQualifiedName}\";\nq = foreach q generate 'Engagement_Score', 'Id', 'DaysSinceLastActivity', 'MemberCurrency_Ledger_Current_Accrued_Points', 'MemberCurrency_Ledger_Current_Redeemed_Points', 'MemberCurrency_Ledger_Current_Expired_Points', 'MemberCurrency_PointsBalance', coalesce('Transactions_Accrual_Transactions_Current_Period',0)+coalesce('Transactions_Redemption_Transactions_Current_Period',0) as 'count_Transactions', 'Transactions_Transaction_Amount_Current_Period';\nq = foreach q generate 'Engagement_Score', 'Id', 'DaysSinceLastActivity', 'MemberCurrency_Ledger_Current_Accrued_Points', 'MemberCurrency_Ledger_Current_Redeemed_Points', 'MemberCurrency_Ledger_Current_Expired_Points', 'MemberCurrency_PointsBalance', 'count_Transactions','Transactions_Transaction_Amount_Current_Period', '{{cell(static_1.selection, 0, \"Api_name_y\").asObject()}}' as 'selected';\nq = filter q by {{row(DaysSinceLastActivit_1.selection, [0] , [\"min\", \"max\"]).asRange('selected')}};\nq = group q by all;\nq = foreach q generate coalesce(sum('MemberCurrency_PointsBalance'),0) as 'Points Balance', avg('Engagement_Score') as 'avg_Engagement_Score', unique('Id') as 'count_Members';",
+        "query" : "q = load \"${App.Datasets.LoyRcg_ED_Members_Activity37.FullyQualifiedName}\";\nq = foreach q generate 'Engagement_Score', 'Id', 'DaysSinceLastActivity', 'MemberCurrency_Ledger_Current_Accrued_Points', 'MemberCurrency_Ledger_Current_Redeemed_Points', 'MemberCurrency_Ledger_Current_Expired_Points', 'MemberCurrency_PointsBalance', coalesce('Transactions_Accrual_Transactions_Current_Period',0)+coalesce('Transactions_Redemption_Transactions_Current_Period',0) as 'count_Transactions', 'Transactions_Transaction_Amount_Current_Period';\nq = foreach q generate 'Engagement_Score', 'Id', 'DaysSinceLastActivity', 'MemberCurrency_Ledger_Current_Accrued_Points', 'MemberCurrency_Ledger_Current_Redeemed_Points', 'MemberCurrency_Ledger_Current_Expired_Points', 'MemberCurrency_PointsBalance', 'count_Transactions','Transactions_Transaction_Amount_Current_Period', '{{cell(static_1.selection, 0, \"Api_name_y\").asObject()}}' as 'selected';\nq = filter q by {{row(DaysSinceLastActivit_1.selection, [0] , [\"min\", \"max\"]).asRange('selected')}};\nq = group q by all;\nq = foreach q generate coalesce(sum('MemberCurrency_PointsBalance'),0) as 'Points Balance', avg('Engagement_Score') as 'avg_Engagement_Score', unique('Id') as 'count_Members';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2029,7 +2029,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.ED_Members_Activity37.Name}"
+            "name" : "${App.Datasets.LoyRcg_ED_Members_Activity37.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2060,7 +2060,7 @@
         "groups" : [ ],
         "label" : "Engagement across cities",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.ED_Members_Activity37.FullyQualifiedName}\";\nq = group q by 'Contact_MailingCity';\nq = foreach q generate 'Contact_MailingCity' as 'Contact_MailingCity', avg('Engagement_Score') as 'avg_Engagement_Score', unique('Id') as 'unique_Id';\nq = order q by 'avg_Engagement_Score' desc;",
+        "query" : "q = load \"${App.Datasets.LoyRcg_ED_Members_Activity37.FullyQualifiedName}\";\nq = group q by 'Contact_MailingCity';\nq = foreach q generate 'Contact_MailingCity' as 'Contact_MailingCity', avg('Engagement_Score') as 'avg_Engagement_Score', unique('Id') as 'unique_Id';\nq = order q by 'avg_Engagement_Score' desc;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2180,7 +2180,7 @@
         "groups" : [ ],
         "label" : "InactivityScore_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.ED_Members_Activity37.FullyQualifiedName}\";\nq = group q by all;\nq = foreach q generate avg('Engagement_Score') as 'avg_Engagement_Score', (case when avg('Engagement_Score')>67 then \"rgb(83, 229, 112)\" when  avg('Engagement_Score')<=33 then \"rgb(255, 118, 118)\" else \"rgb(255, 183, 93)\" end) as 'color';\nq = limit q 2000; ",
+        "query" : "q = load \"${App.Datasets.LoyRcg_ED_Members_Activity37.FullyQualifiedName}\";\nq = group q by all;\nq = foreach q generate avg('Engagement_Score') as 'avg_Engagement_Score', (case when avg('Engagement_Score')>67 then \"rgb(83, 229, 112)\" when  avg('Engagement_Score')<=33 then \"rgb(255, 118, 118)\" else \"rgb(255, 183, 93)\" end) as 'color';\nq = limit q 2000; ",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2359,7 +2359,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.ED_Members_Activity37.Name}"
+            "name" : "${App.Datasets.LoyRcg_ED_Members_Activity37.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2390,7 +2390,7 @@
         "groups" : [ ],
         "label" : "Engagement across geographies",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.ED_Members_Activity37.FullyQualifiedName}\";\nq = group q by 'Contact_MailingState';\nq = foreach q generate 'Contact_MailingState' as 'Contact_MailingState', avg('Engagement_Score') as 'avg_Engagement_Score';\nq = order q by 'Contact_MailingState' asc;",
+        "query" : "q = load \"${App.Datasets.LoyRcg_ED_Members_Activity37.FullyQualifiedName}\";\nq = group q by 'Contact_MailingState';\nq = foreach q generate 'Contact_MailingState' as 'Contact_MailingState', avg('Engagement_Score') as 'avg_Engagement_Score';\nq = order q by 'Contact_MailingState' asc;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2474,6 +2474,77 @@
             "applyConditionalFormatting" : true
           },
           "type" : "chart"
+        }
+      },
+      "lens_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.LoyRcg_Member_Engagement_Details.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "query" : {
+          "query" : {
+            "values" : [
+              "Member",
+              "Engagement_Score",
+              "Points_Balance",
+              "Points_Accrued",
+              "Points_Redeemed",
+              "Points_Expired",
+              "Days_Since_Last_Transaction",
+              "Accruals",
+              "Redemptions",
+              "Transaction_Amount",
+              "Tier_Group",
+              "Tier_Name",
+              "MemberType",
+              "EnrollmentChannel",
+              "Membership_Duration",
+              "Mailing_State_Province",
+              "Mailing_City"
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "options" : { },
+          "parameters" : {
+            "borderColor" : "#e0e5ee",
+            "borderWidth" : 1,
+            "cell" : {
+              "backgroundColor" : "#ffffff",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "columnProperties" : { },
+            "columns" : [ ],
+            "customBulkActions" : [ ],
+            "header" : {
+              "backgroundColor" : "#f4f6f9",
+              "fontColor" : "#16325c",
+              "fontSize" : 12
+            },
+            "innerMajorBorderColor" : "#a8b7c7",
+            "innerMinorBorderColor" : "#e0e5ee",
+            "maxColumnWidth" : 300,
+            "minColumnWidth" : 40,
+            "mode" : "variable",
+            "numberOfLines" : 1,
+            "showActionMenu" : true,
+            "showRowIndexColumn" : true,
+            "totals" : true,
+            "verticalPadding" : 8
+          },
+          "type" : "table"
         }
       }
     },
@@ -3502,6 +3573,38 @@
           "showActionMenu" : true,
           "showRowIndexColumn" : false,
           "step" : "Details_1",
+          "totals" : true,
+          "verticalPadding" : 8
+        },
+        "type" : "table"
+      },
+      "table_2" : {
+        "parameters" : {
+          "borderColor" : "#e0e5ee",
+          "borderWidth" : 1,
+          "cell" : {
+            "backgroundColor" : "#ffffff",
+            "fontColor" : "#16325c",
+            "fontSize" : 12
+          },
+          "columnProperties" : { },
+          "columns" : [ ],
+          "customBulkActions" : [ ],
+          "exploreLink" : true,
+          "header" : {
+            "backgroundColor" : "#f4f6f9",
+            "fontColor" : "#16325c",
+            "fontSize" : 12
+          },
+          "innerMajorBorderColor" : "#a8b7c7",
+          "innerMinorBorderColor" : "#e0e5ee",
+          "maxColumnWidth" : 300,
+          "minColumnWidth" : 40,
+          "mode" : "variable",
+          "numberOfLines" : 1,
+          "showActionMenu" : true,
+          "showRowIndexColumn" : false,
+          "step" : "lens_1",
           "totals" : true,
           "verticalPadding" : 8
         },

@@ -37,13 +37,13 @@
       {
         "fields" : [
           {
-            "dataSourceName" : "${App.Datasets.LoyaltyMemberTierHistory40.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_LoyaltyMemberTierHistory40.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "CreatedDate"
           },
           {
-            "dataSourceName" : "${App.Datasets.LoyaltyLedger_ManualActions66.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_LoyaltyLedger_ManualActions66.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "ActivityDate"
@@ -55,19 +55,19 @@
       {
         "fields" : [
           {
-            "dataSourceName" : "${App.Datasets.LoyaltyLedger_ManualActions66.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_LoyaltyLedger_ManualActions66.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "TransactionJournal_LoyaltyProgramMember_LoyaltyProgram_Name"
           },
           {
-            "dataSourceName" : "${App.Datasets.LoyaltyMemberTierHistory40.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_LoyaltyMemberTierHistory40.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "LoyaltyMemberTier_LoyaltyProgramMember_LoyaltyProgram_Name"
           },
           {
-            "dataSourceName" : "${App.Datasets.LoyaltyProgramTier66.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_LoyaltyProgramTier66.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "LoyaltyProgram_Name"
@@ -79,19 +79,19 @@
       {
         "fields" : [
           {
-            "dataSourceName" : "${App.Datasets.LoyaltyMemberTierHistory40.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_LoyaltyMemberTierHistory40.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "LoyaltyMemberTier_LoyaltyTier_LoyaltyTierGroup_Name"
           },
           {
-            "dataSourceName" : "${App.Datasets.LoyaltyLedger_ManualActions66.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_LoyaltyLedger_ManualActions66.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "LoyaltyTierMember_LoyaltyTier_LoyaltyTierGroup_Name"
           },
           {
-            "dataSourceName" : "${App.Datasets.LoyaltyProgramTier66.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_LoyaltyProgramTier66.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "LoyaltyTierGroup_Name"
@@ -103,19 +103,19 @@
       {
         "fields" : [
           {
-            "dataSourceName" : "${App.Datasets.LoyaltyMemberTierHistory40.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_LoyaltyMemberTierHistory40.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "LoyaltyMemberTier_LoyaltyMemberCurrency_LoyaltyProgramCurrency_NQP_Currency"
           },
           {
-            "dataSourceName" : "${App.Datasets.LoyaltyProgramTier66.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_LoyaltyProgramTier66.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "LoyaltyProgramCurrency_NQP_Currency"
           },
           {
-            "dataSourceName" : "${App.Datasets.LoyaltyProgramCurrency62.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_LoyaltyProgramCurrency62.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "NQP_Currency"
@@ -127,13 +127,13 @@
       {
         "fields" : [
           {
-            "dataSourceName" : "${App.Datasets.LoyaltyMemberTierHistory40.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_LoyaltyMemberTierHistory40.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "TransactionType"
           },
           {
-            "dataSourceName" : "${App.Datasets.LoyaltyLedger_ManualActions66.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_LoyaltyLedger_ManualActions66.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "TransactionType"
@@ -579,7 +579,7 @@
         "groups" : [ ],
         "label" : "PointsAwarded_Chart",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.LoyaltyLedger_ManualActions66.FullyQualifiedName}\";\nq = filter q by {{column(NQPCurrency_Name_1.selection, [\"NQP_Currency\"]).asEquality('LoyaltyProgramCurrency_NQP_Currency')}};\nq = filter q by 'TransactionType' == \"AdjustedPoints_Positive\";\nq = group q by ('ActivityDate_Year', 'ActivityDate_Month');\nq = foreach q generate 'ActivityDate_Year' , 'ActivityDate_Month' , sum('Points') as 'sum_Points';\nq = fill q by (dateCols=('ActivityDate_Year','ActivityDate_Month', \"Y-M\"));\nq = foreach q generate 'ActivityDate_Year' +\"~~~\"+ 'ActivityDate_Month' as 'ActivityDate_Year~~~ActivityDate_Month', sum(q.'sum_Points') as 'AdjustedPoints_Positive';\nq = order q by ('ActivityDate_Year~~~ActivityDate_Month' asc);\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.LoyRcg_LoyaltyLedger_ManualActions66.FullyQualifiedName}\";\nq = filter q by {{column(NQPCurrency_Name_1.selection, [\"NQP_Currency\"]).asEquality('LoyaltyProgramCurrency_NQP_Currency')}};\nq = filter q by 'TransactionType' == \"AdjustedPoints_Positive\";\nq = group q by ('ActivityDate_Year', 'ActivityDate_Month');\nq = foreach q generate 'ActivityDate_Year' , 'ActivityDate_Month' , sum('Points') as 'sum_Points';\nq = fill q by (dateCols=('ActivityDate_Year','ActivityDate_Month', \"Y-M\"));\nq = foreach q generate 'ActivityDate_Year' +\"~~~\"+ 'ActivityDate_Month' as 'ActivityDate_Year~~~ActivityDate_Month', sum(q.'sum_Points') as 'AdjustedPoints_Positive';\nq = order q by ('ActivityDate_Year~~~ActivityDate_Month' asc);\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "exclude",
           "steps" : [
@@ -702,7 +702,7 @@
         "groups" : [ ],
         "label" : "LoyaltyTierGroup_Name_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.LoyaltyProgramTier66.FullyQualifiedName}\";\nq = filter q by 'LoyaltyProgram_Name' == \"{{cell(LoyaltyProgram_Name_1.selection, 0, \"LoyaltyProgram_Name\").asString()}}\";\nq = group q by ('LoyaltyTierGroup_Name','LoyaltyTierGroup_IsPrimary');\nq = order q by 'LoyaltyTierGroup_IsPrimary' desc;\nq = foreach q generate 'LoyaltyTierGroup_Name' as 'LoyaltyTierGroup_Name', count() as 'count';\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.LoyRcg_LoyaltyProgramTier66.FullyQualifiedName}\";\nq = filter q by 'LoyaltyProgram_Name' == \"{{cell(LoyaltyProgram_Name_1.selection, 0, \"LoyaltyProgram_Name\").asString()}}\";\nq = group q by ('LoyaltyTierGroup_Name','LoyaltyTierGroup_IsPrimary');\nq = order q by 'LoyaltyTierGroup_IsPrimary' desc;\nq = foreach q generate 'LoyaltyTierGroup_Name' as 'LoyaltyTierGroup_Name', count() as 'count';\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "none",
           "steps" : [ ]
@@ -822,7 +822,7 @@
         "groups" : [ ],
         "label" : "Actions per Agent",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.LoyaltyLedger_ManualActions66.FullyQualifiedName}\";q = filter q by 'IncludeInManualActions' == \"True\";q = filter q by {{column(NQPCurrency_Name_1.selection, [\"NQP_Currency\"]).asEquality('LoyaltyProgramCurrency_NQP_Currency')}} or ('LoyaltyProgramCurrency_QP_Currency' is not null && 'LoyaltyProgramCurrency_QP_Currency' in all);\nq = group q by ('User_UniqueUserName','TransactionType');\nq = foreach q generate unique('TransactionJournalId') as 'Count','User_UniqueUserName' as 'User_UniqueUserName', 'TransactionType';\nhist = load \"${App.Datasets.LoyaltyMemberTierHistory40.FullyQualifiedName}\";\nhist = group hist by ('CreatedById','TransactionType');\nhist = foreach hist generate 'TransactionType','CreatedById' as 'User_UniqueUserName', count() as 'Count';\nresult = union hist, q;\nresult = group result by all;\nresult = foreach result generate  round(sum('Count')/ unique('User_UniqueUserName'),2) as 'Action_per_agent';",
+        "query" : "q = load \"${App.Datasets.LoyRcg_LoyaltyLedger_ManualActions66.FullyQualifiedName}\";q = filter q by 'IncludeInManualActions' == \"True\";q = filter q by {{column(NQPCurrency_Name_1.selection, [\"NQP_Currency\"]).asEquality('LoyaltyProgramCurrency_NQP_Currency')}} or ('LoyaltyProgramCurrency_QP_Currency' is not null && 'LoyaltyProgramCurrency_QP_Currency' in all);\nq = group q by ('User_UniqueUserName','TransactionType');\nq = foreach q generate unique('TransactionJournalId') as 'Count','User_UniqueUserName' as 'User_UniqueUserName', 'TransactionType';\nhist = load \"${App.Datasets.LoyRcg_LoyaltyMemberTierHistory40.FullyQualifiedName}\";\nhist = group hist by ('CreatedById','TransactionType');\nhist = foreach hist generate 'TransactionType','CreatedById' as 'User_UniqueUserName', count() as 'Count';\nresult = union hist, q;\nresult = group result by all;\nresult = foreach result generate  round(sum('Count')/ unique('User_UniqueUserName'),2) as 'Action_per_agent';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -892,7 +892,7 @@
         "groups" : [ ],
         "label" : "NQPCurrency_Name_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.LoyaltyProgramCurrency62.FullyQualifiedName}\";\nq = filter q by 'CurrencyType' == \"NonQualifying\";\nq = filter q by 'LoyaltyProgram_Name' == \"{{cell(LoyaltyProgram_Name_1.selection, 0, \"LoyaltyProgram_Name\").asString()}}\";\nq = group q by ('CurrencyType', 'NQP_Currency','IsPrimary');\nq = order q by ('CurrencyType' asc, 'IsPrimary' desc);\nq = foreach q generate 'CurrencyType' as 'LoyaltyProgramCurrency_CurrencyType', 'NQP_Currency' as 'NQP_Currency', count() as 'count';\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.LoyRcg_LoyaltyProgramCurrency62.FullyQualifiedName}\";\nq = filter q by 'CurrencyType' == \"NonQualifying\";\nq = filter q by 'LoyaltyProgram_Name' == \"{{cell(LoyaltyProgram_Name_1.selection, 0, \"LoyaltyProgram_Name\").asString()}}\";\nq = group q by ('CurrencyType', 'NQP_Currency','IsPrimary');\nq = order q by ('CurrencyType' asc, 'IsPrimary' desc);\nq = foreach q generate 'CurrencyType' as 'LoyaltyProgramCurrency_CurrencyType', 'NQP_Currency' as 'NQP_Currency', count() as 'count';\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "none",
           "steps" : [ ]
@@ -1012,7 +1012,7 @@
         "groups" : [ ],
         "label" : "MembersServicedKPI",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.LoyaltyLedger_ManualActions66.FullyQualifiedName}\";q = filter q by 'IncludeInManualActions' == \"True\";q = filter q by {{column(NQPCurrency_Name_1.selection, [\"NQP_Currency\"]).asEquality('LoyaltyProgramCurrency_NQP_Currency')}} or ('LoyaltyProgramCurrency_QP_Currency' is not null && 'LoyaltyProgramCurrency_QP_Currency' in all);\nq =  group q by ('LoyaltyProgramMemberId','TransactionType');\nq = foreach q generate 'LoyaltyProgramMemberId' as 'LoyaltyMemberId', 'TransactionType';\nhist = load \"${App.Datasets.LoyaltyMemberTierHistory40.FullyQualifiedName}\";\nhist = group hist by ('LoyaltyMemberTier_LoyaltyMemberId','TransactionType');\nhist = foreach hist generate 'TransactionType', 'LoyaltyMemberTier_LoyaltyMemberId' as 'LoyaltyMemberId';\nresult = union q, hist;\nresult = group result by all;\nresult = foreach result  generate unique('LoyaltyMemberId') as 'count';",
+        "query" : "q = load \"${App.Datasets.LoyRcg_LoyaltyLedger_ManualActions66.FullyQualifiedName}\";q = filter q by 'IncludeInManualActions' == \"True\";q = filter q by {{column(NQPCurrency_Name_1.selection, [\"NQP_Currency\"]).asEquality('LoyaltyProgramCurrency_NQP_Currency')}} or ('LoyaltyProgramCurrency_QP_Currency' is not null && 'LoyaltyProgramCurrency_QP_Currency' in all);\nq =  group q by ('LoyaltyProgramMemberId','TransactionType');\nq = foreach q generate 'LoyaltyProgramMemberId' as 'LoyaltyMemberId', 'TransactionType';\nhist = load \"${App.Datasets.LoyRcg_LoyaltyMemberTierHistory40.FullyQualifiedName}\";\nhist = group hist by ('LoyaltyMemberTier_LoyaltyMemberId','TransactionType');\nhist = foreach hist generate 'TransactionType', 'LoyaltyMemberTier_LoyaltyMemberId' as 'LoyaltyMemberId';\nresult = union q, hist;\nresult = group result by all;\nresult = foreach result  generate unique('LoyaltyMemberId') as 'count';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1132,7 +1132,7 @@
         "groups" : [ ],
         "label" : "MembersService_Timeline",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.LoyaltyLedger_ManualActions66.FullyQualifiedName}\";q = filter q by 'IncludeInManualActions' == \"True\";q = filter q by {{column(NQPCurrency_Name_1.selection, [\"NQP_Currency\"]).asEquality('LoyaltyProgramCurrency_NQP_Currency')}} or ('LoyaltyProgramCurrency_QP_Currency' is not null && 'LoyaltyProgramCurrency_QP_Currency' in all);\nq =  group q by ('ActivityDate_Year', 'ActivityDate_Month','LoyaltyProgramMemberId','TransactionType');\nq = foreach q generate 'ActivityDate_Year' + \"~~~\" + 'ActivityDate_Month' as 'ActivityDate_Year~~~ActivityDate_Month', 'LoyaltyProgramMemberId' as 'LoyaltyMemberId', 'TransactionType';\nhist = load \"${App.Datasets.LoyaltyMemberTierHistory40.FullyQualifiedName}\";\nhist = group hist by ('CreatedDate_Year', 'CreatedDate_Month','LoyaltyMemberTier_LoyaltyMemberId','TransactionType');\nhist = foreach hist generate 'CreatedDate_Year' + \"~~~\" + 'CreatedDate_Month' as 'ActivityDate_Year~~~ActivityDate_Month', 'LoyaltyMemberTier_LoyaltyMemberId' as 'LoyaltyMemberId',  'TransactionType';\nresult = union q, hist;\nresult = group result by ('ActivityDate_Year~~~ActivityDate_Month'); \nresult = foreach result  generate  'ActivityDate_Year~~~ActivityDate_Month' as 'ActivityDate_Year~~~ActivityDate_Month', unique('LoyaltyMemberId') as 'Members_with_Actions';",
+        "query" : "q = load \"${App.Datasets.LoyRcg_LoyaltyLedger_ManualActions66.FullyQualifiedName}\";q = filter q by 'IncludeInManualActions' == \"True\";q = filter q by {{column(NQPCurrency_Name_1.selection, [\"NQP_Currency\"]).asEquality('LoyaltyProgramCurrency_NQP_Currency')}} or ('LoyaltyProgramCurrency_QP_Currency' is not null && 'LoyaltyProgramCurrency_QP_Currency' in all);\nq =  group q by ('ActivityDate_Year', 'ActivityDate_Month','LoyaltyProgramMemberId','TransactionType');\nq = foreach q generate 'ActivityDate_Year' + \"~~~\" + 'ActivityDate_Month' as 'ActivityDate_Year~~~ActivityDate_Month', 'LoyaltyProgramMemberId' as 'LoyaltyMemberId', 'TransactionType';\nhist = load \"${App.Datasets.LoyRcg_LoyaltyMemberTierHistory40.FullyQualifiedName}\";\nhist = group hist by ('CreatedDate_Year', 'CreatedDate_Month','LoyaltyMemberTier_LoyaltyMemberId','TransactionType');\nhist = foreach hist generate 'CreatedDate_Year' + \"~~~\" + 'CreatedDate_Month' as 'ActivityDate_Year~~~ActivityDate_Month', 'LoyaltyMemberTier_LoyaltyMemberId' as 'LoyaltyMemberId',  'TransactionType';\nresult = union q, hist;\nresult = group result by ('ActivityDate_Year~~~ActivityDate_Month'); \nresult = foreach result  generate  'ActivityDate_Year~~~ActivityDate_Month' as 'ActivityDate_Year~~~ActivityDate_Month', unique('LoyaltyMemberId') as 'Members_with_Actions';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1237,7 +1237,7 @@
         "groups" : [ ],
         "label" : "Points_Awarded_Reduced",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.LoyaltyLedger_ManualActions66.FullyQualifiedName}\";q = filter q by {{column(NQPCurrency_Name_1.selection, [\"NQP_Currency\"]).asEquality('LoyaltyProgramCurrency_NQP_Currency')}};\nq_A = filter q by 'TransactionType' == \"AdjustedPoints_Positive\";\nq_B = filter q by 'TransactionType' == \"AdjustedPoints_Negative\";\nresult = group q_A by all full, q_B by all;\nresult = foreach result generate sum(q_A.'Points') as 'PointsAwarded', sum(q_B.'Points') as 'PointsReduced';\nresult = limit result 2000; ",
+        "query" : "q = load \"${App.Datasets.LoyRcg_LoyaltyLedger_ManualActions66.FullyQualifiedName}\";q = filter q by {{column(NQPCurrency_Name_1.selection, [\"NQP_Currency\"]).asEquality('LoyaltyProgramCurrency_NQP_Currency')}};\nq_A = filter q by 'TransactionType' == \"AdjustedPoints_Positive\";\nq_B = filter q by 'TransactionType' == \"AdjustedPoints_Negative\";\nresult = group q_A by all full, q_B by all;\nresult = foreach result generate sum(q_A.'Points') as 'PointsAwarded', sum(q_B.'Points') as 'PointsReduced';\nresult = limit result 2000; ",
         "receiveFacetSource" : {
           "mode" : "exclude",
           "steps" : [
@@ -1283,7 +1283,7 @@
         "groups" : [ ],
         "label" : "LoyaltyProgram_Name_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.LoyaltyProgramTier66.FullyQualifiedName}\";\nq = group q by 'LoyaltyProgram_Name';\nq = foreach q generate 'LoyaltyProgram_Name' as 'LoyaltyProgram_Name', count() as 'count';\nq = order q by 'LoyaltyProgram_Name' asc;\nq = limit q 500;",
+        "query" : "q = load \"${App.Datasets.LoyRcg_LoyaltyProgramTier66.FullyQualifiedName}\";\nq = group q by 'LoyaltyProgram_Name';\nq = foreach q generate 'LoyaltyProgram_Name' as 'LoyaltyProgram_Name', count() as 'count';\nq = order q by 'LoyaltyProgram_Name' asc;\nq = limit q 500;",
         "receiveFacetSource" : {
           "mode" : "none",
           "steps" : [ ]
@@ -1403,7 +1403,7 @@
         "groups" : [ ],
         "label" : "Actions",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.LoyaltyLedger_ManualActions66.FullyQualifiedName}\";q = filter q by 'IncludeInManualActions' == \"True\";q = filter q by {{column(NQPCurrency_Name_1.selection, [\"NQP_Currency\"]).asEquality('LoyaltyProgramCurrency_NQP_Currency')}} or ('LoyaltyProgramCurrency_QP_Currency' is not null && 'LoyaltyProgramCurrency_QP_Currency' in all);\nq = group q by 'TransactionType';\nq = foreach q generate 'TransactionType' as 'TransactionType', unique('TransactionJournalId') as 'Count';\nhist = load \"${App.Datasets.LoyaltyMemberTierHistory40.FullyQualifiedName}\";\nhist = group hist by 'TransactionType';\nhist = foreach hist generate  'TransactionType', count() as 'Count';\nresult = group q by 'TransactionType' full, hist by 'TransactionType';\nresult = foreach result generate coalesce(q.'TransactionType', hist.'TransactionType') as 'TransactionType', coalesce(sum(q.'Count'), sum(hist.'Count')) as 'Modifications';\nresult = order result by 'Modifications' desc;",
+        "query" : "q = load \"${App.Datasets.LoyRcg_LoyaltyLedger_ManualActions66.FullyQualifiedName}\";q = filter q by 'IncludeInManualActions' == \"True\";q = filter q by {{column(NQPCurrency_Name_1.selection, [\"NQP_Currency\"]).asEquality('LoyaltyProgramCurrency_NQP_Currency')}} or ('LoyaltyProgramCurrency_QP_Currency' is not null && 'LoyaltyProgramCurrency_QP_Currency' in all);\nq = group q by 'TransactionType';\nq = foreach q generate 'TransactionType' as 'TransactionType', unique('TransactionJournalId') as 'Count';\nhist = load \"${App.Datasets.LoyRcg_LoyaltyMemberTierHistory40.FullyQualifiedName}\";\nhist = group hist by 'TransactionType';\nhist = foreach hist generate  'TransactionType', count() as 'Count';\nresult = group q by 'TransactionType' full, hist by 'TransactionType';\nresult = foreach result generate coalesce(q.'TransactionType', hist.'TransactionType') as 'TransactionType', coalesce(sum(q.'Count'), sum(hist.'Count')) as 'Modifications';\nresult = order result by 'Modifications' desc;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1473,7 +1473,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.LoyaltyLedger_ManualActions66.Name}"
+            "name" : "${App.Datasets.LoyRcg_LoyaltyLedger_ManualActions66.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1517,7 +1517,7 @@
         "groups" : [ ],
         "label" : "PointsReducedChart",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.LoyaltyLedger_ManualActions66.FullyQualifiedName}\";\nq = filter q by 'TransactionType' == \"AdjustedPoints_Negative\";q = filter q by {{column(NQPCurrency_Name_1.selection, [\"NQP_Currency\"]).asEquality('LoyaltyProgramCurrency_NQP_Currency')}};\nq = group q by ('ActivityDate_Year', 'ActivityDate_Month');\nq = foreach q generate 'ActivityDate_Year' , 'ActivityDate_Month' , sum('Points') as 'sum_Points';\nq = fill q by (dateCols=('ActivityDate_Year','ActivityDate_Month', \"Y-M\"));\nq = foreach q generate 'ActivityDate_Year' +\"~~~\"+ 'ActivityDate_Month' as 'ActivityDate_Year~~~ActivityDate_Month',sum(q.'sum_Points') as 'AdjustedPoints_Negative';\nq = order q by ('ActivityDate_Year~~~ActivityDate_Month' asc);\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.LoyRcg_LoyaltyLedger_ManualActions66.FullyQualifiedName}\";\nq = filter q by 'TransactionType' == \"AdjustedPoints_Negative\";q = filter q by {{column(NQPCurrency_Name_1.selection, [\"NQP_Currency\"]).asEquality('LoyaltyProgramCurrency_NQP_Currency')}};\nq = group q by ('ActivityDate_Year', 'ActivityDate_Month');\nq = foreach q generate 'ActivityDate_Year' , 'ActivityDate_Month' , sum('Points') as 'sum_Points';\nq = fill q by (dateCols=('ActivityDate_Year','ActivityDate_Month', \"Y-M\"));\nq = foreach q generate 'ActivityDate_Year' +\"~~~\"+ 'ActivityDate_Month' as 'ActivityDate_Year~~~ActivityDate_Month',sum(q.'sum_Points') as 'AdjustedPoints_Negative';\nq = order q by ('ActivityDate_Year~~~ActivityDate_Month' asc);\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "exclude",
           "steps" : [

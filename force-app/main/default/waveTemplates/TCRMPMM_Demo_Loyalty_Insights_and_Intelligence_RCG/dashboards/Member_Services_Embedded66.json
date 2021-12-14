@@ -345,13 +345,13 @@
       {
         "fields" : [
           {
-            "dataSourceName" : "${App.Datasets.TransactionJournal66.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_TransactionJournal66.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "ActivityDate"
           },
           {
-            "dataSourceName" : "${App.Datasets.LoyaltyLedger66.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_LoyaltyLedger66.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "TransactionJournal_ActivityDate"
@@ -363,25 +363,25 @@
       {
         "fields" : [
           {
-            "dataSourceName" : "${App.Datasets.TransactionJournal66.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_TransactionJournal66.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "LoyaltyMemberCurrency_LoyaltyProgramCurrency_NQP_Currency"
           },
           {
-            "dataSourceName" : "${App.Datasets.LoyaltyLedger66.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_LoyaltyLedger66.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "LoyaltyProgramCurrency_NQP_Currency"
           },
           {
-            "dataSourceName" : "${App.Datasets.LoyaltyMemberCurrency66.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_LoyaltyMemberCurrency66.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "LoyaltyProgramCurrency_NQP_Currency"
           },
           {
-            "dataSourceName" : "${App.Datasets.LoyaltyMemberTier66.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_LoyaltyMemberTier66.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "LoyaltyMemberCurrency_LoyaltyProgramCurrency_NQP_Currency"
@@ -393,25 +393,25 @@
       {
         "fields" : [
           {
-            "dataSourceName" : "${App.Datasets.LoyaltyLedger66.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_LoyaltyLedger66.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "LoyaltyProgramMemberId"
           },
           {
-            "dataSourceName" : "${App.Datasets.TransactionJournal66.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_TransactionJournal66.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "MemberId"
           },
           {
-            "dataSourceName" : "${App.Datasets.LoyaltyMemberTier66.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_LoyaltyMemberTier66.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "LoyaltyMemberId"
           },
           {
-            "dataSourceName" : "${App.Datasets.LoyaltyMemberCurrency66.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_LoyaltyMemberCurrency66.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "LoyaltyMemberId"
@@ -1230,7 +1230,7 @@
         "groups" : [ ],
         "label" : "NQP Manual Actions",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.LoyaltyLedger66.FullyQualifiedName}\";\nq = filter q by 'TransactionType' in [\"AccrualReversal\", \"AdjustedPoints_Negative\", \"AdjustedPoints_Positive\", \"RedemptionReversal\"];\nq = filter q by 'IncludeInManualActions' == \"True\";\nq = group q by 'TransactionType';\nq = foreach q generate 'TransactionType' as 'TransactionType', unique('TransactionJournalId') as 'unique_TransactionJournalId';\nq = order q by 'TransactionType' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.LoyRcg_LoyaltyLedger66.FullyQualifiedName}\";\nq = filter q by 'TransactionType' in [\"AccrualReversal\", \"AdjustedPoints_Negative\", \"AdjustedPoints_Positive\", \"RedemptionReversal\"];\nq = filter q by 'IncludeInManualActions' == \"True\";\nq = group q by 'TransactionType';\nq = foreach q generate 'TransactionType' as 'TransactionType', unique('TransactionJournalId') as 'unique_TransactionJournalId';\nq = order q by 'TransactionType' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1309,7 +1309,7 @@
         "groups" : [ ],
         "label" : "Transactions Trend",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.TransactionJournal66.FullyQualifiedName}\";\nq = filter q by 'Status' == \"Processed\" && 'JournalType_Name' == \"Accrual\";\nresult = group q by ('ActivityDate_Year', 'ActivityDate_Month');\nresult = foreach result generate q.'ActivityDate_Year' as 'ActivityDate_Year', q.'ActivityDate_Month' as 'ActivityDate_Month', count(q) as 'Count', sum(q.'TransactionAmount') as 'TransactionAmount';\nresult = fill result by (dateCols=('ActivityDate_Year','ActivityDate_Month', \"Y-M\"));\nresult = foreach result generate 'ActivityDate_Year' + \"~~~\" + 'ActivityDate_Month' as 'ActivityDate_Year~~~ActivityDate_Month', 'Count', 'TransactionAmount';\nresult = order result by ('ActivityDate_Year~~~ActivityDate_Month' asc);\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.LoyRcg_TransactionJournal66.FullyQualifiedName}\";\nq = filter q by 'Status' == \"Processed\" && 'JournalType_Name' == \"Accrual\";\nresult = group q by ('ActivityDate_Year', 'ActivityDate_Month');\nresult = foreach result generate q.'ActivityDate_Year' as 'ActivityDate_Year', q.'ActivityDate_Month' as 'ActivityDate_Month', count(q) as 'Count', sum(q.'TransactionAmount') as 'TransactionAmount';\nresult = fill result by (dateCols=('ActivityDate_Year','ActivityDate_Month', \"Y-M\"));\nresult = foreach result generate 'ActivityDate_Year' + \"~~~\" + 'ActivityDate_Month' as 'ActivityDate_Year~~~ActivityDate_Month', 'Count', 'TransactionAmount';\nresult = order result by ('ActivityDate_Year~~~ActivityDate_Month' asc);\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1431,7 +1431,7 @@
         "groups" : [ ],
         "label" : "Descriptive_KPIs",
         "numbers" : [ ],
-        "query" : "TransactionJournal = load \"${App.Datasets.TransactionJournal66.FullyQualifiedName}\";\r\nTransactionJournal = filter TransactionJournal by 'JournalType_Name' == \"Accrual\" && 'Status' == \"Processed\" && 'LoyaltyProgramMember_ProgramId' == \"{{cell(GetMemberDetails_1.result, 0, \"LoyaltyProgramMember_ProgramId\").asString()}}\";\r\nLoyaltyLedger = load \"${App.Datasets.LoyaltyLedger66.FullyQualifiedName}\";\r\nLoyaltyLedger = filter LoyaltyLedger by 'TransactionJournal_LoyaltyProgramMember_ProgramId' == \"{{cell(GetMemberDetails_1.result, 0, \"LoyaltyProgramMember_ProgramId\").asString()}}\";\r\nNQP_redeemption = filter LoyaltyLedger by 'TransactionType' == \"Redemption\";\r\nLlyMemberCurrency = load \"${App.Datasets.LoyaltyMemberCurrency66.FullyQualifiedName}\";\r\nLlyMemberCurrency = filter LlyMemberCurrency by 'LoyaltyProgramMember_ProgramId' == \"{{cell(GetMemberDetails_1.result, 0, \"LoyaltyProgramMember_ProgramId\").asString()}}\";\r\nresult = group TransactionJournal by 'MemberId' full,  LoyaltyLedger by 'LoyaltyProgramMemberId' full, NQP_redeemption by 'LoyaltyProgramMemberId' full, LlyMemberCurrency by 'LoyaltyMemberId';\r\nresult = foreach result generate coalesce(TransactionJournal.'MemberId', LoyaltyLedger.'LoyaltyProgramMemberId', NQP_redeemption.'LoyaltyProgramMemberId', LlyMemberCurrency.'LoyaltyMemberId') as 'LoyaltyProgramMemberId', sum(LoyaltyLedger.'Total_Accrued_Points') as 'sum_NQP_Accrued_Points', case when sum(LoyaltyLedger.'Total_Accrued_Points') is not null then rank() over ([..] partition by all order by sum(LoyaltyLedger.'Total_Accrued_Points')) end as 'rank_NQP_Accrued_Points', sum(NQP_redeemption.'Points') as 'sum_NQP_Redeemed_Points', case when sum(NQP_redeemption.'Points') is not null then rank() over ([..] partition by all order by sum(NQP_redeemption.'Points')) end as 'rank_NQP_Redeemed_Points', sum(TransactionJournal.'TransactionAmount') as 'sum_TransactionAmount', case when sum(TransactionJournal.'TransactionAmount') is not null then rank() over ([..] partition by all order by sum(TransactionJournal.'TransactionAmount')) end as 'rank_TransactionAmount', sum(LlyMemberCurrency.'PointsBalance') as 'sum_PointsBalance', case when sum(LlyMemberCurrency.'PointsBalance') is not null then rank() over ([..] partition by all order by sum(LlyMemberCurrency.'PointsBalance')) end as 'rank_PointsBalance';\r\nresult = group result by 'LoyaltyProgramMemberId';\r\nresult = foreach result generate 'LoyaltyProgramMemberId', first('rank_NQP_Accrued_Points')/ max(first('rank_NQP_Accrued_Points')) over ([..] partition by all) as 'NQP_Accrued_Points_Percentile', first('rank_NQP_Redeemed_Points')/ max(first('rank_NQP_Redeemed_Points')) over ([..] partition by all) as 'NQP_Redeemed_Points_Percentile', first('rank_TransactionAmount')/ max(first('rank_TransactionAmount')) over ([..] partition by all) as 'TransactionAmount_Percentile', first('rank_PointsBalance')/ max(first('rank_PointsBalance')) over ([..] partition by all) as 'PointsBalance_Percentile';\r\nresult = filter result by 'LoyaltyProgramMemberId' == \"{{cell(GetMemberDetails_1.result, 0, \"MemberId\").asString()}}\";\r\nresult = foreach result generate 'LoyaltyProgramMemberId', coalesce('{{coalesce(cell(Static_KPI_1.selection, 0, \"Metric\"), 0).asString()}}',0) as 'Selected_Percentile', round(coalesce('{{coalesce(cell(Static_KPI_1.selection, 0, \"Metric\"), 0).asString()}}',0)*100, 0) as 'Selected_Percentile_Rounded', case when '{{coalesce(cell(Static_KPI_1.selection, 0, \"Metric\"), 0).asString()}}' is not null then \"Member is in \" else \" \" end as 'Start_Text', case when '{{coalesce(cell(Static_KPI_1.selection, 0, \"Metric\"), 0).asString()}}' is not null then \"on the basis of\" else \"                                      \" end as 'End_Text', case when '{{coalesce(cell(Static_KPI_1.selection, 0, \"Metric\"), 0).asString()}}' is not null then +\"percentile\" else \"No Data                         \" end as 'Percentile_Text';",
+        "query" : "TransactionJournal = load \"${App.Datasets.LoyRcg_TransactionJournal66.FullyQualifiedName}\";\r\nTransactionJournal = filter TransactionJournal by 'JournalType_Name' == \"Accrual\" && 'Status' == \"Processed\" && 'LoyaltyProgramMember_ProgramId' == \"{{cell(GetMemberDetails_1.result, 0, \"LoyaltyProgramMember_ProgramId\").asString()}}\";\r\nLoyaltyLedger = load \"${App.Datasets.LoyRcg_LoyaltyLedger66.FullyQualifiedName}\";\r\nLoyaltyLedger = filter LoyaltyLedger by 'TransactionJournal_LoyaltyProgramMember_ProgramId' == \"{{cell(GetMemberDetails_1.result, 0, \"LoyaltyProgramMember_ProgramId\").asString()}}\";\r\nNQP_redeemption = filter LoyaltyLedger by 'TransactionType' == \"Redemption\";\r\nLlyMemberCurrency = load \"${App.Datasets.LoyRcg_LoyaltyMemberCurrency66.FullyQualifiedName}\";\r\nLlyMemberCurrency = filter LlyMemberCurrency by 'LoyaltyProgramMember_ProgramId' == \"{{cell(GetMemberDetails_1.result, 0, \"LoyaltyProgramMember_ProgramId\").asString()}}\";\r\nresult = group TransactionJournal by 'MemberId' full,  LoyaltyLedger by 'LoyaltyProgramMemberId' full, NQP_redeemption by 'LoyaltyProgramMemberId' full, LlyMemberCurrency by 'LoyaltyMemberId';\r\nresult = foreach result generate coalesce(TransactionJournal.'MemberId', LoyaltyLedger.'LoyaltyProgramMemberId', NQP_redeemption.'LoyaltyProgramMemberId', LlyMemberCurrency.'LoyaltyMemberId') as 'LoyaltyProgramMemberId', sum(LoyaltyLedger.'Total_Accrued_Points') as 'sum_NQP_Accrued_Points', case when sum(LoyaltyLedger.'Total_Accrued_Points') is not null then rank() over ([..] partition by all order by sum(LoyaltyLedger.'Total_Accrued_Points')) end as 'rank_NQP_Accrued_Points', sum(NQP_redeemption.'Points') as 'sum_NQP_Redeemed_Points', case when sum(NQP_redeemption.'Points') is not null then rank() over ([..] partition by all order by sum(NQP_redeemption.'Points')) end as 'rank_NQP_Redeemed_Points', sum(TransactionJournal.'TransactionAmount') as 'sum_TransactionAmount', case when sum(TransactionJournal.'TransactionAmount') is not null then rank() over ([..] partition by all order by sum(TransactionJournal.'TransactionAmount')) end as 'rank_TransactionAmount', sum(LlyMemberCurrency.'PointsBalance') as 'sum_PointsBalance', case when sum(LlyMemberCurrency.'PointsBalance') is not null then rank() over ([..] partition by all order by sum(LlyMemberCurrency.'PointsBalance')) end as 'rank_PointsBalance';\r\nresult = group result by 'LoyaltyProgramMemberId';\r\nresult = foreach result generate 'LoyaltyProgramMemberId', first('rank_NQP_Accrued_Points')/ max(first('rank_NQP_Accrued_Points')) over ([..] partition by all) as 'NQP_Accrued_Points_Percentile', first('rank_NQP_Redeemed_Points')/ max(first('rank_NQP_Redeemed_Points')) over ([..] partition by all) as 'NQP_Redeemed_Points_Percentile', first('rank_TransactionAmount')/ max(first('rank_TransactionAmount')) over ([..] partition by all) as 'TransactionAmount_Percentile', first('rank_PointsBalance')/ max(first('rank_PointsBalance')) over ([..] partition by all) as 'PointsBalance_Percentile';\r\nresult = filter result by 'LoyaltyProgramMemberId' == \"{{cell(GetMemberDetails_1.result, 0, \"MemberId\").asString()}}\";\r\nresult = foreach result generate 'LoyaltyProgramMemberId', coalesce('{{coalesce(cell(Static_KPI_1.selection, 0, \"Metric\"), 0).asString()}}',0) as 'Selected_Percentile', round(coalesce('{{coalesce(cell(Static_KPI_1.selection, 0, \"Metric\"), 0).asString()}}',0)*100, 0) as 'Selected_Percentile_Rounded', case when '{{coalesce(cell(Static_KPI_1.selection, 0, \"Metric\"), 0).asString()}}' is not null then \"Member is in \" else \" \" end as 'Start_Text', case when '{{coalesce(cell(Static_KPI_1.selection, 0, \"Metric\"), 0).asString()}}' is not null then \"on the basis of\" else \"                                      \" end as 'End_Text', case when '{{coalesce(cell(Static_KPI_1.selection, 0, \"Metric\"), 0).asString()}}' is not null then +\"percentile\" else \"No Data                         \" end as 'Percentile_Text';",
         "receiveFacetSource" : {
           "mode" : "include",
           "steps" : [
@@ -1480,7 +1480,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.TransactionJournal66.Name}"
+            "name" : "${App.Datasets.LoyRcg_TransactionJournal66.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1562,7 +1562,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.TransactionJournal66.Name}"
+            "name" : "${App.Datasets.LoyRcg_TransactionJournal66.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1723,7 +1723,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.TransactionJournal66.Name}"
+            "name" : "${App.Datasets.LoyRcg_TransactionJournal66.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1766,7 +1766,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.LoyaltyLedger66.Name}"
+            "name" : "${App.Datasets.LoyRcg_LoyaltyLedger66.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1870,7 +1870,7 @@
         "groups" : [ ],
         "label" : "MemberRank_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.LoyaltyLedger66.FullyQualifiedName}\";\nq = group q by all;\nq = foreach q generate coalesce({{coalesce(cell(Descriptive_KPIs_1.result, 0, \"Selected_Percentile\"), 0).asString()}},0) as 'Selected_Percentile';\nq = limit q 1;",
+        "query" : "q = load \"${App.Datasets.LoyRcg_LoyaltyLedger66.FullyQualifiedName}\";\nq = group q by all;\nq = foreach q generate coalesce({{coalesce(cell(Descriptive_KPIs_1.result, 0, \"Selected_Percentile\"), 0).asString()}},0) as 'Selected_Percentile';\nq = limit q 1;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1936,7 +1936,7 @@
         "groups" : [ ],
         "label" : "NQP Manual Action Details",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.LoyaltyLedger66.FullyQualifiedName}\";\nq = filter q by 'IncludeInManualActions' == \"True\";\nq = filter q by 'TransactionType' in [\"AccrualReversal\", \"RedemptionReversal\", \"AdjustedPoints_Positive\", \"AdjustedPoints_Negative\"] && 'TransactionJournal_ActivityDate_Year' == \"{{coalesce(cell(NQP_ManualActions_Trend_1.selection, 0, \"TransactionJournal_ActivityDate_Year\"), \"NA\").asString()}}\" && 'TransactionJournal_ActivityDate_Month' == \"{{coalesce(cell(NQP_ManualActions_Trend_1.selection, 0, \"TransactionJournal_ActivityDate_Month\"), \"NA\").asString()}}\";\nq = foreach q generate 'TransactionType' as 'TransactionType', toDate('TransactionJournal_ActivityDate_sec_epoch') as 'Date', case when 'TransactionType' in [\"AccrualReversal\", \"AdjustedPoints_Negative\"] then 'Points'*-1 else 'Points' end as 'Points_with_Sign', 'User_UniqueUserName' as 'User_UniqueUserName', 'ChangeReasonType' as 'ChangeReasonType','AdditionalNotes' as 'AdditionalNotes';\nq = order q by 'Date' desc;",
+        "query" : "q = load \"${App.Datasets.LoyRcg_LoyaltyLedger66.FullyQualifiedName}\";\nq = filter q by 'IncludeInManualActions' == \"True\";\nq = filter q by 'TransactionType' in [\"AccrualReversal\", \"RedemptionReversal\", \"AdjustedPoints_Positive\", \"AdjustedPoints_Negative\"] && 'TransactionJournal_ActivityDate_Year' == \"{{coalesce(cell(NQP_ManualActions_Trend_1.selection, 0, \"TransactionJournal_ActivityDate_Year\"), \"NA\").asString()}}\" && 'TransactionJournal_ActivityDate_Month' == \"{{coalesce(cell(NQP_ManualActions_Trend_1.selection, 0, \"TransactionJournal_ActivityDate_Month\"), \"NA\").asString()}}\";\nq = foreach q generate 'TransactionType' as 'TransactionType', toDate('TransactionJournal_ActivityDate_sec_epoch') as 'Date', case when 'TransactionType' in [\"AccrualReversal\", \"AdjustedPoints_Negative\"] then 'Points'*-1 else 'Points' end as 'Points_with_Sign', 'User_UniqueUserName' as 'User_UniqueUserName', 'ChangeReasonType' as 'ChangeReasonType','AdditionalNotes' as 'AdditionalNotes';\nq = order q by 'Date' desc;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2019,7 +2019,7 @@
         "groups" : [ ],
         "label" : "NQP Manual Actions Trend",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.LoyaltyLedger66.FullyQualifiedName}\";\nq = filter q by 'IncludeInManualActions' == \"True\";\nq = filter q by 'TransactionType' in [\"AccrualReversal\", \"RedemptionReversal\", \"AdjustedPoints_Positive\", \"AdjustedPoints_Negative\"];\nq = group q by ('TransactionJournal_ActivityDate_Year', 'TransactionJournal_ActivityDate_Month', 'TransactionType');\nq = foreach q generate 'TransactionJournal_ActivityDate_Year', 'TransactionJournal_ActivityDate_Month', 'TransactionType', case when 'TransactionType' == \"AccrualReversal\" then sum('Points')*-1 end as 'sum_AccrualReversal', case when 'TransactionType' == \"RedemptionReversal\" then sum('Points') end as 'sum_RedemptionReversal', case when 'TransactionType' == \"AdjustedPoints_Positive\" then sum('Points') end as 'sum_AdjustedPointsPositive', case when 'TransactionType' == \"AdjustedPoints_Negative\" then sum('Points')*-1 end as 'sum_AdjustedPointsNegative';\nresult = group q by ('TransactionJournal_ActivityDate_Year', 'TransactionJournal_ActivityDate_Month');\nresult = foreach result generate q.'TransactionJournal_ActivityDate_Year' as 'TransactionJournal_ActivityDate_Year', q.'TransactionJournal_ActivityDate_Month' as 'TransactionJournal_ActivityDate_Month', coalesce(sum(q.'sum_AccrualReversal'),0) as 'NQP_Accrual_Reversal_Points', coalesce(sum(q.'sum_RedemptionReversal'),0) as 'NQP_Redemption_Reversal_Points', coalesce(sum(q.'sum_AdjustedPointsPositive'),0) as 'NQP_Adjusted_Points_Positive', coalesce(sum(q.'sum_AdjustedPointsNegative'),0) as 'NQP_Adjusted_Points_Negative';\nresult = fill result by (dateCols=('TransactionJournal_ActivityDate_Year','TransactionJournal_ActivityDate_Month', \"Y-M\"));\nresult = foreach result generate 'TransactionJournal_ActivityDate_Year' + \"~~~\" + 'TransactionJournal_ActivityDate_Month' as 'TransactionJournal_ActivityDate_Year~~~TransactionJournal_ActivityDate_Month', 'TransactionJournal_ActivityDate_Year' as 'TransactionJournal_ActivityDate_Year', 'TransactionJournal_ActivityDate_Month' as 'TransactionJournal_ActivityDate_Month', 'NQP_Accrual_Reversal_Points', 'NQP_Redemption_Reversal_Points', 'NQP_Adjusted_Points_Positive', 'NQP_Adjusted_Points_Negative';\nresult = order result by ('TransactionJournal_ActivityDate_Year~~~TransactionJournal_ActivityDate_Month' asc);\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.LoyRcg_LoyaltyLedger66.FullyQualifiedName}\";\nq = filter q by 'IncludeInManualActions' == \"True\";\nq = filter q by 'TransactionType' in [\"AccrualReversal\", \"RedemptionReversal\", \"AdjustedPoints_Positive\", \"AdjustedPoints_Negative\"];\nq = group q by ('TransactionJournal_ActivityDate_Year', 'TransactionJournal_ActivityDate_Month', 'TransactionType');\nq = foreach q generate 'TransactionJournal_ActivityDate_Year', 'TransactionJournal_ActivityDate_Month', 'TransactionType', case when 'TransactionType' == \"AccrualReversal\" then sum('Points')*-1 end as 'sum_AccrualReversal', case when 'TransactionType' == \"RedemptionReversal\" then sum('Points') end as 'sum_RedemptionReversal', case when 'TransactionType' == \"AdjustedPoints_Positive\" then sum('Points') end as 'sum_AdjustedPointsPositive', case when 'TransactionType' == \"AdjustedPoints_Negative\" then sum('Points')*-1 end as 'sum_AdjustedPointsNegative';\nresult = group q by ('TransactionJournal_ActivityDate_Year', 'TransactionJournal_ActivityDate_Month');\nresult = foreach result generate q.'TransactionJournal_ActivityDate_Year' as 'TransactionJournal_ActivityDate_Year', q.'TransactionJournal_ActivityDate_Month' as 'TransactionJournal_ActivityDate_Month', coalesce(sum(q.'sum_AccrualReversal'),0) as 'NQP_Accrual_Reversal_Points', coalesce(sum(q.'sum_RedemptionReversal'),0) as 'NQP_Redemption_Reversal_Points', coalesce(sum(q.'sum_AdjustedPointsPositive'),0) as 'NQP_Adjusted_Points_Positive', coalesce(sum(q.'sum_AdjustedPointsNegative'),0) as 'NQP_Adjusted_Points_Negative';\nresult = fill result by (dateCols=('TransactionJournal_ActivityDate_Year','TransactionJournal_ActivityDate_Month', \"Y-M\"));\nresult = foreach result generate 'TransactionJournal_ActivityDate_Year' + \"~~~\" + 'TransactionJournal_ActivityDate_Month' as 'TransactionJournal_ActivityDate_Year~~~TransactionJournal_ActivityDate_Month', 'TransactionJournal_ActivityDate_Year' as 'TransactionJournal_ActivityDate_Year', 'TransactionJournal_ActivityDate_Month' as 'TransactionJournal_ActivityDate_Month', 'NQP_Accrual_Reversal_Points', 'NQP_Redemption_Reversal_Points', 'NQP_Adjusted_Points_Positive', 'NQP_Adjusted_Points_Negative';\nresult = order result by ('TransactionJournal_ActivityDate_Year~~~TransactionJournal_ActivityDate_Month' asc);\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2136,7 +2136,7 @@
         "groups" : [ ],
         "label" : "NQP",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.LoyaltyMemberCurrency66.FullyQualifiedName}\";\nresult = group q by ('LoyaltyProgramCurrency_NQP_Currency','LoyaltyProgramCurrency_IsPrimary');\nresult = order result by ('LoyaltyProgramCurrency_IsPrimary' desc);\nresult = foreach result generate 'LoyaltyProgramCurrency_NQP_Currency' as 'LoyaltyProgramCurrency_NQP_Currency', count() as 'A';\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.LoyRcg_LoyaltyMemberCurrency66.FullyQualifiedName}\";\nresult = group q by ('LoyaltyProgramCurrency_NQP_Currency','LoyaltyProgramCurrency_IsPrimary');\nresult = order result by ('LoyaltyProgramCurrency_IsPrimary' desc);\nresult = foreach result generate 'LoyaltyProgramCurrency_NQP_Currency' as 'LoyaltyProgramCurrency_NQP_Currency', count() as 'A';\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2180,7 +2180,7 @@
         "groups" : [ ],
         "label" : "Table_Header_Text",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.LoyaltyLedger66.FullyQualifiedName}\";\nq = group q by all;\nq = foreach q generate case when {{cell(NQP_ManualActions_Trend_1.selection, 0, \"TransactionJournal_ActivityDate_Year\").asString()}} is null then \"Modifications from Selected Month\" else \"Modifications in\" end as 'Activities_Text';\nq = limit q 1;",
+        "query" : "q = load \"${App.Datasets.LoyRcg_LoyaltyLedger66.FullyQualifiedName}\";\nq = group q by all;\nq = foreach q generate case when {{cell(NQP_ManualActions_Trend_1.selection, 0, \"TransactionJournal_ActivityDate_Year\").asString()}} is null then \"Modifications from Selected Month\" else \"Modifications in\" end as 'Activities_Text';\nq = limit q 1;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2227,7 +2227,7 @@
         "groups" : [ ],
         "label" : "TransactionJournal_A_2",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.LoyaltyLedger66.FullyQualifiedName}\";\nq_B = filter q by 'TransactionType' == \"Redemption\";\nresult = group q by ('TransactionJournal_ActivityDate_Year', 'TransactionJournal_ActivityDate_Month') full, q_B by ('TransactionJournal_ActivityDate_Year', 'TransactionJournal_ActivityDate_Month');\nresult = foreach result generate coalesce(q.'TransactionJournal_ActivityDate_Year', q_B.'TransactionJournal_ActivityDate_Year') as 'TransactionJournal_ActivityDate_Year', coalesce(q.'TransactionJournal_ActivityDate_Month', q_B.'TransactionJournal_ActivityDate_Month') as 'TransactionJournal_ActivityDate_Month', sum(q_B.'Points') as 'NQP_Redeemed_Points', sum(q.'Total_Accrued_Points') as 'NQP_Accrued_Points';\nresult = fill result by (dateCols=('TransactionJournal_ActivityDate_Year','TransactionJournal_ActivityDate_Month', \"Y-M\"));\nresult = foreach result generate 'TransactionJournal_ActivityDate_Year' + \"~~~\" + 'TransactionJournal_ActivityDate_Month' as 'TransactionJournal_ActivityDate_Year~~~TransactionJournal_ActivityDate_Month', 'NQP_Redeemed_Points', 'NQP_Accrued_Points';\nresult = order result by ('TransactionJournal_ActivityDate_Year~~~TransactionJournal_ActivityDate_Month' asc);\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.LoyRcg_LoyaltyLedger66.FullyQualifiedName}\";\nq_B = filter q by 'TransactionType' == \"Redemption\";\nresult = group q by ('TransactionJournal_ActivityDate_Year', 'TransactionJournal_ActivityDate_Month') full, q_B by ('TransactionJournal_ActivityDate_Year', 'TransactionJournal_ActivityDate_Month');\nresult = foreach result generate coalesce(q.'TransactionJournal_ActivityDate_Year', q_B.'TransactionJournal_ActivityDate_Year') as 'TransactionJournal_ActivityDate_Year', coalesce(q.'TransactionJournal_ActivityDate_Month', q_B.'TransactionJournal_ActivityDate_Month') as 'TransactionJournal_ActivityDate_Month', sum(q_B.'Points') as 'NQP_Redeemed_Points', sum(q.'Total_Accrued_Points') as 'NQP_Accrued_Points';\nresult = fill result by (dateCols=('TransactionJournal_ActivityDate_Year','TransactionJournal_ActivityDate_Month', \"Y-M\"));\nresult = foreach result generate 'TransactionJournal_ActivityDate_Year' + \"~~~\" + 'TransactionJournal_ActivityDate_Month' as 'TransactionJournal_ActivityDate_Year~~~TransactionJournal_ActivityDate_Month', 'NQP_Redeemed_Points', 'NQP_Accrued_Points';\nresult = order result by ('TransactionJournal_ActivityDate_Year~~~TransactionJournal_ActivityDate_Month' asc);\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]

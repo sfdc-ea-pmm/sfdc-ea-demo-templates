@@ -20,13 +20,13 @@
       {
         "fields" : [
           {
-            "dataSourceName" : "${App.Datasets.LoyaltyMemberTier66.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_LoyaltyMemberTier66.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "LoyaltyMemberId"
           },
           {
-            "dataSourceName" : "${App.Datasets.SurveyQuestionResponse53.Name}",
+            "dataSourceName" : "${App.Datasets.LoyRcg_SurveyQuestionResponse53.Name}",
             "dataSourceNamespace" : "${Org.Namespace}",
             "dataSourceType" : "dataset",
             "fieldName" : "SurveySubject_Participant_LoyaltyMemberId"
@@ -39,7 +39,7 @@
     "filters" : [
       {
         "dataset" : {
-          "name" : "${App.Datasets.SurveyQuestionResponse53.Name}"
+          "name" : "${App.Datasets.LoyRcg_SurveyQuestionResponse53.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -251,7 +251,7 @@
         "groups" : [ ],
         "label" : "Latest_NPS",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.SurveyQuestionResponse53.FullyQualifiedName}\";\nq = filter q by 'SurveyQuestion_QuestionType' == \"NPS\";\nq = filter q by 'SurveySubject_SurveyInvitation_ParticipantId' is not null or 'SurveySubject_SubjectEntityType' == \"TransactionJournal\";\nq = foreach q generate 'SurveyVersion_SurveyId', 'SurveyVersionId', 'QuestionId', 'SurveyResponse_CompletionDateTime', 'NumberValue';\nq = order q by ('SurveyResponse_CompletionDateTime' desc);\nresult = group q by ('SurveyVersion_SurveyId', 'SurveyVersionId', 'QuestionId');\nresult = foreach result generate q.'SurveyVersion_SurveyId' as 'SurveyVersion_SurveyId', q.'SurveyVersionId' as 'SurveyVersionId', q.'QuestionId' as 'QuestionId', first(q.'NumberValue') as 'Value', count(q) as 'count';",
+        "query" : "q = load \"${App.Datasets.LoyRcg_SurveyQuestionResponse53.FullyQualifiedName}\";\nq = filter q by 'SurveyQuestion_QuestionType' == \"NPS\";\nq = filter q by 'SurveySubject_SurveyInvitation_ParticipantId' is not null or 'SurveySubject_SubjectEntityType' == \"TransactionJournal\";\nq = foreach q generate 'SurveyVersion_SurveyId', 'SurveyVersionId', 'QuestionId', 'SurveyResponse_CompletionDateTime', 'NumberValue';\nq = order q by ('SurveyResponse_CompletionDateTime' desc);\nresult = group q by ('SurveyVersion_SurveyId', 'SurveyVersionId', 'QuestionId');\nresult = foreach result generate q.'SurveyVersion_SurveyId' as 'SurveyVersion_SurveyId', q.'SurveyVersionId' as 'SurveyVersionId', q.'QuestionId' as 'QuestionId', first(q.'NumberValue') as 'Value', count(q) as 'count';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -295,7 +295,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.LoyaltyMemberTier66.Name}"
+            "name" : "${App.Datasets.LoyRcg_LoyaltyMemberTier66.Name}"
           }
         ],
         "isGlobal" : false,
@@ -377,7 +377,7 @@
         "groups" : [ ],
         "label" : "Overall NPS",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.SurveyQuestionResponse53.FullyQualifiedName}\";\nq = filter q by 'SurveyQuestion_QuestionType' == \"NPS\";\nq = filter q by 'SurveySubject_SurveyInvitation_ParticipantId' is not null or 'SurveySubject_SubjectEntityType' == \"TransactionJournal\";\nq = filter q by 'SurveySubject_SubjectId' == \"{{cell(Member_1.result, 0, \"LoyaltyProgramMember_ProgramId\").asString()}}\";\nPromoters = filter q by 'NPS_Response_Bucket' == \"Promoters\";\nDetractors = filter q by 'NPS_Response_Bucket' == \"Detractors\";\nresult = group q by all left, Promoters by all full, Detractors by all;\nresult = foreach result generate coalesce((count(Promoters) - count(Detractors))/count(q) ,0)*100 as 'Overall_NPS';",
+        "query" : "q = load \"${App.Datasets.LoyRcg_SurveyQuestionResponse53.FullyQualifiedName}\";\nq = filter q by 'SurveyQuestion_QuestionType' == \"NPS\";\nq = filter q by 'SurveySubject_SurveyInvitation_ParticipantId' is not null or 'SurveySubject_SubjectEntityType' == \"TransactionJournal\";\nq = filter q by 'SurveySubject_SubjectId' == \"{{cell(Member_1.result, 0, \"LoyaltyProgramMember_ProgramId\").asString()}}\";\nPromoters = filter q by 'NPS_Response_Bucket' == \"Promoters\";\nDetractors = filter q by 'NPS_Response_Bucket' == \"Detractors\";\nresult = group q by all left, Promoters by all full, Detractors by all;\nresult = foreach result generate coalesce((count(Promoters) - count(Detractors))/count(q) ,0)*100 as 'Overall_NPS';",
         "receiveFacetSource" : {
           "mode" : "none",
           "steps" : [ ]
@@ -537,7 +537,7 @@
           "filters" : [
             {
               "dataset" : {
-                "name" : "${App.Datasets.SurveyQuestionResponse53.Name}"
+                "name" : "${App.Datasets.LoyRcg_SurveyQuestionResponse53.Name}"
               },
               "field" : "SurveyResponse_CompletionDateTime"
             }
