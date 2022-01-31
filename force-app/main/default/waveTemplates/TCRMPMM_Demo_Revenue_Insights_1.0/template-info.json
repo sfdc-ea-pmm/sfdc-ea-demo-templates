@@ -1,0 +1,95 @@
+{
+  "templateType" : "app",
+  "label" : "Demo | Revenue Insights 1.0",
+  "name" : "Demo_Revenue_Insights_1_0",
+  "description" : "",
+  "assetVersion" : 54.0,
+  "variableDefinition" : "variables.json",
+  "uiDefinition" : "ui.json",
+  "rules" : [
+    {
+      "type" : "templateToApp",
+      "file" : "template-to-app-rules.json"
+    },
+    {
+      "type" : "appToTemplate",
+      "file" : "app-to-template-rules.json"
+    }
+  ],
+  "releaseInfo" : {
+    "templateVersion" : "1.0",
+    "notesFile" : "releaseNotes.html"
+  },
+  "folderDefinition" : "folder.json",
+  "externalFiles" : [
+    {
+      "label" : "Demo Revenue Insights",
+      "name" : "Demo_Revenue_Insights",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/Demo_Revenue_Insights.csv",
+      "type" : "CSV",
+      "schema" : "external_files/Demo_Revenue_Insights.json",
+      "userXmd" : "external_files/Demo_Revenue_Insights_XMD.json",
+      "rows" : 5
+    }
+  ],
+  "lenses" : [ ],
+  "dashboards" : [
+    {
+      "label" : "[DEMO] Revenue Insights",
+      "name" : "DEMO_Revenue_Insights_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/DEMO_Revenue_Insights.json"
+    }
+  ],
+  "components" : [ ],
+  "eltDataflows" : [ ],
+  "recipes" : [ 
+    {
+      "label": "User Recipe",
+      "name": "revinsights_user_recipe",
+      "file": "recipes/revinsights_user_w_userrole_recipe.json"
+    },
+    {
+      "label": "Opportunity Recipe",
+      "name": "revinsights_opportunity_recipe",
+      "file": "recipes/revinsights_opportunity_recipe.json"
+    },
+    {
+      "condition": "${Variables.Has_Activities == 'Yes'}",
+      "label": "Activity Recipe",
+      "name": "revinsights_activity_recipe",
+      "file": "recipes/revinsights_activity_recipe.json"
+    },
+    {
+      "label": "Main Recipe",
+      "name": "RevInsightsMainRecipe",
+      "file": "recipes/RevInsightsMainRecipe.json"
+    },
+    {
+      "label" : "Demo | Revenue Insights 1.0",
+      "name" : "Demo_Revenue_Insights_1_0",
+      "file" : "recipes/DemoRevenueInsightsRecipe.json"
+    }
+  ],
+  "datasetFiles" : [ ],
+  "storedQueries" : [ ],
+  "imageFiles" : [ ],
+  "extendedTypes" : { },
+  "templateDependencies" : [
+    {
+      "namespace" : "sfdc_internal",
+      "name" : "RevenueInsights",
+      "templateVersion" : ">=0.1"
+    }
+  ],
+  "icons" : {
+    "appBadge" : {
+      "name" : "16.png"
+    },
+    "templateBadge" : {
+      "name" : "default.png"
+    },
+    "templatePreviews" : [ ]
+  }
+}
