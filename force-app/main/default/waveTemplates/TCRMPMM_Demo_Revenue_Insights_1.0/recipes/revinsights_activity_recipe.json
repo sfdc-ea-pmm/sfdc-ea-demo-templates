@@ -1,0 +1,1167 @@
+{
+    "format": "R3",
+    "label": "Activity Recipe",
+    "name": "revinsights_activity_recipe",
+    "publishingTarget": "DATASET",
+    "recipeDefinition": {
+        "nodes": {
+            "APPEND0": {
+                "action": "appendV2",
+                "parameters": {
+                    "fieldMappings": [
+                        {
+                            "bottom": "Id",
+                            "top": "Id"
+                        },
+                        {
+                            "bottom": "WhoId",
+                            "top": "WhoId"
+                        },
+                        {
+                            "bottom": "WhatId",
+                            "top": "WhatId"
+                        },
+                        {
+                            "bottom": "Subject",
+                            "top": "Subject"
+                        },
+                        {
+                            "bottom": "ActivityDate",
+                            "top": "ActivityDate"
+                        },
+                        {
+                            "bottom": "CallDurationInSeconds",
+                            "top": "DurationInMinutes"
+                        },
+                        {
+                            "bottom": "AccountId",
+                            "top": "AccountId"
+                        },
+                        {
+                            "bottom": "OwnerId",
+                            "top": "OwnerId"
+                        },
+                        {
+                            "bottom": "CreatedDate",
+                            "top": "CreatedDate"
+                        },
+                        {
+                            "bottom": "CreatedById",
+                            "top": "CreatedById"
+                        },
+                        {
+                            "bottom": "LastModifiedDate",
+                            "top": "LastModifiedDate"
+                        },
+                        {
+                            "bottom": "EventSubtype",
+                            "top": "EventSubtype"
+                        },
+                        {
+                            "bottom": "TaskSubtype",
+                            "top": "TaskSubtype"
+                        },
+                        {
+                            "bottom": "Status"
+                        },
+                        {
+                            "bottom": "Priority"
+                        }
+                    ]
+                },
+                "sources": [
+                    "EDIT_ATTRIBUTES1",
+                    "EDIT_ATTRIBUTES2"
+                ]
+            },
+            "EDIT_ATTRIBUTES0": {
+                "action": "schema",
+                "parameters": {
+                    "fields": [
+                        {
+                            "name": "Id_formula1",
+                            "newProperties": {
+                                "label": "IsOverdue",
+                                "name": "IsOverdue"
+                            }
+                        }
+                    ]
+                },
+                "sources": [
+                    "FORMULA2"
+                ]
+            },
+            "EDIT_ATTRIBUTES1": {
+                "action": "schema",
+                "parameters": {
+                    "fields": [
+                        {
+                            "name": "Id_formula",
+                            "newProperties": {
+                                "label": "Task Subtype",
+                                "name": "TaskSubtype"
+                            }
+                        }
+                    ]
+                },
+                "sources": [
+                    "FORMULA1"
+                ]
+            },
+            "EDIT_ATTRIBUTES10": {
+                "action": "schema",
+                "parameters": {
+                    "fields": [
+                        {
+                            "name": "Id_formula",
+                            "newProperties": {
+                                "label": "Event Count",
+                                "name": "EventCount"
+                            }
+                        }
+                    ]
+                },
+                "sources": [
+                    "FORMULA10"
+                ]
+            },
+            "EDIT_ATTRIBUTES11": {
+                "action": "schema",
+                "parameters": {
+                    "fields": [
+                        {
+                            "name": "EventCount_formula",
+                            "newProperties": {
+                                "label": "Task Count",
+                                "name": "TaskCount"
+                            }
+                        }
+                    ]
+                },
+                "sources": [
+                    "FORMULA11"
+                ]
+            },
+            "EDIT_ATTRIBUTES2": {
+                "action": "schema",
+                "parameters": {
+                    "fields": [
+                        {
+                            "name": "Id_formula",
+                            "newProperties": {
+                                "label": "Event Subtype",
+                                "name": "EventSubtype"
+                            }
+                        }
+                    ]
+                },
+                "sources": [
+                    "FORMULA0"
+                ]
+            },
+            "EDIT_ATTRIBUTES3": {
+                "action": "schema",
+                "parameters": {
+                    "fields": [
+                        {
+                            "name": "IsOverdue_formula",
+                            "newProperties": {
+                                "label": "DaysOverdue",
+                                "name": "DaysOverdue"
+                            }
+                        }
+                    ]
+                },
+                "sources": [
+                    "FORMULA3"
+                ]
+            },
+            "EDIT_ATTRIBUTES4": {
+                "action": "schema",
+                "parameters": {
+                    "fields": [
+                        {
+                            "name": "Id_formula",
+                            "newProperties": {
+                                "label": "Days Since Last Activity",
+                                "name": "DaysSinceLastActivity"
+                            }
+                        }
+                    ]
+                },
+                "sources": [
+                    "FORMULA4"
+                ]
+            },
+            "EDIT_ATTRIBUTES5": {
+                "action": "schema",
+                "parameters": {
+                    "fields": [
+                        {
+                            "name": "Id_formula",
+                            "newProperties": {
+                                "label": "User.Name",
+                                "name": "User.Name"
+                            }
+                        }
+                    ]
+                },
+                "sources": [
+                    "FORMULA5"
+                ]
+            },
+            "EDIT_ATTRIBUTES6": {
+                "action": "schema",
+                "parameters": {
+                    "fields": [
+                        {
+                            "name": "User.Name_formula",
+                            "newProperties": {
+                                "label": "User.UniqueUserName",
+                                "name": "User.UniqueUserName"
+                            }
+                        }
+                    ]
+                },
+                "sources": [
+                    "FORMULA6"
+                ]
+            },
+            "EDIT_ATTRIBUTES7": {
+                "action": "schema",
+                "parameters": {
+                    "fields": [
+                        {
+                            "name": "Id_formula",
+                            "newProperties": {
+                                "label": "Activity Count",
+                                "name": "ActivityCount"
+                            }
+                        }
+                    ]
+                },
+                "sources": [
+                    "FORMULA7"
+                ]
+            },
+            "EDIT_ATTRIBUTES8": {
+                "action": "schema",
+                "parameters": {
+                    "fields": [
+                        {
+                            "name": "Id_formula",
+                            "newProperties": {
+                                "label": "Call Count",
+                                "name": "CallCount"
+                            }
+                        }
+                    ]
+                },
+                "sources": [
+                    "FORMULA8"
+                ]
+            },
+            "EDIT_ATTRIBUTES9": {
+                "action": "schema",
+                "parameters": {
+                    "fields": [
+                        {
+                            "name": "CallCount_formula",
+                            "newProperties": {
+                                "label": "Email Count",
+                                "name": "EmailCount"
+                            }
+                        }
+                    ]
+                },
+                "sources": [
+                    "FORMULA9"
+                ]
+            },
+            "FORMULA0": {
+                "action": "formula",
+                "parameters": {
+                    "expressionType": "SQL",
+                    "fields": [
+                        {
+                            "defaultValue": "",
+                            "formulaExpression": "TaskSubtype",
+                            "label": "Event Subtype",
+                            "name": "Id_formula",
+                            "precision": 255,
+                            "type": "TEXT"
+                        }
+                    ]
+                },
+                "sources": [
+                    "LOAD_DATASET0"
+                ]
+            },
+            "FORMULA1": {
+                "action": "formula",
+                "parameters": {
+                    "expressionType": "SQL",
+                    "fields": [
+                        {
+                            "defaultValue": "",
+                            "formulaExpression": "EventSubtype",
+                            "label": "Task Subtype",
+                            "name": "Id_formula",
+                            "precision": 255,
+                            "type": "TEXT"
+                        }
+                    ]
+                },
+                "sources": [
+                    "LOAD_DATASET1"
+                ]
+            },
+            "FORMULA10": {
+                "action": "formula",
+                "parameters": {
+                    "expressionType": "SQL",
+                    "fields": [
+                        {
+                            "defaultValue": "",
+                            "formulaExpression": "case \n\twhen \"EventSubtype\" = 'Event'\n\tthen 1\n\telse 0\nend",
+                            "label": "Event Count",
+                            "name": "Id_formula",
+                            "precision": 10,
+                            "scale": 0,
+                            "type": "NUMBER"
+                        }
+                    ]
+                },
+                "sources": [
+                    "EDIT_ATTRIBUTES9"
+                ]
+            },
+            "FORMULA11": {
+                "action": "formula",
+                "parameters": {
+                    "expressionType": "SQL",
+                    "fields": [
+                        {
+                            "defaultValue": "",
+                            "formulaExpression": "case \n\twhen \"EventSubtype\" = 'Task'\n\tthen 1\n\telse 0\nend",
+                            "label": "Task Count",
+                            "name": "EventCount_formula",
+                            "precision": 10,
+                            "scale": 0,
+                            "type": "NUMBER"
+                        }
+                    ]
+                },
+                "sources": [
+                    "EDIT_ATTRIBUTES10"
+                ]
+            },
+            "FORMULA2": {
+                "action": "formula",
+                "parameters": {
+                    "expressionType": "SQL",
+                    "fields": [
+                        {
+                            "defaultValue": "",
+                            "formulaExpression": "case \n\twhen \"Opp.IsClosed\" in ('false') and datediff(now(), to_date(ActivityDate, 'yyyy-MM-dd')) > 0\n\tthen 'true'\n\telse\n\t'false'\nend",
+                            "label": "IsOverdue",
+                            "name": "Id_formula1",
+                            "precision": 255,
+                            "type": "TEXT"
+                        }
+                    ]
+                },
+                "sources": [
+                    "JOIN3"
+                ]
+            },
+            "FORMULA3": {
+                "action": "formula",
+                "parameters": {
+                    "expressionType": "SQL",
+                    "fields": [
+                        {
+                            "defaultValue": "",
+                            "formulaExpression": "case \n\twhen IsOverdue in ('true')\n\tthen datediff(now(),to_date(ActivityDate, 'yyyy-MM-dd'))\n\telse\n\t0\nend",
+                            "label": "DaysOverdue",
+                            "name": "IsOverdue_formula",
+                            "precision": 10,
+                            "scale": 0,
+                            "type": "NUMBER"
+                        }
+                    ]
+                },
+                "sources": [
+                    "EDIT_ATTRIBUTES0"
+                ]
+            },
+            "FORMULA4": {
+                "action": "formula",
+                "parameters": {
+                    "expressionType": "SQL",
+                    "fields": [
+                        {
+                            "defaultValue": "",
+                            "formulaExpression": "datediff(now(),\"Account.LastActivityDate\")",
+                            "label": "Days Since Last Activity",
+                            "name": "Id_formula",
+                            "precision": 10,
+                            "scale": 0,
+                            "type": "NUMBER"
+                        }
+                    ]
+                },
+                "sources": [
+                    "EDIT_ATTRIBUTES3"
+                ]
+            },
+            "FORMULA5": {
+                "action": "formula",
+                "parameters": {
+                    "expressionType": "SQL",
+                    "fields": [
+                        {
+                            "defaultValue": "",
+                            "formulaExpression": "\"Owner.Name\"",
+                            "label": "User.Name",
+                            "name": "Id_formula",
+                            "precision": 255,
+                            "type": "TEXT"
+                        }
+                    ]
+                },
+                "sources": [
+                    "EDIT_ATTRIBUTES4"
+                ]
+            },
+            "FORMULA6": {
+                "action": "formula",
+                "parameters": {
+                    "expressionType": "SQL",
+                    "fields": [
+                        {
+                            "defaultValue": "",
+                            "formulaExpression": "\"Owner.UniqueUserName\"",
+                            "label": "User.UniqueUserName",
+                            "name": "User.Name_formula",
+                            "precision": 255,
+                            "type": "TEXT"
+                        }
+                    ]
+                },
+                "sources": [
+                    "EDIT_ATTRIBUTES5"
+                ]
+            },
+            "FORMULA7": {
+                "action": "formula",
+                "parameters": {
+                    "expressionType": "SQL",
+                    "fields": [
+                        {
+                            "defaultValue": "",
+                            "formulaExpression": "1",
+                            "label": "Activity Count",
+                            "name": "Id_formula",
+                            "precision": 10,
+                            "scale": 0,
+                            "type": "NUMBER"
+                        }
+                    ]
+                },
+                "sources": [
+                    "EDIT_ATTRIBUTES6"
+                ]
+            },
+            "FORMULA8": {
+                "action": "formula",
+                "parameters": {
+                    "expressionType": "SQL",
+                    "fields": [
+                        {
+                            "defaultValue": "",
+                            "formulaExpression": "case \n\twhen \"EventSubtype\" = 'Call'\n\tthen 1\n\telse 0\nend",
+                            "label": "Call Count",
+                            "name": "Id_formula",
+                            "precision": 10,
+                            "scale": 0,
+                            "type": "NUMBER"
+                        }
+                    ]
+                },
+                "sources": [
+                    "EDIT_ATTRIBUTES7"
+                ]
+            },
+            "FORMULA9": {
+                "action": "formula",
+                "parameters": {
+                    "expressionType": "SQL",
+                    "fields": [
+                        {
+                            "defaultValue": "",
+                            "formulaExpression": "case \n\twhen \"EventSubtype\" = 'Email'\n\tthen 1\n\telse 0\nend",
+                            "label": "Email Count",
+                            "name": "CallCount_formula",
+                            "precision": 10,
+                            "scale": 0,
+                            "type": "NUMBER"
+                        }
+                    ]
+                },
+                "sources": [
+                    "EDIT_ATTRIBUTES8"
+                ]
+            },
+            "JOIN0": {
+                "action": "join",
+                "parameters": {
+                    "joinType": "LOOKUP",
+                    "leftKeys": [
+                        "OwnerId"
+                    ],
+                    "rightKeys": [
+                        "Id"
+                    ],
+                    "rightQualifier": "Owner"
+                },
+                "schema": {
+                    "fields": [],
+                    "slice": {
+                        "fields": [
+                            "Owner.Id"
+                        ],
+                        "ignoreMissingFields": true,
+                        "mode": "DROP"
+                    }
+                },
+                "sources": [
+                    "APPEND0",
+                    "LOAD_DATASET6"
+                ]
+            },
+            "JOIN2": {
+                "action": "join",
+                "parameters": {
+                    "joinType": "LOOKUP",
+                    "leftKeys": [
+                        "WhatId"
+                    ],
+                    "rightKeys": [
+                        "Id"
+                    ],
+                    "rightQualifier": "Opp"
+                },
+                "schema": {
+                    "fields": [],
+                    "slice": {
+                        "fields": [
+                            "Opp.LastModifiedDate",
+                            "Opp.HasOpportunityLineItem",
+                            "Opp.IsDeleted"
+                        ],
+                        "ignoreMissingFields": true,
+                        "mode": "DROP"
+                    }
+                },
+                "sources": [
+                    "JOIN0",
+                    "LOAD_DATASET4"
+                ]
+            },
+            "JOIN3": {
+                "action": "join",
+                "parameters": {
+                    "joinType": "LOOKUP",
+                    "leftKeys": [
+                        "AccountId"
+                    ],
+                    "rightKeys": [
+                        "Id"
+                    ],
+                    "rightQualifier": "Account"
+                },
+                "schema": {
+                    "fields": [],
+                    "slice": {
+                        "fields": [
+                            "Account.LastModifiedDate",
+                            "Account.Description",
+                            "Account.BillingCity",
+                            "Account.JigsawCompanyId",
+                            "Account.OwnerId",
+                            "Account.Phone",
+                            "Account.AccountSource",
+                            "Account.Owner.Email",
+                            "Account.ShippingCountry",
+                            "Account.BillingPostalCode",
+                            "Account.ShippingCity",
+                            "Account.Owner.Username",
+                            "Account.LastViewedDate",
+                            "Account.ShippingStreet",
+                            "Account.Type",
+                            "Account.BillingCountry",
+                            "Account.BillingStreet",
+                            "Account.ShippingPostalCode",
+                            "Account.CreatedDate",
+                            "Account.ShippingState",
+                            "Account.Id",
+                            "Account.BillingState",
+                            "Account.Jigsaw",
+                            "Account.NumberOfEmployees",
+                            "Account.AnnualRevenue"
+                        ],
+                        "ignoreMissingFields": true,
+                        "mode": "DROP"
+                    }
+                },
+                "sources": [
+                    "JOIN2",
+                    "LOAD_DATASET5"
+                ]
+            },
+            "LOAD_DATASET0": {
+                "action": "load",
+                "parameters": {
+                    "dataset": {
+                        "connectionName": "SFDC_LOCAL",
+                        "label": "Task",
+                        "sourceObjectName": "Task",
+                        "type": "connectedDataset"
+                    },
+                    "fields": [
+                        "Id",
+                        "WhoId",
+                        "WhatId",
+                        "Subject",
+                        "ActivityDate",
+                        "Status",
+                        "Priority",
+                        "IsHighPriority",
+                        "OwnerId",
+                        "Description",
+                        "AccountId",
+                        "IsClosed",
+                        "CreatedDate",
+                        "CreatedById",
+                        "LastModifiedDate",
+                        "CallDurationInSeconds",
+                        "CallType",
+                        "CallDisposition",
+                        "CallObject",
+                        "TaskSubtype"
+                    ]
+                },
+                "sources": []
+            },
+            "LOAD_DATASET1": {
+                "action": "load",
+                "parameters": {
+                    "dataset": {
+                        "connectionName": "SFDC_LOCAL",
+                        "label": "Event",
+                        "sourceObjectName": "Event",
+                        "type": "connectedDataset"
+                    },
+                    "fields": [
+                        "Id",
+                        "WhoId",
+                        "WhatId",
+                        "Subject",
+                        "Location",
+                        "ActivityDate",
+                        "DurationInMinutes",
+                        "EndDateTime",
+                        "AccountId",
+                        "OwnerId",
+                        "ShowAs",
+                        "CreatedDate",
+                        "CreatedById",
+                        "LastModifiedDate",
+                        "EventSubtype"
+                    ]
+                },
+                "sources": []
+            },
+            "LOAD_DATASET4": {
+                "action": "load",
+                "parameters": {
+                    "dataset": {
+                        "label": "Opportunity",
+                        "name": "${App.Datasets.Opportunity.FullyQualifiedName}",
+                        "type": "analyticsDataset"
+                    },
+                    "fields": [
+                        "LastModifiedDate",
+                        "AccountId",
+                        "HasOpportunityLineItem",
+                        "Account.Owner.UniqueUserName",
+                        "ForecastCategory",
+                        "CloseDate",
+                        "Name",
+                        "HasOpenActivity",
+                        "Owner.Email",
+                        "Owner.Username",
+                        "Account.ParentId",
+                        "IsDeleted",
+                        "LeadSource",
+                        "CreatedDate",
+                        "HasOverdueTask",
+                        "Id",
+                        "ForecastCategoryName",
+                        "NextStep",
+                        "Account.LastActivityDate",
+                        "Owner.UniqueUserName",
+                        "Description",
+                        "IsClosed",
+                        "Account.Industry",
+                        "OwnerId",
+                        "IsWon",
+                        "Account.Owner.Username",
+                        "Owner.Name",
+                        "StageName",
+                        "Account.Owner.Name",
+                        "Type",
+                        "Account.Owner.Email",
+                        "LastActivityDate",
+                        "Account.Name",
+                        "Amount"
+                    ]
+                },
+                "sources": []
+            },
+            "LOAD_DATASET5": {
+                "action": "load",
+                "parameters": {
+                    "dataset": {
+                        "label": "Account",
+                        "name": "${App.Datasets.Account.FullyQualifiedName}",
+                        "type": "analyticsDataset"
+                    },
+                    "fields": [
+                        "LastModifiedDate",
+                        "Owner.UniqueUserName",
+                        "Description",
+                        "BillingCity",
+                        "JigsawCompanyId",
+                        "Name",
+                        "Industry",
+                        "OwnerId",
+                        "Phone",
+                        "AccountSource",
+                        "Owner.Email",
+                        "ShippingCountry",
+                        "BillingPostalCode",
+                        "ShippingCity",
+                        "PhotoUrl",
+                        "Owner.Username",
+                        "MasterRecordId",
+                        "ParentId",
+                        "Owner.Name",
+                        "LastViewedDate",
+                        "ShippingStreet",
+                        "Type",
+                        "BillingCountry",
+                        "BillingStreet",
+                        "ShippingPostalCode",
+                        "CreatedDate",
+                        "LastActivityDate",
+                        "ShippingState",
+                        "Id",
+                        "BillingState",
+                        "Jigsaw",
+                        "NumberOfEmployees",
+                        "AnnualRevenue"
+                    ]
+                },
+                "sources": []
+            },
+            "LOAD_DATASET6": {
+                "action": "load",
+                "parameters": {
+                    "dataset": {
+                        "label": "UserRole",
+                        "name": "${App.Datasets.userrole_revinsights.FullyQualifiedName}",
+                        "type": "analyticsDataset"
+                    },
+                    "fields": [
+                        "Role.RoleNames",
+                        "UniqueUserName",
+                        "Roles.ForecastManager.UniqueUserName",
+                        "Roles.ParentRole.Name",
+                        "Email",
+                        "TimeZoneSidKey",
+                        "UserRoleId",
+                        "IsActive",
+                        "Role.Role.ParentRole.Id",
+                        "Roles.RolePath",
+                        "Role.RolesNamesPath",
+                        "ForecastEnabled",
+                        "Roles.ForecastManager.Name",
+                        "Roles.ParentRole.DeveloperName",
+                        "Name",
+                        "Roles.ForecastManager.ForecastEnabled",
+                        "Roles.ForecastUserId",
+                        "Roles.ParentRole.ForecastManager.UniqueUserName",
+                        "isDuplicate",
+                        "SmallPhotoUrl",
+                        "FirstName",
+                        "Roles.Name",
+                        "Roles.Id",
+                        "Roles.ParentRole.ForecastManager.Name",
+                        "Roles.ParentRole.ForecastUserId",
+                        "Username",
+                        "Role.Role.ParentRole.ForecastUserId",
+                        "Roles.DeveloperName",
+                        "Roles.ParentRole.Id",
+                        "Id",
+                        "LastName",
+                        "UserType",
+                        "Roles.Roles"
+                    ]
+                },
+                "sources": []
+            },
+            "OUTPUT0": {
+                "action": "save",
+                "parameters": {
+                    "dataset": {
+                        "folderName": "${App.Folder.FullyQualifiedName}",
+                        "label": "Activity",
+                        "name": "${App.Datasets.Activity.FullyQualifiedName}",
+                        "type": "analyticsDataset"
+                    },
+                    "fields": []
+                },
+                "sources": [
+                    "EDIT_ATTRIBUTES11"
+                ]
+            }
+        },
+        "ui": {
+            "connectors": [
+                {
+                    "source": "JOIN0",
+                    "target": "JOIN2"
+                },
+                {
+                    "source": "LOAD_DATASET0",
+                    "target": "TRANSFORM0"
+                },
+                {
+                    "source": "LOAD_DATASET1",
+                    "target": "TRANSFORM1"
+                },
+                {
+                    "source": "TRANSFORM1",
+                    "target": "APPEND0"
+                },
+                {
+                    "source": "TRANSFORM0",
+                    "target": "APPEND0"
+                },
+                {
+                    "source": "APPEND0",
+                    "target": "JOIN0"
+                },
+                {
+                    "source": "LOAD_DATASET4",
+                    "target": "JOIN2"
+                },
+                {
+                    "source": "JOIN3",
+                    "target": "TRANSFORM2"
+                },
+                {
+                    "source": "TRANSFORM2",
+                    "target": "OUTPUT0"
+                },
+                {
+                    "source": "JOIN2",
+                    "target": "JOIN3"
+                },
+                {
+                    "source": "LOAD_DATASET5",
+                    "target": "JOIN3"
+                },
+                {
+                    "source": "LOAD_DATASET6",
+                    "target": "JOIN0"
+                }
+            ],
+            "hiddenColumns": [],
+            "nodes": {
+                "APPEND0": {
+                    "label": "Append",
+                    "left": 392,
+                    "top": 252,
+                    "type": "APPEND"
+                },
+                "JOIN0": {
+                    "description": "",
+                    "label": "Join Owner onto Activity",
+                    "left": 532,
+                    "top": 252,
+                    "type": "JOIN"
+                },
+                "JOIN2": {
+                    "description": "",
+                    "label": "Join Opportunity onto Activity",
+                    "left": 672,
+                    "top": 252.2,
+                    "type": "JOIN"
+                },
+                "JOIN3": {
+                    "description": "",
+                    "label": "Join Account onto Activity",
+                    "left": 812.1,
+                    "top": 252.39999999999998,
+                    "type": "JOIN"
+                },
+                "LOAD_DATASET0": {
+                    "label": "Task",
+                    "left": 112,
+                    "parameters": {
+                        "sampleSize": 2000
+                    },
+                    "top": 112,
+                    "type": "LOAD_DATASET"
+                },
+                "LOAD_DATASET1": {
+                    "label": "Event",
+                    "left": 112,
+                    "parameters": {
+                        "sampleSize": 2000
+                    },
+                    "top": 252,
+                    "type": "LOAD_DATASET"
+                },
+                "LOAD_DATASET4": {
+                    "description": "",
+                    "label": "Load Opportunity Dataset",
+                    "left": 112.30000000000001,
+                    "parameters": {
+                        "sampleSize": 2000
+                    },
+                    "top": 532.1,
+                    "type": "LOAD_DATASET"
+                },
+                "LOAD_DATASET5": {
+                    "description": "",
+                    "label": "Load Account Dataset",
+                    "left": 112.19999999999999,
+                    "parameters": {
+                        "sampleSize": 2000
+                    },
+                    "top": 672,
+                    "type": "LOAD_DATASET"
+                },
+                "LOAD_DATASET6": {
+                    "label": "UserRole",
+                    "left": 112,
+                    "parameters": {
+                        "sampleSize": 2000
+                    },
+                    "top": 392.1,
+                    "type": "LOAD_DATASET"
+                },
+                "OUTPUT0": {
+                    "description": "",
+                    "label": "Save Activity",
+                    "left": 1092,
+                    "top": 252.2,
+                    "type": "OUTPUT"
+                },
+                "TRANSFORM0": {
+                    "connectors": [
+                        {
+                            "source": "FORMULA0",
+                            "target": "EDIT_ATTRIBUTES2"
+                        }
+                    ],
+                    "graph": {
+                        "EDIT_ATTRIBUTES2": null,
+                        "FORMULA0": {
+                            "parameters": {
+                                "type": "BASE_FORMULA_UI"
+                            }
+                        }
+                    },
+                    "label": "Transform",
+                    "left": 252,
+                    "top": 112,
+                    "type": "TRANSFORM"
+                },
+                "TRANSFORM1": {
+                    "connectors": [
+                        {
+                            "source": "FORMULA1",
+                            "target": "EDIT_ATTRIBUTES1"
+                        }
+                    ],
+                    "graph": {
+                        "EDIT_ATTRIBUTES1": null,
+                        "FORMULA1": {
+                            "parameters": {
+                                "type": "BASE_FORMULA_UI"
+                            }
+                        }
+                    },
+                    "label": "Transform",
+                    "left": 252,
+                    "top": 252,
+                    "type": "TRANSFORM"
+                },
+                "TRANSFORM2": {
+                    "connectors": [
+                        {
+                            "source": "FORMULA2",
+                            "target": "EDIT_ATTRIBUTES0"
+                        },
+                        {
+                            "source": "EDIT_ATTRIBUTES0",
+                            "target": "FORMULA3"
+                        },
+                        {
+                            "source": "FORMULA3",
+                            "target": "EDIT_ATTRIBUTES3"
+                        },
+                        {
+                            "source": "EDIT_ATTRIBUTES3",
+                            "target": "FORMULA4"
+                        },
+                        {
+                            "source": "FORMULA4",
+                            "target": "EDIT_ATTRIBUTES4"
+                        },
+                        {
+                            "source": "EDIT_ATTRIBUTES4",
+                            "target": "FORMULA5"
+                        },
+                        {
+                            "source": "FORMULA5",
+                            "target": "EDIT_ATTRIBUTES5"
+                        },
+                        {
+                            "source": "EDIT_ATTRIBUTES5",
+                            "target": "FORMULA6"
+                        },
+                        {
+                            "source": "FORMULA6",
+                            "target": "EDIT_ATTRIBUTES6"
+                        },
+                        {
+                            "source": "EDIT_ATTRIBUTES6",
+                            "target": "FORMULA7"
+                        },
+                        {
+                            "source": "FORMULA7",
+                            "target": "EDIT_ATTRIBUTES7"
+                        },
+                        {
+                            "source": "EDIT_ATTRIBUTES7",
+                            "target": "FORMULA8"
+                        },
+                        {
+                            "source": "FORMULA8",
+                            "target": "EDIT_ATTRIBUTES8"
+                        },
+                        {
+                            "source": "EDIT_ATTRIBUTES8",
+                            "target": "FORMULA9"
+                        },
+                        {
+                            "source": "FORMULA9",
+                            "target": "EDIT_ATTRIBUTES9"
+                        },
+                        {
+                            "source": "EDIT_ATTRIBUTES9",
+                            "target": "FORMULA10"
+                        },
+                        {
+                            "source": "FORMULA10",
+                            "target": "EDIT_ATTRIBUTES10"
+                        },
+                        {
+                            "source": "EDIT_ATTRIBUTES10",
+                            "target": "FORMULA11"
+                        },
+                        {
+                            "source": "FORMULA11",
+                            "target": "EDIT_ATTRIBUTES11"
+                        }
+                    ],
+                    "graph": {
+                        "EDIT_ATTRIBUTES0": null,
+                        "EDIT_ATTRIBUTES10": null,
+                        "EDIT_ATTRIBUTES11": null,
+                        "EDIT_ATTRIBUTES3": null,
+                        "EDIT_ATTRIBUTES4": null,
+                        "EDIT_ATTRIBUTES5": null,
+                        "EDIT_ATTRIBUTES6": null,
+                        "EDIT_ATTRIBUTES7": null,
+                        "EDIT_ATTRIBUTES8": null,
+                        "EDIT_ATTRIBUTES9": null,
+                        "FORMULA10": {
+                            "parameters": {
+                                "type": "BASE_FORMULA_UI"
+                            }
+                        },
+                        "FORMULA11": {
+                            "parameters": {
+                                "type": "BASE_FORMULA_UI"
+                            }
+                        },
+                        "FORMULA2": {
+                            "parameters": {
+                                "type": "BASE_FORMULA_UI"
+                            }
+                        },
+                        "FORMULA3": {
+                            "parameters": {
+                                "type": "BASE_FORMULA_UI"
+                            }
+                        },
+                        "FORMULA4": {
+                            "parameters": {
+                                "type": "BASE_FORMULA_UI"
+                            }
+                        },
+                        "FORMULA5": {
+                            "parameters": {
+                                "type": "BASE_FORMULA_UI"
+                            }
+                        },
+                        "FORMULA6": {
+                            "parameters": {
+                                "type": "BASE_FORMULA_UI"
+                            }
+                        },
+                        "FORMULA7": {
+                            "parameters": {
+                                "type": "BASE_FORMULA_UI"
+                            }
+                        },
+                        "FORMULA8": {
+                            "parameters": {
+                                "type": "BASE_FORMULA_UI"
+                            }
+                        },
+                        "FORMULA9": {
+                            "parameters": {
+                                "type": "BASE_FORMULA_UI"
+                            }
+                        }
+                    },
+                    "label": "Transform",
+                    "left": 952.1,
+                    "top": 252.3,
+                    "type": "TRANSFORM"
+                }
+            }
+        },
+        "version": "54.0"
+    },
+    "scheduleExpression": null,
+    "scheduleType": null
+}
