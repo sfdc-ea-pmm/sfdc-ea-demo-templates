@@ -972,7 +972,9 @@
                         "Id",
                         "LastName",
                         "UserType",
-                        "Roles.Roles"
+                        "Roles.Roles",
+                        "Role.ForecastUserIds",
+                        "Role.ForecastUserIdsPath"
                     ]
                 },
                 "sources": []
@@ -1091,6 +1093,7 @@
                         "folderName": "${App.Folder.FullyQualifiedName}",
                         "label": "Opportunity RevInsights",
                         "name": "${App.Datasets.opportunity_revinsights.FullyQualifiedName}",
+                        "rowLevelSecurityFilter": "'Owner.Roles.Roles' == \"$User.UserRoleId\" || 'OwnerId' == \"$User.Id\" || 'Account.OwnerId' == \"$User.Id\"",
                         "type": "analyticsDataset"
                     },
                     "fields": []
@@ -1106,6 +1109,7 @@
                         "folderName": "${App.Folder.FullyQualifiedName}",
                         "label": "Forecasting Quota",
                         "name": "${App.Datasets.forecastingquota_revinsights.FullyQualifiedName}",
+                        "rowLevelSecurityFilter": "'Quota.Roles.Roles' == \"$User.UserRoleId\" || 'Quota.Id' == \"$User.Id\"",
                         "type": "analyticsDataset"
                     },
                     "fields": []
@@ -1121,6 +1125,7 @@
                         "folderName": "${App.Folder.FullyQualifiedName}",
                         "label": "Forecast",
                         "name": "${App.Datasets.forecast_revinsights.FullyQualifiedName}",
+                        "rowLevelSecurityFilter": "'User.Roles.Roles' == \"$User.UserRoleId\" || 'User.Id' == \"$User.Id\"",
                         "type": "analyticsDataset"
                     },
                     "fields": []

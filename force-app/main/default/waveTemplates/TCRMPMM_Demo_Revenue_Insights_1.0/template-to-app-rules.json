@@ -1,5 +1,666 @@
 {
-  "constants" : [ ],
-  "macros" : [ ],
-  "rules" : [ ]
+  "constants": [
+    {
+      "name": "Fiscal_Month_Offset",
+      "value": "${Variables.FY_Month_Offset_Map[Variables.Fiscal_Month]}"
+    },
+    {
+      "name": "First_Day_Of_Week_Number",
+      "value": "${Variables.First_Day_Of_Week}"
+    },
+    {
+      "name": "Fiscal_Prefix",
+      "value": "${Variables.FY_Month_Offset_Map[Variables.Fiscal_Month] == '0' ? '' : 'fiscal_'}"
+    },
+    {
+      "name": "Fiscal_Postfix",
+      "value": "${Variables.FY_Month_Offset_Map[Variables.Fiscal_Month] == '0' ? '' : '_Fiscal'}"
+    },
+    {
+      "name": "Predicted_Win_Rate_SAQL_Projection",
+      "value": "sum(q1.'PredictedWinRate') as 'sum_PredictedWinRate', "
+    },
+    {
+      "name": "Pipeline_Progression_Details_Table_Win_Rate_Column",
+      "value": "${Variables.Has_Minimum_Data_For_EDStory == 'Yes' ? Constants.Predicted_Win_Rate_SAQL_Projection : ''}"
+    }
+  ],
+  "rules":
+  [
+    {
+      "name": "RemoveOpportunityProductsFromDataflow",
+      "condition": "${Variables.Has_Products == 'No'}",
+      "appliesTo": [
+        {
+          "type": "workflow",
+          "name": "RevenueInsights"
+        }
+      ],
+      "actions": [
+        {
+          "action": "delete",
+          "description": "Delete Extract_Product node",
+          "path": "$.workflowDefinition.Extract_Product"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Extract_PricebookEntry nodes",
+          "path": "$.workflowDefinition.Extract_PricebookEntry"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Extract_OpportunityLineItem nodes",
+          "path": "$.workflowDefinition.Extract_OpportunityLineItem"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Opportunities_No_Products node",
+          "path": "$.workflowDefinition.Opportunities_No_Products"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Compute_Opportunities_No_Products node",
+          "path": "$.workflowDefinition.Compute_Opportunities_No_Products"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Compute_Opportunities_No_Products_Id node",
+          "path": "$.workflowDefinition.Compute_Opportunities_No_Products_Id"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Append_LineItems node",
+          "path": "$.workflowDefinition.Append_LineItems"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Discount_Field node",
+          "path": "$.workflowDefinition.Discount_Field"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Join_OpportunityLineItemPricebookEntry node",
+          "path": "$.workflowDefinition.Join_OpportunityLineItemPricebookEntry"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Join_OpportunityLineItemPricebookEntryProduct node",
+          "path": "$.workflowDefinition.Join_OpportunityLineItemPricebookEntryProduct"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Join_OpportunityToOpportunityLineItemPricebookEntryProduct node",
+          "path": "$.workflowDefinition.Join_OpportunityToOpportunityLineItemPricebookEntryProduct"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Register_OpportunityProducts node",
+          "path": "$.workflowDefinition.Register_OpportunityProducts"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Register_Product node",
+          "path": "$.workflowDefinition.Register_Product"
+        }
+      ]
+    },
+    {
+      "name": "RemoveOpportunitySplitsFromDataflow",
+      "condition": "${Variables.Has_OpportunitySplits == 'No'}",
+      "appliesTo": [
+        {
+          "type": "workflow",
+          "name": "RevenueInsights"
+        }
+      ],
+      "actions": [
+        {
+          "action": "delete",
+          "description": "Delete Splits register node",
+          "path": "$.workflowDefinition.Register_OpportunitySplits"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Splits nodes",
+          "path": "$.workflowDefinition.Join_OpportunitySplit_Opportunity"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Splits nodes",
+          "path": "$.workflowDefinition.Join_OpportunitySplit_UserRoles"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Splits nodes",
+          "path": "$.workflowDefinition.Join_OpportunitySplit_Type"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Extract Splits nodes",
+          "path": "$.workflowDefinition.Extract_OpportunitySplits"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Extract SplitType nodes",
+          "path": "$.workflowDefinition.Extract_OpportunitySplitType"
+        }
+      ]
+    },
+    {
+      "name": "RemoveCollaborativeForecastQuotaFromDataflow",
+      "condition": "${Variables.Has_CollaborativeForecastingQuota == 'No'}",
+      "appliesTo": [
+        {
+          "type": "workflow",
+          "name": "RevenueInsights"
+        }
+      ],
+      "actions": [
+        {
+          "action": "set",
+          "description": "Change which node gets registered",
+          "path": "$.workflowDefinition.Register_Quota_with_Roles.parameters.source",
+          "value": "Join_Quota_UserRoles"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Collab Quota nodes",
+          "path": "$.workflowDefinition.Join_ForecastingQuota_UserRoles"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Collab Quota nodes",
+          "path": "$.workflowDefinition.Extract_ForecastingQuota"
+        }
+      ]
+    },
+    {
+      "name": "RemoveQuotaCSVFromDataflow",
+      "condition": "${Variables.Has_CollaborativeForecastingQuota == 'Yes'}",
+      "appliesTo": [
+        {
+          "type": "workflow",
+          "name": "RevenueInsights"
+        }
+      ],
+      "actions": [
+        {
+          "action": "delete",
+          "description": "Delete quota CSV nodes",
+          "path": "$.workflowDefinition.Join_Quota_UserRoles"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Register quota CSV nodes",
+          "path": "$.workflowDefinition.Register_Quota"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Extract quota CSV nodes",
+          "path": "$.workflowDefinition.Extract_Quota"
+        }
+      ]
+    },
+    {
+      "name": "RemoveCollaborativeForecastingFromDataflow",
+      "condition": "${Variables.Has_CollaborativeForecasting == 'No'}",
+      "appliesTo": [
+        {
+          "type": "workflow",
+          "name": "RevenueInsights"
+        }
+      ],
+      "actions": [
+        {
+          "action": "delete",
+          "description": "Delete register forecast node",
+          "path": "$.workflowDefinition.Register_Forecasting"
+        },
+        {
+          "action": "delete",
+          "description": "Delete forecasting nodes",
+          "path": "$.workflowDefinition.Join_ForecastingItem_UserRoles"
+        },
+        {
+          "action": "delete",
+          "description": "Delete forecasting nodes",
+          "path": "$.workflowDefinition.Join_ForecastingItem_Period"
+        },
+        {
+          "action": "delete",
+          "description": "Delete forecasting nodes",
+          "path": "$.workflowDefinition.Join_ForecastingItem_Type"
+        },
+        {
+          "action": "delete",
+          "description": "Delete forecasting nodes",
+          "path": "$.workflowDefinition.Extract_Period"
+        },
+        {
+          "action": "delete",
+          "description": "Delete forecasting nodes",
+          "path": "$.workflowDefinition.Extract_ForecastingItem"
+        },
+        {
+          "action": "delete",
+          "description": "Delete forecasting nodes",
+          "path": "$.workflowDefinition.Extract_ForecastingType"
+        },
+        {
+          "action": "set",
+          "description": "Delete forecasting hierarchy",
+          "path": "$.workflowDefinition.Join_User_Roles.parameters.left",
+          "value": "Compute_UniqueUserName"
+        },
+        {
+          "action": "add",
+          "description": "update node in workflow",
+          "path": "$.workflowDefinition.Join_User_Roles.parameters.right_select",
+          "value": "RoleNames"
+        },
+        {
+          "action": "add",
+          "description": "update node in workflow",
+          "path": "$.workflowDefinition.Join_User_Roles.parameters.right_select",
+          "value": "RoleNamesPath"
+        },
+        {
+          "action": "set",
+          "description": "Delete forecasting hierarchy",
+          "path": "$.workflowDefinition.Join_User_Roles.parameters.right",
+          "value": "Flatten_ParentName"
+        },
+        {
+          "action": "delete",
+          "description": "Delete forecasting hierarchy",
+          "path": "$.workflowDefinition.Join_User_ForecastHierarchy_Role"
+        },
+        {
+          "action": "set",
+          "description": "Delete forecasting hierarchy",
+          "path": "$.workflowDefinition.Flatten_ParentName.parameters.source",
+          "value": "Add_ParentRole_Name"
+        },
+        {
+          "action": "set",
+          "description": "Delete forecasting hierarchy",
+          "path": "$.workflowDefinition.Flatten_ParentName.parameters.parent_field",
+          "value": "ParentRole.DeveloperName"
+        },
+        {
+          "action": "set",
+          "description": "Delete forecasting hierarchy",
+          "path": "$.workflowDefinition.Flatten_ParentName.parameters.self_field",
+          "value": "DeveloperName"
+        },
+        {
+          "action": "delete",
+          "description": "Delete forecasting hierarchy",
+          "path": "$.workflowDefinition.Join_ForecastUser_Role"
+        },
+        {
+          "action": "set",
+          "description": "Delete forecasting hierarchy",
+          "path": "$.workflowDefinition.Add_ParentRole_Name.parameters.right",
+          "value": "Extract_UserRole"
+        },
+        {
+          "action": "set",
+          "description": "Delete forecasting hierarchy",
+          "path": "$.workflowDefinition.Flatten_UserRole.parameters.source",
+          "value": "Extract_UserRole"
+        },
+        {
+          "action": "delete",
+          "description": "Delete forecasting hierarchy",
+          "path": "$.workflowDefinition.Join_UserRole_ForecastUsers"
+        },
+        {
+          "action": "delete",
+          "description": "Delete forecasting hierarchy",
+          "path": "$.workflowDefinition.Filter_ForecastUsers"
+        },
+        {
+          "action": "delete",
+          "description": "delete ForecastManager from right selects everywhere",
+          "path": "$..right_select[?(@=~/.*ForecastManager.*/)]"
+        },
+        {
+          "action": "delete",
+          "description": "delete ForecastEnabled from right selects everywhere",
+          "path": "$..right_select[?(@=~/.*ForecastEnabled.*/)]"
+        },
+        {
+          "action": "delete",
+          "description": "delete ForecastEnabled from Extract User node",
+          "path": "$.workflowDefinition.Extract_User.parameters.fields.[?(@.name=~/.*ForecastEnabled.*/)]"
+        },
+        {
+          "action": "delete",
+          "description": "delete ForecastUserID from workflow",
+          "path": "$.workflowDefinition.Extract_UserRole.parameters.fields[?(@.name=='ForecastUserId')]"
+        }
+      ]
+    },
+    {
+      "name": "RemoveRoleHierarchyFromDataflow",
+      "condition": "${Variables.Has_RoleHierarchy == 'No'}",
+      "appliesTo": [
+        {
+          "type": "workflow",
+          "name": "RevenueInsights"
+        }
+      ],
+      "actions": [
+        {
+          "condition": "${Variables.Has_OpportunitySplits == 'Yes'}",
+          "action": "set",
+          "description": "Change role hierarchy nodes",
+          "path": "$.workflowDefinition.Join_OpportunitySplit_UserRoles.parameters.right",
+          "value": "Compute_UniqueUserName"
+        },
+        {
+          "condition": "${Variables.Has_CollaborativeForecastingQuota == 'No'}",
+          "action": "set",
+          "description": "Change role hierarchy nodes",
+          "path": "$.workflowDefinition.Join_Quota_UserRoles.parameters.right",
+          "value": "Compute_UniqueUserName"
+        },
+        {
+          "action": "set",
+          "description": "Change role hierarchy nodes",
+          "path": "$.workflowDefinition.Join_Opportunity_User.parameters.right",
+          "value": "Compute_UniqueUserName"
+        },
+        {
+          "action": "set",
+          "description": "Change role hierarchy nodes",
+          "path": "$.workflowDefinition.Join_Account_User.parameters.right",
+          "value": "Compute_UniqueUserName"
+        },
+        {
+          "action": "set",
+          "description": "Change role hierarchy nodes",
+          "path": "$.workflowDefinition.Join_Activities_User.parameters.right",
+          "value": "Compute_UniqueUserName"
+        },
+        {
+          "action": "delete",
+          "description": "Delete role hierarchy nodes",
+          "path": "$.workflowDefinition.Register_UserRoles"
+        },
+        {
+          "action": "delete",
+          "description": "Delete role hierarchy nodes",
+          "path": "$.workflowDefinition.Join_User_Roles"
+        },
+        {
+          "action": "delete",
+          "description": "Delete role hierarchy nodes",
+          "path": "$.workflowDefinition.Flatten_ParentName"
+        },
+        {
+          "action": "delete",
+          "description": "Delete role hierarchy nodes",
+          "path": "$.workflowDefinition.Add_ParentRole_Name"
+        },
+        {
+          "action": "delete",
+          "description": "Delete role hierarchy nodes",
+          "path": "$.workflowDefinition.Flatten_UserRole"
+        },
+        {
+          "action": "delete",
+          "description": "Delete role hierarchy nodes",
+          "path": "$.workflowDefinition.Extract_UserRole"
+        },
+        {
+          "action": "delete",
+          "description": "delete role names from right selects everywhere",
+          "path": "$..right_select[?(@=~/.*RoleNames.*/)]"
+        },
+        {
+          "action": "delete",
+          "description": "delete role names from right selects everywhere",
+          "path": "$..right_select[?(@=~/.*Role.*/)]"
+        },
+        {
+          "action": "delete",
+          "description": "delete role names from right selects everywhere",
+          "path": "$..right_select[?(@=~/.*RolePath.*/)]"
+        }
+      ]
+    },
+    {
+      "name": "RemoveForecastSnapshotFromDataflow",
+      "condition": "${Variables.Has_CollaborativeForecasting == 'No'}",
+      "appliesTo": [
+        {
+          "type": "workflow",
+          "name": "RevInsightsSnapshot"
+        }
+      ],
+      "actions": [
+        {
+          "action": "delete",
+          "description": "Delete register forecast node",
+          "path": "$.workflowDefinition.Register_Forecast_Snapshot"
+        },
+        {
+          "action": "delete",
+          "description": "Delete forecast snapshot nodes",
+          "path": "$.workflowDefinition.Slice_Flag_Fields_Forecast"
+        },
+        {
+          "action": "delete",
+          "description": "Delete forecast snapshot nodes",
+          "path": "$.workflowDefinition.Filter_Snapshot_Data_Forecast"
+        },
+        {
+          "action": "delete",
+          "description": "Delete forecast snapshot nodes",
+          "path": "$.workflowDefinition.Compute_Snapshot_Filter_Forecast"
+        },
+        {
+          "action": "delete",
+          "description": "Delete forecast snapshot nodes",
+          "path": "$.workflowDefinition.Append_Latest_Snapshot_Forecast"
+        },
+        {
+          "action": "delete",
+          "description": "Delete forecast snapshot nodes",
+          "path": "$.workflowDefinition.Filter_Duplicate_Snapshot_Dates_Forecast"
+        },
+        {
+          "action": "delete",
+          "description": "Delete forecast snapshot nodes",
+          "path": "$.workflowDefinition.Compute_RemoveDataFlag_Forecast"
+        },
+        {
+          "action": "delete",
+          "description": "Delete forecast snapshot nodes",
+          "path": "$.workflowDefinition.Edgemart_Snapshot_Forecast"
+        },
+        {
+          "action": "delete",
+          "description": "Delete forecast snapshot nodes",
+          "path": "$.workflowDefinition.Filter_Source_Data_Forecast"
+        },
+        {
+          "action": "delete",
+          "description": "Delete forecast snapshot nodes",
+          "path": "$.workflowDefinition.Compute_Additional_Flags_Forecast"
+        },
+        {
+          "action": "delete",
+          "description": "Delete forecast snapshot nodes",
+          "path": "$.workflowDefinition.Compute_SnapshotDate_Forecast"
+        },
+        {
+          "action": "delete",
+          "description": "Delete forecast snapshot nodes",
+          "path": "$.workflowDefinition.Edgemart_Forecast"
+        }
+      ]
+    },
+    {
+      "name": "RemoveEACDatasetFromDataflow",
+      "condition": "${empty(Variables.EAC_Dataset)}",
+      "appliesTo": [
+        {
+          "type": "workflow",
+          "name": "RevenueInsights"
+        }
+      ],
+      "actions": [
+        {
+          "action": "set",
+          "description": "Delete Activities node",
+          "path": "$.workflowDefinition.Score_Opportunities.parameters.source",
+          "value": "Join_Opportunity_ActivityCount"
+        },
+        {
+          "action": "set",
+          "description": "Set the right register node",
+          "path": "$.workflowDefinition.Register_Activities.parameters.source",
+          "value": "Compute_Activities_DaysOverdue"
+        },
+        {
+          "action": "delete",
+          "description": "Delete EAC node",
+          "path": "$.workflowDefinition.Append_EAC_Activities"
+        },
+        {
+          "action": "delete",
+          "description": "Delete EAC node",
+          "path": "$.workflowDefinition.Join_Opportunity_EAC"
+        },
+        {
+          "action": "delete",
+          "description": "Delete EAC node",
+          "path": "$.workflowDefinition.Filter_Duplicate_Activities"
+        },
+        {
+          "action": "delete",
+          "description": "Delete EAC node",
+          "path": "$.workflowDefinition.Compute_Duplicate_Activities"
+        },
+        {
+          "action": "delete",
+          "description": "Delete EAC node",
+          "path": "$.workflowDefinition.Join_Activities_EAC"
+        },
+        {
+          "action": "delete",
+          "description": "Delete EAC node",
+          "path": "$.workflowDefinition.Join_EAC_Account"
+        },
+        {
+          "action": "delete",
+          "description": "Delete EAC node",
+          "path": "$.workflowDefinition.Join_EAC_Opportunity"
+        },
+        {
+          "action": "delete",
+          "description": "Delete EAC node",
+          "path": "$.workflowDefinition.Join_EAC_User"
+        },
+        {
+          "action": "delete",
+          "description": "Delete EAC node",
+          "path": "$.workflowDefinition.Compute_EAC_ActivityCounts"
+        },
+        {
+          "action": "delete",
+          "description": "Delete EAC node",
+          "path": "$.workflowDefinition.Extract_EAC_Dataset"
+        }
+      ]
+    },
+    {
+      "name": "RemoveActivitiesFromDataflow",
+      "condition": "${Variables.Has_Activities == 'No'}",
+      "appliesTo": [
+        {
+          "type": "workflow",
+          "name": "RevenueInsights"
+        }
+      ],
+      "actions": [
+        {
+          "condition": "${Variables.Has_Products == 'Yes'}",
+          "action": "set",
+          "description": "Change products node with no activities",
+          "path": "$.workflowDefinition.Join_OpportunityToOpportunityLineItemPricebookEntryProduct.parameters.right",
+          "value": "Join_Opportunity_User"
+        },
+        {
+          "action": "set",
+          "description": "Delete Activities node",
+          "path": "$.workflowDefinition.Score_Opportunities.parameters.source",
+          "value": "Join_Opportunity_User"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Activities node",
+          "path": "$.workflowDefinition.Join_Opportunity_ActivityCount"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Activities node",
+          "path": "$.workflowDefinition.Register_Activities"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Activities node",
+          "path": "$.workflowDefinition.Compute_Activities_DaysOverdue"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Activities node",
+          "path": "$.workflowDefinition.Compute_Activities_IsOverdue"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Activities node",
+          "path": "$.workflowDefinition.Join_Activities_Account"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Activities node",
+          "path": "$.workflowDefinition.Join_Activities_Opportunity"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Activities node",
+          "path": "$.workflowDefinition.Join_Activities_User"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Activities node",
+          "path": "$.workflowDefinition.Append_Event_Task"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Activities node",
+          "path": "$.workflowDefinition.Add_Fields_to_Event"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Activities node",
+          "path": "$.workflowDefinition.Add_Fields_to_Task"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Activities node",
+          "path": "$.workflowDefinition.Extract_Event"
+        },
+        {
+          "action": "delete",
+          "description": "Delete Activities node",
+          "path": "$.workflowDefinition.Extract_Task"
+        }
+      ]
+    }
+  ]
 }

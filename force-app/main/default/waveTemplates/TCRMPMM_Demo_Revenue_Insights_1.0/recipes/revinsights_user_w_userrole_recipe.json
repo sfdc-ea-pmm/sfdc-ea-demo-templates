@@ -89,40 +89,6 @@
                     "EDIT_ATTRIBUTES12"
                 ]
             },
-            "EDIT_ATTRIBUTES14": {
-                "action": "schema",
-                "parameters": {
-                    "fields": [
-                        {
-                            "name": "UniqueUserName_flatten",
-                            "newProperties": {
-                                "label": "RolesNamesPath",
-                                "name": "RolesNamesPath"
-                            }
-                        }
-                    ]
-                },
-                "sources": [
-                    "FLATTEN4"
-                ]
-            },
-            "EDIT_ATTRIBUTES15": {
-                "action": "schema",
-                "parameters": {
-                    "fields": [
-                        {
-                            "name": "UniqueUserName_flatten_multiField",
-                            "newProperties": {
-                                "label": "RoleNames",
-                                "name": "RoleNames"
-                            }
-                        }
-                    ]
-                },
-                "sources": [
-                    "EDIT_ATTRIBUTES14"
-                ]
-            },
             "EDIT_ATTRIBUTES4": {
                 "action": "schema",
                 "parameters": {
@@ -259,6 +225,24 @@
                     "LOAD_DATASET10"
                 ]
             },
+            "FILTER7": {
+                "action": "filter",
+                "parameters": {
+                    "filterExpressions": [
+                        {
+                            "field": "ForecastEnabled",
+                            "operands": [
+                                "true"
+                            ],
+                            "operator": "EQUAL",
+                            "type": "TEXT"
+                        }
+                    ]
+                },
+                "sources": [
+                    "FORMULA3"
+                ]
+            },
             "FLATTEN0": {
                 "action": "flatten",
                 "parameters": {
@@ -350,18 +334,39 @@
                     "multiField": {
                         "isSystemField": false,
                         "label": "RoleNames",
-                        "name": "UniqueUserName_flatten_multiField"
+                        "name": "RoleNames"
                     },
                     "parentField": "Role.ParentRole.ForecastManager.UniqueUserName",
                     "pathField": {
                         "isSystemField": false,
                         "label": "RolesNamesPath",
-                        "name": "UniqueUserName_flatten"
+                        "name": "RolesNamesPath"
                     },
                     "selfField": "UniqueUserName"
                 },
                 "sources": [
-                    "JOIN5"
+                    "FILTER7"
+                ]
+            },
+            "FLATTEN5": {
+                "action": "flatten",
+                "parameters": {
+                    "includeSelfId": true,
+                    "multiField": {
+                        "isSystemField": false,
+                        "label": "ForecastUserIds",
+                        "name": "ForecastUserIds"
+                    },
+                    "parentField": "Role.ParentRole.ForecastUserId",
+                    "pathField": {
+                        "isSystemField": false,
+                        "label": "ForecastUserIdsPath",
+                        "name": "ForecastUserIdsPath"
+                    },
+                    "selfField": "Id"
+                },
+                "sources": [
+                    "FLATTEN4"
                 ]
             },
             "FORMULA0": {
@@ -409,6 +414,44 @@
                 },
                 "sources": [
                     "EDIT_ATTRIBUTES4"
+                ]
+            },
+            "FORMULA2": {
+                "action": "formula",
+                "parameters": {
+                    "expressionType": "SQL",
+                    "fields": [
+                        {
+                            "defaultValue": "false",
+                            "formulaExpression": "case when \n\n\"ForecastEnabled\" = true AND (\"Id\" = \"Role.ForecastUserId\" OR \"Role.ForecastUserId\" is null)\n\nthen\n    'true'\nelse\n    'false'\nend",
+                            "label": "UserInForecastHierarchy",
+                            "name": "UserInForecastHierarchy",
+                            "precision": 255,
+                            "type": "TEXT"
+                        }
+                    ]
+                },
+                "sources": [
+                    "JOIN5"
+                ]
+            },
+            "FORMULA3": {
+                "action": "formula",
+                "parameters": {
+                    "expressionType": "SQL",
+                    "fields": [
+                        {
+                            "defaultValue": "false",
+                            "formulaExpression": "case when \n\n\"ForecastEnabled\" = true AND \"Id\" = \"Role.ForecastUserId\"\n\nthen\n    'true'\nelse\n    'false'\nend",
+                            "label": "UserIsForecastManager",
+                            "name": "UserIsForecastManager",
+                            "precision": 255,
+                            "type": "TEXT"
+                        }
+                    ]
+                },
+                "sources": [
+                    "FORMULA2"
                 ]
             },
             "JOIN0": {
@@ -631,7 +674,7 @@
                 },
                 "sources": [
                     "EDIT_ATTRIBUTES5",
-                    "EDIT_ATTRIBUTES15"
+                    "FLATTEN5"
                 ]
             },
             "JOIN7": {
@@ -741,6 +784,7 @@
                         "folderName": "${App.Folder.FullyQualifiedName}",
                         "label": "User",
                         "name": "${App.Datasets.User.FullyQualifiedName}",
+                        "rowLevelSecurityFilter": "'Role.Roles' == \"$User.UserRoleId\" || 'Id' == \"$User.Id\"",
                         "type": "analyticsDataset"
                     },
                     "fields": []
@@ -756,6 +800,7 @@
                         "folderName": "${App.Folder.FullyQualifiedName}",
                         "label": "UserRole",
                         "name": "${App.Datasets.userrole_revinsights.FullyQualifiedName}",
+                        "rowLevelSecurityFilter": "'Roles.Roles' == \"$User.UserRoleId\" || 'Id' == \"$User.Id\"",
                         "type": "analyticsDataset"
                     },
                     "fields": []
@@ -848,7 +893,7 @@
                     "target": "JOIN5"
                 },
                 {
-                    "source": "JOIN5",
+                    "source": "FILTER7",
                     "target": "TRANSFORM7"
                 },
                 {
@@ -870,6 +915,14 @@
                 {
                     "source": "JOIN7",
                     "target": "OUTPUT1"
+                },
+                {
+                    "source": "TRANSFORM8",
+                    "target": "FILTER7"
+                },
+                {
+                    "source": "JOIN5",
+                    "target": "TRANSFORM8"
                 }
             ],
             "hiddenColumns": [],
@@ -877,95 +930,102 @@
                 "FILTER5": {
                     "description": "",
                     "label": "Filter Active Users Only",
-                    "left": 252,
-                    "top": 392,
+                    "left": 390.2,
+                    "top": 112,
                     "type": "FILTER"
                 },
                 "FILTER6": {
                     "label": "Filter",
-                    "left": 252,
-                    "top": 812.4,
+                    "left": 250.2,
+                    "top": 532,
+                    "type": "FILTER"
+                },
+                "FILTER7": {
+                    "description": "",
+                    "label": "Filter Forecast Hierarchy Users",
+                    "left": 1512,
+                    "top": 112,
                     "type": "FILTER"
                 },
                 "JOIN0": {
                     "description": "",
                     "label": "Augment_ParentName_onto_UserRole",
-                    "left": 392,
-                    "top": 672,
+                    "left": 390.2,
+                    "top": 252,
                     "type": "JOIN"
                 },
                 "JOIN2": {
                     "description": "",
                     "label": "Augment_Roles_onto_User",
-                    "left": 812,
-                    "top": 392.4,
+                    "left": 952.2,
+                    "top": 392,
                     "type": "JOIN"
                 },
                 "JOIN3": {
                     "description": "",
                     "label": "Join ForecastUsers onto UserRole",
-                    "left": 532.1,
-                    "top": 812.1,
+                    "left": 810.2,
+                    "top": 112,
                     "type": "JOIN"
                 },
                 "JOIN4": {
                     "description": "",
                     "label": "Add ParentRole Name",
-                    "left": 812,
-                    "top": 812,
+                    "left": 1090.2,
+                    "top": 112,
                     "type": "JOIN"
                 },
                 "JOIN5": {
                     "description": "",
                     "label": "Join Roles onto ForecastUsers",
-                    "left": 952,
-                    "top": 813.3,
+                    "left": 1230.2,
+                    "top": 112,
                     "type": "JOIN"
                 },
                 "JOIN6": {
                     "description": "",
                     "label": "Join Role onto User Forecast Hierarchy",
-                    "left": 1232,
-                    "top": 813.3,
+                    "left": 1792,
+                    "top": 112,
                     "type": "JOIN"
                 },
                 "JOIN7": {
                     "description": "",
                     "label": "Join Roles onto User",
-                    "left": 1372,
-                    "top": 812,
+                    "left": 1932,
+                    "top": 112,
                     "type": "JOIN"
                 },
                 "LOAD_DATASET1": {
                     "label": "User",
-                    "left": 112,
+                    "left": 250.2,
                     "parameters": {
                         "sampleSize": 2000
                     },
-                    "top": 392,
+                    "top": 112,
                     "type": "LOAD_DATASET"
                 },
                 "LOAD_DATASET10": {
                     "label": "UserRole",
-                    "left": 112,
+                    "left": 110.19999999999999,
                     "parameters": {
                         "sampleSize": 2000
                     },
-                    "top": 672,
+                    "top": 252,
                     "type": "LOAD_DATASET"
                 },
                 "OUTPUT0": {
                     "description": "",
                     "label": "Save User",
-                    "left": 1092,
-                    "top": 392.1,
+                    "left": 1232.7,
+                    "top": 392.3,
                     "type": "OUTPUT"
                 },
                 "OUTPUT1": {
                     "description": "",
                     "label": "Save UserRole",
-                    "left": 1512,
-                    "top": 812,
+                    "left": 2072,
+                    "top": 112,
                     "type": "OUTPUT"
                 },
                 "TRANSFORM0": {
@@ -986,8 +1046,8 @@
                         "FLATTEN0": null
                     },
                     "label": "Flatten_UserRole",
-                    "left": 252,
-                    "top": 672,
+                    "left": 250.2,
+                    "top": 252,
                     "type": "TRANSFORM"
                 },
                 "TRANSFORM1": {
@@ -1008,8 +1068,8 @@
                         "FLATTEN1": null
                     },
                     "label": "Flatten_ParentName",
-                    "left": 532,
-                    "top": 672,
+                    "left": 530.2,
+                    "top": 252,
                     "type": "TRANSFORM"
                 },
                 "TRANSFORM2": {
@@ -1030,8 +1090,8 @@
                         "FLATTEN2": null
                     },
                     "label": "Flatten_Hierarchy_Grouping",
-                    "left": 672,
-                    "top": 672,
+                    "left": 670.2,
+                    "top": 252,
                     "type": "TRANSFORM"
                 },
                 "TRANSFORM3": {
@@ -1047,8 +1107,8 @@
                         "FORMULA0": null
                     },
                     "label": "Compute_IsDuplicate_Name",
-                    "left": 392,
-                    "top": 392,
+                    "left": 530.2,
+                    "top": 112,
                     "type": "TRANSFORM"
                 },
                 "TRANSFORM4": {
@@ -1068,8 +1128,8 @@
                         }
                     },
                     "label": "Compute_UniqueUserName",
-                    "left": 532,
-                    "top": 392,
+                    "left": 670.2,
+                    "top": 112,
                     "type": "TRANSFORM"
                 },
                 "TRANSFORM5": {
@@ -1078,8 +1138,8 @@
                         "DROP_FIELDS0": null
                     },
                     "label": "Transform",
-                    "left": 952.1,
-                    "top": 392.1,
+                    "left": 1092.3,
+                    "top": 392.3,
                     "type": "TRANSFORM"
                 },
                 "TRANSFORM6": {
@@ -1100,30 +1160,50 @@
                         "FLATTEN3": null
                     },
                     "label": "Flatten UserRole",
-                    "left": 672,
-                    "top": 812,
+                    "left": 950.2,
+                    "top": 112,
                     "type": "TRANSFORM"
                 },
                 "TRANSFORM7": {
                     "connectors": [
                         {
                             "source": "FLATTEN4",
-                            "target": "EDIT_ATTRIBUTES14"
-                        },
-                        {
-                            "source": "EDIT_ATTRIBUTES14",
-                            "target": "EDIT_ATTRIBUTES15"
+                            "target": "FLATTEN5"
                         }
                     ],
                     "description": "",
                     "graph": {
-                        "EDIT_ATTRIBUTES14": null,
-                        "EDIT_ATTRIBUTES15": null,
-                        "FLATTEN4": null
+                        "FLATTEN4": null,
+                        "FLATTEN5": null
                     },
-                    "label": "Flatten Parent Name",
-                    "left": 1092,
-                    "top": 812,
+                    "label": "Flatten Forecast Hierarchy",
+                    "left": 1652,
+                    "top": 112,
+                    "type": "TRANSFORM"
+                },
+                "TRANSFORM8": {
+                    "connectors": [
+                        {
+                            "source": "FORMULA2",
+                            "target": "FORMULA3"
+                        }
+                    ],
+                    "description": "Create a field to determine if user is part of the forecast hierarchy",
+                    "graph": {
+                        "FORMULA2": {
+                            "parameters": {
+                                "type": "BASE_FORMULA_UI"
+                            }
+                        },
+                        "FORMULA3": {
+                            "parameters": {
+                                "type": "BASE_FORMULA_UI"
+                            }
+                        }
+                    },
+                    "label": "Create UserInForecastHierarchy field",
+                    "left": 1372,
+                    "top": 112,
                     "type": "TRANSFORM"
                 }
             }

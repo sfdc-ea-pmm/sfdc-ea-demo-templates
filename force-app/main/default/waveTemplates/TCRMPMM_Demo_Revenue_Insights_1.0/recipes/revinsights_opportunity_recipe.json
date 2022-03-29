@@ -1,1269 +1,1546 @@
 {
-    "format": "R3",
-    "label": "Opportunity Recipe",
-    "name": "revinsights_opportunity_recipe",
-    "publishingTarget": "DATASET",
-    "recipeDefinition": {
-        "nodes": {
-            "EDIT_ATTRIBUTES0": {
-                "action": "schema",
-                "parameters": {
-                    "fields": [
-                        {
-                            "name": "Id_formula",
-                            "newProperties": {
-                                "label": "Opportunity Age",
-                                "name": "Opportunity_Age"
-                            }
-                        }
-                    ]
-                },
-                "sources": [
-                    "FORMULA0"
-                ]
-            },
-            "EDIT_ATTRIBUTES1": {
-                "action": "schema",
-                "parameters": {
-                    "fields": [
-                        {
-                            "name": "Id_formula",
-                            "newProperties": {
-                                "label": "Full Name",
-                                "name": "User.Name"
-                            }
-                        }
-                    ]
-                },
-                "sources": [
-                    "FORMULA1"
-                ]
-            },
-            "EDIT_ATTRIBUTES2": {
-                "action": "schema",
-                "parameters": {
-                    "fields": [
-                        {
-                            "name": "Opportunity.Account.Owner.Name_formula",
-                            "newProperties": {
-                                "label": "Opportunity.Account.User.Name",
-                                "name": "Opportunity.Account.User.Name"
-                            }
-                        }
-                    ]
-                },
-                "sources": [
-                    "FORMULA2"
-                ]
-            },
-            "EDIT_ATTRIBUTES3": {
-                "action": "schema",
-                "parameters": {
-                    "fields": [
-                        {
-                            "name": "Id_formula",
-                            "newProperties": {
-                                "label": "Full Name",
-                                "name": "Opportunity.User.Name"
-                            }
-                        }
-                    ]
-                },
-                "sources": [
-                    "FORMULA3"
-                ]
-            },
-            "FILTER5": {
-                "action": "filter",
-                "parameters": {
-                    "filterExpressions": [
-                        {
-                            "field": "Id",
-                            "operands": [],
-                            "operator": "IS_NOT_NULL",
-                            "type": "TEXT"
-                        }
-                    ]
-                },
-                "sources": [
-                    "LOAD_DATASET19"
-                ]
-            },
-            "FILTER6": {
-                "action": "filter",
-                "parameters": {
-                    "filterExpressions": [
-                        {
-                            "field": "Id",
-                            "operands": [],
-                            "operator": "IS_NOT_NULL",
-                            "type": "TEXT"
-                        }
-                    ]
-                },
-                "sources": [
-                    "JOIN11"
-                ]
-            },
-            "FORMULA0": {
-                "action": "formula",
-                "parameters": {
-                    "expressionType": "SQL",
-                    "fields": [
-                        {
-                            "defaultValue": "0",
-                            "formulaExpression": "case \n\nwhen \nIsClosed=true\n\nthen \n(to_unix_timestamp(CloseDate)- to_unix_timestamp(CreatedDate))/86400\n\nelse \n(to_unix_timestamp(current_date())- to_unix_timestamp(CreatedDate))/86400\n\nend",
-                            "label": "Opportunity Age",
-                            "name": "Id_formula",
-                            "precision": 18,
-                            "scale": 2,
-                            "type": "NUMBER"
-                        }
-                    ]
-                },
-                "sources": [
-                    "LOAD_DATASET3"
-                ]
-            },
-            "FORMULA1": {
-                "action": "formula",
-                "parameters": {
-                    "expressionType": "SQL",
-                    "fields": [
-                        {
-                            "defaultValue": "",
-                            "formulaExpression": "\"Owner.Name\"",
-                            "label": "Full Name",
-                            "name": "Id_formula",
-                            "precision": 255,
-                            "type": "TEXT"
-                        }
-                    ]
-                },
-                "sources": [
-                    "JOIN9"
-                ]
-            },
-            "FORMULA10": {
-                "action": "computeRelative",
-                "parameters": {
-                    "expressionType": "SQL",
-                    "fields": [
-                        {
-                            "defaultValue": "",
-                            "format": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-                            "formulaExpression": "lag(CreatedDate)",
-                            "label": "CreatedDatePrev",
-                            "name": "CreatedDatePrev",
-                            "type": "DATETIME"
-                        }
-                    ],
-                    "orderBy": [
-                        {
-                            "direction": "ASC",
-                            "fieldName": "Unique_Sort_Key"
-                        }
-                    ],
-                    "partitionBy": [
-                        "OpportunityId"
-                    ]
-                },
-                "sources": [
-                    "FORMULA9"
-                ]
-            },
-            "FORMULA2": {
-                "action": "formula",
-                "parameters": {
-                    "expressionType": "SQL",
-                    "fields": [
-                        {
-                            "defaultValue": "",
-                            "formulaExpression": "\"Opportunity.Account.Owner.Name\"",
-                            "label": "Opportunity.Account.User.Name",
-                            "name": "Opportunity.Account.Owner.Name_formula",
-                            "precision": 255,
-                            "type": "TEXT"
-                        }
-                    ]
-                },
-                "sources": [
-                    "JOIN12"
-                ]
-            },
-            "FORMULA3": {
-                "action": "formula",
-                "parameters": {
-                    "expressionType": "SQL",
-                    "fields": [
-                        {
-                            "defaultValue": "",
-                            "formulaExpression": "\"Opportunity.Owner.Name\"",
-                            "label": "Full Name",
-                            "name": "Id_formula",
-                            "precision": 255,
-                            "type": "TEXT"
-                        }
-                    ]
-                },
-                "sources": [
-                    "EDIT_ATTRIBUTES2"
-                ]
-            },
-            "FORMULA4": {
-                "action": "formula",
-                "parameters": {
-                    "expressionType": "SQL",
-                    "fields": [
-                        {
-                            "defaultValue": "",
-                            "formulaExpression": "CONCAT(CreatedDate, '-', Id)",
-                            "label": "Unique Sort Key",
-                            "name": "Unique_Sort_Key",
-                            "precision": 255,
-                            "type": "TEXT"
-                        }
-                    ]
-                },
-                "sources": [
-                    "LOAD_DATASET17"
-                ]
-            },
-            "FORMULA5": {
-                "action": "computeRelative",
-                "parameters": {
-                    "expressionType": "SQL",
-                    "fields": [
-                        {
-                            "defaultValue": "3000-01-01T00:00:00.000Z",
-                            "format": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-                            "formulaExpression": "lead(CreatedDate)",
-                            "label": "ValidToDate",
-                            "name": "ValidToDate",
-                            "type": "DATETIME"
-                        }
-                    ],
-                    "orderBy": [
-                        {
-                            "direction": "ASC",
-                            "fieldName": "Unique_Sort_Key"
-                        }
-                    ],
-                    "partitionBy": [
-                        "OpportunityId"
-                    ]
-                },
-                "sources": [
-                    "FORMULA4"
-                ]
-            },
-            "FORMULA6": {
-                "action": "computeRelative",
-                "parameters": {
-                    "expressionType": "SQL",
-                    "fields": [
-                        {
-                            "defaultValue": "",
-                            "format": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-                            "formulaExpression": "current(CreatedDate)",
-                            "label": "ValidFromDate",
-                            "name": "ValidFromDate",
-                            "type": "DATETIME"
-                        }
-                    ],
-                    "orderBy": [
-                        {
-                            "direction": "ASC",
-                            "fieldName": "Unique_Sort_Key"
-                        }
-                    ],
-                    "partitionBy": [
-                        "OpportunityId"
-                    ]
-                },
-                "sources": [
-                    "FORMULA5"
-                ]
-            },
-            "FORMULA7": {
-                "action": "computeRelative",
-                "parameters": {
-                    "expressionType": "SQL",
-                    "fields": [
-                        {
-                            "defaultValue": "",
-                            "formulaExpression": "lag(Amount)",
-                            "label": "AmountPrev",
-                            "name": "AmountPrev",
-                            "precision": 18,
-                            "scale": 2,
-                            "type": "NUMBER"
-                        }
-                    ],
-                    "orderBy": [
-                        {
-                            "direction": "ASC",
-                            "fieldName": "Unique_Sort_Key"
-                        }
-                    ],
-                    "partitionBy": [
-                        "OpportunityId"
-                    ]
-                },
-                "sources": [
-                    "FORMULA6"
-                ]
-            },
-            "FORMULA8": {
-                "action": "computeRelative",
-                "parameters": {
-                    "expressionType": "SQL",
-                    "fields": [
-                        {
-                            "defaultValue": "",
-                            "formulaExpression": "lag(StageName)",
-                            "label": "StageNamePrev",
-                            "name": "StageNamePrev",
-                            "precision": 255,
-                            "type": "TEXT"
-                        }
-                    ],
-                    "orderBy": [
-                        {
-                            "direction": "ASC",
-                            "fieldName": "Unique_Sort_Key"
-                        }
-                    ],
-                    "partitionBy": [
-                        "OpportunityId"
-                    ]
-                },
-                "sources": [
-                    "FORMULA7"
-                ]
-            },
-            "FORMULA9": {
-                "action": "computeRelative",
-                "parameters": {
-                    "expressionType": "SQL",
-                    "fields": [
-                        {
-                            "defaultValue": "",
-                            "format": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-                            "formulaExpression": "lag(CloseDate)",
-                            "label": "CloseDatePrev",
-                            "name": "CloseDatePrev",
-                            "type": "DATETIME"
-                        }
-                    ],
-                    "orderBy": [
-                        {
-                            "direction": "ASC",
-                            "fieldName": "Unique_Sort_Key"
-                        }
-                    ],
-                    "partitionBy": [
-                        "OpportunityId"
-                    ]
-                },
-                "sources": [
-                    "FORMULA8"
-                ]
-            },
-            "JOIN10": {
-                "action": "join",
-                "parameters": {
-                    "joinType": "LOOKUP",
-                    "leftKeys": [
-                        "OwnerId"
-                    ],
-                    "rightKeys": [
-                        "Id"
-                    ],
-                    "rightQualifier": "Owner"
-                },
-                "schema": {
-                    "fields": [],
-                    "slice": {
-                        "fields": [
-                            "Owner.Id"
-                        ],
-                        "ignoreMissingFields": true,
-                        "mode": "DROP"
-                    }
-                },
-                "sources": [
-                    "JOIN3",
-                    "FILTER5"
-                ]
-            },
-            "JOIN11": {
-                "action": "join",
-                "parameters": {
-                    "joinType": "LOOKUP",
-                    "leftKeys": [
-                        "AccountId"
-                    ],
-                    "rightKeys": [
-                        "Id"
-                    ],
-                    "rightQualifier": "Account"
-                },
-                "schema": {
-                    "fields": [],
-                    "slice": {
-                        "fields": [
-                            "Account.Id",
-                            "Account.MasterRecordId",
-                            "Account.BillingStreet",
-                            "Account.BillingCity",
-                            "Account.BillingPostalCode",
-                            "Account.ShippingStreet",
-                            "Account.ShippingCity",
-                            "Account.ShippingState",
-                            "Account.ShippingPostalCode",
-                            "Account.ShippingCountry",
-                            "Account.Phone",
-                            "Account.PhotoUrl",
-                            "Account.Description",
-                            "Account.CreatedDate",
-                            "Account.LastModifiedDate",
-                            "Account.LastViewedDate",
-                            "Account.Jigsaw",
-                            "Account.JigsawCompanyId"
-                        ],
-                        "ignoreMissingFields": true,
-                        "mode": "DROP"
-                    }
-                },
-                "sources": [
-                    "JOIN10",
-                    "JOIN9"
-                ]
-            },
-            "JOIN12": {
-                "action": "join",
-                "parameters": {
-                    "joinType": "LOOKUP",
-                    "leftKeys": [
-                        "OpportunityId"
-                    ],
-                    "rightKeys": [
-                        "Id"
-                    ],
-                    "rightQualifier": "Opportunity"
-                },
-                "schema": {
-                    "fields": [],
-                    "slice": {
-                        "fields": [
-                            "Opportunity.Id",
-                            "Opportunity.IsDeleted",
-                            "Opportunity.Description",
-                            "Opportunity.Probability",
-                            "Opportunity.NextStep",
-                            "Opportunity.Pricebook.CreatedDate",
-                            "Opportunity.Pricebook.LastModifiedDate",
-                            "Opportunity.Pricebook.IsDeleted",
-                            "Opportunity.Pricebook.IsArchived"
-                        ],
-                        "ignoreMissingFields": true,
-                        "mode": "DROP"
-                    }
-                },
-                "sources": [
-                    "LOAD_DATASET13",
-                    "FILTER6"
-                ]
-            },
-            "JOIN13": {
-                "action": "join",
-                "parameters": {
-                    "joinType": "LOOKUP",
-                    "leftKeys": [
-                        "OpportunityId"
-                    ],
-                    "rightKeys": [
-                        "Id"
-                    ],
-                    "rightQualifier": "Opp"
-                },
-                "schema": {
-                    "fields": [],
-                    "slice": {
-                        "fields": [
-                            "Opp.Id",
-                            "Opp.IsDeleted",
-                            "Opp.Description",
-                            "Opp.StageName",
-                            "Opp.Amount",
-                            "Opp.Probability",
-                            "Opp.ForecastCategoryName",
-                            "Opp.Pricebook2Id",
-                            "Opp.CreatedDate",
-                            "Opp.LastModifiedDate",
-                            "Opp.LastActivityDate",
-                            "Opp.HasOpenActivity",
-                            "Opp.Pricebook.Id",
-                            "Opp.Pricebook.Name",
-                            "Opp.Pricebook.Pricebook2Id",
-                            "Opp.Pricebook.Product2Id",
-                            "Opp.Pricebook.UnitPrice",
-                            "Opp.Pricebook.IsActive",
-                            "Opp.Pricebook.CreatedDate",
-                            "Opp.Pricebook.LastModifiedDate",
-                            "Opp.Pricebook.ProductCode",
-                            "Opp.Pricebook.IsDeleted",
-                            "Opp.Pricebook.IsArchived",
-                            "Opp.Owner.Username",
-                            "Opp.Account.LastActivityDate",
-                            "Opp.Account.Owner.Username"
-                        ],
-                        "ignoreMissingFields": true,
-                        "mode": "DROP"
-                    }
-                },
-                "sources": [
-                    "FORMULA10",
-                    "JOIN11"
-                ]
-            },
-            "JOIN3": {
-                "action": "join",
-                "parameters": {
-                    "joinType": "LOOKUP",
-                    "leftKeys": [
-                        "Pricebook2Id"
-                    ],
-                    "rightKeys": [
-                        "Pricebook2Id"
-                    ],
-                    "rightQualifier": "Pricebook"
-                },
-                "schema": {
-                    "fields": [],
-                    "slice": {
-                        "fields": [],
-                        "ignoreMissingFields": true,
-                        "mode": "DROP"
-                    }
-                },
-                "sources": [
-                    "EDIT_ATTRIBUTES0",
-                    "LOAD_DATASET8"
-                ]
-            },
-            "JOIN9": {
-                "action": "join",
-                "parameters": {
-                    "joinType": "LOOKUP",
-                    "leftKeys": [
-                        "OwnerId"
-                    ],
-                    "rightKeys": [
-                        "Id"
-                    ],
-                    "rightQualifier": "Owner"
-                },
-                "schema": {
-                    "fields": [],
-                    "slice": {
-                        "fields": [
-                            "Owner.Id"
-                        ],
-                        "ignoreMissingFields": true,
-                        "mode": "DROP"
-                    }
-                },
-                "sources": [
-                    "LOAD_DATASET6",
-                    "LOAD_DATASET19"
-                ]
-            },
-            "LOAD_DATASET13": {
-                "action": "load",
-                "parameters": {
-                    "dataset": {
-                        "connectionName": "SFDC_LOCAL",
-                        "label": "OpportunityLineItem",
-                        "sourceObjectName": "OpportunityLineItem",
-                        "type": "connectedDataset"
-                    },
-                    "fields": [
-                        "Id",
-                        "OpportunityId",
-                        "SortOrder",
-                        "PricebookEntryId",
-                        "Product2Id",
-                        "ProductCode",
-                        "Name",
-                        "Quantity",
-                        "TotalPrice",
-                        "UnitPrice",
-                        "ListPrice",
-                        "Description",
-                        "CreatedDate",
-                        "LastModifiedDate"
-                    ]
-                },
-                "sources": []
-            },
-            "LOAD_DATASET17": {
-                "action": "load",
-                "parameters": {
-                    "dataset": {
-                        "connectionName": "SFDC_LOCAL",
-                        "label": "OpportunityHistory",
-                        "sourceObjectName": "OpportunityHistory",
-                        "type": "connectedDataset"
-                    },
-                    "fields": [
-                        "Id",
-                        "OpportunityId",
-                        "CreatedById",
-                        "CreatedDate",
-                        "StageName",
-                        "Amount",
-                        "CloseDate",
-                        "ForecastCategory",
-                        "IsDeleted"
-                    ]
-                },
-                "sources": []
-            },
-            "LOAD_DATASET18": {
-                "action": "load",
-                "parameters": {
-                    "dataset": {
-                        "connectionName": "SFDC_LOCAL",
-                        "label": "Product2",
-                        "sourceObjectName": "Product2",
-                        "type": "connectedDataset"
-                    },
-                    "fields": [
-                        "Id",
-                        "Name",
-                        "ProductCode",
-                        "Family"
-                    ]
-                },
-                "sources": []
-            },
-            "LOAD_DATASET19": {
-                "action": "load",
-                "parameters": {
-                    "dataset": {
-                        "label": "UserRole",
-                        "name": "${App.Datasets.userrole_revinsights.FullyQualifiedName}",
-                        "type": "analyticsDataset"
-                    },
-                    "fields": [
-                        "Role.RoleNames",
-                        "UniqueUserName",
-                        "Roles.ForecastManager.UniqueUserName",
-                        "Roles.ParentRole.Name",
-                        "Email",
-                        "TimeZoneSidKey",
-                        "UserRoleId",
-                        "IsActive",
-                        "Role.Role.ParentRole.Id",
-                        "Roles.RolePath",
-                        "Role.RolesNamesPath",
-                        "ForecastEnabled",
-                        "Roles.ForecastManager.Name",
-                        "Roles.ParentRole.DeveloperName",
-                        "Name",
-                        "Roles.ForecastManager.ForecastEnabled",
-                        "Roles.ForecastUserId",
-                        "Roles.ParentRole.ForecastManager.UniqueUserName",
-                        "isDuplicate",
-                        "SmallPhotoUrl",
-                        "FirstName",
-                        "Roles.Name",
-                        "Roles.Id",
-                        "Roles.ParentRole.ForecastManager.Name",
-                        "Roles.ParentRole.ForecastUserId",
-                        "Username",
-                        "Role.Role.ParentRole.ForecastUserId",
-                        "Roles.DeveloperName",
-                        "Roles.ParentRole.Id",
-                        "Id",
-                        "LastName",
-                        "UserType",
-                        "Roles.Roles",
-                        "Role.Role.ForecastUserId"
-                    ]
-                },
-                "sources": []
-            },
-            "LOAD_DATASET3": {
-                "action": "load",
-                "parameters": {
-                    "dataset": {
-                        "connectionName": "SFDC_LOCAL",
-                        "label": "Opportunity",
-                        "sourceObjectName": "Opportunity",
-                        "type": "connectedDataset"
-                    },
-                    "fields": [
-                        "Id",
-                        "IsDeleted",
-                        "AccountId",
-                        "Name",
-                        "Description",
-                        "StageName",
-                        "Amount",
-                        "Probability",
-                        "CloseDate",
-                        "Type",
-                        "NextStep",
-                        "LeadSource",
-                        "IsClosed",
-                        "IsWon",
-                        "ForecastCategory",
-                        "ForecastCategoryName",
-                        "HasOpportunityLineItem",
-                        "Pricebook2Id",
-                        "OwnerId",
-                        "CreatedDate",
-                        "LastModifiedDate",
-                        "LastActivityDate",
-                        "HasOpenActivity",
-                        "HasOverdueTask"
-                    ]
-                },
-                "sources": []
-            },
-            "LOAD_DATASET6": {
-                "action": "load",
-                "parameters": {
-                    "dataset": {
-                        "connectionName": "SFDC_LOCAL",
-                        "label": "Account",
-                        "sourceObjectName": "Account",
-                        "type": "connectedDataset"
-                    },
-                    "fields": [
-                        "Id",
-                        "MasterRecordId",
-                        "Name",
-                        "Type",
-                        "ParentId",
-                        "BillingStreet",
-                        "BillingCity",
-                        "BillingState",
-                        "BillingPostalCode",
-                        "BillingCountry",
-                        "ShippingStreet",
-                        "ShippingCity",
-                        "ShippingState",
-                        "ShippingPostalCode",
-                        "ShippingCountry",
-                        "Phone",
-                        "PhotoUrl",
-                        "Industry",
-                        "AnnualRevenue",
-                        "NumberOfEmployees",
-                        "Description",
-                        "OwnerId",
-                        "CreatedDate",
-                        "LastModifiedDate",
-                        "LastActivityDate",
-                        "LastViewedDate",
-                        "Jigsaw",
-                        "JigsawCompanyId",
-                        "AccountSource"
-                    ]
-                },
-                "sources": []
-            },
-            "LOAD_DATASET8": {
-                "action": "load",
-                "parameters": {
-                    "dataset": {
-                        "connectionName": "SFDC_LOCAL",
-                        "label": "PricebookEntry",
-                        "sourceObjectName": "PricebookEntry",
-                        "type": "connectedDataset"
-                    },
-                    "fields": [
-                        "Id",
-                        "Name",
-                        "Pricebook2Id",
-                        "Product2Id",
-                        "UnitPrice",
-                        "IsActive",
-                        "UseStandardPrice",
-                        "CreatedDate",
-                        "LastModifiedDate",
-                        "ProductCode",
-                        "IsDeleted",
-                        "IsArchived"
-                    ]
-                },
-                "sources": []
-            },
-            "OUTPUT4": {
-                "action": "save",
-                "parameters": {
-                    "dataset": {
-                        "folderName": "${App.Folder.FullyQualifiedName}",
-                        "label": "Opportunity",
-                        "name": "${App.Datasets.Opportunity.FullyQualifiedName}",
-                        "type": "analyticsDataset"
-                    },
-                    "fields": []
-                },
-                "sources": [
-                    "JOIN11"
-                ]
-            },
-            "OUTPUT5": {
-                "action": "save",
-                "parameters": {
-                    "dataset": {
-                        "folderName": "${App.Folder.FullyQualifiedName}",
-                        "label": "OpptyProduct",
-                        "name": "${App.Datasets.OpptyProduct.FullyQualifiedName}",
-                        "type": "analyticsDataset"
-                    },
-                    "fields": []
-                },
-                "sources": [
-                    "EDIT_ATTRIBUTES3"
-                ]
-            },
-            "OUTPUT6": {
-                "action": "save",
-                "parameters": {
-                    "dataset": {
-                        "folderName": "${App.Folder.FullyQualifiedName}",
-                        "label": "Account",
-                        "name": "${App.Datasets.Account.FullyQualifiedName}",
-                        "type": "analyticsDataset"
-                    },
-                    "fields": []
-                },
-                "sources": [
-                    "EDIT_ATTRIBUTES1"
-                ]
-            },
-            "OUTPUT7": {
-                "action": "save",
-                "parameters": {
-                    "dataset": {
-                        "folderName": "${App.Folder.FullyQualifiedName}",
-                        "label": "OpportunityHistory",
-                        "name": "${App.Datasets.OpportunityHistory.FullyQualifiedName}",
-                        "type": "analyticsDataset"
-                    },
-                    "fields": []
-                },
-                "sources": [
-                    "JOIN13"
-                ]
-            },
-            "OUTPUT8": {
-                "action": "save",
-                "parameters": {
-                    "dataset": {
-                        "folderName": "${App.Folder.FullyQualifiedName}",
-                        "label": "Product",
-                        "name": "${App.Datasets.Product.FullyQualifiedName}",
-                        "type": "analyticsDataset"
-                    },
-                    "fields": []
-                },
-                "sources": [
-                    "LOAD_DATASET18"
-                ]
-            }
+    "name" : "revinsights_opportunity_recipe",
+    "label" : "Opportunity Recipe",
+    "scheduleExpression" : null,
+    "publishingTarget" : "DATASET",
+    "format" : "R3",
+    "scheduleType" : null,
+    "recipeDefinition" : {
+      "version" : "54.0",
+      "nodes" : {
+        "FILTER5" : {
+          "action" : "filter",
+          "sources" : [
+            "LOAD_DATASET19"
+          ],
+          "parameters" : {
+            "filterExpressions" : [
+              {
+                "type" : "TEXT",
+                "field" : "Id",
+                "operator" : "IS_NOT_NULL",
+                "operands" : [ ]
+              }
+            ]
+          }
         },
-        "ui": {
-            "connectors": [
-                {
-                    "source": "TRANSFORM0",
-                    "target": "JOIN3"
-                },
-                {
-                    "source": "LOAD_DATASET8",
-                    "target": "JOIN3"
-                },
-                {
-                    "source": "LOAD_DATASET6",
-                    "target": "JOIN9"
-                },
-                {
-                    "source": "JOIN3",
-                    "target": "JOIN10"
-                },
-                {
-                    "source": "FILTER5",
-                    "target": "JOIN10"
-                },
-                {
-                    "source": "JOIN10",
-                    "target": "JOIN11"
-                },
-                {
-                    "source": "JOIN9",
-                    "target": "JOIN11"
-                },
-                {
-                    "source": "JOIN11",
-                    "target": "OUTPUT4"
-                },
-                {
-                    "source": "JOIN11",
-                    "target": "FILTER6"
-                },
-                {
-                    "source": "LOAD_DATASET13",
-                    "target": "JOIN12"
-                },
-                {
-                    "source": "FILTER6",
-                    "target": "JOIN12"
-                },
-                {
-                    "source": "TRANSFORM2",
-                    "target": "OUTPUT5"
-                },
-                {
-                    "source": "TRANSFORM1",
-                    "target": "OUTPUT6"
-                },
-                {
-                    "source": "TRANSFORM4",
-                    "target": "JOIN13"
-                },
-                {
-                    "source": "JOIN11",
-                    "target": "JOIN13"
-                },
-                {
-                    "source": "JOIN13",
-                    "target": "OUTPUT7"
-                },
-                {
-                    "source": "LOAD_DATASET3",
-                    "target": "TRANSFORM0"
-                },
-                {
-                    "source": "JOIN9",
-                    "target": "TRANSFORM1"
-                },
-                {
-                    "source": "JOIN12",
-                    "target": "TRANSFORM2"
-                },
-                {
-                    "source": "LOAD_DATASET18",
-                    "target": "OUTPUT8"
-                },
-                {
-                    "source": "LOAD_DATASET19",
-                    "target": "FILTER5"
-                },
-                {
-                    "source": "LOAD_DATASET19",
-                    "target": "JOIN9"
-                },
-                {
-                    "source": "LOAD_DATASET17",
-                    "target": "TRANSFORM3"
-                },
-                {
-                    "source": "TRANSFORM3",
-                    "target": "TRANSFORM4"
-                }
+        "FILTER6" : {
+          "action" : "filter",
+          "sources" : [
+            "JOIN11"
+          ],
+          "parameters" : {
+            "filterExpressions" : [
+              {
+                "type" : "TEXT",
+                "field" : "Id",
+                "operator" : "IS_NOT_NULL",
+                "operands" : [ ]
+              }
+            ]
+          }
+        },
+        "FILTER7" : {
+          "action" : "filter",
+          "sources" : [
+            "FORMULA15"
+          ],
+          "parameters" : {
+            "filterExpressions" : [
+              {
+                "type" : "TEXT",
+                "field" : "Stage_isUpdated",
+                "operator" : "EQUAL",
+                "operands" : [
+                  "1"
+                ]
+              }
+            ]
+          }
+        },
+        "JOIN10" : {
+          "action" : "join",
+          "sources" : [
+            "JOIN3",
+            "FILTER5"
+          ],
+          "schema" : {
+            "fields" : [ ],
+            "slice" : {
+              "mode" : "DROP",
+              "ignoreMissingFields" : true,
+              "fields" : [
+                "Owner.Id"
+              ]
+            }
+          },
+          "parameters" : {
+            "joinType" : "LOOKUP",
+            "leftKeys" : [
+              "OwnerId"
             ],
-            "hiddenColumns": [],
-            "nodes": {
-                "FILTER5": {
-                    "label": "Filter",
-                    "left": 392.1,
-                    "top": 112.30000000000001,
-                    "type": "FILTER"
-                },
-                "FILTER6": {
-                    "description": "",
-                    "label": "Opportunity",
-                    "left": 532.1,
-                    "top": 532,
-                    "type": "FILTER"
-                },
-                "JOIN10": {
-                    "description": "",
-                    "label": "Join Owner onto Opportunity",
-                    "left": 531.9,
-                    "top": 392.1,
-                    "type": "JOIN"
-                },
-                "JOIN11": {
-                    "description": "",
-                    "label": "Join Account onto Opportunity",
-                    "left": 672,
-                    "top": 391.9,
-                    "type": "JOIN"
-                },
-                "JOIN12": {
-                    "description": "",
-                    "label": "Join Opportunity onto Opportunity Line Item",
-                    "left": 532.2,
-                    "top": 671.9,
-                    "type": "JOIN"
-                },
-                "JOIN13": {
-                    "description": "",
-                    "label": "Join Opportunity onto Opportunity History",
-                    "left": 672.1,
-                    "top": 812,
-                    "type": "JOIN"
-                },
-                "JOIN3": {
-                    "description": "",
-                    "label": "Augment_PricebookEntry_onto_Opportunity",
-                    "left": 392,
-                    "top": 392,
-                    "type": "JOIN"
-                },
-                "JOIN9": {
-                    "description": "",
-                    "label": "Join Owner onto Account",
-                    "left": 252.10000000000002,
-                    "top": 252.10000000000002,
-                    "type": "JOIN"
-                },
-                "LOAD_DATASET13": {
-                    "label": "OpportunityLineItem",
-                    "left": 112.69999999999999,
-                    "parameters": {
-                        "sampleSize": 2000
-                    },
-                    "top": 671.9,
-                    "type": "LOAD_DATASET"
-                },
-                "LOAD_DATASET17": {
-                    "label": "OpportunityHistory",
-                    "left": 112,
-                    "parameters": {
-                        "sampleSize": 2000
-                    },
-                    "top": 812,
-                    "type": "LOAD_DATASET"
-                },
-                "LOAD_DATASET18": {
-                    "label": "Product2",
-                    "left": 112,
-                    "parameters": {
-                        "sampleSize": 2000
-                    },
-                    "top": 952,
-                    "type": "LOAD_DATASET"
-                },
-                "LOAD_DATASET19": {
-                    "label": "UserRole",
-                    "left": 112.19999999999999,
-                    "parameters": {
-                        "sampleSize": 2000
-                    },
-                    "top": 112.1,
-                    "type": "LOAD_DATASET"
-                },
-                "LOAD_DATASET3": {
-                    "label": "Opportunity",
-                    "left": 112,
-                    "parameters": {
-                        "sampleSize": 2000
-                    },
-                    "top": 391.8,
-                    "type": "LOAD_DATASET"
-                },
-                "LOAD_DATASET6": {
-                    "label": "Account",
-                    "left": 112.6,
-                    "parameters": {
-                        "sampleSize": 2000
-                    },
-                    "top": 251.3,
-                    "type": "LOAD_DATASET"
-                },
-                "LOAD_DATASET8": {
-                    "label": "PricebookEntry",
-                    "left": 111.9,
-                    "parameters": {
-                        "sampleSize": 2000
-                    },
-                    "top": 532,
-                    "type": "LOAD_DATASET"
-                },
-                "OUTPUT4": {
-                    "description": "",
-                    "label": "Save Opportunity",
-                    "left": 812.1,
-                    "top": 392.1,
-                    "type": "OUTPUT"
-                },
-                "OUTPUT5": {
-                    "description": "",
-                    "label": "Save Opportunity Line Item",
-                    "left": 812.1,
-                    "top": 672,
-                    "type": "OUTPUT"
-                },
-                "OUTPUT6": {
-                    "description": "",
-                    "label": "Save Account",
-                    "left": 812.6,
-                    "top": 252.10000000000002,
-                    "type": "OUTPUT"
-                },
-                "OUTPUT7": {
-                    "description": "",
-                    "label": "Save Opportunity History",
-                    "left": 812.1,
-                    "top": 812,
-                    "type": "OUTPUT"
-                },
-                "OUTPUT8": {
-                    "description": "",
-                    "label": "Save Product",
-                    "left": 252,
-                    "top": 952,
-                    "type": "OUTPUT"
-                },
-                "TRANSFORM0": {
-                    "connectors": [
-                        {
-                            "source": "FORMULA0",
-                            "target": "EDIT_ATTRIBUTES0"
-                        }
-                    ],
-                    "description": "",
-                    "graph": {
-                        "EDIT_ATTRIBUTES0": null,
-                        "FORMULA0": {
-                            "parameters": {
-                                "type": "BASE_FORMULA_UI"
-                            }
-                        }
-                    },
-                    "label": "Add Fields to Opportunity",
-                    "left": 252,
-                    "top": 392,
-                    "type": "TRANSFORM"
-                },
-                "TRANSFORM1": {
-                    "connectors": [
-                        {
-                            "source": "FORMULA1",
-                            "target": "EDIT_ATTRIBUTES1"
-                        }
-                    ],
-                    "graph": {
-                        "EDIT_ATTRIBUTES1": null,
-                        "FORMULA1": {
-                            "parameters": {
-                                "type": "BASE_FORMULA_UI"
-                            }
-                        }
-                    },
-                    "label": "Transform",
-                    "left": 392,
-                    "top": 252,
-                    "type": "TRANSFORM"
-                },
-                "TRANSFORM2": {
-                    "connectors": [
-                        {
-                            "source": "FORMULA2",
-                            "target": "EDIT_ATTRIBUTES2"
-                        },
-                        {
-                            "source": "EDIT_ATTRIBUTES2",
-                            "target": "FORMULA3"
-                        },
-                        {
-                            "source": "FORMULA3",
-                            "target": "EDIT_ATTRIBUTES3"
-                        }
-                    ],
-                    "graph": {
-                        "EDIT_ATTRIBUTES2": null,
-                        "EDIT_ATTRIBUTES3": null,
-                        "FORMULA2": {
-                            "parameters": {
-                                "type": "BASE_FORMULA_UI"
-                            }
-                        },
-                        "FORMULA3": {
-                            "parameters": {
-                                "type": "BASE_FORMULA_UI"
-                            }
-                        }
-                    },
-                    "label": "Transform",
-                    "left": 672,
-                    "top": 672,
-                    "type": "TRANSFORM"
-                },
-                "TRANSFORM3": {
-                    "connectors": [],
-                    "description": "",
-                    "graph": {
-                        "FORMULA4": {
-                            "parameters": {
-                                "type": "BASE_FORMULA_UI"
-                            }
-                        }
-                    },
-                    "label": "Add Unique Sort Key",
-                    "left": 252,
-                    "top": 811.1,
-                    "type": "TRANSFORM"
-                },
-                "TRANSFORM4": {
-                    "connectors": [
-                        {
-                            "source": "FORMULA5",
-                            "target": "FORMULA6"
-                        },
-                        {
-                            "source": "FORMULA6",
-                            "target": "FORMULA7"
-                        },
-                        {
-                            "source": "FORMULA7",
-                            "target": "FORMULA8"
-                        },
-                        {
-                            "source": "FORMULA8",
-                            "target": "FORMULA9"
-                        },
-                        {
-                            "source": "FORMULA9",
-                            "target": "FORMULA10"
-                        }
-                    ],
-                    "description": "",
-                    "graph": {
-                        "FORMULA10": null,
-                        "FORMULA5": null,
-                        "FORMULA6": null,
-                        "FORMULA7": null,
-                        "FORMULA8": null,
-                        "FORMULA9": null
-                    },
-                    "label": "Add Historical Trending Fields",
-                    "left": 392,
-                    "top": 812,
-                    "type": "TRANSFORM"
-                }
-            }
+            "rightQualifier" : "Owner",
+            "rightKeys" : [
+              "Id"
+            ]
+          }
         },
-        "version": "54.0"
-    },
-    "scheduleExpression": null,
-    "scheduleType": null
-}
+        "JOIN11" : {
+          "action" : "join",
+          "sources" : [
+            "JOIN10",
+            "JOIN9"
+          ],
+          "schema" : {
+            "fields" : [ ],
+            "slice" : {
+              "mode" : "DROP",
+              "ignoreMissingFields" : true,
+              "fields" : [
+                "Account.Id",
+                "Account.MasterRecordId",
+                "Account.BillingStreet",
+                "Account.BillingCity",
+                "Account.BillingPostalCode",
+                "Account.ShippingStreet",
+                "Account.ShippingCity",
+                "Account.ShippingState",
+                "Account.ShippingPostalCode",
+                "Account.ShippingCountry",
+                "Account.Phone",
+                "Account.PhotoUrl",
+                "Account.Description",
+                "Account.CreatedDate",
+                "Account.LastModifiedDate",
+                "Account.LastViewedDate",
+                "Account.Jigsaw",
+                "Account.JigsawCompanyId"
+              ]
+            }
+          },
+          "parameters" : {
+            "joinType" : "LOOKUP",
+            "leftKeys" : [
+              "AccountId"
+            ],
+            "rightQualifier" : "Account",
+            "rightKeys" : [
+              "Id"
+            ]
+          }
+        },
+        "JOIN12" : {
+          "action" : "join",
+          "sources" : [
+            "LOAD_DATASET13",
+            "FILTER6"
+          ],
+          "schema" : {
+            "fields" : [ ],
+            "slice" : {
+              "mode" : "DROP",
+              "ignoreMissingFields" : true,
+              "fields" : [
+                "Opportunity.Id",
+                "Opportunity.IsDeleted",
+                "Opportunity.Description",
+                "Opportunity.Probability",
+                "Opportunity.NextStep",
+                "Opportunity.Pricebook.CreatedDate",
+                "Opportunity.Pricebook.LastModifiedDate",
+                "Opportunity.Pricebook.IsDeleted",
+                "Opportunity.Pricebook.IsArchived"
+              ]
+            }
+          },
+          "parameters" : {
+            "joinType" : "LOOKUP",
+            "leftKeys" : [
+              "OpportunityId"
+            ],
+            "rightQualifier" : "Opportunity",
+            "rightKeys" : [
+              "Id"
+            ]
+          }
+        },
+        "JOIN14" : {
+          "action" : "join",
+          "sources" : [
+            "JOIN12",
+            "LOAD_DATASET18"
+          ],
+          "schema" : {
+            "fields" : [ ],
+            "slice" : {
+              "mode" : "DROP",
+              "ignoreMissingFields" : true,
+              "fields" : [ ]
+            }
+          },
+          "parameters" : {
+            "joinType" : "LOOKUP",
+            "leftKeys" : [
+              "Product2Id"
+            ],
+            "rightQualifier" : "Product2",
+            "rightKeys" : [
+              "Id"
+            ]
+          }
+        },
+        "JOIN16" : {
+          "action" : "join",
+          "sources" : [
+            "JOIN17",
+            "JOIN11"
+          ],
+          "schema" : {
+            "fields" : [ ],
+            "slice" : {
+              "mode" : "DROP",
+              "ignoreMissingFields" : true,
+              "fields" : [
+                "Time.Id",
+                "Time.OpportunityId",
+                "Time.CreatedById",
+                "Time.CreatedDate",
+                "Time.StageName",
+                "Time.Amount",
+                "Time.CloseDate",
+                "Time.ForecastCategory",
+                "Time.IsDeleted",
+                "Time.Unique_Sort_Key",
+                "Time.ValidToDate",
+                "Time.ValidFromDate",
+                "Time.AmountPrev",
+                "Time.StageNamePrev",
+                "Time.CloseDatePrev",
+                "Time.CreatedDatePrev",
+                "Time.Seconds_inStage",
+                "Opp.Id",
+                "Opp.IsDeleted",
+                "Opp.Description",
+                "Opp.StageName",
+                "Opp.Probability",
+                "Opp.ForecastCategoryName",
+                "Opp.Pricebook2Id",
+                "Opp.CreatedDate",
+                "Opp.LastModifiedDate",
+                "Opp.LastActivityDate",
+                "Opp.HasOpenActivity",
+                "Opp.Pricebook.Id",
+                "Opp.Pricebook.Name",
+                "Opp.Pricebook.Pricebook2Id",
+                "Opp.Pricebook.Product2Id",
+                "Opp.Pricebook.UnitPrice",
+                "Opp.Pricebook.IsActive",
+                "Opp.Pricebook.CreatedDate",
+                "Opp.Pricebook.LastModifiedDate",
+                "Opp.Pricebook.ProductCode",
+                "Opp.Pricebook.IsDeleted",
+                "Opp.Pricebook.IsArchived",
+                "Opp.Owner.Username",
+                "Opp.Account.LastActivityDate",
+                "Opp.Account.Owner.Username"
+              ]
+            }
+          },
+          "parameters" : {
+            "joinType" : "LOOKUP",
+            "leftKeys" : [
+              "OpportunityId"
+            ],
+            "rightQualifier" : "Opp",
+            "rightKeys" : [
+              "Id"
+            ]
+          }
+        },
+        "JOIN3" : {
+          "action" : "join",
+          "sources" : [
+            "EDIT_ATTRIBUTES0",
+            "LOAD_DATASET8"
+          ],
+          "schema" : {
+            "fields" : [ ],
+            "slice" : {
+              "mode" : "DROP",
+              "ignoreMissingFields" : true,
+              "fields" : [ ]
+            }
+          },
+          "parameters" : {
+            "joinType" : "LOOKUP",
+            "leftKeys" : [
+              "Pricebook2Id"
+            ],
+            "rightQualifier" : "Pricebook",
+            "rightKeys" : [
+              "Pricebook2Id"
+            ]
+          }
+        },
+        "JOIN9" : {
+          "action" : "join",
+          "sources" : [
+            "LOAD_DATASET6",
+            "LOAD_DATASET19"
+          ],
+          "schema" : {
+            "fields" : [ ],
+            "slice" : {
+              "mode" : "DROP",
+              "ignoreMissingFields" : true,
+              "fields" : [
+                "Owner.Id"
+              ]
+            }
+          },
+          "parameters" : {
+            "joinType" : "LOOKUP",
+            "leftKeys" : [
+              "OwnerId"
+            ],
+            "rightQualifier" : "Owner",
+            "rightKeys" : [
+              "Id"
+            ]
+          }
+        },
+        "LOAD_DATASET13" : {
+          "action" : "load",
+          "sources" : [ ],
+          "parameters" : {
+            "fields" : [
+              "Id",
+              "OpportunityId",
+              "SortOrder",
+              "PricebookEntryId",
+              "Product2Id",
+              "ProductCode",
+              "Name",
+              "Quantity",
+              "TotalPrice",
+              "UnitPrice",
+              "ListPrice",
+              "Description",
+              "CreatedDate",
+              "LastModifiedDate"
+            ],
+            "dataset" : {
+              "type" : "connectedDataset",
+              "label" : "OpportunityLineItem",
+              "connectionName" : "SFDC_LOCAL",
+              "sourceObjectName" : "OpportunityLineItem"
+            }
+          }
+        },
+        "LOAD_DATASET17" : {
+          "action" : "load",
+          "sources" : [ ],
+          "parameters" : {
+            "fields" : [
+              "Id",
+              "OpportunityId",
+              "CreatedById",
+              "CreatedDate",
+              "StageName",
+              "Amount",
+              "CloseDate",
+              "ForecastCategory",
+              "IsDeleted"
+            ],
+            "dataset" : {
+              "type" : "connectedDataset",
+              "label" : "OpportunityHistory",
+              "connectionName" : "SFDC_LOCAL",
+              "sourceObjectName" : "OpportunityHistory"
+            }
+          }
+        },
+        "LOAD_DATASET18" : {
+          "action" : "load",
+          "sources" : [ ],
+          "parameters" : {
+            "fields" : [
+              "Id",
+              "Name",
+              "ProductCode",
+              "Family"
+            ],
+            "dataset" : {
+              "type" : "connectedDataset",
+              "label" : "Product2",
+              "connectionName" : "SFDC_LOCAL",
+              "sourceObjectName" : "Product2"
+            }
+          }
+        },
+        "LOAD_DATASET19" : {
+          "action" : "load",
+          "sources" : [ ],
+          "parameters" : {
+            "fields" : [
+              "Role.RoleNames",
+              "UniqueUserName",
+              "Roles.ForecastManager.UniqueUserName",
+              "Roles.ParentRole.Name",
+              "Email",
+              "TimeZoneSidKey",
+              "UserRoleId",
+              "IsActive",
+              "Role.Role.ParentRole.Id",
+              "Roles.RolePath",
+              "Role.RolesNamesPath",
+              "ForecastEnabled",
+              "Roles.ForecastManager.Name",
+              "Roles.ParentRole.DeveloperName",
+              "Name",
+              "Roles.ForecastManager.ForecastEnabled",
+              "Roles.ForecastUserId",
+              "Roles.ParentRole.ForecastManager.UniqueUserName",
+              "isDuplicate",
+              "SmallPhotoUrl",
+              "FirstName",
+              "Roles.Name",
+              "Roles.Id",
+              "Roles.ParentRole.ForecastManager.Name",
+              "Roles.ParentRole.ForecastUserId",
+              "Username",
+              "Role.Role.ParentRole.ForecastUserId",
+              "Roles.DeveloperName",
+              "Roles.ParentRole.Id",
+              "Id",
+              "LastName",
+              "Role.Role.ForecastUserId",
+              "UserType",
+              "Roles.Roles",
+              "Role.ForecastUserIds",
+              "Role.ForecastUserIdsPath"
+            ],
+            "dataset" : {
+              "type" : "analyticsDataset",
+              "label" : "UserRole",
+              "name" : "${App.Datasets.userrole_revinsights.FullyQualifiedName}"
+            }
+          }
+        },
+        "LOAD_DATASET3" : {
+          "action" : "load",
+          "sources" : [ ],
+          "parameters" : {
+            "fields" : [
+              "Id",
+              "IsDeleted",
+              "AccountId",
+              "Name",
+              "Description",
+              "StageName",
+              "Amount",
+              "Probability",
+              "CloseDate",
+              "Type",
+              "NextStep",
+              "LeadSource",
+              "IsClosed",
+              "IsWon",
+              "ForecastCategory",
+              "ForecastCategoryName",
+              "HasOpportunityLineItem",
+              "Pricebook2Id",
+              "OwnerId",
+              "CreatedDate",
+              "LastModifiedDate",
+              "LastActivityDate",
+              "HasOpenActivity",
+              "HasOverdueTask"
+            ],
+            "dataset" : {
+              "type" : "connectedDataset",
+              "label" : "Opportunity",
+              "connectionName" : "SFDC_LOCAL",
+              "sourceObjectName" : "Opportunity"
+            }
+          }
+        },
+        "LOAD_DATASET6" : {
+          "action" : "load",
+          "sources" : [ ],
+          "parameters" : {
+            "fields" : [
+              "Id",
+              "MasterRecordId",
+              "Name",
+              "Type",
+              "ParentId",
+              "BillingStreet",
+              "BillingCity",
+              "BillingState",
+              "BillingPostalCode",
+              "BillingCountry",
+              "ShippingStreet",
+              "ShippingCity",
+              "ShippingState",
+              "ShippingPostalCode",
+              "ShippingCountry",
+              "Phone",
+              "PhotoUrl",
+              "Industry",
+              "AnnualRevenue",
+              "NumberOfEmployees",
+              "Description",
+              "OwnerId",
+              "CreatedDate",
+              "LastModifiedDate",
+              "LastActivityDate",
+              "LastViewedDate",
+              "Jigsaw",
+              "JigsawCompanyId",
+              "AccountSource"
+            ],
+            "dataset" : {
+              "type" : "connectedDataset",
+              "label" : "Account",
+              "connectionName" : "SFDC_LOCAL",
+              "sourceObjectName" : "Account"
+            }
+          }
+        },
+        "LOAD_DATASET8" : {
+          "action" : "load",
+          "sources" : [ ],
+          "parameters" : {
+            "fields" : [
+              "Id",
+              "Name",
+              "Pricebook2Id",
+              "Product2Id",
+              "UnitPrice",
+              "IsActive",
+              "UseStandardPrice",
+              "CreatedDate",
+              "LastModifiedDate",
+              "ProductCode",
+              "IsDeleted",
+              "IsArchived"
+            ],
+            "dataset" : {
+              "type" : "connectedDataset",
+              "label" : "PricebookEntry",
+              "connectionName" : "SFDC_LOCAL",
+              "sourceObjectName" : "PricebookEntry"
+            }
+          }
+        },
+        "OUTPUT4" : {
+          "action" : "save",
+          "sources" : [
+            "JOIN11"
+          ],
+          "parameters" : {
+            "fields" : [ ],
+            "dataset" : {
+              "type" : "analyticsDataset",
+              "label" : "Opportunity",
+              "name" : "${App.Datasets.Opportunity.FullyQualifiedName}",
+              "rowLevelSecurityFilter" : "'Owner.Roles.Roles' == \"$User.UserRoleId\" || 'OwnerId' == \"$User.Id\" || 'Account.OwnerId' == \"$User.Id\"",
+              "folderName" : "${App.Folder.FullyQualifiedName}"
+            }
+          }
+        },
+        "OUTPUT5" : {
+          "action" : "save",
+          "sources" : [
+            "EDIT_ATTRIBUTES3"
+          ],
+          "parameters" : {
+            "fields" : [ ],
+            "dataset" : {
+              "type" : "analyticsDataset",
+              "label" : "OpptyProduct",
+              "name" : "${App.Datasets.OpptyProduct.FullyQualifiedName}",
+              "rowLevelSecurityFilter" : "'Opportunity.Owner.Roles.Roles' == \"$User.UserRoleId\" || 'Opportunity.OwnerId' == \"$User.Id\" || 'Opportunity.Account.OwnerId' == \"$User.Id\"",
+              "folderName" : "${App.Folder.FullyQualifiedName}"
+            }
+          }
+        },
+        "OUTPUT6" : {
+          "action" : "save",
+          "sources" : [
+            "EDIT_ATTRIBUTES1"
+          ],
+          "parameters" : {
+            "fields" : [ ],
+            "dataset" : {
+              "type" : "analyticsDataset",
+              "label" : "Account",
+              "name" : "${App.Datasets.Account.FullyQualifiedName}",
+              "rowLevelSecurityFilter" : "'Owner.Roles.Roles' == \"$User.UserRoleId\" || 'OwnerId' == \"$User.Id\"",
+              "folderName" : "${App.Folder.FullyQualifiedName}"
+            }
+          }
+        },
+        "OUTPUT7" : {
+          "action" : "save",
+          "sources" : [
+            "JOIN16"
+          ],
+          "parameters" : {
+            "fields" : [ ],
+            "dataset" : {
+              "type" : "analyticsDataset",
+              "label" : "OpportunityHistory",
+              "name" : "${App.Datasets.OpportunityHistory.FullyQualifiedName}",
+              "rowLevelSecurityFilter" : "'Opp.Owner.Roles.Roles' == \"$User.UserRoleId\" || 'Opp.OwnerId' == \"$User.Id\" || 'Opp.Account.OwnerId' == \"$User.Id\"",
+              "folderName" : "${App.Folder.FullyQualifiedName}"
+            }
+          }
+        },
+        "OUTPUT8" : {
+          "action" : "save",
+          "sources" : [
+            "LOAD_DATASET18"
+          ],
+          "parameters" : {
+            "fields" : [ ],
+            "dataset" : {
+              "type" : "analyticsDataset",
+              "label" : "Product",
+              "name" : "${App.Datasets.Product.FullyQualifiedName}",
+              "folderName" : "${App.Folder.FullyQualifiedName}"
+            }
+          }
+        },
+        "EDIT_ATTRIBUTES0" : {
+          "action" : "schema",
+          "sources" : [
+            "FORMULA0"
+          ],
+          "parameters" : {
+            "fields" : [
+              {
+                "name" : "Id_formula",
+                "newProperties" : {
+                  "label" : "Opportunity Age",
+                  "name" : "Opportunity_Age"
+                }
+              }
+            ]
+          }
+        },
+        "FORMULA0" : {
+          "action" : "formula",
+          "sources" : [
+            "LOAD_DATASET3"
+          ],
+          "parameters" : {
+            "expressionType" : "SQL",
+            "fields" : [
+              {
+                "type" : "NUMBER",
+                "name" : "Id_formula",
+                "label" : "Opportunity Age",
+                "formulaExpression" : "case \n\nwhen \nIsClosed=true\n\nthen \n(to_unix_timestamp(CloseDate)- to_unix_timestamp(CreatedDate))/86400\n\nelse \n(to_unix_timestamp(current_date())- to_unix_timestamp(CreatedDate))/86400\n\nend",
+                "precision" : 18,
+                "scale" : 2,
+                "defaultValue" : "0"
+              }
+            ]
+          }
+        },
+        "EDIT_ATTRIBUTES1" : {
+          "action" : "schema",
+          "sources" : [
+            "FORMULA1"
+          ],
+          "parameters" : {
+            "fields" : [
+              {
+                "name" : "Id_formula",
+                "newProperties" : {
+                  "label" : "Full Name",
+                  "name" : "User.Name"
+                }
+              }
+            ]
+          }
+        },
+        "FORMULA1" : {
+          "action" : "formula",
+          "sources" : [
+            "JOIN9"
+          ],
+          "parameters" : {
+            "expressionType" : "SQL",
+            "fields" : [
+              {
+                "type" : "TEXT",
+                "name" : "Id_formula",
+                "label" : "Full Name",
+                "formulaExpression" : "\"Owner.Name\"",
+                "precision" : 255,
+                "defaultValue" : ""
+              }
+            ]
+          }
+        },
+        "EDIT_ATTRIBUTES2" : {
+          "action" : "schema",
+          "sources" : [
+            "FORMULA2"
+          ],
+          "parameters" : {
+            "fields" : [
+              {
+                "name" : "Opportunity.Account.Owner.Name_formula",
+                "newProperties" : {
+                  "label" : "Opportunity.Account.User.Name",
+                  "name" : "Opportunity.Account.User.Name"
+                }
+              }
+            ]
+          }
+        },
+        "EDIT_ATTRIBUTES3" : {
+          "action" : "schema",
+          "sources" : [
+            "FORMULA3"
+          ],
+          "parameters" : {
+            "fields" : [
+              {
+                "name" : "Id_formula",
+                "newProperties" : {
+                  "label" : "Full Name",
+                  "name" : "Opportunity.User.Name"
+                }
+              }
+            ]
+          }
+        },
+        "FORMULA2" : {
+          "action" : "formula",
+          "sources" : [
+            "JOIN14"
+          ],
+          "parameters" : {
+            "expressionType" : "SQL",
+            "fields" : [
+              {
+                "type" : "TEXT",
+                "name" : "Opportunity.Account.Owner.Name_formula",
+                "label" : "Opportunity.Account.User.Name",
+                "formulaExpression" : "\"Opportunity.Account.Owner.Name\"",
+                "precision" : 255,
+                "defaultValue" : ""
+              }
+            ]
+          }
+        },
+        "FORMULA3" : {
+          "action" : "formula",
+          "sources" : [
+            "EDIT_ATTRIBUTES2"
+          ],
+          "parameters" : {
+            "expressionType" : "SQL",
+            "fields" : [
+              {
+                "type" : "TEXT",
+                "name" : "Id_formula",
+                "label" : "Full Name",
+                "formulaExpression" : "\"Opportunity.Owner.Name\"",
+                "precision" : 255,
+                "defaultValue" : ""
+              }
+            ]
+          }
+        },
+        "FORMULA4" : {
+          "action" : "formula",
+          "sources" : [
+            "LOAD_DATASET17"
+          ],
+          "parameters" : {
+            "expressionType" : "SQL",
+            "fields" : [
+              {
+                "type" : "TEXT",
+                "name" : "Unique_Sort_Key",
+                "label" : "Unique Sort Key",
+                "formulaExpression" : "CONCAT(CreatedDate, '-', Id)",
+                "precision" : 255,
+                "defaultValue" : ""
+              }
+            ]
+          }
+        },
+        "FORMULA10" : {
+          "action" : "computeRelative",
+          "sources" : [
+            "FORMULA9"
+          ],
+          "parameters" : {
+            "partitionBy" : [
+              "OpportunityId"
+            ],
+            "orderBy" : [
+              {
+                "fieldName" : "Unique_Sort_Key",
+                "direction" : "ASC"
+              }
+            ],
+            "expressionType" : "SQL",
+            "fields" : [
+              {
+                "type" : "DATETIME",
+                "name" : "CreatedDatePrev",
+                "label" : "CreatedDatePrev",
+                "formulaExpression" : "lag(CreatedDate)",
+                "format" : "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+                "defaultValue" : ""
+              }
+            ]
+          }
+        },
+        "FORMULA11" : {
+          "action" : "formula",
+          "sources" : [
+            "FORMULA10"
+          ],
+          "parameters" : {
+            "expressionType" : "SQL",
+            "fields" : [
+              {
+                "type" : "TEXT",
+                "name" : "Stage_isUpdated",
+                "label" : "Stage IsUpdated",
+                "formulaExpression" : "case when StageName = StageNamePrev then '0' else '1' end",
+                "precision" : 255,
+                "defaultValue" : "1"
+              }
+            ]
+          }
+        },
+        "FORMULA15" : {
+          "action" : "formula",
+          "sources" : [
+            "FORMULA11"
+          ],
+          "parameters" : {
+            "expressionType" : "SQL",
+            "fields" : [
+              {
+                "type" : "NUMBER",
+                "name" : "Seconds_inStage",
+                "label" : "Seconds in Stage",
+                "formulaExpression" : "case when Stage_isUpdated = '1' then to_unix_timestamp(ValidToDate) - to_unix_timestamp(ValidFromDate) else 0 end",
+                "precision" : 10,
+                "scale" : 0,
+                "defaultValue" : ""
+              }
+            ]
+          }
+        },
+        "FORMULA5" : {
+          "action" : "computeRelative",
+          "sources" : [
+            "FORMULA4"
+          ],
+          "parameters" : {
+            "partitionBy" : [
+              "OpportunityId"
+            ],
+            "orderBy" : [
+              {
+                "fieldName" : "Unique_Sort_Key",
+                "direction" : "ASC"
+              }
+            ],
+            "expressionType" : "SQL",
+            "fields" : [
+              {
+                "type" : "DATETIME",
+                "name" : "ValidToDate",
+                "label" : "ValidToDate",
+                "formulaExpression" : "lead(CreatedDate)",
+                "format" : "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+                "defaultValue" : "3000-01-01T00:00:00.000Z"
+              }
+            ]
+          }
+        },
+        "FORMULA6" : {
+          "action" : "computeRelative",
+          "sources" : [
+            "FORMULA5"
+          ],
+          "parameters" : {
+            "partitionBy" : [
+              "OpportunityId"
+            ],
+            "orderBy" : [
+              {
+                "fieldName" : "Unique_Sort_Key",
+                "direction" : "ASC"
+              }
+            ],
+            "expressionType" : "SQL",
+            "fields" : [
+              {
+                "type" : "DATETIME",
+                "name" : "ValidFromDate",
+                "label" : "ValidFromDate",
+                "formulaExpression" : "current(CreatedDate)",
+                "format" : "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+                "defaultValue" : ""
+              }
+            ]
+          }
+        },
+        "FORMULA7" : {
+          "action" : "computeRelative",
+          "sources" : [
+            "FORMULA6"
+          ],
+          "parameters" : {
+            "partitionBy" : [
+              "OpportunityId"
+            ],
+            "orderBy" : [
+              {
+                "fieldName" : "Unique_Sort_Key",
+                "direction" : "ASC"
+              }
+            ],
+            "expressionType" : "SQL",
+            "fields" : [
+              {
+                "type" : "NUMBER",
+                "name" : "AmountPrev",
+                "label" : "AmountPrev",
+                "formulaExpression" : "lag(Amount)",
+                "precision" : 18,
+                "scale" : 2,
+                "defaultValue" : ""
+              }
+            ]
+          }
+        },
+        "FORMULA8" : {
+          "action" : "computeRelative",
+          "sources" : [
+            "FORMULA7"
+          ],
+          "parameters" : {
+            "partitionBy" : [
+              "OpportunityId"
+            ],
+            "orderBy" : [
+              {
+                "fieldName" : "Unique_Sort_Key",
+                "direction" : "ASC"
+              }
+            ],
+            "expressionType" : "SQL",
+            "fields" : [
+              {
+                "type" : "TEXT",
+                "name" : "StageNamePrev",
+                "label" : "StageNamePrev",
+                "formulaExpression" : "lag(StageName)",
+                "precision" : 255,
+                "defaultValue" : ""
+              }
+            ]
+          }
+        },
+        "FORMULA9" : {
+          "action" : "computeRelative",
+          "sources" : [
+            "FORMULA8"
+          ],
+          "parameters" : {
+            "partitionBy" : [
+              "OpportunityId"
+            ],
+            "orderBy" : [
+              {
+                "fieldName" : "Unique_Sort_Key",
+                "direction" : "ASC"
+              }
+            ],
+            "expressionType" : "SQL",
+            "fields" : [
+              {
+                "type" : "DATETIME",
+                "name" : "CloseDatePrev",
+                "label" : "CloseDatePrev",
+                "formulaExpression" : "lag(CloseDate)",
+                "format" : "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+                "defaultValue" : ""
+              }
+            ]
+          }
+        },
+        "FORMULA12" : {
+          "action" : "computeRelative",
+          "sources" : [
+            "FILTER7"
+          ],
+          "parameters" : {
+            "partitionBy" : [
+              "OpportunityId"
+            ],
+            "orderBy" : [
+              {
+                "fieldName" : "Unique_Sort_Key",
+                "direction" : "ASC"
+              }
+            ],
+            "expressionType" : "SQL",
+            "fields" : [
+              {
+                "type" : "TEXT",
+                "name" : "LastStageUpdate_Id",
+                "label" : "LastStageUpdate Id",
+                "formulaExpression" : "first_value(Id)",
+                "precision" : 255,
+                "defaultValue" : "Id"
+              }
+            ]
+          }
+        },
+        "FORMULA13" : {
+          "action" : "formula",
+          "sources" : [
+            "FORMULA12"
+          ],
+          "parameters" : {
+            "expressionType" : "SQL",
+            "fields" : [
+              {
+                "type" : "TEXT",
+                "name" : "IsLastStageUpdate",
+                "label" : "Is LastStageUpdate",
+                "formulaExpression" : "case when LastStageUpdate_Id = Id then '1' else '0' end",
+                "precision" : 255,
+                "defaultValue" : "0"
+              }
+            ]
+          }
+        },
+        "JOIN17" : {
+          "action" : "join",
+          "sources" : [
+            "FORMULA15",
+            "FORMULA13"
+          ],
+          "schema" : {
+            "fields" : [ ],
+            "slice" : {
+              "mode" : "DROP",
+              "ignoreMissingFields" : true,
+              "fields" : [
+                "Time.Id",
+                "Time.OpportunityId",
+                "Time.CreatedById",
+                "Time.CreatedDate",
+                "Time.StageName",
+                "Time.Amount",
+                "Time.CloseDate",
+                "Time.ForecastCategory",
+                "Time.IsDeleted",
+                "Time.Unique_Sort_Key",
+                "Time.ValidToDate",
+                "Time.ValidFromDate",
+                "Time.AmountPrev",
+                "Time.StageNamePrev",
+                "Time.CloseDatePrev",
+                "Time.CreatedDatePrev"
+              ]
+            }
+          },
+          "parameters" : {
+            "joinType" : "LOOKUP",
+            "leftKeys" : [
+              "Id"
+            ],
+            "rightQualifier" : "Time",
+            "rightKeys" : [
+              "Id"
+            ]
+          }
+        }
+      },
+      "ui" : {
+        "nodes" : {
+          "FILTER5" : {
+            "label" : "Filter",
+            "type" : "FILTER",
+            "top" : 112.30000000000001,
+            "left" : 392.1
+          },
+          "FILTER6" : {
+            "label" : "Opportunity",
+            "description" : "",
+            "type" : "FILTER",
+            "top" : 532,
+            "left" : 532.1
+          },
+          "FILTER7" : {
+            "label" : "Filter for Updated Stage",
+            "description" : "",
+            "type" : "FILTER",
+            "top" : 812,
+            "left" : 532
+          },
+          "JOIN10" : {
+            "label" : "Join Owner onto Opportunity",
+            "description" : "",
+            "type" : "JOIN",
+            "top" : 392.1,
+            "left" : 531.9
+          },
+          "JOIN11" : {
+            "label" : "Join Account onto Opportunity",
+            "description" : "",
+            "type" : "JOIN",
+            "top" : 391.9,
+            "left" : 672
+          },
+          "JOIN12" : {
+            "label" : "Join Opportunity onto Opportunity Line Item",
+            "description" : "",
+            "type" : "JOIN",
+            "top" : 672,
+            "left" : 392
+          },
+          "JOIN14" : {
+            "label" : "Join Product onto OpportunityLineItem",
+            "description" : "",
+            "type" : "JOIN",
+            "top" : 672,
+            "left" : 532
+          },
+          "JOIN16" : {
+            "label" : "Join Opportunity onto Opportunity History",
+            "description" : "",
+            "type" : "JOIN",
+            "top" : 812,
+            "left" : 1232
+          },
+          "JOIN3" : {
+            "label" : "Augment_PricebookEntry_onto_Opportunity",
+            "description" : "",
+            "type" : "JOIN",
+            "top" : 392,
+            "left" : 392
+          },
+          "JOIN9" : {
+            "label" : "Join Owner onto Account",
+            "description" : "",
+            "type" : "JOIN",
+            "top" : 252.10000000000002,
+            "left" : 252.10000000000002
+          },
+          "LOAD_DATASET13" : {
+            "label" : "OpportunityLineItem",
+            "type" : "LOAD_DATASET",
+            "top" : 671.9,
+            "left" : 112.69999999999999,
+            "parameters" : {
+              "sampleSize" : 2000
+            }
+          },
+          "LOAD_DATASET17" : {
+            "label" : "OpportunityHistory",
+            "type" : "LOAD_DATASET",
+            "top" : 812,
+            "left" : 112,
+            "parameters" : {
+              "sampleSize" : 2000
+            }
+          },
+          "LOAD_DATASET18" : {
+            "label" : "Product2",
+            "type" : "LOAD_DATASET",
+            "top" : 952,
+            "left" : 112,
+            "parameters" : {
+              "sampleSize" : 2000
+            }
+          },
+          "LOAD_DATASET19" : {
+            "label" : "UserRole",
+            "type" : "LOAD_DATASET",
+            "top" : 112.1,
+            "left" : 112.19999999999999,
+            "parameters" : {
+              "sampleSize" : 2000
+            }
+          },
+          "LOAD_DATASET3" : {
+            "label" : "Opportunity",
+            "type" : "LOAD_DATASET",
+            "top" : 391.8,
+            "left" : 112,
+            "parameters" : {
+              "sampleSize" : 2000
+            }
+          },
+          "LOAD_DATASET6" : {
+            "label" : "Account",
+            "type" : "LOAD_DATASET",
+            "top" : 251.3,
+            "left" : 112.6,
+            "parameters" : {
+              "sampleSize" : 2000
+            }
+          },
+          "LOAD_DATASET8" : {
+            "label" : "PricebookEntry",
+            "type" : "LOAD_DATASET",
+            "top" : 532,
+            "left" : 111.9,
+            "parameters" : {
+              "sampleSize" : 2000
+            }
+          },
+          "OUTPUT4" : {
+            "label" : "Save Opportunity",
+            "description" : "",
+            "type" : "OUTPUT",
+            "top" : 392.1,
+            "left" : 812.1
+          },
+          "OUTPUT5" : {
+            "label" : "Save Opportunity Line Item",
+            "description" : "",
+            "type" : "OUTPUT",
+            "top" : 672,
+            "left" : 812.1
+          },
+          "OUTPUT6" : {
+            "label" : "Save Account",
+            "description" : "",
+            "type" : "OUTPUT",
+            "top" : 252.10000000000002,
+            "left" : 812.6
+          },
+          "OUTPUT7" : {
+            "label" : "Save Opportunity History",
+            "description" : "",
+            "type" : "OUTPUT",
+            "top" : 812.1,
+            "left" : 1372.5
+          },
+          "OUTPUT8" : {
+            "label" : "Save Product",
+            "description" : "",
+            "type" : "OUTPUT",
+            "top" : 951.9,
+            "left" : 812.1
+          },
+          "TRANSFORM0" : {
+            "label" : "Add Fields to Opportunity",
+            "description" : "",
+            "type" : "TRANSFORM",
+            "top" : 392,
+            "left" : 252,
+            "graph" : {
+              "EDIT_ATTRIBUTES0" : null,
+              "FORMULA0" : {
+                "parameters" : {
+                  "type" : "BASE_FORMULA_UI"
+                }
+              }
+            },
+            "connectors" : [
+              {
+                "source" : "FORMULA0",
+                "target" : "EDIT_ATTRIBUTES0"
+              }
+            ]
+          },
+          "TRANSFORM1" : {
+            "label" : "Transform",
+            "type" : "TRANSFORM",
+            "top" : 252,
+            "left" : 392,
+            "graph" : {
+              "EDIT_ATTRIBUTES1" : null,
+              "FORMULA1" : {
+                "parameters" : {
+                  "type" : "BASE_FORMULA_UI"
+                }
+              }
+            },
+            "connectors" : [
+              {
+                "source" : "FORMULA1",
+                "target" : "EDIT_ATTRIBUTES1"
+              }
+            ]
+          },
+          "TRANSFORM2" : {
+            "label" : "Transform",
+            "type" : "TRANSFORM",
+            "top" : 672,
+            "left" : 672,
+            "graph" : {
+              "EDIT_ATTRIBUTES2" : null,
+              "EDIT_ATTRIBUTES3" : null,
+              "FORMULA2" : {
+                "parameters" : {
+                  "type" : "BASE_FORMULA_UI"
+                }
+              },
+              "FORMULA3" : {
+                "parameters" : {
+                  "type" : "BASE_FORMULA_UI"
+                }
+              }
+            },
+            "connectors" : [
+              {
+                "source" : "FORMULA2",
+                "target" : "EDIT_ATTRIBUTES2"
+              },
+              {
+                "source" : "EDIT_ATTRIBUTES2",
+                "target" : "FORMULA3"
+              },
+              {
+                "source" : "FORMULA3",
+                "target" : "EDIT_ATTRIBUTES3"
+              }
+            ]
+          },
+          "TRANSFORM3" : {
+            "label" : "Add Unique Sort Key",
+            "description" : "",
+            "type" : "TRANSFORM",
+            "top" : 811.1,
+            "left" : 252,
+            "graph" : {
+              "FORMULA4" : {
+                "parameters" : {
+                  "type" : "BASE_FORMULA_UI"
+                }
+              }
+            },
+            "connectors" : [ ]
+          },
+          "TRANSFORM4" : {
+            "label" : "Add Historical Trending Fields",
+            "description" : "",
+            "type" : "TRANSFORM",
+            "top" : 812,
+            "left" : 392,
+            "graph" : {
+              "FORMULA10" : null,
+              "FORMULA11" : {
+                "parameters" : {
+                  "type" : "BASE_FORMULA_UI"
+                }
+              },
+              "FORMULA15" : {
+                "parameters" : {
+                  "type" : "BASE_FORMULA_UI"
+                }
+              },
+              "FORMULA5" : null,
+              "FORMULA6" : null,
+              "FORMULA7" : null,
+              "FORMULA8" : null,
+              "FORMULA9" : null
+            },
+            "connectors" : [
+              {
+                "source" : "FORMULA5",
+                "target" : "FORMULA6"
+              },
+              {
+                "source" : "FORMULA6",
+                "target" : "FORMULA7"
+              },
+              {
+                "source" : "FORMULA7",
+                "target" : "FORMULA8"
+              },
+              {
+                "source" : "FORMULA8",
+                "target" : "FORMULA9"
+              },
+              {
+                "source" : "FORMULA9",
+                "target" : "FORMULA10"
+              },
+              {
+                "source" : "FORMULA10",
+                "target" : "FORMULA11"
+              },
+              {
+                "source" : "FORMULA11",
+                "target" : "FORMULA15"
+              }
+            ]
+          },
+          "TRANSFORM5" : {
+            "label" : "Find Last Stage Update",
+            "description" : "",
+            "type" : "TRANSFORM",
+            "top" : 812,
+            "left" : 672,
+            "graph" : {
+              "FORMULA12" : null,
+              "FORMULA13" : {
+                "parameters" : {
+                  "type" : "BASE_FORMULA_UI"
+                }
+              }
+            },
+            "connectors" : [
+              {
+                "source" : "FORMULA12",
+                "target" : "FORMULA13"
+              }
+            ]
+          },
+          "JOIN17" : {
+            "label" : "Join Stage Duration to Opportunity History",
+            "description" : "",
+            "type" : "JOIN",
+            "top" : 812.1,
+            "left" : 812
+          }
+        },
+        "connectors" : [
+          {
+            "source" : "JOIN17",
+            "target" : "JOIN16"
+          },
+          {
+            "source" : "TRANSFORM0",
+            "target" : "JOIN3"
+          },
+          {
+            "source" : "LOAD_DATASET8",
+            "target" : "JOIN3"
+          },
+          {
+            "source" : "LOAD_DATASET6",
+            "target" : "JOIN9"
+          },
+          {
+            "source" : "JOIN3",
+            "target" : "JOIN10"
+          },
+          {
+            "source" : "FILTER5",
+            "target" : "JOIN10"
+          },
+          {
+            "source" : "JOIN10",
+            "target" : "JOIN11"
+          },
+          {
+            "source" : "JOIN9",
+            "target" : "JOIN11"
+          },
+          {
+            "source" : "JOIN11",
+            "target" : "OUTPUT4"
+          },
+          {
+            "source" : "JOIN11",
+            "target" : "FILTER6"
+          },
+          {
+            "source" : "LOAD_DATASET13",
+            "target" : "JOIN12"
+          },
+          {
+            "source" : "FILTER6",
+            "target" : "JOIN12"
+          },
+          {
+            "source" : "TRANSFORM2",
+            "target" : "OUTPUT5"
+          },
+          {
+            "source" : "TRANSFORM1",
+            "target" : "OUTPUT6"
+          },
+          {
+            "source" : "LOAD_DATASET3",
+            "target" : "TRANSFORM0"
+          },
+          {
+            "source" : "JOIN9",
+            "target" : "TRANSFORM1"
+          },
+          {
+            "source" : "JOIN14",
+            "target" : "TRANSFORM2"
+          },
+          {
+            "source" : "LOAD_DATASET18",
+            "target" : "OUTPUT8"
+          },
+          {
+            "source" : "LOAD_DATASET19",
+            "target" : "FILTER5"
+          },
+          {
+            "source" : "LOAD_DATASET19",
+            "target" : "JOIN9"
+          },
+          {
+            "source" : "LOAD_DATASET17",
+            "target" : "TRANSFORM3"
+          },
+          {
+            "source" : "TRANSFORM3",
+            "target" : "TRANSFORM4"
+          },
+          {
+            "source" : "JOIN12",
+            "target" : "JOIN14"
+          },
+          {
+            "source" : "LOAD_DATASET18",
+            "target" : "JOIN14"
+          },
+          {
+            "source" : "TRANSFORM4",
+            "target" : "FILTER7"
+          },
+          {
+            "source" : "FILTER7",
+            "target" : "TRANSFORM5"
+          },
+          {
+            "source" : "JOIN11",
+            "target" : "JOIN16"
+          },
+          {
+            "source" : "JOIN16",
+            "target" : "OUTPUT7"
+          },
+          {
+            "source" : "TRANSFORM4",
+            "target" : "JOIN17"
+          },
+          {
+            "source" : "TRANSFORM5",
+            "target" : "JOIN17"
+          }
+        ],
+        "hiddenColumns" : [ ]
+      }
+    }
+  }

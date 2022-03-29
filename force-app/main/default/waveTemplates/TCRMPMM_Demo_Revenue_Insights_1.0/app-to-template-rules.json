@@ -1,5 +1,74 @@
 {
-  "constants" : [ ],
-  "macros" : [ ],
-  "rules" : [ ]
+  "constants": [],
+  "macros": [],
+  "rules": [
+    {
+      "name": "CreateVariableForAmountField",
+      "appliesTo": [
+        {
+          "type": "dashboard",
+          "name": "*"
+        },
+        {
+          "type": "xmd",
+          "name": "*"
+        }
+      ],
+      "actions": [
+        {
+          "action": "replace",
+          "key": "\"Amount\"",
+          "value": "\"${Variables.Opportunity_Amount.fieldName}\""
+        },
+        {
+          "action": "replace",
+          "key": "'Amount'",
+          "value": "'${Variables.Opportunity_Amount.fieldName}'"
+        },
+        {
+          "action": "replace",
+          "key": "sum_Amount",
+          "value": "sum_${Variables.Opportunity_Amount.fieldName}"
+        },
+        {
+          "action": "replace",
+          "key": ".Amount\"",
+          "value": ".${Variables.Opportunity_Amount.fieldName}\""
+        }
+      ]
+    },
+    {
+      "name": "FixStoryIDReferenceInDashboards",
+      "appliesTo": [
+        {
+          "type": "dashboard",
+          "name": "Revenue_Forecasting_Collab"
+        },
+        {
+          "type": "dashboard",
+          "name": "Revenue_Forecasting"
+        }
+      ],
+      "actions": [
+        {
+          "action": "set",
+          "description": "Set top_drivers_1.storyID value to generic reference rather than a hardcoded ID",
+          "path": "$..state.steps.top_drivers_1.storyId",
+          "value": "${App.DiscoveryStories.Likelihood_to_Win.Id}"
+        },
+        {
+          "action": "set",
+          "description": "Set drivers_positive_1.storyID value to generic reference rather than a hardcoded ID",
+          "path": "$..state.steps.drivers_positive_1.storyId",
+          "value": "${App.DiscoveryStories.Likelihood_to_Win.Id}"
+        },
+        {
+          "action": "set",
+          "description": "Set drivers_negative.storyID value to generic reference rather than a hardcoded ID",
+          "path": "$..state.steps.drivers_negative.storyId",
+          "value": "${App.DiscoveryStories.Likelihood_to_Win.Id}"
+        }
+      ]
+    }
+  ]
 }

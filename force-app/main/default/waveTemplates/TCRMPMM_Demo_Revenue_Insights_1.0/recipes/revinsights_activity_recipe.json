@@ -693,30 +693,19 @@
                     },
                     "fields": [
                         "LastModifiedDate",
-                        "AccountId",
-                        "HasOpportunityLineItem",
                         "Account.Owner.UniqueUserName",
-                        "ForecastCategory",
                         "CloseDate",
-                        "Name",
                         "HasOpenActivity",
-                        "Owner.Email",
                         "Owner.Username",
                         "Account.ParentId",
                         "IsDeleted",
-                        "LeadSource",
-                        "CreatedDate",
-                        "HasOverdueTask",
                         "Id",
-                        "ForecastCategoryName",
-                        "NextStep",
                         "Account.LastActivityDate",
                         "Owner.UniqueUserName",
                         "Description",
                         "IsClosed",
                         "Account.Industry",
                         "OwnerId",
-                        "IsWon",
                         "Account.Owner.Username",
                         "Owner.Name",
                         "StageName",
@@ -724,8 +713,20 @@
                         "Type",
                         "Account.Owner.Email",
                         "LastActivityDate",
+                        "AccountId",
+                        "HasOpportunityLineItem",
+                        "ForecastCategory",
+                        "Name",
+                        "Owner.Email",
+                        "LeadSource",
+                        "CreatedDate",
+                        "HasOverdueTask",
+                        "ForecastCategoryName",
+                        "NextStep",
+                        "IsWon",
                         "Account.Name",
-                        "Amount"
+                        "Amount",
+                        "Account.OwnerId"
                     ]
                 },
                 "sources": []
@@ -817,7 +818,9 @@
                         "Id",
                         "LastName",
                         "UserType",
-                        "Roles.Roles"
+                        "Roles.Roles",
+                        "Role.ForecastUserIdsPath",
+                        "Role.ForecastUserIds"
                     ]
                 },
                 "sources": []
@@ -829,6 +832,7 @@
                         "folderName": "${App.Folder.FullyQualifiedName}",
                         "label": "Activity",
                         "name": "${App.Datasets.Activity.FullyQualifiedName}",
+                        "rowLevelSecurityFilter": "'Owner.Roles.Roles' == \"$User.UserRoleId\" || 'OwnerId' == \"$User.Id\" || 'Opp.Account.OwnerId' == \"$User.Id\" ||  'Opp.OwnerId' == \"$User.Id\"",
                         "type": "analyticsDataset"
                     },
                     "fields": []

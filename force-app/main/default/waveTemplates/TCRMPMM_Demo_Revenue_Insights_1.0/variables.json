@@ -1,91 +1,191 @@
 {
-  "Overrides" : {
-    "label" : "Overrides",
-    "description" : "Internal configuration to allow asset creation overrides, not to be displayed in UI.",
-    "defaultValue" : {
-      "createAllDashboards" : true,
-      "createAllComponents" : true,
-      "createAllLenses" : true,
-      "createAllExternalFiles" : true,
-      "createDataflow" : true,
-      "createAllDatasetFiles" : true,
-      "createAllImages" : true,
-      "createAllRecipes" : true
+  "Has_CollaborativeForecasting": {
+    "label": "Is Collaborative Forecasting enabled?",
+    "description": "Both Collaborative Forecasting and Forecast Hierarchy have to be set up.",
+    "defaultValue": "No",
+    "variableType": {
+      "type": "StringType",
+      "enums": [
+        "Yes",
+        "No"
+      ]
     },
-    "required" : true,
-    "excludeSelected" : false,
-    "excludes" : [ ],
-    "variableType" : {
-      "required" : [
-        "createAllExternalFiles",
-        "createAllDashboards",
-        "createAllComponents",
-        "createAllImages",
-        "createAllDatasetFiles",
-        "createAllLenses",
-        "createDataflow",
-        "createAllRecipes"
-      ],
-      "type" : "ObjectType",
-      "properties" : {
-        "createAllDashboards" : {
-          "type" : "BooleanType",
-          "enums" : [
-            true,
-            false
-          ]
-        },
-        "createAllComponents" : {
-          "type" : "BooleanType",
-          "enums" : [
-            true,
-            false
-          ]
-        },
-        "createAllLenses" : {
-          "type" : "BooleanType",
-          "enums" : [
-            true,
-            false
-          ]
-        },
-        "createAllExternalFiles" : {
-          "type" : "BooleanType",
-          "enums" : [
-            true,
-            false
-          ]
-        },
-        "createDataflow" : {
-          "type" : "BooleanType",
-          "enums" : [
-            true,
-            false
-          ]
-        },
-        "createAllDatasetFiles" : {
-          "type" : "BooleanType",
-          "enums" : [
-            true,
-            false
-          ]
-        },
-        "createAllImages" : {
-          "type" : "BooleanType",
-          "enums" : [
-            true,
-            false
-          ]
-        },
-        "createAllRecipes" : {
-          "type" : "BooleanType",
-          "enums" : [
-            true,
-            false
-          ]
-        }
-      },
-      "strictValidation" : true
+    "required": true
+  },
+  "Has_CollaborativeForecastingQuota": {
+    "label": "Is Collaborative Forecasting Quata enabled?",
+    "description": "Is Collaborative Forecast Quota set up?",
+    "defaultValue": "No",
+    "variableType": {
+      "type": "StringType",
+      "enums": [
+        "Yes",
+        "No"
+      ]
+    },
+    "required": true
+  },
+  "Opportunity_Amount": {
+    "label": "What field contains the total amount of the opportunity?",
+    "description": "Choose the field you use to track the total amount of the opportunity.",
+    "defaultValue": {
+      "sobjectName": "Opportunity",
+      "fieldName": "Amount"
+    },
+    "required": true,
+    "excludeSelected": true,
+    "excludes": [
+      "Probability"
+    ],
+    "variableType": {
+      "type": "SobjectFieldType",
+      "dataType": "xsd:double"
     }
-  }
+  },
+  "Has_RoleHierarchy": {
+    "label": "Is the Customer Using Role Hierarchy?",
+    "description": "This Question remains hidden.",
+    "defaultValue": "Yes",
+    "variableType": {
+      "type": "StringType",
+      "enums": [
+        "Yes",
+        "No"
+      ]
+    },
+    "required": true
+  },
+  "Has_OpportunitySplits": {
+    "label": "Is Opportunity Splits set up?",
+    "description": "We pull in all Opportunity Split types.",
+    "defaultValue": "No",
+    "variableType": {
+      "type": "StringType",
+      "enums": [
+        "Yes",
+        "No"
+      ]
+    },
+    "required": true
+  },
+  "Has_Minimum_Data_For_EDStory": {
+    "label": "Is there enough data in customer org to run the Likelihood_To_Win ED Story?",
+    "description": "Check Opportunity Data for at least 400 opps, 25 won and 25 lost",
+    "defaultValue": "No",
+    "variableType": {
+      "type": "StringType",
+      "enums": [
+        "Yes",
+        "No"
+      ]
+    },
+    "required": true
+  },
+  "Has_Products": {
+    "label": "Is the customer using Opportunity Products?",
+    "description": "Pull in OpportunityLineItem and Products",
+    "defaultValue": "No",
+    "variableType": {
+      "type": "StringType",
+      "enums": [
+        "Yes",
+        "No"
+      ]
+    },
+    "required": true
+  },
+  "Has_Activities": {
+    "label": "Are Events and Tasks set up?",
+    "description": "",
+    "defaultValue": "No",
+    "variableType": {
+      "type": "StringType",
+      "enums": [
+        "Yes",
+        "No"
+      ]
+    },
+    "required": true
+  },
+  "EAC_Dataset": {
+    "label": "Does the EAC Activities dataset exist?",
+    "description": "",
+    "required": false,
+    "excludeSelected": true,
+    "variableType": {
+      "type": "DatasetType"
+    }
+  },
+  "DefaultsVisibleMessages": {
+      "label": "",
+      "description": "",
+      "variableType": {
+        "type": "StringType"
+      },
+      "required": false
+    },
+    "Fiscal_Month": {
+      "label": "What month starts your fiscal period?",
+      "description": "Select the start date of your fiscal period. If it is different than January, you also need to update the Quotas dataset JSON file.",
+      "defaultValue": "01 - January",
+      "required": true,
+      "variableType": {
+        "type": "StringType",
+        "enums": [
+          "01 - January",
+          "02 - February",
+          "03 - March",
+          "04 - April",
+          "05 - May",
+          "06 - June",
+          "07 - July",
+          "08 - August",
+          "09 - September",
+          "10 - October",
+          "11 - November",
+          "12 - December"
+        ]
+      }
+    },
+    "First_Day_Of_Week": {
+      "required": true,
+      "description": "Internal mapping for first day of week",
+      "defaultValue": 0,
+      "variableType": {
+        "type": "NumberType"
+      }
+    },
+    "Can_Continue": {
+      "required": true,
+      "variableType": {
+        "type": "BooleanType"
+      }
+    },
+    "failedCheck": {
+      "required": false,
+        "variableType": {
+          "type": "StringType"
+      }
+    },
+    "FY_Month_Offset_Map": {
+      "required": true,
+      "description": "Internal mapping between fiscal year start months and offset, not to be displayed in UI.",
+      "defaultValue": {
+        "01 - January": 0,
+        "02 - February": 1,
+        "03 - March": 2,
+        "04 - April": 3,
+        "05 - May": 4,
+        "06 - June": 5,
+        "07 - July": 6,
+        "08 - August": 7,
+        "09 - September": 8,
+        "10 - October": 9,
+        "11 - November": 10,
+        "12 - December": 11
+      },
+      "variableType": {
+        "type": "ObjectType"
+      }
+    }
 }

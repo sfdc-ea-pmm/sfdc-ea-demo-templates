@@ -1,0 +1,698 @@
+{
+  "name" : "Top_Accounts_tp",
+  "label" : "Top Accounts",
+  "folder" : {
+    "id" : "${App.Folder.Id}"
+  },
+  "dateVersion" : 1,
+  "mobileDisabled" : false,
+  "xmd" : {
+    "measures" : [ ],
+    "derivedDimensions" : [ ],
+    "organizations" : [ ],
+    "showDetailsDefaultFields" : [ ],
+    "dates" : [ ],
+    "derivedMeasures" : [ ],
+    "dimensions" : [
+      {
+        "recordDisplayFields" : [ ],
+        "conditionalFormatting" : { },
+        "defaultAction" : "openSfdcRecord",
+        "salesforceActions" : [ ],
+        "field" : "Name_1.Name",
+        "members" : [ ],
+        "customActions" : [ ]
+      }
+    ]
+  },
+  "state" : {
+    "dataSourceLinks" : [ ],
+    "filters" : [ ],
+    "gridLayouts" : [
+      {
+        "maxWidth" : 300,
+        "name" : "Default",
+        "numColumns" : 50,
+        "pages" : [
+          {
+            "label" : "no_activity",
+            "name" : "0d1b479c-275a-4574-9899-3aa22f541801",
+            "navigationHidden" : false,
+            "widgets" : [
+              {
+                "colspan" : 35,
+                "column" : 1,
+                "name" : "text_4",
+                "row" : 1,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              },
+              {
+                "colspan" : 38,
+                "column" : 1,
+                "name" : "repeater_2",
+                "row" : 5,
+                "rowspan" : 16,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
+                }
+              }
+            ]
+          }
+        ],
+        "rowHeight" : "fine",
+        "selectors" : [
+          "minWidth(300)",
+          "maxWidth(400)"
+        ],
+        "style" : {
+          "alignmentX" : "left",
+          "alignmentY" : "top",
+          "backgroundColor" : "#FFFFFF",
+          "cellSpacingX" : 0,
+          "cellSpacingY" : 0,
+          "fit" : "original",
+          "gutterColor" : "#C5D3E0"
+        },
+        "version" : 1.0
+      }
+    ],
+    "layouts" : [ ],
+    "steps" : {
+      "No_Activity_Total_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.opportunity_revinsights.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "No_Activity_Total",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "sum",
+                "Amount"
+              ]
+            ],
+            "filters" : [
+              [
+                "Activity.ActivityCount",
+                [
+                  [
+                    1
+                  ]
+                ],
+                "=="
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "content" : {
+                "legend" : {
+                  "showBinLabel" : true,
+                  "measures" : [ ],
+                  "showNullValues" : true,
+                  "customizeLegend" : false,
+                  "showPercentage" : true,
+                  "showDimensions" : true,
+                  "showMeasures" : true,
+                  "dimensions" : [ ]
+                }
+              }
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimensionAxis" : [ ],
+              "plots" : [
+                "sum_Amount"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Account_Name_Account_1" : {
+        "broadcastFacet" : true,
+        "groups" : [ ],
+        "label" : "Account_Name_Account_1",
+        "numbers" : [ ],
+        "query" : "q = load \"${App.Datasets.opportunity_revinsights.FullyQualifiedName}\";\nq = group q by ('Account.Name', 'Account.Owner.SmallPhotoUrl');\nq = foreach q generate 'Account.Name' as 'Account.Name', 'Account.Owner.SmallPhotoUrl' as 'Account.Owner.SmallPhotoUrl', sum('Amount') as 'sum_Amount';\nq = order q by 'sum_Amount' desc nulls last;\nq = limit q 2000;",
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "strings" : [ ],
+        "type" : "saql",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "content" : {
+                "legend" : {
+                  "showBinLabel" : true,
+                  "measures" : [ ],
+                  "showNullValues" : true,
+                  "customizeLegend" : false,
+                  "showPercentage" : true,
+                  "showDimensions" : true,
+                  "showMeasures" : true,
+                  "dimensions" : [ ]
+                }
+              }
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnProperties" : {
+              "Account.Name" : {
+                "type" : "text",
+                "parameters" : {
+                  "styles" : {
+                    "linkColor" : "#006dcc"
+                  },
+                  "alignment" : "left"
+                }
+              }
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      },
+      "Name_1" : {
+        "broadcastFacet" : true,
+        "datasets" : [
+          {
+            "name" : "${App.Datasets.opportunity_revinsights.Name}"
+          }
+        ],
+        "isGlobal" : false,
+        "label" : "No_Activity",
+        "query" : {
+          "query" : {
+            "measures" : [
+              [
+                "sum",
+                "Amount"
+              ]
+            ],
+            "groups" : [
+              "Name"
+            ],
+            "filters" : [
+              [
+                "Activity.ActivityCount",
+                [
+                  [
+                    1
+                  ]
+                ],
+                "=="
+              ]
+            ],
+            "order" : [
+              [
+                "sum_Amount",
+                {
+                  "ascending" : false
+                }
+              ]
+            ]
+          },
+          "version" : -1.0
+        },
+        "receiveFacetSource" : {
+          "mode" : "all",
+          "steps" : [ ]
+        },
+        "selectMode" : "single",
+        "type" : "aggregateflex",
+        "useGlobal" : true,
+        "visualizationParameters" : {
+          "parameters" : {
+            "autoFitMode" : "keepLabels",
+            "showValues" : true,
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
+            "legend" : {
+              "descOrder" : false,
+              "showHeader" : true,
+              "show" : true,
+              "customSize" : "auto",
+              "position" : "right-top",
+              "inside" : false
+            },
+            "axisMode" : "multi",
+            "tooltip" : {
+              "content" : {
+                "legend" : {
+                  "showBinLabel" : true,
+                  "measures" : [ ],
+                  "showNullValues" : true,
+                  "customizeLegend" : false,
+                  "showPercentage" : true,
+                  "showDimensions" : true,
+                  "showMeasures" : true,
+                  "dimensions" : [ ]
+                }
+              }
+            },
+            "visualizationType" : "hbar",
+            "title" : {
+              "fontSize" : 14,
+              "subtitleFontSize" : 11,
+              "label" : "",
+              "align" : "center",
+              "subtitleLabel" : ""
+            },
+            "binValues" : false,
+            "trellis" : {
+              "flipLabels" : false,
+              "showGridLines" : true,
+              "size" : [
+                100,
+                100
+              ],
+              "enable" : false,
+              "type" : "x",
+              "chartsPerLine" : 4
+            },
+            "columnProperties" : {
+              "Name" : {
+                "type" : "text",
+                "parameters" : {
+                  "styles" : {
+                    "linkColor" : "#006dcc"
+                  },
+                  "alignment" : "left"
+                }
+              }
+            },
+            "columnMap" : {
+              "trellis" : [ ],
+              "dimensionAxis" : [
+                "Name"
+              ],
+              "plots" : [
+                "sum_Amount"
+              ]
+            },
+            "showActionMenu" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
+            "theme" : "wave",
+            "dimensionAxis" : {
+              "showTitle" : true,
+              "customSize" : "auto",
+              "showAxis" : true,
+              "title" : "",
+              "icons" : {
+                "useIcons" : false,
+                "iconProps" : {
+                  "fit" : "cover",
+                  "column" : "",
+                  "type" : "round"
+                }
+              }
+            },
+            "applyConditionalFormatting" : true
+          },
+          "type" : "chart"
+        }
+      }
+    },
+    "widgetStyle" : {
+      "backgroundColor" : "#FFFFFF",
+      "borderColor" : "#E6ECF2",
+      "borderEdges" : [ ],
+      "borderRadius" : 0,
+      "borderWidth" : 1
+    },
+    "widgets" : {
+      "text_4" : {
+        "parameters" : {
+          "content" : {
+            "richTextContent" : [
+              {
+                "attributes" : {
+                  "color" : "#091a3e",
+                  "size" : "14px",
+                  "bold" : true
+                },
+                "insert" : "Top Accounts"
+              },
+              {
+                "attributes" : {
+                  "align" : "left"
+                },
+                "insert" : "\n"
+              }
+            ]
+          },
+          "showActionMenu" : true
+        },
+        "type" : "text"
+      },
+      "repeater_2" : {
+        "parameters" : {
+          "cardProperties" : {
+            "cellSpacingX" : 1,
+            "cellSpacingY" : 0,
+            "numColumns" : 17,
+            "rowHeight" : "fine",
+            "selectedStyles" : {
+              "backgroundColor" : "#FFFFFF",
+              "borderColor" : "#0070D2",
+              "borderEdges" : [
+                "all"
+              ],
+              "borderRadius" : 4,
+              "borderWidth" : 1
+            },
+            "styles" : {
+              "backgroundColor" : "#FFFFFF",
+              "borderColor" : "#C6D3E1",
+              "borderEdges" : [
+                "bottom"
+              ],
+              "borderRadius" : 0,
+              "borderWidth" : 1,
+              "bottomPadding" : 2,
+              "leftPadding" : 2,
+              "rightPadding" : 4,
+              "topPadding" : 2
+            }
+          },
+          "cellProperties" : {
+            "text_10" : {
+              "parameters" : {
+                "content" : {
+                  "richTextContent" : [
+                    {
+                      "attributes" : {
+                        "size" : "12px"
+                      },
+                      "insert" : "[Account_Name]"
+                    },
+                    {
+                      "attributes" : {
+                        "align" : "left"
+                      },
+                      "insert" : "\n"
+                    }
+                  ],
+                  "values" : {
+                    "Account_Name" : {
+                      "field" : "Account.Name",
+                      "sourceType" : "result",
+                      "step" : "Account_Name_Account_1"
+                    }
+                  }
+                }
+              },
+              "position" : {
+                "colspan" : 11,
+                "column" : 0,
+                "row" : 0,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              "type" : "text"
+            },
+            "text_11" : {
+              "parameters" : {
+                "content" : {
+                  "richTextContent" : [
+                    {
+                      "attributes" : {
+                        "size" : "12px",
+                        "bold" : true
+                      },
+                      "insert" : "[Sum_of_Amount]"
+                    },
+                    {
+                      "attributes" : {
+                        "align" : "right"
+                      },
+                      "insert" : "\n"
+                    }
+                  ],
+                  "values" : {
+                    "Sum_of_Amount" : {
+                      "field" : "sum_Amount",
+                      "sourceType" : "result",
+                      "step" : "Account_Name_Account_1"
+                    }
+                  }
+                }
+              },
+              "position" : {
+                "colspan" : 6,
+                "column" : 11,
+                "row" : 0,
+                "rowspan" : 2,
+                "widgetStyle" : {
+                  "backgroundColor" : "#FFFFFF",
+                  "borderColor" : "#E6ECF2",
+                  "borderEdges" : [ ],
+                  "borderRadius" : 0,
+                  "borderWidth" : 1
+                }
+              },
+              "type" : "text"
+            }
+          },
+          "exploreLink" : true,
+          "itemsPerRow" : 1,
+          "showActionMenu" : true,
+          "step" : "Account_Name_Account_1"
+        },
+        "type" : "repeater"
+      }
+    }
+  }
+}

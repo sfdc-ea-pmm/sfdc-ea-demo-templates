@@ -1,51 +1,113 @@
 {
-  "templateType" : "app",
-  "label" : "Demo | Revenue Insights 1.0",
-  "name" : "Demo_Revenue_Insights_1_0",
-  "description" : "",
-  "assetVersion" : 54.0,
-  "variableDefinition" : "variables.json",
-  "uiDefinition" : "ui.json",
-  "rules" : [
+  "templateType": "app",
+  "label": "Revenue Insights",
+  "name": "RevenueInsights",
+  "description": "Revenue Insights is a Sales Leader's one stop shop to manage their sales organization. v1.0 #140",
+  "assetVersion": 54,
+  "releaseInfo": {
+    "templateVersion": "1.0",
+    "notesFile": "releaseNotes.html"
+  },
+  "folderDefinition": "folder.json",
+  "apexCallback": {
+    "namespace": "wavetemplate",
+    "name": "RevInsightsConfigurationModifier"
+  },
+  "variableDefinition": "variables.json",
+  "uiDefinition": "ui.json",
+  "icons": {
+    "appBadge": {
+      "name": "21.png"
+    },
+    "templateBadge": {
+      "name": "sales.png"
+    },
+    "templatePreviews": [
+      {
+        "name": "preview_revenue_insights1.png",
+        "label": "Overview",
+        "description": "User the Overview tab to get a comprehensive view of your revenue performance and forecasts."
+      },
+      {
+        "name": "preview_revenue_insights2.png",
+        "label": "Team Performance",
+        "description": "Use the Team Performance tab to explore your opportunity data and understand pipeline health."
+      },
+      {
+        "name": "preview_revenue_insights3.png",
+        "label": "Sales Performance",
+        "description": "Use the Sales Performance tab to explore your opportunity data and pipeline health over time."
+      }
+    ]
+  },
+  "extendedTypes": {},
+  "rules": [
     {
-      "type" : "templateToApp",
-      "file" : "template-to-app-rules.json"
+      "type": "templateToApp",
+      "file": "rules_recipe.json"
+    }
+  ],
+  "externalFiles": [
+    {
+      "condition": "${Variables.Has_RoleHierarchy == 'No'}",
+      "file": "dataset_files/no_userrole_hierarchy.csv",
+      "name": "no_userrole_hierarchy_revinsights",
+      "schema": "dataset_files/no_userrole_hierarchy.json",
+      "type": "CSV",
+      "userXmd": "dataset_files/no_userrole_hierarchy_XMD.json"
     },
     {
-      "type" : "appToTemplate",
-      "file" : "app-to-template-rules.json"
+      "file": "dataset_files/plain_quota.csv",
+      "condition": "${Variables.Has_CollaborativeForecastingQuota == 'No'}",
+      "name": "plain_quota",
+      "overwriteOnUpgrade": "Never",
+      "schema": "dataset_files/plain_quota.json",
+      "type": "CSV"
     }
   ],
-  "releaseInfo" : {
-    "templateVersion" : "1.0",
-    "notesFile" : "releaseNotes.html"
-  },
-  "folderDefinition" : "folder.json",
-  "externalFiles" : [
+  "lenses": [],
+  "dashboards": [
     {
-      "label" : "Demo Revenue Insights",
-      "name" : "Demo_Revenue_Insights",
-      "condition" : "${Variables.Overrides.createAllExternalFiles}",
-      "file" : "external_files/Demo_Revenue_Insights.csv",
-      "type" : "CSV",
-      "schema" : "external_files/Demo_Revenue_Insights.json",
-      "userXmd" : "external_files/Demo_Revenue_Insights_XMD.json",
-      "rows" : 5
+      "label": "Revenue Insights",
+      "name": "Revenue_Insights_tp",
+      "file": "dashboards/Revenue_Insights.json"
     }
   ],
-  "lenses" : [ ],
-  "dashboards" : [
+  "components": [
     {
-      "label" : "[DEMO] Revenue Insights",
-      "name" : "DEMO_Revenue_Insights_tp",
-      "condition" : "${Variables.Overrides.createAllDashboards}",
-      "file" : "dashboards/DEMO_Revenue_Insights.json"
+      "label" : "Opportunities Needing My Attention",
+      "name" : "Opportunities_Needing_My_Attention_tp",
+      "file" : "components/Opportunities_Needing_My_Attention.json"
+    },
+    {
+      "label" : "Opportunity Changes",
+      "name" : "Opportunity_Changes_tp",
+      "file" : "components/Opportunity_Changes.json"
+    },
+    {
+      "label" : "Top Accounts",
+      "name" : "Top_Accounts_tp",
+      "file" : "components/Top_Accounts.json"
+    },
+    {
+      "label" : "Top Open Opportunities",
+      "name" : "Top_Open_Opportunities_tp",
+      "file" : "components/Top_Open_Opportunities.json"
+    },
+    {
+      "label" : "Top Opportunities",
+      "name" : "Top_Opportunities_tp",
+      "file" : "components/Top_Opportunities.json"
+    },
+    {
+      "label" : "Top Products",
+      "name" : "Top_Products_tp",
+      "file" : "components/Top_Products.json"
     }
   ],
-  "components" : [ ],
-  "eltDataflows" : [ ],
-  "recipes" : [ 
+  "recipes": [
     {
+      "condition": "${Variables.Has_RoleHierarchy == 'Yes' || Variables.Has_RoleHierarchy == 'No'}",
       "label": "User Recipe",
       "name": "revinsights_user_recipe",
       "file": "recipes/revinsights_user_w_userrole_recipe.json"
@@ -65,31 +127,112 @@
       "label": "Main Recipe",
       "name": "RevInsightsMainRecipe",
       "file": "recipes/RevInsightsMainRecipe.json"
-    },
-    {
-      "label" : "Demo | Revenue Insights 1.0",
-      "name" : "Demo_Revenue_Insights_1_0",
-      "file" : "recipes/DemoRevenueInsightsRecipe.json"
     }
   ],
-  "datasetFiles" : [ ],
-  "storedQueries" : [ ],
-  "imageFiles" : [ ],
-  "extendedTypes" : { },
-  "templateDependencies" : [
+  "eltDataflows": [],
+  "datasetFiles": [
     {
-      "namespace" : "sfdc_internal",
-      "name" : "RevenueInsights",
-      "templateVersion" : ">=0.1"
+      "label": "Opportunity",
+      "name": "Opportunity",
+      "userXmd": "dataset_files/opportunity_XMD.json"
+    },
+    {
+      "label": "Opportunity RevInsights",
+      "name": "opportunity_revinsights",
+      "userXmd": "dataset_files/opportunity_revinsights_XMD.json"
+    },
+    {
+      "label": "Account",
+      "name": "Account",
+      "userXmd": "dataset_files/account_XMD.json"
+    },
+    {
+      "condition": "${Variables.Has_CollaborativeForecasting == 'Yes'}",
+      "label": "Forecast",
+      "name": "forecast_revinsights",
+      "userXmd": "dataset_files/forecast_XMD.json"
+    },
+    {
+      "condition": "${Variables.Has_OpportunitySplits == 'Yes'}",
+      "label": "Opportunity Splits",
+      "name": "opportunitysplits_revinsights",
+      "userXmd": "dataset_files/opportunitysplits_XMD.json"
+    },
+    {
+      "condition": "${Variables.Has_Products == 'Yes'}",
+      "label": "Oppty Products",
+      "name": "OpptyProduct",
+      "userXmd": "dataset_files/opportunity_product_XMD.json"
+    },
+    {
+      "condition": "${Variables.Has_Products == 'Yes'}",
+      "label": "Products",
+      "name": "Product",
+      "userXmd": "dataset_files/product_XMD.json"
+    },
+    {
+      "label": "Forecasting Quota",
+      "name": "forecastingquota_revinsights",
+      "userXmd": "dataset_files/forecastingquota_XMD.json"
+    },
+    {
+      "condition": "${Variables.Has_Activities == 'Yes'}",
+      "label": "Activities",
+      "name": "Activity",
+      "userXmd": "dataset_files/activities_XMD.json"
+    },
+    {
+      "label": "Users",
+      "name": "User",
+      "userXmd": "dataset_files/user_XMD.json"
+    },
+    {
+      "condition": "${Variables.Has_RoleHierarchy == 'No' || Variables.Has_RoleHierarchy == 'Yes'}",
+      "label": "User Roles",
+      "name": "userrole_revinsights",
+      "userXmd": "dataset_files/userroles_XMD.json"
+    },
+    {
+      "label": "OpportunityHistory",
+      "name": "OpportunityHistory",
+      "userXmd": "dataset_files/opphistory_XMD.json"
     }
   ],
-  "icons" : {
-    "appBadge" : {
-      "name" : "16.png"
+  "imageFiles": [],
+  "tags": [
+    "Sales",
+    "Featured"
+  ],
+  "customAttributes": [
+    {
+      "label": "Features",
+      "values": [
+        "Prebuilt Dashboards",
+        "Recipes"
+      ]
     },
-    "templateBadge" : {
-      "name" : "default.png"
+    {
+      "label": "Salesforce Objects",
+      "values": [
+        "Account",
+        "Event",
+        "ForecastingQuota",
+        "ForecastingType",
+        "ForecastingItem",
+        "Opportunity",
+        "OpportunityHistory",
+        "OpportunityLineItem",
+        "Product",
+        "Task",
+        "User",
+        "UserRole"
+      ]
     },
-    "templatePreviews" : [ ]
-  }
+    {
+      "label": "Publisher",
+      "values": [
+        "Tableau CRM"
+      ]
+    }
+  ]
 }
