@@ -1,6 +1,6 @@
 {
   "name" : "Waste_Management_Dashboard_tp",
-  "label" : "[Demo] Waste Management Dashboard",
+  "label" : "Waste Management Dashboard",
   "folder" : {
     "id" : "${App.Folder.Id}"
   },
@@ -55,11 +55,11 @@
             "parameters" : {
               "bins" : [
                 {
-                  "formatValue" : "#E84340",
+                  "formatValue" : "#00B531",
                   "bin" : "*"
                 },
                 {
-                  "formatValue" : "#3AE867",
+                  "formatValue" : "#E84340",
                   "bin" : "0"
                 }
               ]
@@ -67,31 +67,6 @@
           }
         },
         "field" : "Waste_In_tonnes_1.B",
-        "format" : {
-          "delimiters" : { },
-          "customFormat" : "[\"#,###.##%\",100]"
-        }
-      },
-      {
-        "conditionalFormatting" : {
-          "color" : {
-            "referenceField" : "E",
-            "type" : "multiple",
-            "parameters" : {
-              "bins" : [
-                {
-                  "formatValue" : "rgb(232, 67, 64)",
-                  "bin" : "*"
-                },
-                {
-                  "formatValue" : "#3AE867",
-                  "bin" : "0"
-                }
-              ]
-            }
-          }
-        },
-        "field" : "Total_Emissions_1.E",
         "format" : {
           "delimiters" : { },
           "customFormat" : "[\"#,###.##%\",100]"
@@ -132,23 +107,62 @@
       {
         "conditionalFormatting" : {
           "color" : {
-            "referenceField" : "B",
+            "referenceField" : "E",
             "type" : "multiple",
             "parameters" : {
               "bins" : [
                 {
-                  "formatValue" : "#E84340",
+                  "formatValue" : "#00B531",
                   "bin" : "*"
                 },
                 {
-                  "formatValue" : "#00B531",
+                  "formatValue" : "#E84340",
                   "bin" : "0"
                 }
               ]
             }
           }
         },
-        "field" : "Scope_3_Emissios_4.B",
+        "field" : "Total_Emissions_1.E",
+        "format" : {
+          "delimiters" : {
+            "thousands" : ",",
+            "decimal" : "."
+          },
+          "customFormat" : "[\"#,###.##%\",15]"
+        }
+      },
+      {
+        "conditionalFormatting" : {
+          "color" : {
+            "referenceField" : "D",
+            "type" : "multiple",
+            "parameters" : {
+              "bins" : [
+                {
+                  "formatValue" : "#00B531",
+                  "bin" : "*"
+                },
+                {
+                  "formatValue" : "#E84340",
+                  "bin" : "0"
+                }
+              ]
+            }
+          }
+        },
+        "field" : "Scope_3_Emissios_3.D",
+        "format" : {
+          "delimiters" : {
+            "thousands" : ",",
+            "decimal" : "."
+          },
+          "customFormat" : "[\"#,###.##%\",35]"
+        }
+      },
+      {
+        "conditionalFormatting" : { },
+        "field" : "Scope_3_Emissios_3.B",
         "format" : {
           "delimiters" : { },
           "customFormat" : "[\"#,###.##%\",100]"
@@ -180,36 +194,31 @@
         }
       },
       {
-        "conditionalFormatting" : { },
-        "field" : "Scope_3_Emissios_3.B",
-        "format" : {
-          "delimiters" : { },
-          "customFormat" : "[\"#,###.##%\",100]"
-        }
-      },
-      {
         "conditionalFormatting" : {
           "color" : {
-            "referenceField" : "D",
+            "referenceField" : "B",
             "type" : "multiple",
             "parameters" : {
               "bins" : [
                 {
-                  "formatValue" : "#E84340",
+                  "formatValue" : "#00B531",
                   "bin" : "*"
                 },
                 {
-                  "formatValue" : "#00B531",
+                  "formatValue" : "#E84340",
                   "bin" : "0"
                 }
               ]
             }
           }
         },
-        "field" : "Scope_3_Emissios_3.D",
+        "field" : "Scope_3_Emissios_4.B",
         "format" : {
-          "delimiters" : { },
-          "customFormat" : "[\"#,###.##%\",100]"
+          "delimiters" : {
+            "thousands" : ",",
+            "decimal" : "."
+          },
+          "customFormat" : "[\"#,###.##%\",13]"
         }
       }
     ],
@@ -1032,7 +1041,14 @@
               "textWrap" : true
             },
             "columnProperties" : { },
-            "columns" : [ ],
+            "columns" : [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "Date_Year~~~Date_Month"
+            ],
             "customBulkActions" : [ ],
             "header" : {
               "backgroundColor" : "#f4f6f9",
