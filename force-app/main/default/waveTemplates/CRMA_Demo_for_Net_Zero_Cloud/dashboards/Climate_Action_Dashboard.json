@@ -1,6 +1,6 @@
 {
   "name" : "Climate_Action_Dashboard_tp",
-  "label" : "[Demo] Climate Action Dashboard",
+  "label" : "Climate Action Dashboard",
   "folder" : {
     "id" : "${App.Folder.Id}"
   },
@@ -309,6 +309,14 @@
         }
       },
       {
+        "conditionalFormatting" : { },
+        "field" : "Date_Year_3.A",
+        "format" : {
+          "delimiters" : { },
+          "customFormat" : "[\"#,###.##%\",100]"
+        }
+      },
+      {
         "conditionalFormatting" : {
           "color" : {
             "referenceField" : "B",
@@ -329,8 +337,11 @@
         },
         "field" : "Date_Year_3.B",
         "format" : {
-          "delimiters" : { },
-          "customFormat" : "[\"#,###.##%\",100]"
+          "delimiters" : {
+            "thousands" : ",",
+            "decimal" : "."
+          },
+          "customFormat" : "[\"#,###.##%\",-261]"
         }
       }
     ],
@@ -5193,7 +5204,7 @@
           "query" : {
             "measures" : [
               [
-                "sum",
+                "avg",
                 "Carbon_Intensity",
                 "A"
               ],
@@ -5208,7 +5219,7 @@
                 "query" : {
                   "measures" : [
                     [
-                      "sum",
+                      "avg",
                       "Carbon_Intensity"
                     ]
                   ],
@@ -5228,7 +5239,7 @@
                   "groups" : [
                     "Date_Year"
                   ],
-                  "formula" : "(A - sum(A) over ([-1..-1] partition by all order by ('Date_Year')))/(sum(A) over ([-1..-1] partition by all order by ('Date_Year')))"
+                  "formula" : "(A - sum(A) over ([-1..-1] partition by all order by ('Date_Year')))/(sum(A) over ([-1..-1] partition by all order by ('Date_Year')))*-1"
                 },
                 "header" : "Change"
               }
@@ -10069,7 +10080,7 @@
                 "attributes" : {
                   "color" : "#ffffff"
                 },
-                "insert" : "Emissions Breakup"
+                "insert" : "Emissions Breakdown"
               },
               {
                 "attributes" : {

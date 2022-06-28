@@ -1,6 +1,6 @@
 {
   "name" : "Audit_Dashboard_tp",
-  "label" : "[Demo] Audit Dashboard",
+  "label" : "Audit Dashboard",
   "folder" : {
     "id" : "${App.Folder.Id}"
   },
@@ -262,23 +262,7 @@
       },
       {
         "conditionalFormatting" : { },
-        "field" : "Details_1.F",
-        "format" : {
-          "delimiters" : { },
-          "customFormat" : "[\"#,###\",1]"
-        }
-      },
-      {
-        "conditionalFormatting" : { },
-        "field" : "Details_1.E",
-        "format" : {
-          "delimiters" : { },
-          "customFormat" : "[\"#,###\",1]"
-        }
-      },
-      {
-        "conditionalFormatting" : { },
-        "field" : "Details_1.D",
+        "field" : "Details_1.B",
         "format" : {
           "delimiters" : { },
           "customFormat" : "[\"#,###\",1]"
@@ -294,7 +278,23 @@
       },
       {
         "conditionalFormatting" : { },
-        "field" : "Details_1.B",
+        "field" : "Details_1.D",
+        "format" : {
+          "delimiters" : { },
+          "customFormat" : "[\"#,###\",1]"
+        }
+      },
+      {
+        "conditionalFormatting" : { },
+        "field" : "Details_1.E",
+        "format" : {
+          "delimiters" : { },
+          "customFormat" : "[\"#,###\",1]"
+        }
+      },
+      {
+        "conditionalFormatting" : { },
+        "field" : "Details_1.F",
         "format" : {
           "delimiters" : { },
           "customFormat" : "[\"#,###\",1]"
@@ -1408,6 +1408,16 @@
                   ],
                   "borderRadius" : 4,
                   "borderWidth" : 1
+                }
+              },
+              {
+                "colspan" : 46,
+                "column" : 2,
+                "name" : "table_1",
+                "row" : 211,
+                "rowspan" : 38,
+                "widgetStyle" : {
+                  "borderEdges" : [ ]
                 }
               }
             ]
@@ -3000,7 +3010,8 @@
                     "CountryCode",
                     "Asset"
                   ]
-                }
+                },
+                "header" : "Electricity Usage Current"
               },
               {
                 "query" : {
@@ -3015,7 +3026,8 @@
                     "CountryCode",
                     "Asset"
                   ]
-                }
+                },
+                "header" : "Total Diesel Consumption"
               },
               {
                 "query" : {
@@ -3030,7 +3042,8 @@
                     "CountryCode",
                     "Asset"
                   ]
-                }
+                },
+                "header" : "Total Natural Gas consumption (kWh)"
               },
               {
                 "query" : {
@@ -3045,7 +3058,8 @@
                     "CountryCode",
                     "Asset"
                   ]
-                }
+                },
+                "header" : "Total Fuel Oil Consumption"
               },
               {
                 "query" : {
@@ -3060,7 +3074,8 @@
                     "CountryCode",
                     "Asset"
                   ]
-                }
+                },
+                "header" : "Total Steam Consumption"
               },
               {
                 "query" : {
@@ -3075,7 +3090,8 @@
                     "CountryCode",
                     "Asset"
                   ]
-                }
+                },
+                "header" : "Electricity Usage (kWh/m2)"
               },
               {
                 "query" : {
@@ -3090,7 +3106,8 @@
                     "CountryCode",
                     "Asset"
                   ]
-                }
+                },
+                "header" : "Total Building Area"
               },
               {
                 "query" : {
@@ -3105,7 +3122,8 @@
                     "CountryCode",
                     "Asset"
                   ]
-                }
+                },
+                "header" : "Energy Consumption"
               },
               {
                 "query" : {
@@ -3120,7 +3138,8 @@
                     "CountryCode",
                     "Asset"
                   ]
-                }
+                },
+                "header" : "Energy Usage (kBtu/m2)"
               },
               {
                 "query" : {
@@ -3135,7 +3154,8 @@
                     "CountryCode",
                     "Asset"
                   ]
-                }
+                },
+                "header" : "Energy Usage (kBtu/sq ft)"
               }
             ],
             "groups" : [
@@ -3179,6 +3199,7 @@
             "minColumnWidth" : 40,
             "mode" : "variable",
             "numberOfLines" : 1,
+            "pivoted" : false,
             "showActionMenu" : true,
             "showRowIndexColumn" : false,
             "totals" : true,
@@ -3621,19 +3642,36 @@
             "measures" : [
               [
                 "avg",
-                "Carbon_Inventory"
+                "Carbon_Inventory",
+                "A"
               ]
+            ],
+            "columns" : [
+              {
+                "query" : {
+                  "measures" : [
+                    [
+                      "avg",
+                      "Carbon_Inventory"
+                    ]
+                  ],
+                  "groups" : [
+                    "Asset"
+                  ],
+                  "order" : [
+                    [
+                      -1,
+                      {
+                        "ascending" : false
+                      }
+                    ]
+                  ]
+                },
+                "header" : "Carbon Inventory"
+              }
             ],
             "groups" : [
               "Asset"
-            ],
-            "order" : [
-              [
-                "avg_Carbon_Inventory",
-                {
-                  "ascending" : false
-                }
-              ]
             ]
           },
           "version" : -1.0
@@ -3712,13 +3750,14 @@
               "type" : "x",
               "chartsPerLine" : 4
             },
+            "columnProperties" : { },
             "columnMap" : {
               "trellis" : [ ],
               "dimensionAxis" : [
                 "Asset"
               ],
               "plots" : [
-                "avg_Carbon_Inventory"
+                "A"
               ]
             },
             "showActionMenu" : true,
@@ -10041,13 +10080,14 @@
             "type" : "x",
             "chartsPerLine" : 4
           },
+          "columnProperties" : { },
           "columnMap" : {
             "trellis" : [ ],
             "dimensionAxis" : [
               "Asset"
             ],
             "plots" : [
-              "avg_Carbon_Inventory"
+              "A"
             ]
           },
           "showActionMenu" : true,
