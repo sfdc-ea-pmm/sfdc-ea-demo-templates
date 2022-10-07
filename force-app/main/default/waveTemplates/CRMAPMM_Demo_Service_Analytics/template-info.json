@@ -1,0 +1,310 @@
+{
+  "templateType" : "app",
+  "label" : "Demo | Service Analytics",
+  "name" : "CRMAPMM_Demo_Service_Analytics",
+  "description" : "",
+  "assetVersion" : 55.0,
+  "customAttributes": [
+    {
+      "label": "Author(s)",
+      "values": [
+        "CRMA PMM"
+      ]
+    },
+    {
+      "label": "Demo Version",
+      "values": ["v2022.40"]
+    },
+    {
+      "label": "Source Version",
+      "values": ["v238"]
+    }
+  ],
+  "tags": ["Demo", "Service", "Featured"],
+  "variableDefinition" : "variables.json",
+  "uiDefinition" : "ui.json",
+  "rules" : [
+    {
+      "type" : "templateToApp",
+      "file" : "template-to-app-rules.json"
+    },
+    {
+      "type" : "appToTemplate",
+      "file" : "app-to-template-rules.json"
+    }
+  ],
+  "releaseInfo" : {
+    "templateVersion" : "1.0",
+    "notesFile" : "releaseNotes.html"
+  },
+  "folderDefinition" : "folder.json",
+  "externalFiles" : [ 
+    {
+      "label" : "Cases_Leading_Causes",
+      "name" : "Cases_Leading_Causes_dtp",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/Cases_Leading_Causes.csv",
+      "type" : "CSV",
+      "schema" : "external_files/Cases_Leading_Causes.schema.json",
+      "userXmd" : "external_files/Cases_Leading_Causes_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "Cases_Prescription",
+      "name" : "Cases_Prescription_dtp",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/Cases_Prescription.csv",
+      "type" : "CSV",
+      "schema" : "external_files/Cases_Prescription.schema.json",
+      "userXmd" : "external_files/Cases_Prescription_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "ServiceActivity",
+      "name" : "ServiceActivity_dtp",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/ServiceActivity.csv",
+      "type" : "CSV",
+      "schema" : "external_files/ServiceActivity.schema.json",
+      "userXmd" : "external_files/ServiceActivity_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "ServiceCase",
+      "name" : "ServiceCase_dtp",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/ServiceCase.csv",
+      "type" : "CSV",
+      "schema" : "external_files/ServiceCase.schema.json",
+      "userXmd" : "external_files/ServiceCase_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "ServiceCaseHistory",
+      "name" : "ServiceCaseHistory_dtp",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/ServiceCaseHistory.csv",
+      "type" : "CSV",
+      "schema" : "external_files/ServiceCaseHistory.schema.json",
+      "userXmd" : "external_files/ServiceCaseHistory_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "ServiceChatTranscript",
+      "name" : "ServiceChatTranscript_dtp",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/ServiceChatTranscript.csv",
+      "type" : "CSV",
+      "schema" : "external_files/ServiceChatTranscript.schema.json",
+      "userXmd" : "external_files/ServiceChatTranscript_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "ServiceChatTranscriptEvent",
+      "name" : "ServiceChatTranscriptEvent_dtp",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/ServiceChatTranscriptEvent.csv",
+      "type" : "CSV",
+      "schema" : "external_files/ServiceChatTranscriptEvent.schema.json",
+      "userXmd" : "external_files/ServiceChatTranscriptEvent_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "ServiceKnowledge",
+      "name" : "ServiceKnowledge_dtp",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/ServiceKnowledge.csv",
+      "type" : "CSV",
+      "schema" : "external_files/ServiceKnowledge.schema.json",
+      "userXmd" : "external_files/ServiceKnowledge_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "ServiceKnowledgeAttached",
+      "name" : "ServiceKnowledgeAttached_dtp",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/ServiceKnowledgeAttached.csv",
+      "type" : "CSV",
+      "schema" : "external_files/ServiceKnowledgeAttached.schema.json",
+      "userXmd" : "external_files/ServiceKnowledgeAttached_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "ServiceOmniAgentWork",
+      "name" : "ServiceOmniAgentWork_dtp",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/ServiceOmniAgentWork.csv",
+      "type" : "CSV",
+      "schema" : "external_files/ServiceOmniAgentWork.schema.json",
+      "userXmd" : "external_files/ServiceOmniAgentWork_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "ServiceOmniUserPresence",
+      "name" : "ServiceOmniUserPresence_dtp",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/ServiceOmniUserPresence.csv",
+      "type" : "CSV",
+      "schema" : "external_files/ServiceOmniUserPresence.schema.json",
+      "userXmd" : "external_files/ServiceOmniUserPresence_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "ServiceOpportunity",
+      "name" : "ServiceOpportunity_dtp",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/ServiceOpportunity.csv",
+      "type" : "CSV",
+      "schema" : "external_files/ServiceOpportunity.schema.json",
+      "userXmd" : "external_files/ServiceOpportunity_XMD.json",
+      "rows" : 5
+    }
+  ],
+  "lenses" : [ ],
+  "dashboards" : [
+    {
+      "label" : "My Performance Summary",
+      "name" : "My_Performance_Summary5_dtp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/My_Performance_Summary5.json"
+    },
+    {
+      "label" : "Service Account Profile",
+      "name" : "Service_Account_Profile5_dtp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Service_Account_Profile5.json"
+    },
+    {
+      "label" : "Service Agent Activity",
+      "name" : "Service_Agent_Activity5_dtp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Service_Agent_Activity5.json"
+    },
+    {
+      "label" : "Service Agent Performance",
+      "name" : "Service_By_TeamEfficiency5_dtp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Service_By_TeamEfficiency5.json"
+    },
+    {
+      "label" : "Service Agent Sidebar By Case History",
+      "name" : "Service_Case_History_Sidebar5_dtp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Service_Case_History_Sidebar5.json"
+    },
+    {
+      "label" : "Service Agent Sidebar By Customer",
+      "name" : "Service_Agent_Sidebar_By_Customer5_dtp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Service_Agent_Sidebar_By_Customer5.json"
+    },
+    {
+      "label" : "Service Agent Sidebar By Similarity",
+      "name" : "Service_Agent_Sidebar_By_Similarity5_dtp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Service_Agent_Sidebar_By_Similarity5.json"
+    },
+    {
+      "label" : "Service Analytics Overview",
+      "name" : "Service_Overview5_dtp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Service_Overview5.json"
+    },
+    {
+      "label" : "Service Backlog",
+      "name" : "Service_Backlog_Analysis5_dtp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Service_Backlog_Analysis5.json"
+    },
+    {
+      "label" : "Service Channel Review",
+      "name" : "Service_By_EngagementEfficiency5_dtp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Service_By_EngagementEfficiency5.json"
+    },
+    {
+      "label" : "Service Customer Satisfaction",
+      "name" : "Service_Customer_Satisfaction5_dtp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Service_Customer_Satisfaction5.json"
+    },
+    {
+      "label" : "Service Knowledge Efficiency",
+      "name" : "Service_Knowledge5_dtp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Service_Knowledge5.json"
+    },
+    {
+      "label" : "Service Knowledge Usage",
+      "name" : "Service_Knowledge_Metrics5_dtp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Service_Knowledge_Metrics5.json"
+    },
+    {
+      "label" : "Service Live Agent Chat",
+      "name" : "Service_Live_Agent_Chat5_dtp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Service_Live_Agent_Chat5.json"
+    },
+    {
+      "label" : "Service Omni",
+      "name" : "Service_Omni5_dtp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Service_Omni5.json"
+    },
+    {
+      "label" : "Service Open Cases",
+      "name" : "Service_By_OpenCases5_dtp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Service_By_OpenCases5.json"
+    },
+    {
+      "label" : "Service Telephony",
+      "name" : "Service_Telephony5_dtp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Service_Telephony5.json"
+    }
+  ],
+  "components" : [ ],
+  "eltDataflows" : [
+    {
+      "label" : "Demo Service Analytics Timeshifting",
+      "name" : "Timeshifting",
+      "condition" : "${Variables.Overrides.createDataflow}",
+      "file" : "dataflow/Timeshifting.json"
+    }
+  ],
+  "recipes" : [
+    {
+      "label" : "Action Framework",
+      "name" : "ServiceCase_Add_ID_Lookup",
+      "condition" : "${Variables.Overrides.createAllRecipes}",
+      "file" : "recipes/ServiceCase_Add_ID_Lookup.json"
+    }
+  ],
+  "datasetFiles" : [ ],
+  "storedQueries" : [ ],
+  "imageFiles" : [ ],
+  "extendedTypes" : { },
+  "templateDependencies" : [ ],
+  "icons": {
+    "appBadge": {
+      "name": "16.png"
+    },
+    "templateBadge": {
+      "name": "analytics_icon"
+    },
+    "templatePreviews": [
+      {
+        "name": "einstein_scene",
+        "label": "",
+        "description": ""
+      },
+      {
+        "name": "demo_template_guide_0",
+        "label": "How to Use this Template",
+        "description": "This demo template is decoupled from core objects and does not require any additional licenses (only CRMA+). To customize the data you will need to download the datasets, modify and update. "
+      }
+    ]
+  }
+}
