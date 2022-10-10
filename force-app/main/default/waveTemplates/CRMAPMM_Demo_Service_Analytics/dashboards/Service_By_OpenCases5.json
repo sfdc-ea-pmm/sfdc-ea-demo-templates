@@ -1748,7 +1748,7 @@
                 "Duration"
               ]
             ],
-            "pigql" : "q = load \"ServiceCase\"; q = filter q by 'IsClosed' == \"false\"; q = group q by all; q = foreach q generate avg('{{column(Static_Duration.selection, [\"pigql_value\"]).asObject()}}') as 'avg_Duration';",
+            "pigql" : "q = load \"${App.Datasets.ServiceCase_dtp.FullyQualifiedName}\"; q = filter q by 'IsClosed' == \"false\"; q = group q by all; q = foreach q generate avg('{{column(Static_Duration.selection, [\"pigql_value\"]).asObject()}}') as 'avg_Duration';",
             "autoFilter" : true
           },
           "version" : -1.0
@@ -1838,7 +1838,7 @@
                 null
               ]
             ],
-            "pigql" : "q = load \"ServiceCase\";q = filter q by 'IsClosed' ==\"false\";q = filter q by 'ED_Outcome__c' != 0;q = group q by 'CaseNumber'; q = foreach q generate 'CaseNumber' as 'CaseNumber', sum('{{column(Static_Duration.selection, [\"pigql_value\"]).asObject()}}') as 'Total_Duration', sum('ED_Outcome__c') as 'Predicted_CSAT';q = order q by ('Total_Duration' desc,'Predicted_CSAT' desc);q = limit q 1000",
+            "pigql" : "q = load \"${App.Datasets.ServiceCase_dtp.FullyQualifiedName}\";q = filter q by 'IsClosed' ==\"false\";q = filter q by 'ED_Outcome__c' != 0;q = group q by 'CaseNumber'; q = foreach q generate 'CaseNumber' as 'CaseNumber', sum('{{column(Static_Duration.selection, [\"pigql_value\"]).asObject()}}') as 'Total_Duration', sum('ED_Outcome__c') as 'Predicted_CSAT';q = order q by ('Total_Duration' desc,'Predicted_CSAT' desc);q = limit q 1000",
             "autoFilter" : true,
             "groups" : [
               "CaseNumber"
@@ -2206,7 +2206,7 @@
                 "Amount"
               ]
             ],
-            "pigql" : "q = load \"ServiceCase\"; q = filter q by 'IsClosed' == \"false\"; r = load \"ServiceOpportunity\"; r = filter r by {{column(filter_forecast_category.selection, [\"ForecastCategory\"]).asEquality(\"ForecastCategory\")}}; s = group q by 'Account_Name' left, r by 'Account_Name'; s = foreach s generate q.'Account_Name' as 'Account_Name', count(q) as 'count', coalesce(sum(r.'Amount'),0) as 'sum_Amount'; s = order s by {{cell(Field_Select.selection, 0, \"value\").asString()}} {{cell(static_1.selection, 0, \"value\").asString()}};s = limit s 100;",
+            "pigql" : "q = load \"${App.Datasets.ServiceCase_dtp.FullyQualifiedName}\"; q = filter q by 'IsClosed' == \"false\"; r = load \"${App.Datasets.ServiceOpportunity_dtp.FullyQualifiedName}\"; r = filter r by {{column(filter_forecast_category.selection, [\"ForecastCategory\"]).asEquality(\"ForecastCategory\")}}; s = group q by 'Account_Name' left, r by 'Account_Name'; s = foreach s generate q.'Account_Name' as 'Account_Name', count(q) as 'count', coalesce(sum(r.'Amount'),0) as 'sum_Amount'; s = order s by {{cell(Field_Select.selection, 0, \"value\").asString()}} {{cell(static_1.selection, 0, \"value\").asString()}};s = limit s 100;",
             "autoFilter" : true,
             "groups" : [
               "Account_Name"
@@ -2242,7 +2242,7 @@
                 "Percent"
               ]
             ],
-            "pigql" : "q = load \"ServiceCase\"; q = filter q by 'IsClosed' == \"false\"; q = group q by 'IsEscalated'; q = foreach q generate 'IsEscalated' as 'IsEscalated', count() as 'count', (count()) / sum(count()) over([..] partition by all)*100 as 'perc_Percent'; q = filter q by 'IsEscalated' == \"true\"; ",
+            "pigql" : "q = load \"${App.Datasets.ServiceCase_dtp.FullyQualifiedName}\"; q = filter q by 'IsClosed' == \"false\"; q = group q by 'IsEscalated'; q = foreach q generate 'IsEscalated' as 'IsEscalated', count() as 'count', (count()) / sum(count()) over([..] partition by all)*100 as 'perc_Percent'; q = filter q by 'IsEscalated' == \"true\"; ",
             "autoFilter" : true
           },
           "version" : -1.0

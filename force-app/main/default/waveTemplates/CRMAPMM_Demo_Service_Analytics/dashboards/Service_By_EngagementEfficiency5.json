@@ -1862,7 +1862,7 @@
                 "Percent"
               ]
             ],
-            "pigql" : "q = load \"ServiceCase\"; q = filter q by 'IsClosed' == \"true\"; q = group q by 'First_Contact_Close__c'; q = foreach q generate 'First_Contact_Close__c' as 'First_Contact_Close__c', count() as 'count', (count()) / sum(count()) over([..] partition by all)*100 as 'perc_Percent'; q = filter q by 'First_Contact_Close__c' == \"true\"; ",
+            "pigql" : "q = load \"${App.Datasets.ServiceCase_dtp.FullyQualifiedName}\"; q = filter q by 'IsClosed' == \"true\"; q = group q by 'First_Contact_Close__c'; q = foreach q generate 'First_Contact_Close__c' as 'First_Contact_Close__c', count() as 'count', (count()) / sum(count()) over([..] partition by all)*100 as 'perc_Percent'; q = filter q by 'First_Contact_Close__c' == \"true\"; ",
             "autoFilter" : true
           },
           "version" : -1.0
@@ -1889,7 +1889,7 @@
         "isGlobal" : false,
         "query" : {
           "query" : {
-            "pigql" : "q = load \"ServiceCase\"; q = filter q by 'IsClosed' == \"true\"; q = group q by all; q = foreach q generate avg('{{column(Static_Duration.selection, [\"pigql_value\"]).asObject()}}') as 'avg_Time_Open__c';",
+            "pigql" : "q = load \"${App.Datasets.ServiceCase_dtp.FullyQualifiedName}\"; q = filter q by 'IsClosed' == \"true\"; q = group q by all; q = foreach q generate avg('{{column(Static_Duration.selection, [\"pigql_value\"]).asObject()}}') as 'avg_Time_Open__c';",
             "measures" : [
               [
                 "avg",

@@ -1593,7 +1593,7 @@
                 null
               ]
             ],
-            "pigql" : "q = load \"ServiceActivity\"; r = group q by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day');r = foreach r generate 'CreatedDate_Year'+\"~~~\"+'CreatedDate_Month'+\"~~~\"+'CreatedDate_Day' as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day', count()/unique('Owner_Id') as 'avg_activity_cnt', (case when (\"{{cell(filter_activity_owner.selection, 0, \"Owner_Name\").asString()}}\" == \"all\" && \"{{cell(scatter_activity_per_case.selection, 0, \"Owner_Name\").asString()}}\" == \"all\") then \"ALL\" else \"Selected Agents\" end) as 'Performance'; s = group q by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day'); s = foreach s generate 'CreatedDate_Year'+\"~~~\"+'CreatedDate_Month'+\"~~~\"+'CreatedDate_Day' as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day', count()/unique('Owner_Id') as 'avg_activity_cnt', \"Team\" as 'Performance';u = union r, s; u = filter u by 'Performance' != \"ALL\";",
+            "pigql" : "q = load \"${App.Datasets.ServiceActivity_dtp.FullyQualifiedName}\"; r = group q by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day');r = foreach r generate 'CreatedDate_Year'+\"~~~\"+'CreatedDate_Month'+\"~~~\"+'CreatedDate_Day' as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day', count()/unique('Owner_Id') as 'avg_activity_cnt', (case when (\"{{cell(filter_activity_owner.selection, 0, \"Owner_Name\").asString()}}\" == \"all\" && \"{{cell(scatter_activity_per_case.selection, 0, \"Owner_Name\").asString()}}\" == \"all\") then \"ALL\" else \"Selected Agents\" end) as 'Performance'; s = group q by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day'); s = foreach s generate 'CreatedDate_Year'+\"~~~\"+'CreatedDate_Month'+\"~~~\"+'CreatedDate_Day' as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day', count()/unique('Owner_Id') as 'avg_activity_cnt', \"Team\" as 'Performance';u = union r, s; u = filter u by 'Performance' != \"ALL\";",
             "groups" : [
               [
                 "CreatedDate_Year",
@@ -1786,7 +1786,7 @@
                 null
               ]
             ],
-            "pigql" : "q = load \"ServiceActivity\"; r = group q by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day');r = foreach r generate 'CreatedDate_Year'+\"~~~\"+'CreatedDate_Month'+\"~~~\"+'CreatedDate_Day' as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day', count()/unique('Owner_Id') as 'avg_activity_cnt', (case when (\"{{cell(filter_activity_owner.selection, 0, \"Owner.Name\").asString()}}\" == \"all\" && \"{{cell(scatter_activity_per_case.selection, 0, \"Owner.Name\").asString()}}\" == \"all\") then \"ALL\" else \"Selected Agents\" end) as 'Performance'; s = group q by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day'); s = foreach s generate 'CreatedDate_Year'+\"~~~\"+'CreatedDate_Month'+\"~~~\"+'CreatedDate_Day' as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day', count()/unique('Owner_Id') as 'avg_activity_cnt', \"Team\" as 'Performance';u = union r, s; u = filter u by 'Performance' != \"ALL\";",
+            "pigql" : "q = load \"${App.Datasets.ServiceActivity_dtp.FullyQualifiedName}\"; r = group q by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day');r = foreach r generate 'CreatedDate_Year'+\"~~~\"+'CreatedDate_Month'+\"~~~\"+'CreatedDate_Day' as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day', count()/unique('Owner_Id') as 'avg_activity_cnt', (case when (\"{{cell(filter_activity_owner.selection, 0, \"Owner.Name\").asString()}}\" == \"all\" && \"{{cell(scatter_activity_per_case.selection, 0, \"Owner.Name\").asString()}}\" == \"all\") then \"ALL\" else \"Selected Agents\" end) as 'Performance'; s = group q by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day'); s = foreach s generate 'CreatedDate_Year'+\"~~~\"+'CreatedDate_Month'+\"~~~\"+'CreatedDate_Day' as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day', count()/unique('Owner_Id') as 'avg_activity_cnt', \"Team\" as 'Performance';u = union r, s; u = filter u by 'Performance' != \"ALL\";",
             "groups" : [
               [
                 "CreatedDate_Year",
@@ -1872,7 +1872,7 @@
                 null
               ]
             ],
-            "pigql" : "activity = load \"ServiceActivity\";activity = group activity by 'Owner_Name';activity = foreach activity generate coalesce(count(), 0) / coalesce(unique('Case_Id'), 0) as 'avg_Activity per Case', coalesce(unique('Case_Id'), 0) as 'Total_Cases with Activities',coalesce(avg('Case_{{column(Static_Duration.selection, [\"value\"]).asObject()}}'), 0) as 'avg_Case Duration','Owner_Name' as 'Owner_Name';activity = limit activity 2000;",
+            "pigql" : "activity = load \"${App.Datasets.ServiceActivity_dtp.FullyQualifiedName}\";activity = group activity by 'Owner_Name';activity = foreach activity generate coalesce(count(), 0) / coalesce(unique('Case_Id'), 0) as 'avg_Activity per Case', coalesce(unique('Case_Id'), 0) as 'Total_Cases with Activities',coalesce(avg('Case_{{column(Static_Duration.selection, [\"value\"]).asObject()}}'), 0) as 'avg_Case Duration','Owner_Name' as 'Owner_Name';activity = limit activity 2000;",
             "autoFilter" : true,
             "groups" : [
               "Owner_Name"
@@ -1934,7 +1934,7 @@
         "isGlobal" : false,
         "query" : {
           "query" : {
-            "pigql" : "activity = load \"ServiceActivity\";activity = group activity by all;activity = foreach activity generate coalesce(count(activity), 0)/coalesce(unique('Owner_Name'), 0) as 'sum_avg_activity_per_agent';activity =limit activity 2000;",
+            "pigql" : "activity = load \"${App.Datasets.ServiceActivity_dtp.FullyQualifiedName}\";activity = group activity by all;activity = foreach activity generate coalesce(count(activity), 0)/coalesce(unique('Owner_Name'), 0) as 'sum_avg_activity_per_agent';activity =limit activity 2000;",
             "measures" : [
               [
                 "sum",
@@ -1966,7 +1966,7 @@
         "isGlobal" : false,
         "query" : {
           "query" : {
-            "pigql" : "activity = load \"ServiceActivity\";activity = group activity by all;activity = foreach activity generate coalesce(count(activity), 0)/coalesce(unique('Case_Id'), 0) as 'sum_avg_activity_per_case';activity =limit activity 2000;",
+            "pigql" : "activity = load \"${App.Datasets.ServiceActivity_dtp.FullyQualifiedName}\";activity = group activity by all;activity = foreach activity generate coalesce(count(activity), 0)/coalesce(unique('Case_Id'), 0) as 'sum_avg_activity_per_case';activity =limit activity 2000;",
             "measures" : [
               [
                 "sum",
@@ -2040,7 +2040,7 @@
                 "completed_activity_pct"
               ]
             ],
-            "pigql" : "activity = load \"ServiceActivity\";comp_activity = filter activity by 'ActivityIsClosed' == \"Completed\";comp_activity = foreach comp_activity generate count() as 'cnt_comp_activities';result = group comp_activity by all full, activity by all;result = foreach result generate coalesce(sum(comp_activity.cnt_comp_activities), 0) / coalesce(count(activity), 0) * 100 as 'sum_completed_activity_pct';result = limit result 2000;",
+            "pigql" : "activity = load \"${App.Datasets.ServiceActivity_dtp.FullyQualifiedName}\";comp_activity = filter activity by 'ActivityIsClosed' == \"Completed\";comp_activity = foreach comp_activity generate count() as 'cnt_comp_activities';result = group comp_activity by all full, activity by all;result = foreach result generate coalesce(sum(comp_activity.cnt_comp_activities), 0) / coalesce(count(activity), 0) * 100 as 'sum_completed_activity_pct';result = limit result 2000;",
             "autoFilter" : true,
             "groups" : [ ]
           },

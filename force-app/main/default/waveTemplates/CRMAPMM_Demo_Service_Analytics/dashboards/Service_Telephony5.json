@@ -1147,7 +1147,7 @@
                 "TotalCalls"
               ]
             ],
-            "pigql" : "a = load \"ServiceActivity\";a = filter a by 'IsCall' == \"Yes\";a = group a by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day','CreatedDate_Hour');a = foreach a generate 'CreatedDate_Hour' as 'time_Hour', count() as 'sum_TotalCalls', avg('CallDurationInSeconds') as 'avg_CallDurationInSeconds';a = order a by 'time_Hour' asc;",
+            "pigql" : "a = load \"${App.Datasets.ServiceActivity_dtp.FullyQualifiedName}\";a = filter a by 'IsCall' == \"Yes\";a = group a by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day','CreatedDate_Hour');a = foreach a generate 'CreatedDate_Hour' as 'time_Hour', count() as 'sum_TotalCalls', avg('CallDurationInSeconds') as 'avg_CallDurationInSeconds';a = order a by 'time_Hour' asc;",
             "autoFilter" : true,
             "groups" : [
               [
@@ -1186,7 +1186,7 @@
                 "level"
               ]
             ],
-            "pigql" : "a = load \"ServiceActivity\";a = group a by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day');a = filter a by 'IsCall' == \"Yes\";a = group a by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day','CreatedDate_Hour');a = foreach a generate 'CreatedDate_Hour' as 'time_Hour',(1 - erlang_c(unique('Owner_Id'),(((count() / unique('CreatedDate_Day'))/3600) * avg('CallDurationInSeconds'))) * exp(((((count() / unique('CreatedDate_Day'))/3600) * avg('CallDurationInSeconds')) - unique('Owner_Id')) * 50 / avg('CallDurationInSeconds'))) * 100 as 'Service_Level';a = group a by all; a = foreach a generate avg('Service_Level') as 'service_level'",
+            "pigql" : "a = load \"${App.Datasets.ServiceActivity_dtp.FullyQualifiedName}\";a = group a by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day');a = filter a by 'IsCall' == \"Yes\";a = group a by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day','CreatedDate_Hour');a = foreach a generate 'CreatedDate_Hour' as 'time_Hour',(1 - erlang_c(unique('Owner_Id'),(((count() / unique('CreatedDate_Day'))/3600) * avg('CallDurationInSeconds'))) * exp(((((count() / unique('CreatedDate_Day'))/3600) * avg('CallDurationInSeconds')) - unique('Owner_Id')) * 50 / avg('CallDurationInSeconds'))) * 100 as 'Service_Level';a = group a by all; a = foreach a generate avg('Service_Level') as 'service_level'",
             "autoFilter" : true
           },
           "version" : -1.0
@@ -1219,7 +1219,7 @@
                 "waiting"
               ]
             ],
-            "pigql" : "a = load \"ServiceActivity\";a = group a by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day');a = filter a by 'IsCall' == \"Yes\";a = group a by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day','CreatedDate_Hour');a = foreach a generate 'CreatedDate_Hour' as 'time_Hour',erlang_c(unique('Owner_Id'),(((count() / unique('CreatedDate_Day'))/3600) * avg('CallDurationInSeconds'))) as 'er_c',erlang_c(unique('Owner_Id'),(((count() / unique('CreatedDate_Day'))/3600) * avg('CallDurationInSeconds'))) * 100 as 'Probability_of_Waiting';a = group a by all; a = foreach a generate avg('Probability_of_Waiting') as 'prob_waiting'",
+            "pigql" : "a = load \"${App.Datasets.ServiceActivity_dtp.FullyQualifiedName}\";a = group a by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day');a = filter a by 'IsCall' == \"Yes\";a = group a by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day','CreatedDate_Hour');a = foreach a generate 'CreatedDate_Hour' as 'time_Hour',erlang_c(unique('Owner_Id'),(((count() / unique('CreatedDate_Day'))/3600) * avg('CallDurationInSeconds'))) as 'er_c',erlang_c(unique('Owner_Id'),(((count() / unique('CreatedDate_Day'))/3600) * avg('CallDurationInSeconds'))) * 100 as 'Probability_of_Waiting';a = group a by all; a = foreach a generate avg('Probability_of_Waiting') as 'prob_waiting'",
             "autoFilter" : true
           },
           "version" : -1.0
@@ -1257,7 +1257,7 @@
                 "Level"
               ]
             ],
-            "pigql" : "a = load \"ServiceActivity\";a = group a by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day');a = filter a by 'IsCall' == \"Yes\";a = group a by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day','CreatedDate_Hour');a = foreach a generate 'CreatedDate_Hour' as 'time_Hour',erlang_c(unique('Owner_Id'),(((count() / unique('CreatedDate_Day'))/3600) * avg('CallDurationInSeconds'))) as 'er_c',erlang_c(unique('Owner_Id'),(((count() / unique('CreatedDate_Day'))/3600) * avg('CallDurationInSeconds'))) * 100 as 'Probability_of_Waiting',(1 - erlang_c(unique('Owner_Id'),(((count() / unique('CreatedDate_Day'))/3600) * avg('CallDurationInSeconds'))) * exp(((((count() / unique('CreatedDate_Day'))/3600) * avg('CallDurationInSeconds')) - unique('Owner_Id')) * 50 / avg('CallDurationInSeconds'))) * 100 as 'Service_Level';a = order a by 'time_Hour' asc;",
+            "pigql" : "a = load \"${App.Datasets.ServiceActivity_dtp.FullyQualifiedName}\";a = group a by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day');a = filter a by 'IsCall' == \"Yes\";a = group a by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day','CreatedDate_Hour');a = foreach a generate 'CreatedDate_Hour' as 'time_Hour',erlang_c(unique('Owner_Id'),(((count() / unique('CreatedDate_Day'))/3600) * avg('CallDurationInSeconds'))) as 'er_c',erlang_c(unique('Owner_Id'),(((count() / unique('CreatedDate_Day'))/3600) * avg('CallDurationInSeconds'))) * 100 as 'Probability_of_Waiting',(1 - erlang_c(unique('Owner_Id'),(((count() / unique('CreatedDate_Day'))/3600) * avg('CallDurationInSeconds'))) * exp(((((count() / unique('CreatedDate_Day'))/3600) * avg('CallDurationInSeconds')) - unique('Owner_Id')) * 50 / avg('CallDurationInSeconds'))) * 100 as 'Service_Level';a = order a by 'time_Hour' asc;",
             "autoFilter" : true,
             "groups" : [
               [
@@ -1372,7 +1372,7 @@
                 "Agents"
               ]
             ],
-            "pigql" : "a = load \"ServiceActivity\";a = filter a by 'IsCall' == \"Yes\";a = group a by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day','CreatedDate_Hour');a = foreach a generate 'CreatedDate_Hour' as 'time_Hour',unique('Owner_Id') as 'total_Agents';a = order a by 'time_Hour' asc;",
+            "pigql" : "a = load \"${App.Datasets.ServiceActivity_dtp.FullyQualifiedName}\";a = filter a by 'IsCall' == \"Yes\";a = group a by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day','CreatedDate_Hour');a = foreach a generate 'CreatedDate_Hour' as 'time_Hour',unique('Owner_Id') as 'total_Agents';a = order a by 'time_Hour' asc;",
             "autoFilter" : true,
             "groups" : [
               [
@@ -1449,7 +1449,7 @@
         "isGlobal" : false,
         "query" : {
           "query" : {
-            "pigql" : "a = load \"ServiceActivity\";a = filter a by 'IsCall' == \"Yes\"; a = group a by 'Owner_Name';a = foreach a generate avg('CallDurationInSeconds') as 'avg_CallDurationInSeconds', unique('Case_Id') as 'sum_CaseId', 'Owner_Name' as 'Owner_Name', count() / unique('Case_Id') as 'avg_Calls_Per_Case';",
+            "pigql" : "a = load \"${App.Datasets.ServiceActivity_dtp.FullyQualifiedName}\";a = filter a by 'IsCall' == \"Yes\"; a = group a by 'Owner_Name';a = foreach a generate avg('CallDurationInSeconds') as 'avg_CallDurationInSeconds', unique('Case_Id') as 'sum_CaseId', 'Owner_Name' as 'Owner_Name', count() / unique('Case_Id') as 'avg_Calls_Per_Case';",
             "measures" : [
               [
                 "avg",
@@ -1548,7 +1548,7 @@
         "isGlobal" : false,
         "query" : {
           "query" : {
-            "pigql" : "q = load \"ServiceActivity\"; q = filter q by 'IsCall' == \"Yes\";q = group q by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day');q = foreach q generate 'CreatedDate_Year'+\"~~~\"+'CreatedDate_Month'+\"~~~\"+'CreatedDate_Day' as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day', unique('Id') as 'dailyCalls',avg(unique('Id')) over ([..] partition by all ) as 'avg_dailyCalls',sum(1) over ([..] partition by all) as 'Counter';q = group q by 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day';q = foreach q generate 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day' as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day', power(first('dailyCalls') - (first('avg_dailyCalls')),2)/first('Counter') as 'sqr_diff_dailyCalls',first('avg_dailyCalls') as 'avg_dailyCalls',first('dailyCalls') as 'dailyCalls';q = group q by 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day';q = foreach q generate 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day' as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day', first('dailyCalls') as 'total_dailyCalls', first('avg_dailyCalls') as 'avg_dailyCalls',first('avg_dailyCalls') + (3 * sqrt(sum(sum('sqr_diff_dailyCalls')) over ([..] partition by all))) as 'l_UCL',first('avg_dailyCalls') - (3 * sqrt(sum(sum('sqr_diff_dailyCalls')) over ([..] partition by all))) as 'l_LCL';",
+            "pigql" : "q = load \"${App.Datasets.ServiceActivity_dtp.FullyQualifiedName}\"; q = filter q by 'IsCall' == \"Yes\";q = group q by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day');q = foreach q generate 'CreatedDate_Year'+\"~~~\"+'CreatedDate_Month'+\"~~~\"+'CreatedDate_Day' as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day', unique('Id') as 'dailyCalls',avg(unique('Id')) over ([..] partition by all ) as 'avg_dailyCalls',sum(1) over ([..] partition by all) as 'Counter';q = group q by 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day';q = foreach q generate 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day' as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day', power(first('dailyCalls') - (first('avg_dailyCalls')),2)/first('Counter') as 'sqr_diff_dailyCalls',first('avg_dailyCalls') as 'avg_dailyCalls',first('dailyCalls') as 'dailyCalls';q = group q by 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day';q = foreach q generate 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day' as 'CreatedDate_Year~~~CreatedDate_Month~~~CreatedDate_Day', first('dailyCalls') as 'total_dailyCalls', first('avg_dailyCalls') as 'avg_dailyCalls',first('avg_dailyCalls') + (3 * sqrt(sum(sum('sqr_diff_dailyCalls')) over ([..] partition by all))) as 'l_UCL',first('avg_dailyCalls') - (3 * sqrt(sum(sum('sqr_diff_dailyCalls')) over ([..] partition by all))) as 'l_LCL';",
             "measures" : [
               [
                 "total",
@@ -1731,7 +1731,7 @@
                 "Call_Per_Agent"
               ]
             ],
-            "pigql" : "a = load \"ServiceActivity\";a = filter a by 'IsCall' == \"Yes\"; a = group a by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day');a = foreach a generate count() / unique('Owner_Name') as 'avg_Call_Per_Agent';a = group a by all;a = foreach a generate avg('avg_Call_Per_Agent')  as 'avg_Call_Per_Agent';",
+            "pigql" : "a = load \"${App.Datasets.ServiceActivity_dtp.FullyQualifiedName}\";a = filter a by 'IsCall' == \"Yes\"; a = group a by ('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day');a = foreach a generate count() / unique('Owner_Name') as 'avg_Call_Per_Agent';a = group a by all;a = foreach a generate avg('avg_Call_Per_Agent')  as 'avg_Call_Per_Agent';",
             "autoFilter" : true
           },
           "version" : -1.0

@@ -1470,7 +1470,7 @@
         "isGlobal" : false,
         "query" : {
           "query" : {
-            "pigql" : "a = load \"ServiceOmniAgentWork\";a = filter a by 'Status' in [\"Canceled\", \"Closed\"];a = group a by ('RequestDateTime_Year','RequestDateTime_Month','RequestDateTime_Day','RequestDateTime_Hour');a = foreach a generate 'RequestDateTime_Year'+\"~~~\"+'RequestDateTime_Month'+\"~~~\"+'RequestDateTime_Day' as 'each_date', 'RequestDateTime_Hour' as 'RequestDateTime_Hour', count() as 'date_hour_volume', unique('UserId_Name') as 'date_hour_agents_working' ;a= group a by 'RequestDateTime_Hour';a = foreach a generate 'RequestDateTime_Hour' as 'RequestDateTime_Hour', round(sum('date_hour_volume')/unique('each_date'),0) as 'Request Volume', round(sum('date_hour_agents_working')/unique('each_date'),0) as '# Agents Working';a = order a by ('RequestDateTime_Hour' asc)",
+            "pigql" : "a = load \"${App.Datasets.ServiceOmniAgentWork_dtp.FullyQualifiedName}\";a = filter a by 'Status' in [\"Canceled\", \"Closed\"];a = group a by ('RequestDateTime_Year','RequestDateTime_Month','RequestDateTime_Day','RequestDateTime_Hour');a = foreach a generate 'RequestDateTime_Year'+\"~~~\"+'RequestDateTime_Month'+\"~~~\"+'RequestDateTime_Day' as 'each_date', 'RequestDateTime_Hour' as 'RequestDateTime_Hour', count() as 'date_hour_volume', unique('UserId_Name') as 'date_hour_agents_working' ;a= group a by 'RequestDateTime_Hour';a = foreach a generate 'RequestDateTime_Hour' as 'RequestDateTime_Hour', round(sum('date_hour_volume')/unique('each_date'),0) as 'Request Volume', round(sum('date_hour_agents_working')/unique('each_date'),0) as '# Agents Working';a = order a by ('RequestDateTime_Hour' asc)",
             "measures" : [
               [
                 null,
@@ -2408,10 +2408,7 @@
       },
       "link_Telephony" : {
         "parameters" : {
-          "destinationLink" : {
-            "name" : "${App.Dashboards['Service Telephony'].Name}",
-            "namespace" : "${Org.Namespace}"
-          },
+          "destination": "${App.Dashboards['Service Telephony'].Id}",
           "destinationType" : "dashboard",
           "fontSize" : 12,
           "includeState" : false,

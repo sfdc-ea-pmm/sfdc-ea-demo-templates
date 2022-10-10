@@ -1801,7 +1801,7 @@
                 "CSAT"
               ]
             ],
-            "pigql" : "q = load \"ServiceCase\"; q = filter q by 'CSAT' >= -10; q = filter q by 'IsClosed' == \"false\"; q = group q by all; q = foreach q generate percentile_disc(0.25) within group (order by 'CSAT' asc) as 'per_CSAT';",
+            "pigql" : "q = load \"${App.Datasets.ServiceCase_dtp.FullyQualifiedName}\"; q = filter q by 'CSAT' >= -10; q = filter q by 'IsClosed' == \"false\"; q = group q by all; q = foreach q generate percentile_disc(0.25) within group (order by 'CSAT' asc) as 'per_CSAT';",
             "autoFilter" : true
           },
           "version" : -1.0
@@ -2026,7 +2026,7 @@
                 "Percent"
               ]
             ],
-            "pigql" : "q = load \"ServiceCase\"; q = filter q by 'CSAT' >= -10; ENDTOTAL = filter q by 'IsClosed' == \"false\"; updcreatedTOTAL = filter q by {{cell(Time_Selection.selection, 0, \"LastYearCompare\").asDateRange(\"date('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day')\")}}; updclosedTOTAL = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('ClosedDate_Year','ClosedDate_Month','ClosedDate_Day')\")}};compare = group updcreatedTOTAL by all full, updclosedTOTAL by all full, ENDTOTAL by all; compare = foreach compare generate 100*(avg(updclosedTOTAL.'CSAT')-avg(updcreatedTOTAL.'CSAT'))/avg(updcreatedTOTAL.'CSAT') as 'perc_Percent', (case when 100*(avg(updclosedTOTAL.'CSAT')-avg(updcreatedTOTAL.'CSAT'))/avg(updcreatedTOTAL.'CSAT') < 0 then \"#ff545f\" when 100*(avg(updclosedTOTAL.'CSAT')-avg(updcreatedTOTAL.'CSAT'))/avg(updcreatedTOTAL.'CSAT') > 0 then \"#ee9f77\" else \"#32b181\" end) as 'color';",
+            "pigql" : "q = load \"${App.Datasets.ServiceCase_dtp.FullyQualifiedName}\"; q = filter q by 'CSAT' >= -10; ENDTOTAL = filter q by 'IsClosed' == \"false\"; updcreatedTOTAL = filter q by {{cell(Time_Selection.selection, 0, \"LastYearCompare\").asDateRange(\"date('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day')\")}}; updclosedTOTAL = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('ClosedDate_Year','ClosedDate_Month','ClosedDate_Day')\")}};compare = group updcreatedTOTAL by all full, updclosedTOTAL by all full, ENDTOTAL by all; compare = foreach compare generate 100*(avg(updclosedTOTAL.'CSAT')-avg(updcreatedTOTAL.'CSAT'))/avg(updcreatedTOTAL.'CSAT') as 'perc_Percent', (case when 100*(avg(updclosedTOTAL.'CSAT')-avg(updcreatedTOTAL.'CSAT'))/avg(updcreatedTOTAL.'CSAT') < 0 then \"#ff545f\" when 100*(avg(updclosedTOTAL.'CSAT')-avg(updcreatedTOTAL.'CSAT'))/avg(updcreatedTOTAL.'CSAT') > 0 then \"#ee9f77\" else \"#32b181\" end) as 'color';",
             "autoFilter" : true
           },
           "version" : -1.0
@@ -2548,7 +2548,7 @@
         "isGlobal" : false,
         "query" : {
           "query" : {
-            "pigql" : "q = load \"ServiceCase\"; q = filter q by 'CSAT' <= 34; q = filter q by 'IsClosed' == \"false\"; q = group q by all; q = foreach q generate count() as count;",
+            "pigql" : "q = load \"${App.Datasets.ServiceCase_dtp.FullyQualifiedName}\"; q = filter q by 'CSAT' <= 34; q = filter q by 'IsClosed' == \"false\"; q = group q by all; q = foreach q generate count() as count;",
             "measures" : [
               [
                 "count",
@@ -2586,7 +2586,7 @@
                 "*"
               ]
             ],
-            "pigql" : "q = load \"ServiceCase\"; q = filter q by 'CSAT' <= {{coalesce(cell(kpi_bottom_quartile.result, 0, \"per_CSAT\"),0).asObject()}}; q = filter q by 'IsClosed' == \"false\"; q = group q by all; q = foreach q generate count() as count;",
+            "pigql" : "q = load \"${App.Datasets.ServiceCase_dtp.FullyQualifiedName}\"; q = filter q by 'CSAT' <= {{coalesce(cell(kpi_bottom_quartile.result, 0, \"per_CSAT\"),0).asObject()}}; q = filter q by 'IsClosed' == \"false\"; q = group q by all; q = foreach q generate count() as count;",
             "autoFilter" : true
           },
           "version" : -1.0
@@ -2658,7 +2658,7 @@
                 "Percent"
               ]
             ],
-            "pigql" : "q = load \"ServiceCase\"; q = filter q by 'CSAT' >= -10; ENDTOTAL = filter q by 'IsClosed' == \"false\"; updcreatedTOTAL = filter q by {{cell(Time_Selection.selection, 0, \"LastPeriodCompare\").asDateRange(\"date('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day')\")}}; updclosedTOTAL = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('ClosedDate_Year','ClosedDate_Month','ClosedDate_Day')\")}};compare = group updcreatedTOTAL by all full, updclosedTOTAL by all full, ENDTOTAL by all; compare = foreach compare generate 100*(avg(updclosedTOTAL.'CSAT')-avg(updcreatedTOTAL.'CSAT'))/avg(updcreatedTOTAL.'CSAT') as 'perc_Percent', (case when 100*(avg(updclosedTOTAL.'CSAT')-avg(updcreatedTOTAL.'CSAT'))/avg(updcreatedTOTAL.'CSAT') < 0 then \"#f2536d\" when 100*(avg(updclosedTOTAL.'CSAT')-avg(updcreatedTOTAL.'CSAT'))/avg(updcreatedTOTAL.'CSAT') > 0 then \"#3CAF6D\" else \"#32b181\" end) as 'color';",
+            "pigql" : "q = load \"${App.Datasets.ServiceCase_dtp.FullyQualifiedName}\"; q = filter q by 'CSAT' >= -10; ENDTOTAL = filter q by 'IsClosed' == \"false\"; updcreatedTOTAL = filter q by {{cell(Time_Selection.selection, 0, \"LastPeriodCompare\").asDateRange(\"date('CreatedDate_Year','CreatedDate_Month','CreatedDate_Day')\")}}; updclosedTOTAL = filter q by {{cell(Time_Selection.selection, 0, \"Current\").asDateRange(\"date('ClosedDate_Year','ClosedDate_Month','ClosedDate_Day')\")}};compare = group updcreatedTOTAL by all full, updclosedTOTAL by all full, ENDTOTAL by all; compare = foreach compare generate 100*(avg(updclosedTOTAL.'CSAT')-avg(updcreatedTOTAL.'CSAT'))/avg(updcreatedTOTAL.'CSAT') as 'perc_Percent', (case when 100*(avg(updclosedTOTAL.'CSAT')-avg(updcreatedTOTAL.'CSAT'))/avg(updcreatedTOTAL.'CSAT') < 0 then \"#f2536d\" when 100*(avg(updclosedTOTAL.'CSAT')-avg(updcreatedTOTAL.'CSAT'))/avg(updcreatedTOTAL.'CSAT') > 0 then \"#3CAF6D\" else \"#32b181\" end) as 'color';",
             "autoFilter" : true
           },
           "version" : -1.0
@@ -4047,8 +4047,10 @@
       },
       "link_Constants_CaseCustomerSatLabel" : {
         "parameters" : {
-          "destination" : "\\${App.Dashboards['${App.Dashboards[Rules.CurrentNode].Label}'].Id}",
-          "destinationType" : "component",
+          "destinationLink" : {
+            "name" : "Default"
+          },
+          "destinationType" : "page",
           "fontSize" : 12,
           "includeState" : false,
           "text" : "CSAT",

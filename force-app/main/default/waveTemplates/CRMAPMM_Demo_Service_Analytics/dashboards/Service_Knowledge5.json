@@ -1358,7 +1358,7 @@
         "isGlobal" : false,
         "query" : {
           "query" : {
-            "pigql" : "q = load \"ServiceCase\";\nq = filter q by IsClosed==\"true\";\nhasArticle = filter q by 'ArticleVersion' > 0;  \nc = group hasArticle by 'Priority', q by 'Priority'; \nc = foreach c generate count(hasArticle)/count(q)  as 'avg_AttachedRate', hasArticle['Priority'] as 'Priority'; c = order c by 'avg_AttachedRate' {{cell(static_1.selection, 0, \"value\").asString()}};",
+            "pigql" : "q = load \"${App.Datasets.ServiceCase_dtp.FullyQualifiedName}\";\nq = filter q by IsClosed==\"true\";\nhasArticle = filter q by 'ArticleVersion' > 0;  \nc = group hasArticle by 'Priority', q by 'Priority'; \nc = foreach c generate count(hasArticle)/count(q)  as 'avg_AttachedRate', hasArticle['Priority'] as 'Priority'; c = order c by 'avg_AttachedRate' {{cell(static_1.selection, 0, \"value\").asString()}};",
             "measures" : [
               [
                 "count",
@@ -1445,7 +1445,7 @@
         "isGlobal" : false,
         "query" : {
           "query" : {
-            "pigql" : "q = load \"ServiceCase\"; q = filter q by 'IsClosed' == \"true\" ;  hasArticle = filter q by 'ArticleVersion' > 0;  c = group hasArticle by ('ClosedDate_Year','ClosedDate_Month'), q by ('ClosedDate_Year','ClosedDate_Month'); c = foreach c generate count(hasArticle)/count(q) as 'avg_AttachedRate', hasArticle['ClosedDate_Year'] + \"~~~\" + hasArticle['ClosedDate_Month'] as 'ClosedDate_Year~~~ClosedDate_Month'; c = group c by all; c = foreach c generate avg('avg_AttachedRate') as 'avg_AttachedRate';",
+            "pigql" : "q = load \"${App.Datasets.ServiceCase_dtp.FullyQualifiedName}\"; q = filter q by 'IsClosed' == \"true\" ;  hasArticle = filter q by 'ArticleVersion' > 0;  c = group hasArticle by ('ClosedDate_Year','ClosedDate_Month'), q by ('ClosedDate_Year','ClosedDate_Month'); c = foreach c generate count(hasArticle)/count(q) as 'avg_AttachedRate', hasArticle['ClosedDate_Year'] + \"~~~\" + hasArticle['ClosedDate_Month'] as 'ClosedDate_Year~~~ClosedDate_Month'; c = group c by all; c = foreach c generate avg('avg_AttachedRate') as 'avg_AttachedRate';",
             "measures" : [
               [
                 "count",
@@ -1485,7 +1485,7 @@
         "isGlobal" : false,
         "query" : {
           "query" : {
-            "pigql" : "q = load \"ServiceCase\";q = filter q by 'IsClosed' == \"true\"; hasArticle = filter q by 'ArticleVersion' > 0;  c = group hasArticle by 'Owner_Name', q by 'Owner_Name'; c = foreach c generate count(hasArticle)/count(q)  as 'avg_AttachedRate', hasArticle['Owner_Name'] as 'Owner_Name'; c = order c by 'avg_AttachedRate' {{cell(static_1.selection, 0, \"value\").asString()}};",
+            "pigql" : "q = load \"${App.Datasets.ServiceCase_dtp.FullyQualifiedName}\";q = filter q by 'IsClosed' == \"true\"; hasArticle = filter q by 'ArticleVersion' > 0;  c = group hasArticle by 'Owner_Name', q by 'Owner_Name'; c = foreach c generate count(hasArticle)/count(q)  as 'avg_AttachedRate', hasArticle['Owner_Name'] as 'Owner_Name'; c = order c by 'avg_AttachedRate' {{cell(static_1.selection, 0, \"value\").asString()}};",
             "measures" : [
               [
                 "count",
@@ -1520,7 +1520,7 @@
         "isGlobal" : false,
         "query" : {
           "query" : {
-            "pigql" : "q = load \"ServiceCase\"; q = filter q by 'IsClosed' == \"true\" ;  hasArticle = filter q by 'ArticleVersion' > 0;  c = group hasArticle by ('ClosedDate_Year','ClosedDate_Month'), q by ('ClosedDate_Year','ClosedDate_Month'); c = foreach c generate count(hasArticle)/count(q) as 'avg_AttachedRate',  hasArticle['ClosedDate_Year'] + \"~~~\" + hasArticle['ClosedDate_Month'] as 'ClosedDate_Year~~~ClosedDate_Month';",
+            "pigql" : "q = load \"${App.Datasets.ServiceCase_dtp.FullyQualifiedName}\"; q = filter q by 'IsClosed' == \"true\" ;  hasArticle = filter q by 'ArticleVersion' > 0;  c = group hasArticle by ('ClosedDate_Year','ClosedDate_Month'), q by ('ClosedDate_Year','ClosedDate_Month'); c = foreach c generate count(hasArticle)/count(q) as 'avg_AttachedRate',  hasArticle['ClosedDate_Year'] + \"~~~\" + hasArticle['ClosedDate_Month'] as 'ClosedDate_Year~~~ClosedDate_Month';",
             "measures" : [
               [
                 "count",
@@ -1575,7 +1575,7 @@
         "isGlobal" : false,
         "query" : {
           "query" : {
-            "pigql" : "q = load \"ServiceCase\"; q = filter q by 'IsClosed' == \"true\" ; hasArticle = filter q by 'ArticleVersion' > 0; c = group hasArticle by all, q by all; c = foreach c generate count(hasArticle)/count(q) as 'avg_AttachedRate';",
+            "pigql" : "q = load \"${App.Datasets.ServiceCase_dtp.FullyQualifiedName}\"; q = filter q by 'IsClosed' == \"true\" ; hasArticle = filter q by 'ArticleVersion' > 0; c = group hasArticle by all, q by all; c = foreach c generate count(hasArticle)/count(q) as 'avg_AttachedRate';",
             "measures" : [
               [
                 "count",
@@ -1717,7 +1717,7 @@
         "isGlobal" : false,
         "query" : {
           "query" : {
-            "pigql" : "q = load \"ServiceCase\"; q = filter q by IsClosed==\"true\";hasArticle = filter q by 'ArticleVersion' > 0; hasArticle = group hasArticle by all; hasArticle = foreach hasArticle generate \"With Articles\" as 'Cases',  avg('DurationCalculatedField') as 'avg_CaseDuration'; noArticle = filter q by 'ArticleVersion' == 0; noArticle = group noArticle by all; noArticle = foreach noArticle generate \"Without Articles\" as 'Cases',  avg('DurationCalculatedField') as 'avg_CaseDuration'; u = group hasArticle by all, noArticle by all; u = foreach u generate -(sum(hasArticle['avg_CaseDuration'])-sum(noArticle['avg_CaseDuration']))/sum(noArticle['avg_CaseDuration'])*100 as 'avg_Percent';",
+            "pigql" : "q = load \"${App.Datasets.ServiceCase_dtp.FullyQualifiedName}\"; q = filter q by IsClosed==\"true\";hasArticle = filter q by 'ArticleVersion' > 0; hasArticle = group hasArticle by all; hasArticle = foreach hasArticle generate \"With Articles\" as 'Cases',  avg('DurationCalculatedField') as 'avg_CaseDuration'; noArticle = filter q by 'ArticleVersion' == 0; noArticle = group noArticle by all; noArticle = foreach noArticle generate \"Without Articles\" as 'Cases',  avg('DurationCalculatedField') as 'avg_CaseDuration'; u = group hasArticle by all, noArticle by all; u = foreach u generate -(sum(hasArticle['avg_CaseDuration'])-sum(noArticle['avg_CaseDuration']))/sum(noArticle['avg_CaseDuration'])*100 as 'avg_Percent';",
             "measures" : [
               [
                 "count",
@@ -1751,7 +1751,7 @@
         "isGlobal" : false,
         "query" : {
           "query" : {
-            "pigql" : "q = load \"ServiceCase\"; q = filter q by 'IsClosed' == \"true\" ;  hasArticle = filter q by 'ArticleVersion' > 0; c = group hasArticle by 'Product_Family_KB__c', q by 'Product_Family_KB__c'; c = foreach c generate count(hasArticle)/count(q) as 'avg_AttachedRate', hasArticle['Product_Family_KB__c'] as 'Product_Family_KB__c'; c = order c by 'avg_AttachedRate' {{cell(static_1.selection, 0, \"value\").asString()}};",
+            "pigql" : "q = load \"${App.Datasets.ServiceCase_dtp.FullyQualifiedName}\"; q = filter q by 'IsClosed' == \"true\" ;  hasArticle = filter q by 'ArticleVersion' > 0; c = group hasArticle by 'Product_Family_KB__c', q by 'Product_Family_KB__c'; c = foreach c generate count(hasArticle)/count(q) as 'avg_AttachedRate', hasArticle['Product_Family_KB__c'] as 'Product_Family_KB__c'; c = order c by 'avg_AttachedRate' {{cell(static_1.selection, 0, \"value\").asString()}};",
             "measures" : [
               [
                 "count",
@@ -1800,7 +1800,7 @@
         "isGlobal" : false,
         "query" : {
           "query" : {
-            "pigql" : "q = load \"ServiceCase\";q = filter q by IsClosed==\"true\"; q = filter q by 'CSAT' > -10; hasArticle = filter q by 'ArticleVersion' > 0; hasArticle = group hasArticle by all; hasArticle = foreach hasArticle generate \"With Articles\" as 'Cases',  avg('CSAT') as 'avg_CSAT'; noArticle = filter q by 'ArticleVersion' == 0; noArticle = group noArticle by all; noArticle = foreach noArticle generate \"Without Articles\" as 'Cases',  avg('CSAT') as 'avg_CSAT'; u = group hasArticle by all, noArticle by all; u = foreach u generate (sum(hasArticle['avg_CSAT'])-sum(noArticle['avg_CSAT']))/sum(noArticle['avg_CSAT'])*100 as 'avg_Percent';",
+            "pigql" : "q = load \"${App.Datasets.ServiceCase_dtp.FullyQualifiedName}\";q = filter q by IsClosed==\"true\"; q = filter q by 'CSAT' > -10; hasArticle = filter q by 'ArticleVersion' > 0; hasArticle = group hasArticle by all; hasArticle = foreach hasArticle generate \"With Articles\" as 'Cases',  avg('CSAT') as 'avg_CSAT'; noArticle = filter q by 'ArticleVersion' == 0; noArticle = group noArticle by all; noArticle = foreach noArticle generate \"Without Articles\" as 'Cases',  avg('CSAT') as 'avg_CSAT'; u = group hasArticle by all, noArticle by all; u = foreach u generate (sum(hasArticle['avg_CSAT'])-sum(noArticle['avg_CSAT']))/sum(noArticle['avg_CSAT'])*100 as 'avg_Percent';",
             "measures" : [
               [
                 "avg",
@@ -1834,7 +1834,7 @@
         "isGlobal" : false,
         "query" : {
           "query" : {
-            "pigql" : "q = load \"ServiceCase\";q = filter q by 'IsClosed' == \"true\" ;  hasArticle = filter q by 'ArticleVersion' > 0;  c = group hasArticle by 'Reason', q by 'Reason'; c = foreach c generate count(hasArticle)/count(q)  as 'avg_AttachedRate', hasArticle['Reason'] as 'Reason'; c = order c by 'avg_AttachedRate' {{cell(static_1.selection, 0, \"value\").asString()}};",
+            "pigql" : "q = load \"${App.Datasets.ServiceCase_dtp.FullyQualifiedName}\";q = filter q by 'IsClosed' == \"true\" ;  hasArticle = filter q by 'ArticleVersion' > 0;  c = group hasArticle by 'Reason', q by 'Reason'; c = foreach c generate count(hasArticle)/count(q)  as 'avg_AttachedRate', hasArticle['Reason'] as 'Reason'; c = order c by 'avg_AttachedRate' {{cell(static_1.selection, 0, \"value\").asString()}};",
             "measures" : [
               [
                 "count",
