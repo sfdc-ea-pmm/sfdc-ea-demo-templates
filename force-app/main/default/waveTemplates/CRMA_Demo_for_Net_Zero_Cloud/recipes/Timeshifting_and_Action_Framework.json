@@ -1,0 +1,398 @@
+{
+  "name" : "Timeshifting_and_Action_Framework",
+  "label" : "Timeshifting and Action Framework",
+  "scheduleExpression" : null,
+  "publishingTarget" : "DATASET",
+  "format" : "R3",
+  "scheduleType" : null,
+  "recipeDefinition" : {
+    "version" : "56.0",
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "Id",
+            "Name",
+            "City",
+            "Country",
+            "StationaryAssetType",
+            "BusinessRegion"
+          ],
+          "dataset" : {
+            "type" : "connectedDataset",
+            "label" : "StnryAssetEnvrSrc",
+            "connectionName" : "SFDC_LOCAL",
+            "sourceObjectName" : "StnryAssetEnvrSrc"
+          },
+          "sampleDetails" : {
+            "type" : "TopN",
+            "sortBy" : [ ]
+          }
+        }
+      },
+      "LOAD_DATASET1" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "ReportPeriod",
+            "BusinessRegion",
+            "CountryCode3Digits",
+            "ActivitySourceType",
+            "AssetType",
+            "Asset",
+            "Country",
+            "AssetId",
+            "AverageRisk",
+            "WaterRisk",
+            "WaterStress",
+            "AverageWithdrawal",
+            "AverageQuantifiedRisk",
+            "QuantifiedRisk",
+            "AverageConsumption",
+            "AverageDischarge",
+            "AverageStress"
+          ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | Water Risk",
+            "name" : "${App.Datasets.Demo_Water_Risk.FullyQualifiedName}"
+          },
+          "sampleDetails" : {
+            "type" : "TopN",
+            "sortBy" : [ ]
+          }
+        }
+      },
+      "LOAD_DATASET2" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "ReportPeriod",
+            "BusinessRegion",
+            "ActivitySourceType",
+            "TreatmentMethod",
+            "AssetType",
+            "Asset",
+            "Country",
+            "AssetId",
+            "FloorArea",
+            "WithdrawnWater",
+            "ConsumedWater",
+            "UnitsManufactured",
+            "ConsumedPerDay",
+            "DischargedPerDay",
+            "EmployeeCount",
+            "WithdrawnPerDay",
+            "DischargedWater",
+            "TreatedWater",
+            "WaterManagementCost",
+            "ActivityType"
+          ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | Water Management",
+            "name" : "${App.Datasets.Demo_Water_Management.FullyQualifiedName}"
+          },
+          "sampleDetails" : {
+            "type" : "TopN",
+            "sortBy" : [ ]
+          }
+        }
+      },
+      "UPDATE0" : {
+        "action" : "update",
+        "sources" : [
+          "LOAD_DATASET1",
+          "LOAD_DATASET0"
+        ],
+        "parameters" : {
+          "leftKeys" : [
+            "Asset"
+          ],
+          "rightKeys" : [
+            "Name"
+          ],
+          "updateColumns" : {
+            "AssetId" : "Id"
+          }
+        }
+      },
+      "OUTPUT0" : {
+        "action" : "save",
+        "sources" : [
+          "UPDATE0"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | Water Risk",
+            "name" : "${App.Datasets.Demo_Water_Risk.Name}",
+            "folderName" : "${App.Folder.FullyQualifiedName}"
+          },
+          "measuresToCurrencies" : [ ]
+        }
+      },
+      "UPDATE1" : {
+        "action" : "update",
+        "sources" : [
+          "LOAD_DATASET2",
+          "LOAD_DATASET0"
+        ],
+        "parameters" : {
+          "leftKeys" : [
+            "Asset"
+          ],
+          "rightKeys" : [
+            "Name"
+          ],
+          "updateColumns" : {
+            "AssetId" : "Id"
+          }
+        }
+      },
+      "OUTPUT1" : {
+        "action" : "save",
+        "sources" : [
+          "UPDATE1"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | Water Management",
+            "name" : "${App.Datasets.Demo_Water_Management.Name}",
+            "folderName" : "${App.Folder.FullyQualifiedName}"
+          },
+          "measuresToCurrencies" : [ ]
+        }
+      },
+      "LOAD_DATASET3" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "Id",
+            "Name"
+          ],
+          "dataset" : {
+            "type" : "connectedDataset",
+            "label" : "CrbnCreditProject",
+            "connectionName" : "SFDC_LOCAL",
+            "sourceObjectName" : "CrbnCreditProject"
+          },
+          "sampleDetails" : {
+            "type" : "TopN",
+            "sortBy" : [ ]
+          }
+        }
+      },
+      "LOAD_DATASET4" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "ProjectName",
+            "ProjectId",
+            "MitigationType",
+            "ProjectExternaId",
+            "ReportDate",
+            "BusinessRegion",
+            "CountryCode3Digits",
+            "AdditionalBenefits",
+            "ProjectType",
+            "Country",
+            "TotalPurchasedCredits",
+            "CostPerUnit",
+            "AvgCreditsPurchased",
+            "TotalAllocatedCredits",
+            "CreditsAvailable",
+            "CreditsAllocated",
+            "AvgPrice",
+            "TotalAvailableCredits",
+            "SustainabilityCredits",
+            "CreditsPurchased"
+          ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | Projects and Credits",
+            "name" : "${App.Datasets.Demo_Projects_and_Credits.FullyQualifiedName}"
+          },
+          "sampleDetails" : {
+            "type" : "TopN",
+            "sortBy" : [ ]
+          }
+        }
+      },
+      "UPDATE2" : {
+        "action" : "update",
+        "sources" : [
+          "LOAD_DATASET4",
+          "LOAD_DATASET3"
+        ],
+        "parameters" : {
+          "leftKeys" : [
+            "ProjectName"
+          ],
+          "rightKeys" : [
+            "Name"
+          ],
+          "updateColumns" : {
+            "ProjectId" : "Id"
+          }
+        }
+      },
+      "OUTPUT2" : {
+        "action" : "save",
+        "sources" : [
+          "UPDATE2"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | Projects and Credits",
+            "name" : "${App.Datasets.Demo_Projects_and_Credits.Name}",
+            "folderName" : "${App.Folder.FullyQualifiedName}"
+          },
+          "measuresToCurrencies" : [ ]
+        }
+      }
+    },
+    "ui" : {
+      "nodes" : {
+        "LOAD_DATASET0" : {
+          "label" : "StnryAssetEnvrSrc",
+          "type" : "LOAD_DATASET",
+          "top" : 112,
+          "left" : 112,
+          "parameters" : {
+            "sampleSize" : 2000
+          }
+        },
+        "LOAD_DATASET1" : {
+          "label" : "Demo | Water Risk",
+          "type" : "LOAD_DATASET",
+          "top" : 252,
+          "left" : 112,
+          "parameters" : {
+            "sampleSize" : 2000
+          }
+        },
+        "LOAD_DATASET2" : {
+          "label" : "Demo | Water Management",
+          "type" : "LOAD_DATASET",
+          "top" : 392,
+          "left" : 112,
+          "parameters" : {
+            "sampleSize" : 2000
+          }
+        },
+        "UPDATE0" : {
+          "label" : "Update Water Risk",
+          "description" : "",
+          "type" : "UPDATE",
+          "top" : 252,
+          "left" : 252
+        },
+        "OUTPUT0" : {
+          "label" : "Save Water Risk",
+          "description" : "",
+          "type" : "OUTPUT",
+          "top" : 252,
+          "left" : 392
+        },
+        "UPDATE1" : {
+          "label" : "Update Water Management",
+          "description" : "",
+          "type" : "UPDATE",
+          "top" : 392,
+          "left" : 252
+        },
+        "OUTPUT1" : {
+          "label" : "Save Water Management",
+          "description" : "",
+          "type" : "OUTPUT",
+          "top" : 392,
+          "left" : 392
+        },
+        "LOAD_DATASET3" : {
+          "label" : "CrbnCreditProject",
+          "type" : "LOAD_DATASET",
+          "top" : 532,
+          "left" : 112,
+          "parameters" : {
+            "sampleSize" : 2000
+          }
+        },
+        "LOAD_DATASET4" : {
+          "label" : "Demo | Projects and Credits",
+          "type" : "LOAD_DATASET",
+          "top" : 672,
+          "left" : 112,
+          "parameters" : {
+            "sampleSize" : 2000
+          }
+        },
+        "UPDATE2" : {
+          "label" : "Update Projects and Credits",
+          "description" : "",
+          "type" : "UPDATE",
+          "top" : 672,
+          "left" : 253.3
+        },
+        "OUTPUT2" : {
+          "label" : "Save Projects and Credits",
+          "description" : "",
+          "type" : "OUTPUT",
+          "top" : 672,
+          "left" : 392
+        }
+      },
+      "connectors" : [
+        {
+          "source" : "LOAD_DATASET1",
+          "target" : "UPDATE0"
+        },
+        {
+          "source" : "LOAD_DATASET0",
+          "target" : "UPDATE0"
+        },
+        {
+          "source" : "UPDATE0",
+          "target" : "OUTPUT0"
+        },
+        {
+          "source" : "LOAD_DATASET2",
+          "target" : "UPDATE1"
+        },
+        {
+          "source" : "LOAD_DATASET0",
+          "target" : "UPDATE1"
+        },
+        {
+          "source" : "UPDATE1",
+          "target" : "OUTPUT1"
+        },
+        {
+          "source" : "LOAD_DATASET4",
+          "target" : "UPDATE2"
+        },
+        {
+          "source" : "LOAD_DATASET3",
+          "target" : "UPDATE2"
+        },
+        {
+          "source" : "UPDATE2",
+          "target" : "OUTPUT2"
+        }
+      ],
+      "hiddenColumns" : [ ]
+    }
+  },
+  "lastTime" : null
+}
