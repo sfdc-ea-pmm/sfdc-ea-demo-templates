@@ -1,0 +1,628 @@
+{
+  "name" : "ServiceCase_Add_ID_Lookup",
+  "label" : "Action Framework",
+  "scheduleExpression" : null,
+  "publishingTarget" : "DATASET",
+  "format" : "R3",
+  "scheduleType" : null,
+  "recipeDefinition" : {
+    "version" : "55.0",
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "Origin",
+            "LastModifiedDate",
+            "AccountId",
+            "Event_ActivityLastModifiedDate",
+            "Account_BillingState",
+            "ValidToWithNow",
+            "MilestoneStatus__c",
+            "Owner_UserRoleId",
+            "Owner_Id",
+            "CSAT__c",
+            "CurrentDate",
+            "Status",
+            "CaseArticle_User_Name",
+            "Priority",
+            "CaseArticle_CreatedDate",
+            "First_Contact_Close__c",
+            "Role_ParentRoleId",
+            "Owner_Name",
+            "Product_Family_KB__c",
+            "Owner_CallCenterId",
+            "IsEscalated",
+            "CreatedDate",
+            "Task_ActivityLastModifiedDate",
+            "Type_of_Support__c",
+            "Account_Id",
+            "RecordType_Name",
+            "ContactId",
+            "IsClosed",
+            "Reason",
+            "OwnerId",
+            "CaseArticle_ArticleVersionNumber",
+            "RecordTypeId",
+            "CaseNumber",
+            "Account_Name",
+            "Role_Name",
+            "CaseArticle_CaseId",
+            "RecordTypeName",
+            "LastProcessedDate",
+            "Contact_Name",
+            "Contact_Id",
+            "Type",
+            "Account_Industry",
+            "ClosedDate",
+            "Owner_Type",
+            "DurationCalculatedField",
+            "ArticleVersion",
+            "CSAT",
+            "ED_Outcome__c",
+            "sum_last_activity",
+            "Time_Open__c"
+          ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "ServiceCase",
+            "name" : "${App.Datasets.ServiceCase_dtp.FullyQualifiedName}"
+          },
+          "sampleDetails" : {
+            "type" : "TopN",
+            "sortBy" : [ ]
+          }
+        }
+      },
+      "LOAD_DATASET1" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "Id",
+            "CaseNumber"
+          ],
+          "dataset" : {
+            "type" : "connectedDataset",
+            "label" : "Case",
+            "connectionName" : "SFDC_LOCAL",
+            "sourceObjectName" : "Case"
+          },
+          "sampleDetails" : {
+            "type" : "TopN",
+            "sortBy" : [ ]
+          }
+        }
+      },
+      "FILTER0" : {
+        "action" : "filter",
+        "sources" : [
+          "LOAD_DATASET1"
+        ],
+        "parameters" : {
+          "filterExpressions" : [
+            {
+              "type" : "TEXT",
+              "field" : "CaseNumber",
+              "operator" : "EQUAL",
+              "operands" : [
+                "00001200"
+              ]
+            }
+          ]
+        }
+      },
+      "FORMULA0" : {
+        "action" : "formula",
+        "sources" : [
+          "LOAD_DATASET0"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "TEXT",
+              "name" : "CaseNumbeHardcoded",
+              "label" : "CaseNumbeHardcoded",
+              "formulaExpression" : "'00001200'",
+              "precision" : 255,
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "JOIN0" : {
+        "action" : "join",
+        "sources" : [
+          "FORMULA0",
+          "FILTER0"
+        ],
+        "schema" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [ ]
+          }
+        },
+        "parameters" : {
+          "joinType" : "LOOKUP",
+          "leftKeys" : [
+            "CaseNumbeHardcoded"
+          ],
+          "rightQualifier" : "Filter0",
+          "rightKeys" : [
+            "CaseNumber"
+          ]
+        }
+      },
+      "FORMULA1" : {
+        "action" : "formula",
+        "sources" : [
+          "JOIN0"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "TEXT",
+              "name" : "Id",
+              "label" : "Id",
+              "formulaExpression" : "\"Filter0.Id\"",
+              "precision" : 255,
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS0" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA1"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "Filter0.Id",
+              "Filter0.CaseNumber",
+              "CaseNumbeHardcoded"
+            ]
+          }
+        }
+      },
+      "OUTPUT0" : {
+        "action" : "save",
+        "sources" : [
+          "DROP_FIELDS0"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "ServiceCase",
+            "name" : "${App.Datasets.ServiceCase_dtp.Name}",
+            "folderName" : "${App.Folder.FullyQualifiedName}"
+          }
+        }
+      },
+      "LOAD_DATASET2" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "Id",
+            "CaseNumber"
+          ],
+          "dataset" : {
+            "type" : "connectedDataset",
+            "label" : "Case",
+            "connectionName" : "SFDC_LOCAL",
+            "sourceObjectName" : "Case"
+          },
+          "sampleDetails" : {
+            "type" : "TopN",
+            "sortBy" : [ ]
+          }
+        }
+      },
+      "FILTER1" : {
+        "action" : "filter",
+        "sources" : [
+          "LOAD_DATASET2"
+        ],
+        "parameters" : {
+          "filterExpressions" : [
+            {
+              "type" : "TEXT",
+              "field" : "CaseNumber",
+              "operator" : "EQUAL",
+              "operands" : [
+                "00001200"
+              ]
+            }
+          ]
+        }
+      },
+      "LOAD_DATASET3" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "Case_RecordType_Name",
+            "Case_ClosedDate",
+            "LastModifiedDate",
+            "WhatId",
+            "Case_Status",
+            "CallDisposition",
+            "CallType",
+            "ActivityIsClosed",
+            "Case_Account_Id",
+            "Case_Type",
+            "Case_Priority",
+            "IsClosed",
+            "IsCall",
+            "OwnerId",
+            "EndDateTime",
+            "Case_CreatedDate",
+            "Owner_UserRoleId",
+            "Owner_Id",
+            "Case_Account_Name",
+            "Status",
+            "ActivityDate",
+            "Priority",
+            "Case_Role_Name",
+            "ActivityType",
+            "Case_Product_Family_KB__c",
+            "LastProcessedDate",
+            "Case_Origin",
+            "IsActivity",
+            "Case_Reason",
+            "Subject",
+            "Case_CaseNumber",
+            "Owner_Name",
+            "Case_CurrentDate",
+            "CallObject",
+            "Type",
+            "TaskSubtype",
+            "Case_IsClosed",
+            "CreatedDate",
+            "EventSubtype",
+            "Case_Type_of_Support__c",
+            "ShowAs",
+            "Case_Time_Open__c",
+            "DurationInMinutes",
+            "CallDurationInSeconds",
+            "Case_ED_Outcome__c",
+            "Id"
+          ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "ServiceActivity",
+            "name" : "${App.Datasets.ServiceActivity_dtp.FullyQualifiedName}"
+          },
+          "sampleDetails" : {
+            "type" : "TopN",
+            "sortBy" : [ ]
+          }
+        }
+      },
+      "FORMULA2" : {
+        "action" : "formula",
+        "sources" : [
+          "LOAD_DATASET3"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "TEXT",
+              "name" : "CaseNumbeHardcoded",
+              "label" : "CaseNumbeHardcoded",
+              "formulaExpression" : "'00001200'",
+              "precision" : 255,
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "JOIN1" : {
+        "action" : "join",
+        "sources" : [
+          "FORMULA2",
+          "FILTER1"
+        ],
+        "schema" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [ ]
+          }
+        },
+        "parameters" : {
+          "joinType" : "LOOKUP",
+          "leftKeys" : [
+            "CaseNumbeHardcoded"
+          ],
+          "rightQualifier" : "Filter1",
+          "rightKeys" : [
+            "CaseNumber"
+          ]
+        }
+      },
+      "FORMULA3" : {
+        "action" : "formula",
+        "sources" : [
+          "JOIN1"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "TEXT",
+              "name" : "Case_Id",
+              "label" : "Case.Id",
+              "formulaExpression" : "\"Filter1.Id\"",
+              "precision" : 255,
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS1" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA3"
+        ],
+        "parameters" : {
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "CaseNumbeHardcoded",
+              "Filter1.CaseNumber",
+              "Filter1.Id"
+            ]
+          }
+        }
+      },
+      "OUTPUT1" : {
+        "action" : "save",
+        "sources" : [
+          "DROP_FIELDS1"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "ServiceActivity",
+            "name" : "${App.Datasets.ServiceActivity_dtp.Name}",
+            "folderName" : "${App.Folder.FullyQualifiedName}"
+          }
+        }
+      }
+    },
+    "ui" : {
+      "nodes" : {
+        "LOAD_DATASET0" : {
+          "label" : "ServiceCase Dataset",
+          "description" : "",
+          "type" : "LOAD_DATASET",
+          "top" : 112.1,
+          "left" : 112.30000000000001,
+          "parameters" : {
+            "sampleSize" : 2000
+          }
+        },
+        "LOAD_DATASET1" : {
+          "label" : "Case Object Lookup for Service Case",
+          "description" : "",
+          "type" : "LOAD_DATASET",
+          "top" : 252,
+          "left" : 112,
+          "parameters" : {
+            "sampleSize" : 2000
+          }
+        },
+        "FILTER0" : {
+          "label" : "Filter on Hardcoded Case Number",
+          "description" : "Update this value to any case and re-run",
+          "type" : "FILTER",
+          "top" : 252,
+          "left" : 252
+        },
+        "TRANSFORM0" : {
+          "label" : "Transform to Add Hardcoded Case Number",
+          "description" : "",
+          "type" : "TRANSFORM",
+          "top" : 112,
+          "left" : 392,
+          "graph" : {
+            "FORMULA0" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "Formula"
+            }
+          },
+          "connectors" : [ ]
+        },
+        "JOIN0" : {
+          "label" : "Join LookUp for Case Id",
+          "description" : "",
+          "type" : "JOIN",
+          "top" : 112,
+          "left" : 532
+        },
+        "TRANSFORM1" : {
+          "label" : "Transform to Rename Id and Drop temp Fields",
+          "description" : "",
+          "type" : "TRANSFORM",
+          "top" : 112,
+          "left" : 672,
+          "graph" : {
+            "FORMULA1" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "Formula"
+            },
+            "DROP_FIELDS0" : {
+              "label" : "Drop Columns"
+            }
+          },
+          "connectors" : [
+            {
+              "source" : "FORMULA1",
+              "target" : "DROP_FIELDS0"
+            }
+          ]
+        },
+        "OUTPUT0" : {
+          "label" : "Output to Service Case",
+          "description" : "",
+          "type" : "OUTPUT",
+          "top" : 112,
+          "left" : 812
+        },
+        "LOAD_DATASET2" : {
+          "label" : "Case",
+          "type" : "LOAD_DATASET",
+          "top" : 671.1,
+          "left" : 112.19999999999999,
+          "parameters" : {
+            "sampleSize" : 2000
+          }
+        },
+        "FILTER1" : {
+          "label" : "Filter on Hardcoded Case Number",
+          "description" : "",
+          "type" : "FILTER",
+          "top" : 672,
+          "left" : 252
+        },
+        "LOAD_DATASET3" : {
+          "label" : "ServiceActivity",
+          "description" : "All columns except Id",
+          "type" : "LOAD_DATASET",
+          "top" : 532.3,
+          "left" : 112.30000000000001,
+          "parameters" : {
+            "sampleSize" : 2000
+          }
+        },
+        "TRANSFORM2" : {
+          "label" : "Transform to Add Hardcoded Case Number",
+          "description" : "",
+          "type" : "TRANSFORM",
+          "top" : 532,
+          "left" : 252,
+          "graph" : {
+            "FORMULA2" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "Formula"
+            }
+          },
+          "connectors" : [ ]
+        },
+        "JOIN1" : {
+          "label" : "Join LookUp for Case Id",
+          "description" : "",
+          "type" : "JOIN",
+          "top" : 532,
+          "left" : 392
+        },
+        "TRANSFORM3" : {
+          "label" : "Transform to Rename Id and Drop temp Fields",
+          "description" : "",
+          "type" : "TRANSFORM",
+          "top" : 532,
+          "left" : 532,
+          "graph" : {
+            "FORMULA3" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "Formula"
+            },
+            "DROP_FIELDS1" : {
+              "label" : "Drop Columns"
+            }
+          },
+          "connectors" : [
+            {
+              "source" : "FORMULA3",
+              "target" : "DROP_FIELDS1"
+            }
+          ]
+        },
+        "OUTPUT1" : {
+          "label" : "Output to ServiceActivity",
+          "description" : "",
+          "type" : "OUTPUT",
+          "top" : 532,
+          "left" : 672
+        }
+      },
+      "connectors" : [
+        {
+          "source" : "LOAD_DATASET1",
+          "target" : "FILTER0"
+        },
+        {
+          "source" : "LOAD_DATASET0",
+          "target" : "TRANSFORM0"
+        },
+        {
+          "source" : "TRANSFORM0",
+          "target" : "JOIN0"
+        },
+        {
+          "source" : "FILTER0",
+          "target" : "JOIN0"
+        },
+        {
+          "source" : "JOIN0",
+          "target" : "TRANSFORM1"
+        },
+        {
+          "source" : "TRANSFORM1",
+          "target" : "OUTPUT0"
+        },
+        {
+          "source" : "LOAD_DATASET2",
+          "target" : "FILTER1"
+        },
+        {
+          "source" : "LOAD_DATASET3",
+          "target" : "TRANSFORM2"
+        },
+        {
+          "source" : "TRANSFORM2",
+          "target" : "JOIN1"
+        },
+        {
+          "source" : "FILTER1",
+          "target" : "JOIN1"
+        },
+        {
+          "source" : "JOIN1",
+          "target" : "TRANSFORM3"
+        },
+        {
+          "source" : "TRANSFORM3",
+          "target" : "OUTPUT1"
+        }
+      ],
+      "hiddenColumns" : [ ],
+      "assetType" : "TCRM"
+    }
+  },
+  "lastTime" : null
+}
