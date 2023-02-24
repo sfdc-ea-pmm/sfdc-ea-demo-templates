@@ -70,11 +70,15 @@
     ]
   },
   "state" : {
-    "dataSourceLinks" : [ ],
+    "dataSourceLinksInfo" : {
+      "enableAutomaticLinking" : false,
+      "excludeRelationships" : [ ],
+      "links" : [ ]
+    },
     "filters" : [
       {
         "dataset" : {
-          "name" : "${App.Datasets.Demo_Supplier_Dashboard_tp.Name}"
+          "name" : "${App.Datasets.Demo_Supplier_Dashboard.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -85,7 +89,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.Demo_Supplier_Dashboard_tp.Name}"
+          "name" : "${App.Datasets.Demo_Supplier_Dashboard.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -96,7 +100,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.Demo_Supplier_Dashboard_tp.Name}"
+          "name" : "${App.Datasets.Demo_Supplier_Dashboard.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -1365,7 +1369,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Supplier_Dashboard_tp.Name}"
+            "name" : "${App.Datasets.Demo_Supplier_Dashboard.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1501,7 +1505,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Supplier_Dashboard_tp.Name}"
+            "name" : "${App.Datasets.Demo_Supplier_Dashboard.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1586,6 +1590,7 @@
             "centerValueType" : "number",
             "valueType" : "compactNumber",
             "theme" : "wave",
+            "compactDecimalDigits" : -1,
             "applyConditionalFormatting" : true
           },
           "type" : "chart"
@@ -1595,7 +1600,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Supplier_Dashboard_tp.Name}"
+            "name" : "${App.Datasets.Demo_Supplier_Dashboard.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1621,7 +1626,6 @@
         "visualizationParameters" : {
           "parameters" : {
             "autoFitMode" : "keepLabels",
-            "showValues" : true,
             "bins" : {
               "breakpoints" : {
                 "high" : 100,
@@ -1711,7 +1715,9 @@
                 "showDomain" : false
               }
             },
+            "valueType" : "compactNumber",
             "theme" : "wave",
+            "compactDecimalDigits" : -1,
             "dimensionAxis" : {
               "showTitle" : true,
               "customSize" : "auto",
@@ -1735,7 +1741,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Supplier_Dashboard_tp.Name}"
+            "name" : "${App.Datasets.Demo_Supplier_Dashboard.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1761,7 +1767,6 @@
         "visualizationParameters" : {
           "parameters" : {
             "autoFitMode" : "keepLabels",
-            "showValues" : true,
             "bins" : {
               "breakpoints" : {
                 "high" : 100,
@@ -1851,7 +1856,9 @@
                 "showDomain" : false
               }
             },
+            "valueType" : "compactNumber",
             "theme" : "wave",
+            "compactDecimalDigits" : -1,
             "dimensionAxis" : {
               "showTitle" : true,
               "customSize" : "auto",
@@ -1875,7 +1882,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Supplier_Dashboard_tp.Name}"
+            "name" : "${App.Datasets.Demo_Supplier_Dashboard.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1948,7 +1955,6 @@
         "visualizationParameters" : {
           "parameters" : {
             "autoFitMode" : "keepLabels",
-            "showValues" : true,
             "legend" : {
               "descOrder" : false,
               "showHeader" : true,
@@ -2024,9 +2030,11 @@
                 "showDomain" : false
               }
             },
+            "valueType" : "compactNumber",
             "theme" : "wave",
             "rightColor" : "#e16032",
             "leftColor" : "#52b7d8",
+            "compactDecimalDigits" : -1,
             "dimensionAxis" : {
               "customSize" : "auto",
               "showAxis" : true
@@ -2040,7 +2048,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Supplier_Dashboard_tp.Name}"
+            "name" : "${App.Datasets.Demo_Supplier_Dashboard.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2073,7 +2081,6 @@
         "visualizationParameters" : {
           "parameters" : {
             "autoFitMode" : "keepLabels",
-            "showValues" : true,
             "bins" : {
               "breakpoints" : {
                 "high" : 100,
@@ -2164,7 +2171,9 @@
                 "showDomain" : false
               }
             },
+            "valueType" : "compactNumber",
             "theme" : "wave",
+            "compactDecimalDigits" : -1,
             "dimensionAxis" : {
               "showTitle" : true,
               "customSize" : "auto",
@@ -2230,7 +2239,7 @@
         "groups" : [ ],
         "label" : "Has score Card ",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Demo_Supplier_Dashboard_tp.FullyQualifiedName}\";\nq = group q by 'HasScoreCard';\nq = foreach q generate 'HasScoreCard', case 'HasScoreCard'  when \"Yes\" then \"With score card\" else \"Without score card\" end as'scorecard' , unique('Supplier') as 'unique_Supplier';\nq = order q by 'scorecard' asc;\nq = limit q 2000;\n\n",
+        "query" : "q = load \"${App.Datasets.Demo_Supplier_Dashboard.FullyQualifiedName}\";\nq = group q by 'HasScoreCard';\nq = foreach q generate 'HasScoreCard', case 'HasScoreCard'  when \"Yes\" then \"With score card\" else \"Without score card\" end as'scorecard' , unique('Supplier') as 'unique_Supplier';\nq = order q by 'scorecard' asc;\nq = limit q 2000;\n\n",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2299,6 +2308,7 @@
             "centerValueType" : "number",
             "valueType" : "compactNumber",
             "theme" : "wave",
+            "compactDecimalDigits" : -1,
             "applyConditionalFormatting" : true
           },
           "type" : "chart"
@@ -2308,7 +2318,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Supplier_Dashboard_tp.Name}"
+            "name" : "${App.Datasets.Demo_Supplier_Dashboard.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2401,6 +2411,7 @@
             },
             "innerMajorBorderColor" : "#a8b7c7",
             "innerMinorBorderColor" : "#e0e5ee",
+            "interactions" : [ ],
             "mode" : "fittocontainer",
             "numberOfLines" : 1,
             "pivoted" : false,
@@ -2416,7 +2427,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Supplier_Dashboard_tp.Name}"
+            "name" : "${App.Datasets.Demo_Supplier_Dashboard.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2501,6 +2512,7 @@
             "centerValueType" : "number",
             "valueType" : "compactNumber",
             "theme" : "wave",
+            "compactDecimalDigits" : -1,
             "applyConditionalFormatting" : true
           },
           "type" : "chart"
@@ -2510,7 +2522,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Supplier_Dashboard_tp.Name}"
+            "name" : "${App.Datasets.Demo_Supplier_Dashboard.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2543,7 +2555,6 @@
         "visualizationParameters" : {
           "parameters" : {
             "autoFitMode" : "keepLabels",
-            "showValues" : true,
             "bins" : {
               "breakpoints" : {
                 "high" : 100,
@@ -2634,7 +2645,9 @@
                 "showDomain" : false
               }
             },
+            "valueType" : "compactNumber",
             "theme" : "wave",
+            "compactDecimalDigits" : -1,
             "dimensionAxis" : {
               "showTitle" : true,
               "customSize" : "auto",
@@ -2658,7 +2671,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Supplier_Dashboard_tp.Name}"
+            "name" : "${App.Datasets.Demo_Supplier_Dashboard.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2695,7 +2708,6 @@
         "visualizationParameters" : {
           "parameters" : {
             "autoFitMode" : "keepLabels",
-            "showValues" : true,
             "bins" : {
               "breakpoints" : {
                 "high" : 100,
@@ -2787,7 +2799,9 @@
                 "showDomain" : false
               }
             },
+            "valueType" : "compactNumber",
             "theme" : "wave",
+            "compactDecimalDigits" : -1,
             "dimensionAxis" : {
               "showTitle" : true,
               "customSize" : "auto",
@@ -2811,7 +2825,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Supplier_Dashboard_tp.Name}"
+            "name" : "${App.Datasets.Demo_Supplier_Dashboard.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2837,7 +2851,6 @@
         "visualizationParameters" : {
           "parameters" : {
             "autoFitMode" : "keepLabels",
-            "showValues" : true,
             "bins" : {
               "breakpoints" : {
                 "high" : 100,
@@ -2927,7 +2940,9 @@
                 "showDomain" : false
               }
             },
+            "valueType" : "compactNumber",
             "theme" : "wave",
+            "compactDecimalDigits" : -1,
             "dimensionAxis" : {
               "showTitle" : true,
               "customSize" : "auto",
@@ -2951,7 +2966,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Supplier_Dashboard_tp.Name}"
+            "name" : "${App.Datasets.Demo_Supplier_Dashboard.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2980,7 +2995,6 @@
         "visualizationParameters" : {
           "parameters" : {
             "autoFitMode" : "keepLabels",
-            "showValues" : true,
             "bins" : {
               "breakpoints" : {
                 "high" : 100,
@@ -3072,7 +3086,9 @@
                 "showDomain" : false
               }
             },
+            "valueType" : "compactNumber",
             "theme" : "wave",
+            "compactDecimalDigits" : -1,
             "dimensionAxis" : {
               "showTitle" : false,
               "customSize" : "auto",
@@ -3096,7 +3112,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Supplier_Dashboard_tp.Name}"
+            "name" : "${App.Datasets.Demo_Supplier_Dashboard.Name}"
           }
         ],
         "isGlobal" : false,
@@ -3125,7 +3141,6 @@
         "visualizationParameters" : {
           "parameters" : {
             "autoFitMode" : "keepLabels",
-            "showValues" : true,
             "bins" : {
               "breakpoints" : {
                 "high" : 100,
@@ -3217,7 +3232,9 @@
                 "showDomain" : false
               }
             },
+            "valueType" : "compactNumber",
             "theme" : "wave",
+            "compactDecimalDigits" : -1,
             "dimensionAxis" : {
               "showTitle" : true,
               "customSize" : "auto",
@@ -3270,7 +3287,7 @@
         "broadcastFacet" : false,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Supplier_Dashboard_tp.Name}"
+            "name" : "${App.Datasets.Demo_Supplier_Dashboard.Name}"
           }
         ],
         "isGlobal" : false,
@@ -3299,7 +3316,6 @@
         "visualizationParameters" : {
           "parameters" : {
             "autoFitMode" : "keepLabels",
-            "showValues" : true,
             "bins" : {
               "breakpoints" : {
                 "high" : 100,
@@ -3391,7 +3407,9 @@
                 "showDomain" : false
               }
             },
+            "valueType" : "compactNumber",
             "theme" : "wave",
+            "compactDecimalDigits" : -1,
             "dimensionAxis" : {
               "showTitle" : true,
               "customSize" : "auto",
@@ -3415,7 +3433,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Supplier_Dashboard_tp.Name}"
+            "name" : "${App.Datasets.Demo_Supplier_Dashboard.Name}"
           }
         ],
         "isGlobal" : false,
@@ -3441,7 +3459,6 @@
         "visualizationParameters" : {
           "parameters" : {
             "autoFitMode" : "keepLabels",
-            "showValues" : true,
             "bins" : {
               "breakpoints" : {
                 "high" : 100,
@@ -3531,7 +3548,9 @@
                 "showDomain" : false
               }
             },
+            "valueType" : "compactNumber",
             "theme" : "wave",
+            "compactDecimalDigits" : -1,
             "dimensionAxis" : {
               "showTitle" : true,
               "customSize" : "auto",
@@ -3555,7 +3574,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Supplier_Dashboard_tp.Name}"
+            "name" : "${App.Datasets.Demo_Supplier_Dashboard.Name}"
           }
         ],
         "isGlobal" : false,
@@ -3639,6 +3658,7 @@
             "centerValueType" : "number",
             "valueType" : "compactNumber",
             "theme" : "wave",
+            "compactDecimalDigits" : -1,
             "applyConditionalFormatting" : true
           },
           "type" : "chart"
@@ -3649,7 +3669,7 @@
         "groups" : [ ],
         "label" : "Supplier Data",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Demo_Supplier_Dashboard_tp.FullyQualifiedName}\";\nresult = group q by ('Supplier', 'Rank', 'SBTI_Target_Status', 'Emission_Calculation_Method', 'HasScoreCard');\nresult = foreach result generate q.'Supplier' as 'Supplier', q.'Rank' as 'Rank', q.'SBTI_Target_Status' as 'SBTI_Target_Status', q.'Emission_Calculation_Method' as 'Emission_Calculation_Method', q.'HasScoreCard' as 'HasScoreCard', avg(q.'Contribution_total_Emissions_Card') as 'Contribution to Total Emissions', avg(q.'Expense_Ratio') as 'Expense Ratio', avg(q.'Procurement_Emissions') as 'Emissions', avg(q.'RankNro') as 'RankNro';\nresult = order result by 'RankNro' {{cell(static_Rank_Order_1.selection, 0, \"Value\").asString()}};\nresult = filter result by 'RankNro' <= {{cell(static_Limit_ScoreCa_1.selection, 0, \"Value\").asObject()}};",
+        "query" : "q = load \"${App.Datasets.Demo_Supplier_Dashboard.FullyQualifiedName}\";\nresult = group q by ('Supplier', 'Rank', 'SBTI_Target_Status', 'Emission_Calculation_Method', 'HasScoreCard');\nresult = foreach result generate q.'Supplier' as 'Supplier', q.'Rank' as 'Rank', q.'SBTI_Target_Status' as 'SBTI_Target_Status', q.'Emission_Calculation_Method' as 'Emission_Calculation_Method', q.'HasScoreCard' as 'HasScoreCard', avg(q.'Contribution_total_Emissions_Card') as 'Contribution to Total Emissions', avg(q.'Expense_Ratio') as 'Expense Ratio', avg(q.'Procurement_Emissions') as 'Emissions', avg(q.'RankNro') as 'RankNro';\nresult = order result by 'RankNro' {{cell(static_Rank_Order_1.selection, 0, \"Value\").asString()}};\nresult = filter result by 'RankNro' <= {{cell(static_Limit_ScoreCa_1.selection, 0, \"Value\").asObject()}};",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -3679,6 +3699,7 @@
             },
             "innerMajorBorderColor" : "#a8b7c7",
             "innerMinorBorderColor" : "#e0e5ee",
+            "interactions" : [ ],
             "maxColumnWidth" : 300,
             "minColumnWidth" : 40,
             "mode" : "variable",
@@ -3695,7 +3716,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Supplier_Dashboard_tp.Name}"
+            "name" : "${App.Datasets.Demo_Supplier_Dashboard.Name}"
           }
         ],
         "isGlobal" : false,
@@ -3721,7 +3742,6 @@
         "visualizationParameters" : {
           "parameters" : {
             "autoFitMode" : "keepLabels",
-            "showValues" : true,
             "bins" : {
               "breakpoints" : {
                 "high" : 100,
@@ -3811,7 +3831,9 @@
                 "showDomain" : false
               }
             },
+            "valueType" : "compactNumber",
             "theme" : "wave",
+            "compactDecimalDigits" : -1,
             "dimensionAxis" : {
               "showTitle" : true,
               "customSize" : "auto",
@@ -3887,6 +3909,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : true
         },
         "type" : "text"
@@ -3909,6 +3932,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : true
         },
         "type" : "text"
@@ -3931,6 +3955,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : true
         },
         "type" : "text"
@@ -3947,6 +3972,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : false
         },
         "type" : "text"
@@ -3963,6 +3989,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : false
         },
         "type" : "text"
@@ -3986,6 +4013,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : false
         },
         "type" : "text"
@@ -4009,6 +4037,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : true
         },
         "type" : "text"
@@ -4031,6 +4060,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : true
         },
         "type" : "text"
@@ -4047,6 +4077,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : false
         },
         "type" : "text"
@@ -4063,6 +4094,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : false
         },
         "type" : "text"
@@ -4095,7 +4127,6 @@
         "parameters" : {
           "autoFitMode" : "keepLabels",
           "centerText" : "",
-          "showValues" : true,
           "bins" : {
             "breakpoints" : {
               "high" : 100,
@@ -4194,6 +4225,7 @@
           "valueType" : "compactNumber",
           "theme" : "bluegrassDark",
           "step" : "Maturity_1",
+          "compactDecimalDigits" : -1,
           "dimensionAxis" : {
             "showTitle" : true,
             "customSize" : "auto",
@@ -4247,6 +4279,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : false
         },
         "type" : "text"
@@ -4263,7 +4296,6 @@
         "parameters" : {
           "autoFitMode" : "keepLabels",
           "centerText" : "",
-          "showValues" : true,
           "bins" : {
             "breakpoints" : {
               "high" : 100,
@@ -4362,6 +4394,7 @@
           "valueType" : "compactNumber",
           "theme" : "bluegrassDark",
           "step" : "Emission_Reduction_1",
+          "compactDecimalDigits" : -1,
           "dimensionAxis" : {
             "showTitle" : true,
             "customSize" : "auto",
@@ -4399,6 +4432,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : false
         },
         "type" : "text"
@@ -4407,7 +4441,6 @@
         "parameters" : {
           "autoFitMode" : "keepLabels",
           "centerText" : "",
-          "showValues" : true,
           "bins" : {
             "breakpoints" : {
               "high" : 100,
@@ -4506,6 +4539,7 @@
           "valueType" : "compactNumber",
           "theme" : "bluegrassDark",
           "step" : "SBTI_Target_Status_1",
+          "compactDecimalDigits" : -1,
           "dimensionAxis" : {
             "showTitle" : true,
             "customSize" : "auto",
@@ -4543,6 +4577,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : false
         },
         "type" : "text"
@@ -4550,7 +4585,6 @@
       "chart_8" : {
         "parameters" : {
           "autoFitMode" : "keepLabels",
-          "showValues" : true,
           "bins" : {
             "breakpoints" : {
               "high" : 100,
@@ -4643,8 +4677,10 @@
               "showDomain" : false
             }
           },
+          "valueType" : "compactNumber",
           "theme" : "bluegrassDark",
           "step" : "Emissions_by_Locatio_1",
+          "compactDecimalDigits" : -1,
           "dimensionAxis" : {
             "showTitle" : false,
             "customSize" : "auto",
@@ -4682,6 +4718,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : false
         },
         "type" : "text"
@@ -4705,34 +4742,13 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : false
         },
         "type" : "text"
       },
       "chart_2" : {
         "parameters" : {
-          "autoFitMode" : "keepLabels",
-          "showValues" : true,
-          "bins" : {
-            "breakpoints" : {
-              "high" : 100,
-              "low" : 0
-            },
-            "bands" : {
-              "high" : {
-                "color" : "#008000",
-                "label" : ""
-              },
-              "low" : {
-                "color" : "#B22222",
-                "label" : ""
-              },
-              "medium" : {
-                "color" : "#ffa500",
-                "label" : ""
-              }
-            }
-          },
           "legend" : {
             "descOrder" : false,
             "showHeader" : true,
@@ -4741,7 +4757,6 @@
             "position" : "right-top",
             "inside" : false
           },
-          "showMeasureTitle" : true,
           "axisMode" : "multi",
           "tooltip" : {
             "content" : {
@@ -4778,6 +4793,37 @@
             "type" : "x",
             "chartsPerLine" : 4
           },
+          "valueType" : "compactNumber",
+          "theme" : "bluegrassLight",
+          "rightColor" : "#e16032",
+          "leftColor" : "#52b7d8",
+          "dimensionAxis" : {
+            "customSize" : "auto",
+            "showAxis" : true
+          },
+          "applyConditionalFormatting" : true,
+          "autoFitMode" : "keepLabels",
+          "bins" : {
+            "breakpoints" : {
+              "high" : 100,
+              "low" : 0
+            },
+            "bands" : {
+              "high" : {
+                "color" : "#008000",
+                "label" : ""
+              },
+              "low" : {
+                "color" : "#B22222",
+                "label" : ""
+              },
+              "medium" : {
+                "color" : "#ffa500",
+                "label" : ""
+              }
+            }
+          },
+          "showMeasureTitle" : true,
           "columnProperties" : { },
           "showMeasure" : true,
           "columnMap" : {
@@ -4811,15 +4857,8 @@
               "showDomain" : false
             }
           },
-          "theme" : "bluegrassLight",
-          "rightColor" : "#e16032",
           "step" : "Reported_vs_Calculat_1",
-          "leftColor" : "#52b7d8",
-          "dimensionAxis" : {
-            "customSize" : "auto",
-            "showAxis" : true
-          },
-          "applyConditionalFormatting" : true
+          "compactDecimalDigits" : -1
         },
         "type" : "chart"
       },
@@ -4842,6 +4881,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : false
         },
         "type" : "text"
@@ -4849,7 +4889,6 @@
       "chart_1" : {
         "parameters" : {
           "autoFitMode" : "keepLabels",
-          "showValues" : true,
           "bins" : {
             "breakpoints" : {
               "high" : 100,
@@ -4984,13 +5023,13 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : true
         },
         "type" : "text"
       },
       "chart_4" : {
         "parameters" : {
-          "showValues" : true,
           "legend" : {
             "descOrder" : false,
             "showHeader" : false,
@@ -5106,7 +5145,8 @@
               "showDomain" : false
             }
           },
-          "step" : "Has_score_Card__1"
+          "step" : "Has_score_Card__1",
+          "compactDecimalDigits" : -1
         },
         "type" : "chart"
       },
@@ -5128,6 +5168,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : false
         },
         "type" : "text"
@@ -5743,6 +5784,7 @@
             }
           },
           "exploreLink" : true,
+          "interactions" : [ ],
           "itemsPerRow" : 3,
           "showActionMenu" : true,
           "step" : "Supplier_Data_1"
@@ -5752,7 +5794,6 @@
       "chart_3" : {
         "parameters" : {
           "autoFitMode" : "keepLabels",
-          "showValues" : true,
           "bins" : {
             "breakpoints" : {
               "high" : 100,
@@ -5845,8 +5886,10 @@
               "showDomain" : false
             }
           },
+          "valueType" : "compactNumber",
           "theme" : "bluegrassDark",
           "step" : "Reporting_Scopes_1",
+          "compactDecimalDigits" : -1,
           "dimensionAxis" : {
             "showTitle" : false,
             "customSize" : "auto",
@@ -5884,6 +5927,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : false
         },
         "type" : "text"
@@ -5897,7 +5941,7 @@
           "filters" : [
             {
               "dataset" : {
-                "name" : "${App.Datasets.Demo_Supplier_Dashboard_tp.Name}"
+                "name" : "${App.Datasets.Demo_Supplier_Dashboard.Name}"
               },
               "field" : "Supplier"
             }
@@ -5925,6 +5969,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : false
         },
         "type" : "text"
@@ -5948,6 +5993,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : false
         },
         "type" : "text"
@@ -6009,6 +6055,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : false
         },
         "type" : "text"
@@ -6057,7 +6104,7 @@
           "alignmentY" : "center",
           "fit" : "fitwidth",
           "image" : {
-            "name" : "${App.Images['sus_iconpng5png3'].Name}",
+            "name" : "${App.Images['sus_iconpng5png31'].Name}",
             "namespace" : "${Org.Namespace}"
           }
         },
@@ -6118,7 +6165,7 @@
           "filters" : [
             {
               "dataset" : {
-                "name" : "${App.Datasets.Demo_Supplier_Dashboard_tp.Name}"
+                "name" : "${App.Datasets.Demo_Supplier_Dashboard.Name}"
               },
               "field" : "Supplier_Tier"
             }
@@ -6136,7 +6183,7 @@
           "filters" : [
             {
               "dataset" : {
-                "name" : "${App.Datasets.Demo_Supplier_Dashboard_tp.Name}"
+                "name" : "${App.Datasets.Demo_Supplier_Dashboard.Name}"
               },
               "field" : "SBTI_Target_Status"
             }
@@ -6231,6 +6278,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : true
         },
         "type" : "text"
@@ -6253,6 +6301,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : true
         },
         "type" : "text"
@@ -6292,6 +6341,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : true
         },
         "type" : "text"
@@ -6316,6 +6366,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : true
         },
         "type" : "text"
@@ -6342,6 +6393,7 @@
           },
           "innerMajorBorderColor" : "#a8b7c7",
           "innerMinorBorderColor" : "#e0e5ee",
+          "interactions" : [ ],
           "mode" : "fittocontainer",
           "numberOfLines" : 1,
           "pivoted" : false,
