@@ -6,13 +6,14 @@
   "format" : "R3",
   "scheduleType" : null,
   "recipeDefinition" : {
-    "version" : "56.0",
+    "version" : "57.0",
     "nodes" : {
       "LOAD_DATASET0" : {
         "action" : "load",
         "sources" : [ ],
         "parameters" : {
           "fields" : [
+            "External_ID__c",
             "Id",
             "Name",
             "City",
@@ -37,14 +38,19 @@
         "sources" : [ ],
         "parameters" : {
           "fields" : [
+            "AccountId",
             "ReportPeriod",
+            "LastProcessedDate",
             "BusinessRegion",
             "CountryCode3Digits",
             "ActivitySourceType",
             "AssetType",
             "Asset",
             "Country",
+            "AssetExternalId",
+            "AccountExternalId",
             "AssetId",
+            "AccountName",
             "AverageRisk",
             "WaterRisk",
             "WaterStress",
@@ -58,7 +64,7 @@
           "dataset" : {
             "type" : "analyticsDataset",
             "label" : "Demo | Water Risk",
-            "name" : "${App.Datasets.Demo_Water_Risk.FullyQualifiedName}"
+            "name" : "${App.Datasets.Demo_Water_Risk1.FullyQualifiedName}"
           },
           "sampleDetails" : {
             "type" : "TopN",
@@ -71,31 +77,36 @@
         "sources" : [ ],
         "parameters" : {
           "fields" : [
-            "ReportPeriod",
+            "AccountId",
             "BusinessRegion",
+            "Asset",
+            "AssetExternalId",
+            "AccountExternalId",
+            "ReportPeriod",
+            "ActivityType",
+            "LastProcessedDate",
             "ActivitySourceType",
             "TreatmentMethod",
             "AssetType",
-            "Asset",
             "Country",
             "AssetId",
+            "AccountName",
             "FloorArea",
             "WithdrawnWater",
             "ConsumedWater",
-            "UnitsManufactured",
             "ConsumedPerDay",
             "DischargedPerDay",
             "EmployeeCount",
             "WithdrawnPerDay",
+            "UnitsManufactured",
             "DischargedWater",
             "TreatedWater",
-            "WaterManagementCost",
-            "ActivityType"
+            "WaterManagementCost"
           ],
           "dataset" : {
             "type" : "analyticsDataset",
             "label" : "Demo | Water Management",
-            "name" : "${App.Datasets.Demo_Water_Management.FullyQualifiedName}"
+            "name" : "${App.Datasets.Demo_Water_Management1.FullyQualifiedName}"
           },
           "sampleDetails" : {
             "type" : "TopN",
@@ -111,10 +122,10 @@
         ],
         "parameters" : {
           "leftKeys" : [
-            "Asset"
+            "AssetExternalId"
           ],
           "rightKeys" : [
-            "Name"
+            "External_ID__c"
           ],
           "updateColumns" : {
             "AssetId" : "Id"
@@ -124,14 +135,14 @@
       "OUTPUT0" : {
         "action" : "save",
         "sources" : [
-          "UPDATE0"
+          "UPDATE8"
         ],
         "parameters" : {
           "fields" : [ ],
           "dataset" : {
             "type" : "analyticsDataset",
             "label" : "Demo | Water Risk",
-            "name" : "${App.Datasets.Demo_Water_Risk.Name}",
+            "name" : "${App.Datasets.Demo_Water_Risk1.Name}",
             "folderName" : "${App.Folder.FullyQualifiedName}"
           },
           "measuresToCurrencies" : [ ]
@@ -158,14 +169,14 @@
       "OUTPUT1" : {
         "action" : "save",
         "sources" : [
-          "UPDATE1"
+          "UPDATE6"
         ],
         "parameters" : {
           "fields" : [ ],
           "dataset" : {
             "type" : "analyticsDataset",
             "label" : "Demo | Water Management",
-            "name" : "${App.Datasets.Demo_Water_Management.Name}",
+            "name" : "${App.Datasets.Demo_Water_Management1.Name}",
             "folderName" : "${App.Folder.FullyQualifiedName}"
           },
           "measuresToCurrencies" : [ ]
@@ -215,12 +226,13 @@
             "AvgPrice",
             "TotalAvailableCredits",
             "SustainabilityCredits",
-            "CreditsPurchased"
+            "CreditsPurchased",
+            "LastProcessedDate"
           ],
           "dataset" : {
             "type" : "analyticsDataset",
             "label" : "Demo | Projects and Credits",
-            "name" : "${App.Datasets.Demo_Projects_and_Credits.FullyQualifiedName}"
+            "name" : "${App.Datasets.Demo_Projects_and_Credits1.FullyQualifiedName}"
           },
           "sampleDetails" : {
             "type" : "TopN",
@@ -249,17 +261,2097 @@
       "OUTPUT2" : {
         "action" : "save",
         "sources" : [
-          "UPDATE2"
+          "FORMULA47"
         ],
         "parameters" : {
           "fields" : [ ],
           "dataset" : {
             "type" : "analyticsDataset",
             "label" : "Demo | Projects and Credits",
-            "name" : "${App.Datasets.Demo_Projects_and_Credits.Name}",
+            "name" : "${App.Datasets.Demo_Projects_and_Credits1.Name}",
             "folderName" : "${App.Folder.FullyQualifiedName}"
           },
           "measuresToCurrencies" : [ ]
+        }
+      },
+      "LOAD_DATASET5" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "Fuel_Type",
+            "AccountId",
+            "Asset_Category",
+            "Asset",
+            "AssetExternalId",
+            "AccountExternalId",
+            "Asset_Type",
+            "CountryCode",
+            "LastProcessedDate",
+            "Date",
+            "Business_Region",
+            "AssetId",
+            "AccountName",
+            "Carbon_Inventory",
+            "Energy_Usage_kBtu_sq_ft",
+            "Electricity_Usage_Previous",
+            "Electricity_Usage_kWh_m2",
+            "Total_Energy_Consumption_kWh",
+            "Electricity_Usage_Current",
+            "Scope_3_Emissions",
+            "Annual_Energy_Intensity_Variance",
+            "Energy_Consumption_Intensity_kWh_m2",
+            "Total_Renewable_Energy_kWh",
+            "Electricity_Usage_kWh_sq_ft",
+            "Fuel_Consumption_Liters",
+            "Scope_1_Scope_2_Location_Emissions",
+            "Total_Diesel_Consumption",
+            "Non_Renewal_Resources",
+            "Energy_Emissions",
+            "Scope_1_Scope_2_Market_Emissions",
+            "Annual_Electricity_Intensity_Variance",
+            "Electricity_Cons_Intensity_kWh_m2",
+            "Total_Fuel_Oil_Consumption",
+            "Energy_Consumption",
+            "Data_Center_PUE_current",
+            "Total_Natural_Gas_consumption_kWh",
+            "Renewal_Resources",
+            "Total_Steam_Consumption",
+            "Data_Center_PUE_previous",
+            "Emissions_from_Stationary_Sources",
+            "Total_Building_Area",
+            "Energy_Usage_kBtu_m2",
+            "High_Outliers",
+            "Scope_1_Emissions_tCO2e",
+            "Fuel_Consumption_Gallons",
+            "Low_Outliers",
+            "Total_Allocation_Renewable_Energy"
+          ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | Audit Dashboard",
+            "name" : "${App.Datasets.Demo_Audit_Dashboard.FullyQualifiedName}"
+          },
+          "sampleDetails" : {
+            "type" : "TopN",
+            "sortBy" : [ ]
+          }
+        }
+      },
+      "FORMULA0" : {
+        "action" : "formula",
+        "sources" : [
+          "LOAD_DATASET5"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "NUMBER",
+              "name" : "ElapsedYears",
+              "label" : "ElapsedYears",
+              "formulaExpression" : "year(now()) - year(LastProcessedDate)",
+              "precision" : 10,
+              "scale" : 0,
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "FORMULA1" : {
+        "action" : "formula",
+        "sources" : [
+          "FORMULA0"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "DateAux",
+              "label" : "DateAux",
+              "formulaExpression" : "Date - INTERVAL 0 DAY",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS0" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA1"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "LastProcessedDate",
+              "Date"
+            ]
+          }
+        }
+      },
+      "FORMULA2" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS0"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "Date",
+              "label" : "Date",
+              "formulaExpression" : "to_timestamp(to_unix_timestamp(DateAux) + 86400 * 365 * ElapsedYears)",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS1" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA2"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "ElapsedYears",
+              "DateAux"
+            ]
+          }
+        }
+      },
+      "FORMULA3" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS1"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "LastProcessedDate",
+              "label" : "LastProcessedDate",
+              "formulaExpression" : "now()",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "UPDATE3" : {
+        "action" : "update",
+        "sources" : [
+          "FORMULA3",
+          "LOAD_DATASET0"
+        ],
+        "parameters" : {
+          "leftKeys" : [
+            "AssetExternalId"
+          ],
+          "rightKeys" : [
+            "External_ID__c"
+          ],
+          "updateColumns" : {
+            "AssetId" : "Id"
+          }
+        }
+      },
+      "OUTPUT3" : {
+        "action" : "save",
+        "sources" : [
+          "UPDATE7"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | Audit Dashboard",
+            "name" : "${App.Datasets.Demo_Audit_Dashboard.Name}",
+            "folderName" : "${App.Folder.FullyQualifiedName}"
+          },
+          "measuresToCurrencies" : [ ]
+        }
+      },
+      "LOAD_DATASET6" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "Emission_Category",
+            "Energy_Consumption",
+            "Ground_Travel_Emissions_Category",
+            "LastProcessedDate",
+            "Consumption_Type",
+            "City",
+            "RenewalEnergy",
+            "Vendor",
+            "Date",
+            "Business_Travel_Type",
+            "Emission_Type",
+            "Emission_Source",
+            "Country",
+            "Cost_Center_Name",
+            "Electricity_Consumption_Value",
+            "Energy_Consumption_Value",
+            "Emission_Value",
+            "Emissions_from_Business_Travel",
+            "GTE_Value",
+            "Carbon_Intensity"
+          ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | Net Zero Cloud",
+            "name" : "${App.Datasets.Demo_Net_Zero_Cloud.FullyQualifiedName}"
+          },
+          "sampleDetails" : {
+            "type" : "TopN",
+            "sortBy" : [ ]
+          }
+        }
+      },
+      "FORMULA4" : {
+        "action" : "formula",
+        "sources" : [
+          "LOAD_DATASET6"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "NUMBER",
+              "name" : "ElapsedYears",
+              "label" : "ElapsedYears",
+              "formulaExpression" : "year(now()) - year(LastProcessedDate)",
+              "precision" : 10,
+              "scale" : 0,
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "FORMULA5" : {
+        "action" : "formula",
+        "sources" : [
+          "FORMULA4"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "DateAux",
+              "label" : "DateAux",
+              "formulaExpression" : "Date - INTERVAL 0 DAY",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS2" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA5"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "LastProcessedDate",
+              "Date"
+            ]
+          }
+        }
+      },
+      "FORMULA6" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS2"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "Date",
+              "label" : "Date",
+              "formulaExpression" : "to_timestamp(to_unix_timestamp(DateAux) + 86400 * 365 * ElapsedYears)",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS3" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA6"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "ElapsedYears",
+              "DateAux"
+            ]
+          }
+        }
+      },
+      "FORMULA7" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS3"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "LastProcessedDate",
+              "label" : "LastProcessedDate",
+              "formulaExpression" : "now()",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "OUTPUT4" : {
+        "action" : "save",
+        "sources" : [
+          "FORMULA7"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | Net Zero Cloud",
+            "name" : "${App.Datasets.Demo_Net_Zero_Cloud.Name}",
+            "folderName" : "${App.Folder.FullyQualifiedName}"
+          },
+          "measuresToCurrencies" : [ ]
+        }
+      },
+      "LOAD_DATASET7" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "LastProcessedDate",
+            "Date",
+            "Emissions_Scope_Category",
+            "Emission_Activity_Category",
+            "Target_Renewable_Energy_Percentage",
+            "Total_Floor_Area_sqft",
+            "Target_Compensated_Emissions_tCO2e",
+            "Forecasted_Renewable_Energy_Cons",
+            "Forecasted_Emissions_Intensity_Reduc",
+            "Forecasted_Emissions_tCO2e",
+            "Actual_Renewable_Energy_Cons",
+            "Net_Emissions_Forecast_tCO2e",
+            "Headcount",
+            "Planned_Supplier_Emissions_Reduction",
+            "Required_Carbon_Credits_tCO2e",
+            "Actual_Emissions_Intensity",
+            "Planned_Carbon_Credits_tCO2e",
+            "Revenue",
+            "Planned_Operational_Emissions_Reduction",
+            "Final_Forecasted_Emissions_tCO2e",
+            "Actual_Emissions_tCO2e",
+            "Target_Emissions_tCo2e"
+          ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | Emission Activity Tab",
+            "name" : "${App.Datasets.Demo_Emission_Activity_Tab.FullyQualifiedName}"
+          },
+          "sampleDetails" : {
+            "type" : "TopN",
+            "sortBy" : [ ]
+          }
+        }
+      },
+      "FORMULA8" : {
+        "action" : "formula",
+        "sources" : [
+          "LOAD_DATASET7"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "NUMBER",
+              "name" : "ElapsedYears",
+              "label" : "ElapsedYears",
+              "formulaExpression" : "year(now()) - year(LastProcessedDate)",
+              "precision" : 10,
+              "scale" : 0,
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "FORMULA9" : {
+        "action" : "formula",
+        "sources" : [
+          "FORMULA8"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "DateAux",
+              "label" : "DateAux",
+              "formulaExpression" : "Date - INTERVAL 0 DAY",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS4" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA9"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "LastProcessedDate",
+              "Date"
+            ]
+          }
+        }
+      },
+      "FORMULA10" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS4"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "Date",
+              "label" : "Date",
+              "formulaExpression" : "to_timestamp(to_unix_timestamp(DateAux) + 86400 * 365 * ElapsedYears)",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS5" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA10"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "DateAux",
+              "ElapsedYears"
+            ]
+          }
+        }
+      },
+      "FORMULA11" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS5"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "LastProcessedDate",
+              "label" : "LastProcessedDate",
+              "formulaExpression" : "now()",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "OUTPUT5" : {
+        "action" : "save",
+        "sources" : [
+          "FORMULA11"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | Emission Activity Tab",
+            "name" : "${App.Datasets.Demo_Emission_Activity_Tab.Name}",
+            "folderName" : "${App.Folder.FullyQualifiedName}"
+          },
+          "measuresToCurrencies" : [ ]
+        }
+      },
+      "LOAD_DATASET8" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "Mesures",
+            "Scope",
+            "Emission_Activity",
+            "LastProcessedDate",
+            "Date",
+            "Emission_Activity_Mesure",
+            "Emission_Value_Scope_Wise",
+            "Emission_Value"
+          ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | Carbon Emission Forecast",
+            "name" : "${App.Datasets.Demo_Carbon_Emission_Forecast.FullyQualifiedName}"
+          },
+          "sampleDetails" : {
+            "type" : "TopN",
+            "sortBy" : [ ]
+          }
+        }
+      },
+      "FORMULA12" : {
+        "action" : "formula",
+        "sources" : [
+          "LOAD_DATASET8"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "NUMBER",
+              "name" : "ElapsedYears",
+              "label" : "ElapsedYears",
+              "formulaExpression" : "year(now()) - year(LastProcessedDate)",
+              "precision" : 10,
+              "scale" : 0,
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "FORMULA13" : {
+        "action" : "formula",
+        "sources" : [
+          "FORMULA12"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "DateAux",
+              "label" : "DateAux",
+              "formulaExpression" : "Date - INTERVAL 0 DAY",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS6" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA13"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "LastProcessedDate",
+              "Date"
+            ]
+          }
+        }
+      },
+      "FORMULA14" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS6"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "Date",
+              "label" : "Date",
+              "formulaExpression" : "to_timestamp(to_unix_timestamp(DateAux) + 86400 * 365 * ElapsedYears)",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS7" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA14"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "ElapsedYears",
+              "DateAux"
+            ]
+          }
+        }
+      },
+      "FORMULA15" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS7"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "LastProcessedDate",
+              "label" : "LastProcessedDate",
+              "formulaExpression" : "now()",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "OUTPUT6" : {
+        "action" : "save",
+        "sources" : [
+          "FORMULA15"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | Carbon Emission Forecast",
+            "name" : "${App.Datasets.Demo_Carbon_Emission_Forecast.Name}",
+            "folderName" : "${App.Folder.FullyQualifiedName}"
+          },
+          "measuresToCurrencies" : [ ]
+        }
+      },
+      "LOAD_DATASET9" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "Mesures",
+            "Scope",
+            "LastProcessedDate",
+            "Date",
+            "Scope_Emissions"
+          ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | NZC Scope 3 Overview",
+            "name" : "${App.Datasets.Demo_Scope_3_Overview.FullyQualifiedName}"
+          },
+          "sampleDetails" : {
+            "type" : "TopN",
+            "sortBy" : [ ]
+          }
+        }
+      },
+      "FORMULA16" : {
+        "action" : "formula",
+        "sources" : [
+          "LOAD_DATASET9"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "NUMBER",
+              "name" : "ElapsedYears",
+              "label" : "ElapsedYears",
+              "formulaExpression" : "year(now()) - year(LastProcessedDate)",
+              "precision" : 10,
+              "scale" : 0,
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "FORMULA17" : {
+        "action" : "formula",
+        "sources" : [
+          "FORMULA16"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "DateAux",
+              "label" : "DateAux",
+              "formulaExpression" : "Date - INTERVAL 0 DAY",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS8" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA17"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "LastProcessedDate",
+              "Date"
+            ]
+          }
+        }
+      },
+      "FORMULA18" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS8"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "Date",
+              "label" : "Date",
+              "formulaExpression" : "to_timestamp(to_unix_timestamp(DateAux) + 86400 * 365 * ElapsedYears)",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS9" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA18"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "ElapsedYears",
+              "DateAux"
+            ]
+          }
+        }
+      },
+      "FORMULA19" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS9"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "LastProcessedDate",
+              "label" : "LastProcessedDate",
+              "formulaExpression" : "now()",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "OUTPUT7" : {
+        "action" : "save",
+        "sources" : [
+          "FORMULA19"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | NZC Scope 3 Overview",
+            "name" : "${App.Datasets.Demo_Scope_3_Overview.Name}",
+            "folderName" : "${App.Folder.FullyQualifiedName}"
+          },
+          "measuresToCurrencies" : [ ]
+        }
+      },
+      "LOAD_DATASET10" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "GHG_Scope_3_Category",
+            "LastProcessedDate",
+            "Supplier",
+            "Date",
+            "Supplier_Expenses",
+            "Emission_Value",
+            "Ratio",
+            "Scope_3_Emissions",
+            "Vehicle_Emissions",
+            "Stationary_Sources_tCO2e",
+            "Other_Emissions"
+          ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | NZC Scope 3 Procurement",
+            "name" : "${App.Datasets.Demo_Scope_3_Procurement.FullyQualifiedName}"
+          },
+          "sampleDetails" : {
+            "type" : "TopN",
+            "sortBy" : [ ]
+          }
+        }
+      },
+      "FORMULA20" : {
+        "action" : "formula",
+        "sources" : [
+          "LOAD_DATASET10"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "NUMBER",
+              "name" : "ElapsedYears",
+              "label" : "ElapsedYears",
+              "formulaExpression" : "year(now()) - year(LastProcessedDate)",
+              "precision" : 10,
+              "scale" : 0,
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "FORMULA21" : {
+        "action" : "formula",
+        "sources" : [
+          "FORMULA20"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "DateAux",
+              "label" : "DateAux",
+              "formulaExpression" : "Date - INTERVAL 0 DAY",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS10" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA21"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "LastProcessedDate",
+              "Date"
+            ]
+          }
+        }
+      },
+      "FORMULA22" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS10"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "Date",
+              "label" : "Date",
+              "formulaExpression" : "to_timestamp(to_unix_timestamp(DateAux) + 86400 * 365 * ElapsedYears)",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS11" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA22"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "DateAux",
+              "ElapsedYears"
+            ]
+          }
+        }
+      },
+      "FORMULA23" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS11"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "LastProcessedDate",
+              "label" : "LastProcessedDate",
+              "formulaExpression" : "now()",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "OUTPUT8" : {
+        "action" : "save",
+        "sources" : [
+          "FORMULA23"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | NZC Scope 3 Procurement",
+            "name" : "${App.Datasets.Demo_Scope_3_Procurement.Name}",
+            "folderName" : "${App.Folder.FullyQualifiedName}"
+          },
+          "measuresToCurrencies" : [ ]
+        }
+      },
+      "LOAD_DATASET11" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "Supplier_Tier",
+            "HasScoreCard",
+            "ExternalId",
+            "Emission_Calculation_Method",
+            "LastProcessedDate",
+            "Rank",
+            "Date",
+            "Emissions_Reduction_Type",
+            "Reporting_Scope",
+            "Score_Card_Status",
+            "SBTI_Target_Status",
+            "Supplier",
+            "Location",
+            "Reported_Emissions",
+            "Procurement_Expense",
+            "ScoreCardOrder",
+            "Calculated_Emissions",
+            "Procurement_Emissions",
+            "Expense_Ratio",
+            "Contribution_to_Total_Emissions",
+            "Contribution_total_Emissions_Card",
+            "RankNro"
+          ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | Supplier Dashboard",
+            "name" : "${App.Datasets.Demo_Supplier_Dashboard.FullyQualifiedName}"
+          },
+          "sampleDetails" : {
+            "type" : "TopN",
+            "sortBy" : [ ]
+          }
+        }
+      },
+      "FORMULA24" : {
+        "action" : "formula",
+        "sources" : [
+          "LOAD_DATASET11"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "NUMBER",
+              "name" : "ElapsedYears",
+              "label" : "ElapsedYears",
+              "formulaExpression" : "year(now()) - year(LastProcessedDate)",
+              "precision" : 10,
+              "scale" : 0,
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "FORMULA25" : {
+        "action" : "formula",
+        "sources" : [
+          "FORMULA24"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "DateAux",
+              "label" : "DateAux",
+              "formulaExpression" : "Date - INTERVAL 0 DAY",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS12" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA25"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "LastProcessedDate",
+              "Date"
+            ]
+          }
+        }
+      },
+      "FORMULA26" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS12"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "Date",
+              "label" : "Date",
+              "formulaExpression" : "to_timestamp(to_unix_timestamp(DateAux) + 86400 * 365 * ElapsedYears)",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS13" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA26"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "ElapsedYears",
+              "DateAux"
+            ]
+          }
+        }
+      },
+      "FORMULA27" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS13"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "LastProcessedDate",
+              "label" : "LastProcessedDate",
+              "formulaExpression" : "now()",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "OUTPUT9" : {
+        "action" : "save",
+        "sources" : [
+          "FORMULA27"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | Supplier Dashboard",
+            "name" : "${App.Datasets.Demo_Supplier_Dashboard.Name}",
+            "folderName" : "${App.Folder.FullyQualifiedName}"
+          },
+          "measuresToCurrencies" : [ ]
+        }
+      },
+      "LOAD_DATASET12" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "Type_of_Waste",
+            "Scope",
+            "Category_of_Waste",
+            "LastProcessedDate",
+            "Treatment_Methods",
+            "Date",
+            "Scope_3_Upstream_Emissions",
+            "Waste_Quantity",
+            "Landfill_Waste",
+            "Scope_3_Downstream_Emissions",
+            "Scope_1_Emissions",
+            "Combustion_Waste"
+          ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | Waste Management Dataset",
+            "name" : "${App.Datasets.Demo_Waste_Management.FullyQualifiedName}"
+          },
+          "sampleDetails" : {
+            "type" : "TopN",
+            "sortBy" : [ ]
+          }
+        }
+      },
+      "FORMULA28" : {
+        "action" : "formula",
+        "sources" : [
+          "LOAD_DATASET12"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "NUMBER",
+              "name" : "ElapsedYears",
+              "label" : "ElapsedYears",
+              "formulaExpression" : "year(now()) - year(LastProcessedDate)",
+              "precision" : 10,
+              "scale" : 0,
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "FORMULA29" : {
+        "action" : "formula",
+        "sources" : [
+          "FORMULA28"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "DateAux",
+              "label" : "DateAux",
+              "formulaExpression" : "Date - INTERVAL 0 DAY",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS14" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA29"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "LastProcessedDate",
+              "Date"
+            ]
+          }
+        }
+      },
+      "FORMULA30" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS14"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "Date",
+              "label" : "Date",
+              "formulaExpression" : "to_timestamp(to_unix_timestamp(DateAux) + 86400 * 365 * ElapsedYears)",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS15" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA30"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "ElapsedYears",
+              "DateAux"
+            ]
+          }
+        }
+      },
+      "FORMULA31" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS15"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "LastProcessedDate",
+              "label" : "LastProcessedDate",
+              "formulaExpression" : "now()",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "OUTPUT10" : {
+        "action" : "save",
+        "sources" : [
+          "FORMULA31"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | Waste Management Dataset",
+            "name" : "${App.Datasets.Demo_Waste_Management.Name}",
+            "folderName" : "${App.Folder.FullyQualifiedName}"
+          },
+          "measuresToCurrencies" : [ ]
+        }
+      },
+      "FORMULA32" : {
+        "action" : "formula",
+        "sources" : [
+          "UPDATE0"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "NUMBER",
+              "name" : "ElapsedYears",
+              "label" : "ElapsedYears",
+              "formulaExpression" : "year(now()) - year(LastProcessedDate)",
+              "precision" : 10,
+              "scale" : 0,
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "FORMULA33" : {
+        "action" : "formula",
+        "sources" : [
+          "FORMULA32"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "ReportPeriodAux",
+              "label" : "ReportPeriodAux",
+              "formulaExpression" : "ReportPeriod - INTERVAL 0 DAY",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS16" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA33"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "ReportPeriod",
+              "LastProcessedDate"
+            ]
+          }
+        }
+      },
+      "FORMULA34" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS16"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "ReportPeriod",
+              "label" : "ReportPeriod",
+              "formulaExpression" : "to_timestamp(to_unix_timestamp(ReportPeriodAux) + 86400 * 365 * ElapsedYears)",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS17" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA34"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "ElapsedYears",
+              "ReportPeriodAux"
+            ]
+          }
+        }
+      },
+      "FORMULA35" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS17"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "LastProcessedDate",
+              "label" : "LastProcessedDate",
+              "formulaExpression" : "now()",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "FORMULA36" : {
+        "action" : "formula",
+        "sources" : [
+          "UPDATE1"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "NUMBER",
+              "name" : "ElapsedYears",
+              "label" : "ElapsedYears",
+              "formulaExpression" : "year(now()) - year(LastProcessedDate)",
+              "precision" : 10,
+              "scale" : 0,
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "FORMULA37" : {
+        "action" : "formula",
+        "sources" : [
+          "FORMULA36"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "ReportPeriodAux",
+              "label" : "ReportPeriodAux",
+              "formulaExpression" : "ReportPeriod - INTERVAL 0 DAY",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS18" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA37"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "ReportPeriod",
+              "LastProcessedDate"
+            ]
+          }
+        }
+      },
+      "FORMULA38" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS18"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "ReportPeriod",
+              "label" : "ReportPeriod",
+              "formulaExpression" : "to_timestamp(to_unix_timestamp(ReportPeriodAux) + 86400 * 365 * ElapsedYears)",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS19" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA38"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "ElapsedYears",
+              "ReportPeriodAux"
+            ]
+          }
+        }
+      },
+      "FORMULA39" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS19"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "LastProcessedDate",
+              "label" : "LastProcessedDate",
+              "formulaExpression" : "now()",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "LOAD_DATASET13" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "AccountId",
+            "ReportPeriod",
+            "LastProcessedDate",
+            "BusinessRegion",
+            "CountryCode3Digits",
+            "AssetType",
+            "ReportPeriodBucket",
+            "Asset",
+            "Country",
+            "AssetExternalId",
+            "AccountExternalId",
+            "AssetId",
+            "IsUnitedStatesBuilding",
+            "EnergyIntensity",
+            "EnergyIntensityVariance",
+            "CarbonEmission",
+            "AccountName"
+          ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | Building Energy Intensity",
+            "name" : "${App.Datasets.Demo_Building_Energy_Intensity.FullyQualifiedName}"
+          },
+          "sampleDetails" : {
+            "type" : "TopN",
+            "sortBy" : [ ]
+          }
+        }
+      },
+      "FORMULA40" : {
+        "action" : "formula",
+        "sources" : [
+          "LOAD_DATASET13"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "NUMBER",
+              "name" : "ElapsedYears",
+              "label" : "ElapsedYears",
+              "formulaExpression" : "year(now()) - year(LastProcessedDate)",
+              "precision" : 10,
+              "scale" : 0,
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "FORMULA41" : {
+        "action" : "formula",
+        "sources" : [
+          "FORMULA40"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "ReportPeriodAux",
+              "label" : "ReportPeriodAux",
+              "formulaExpression" : "ReportPeriod - INTERVAL 0 DAY",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS20" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA41"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "ReportPeriod",
+              "LastProcessedDate"
+            ]
+          }
+        }
+      },
+      "FORMULA42" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS20"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "ReportPeriod",
+              "label" : "ReportPeriod",
+              "formulaExpression" : "to_timestamp(to_unix_timestamp(ReportPeriodAux) + 86400 * 365 * ElapsedYears)",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS21" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA42"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "ReportPeriodAux",
+              "ElapsedYears"
+            ]
+          }
+        }
+      },
+      "FORMULA43" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS21"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "LastProcessedDate",
+              "label" : "LastProcessedDate",
+              "formulaExpression" : "now()",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "UPDATE4" : {
+        "action" : "update",
+        "sources" : [
+          "FORMULA43",
+          "LOAD_DATASET0"
+        ],
+        "parameters" : {
+          "leftKeys" : [
+            "AssetExternalId"
+          ],
+          "rightKeys" : [
+            "External_ID__c"
+          ],
+          "updateColumns" : {
+            "AssetId" : "Id"
+          }
+        }
+      },
+      "OUTPUT11" : {
+        "action" : "save",
+        "sources" : [
+          "UPDATE5"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | Building Energy Intensity",
+            "name" : "${App.Datasets.Demo_Building_Energy_Intensity.Name}",
+            "folderName" : "${App.Folder.FullyQualifiedName}"
+          },
+          "measuresToCurrencies" : [ ]
+        }
+      },
+      "LOAD_DATASET14" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "External_ID__c",
+            "Id",
+            "Name"
+          ],
+          "dataset" : {
+            "type" : "connectedDataset",
+            "label" : "Account",
+            "connectionName" : "SFDC_LOCAL",
+            "sourceObjectName" : "Account"
+          },
+          "sampleDetails" : {
+            "type" : "TopN",
+            "sortBy" : [ ]
+          }
+        }
+      },
+      "UPDATE5" : {
+        "action" : "update",
+        "sources" : [
+          "UPDATE4",
+          "LOAD_DATASET14"
+        ],
+        "parameters" : {
+          "leftKeys" : [
+            "AccountExternalId"
+          ],
+          "rightKeys" : [
+            "External_ID__c"
+          ],
+          "updateColumns" : {
+            "AccountId" : "Id",
+            "AccountName" : "Name"
+          }
+        }
+      },
+      "FORMULA44" : {
+        "action" : "formula",
+        "sources" : [
+          "UPDATE2"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "NUMBER",
+              "name" : "ElapsedYears",
+              "label" : "ElapsedYears",
+              "formulaExpression" : "year(now()) - year(LastProcessedDate)",
+              "precision" : 10,
+              "scale" : 0,
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "FORMULA45" : {
+        "action" : "formula",
+        "sources" : [
+          "FORMULA44"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "ReportDateAux",
+              "label" : "ReportDateAux",
+              "formulaExpression" : "ReportDate - INTERVAL 0 DAY",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS22" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA45"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "ReportDate",
+              "LastProcessedDate"
+            ]
+          }
+        }
+      },
+      "FORMULA46" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS22"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "ReportDate",
+              "label" : "ReportDate",
+              "formulaExpression" : "to_timestamp(to_unix_timestamp(ReportDateAux) + 86400 * 365 * ElapsedYears)",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS23" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA46"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "ElapsedYears",
+              "ReportDateAux"
+            ]
+          }
+        }
+      },
+      "FORMULA47" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS23"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "LastProcessedDate",
+              "label" : "LastProcessedDate",
+              "formulaExpression" : "now()",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "LOAD_DATASET15" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "Scope",
+            "ActivityType",
+            "LastProcessedDate",
+            "ReportDate",
+            "Allocation",
+            "AllocationCost",
+            "Emission",
+            "Carried",
+            "Purchased",
+            "NetEmission"
+          ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | Carbon Credit Allocation",
+            "name" : "${App.Datasets.Demo_Carbon_Credit_Allocation1.FullyQualifiedName}"
+          },
+          "sampleDetails" : {
+            "type" : "TopN",
+            "sortBy" : [ ]
+          }
+        }
+      },
+      "FORMULA48" : {
+        "action" : "formula",
+        "sources" : [
+          "LOAD_DATASET15"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "NUMBER",
+              "name" : "ElapsedYears",
+              "label" : "ElapsedYears",
+              "formulaExpression" : "year(now()) - year(LastProcessedDate)",
+              "precision" : 10,
+              "scale" : 0,
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "FORMULA49" : {
+        "action" : "formula",
+        "sources" : [
+          "FORMULA48"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "ReportDateAux",
+              "label" : "ReportDateAux",
+              "formulaExpression" : "ReportDate - INTERVAL 0 DAY",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS24" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA49"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "LastProcessedDate",
+              "ReportDate"
+            ]
+          }
+        }
+      },
+      "FORMULA50" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS24"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "ReportDate",
+              "label" : "ReportDate",
+              "formulaExpression" : "to_timestamp(to_unix_timestamp(ReportDateAux) + 86400 * 365 * ElapsedYears)",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS25" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA50"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "ReportDateAux",
+              "ElapsedYears"
+            ]
+          }
+        }
+      },
+      "FORMULA51" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS25"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "LastProcessedDate",
+              "label" : "LastProcessedDate",
+              "formulaExpression" : "now()",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "OUTPUT12" : {
+        "action" : "save",
+        "sources" : [
+          "FORMULA51"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | Carbon Credit Allocation",
+            "name" : "${App.Datasets.Demo_Carbon_Credit_Allocation1.Name}",
+            "folderName" : "${App.Folder.FullyQualifiedName}"
+          },
+          "measuresToCurrencies" : [ ]
+        }
+      },
+      "UPDATE6" : {
+        "action" : "update",
+        "sources" : [
+          "FORMULA39",
+          "LOAD_DATASET14"
+        ],
+        "parameters" : {
+          "leftKeys" : [
+            "AccountExternalId"
+          ],
+          "rightKeys" : [
+            "External_ID__c"
+          ],
+          "updateColumns" : {
+            "AccountId" : "Id",
+            "AccountName" : "Name"
+          }
+        }
+      },
+      "UPDATE7" : {
+        "action" : "update",
+        "sources" : [
+          "UPDATE3",
+          "LOAD_DATASET14"
+        ],
+        "parameters" : {
+          "leftKeys" : [
+            "AccountExternalId"
+          ],
+          "rightKeys" : [
+            "External_ID__c"
+          ],
+          "updateColumns" : {
+            "AccountId" : "Id",
+            "AccountName" : "Name"
+          }
+        }
+      },
+      "UPDATE8" : {
+        "action" : "update",
+        "sources" : [
+          "FORMULA35",
+          "LOAD_DATASET14"
+        ],
+        "parameters" : {
+          "leftKeys" : [
+            "AccountExternalId"
+          ],
+          "rightKeys" : [
+            "External_ID__c"
+          ],
+          "updateColumns" : {
+            "AccountId" : "Id",
+            "AccountName" : "Name"
+          }
         }
       }
     },
@@ -269,7 +2361,7 @@
           "label" : "StnryAssetEnvrSrc",
           "type" : "LOAD_DATASET",
           "top" : 112,
-          "left" : 112,
+          "left" : 250.2,
           "parameters" : {
             "sampleSize" : 2000
           }
@@ -278,7 +2370,7 @@
           "label" : "Demo | Water Risk",
           "type" : "LOAD_DATASET",
           "top" : 252,
-          "left" : 112,
+          "left" : 250.2,
           "parameters" : {
             "sampleSize" : 2000
           }
@@ -287,7 +2379,7 @@
           "label" : "Demo | Water Management",
           "type" : "LOAD_DATASET",
           "top" : 392,
-          "left" : 112,
+          "left" : 250.2,
           "parameters" : {
             "sampleSize" : 2000
           }
@@ -296,35 +2388,35 @@
           "label" : "Update Water Risk",
           "description" : "",
           "type" : "UPDATE",
-          "top" : 252,
-          "left" : 252
+          "top" : 112,
+          "left" : 390.2
         },
         "OUTPUT0" : {
           "label" : "Save Water Risk",
           "description" : "",
           "type" : "OUTPUT",
-          "top" : 252,
-          "left" : 392
+          "top" : 112,
+          "left" : 810.2
         },
         "UPDATE1" : {
           "label" : "Update Water Management",
           "description" : "",
           "type" : "UPDATE",
-          "top" : 392,
-          "left" : 252
+          "top" : 252,
+          "left" : 390.2
         },
         "OUTPUT1" : {
           "label" : "Save Water Management",
           "description" : "",
           "type" : "OUTPUT",
-          "top" : 392,
-          "left" : 392
+          "top" : 252,
+          "left" : 810.2
         },
         "LOAD_DATASET3" : {
           "label" : "CrbnCreditProject",
           "type" : "LOAD_DATASET",
-          "top" : 532,
-          "left" : 112,
+          "top" : 952,
+          "left" : 250.2,
           "parameters" : {
             "sampleSize" : 2000
           }
@@ -332,8 +2424,8 @@
         "LOAD_DATASET4" : {
           "label" : "Demo | Projects and Credits",
           "type" : "LOAD_DATASET",
-          "top" : 672,
-          "left" : 112,
+          "top" : 1092,
+          "left" : 250.2,
           "parameters" : {
             "sampleSize" : 2000
           }
@@ -342,15 +2434,1019 @@
           "label" : "Update Projects and Credits",
           "description" : "",
           "type" : "UPDATE",
-          "top" : 672,
-          "left" : 253.3
+          "top" : 952,
+          "left" : 390.2
         },
         "OUTPUT2" : {
           "label" : "Save Projects and Credits",
           "description" : "",
           "type" : "OUTPUT",
+          "top" : 952,
+          "left" : 670.2
+        },
+        "LOAD_DATASET5" : {
+          "label" : "Demo | Audit Dashboard",
+          "type" : "LOAD_DATASET",
+          "top" : 532,
+          "left" : 110.19999999999999,
+          "parameters" : {
+            "sampleSize" : 2000
+          }
+        },
+        "TRANSFORM0" : {
+          "label" : "Timeshifting for Audit",
+          "description" : "",
+          "type" : "TRANSFORM",
+          "top" : 532,
+          "left" : 250.2,
+          "graph" : {
+            "FORMULA0" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "Formula"
+            },
+            "FORMULA1" : {
+              "parameters" : {
+                "type" : "DATE_ADD_SUBTRACT_UI"
+              },
+              "label" : "Audit Aux Date"
+            },
+            "DROP_FIELDS0" : {
+              "label" : "Audit Drop Dates"
+            },
+            "FORMULA2" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "Audit Shift Dates"
+            },
+            "DROP_FIELDS1" : {
+              "label" : "Audit Drop Aux Columns"
+            },
+            "FORMULA3" : {
+              "parameters" : {
+                "type" : "DATE_NOW_UI"
+              },
+              "label" : "Audit Add LPD"
+            }
+          },
+          "connectors" : [
+            {
+              "source" : "FORMULA0",
+              "target" : "FORMULA1"
+            },
+            {
+              "source" : "FORMULA1",
+              "target" : "DROP_FIELDS0"
+            },
+            {
+              "source" : "DROP_FIELDS0",
+              "target" : "FORMULA2"
+            },
+            {
+              "source" : "FORMULA2",
+              "target" : "DROP_FIELDS1"
+            },
+            {
+              "source" : "DROP_FIELDS1",
+              "target" : "FORMULA3"
+            }
+          ]
+        },
+        "UPDATE3" : {
+          "label" : "Update Asset in Audit",
+          "description" : "",
+          "type" : "UPDATE",
+          "top" : 392,
+          "left" : 390.2
+        },
+        "OUTPUT3" : {
+          "label" : "Save Audit",
+          "description" : "",
+          "type" : "OUTPUT",
+          "top" : 392,
+          "left" : 670.2
+        },
+        "LOAD_DATASET6" : {
+          "label" : "Demo | Net Zero Cloud",
+          "type" : "LOAD_DATASET",
+          "top" : 1232,
+          "left" : 250.2,
+          "parameters" : {
+            "sampleSize" : 2000
+          }
+        },
+        "TRANSFORM1" : {
+          "label" : "Timeshifting for NZC",
+          "description" : "",
+          "type" : "TRANSFORM",
+          "top" : 1232,
+          "left" : 390.2,
+          "graph" : {
+            "FORMULA4" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "NZC ElapsedYears"
+            },
+            "FORMULA5" : {
+              "parameters" : {
+                "type" : "DATE_ADD_SUBTRACT_UI"
+              },
+              "label" : "NZC Aux Date"
+            },
+            "DROP_FIELDS2" : {
+              "label" : "NZC Drop Dates"
+            },
+            "FORMULA6" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "NZC Shift Dates"
+            },
+            "DROP_FIELDS3" : {
+              "label" : "NZC Drop Aux Columns"
+            },
+            "FORMULA7" : {
+              "parameters" : {
+                "type" : "DATE_NOW_UI"
+              },
+              "label" : "NZC add LPD"
+            }
+          },
+          "connectors" : [
+            {
+              "source" : "FORMULA4",
+              "target" : "FORMULA5"
+            },
+            {
+              "source" : "FORMULA5",
+              "target" : "DROP_FIELDS2"
+            },
+            {
+              "source" : "DROP_FIELDS2",
+              "target" : "FORMULA6"
+            },
+            {
+              "source" : "FORMULA6",
+              "target" : "DROP_FIELDS3"
+            },
+            {
+              "source" : "DROP_FIELDS3",
+              "target" : "FORMULA7"
+            }
+          ]
+        },
+        "OUTPUT4" : {
+          "label" : "Save NZC",
+          "description" : "",
+          "type" : "OUTPUT",
+          "top" : 1232,
+          "left" : 530.2
+        },
+        "LOAD_DATASET7" : {
+          "label" : "Demo | Emission Activity Tab",
+          "type" : "LOAD_DATASET",
+          "top" : 1372,
+          "left" : 250.2,
+          "parameters" : {
+            "sampleSize" : 2000
+          }
+        },
+        "TRANSFORM2" : {
+          "label" : "Timeshifting for E.A.T.",
+          "description" : "",
+          "type" : "TRANSFORM",
+          "top" : 1372,
+          "left" : 390.2,
+          "graph" : {
+            "FORMULA8" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "EAT ElapsedYears"
+            },
+            "FORMULA9" : {
+              "parameters" : {
+                "type" : "DATE_ADD_SUBTRACT_UI"
+              },
+              "label" : "EAT Aus Date"
+            },
+            "DROP_FIELDS4" : {
+              "label" : "EAT Drop Dates"
+            },
+            "FORMULA10" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "EAT Shift Dates"
+            },
+            "DROP_FIELDS5" : {
+              "label" : "EAT Drop Aux Columns"
+            },
+            "FORMULA11" : {
+              "parameters" : {
+                "type" : "DATE_NOW_UI"
+              },
+              "label" : "EAT add LPD"
+            }
+          },
+          "connectors" : [
+            {
+              "source" : "FORMULA8",
+              "target" : "FORMULA9"
+            },
+            {
+              "source" : "FORMULA9",
+              "target" : "DROP_FIELDS4"
+            },
+            {
+              "source" : "DROP_FIELDS4",
+              "target" : "FORMULA10"
+            },
+            {
+              "source" : "FORMULA10",
+              "target" : "DROP_FIELDS5"
+            },
+            {
+              "source" : "DROP_FIELDS5",
+              "target" : "FORMULA11"
+            }
+          ]
+        },
+        "OUTPUT5" : {
+          "label" : "Save EAT",
+          "description" : "",
+          "type" : "OUTPUT",
+          "top" : 1372,
+          "left" : 530.2
+        },
+        "LOAD_DATASET8" : {
+          "label" : "Demo | Carbon Emission Forecast",
+          "type" : "LOAD_DATASET",
+          "top" : 1512,
+          "left" : 250.2,
+          "parameters" : {
+            "sampleSize" : 2000
+          }
+        },
+        "TRANSFORM3" : {
+          "label" : "Timeshifting for CEF",
+          "description" : "",
+          "type" : "TRANSFORM",
+          "top" : 1512,
+          "left" : 390.2,
+          "graph" : {
+            "FORMULA12" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "DEF ElapsedYears"
+            },
+            "FORMULA13" : {
+              "parameters" : {
+                "type" : "DATE_ADD_SUBTRACT_UI"
+              },
+              "label" : "CEF Aux Date"
+            },
+            "DROP_FIELDS6" : {
+              "label" : "CEF Drop Dates"
+            },
+            "FORMULA14" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "CEF Shift Dates"
+            },
+            "DROP_FIELDS7" : {
+              "label" : "CEF Drop Aux Columns"
+            },
+            "FORMULA15" : {
+              "parameters" : {
+                "type" : "DATE_NOW_UI"
+              },
+              "label" : "CEF add LPD"
+            }
+          },
+          "connectors" : [
+            {
+              "source" : "FORMULA12",
+              "target" : "FORMULA13"
+            },
+            {
+              "source" : "FORMULA13",
+              "target" : "DROP_FIELDS6"
+            },
+            {
+              "source" : "DROP_FIELDS6",
+              "target" : "FORMULA14"
+            },
+            {
+              "source" : "FORMULA14",
+              "target" : "DROP_FIELDS7"
+            },
+            {
+              "source" : "DROP_FIELDS7",
+              "target" : "FORMULA15"
+            }
+          ]
+        },
+        "OUTPUT6" : {
+          "label" : "Save CEF",
+          "description" : "",
+          "type" : "OUTPUT",
+          "top" : 1512,
+          "left" : 530.2
+        },
+        "LOAD_DATASET9" : {
+          "label" : "Demo | NZC Scope 3 Overview",
+          "type" : "LOAD_DATASET",
+          "top" : 1652,
+          "left" : 250.2,
+          "parameters" : {
+            "sampleSize" : 2000
+          }
+        },
+        "TRANSFORM4" : {
+          "label" : "Timeshifting for Scope3",
+          "description" : "",
+          "type" : "TRANSFORM",
+          "top" : 1652,
+          "left" : 390.2,
+          "graph" : {
+            "FORMULA16" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "S30 ElapsedYears"
+            },
+            "FORMULA17" : {
+              "parameters" : {
+                "type" : "DATE_ADD_SUBTRACT_UI"
+              },
+              "label" : "S3O Aux Date"
+            },
+            "DROP_FIELDS8" : {
+              "label" : "S3O Drop Dates"
+            },
+            "FORMULA18" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "S3O Shift Dates"
+            },
+            "DROP_FIELDS9" : {
+              "label" : "S3O Drop Aux Columns"
+            },
+            "FORMULA19" : {
+              "parameters" : {
+                "type" : "DATE_NOW_UI"
+              },
+              "label" : "S3O add LPD"
+            }
+          },
+          "connectors" : [
+            {
+              "source" : "FORMULA16",
+              "target" : "FORMULA17"
+            },
+            {
+              "source" : "FORMULA17",
+              "target" : "DROP_FIELDS8"
+            },
+            {
+              "source" : "DROP_FIELDS8",
+              "target" : "FORMULA18"
+            },
+            {
+              "source" : "FORMULA18",
+              "target" : "DROP_FIELDS9"
+            },
+            {
+              "source" : "DROP_FIELDS9",
+              "target" : "FORMULA19"
+            }
+          ]
+        },
+        "OUTPUT7" : {
+          "label" : "Save S3O",
+          "description" : "",
+          "type" : "OUTPUT",
+          "top" : 1652,
+          "left" : 530.2
+        },
+        "LOAD_DATASET10" : {
+          "label" : "Demo | NZC Scope 3 Procurement",
+          "type" : "LOAD_DATASET",
+          "top" : 1792,
+          "left" : 250.2,
+          "parameters" : {
+            "sampleSize" : 2000
+          }
+        },
+        "TRANSFORM5" : {
+          "label" : "S3P Timeshifting",
+          "description" : "",
+          "type" : "TRANSFORM",
+          "top" : 1792,
+          "left" : 390.2,
+          "graph" : {
+            "FORMULA20" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "S3P ElapsedYears"
+            },
+            "FORMULA21" : {
+              "parameters" : {
+                "type" : "DATE_ADD_SUBTRACT_UI"
+              },
+              "label" : "S3P Aux Date"
+            },
+            "DROP_FIELDS10" : {
+              "label" : "S3P Drop Dates"
+            },
+            "FORMULA22" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "S3P Shift Dates"
+            },
+            "DROP_FIELDS11" : {
+              "label" : "S3P Drop Aux Columns"
+            },
+            "FORMULA23" : {
+              "parameters" : {
+                "type" : "DATE_NOW_UI"
+              },
+              "label" : "S3P add LPD"
+            }
+          },
+          "connectors" : [
+            {
+              "source" : "FORMULA20",
+              "target" : "FORMULA21"
+            },
+            {
+              "source" : "FORMULA21",
+              "target" : "DROP_FIELDS10"
+            },
+            {
+              "source" : "DROP_FIELDS10",
+              "target" : "FORMULA22"
+            },
+            {
+              "source" : "FORMULA22",
+              "target" : "DROP_FIELDS11"
+            },
+            {
+              "source" : "DROP_FIELDS11",
+              "target" : "FORMULA23"
+            }
+          ]
+        },
+        "OUTPUT8" : {
+          "label" : "Save S3P",
+          "description" : "",
+          "type" : "OUTPUT",
+          "top" : 1792,
+          "left" : 530.2
+        },
+        "LOAD_DATASET11" : {
+          "label" : "Demo | Supplier Dashboard",
+          "type" : "LOAD_DATASET",
+          "top" : 1932,
+          "left" : 250.2,
+          "parameters" : {
+            "sampleSize" : 2000
+          }
+        },
+        "TRANSFORM6" : {
+          "label" : "Supp Timeshifting",
+          "description" : "",
+          "type" : "TRANSFORM",
+          "top" : 1932,
+          "left" : 390.2,
+          "graph" : {
+            "FORMULA24" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "Supp ElapsedYears"
+            },
+            "FORMULA25" : {
+              "parameters" : {
+                "type" : "DATE_ADD_SUBTRACT_UI"
+              },
+              "label" : "Supp Aux Date"
+            },
+            "DROP_FIELDS12" : {
+              "label" : "Supp Drop Dates"
+            },
+            "FORMULA26" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "Supp Shift Dates"
+            },
+            "DROP_FIELDS13" : {
+              "label" : "Supp Drop Aux Columns"
+            },
+            "FORMULA27" : {
+              "parameters" : {
+                "type" : "DATE_NOW_UI"
+              },
+              "label" : "Supp add LPD"
+            }
+          },
+          "connectors" : [
+            {
+              "source" : "FORMULA24",
+              "target" : "FORMULA25"
+            },
+            {
+              "source" : "FORMULA25",
+              "target" : "DROP_FIELDS12"
+            },
+            {
+              "source" : "DROP_FIELDS12",
+              "target" : "FORMULA26"
+            },
+            {
+              "source" : "FORMULA26",
+              "target" : "DROP_FIELDS13"
+            },
+            {
+              "source" : "DROP_FIELDS13",
+              "target" : "FORMULA27"
+            }
+          ]
+        },
+        "OUTPUT9" : {
+          "label" : "Save Supp",
+          "description" : "",
+          "type" : "OUTPUT",
+          "top" : 1932,
+          "left" : 530.2
+        },
+        "LOAD_DATASET12" : {
+          "label" : "Demo | Waste Management Dataset",
+          "type" : "LOAD_DATASET",
+          "top" : 2072,
+          "left" : 250.2,
+          "parameters" : {
+            "sampleSize" : 2000
+          }
+        },
+        "TRANSFORM7" : {
+          "label" : "Wst Timeshifting",
+          "description" : "",
+          "type" : "TRANSFORM",
+          "top" : 2072,
+          "left" : 390.2,
+          "graph" : {
+            "FORMULA28" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "Wst ElapsedYears"
+            },
+            "FORMULA29" : {
+              "parameters" : {
+                "type" : "DATE_ADD_SUBTRACT_UI"
+              },
+              "label" : "Wst Aux Date"
+            },
+            "DROP_FIELDS14" : {
+              "label" : "Wst Drop Dates"
+            },
+            "FORMULA30" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "Wst Shift Dates"
+            },
+            "DROP_FIELDS15" : {
+              "label" : "Wst Drop Aux Columns"
+            },
+            "FORMULA31" : {
+              "parameters" : {
+                "type" : "DATE_NOW_UI"
+              },
+              "label" : "Wst add LPD"
+            }
+          },
+          "connectors" : [
+            {
+              "source" : "FORMULA28",
+              "target" : "FORMULA29"
+            },
+            {
+              "source" : "FORMULA29",
+              "target" : "DROP_FIELDS14"
+            },
+            {
+              "source" : "DROP_FIELDS14",
+              "target" : "FORMULA30"
+            },
+            {
+              "source" : "FORMULA30",
+              "target" : "DROP_FIELDS15"
+            },
+            {
+              "source" : "DROP_FIELDS15",
+              "target" : "FORMULA31"
+            }
+          ]
+        },
+        "OUTPUT10" : {
+          "label" : "Save Wst",
+          "description" : "",
+          "type" : "OUTPUT",
+          "top" : 2072,
+          "left" : 530.2
+        },
+        "TRANSFORM8" : {
+          "label" : "Wtr Risk Timeshifting",
+          "description" : "",
+          "type" : "TRANSFORM",
+          "top" : 112,
+          "left" : 530.2,
+          "graph" : {
+            "FORMULA32" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "Wtr Risk ElapsedYears"
+            },
+            "FORMULA33" : {
+              "parameters" : {
+                "type" : "DATE_ADD_SUBTRACT_UI"
+              },
+              "label" : "Wtr Risk Aux Date"
+            },
+            "DROP_FIELDS16" : {
+              "label" : "Wtr Risk Drop Dates"
+            },
+            "FORMULA34" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "Wtr Risk Shift Dates"
+            },
+            "DROP_FIELDS17" : {
+              "label" : "Wtr Risk Drop Aux Columns"
+            },
+            "FORMULA35" : {
+              "parameters" : {
+                "type" : "DATE_NOW_UI"
+              },
+              "label" : "Wtr Risk add LPD"
+            }
+          },
+          "connectors" : [
+            {
+              "source" : "FORMULA32",
+              "target" : "FORMULA33"
+            },
+            {
+              "source" : "FORMULA33",
+              "target" : "DROP_FIELDS16"
+            },
+            {
+              "source" : "DROP_FIELDS16",
+              "target" : "FORMULA34"
+            },
+            {
+              "source" : "FORMULA34",
+              "target" : "DROP_FIELDS17"
+            },
+            {
+              "source" : "DROP_FIELDS17",
+              "target" : "FORMULA35"
+            }
+          ]
+        },
+        "TRANSFORM9" : {
+          "label" : "Wtr Mgmt Timeshifting",
+          "description" : "",
+          "type" : "TRANSFORM",
+          "top" : 252,
+          "left" : 530.2,
+          "graph" : {
+            "FORMULA36" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "Wtr Mgmt ElapsedYears"
+            },
+            "FORMULA37" : {
+              "parameters" : {
+                "type" : "DATE_ADD_SUBTRACT_UI"
+              },
+              "label" : "Wtr Mgmt Aux Date"
+            },
+            "DROP_FIELDS18" : {
+              "label" : "Wtr Mgmt Drop Dates"
+            },
+            "FORMULA38" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "Wtr Mgmt Shift Dates"
+            },
+            "DROP_FIELDS19" : {
+              "label" : "Wtr Mgmt Drop Aux Columns"
+            },
+            "FORMULA39" : {
+              "parameters" : {
+                "type" : "DATE_NOW_UI"
+              },
+              "label" : "Wtr Mgmt add LPD"
+            }
+          },
+          "connectors" : [
+            {
+              "source" : "FORMULA36",
+              "target" : "FORMULA37"
+            },
+            {
+              "source" : "FORMULA37",
+              "target" : "DROP_FIELDS18"
+            },
+            {
+              "source" : "DROP_FIELDS18",
+              "target" : "FORMULA38"
+            },
+            {
+              "source" : "FORMULA38",
+              "target" : "DROP_FIELDS19"
+            },
+            {
+              "source" : "DROP_FIELDS19",
+              "target" : "FORMULA39"
+            }
+          ]
+        },
+        "LOAD_DATASET13" : {
+          "label" : "Demo | Building Energy Intensity",
+          "type" : "LOAD_DATASET",
           "top" : 672,
-          "left" : 392
+          "left" : 110.19999999999999,
+          "parameters" : {
+            "sampleSize" : 2000
+          }
+        },
+        "TRANSFORM10" : {
+          "label" : "B.E.I. Timeshifting",
+          "description" : "",
+          "type" : "TRANSFORM",
+          "top" : 672,
+          "left" : 250.2,
+          "graph" : {
+            "FORMULA40" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "B.E.I. ElapsedYears"
+            },
+            "FORMULA41" : {
+              "parameters" : {
+                "type" : "DATE_ADD_SUBTRACT_UI"
+              },
+              "label" : "B.E.I. Aux Date"
+            },
+            "DROP_FIELDS20" : {
+              "label" : "B.E.I. Drop Dates"
+            },
+            "FORMULA42" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "B.E.I. Shift Dates"
+            },
+            "DROP_FIELDS21" : {
+              "label" : "B.E.I. Drop Aux Columns"
+            },
+            "FORMULA43" : {
+              "parameters" : {
+                "type" : "DATE_NOW_UI"
+              },
+              "label" : "B.E.I. add LPD"
+            }
+          },
+          "connectors" : [
+            {
+              "source" : "FORMULA40",
+              "target" : "FORMULA41"
+            },
+            {
+              "source" : "FORMULA41",
+              "target" : "DROP_FIELDS20"
+            },
+            {
+              "source" : "DROP_FIELDS20",
+              "target" : "FORMULA42"
+            },
+            {
+              "source" : "FORMULA42",
+              "target" : "DROP_FIELDS21"
+            },
+            {
+              "source" : "DROP_FIELDS21",
+              "target" : "FORMULA43"
+            }
+          ]
+        },
+        "UPDATE4" : {
+          "label" : "Update Assets in B.E.I.",
+          "description" : "",
+          "type" : "UPDATE",
+          "top" : 532,
+          "left" : 390.2
+        },
+        "OUTPUT11" : {
+          "label" : "Save B.E.I.",
+          "description" : "",
+          "type" : "OUTPUT",
+          "top" : 532,
+          "left" : 670.2
+        },
+        "LOAD_DATASET14" : {
+          "label" : "Account",
+          "type" : "LOAD_DATASET",
+          "top" : 672,
+          "left" : 390.2,
+          "parameters" : {
+            "sampleSize" : 2000
+          }
+        },
+        "UPDATE5" : {
+          "label" : "Update Account in B.E.I.",
+          "description" : "",
+          "type" : "UPDATE",
+          "top" : 532,
+          "left" : 530.2
+        },
+        "TRANSFORM11" : {
+          "label" : "Proj Timeshifting",
+          "description" : "",
+          "type" : "TRANSFORM",
+          "top" : 952,
+          "left" : 530.2,
+          "graph" : {
+            "FORMULA44" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "Proj ElapsedYears"
+            },
+            "FORMULA45" : {
+              "parameters" : {
+                "type" : "DATE_ADD_SUBTRACT_UI"
+              },
+              "label" : "Proj Aux Date"
+            },
+            "DROP_FIELDS22" : {
+              "label" : "Proj Drop Dates"
+            },
+            "FORMULA46" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "Proj Shift Dates"
+            },
+            "DROP_FIELDS23" : {
+              "label" : "Proj Drop Aux Columns"
+            },
+            "FORMULA47" : {
+              "parameters" : {
+                "type" : "DATE_NOW_UI"
+              },
+              "label" : "Proj add LPD"
+            }
+          },
+          "connectors" : [
+            {
+              "source" : "FORMULA44",
+              "target" : "FORMULA45"
+            },
+            {
+              "source" : "FORMULA45",
+              "target" : "DROP_FIELDS22"
+            },
+            {
+              "source" : "DROP_FIELDS22",
+              "target" : "FORMULA46"
+            },
+            {
+              "source" : "FORMULA46",
+              "target" : "DROP_FIELDS23"
+            },
+            {
+              "source" : "DROP_FIELDS23",
+              "target" : "FORMULA47"
+            }
+          ]
+        },
+        "LOAD_DATASET15" : {
+          "label" : "Demo | Carbon Credit Allocation",
+          "type" : "LOAD_DATASET",
+          "top" : 2352.7,
+          "left" : 252,
+          "parameters" : {
+            "sampleSize" : 2000
+          }
+        },
+        "TRANSFORM12" : {
+          "label" : "CC. Alloc. Timeshifting",
+          "description" : "",
+          "type" : "TRANSFORM",
+          "top" : 2212,
+          "left" : 390.2,
+          "graph" : {
+            "FORMULA48" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "CC. Alloc. ElapsedYears"
+            },
+            "FORMULA49" : {
+              "parameters" : {
+                "type" : "DATE_ADD_SUBTRACT_UI"
+              },
+              "label" : "CC. Alloc. Aux Date"
+            },
+            "DROP_FIELDS24" : {
+              "label" : "CC. Alloc. Drop Dates"
+            },
+            "FORMULA50" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "CC. Alloc. Shift Dates"
+            },
+            "DROP_FIELDS25" : {
+              "label" : "CC. Alloc. Drop Aux Columns"
+            },
+            "FORMULA51" : {
+              "parameters" : {
+                "type" : "DATE_NOW_UI"
+              },
+              "label" : "CC. Alloc. add LPD"
+            }
+          },
+          "connectors" : [
+            {
+              "source" : "FORMULA48",
+              "target" : "FORMULA49"
+            },
+            {
+              "source" : "FORMULA49",
+              "target" : "DROP_FIELDS24"
+            },
+            {
+              "source" : "DROP_FIELDS24",
+              "target" : "FORMULA50"
+            },
+            {
+              "source" : "FORMULA50",
+              "target" : "DROP_FIELDS25"
+            },
+            {
+              "source" : "DROP_FIELDS25",
+              "target" : "FORMULA51"
+            }
+          ]
+        },
+        "OUTPUT12" : {
+          "label" : "Save CC. Alloc.",
+          "description" : "",
+          "type" : "OUTPUT",
+          "top" : 2212,
+          "left" : 530.2
+        },
+        "UPDATE6" : {
+          "label" : "Update Account in Wtr Mgmt",
+          "description" : "",
+          "type" : "UPDATE",
+          "top" : 252,
+          "left" : 670.2
+        },
+        "UPDATE7" : {
+          "label" : "Update Account in B.E.I.",
+          "description" : "",
+          "type" : "UPDATE",
+          "top" : 392,
+          "left" : 530.2
+        },
+        "UPDATE8" : {
+          "label" : "Update Account in Wtr Risk",
+          "description" : "",
+          "type" : "UPDATE",
+          "top" : 112,
+          "left" : 670.2
         }
       },
       "connectors" : [
@@ -363,10 +3459,6 @@
           "target" : "UPDATE0"
         },
         {
-          "source" : "UPDATE0",
-          "target" : "OUTPUT0"
-        },
-        {
           "source" : "LOAD_DATASET2",
           "target" : "UPDATE1"
         },
@@ -375,7 +3467,7 @@
           "target" : "UPDATE1"
         },
         {
-          "source" : "UPDATE1",
+          "source" : "UPDATE6",
           "target" : "OUTPUT1"
         },
         {
@@ -387,12 +3479,157 @@
           "target" : "UPDATE2"
         },
         {
-          "source" : "UPDATE2",
+          "source" : "TRANSFORM11",
           "target" : "OUTPUT2"
+        },
+        {
+          "source" : "LOAD_DATASET5",
+          "target" : "TRANSFORM0"
+        },
+        {
+          "source" : "TRANSFORM0",
+          "target" : "UPDATE3"
+        },
+        {
+          "source" : "LOAD_DATASET0",
+          "target" : "UPDATE3"
+        },
+        {
+          "source" : "UPDATE7",
+          "target" : "OUTPUT3"
+        },
+        {
+          "source" : "LOAD_DATASET6",
+          "target" : "TRANSFORM1"
+        },
+        {
+          "source" : "TRANSFORM1",
+          "target" : "OUTPUT4"
+        },
+        {
+          "source" : "LOAD_DATASET7",
+          "target" : "TRANSFORM2"
+        },
+        {
+          "source" : "TRANSFORM2",
+          "target" : "OUTPUT5"
+        },
+        {
+          "source" : "LOAD_DATASET8",
+          "target" : "TRANSFORM3"
+        },
+        {
+          "source" : "TRANSFORM3",
+          "target" : "OUTPUT6"
+        },
+        {
+          "source" : "LOAD_DATASET9",
+          "target" : "TRANSFORM4"
+        },
+        {
+          "source" : "TRANSFORM4",
+          "target" : "OUTPUT7"
+        },
+        {
+          "source" : "LOAD_DATASET10",
+          "target" : "TRANSFORM5"
+        },
+        {
+          "source" : "TRANSFORM5",
+          "target" : "OUTPUT8"
+        },
+        {
+          "source" : "LOAD_DATASET11",
+          "target" : "TRANSFORM6"
+        },
+        {
+          "source" : "TRANSFORM6",
+          "target" : "OUTPUT9"
+        },
+        {
+          "source" : "LOAD_DATASET12",
+          "target" : "TRANSFORM7"
+        },
+        {
+          "source" : "TRANSFORM7",
+          "target" : "OUTPUT10"
+        },
+        {
+          "source" : "UPDATE0",
+          "target" : "TRANSFORM8"
+        },
+        {
+          "source" : "UPDATE8",
+          "target" : "OUTPUT0"
+        },
+        {
+          "source" : "UPDATE1",
+          "target" : "TRANSFORM9"
+        },
+        {
+          "source" : "LOAD_DATASET13",
+          "target" : "TRANSFORM10"
+        },
+        {
+          "source" : "TRANSFORM10",
+          "target" : "UPDATE4"
+        },
+        {
+          "source" : "LOAD_DATASET0",
+          "target" : "UPDATE4"
+        },
+        {
+          "source" : "UPDATE5",
+          "target" : "OUTPUT11"
+        },
+        {
+          "source" : "UPDATE4",
+          "target" : "UPDATE5"
+        },
+        {
+          "source" : "LOAD_DATASET14",
+          "target" : "UPDATE5"
+        },
+        {
+          "source" : "UPDATE2",
+          "target" : "TRANSFORM11"
+        },
+        {
+          "source" : "LOAD_DATASET15",
+          "target" : "TRANSFORM12"
+        },
+        {
+          "source" : "TRANSFORM12",
+          "target" : "OUTPUT12"
+        },
+        {
+          "source" : "TRANSFORM9",
+          "target" : "UPDATE6"
+        },
+        {
+          "source" : "LOAD_DATASET14",
+          "target" : "UPDATE6"
+        },
+        {
+          "source" : "UPDATE3",
+          "target" : "UPDATE7"
+        },
+        {
+          "source" : "LOAD_DATASET14",
+          "target" : "UPDATE7"
+        },
+        {
+          "source" : "TRANSFORM8",
+          "target" : "UPDATE8"
+        },
+        {
+          "source" : "LOAD_DATASET14",
+          "target" : "UPDATE8"
         }
       ],
       "hiddenColumns" : [ ]
-    }
+    },
+    "runMode" : "full"
   },
   "lastTime" : null
 }
