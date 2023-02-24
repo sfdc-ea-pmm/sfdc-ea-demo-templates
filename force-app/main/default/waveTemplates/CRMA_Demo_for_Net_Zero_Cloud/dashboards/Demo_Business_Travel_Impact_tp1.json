@@ -1,5 +1,5 @@
 {
-  "name" : "Demo_Business_Travel_Impact_tp",
+  "name" : "Demo_Business_Travel_Impact_tp1",
   "label" : "Business Travel Impact",
   "folder" : {
     "id" : "${App.Folder.Id}"
@@ -78,11 +78,15 @@
     ]
   },
   "state" : {
-    "dataSourceLinks" : [ ],
+    "dataSourceLinksInfo" : {
+      "enableAutomaticLinking" : false,
+      "excludeRelationships" : [ ],
+      "links" : [ ]
+    },
     "filters" : [
       {
         "dataset" : {
-          "name" : "${App.Datasets.Demo_Net_Zero_Cloud_tp.Name}"
+          "name" : "${App.Datasets.Demo_Net_Zero_Cloud.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -93,7 +97,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.Demo_Net_Zero_Cloud_tp.Name}"
+          "name" : "${App.Datasets.Demo_Net_Zero_Cloud.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -104,7 +108,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.Demo_Net_Zero_Cloud_tp.Name}"
+          "name" : "${App.Datasets.Demo_Net_Zero_Cloud.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -460,7 +464,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Net_Zero_Cloud_tp.Name}"
+            "name" : "${App.Datasets.Demo_Net_Zero_Cloud.Name}"
           }
         ],
         "isGlobal" : false,
@@ -491,7 +495,6 @@
           "parameters" : {
             "autoFitMode" : "keepLabels",
             "centerText" : "",
-            "showValues" : true,
             "bins" : {
               "breakpoints" : {
                 "high" : 100,
@@ -611,7 +614,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Net_Zero_Cloud_tp.Name}"
+            "name" : "${App.Datasets.Demo_Net_Zero_Cloud.Name}"
           }
         ],
         "isGlobal" : false,
@@ -640,7 +643,27 @@
         "useGlobal" : false,
         "visualizationParameters" : {
           "parameters" : {
-            "showValues" : true,
+            "autoFitMode" : "keepLabels",
+            "bins" : {
+              "breakpoints" : {
+                "high" : 100,
+                "low" : 0
+              },
+              "bands" : {
+                "high" : {
+                  "color" : "#008000",
+                  "label" : ""
+                },
+                "low" : {
+                  "color" : "#B22222",
+                  "label" : ""
+                },
+                "medium" : {
+                  "color" : "#ffa500",
+                  "label" : ""
+                }
+              }
+            },
             "showPoints" : false,
             "legend" : {
               "descOrder" : false,
@@ -667,6 +690,15 @@
             },
             "visualizationType" : "time",
             "missingValue" : "connect",
+            "dashLine" : {
+              "measures" : "",
+              "showDashLine" : false
+            },
+            "timeAxis" : {
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : ""
+            },
             "title" : {
               "fontSize" : 14,
               "subtitleFontSize" : 11,
@@ -686,8 +718,38 @@
               "type" : "x",
               "chartsPerLine" : 4
             },
+            "fillArea" : true,
+            "columnMap" : {
+              "split" : [ ],
+              "timeAxis" : [
+                "Date_Year"
+              ],
+              "trellis" : [ ],
+              "plots" : [
+                "avg_Emissions_from_Business_Travel"
+              ]
+            },
+            "showActionMenu" : true,
             "showZero" : true,
+            "measureAxis2" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
             "valueType" : "none",
+            "measureAxis1" : {
+              "sqrtScale" : false,
+              "showTitle" : true,
+              "showAxis" : true,
+              "title" : "tCO2e",
+              "customDomain" : {
+                "showDomain" : false
+              }
+            },
             "theme" : "wave",
             "dimensionAxis" : {
               "showTitle" : true,
@@ -709,66 +771,6 @@
               "showDrawArea" : false,
               "bounding1" : "",
               "bounding2" : ""
-            },
-            "autoFitMode" : "keepLabels",
-            "bins" : {
-              "breakpoints" : {
-                "high" : 100,
-                "low" : 0
-              },
-              "bands" : {
-                "high" : {
-                  "color" : "#008000",
-                  "label" : ""
-                },
-                "low" : {
-                  "color" : "#B22222",
-                  "label" : ""
-                },
-                "medium" : {
-                  "color" : "#ffa500",
-                  "label" : ""
-                }
-              }
-            },
-            "dashLine" : {
-              "measures" : "",
-              "showDashLine" : false
-            },
-            "timeAxis" : {
-              "showTitle" : true,
-              "showAxis" : true,
-              "title" : ""
-            },
-            "fillArea" : true,
-            "columnMap" : {
-              "split" : [ ],
-              "timeAxis" : [
-                "Date_Year"
-              ],
-              "trellis" : [ ],
-              "plots" : [
-                "avg_Emissions_from_Business_Travel"
-              ]
-            },
-            "showActionMenu" : true,
-            "measureAxis2" : {
-              "sqrtScale" : false,
-              "showTitle" : true,
-              "showAxis" : true,
-              "title" : "",
-              "customDomain" : {
-                "showDomain" : false
-              }
-            },
-            "measureAxis1" : {
-              "sqrtScale" : false,
-              "showTitle" : true,
-              "showAxis" : true,
-              "title" : "tCO2e",
-              "customDomain" : {
-                "showDomain" : false
-              }
             }
           },
           "type" : "chart"
@@ -778,7 +780,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Net_Zero_Cloud_tp.Name}"
+            "name" : "${App.Datasets.Demo_Net_Zero_Cloud.Name}"
           }
         ],
         "isGlobal" : false,
@@ -809,7 +811,6 @@
           "parameters" : {
             "autoFitMode" : "keepLabels",
             "centerText" : "",
-            "showValues" : true,
             "bins" : {
               "breakpoints" : {
                 "high" : 100,
@@ -929,7 +930,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Net_Zero_Cloud_tp.Name}"
+            "name" : "${App.Datasets.Demo_Net_Zero_Cloud.Name}"
           }
         ],
         "isGlobal" : false,
@@ -967,7 +968,6 @@
         "visualizationParameters" : {
           "parameters" : {
             "autoFitMode" : "keepLabels",
-            "showValues" : true,
             "bins" : {
               "breakpoints" : {
                 "high" : 100,
@@ -1059,7 +1059,9 @@
                 "showDomain" : false
               }
             },
+            "valueType" : "compactNumber",
             "theme" : "wave",
+            "compactDecimalDigits" : -1,
             "dimensionAxis" : {
               "showTitle" : false,
               "customSize" : "auto",
@@ -1083,7 +1085,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Net_Zero_Cloud_tp.Name}"
+            "name" : "${App.Datasets.Demo_Net_Zero_Cloud.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1200,7 +1202,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Net_Zero_Cloud_tp.Name}"
+            "name" : "${App.Datasets.Demo_Net_Zero_Cloud.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1230,7 +1232,6 @@
         "visualizationParameters" : {
           "parameters" : {
             "autoFitMode" : "keepLabels",
-            "showValues" : false,
             "bins" : {
               "breakpoints" : {
                 "high" : 100,
@@ -1322,6 +1323,7 @@
                 "showDomain" : false
               }
             },
+            "valueType" : "none",
             "theme" : "wave",
             "dimensionAxis" : {
               "showTitle" : true,
@@ -1371,6 +1373,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : true
         },
         "type" : "text"
@@ -1384,7 +1387,7 @@
           "filters" : [
             {
               "dataset" : {
-                "name" : "${App.Datasets.Demo_Net_Zero_Cloud_tp.Name}"
+                "name" : "${App.Datasets.Demo_Net_Zero_Cloud.Name}"
               },
               "field" : "Country"
             }
@@ -1402,7 +1405,7 @@
           "filters" : [
             {
               "dataset" : {
-                "name" : "${App.Datasets.Demo_Net_Zero_Cloud_tp.Name}"
+                "name" : "${App.Datasets.Demo_Net_Zero_Cloud.Name}"
               },
               "field" : "Date"
             }
@@ -1427,6 +1430,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : true
         },
         "type" : "text"
@@ -1449,6 +1453,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : true
         },
         "type" : "text"
@@ -1471,6 +1476,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : true
         },
         "type" : "text"
@@ -1534,7 +1540,7 @@
           "filters" : [
             {
               "dataset" : {
-                "name" : "${App.Datasets.Demo_Net_Zero_Cloud_tp.Name}"
+                "name" : "${App.Datasets.Demo_Net_Zero_Cloud.Name}"
               },
               "field" : "Vendor"
             }
@@ -1549,7 +1555,7 @@
           "alignmentY" : "center",
           "fit" : "fitwidth",
           "image" : {
-            "name" : "${App.Images['sus_iconpng5png1'].Name}",
+            "name" : "${App.Images['sus_iconpng5png11'].Name}",
             "namespace" : "${Org.Namespace}"
           }
         },
@@ -1573,13 +1579,13 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : true
         },
         "type" : "text"
       },
       "chart_6" : {
         "parameters" : {
-          "showValues" : true,
           "showPoints" : false,
           "legend" : {
             "descOrder" : false,
@@ -1732,6 +1738,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : true
         },
         "type" : "text"
@@ -1740,7 +1747,6 @@
         "parameters" : {
           "autoFitMode" : "keepLabels",
           "centerText" : "",
-          "showValues" : true,
           "bins" : {
             "breakpoints" : {
               "high" : 100,
@@ -1875,6 +1881,7 @@
               }
             ]
           },
+          "interactions" : [ ],
           "showActionMenu" : true
         },
         "type" : "text"
@@ -1882,7 +1889,6 @@
       "chart_7" : {
         "parameters" : {
           "autoFitMode" : "keepLabels",
-          "showValues" : true,
           "bins" : {
             "breakpoints" : {
               "high" : 100,
@@ -1975,8 +1981,10 @@
               "showDomain" : false
             }
           },
+          "valueType" : "compactNumber",
           "theme" : "bluegrassDark",
           "step" : "Cost_Center_Name_1",
+          "compactDecimalDigits" : -1,
           "dimensionAxis" : {
             "showTitle" : false,
             "customSize" : "auto",
@@ -1999,7 +2007,6 @@
         "parameters" : {
           "autoFitMode" : "keepLabels",
           "centerText" : "",
-          "showValues" : true,
           "bins" : {
             "breakpoints" : {
               "high" : 100,
@@ -2119,7 +2126,6 @@
       "chart_11" : {
         "parameters" : {
           "autoFitMode" : "keepLabels",
-          "showValues" : true,
           "bins" : {
             "breakpoints" : {
               "high" : 100,
@@ -2240,7 +2246,6 @@
       "chart_10" : {
         "parameters" : {
           "autoFitMode" : "keepLabels",
-          "showValues" : false,
           "bins" : {
             "breakpoints" : {
               "high" : 100,
@@ -2333,6 +2338,7 @@
               "showDomain" : false
             }
           },
+          "valueType" : "none",
           "theme" : "wave",
           "step" : "Vendor_1",
           "dimensionAxis" : {
