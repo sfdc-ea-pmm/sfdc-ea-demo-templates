@@ -489,6 +489,7 @@
         "parameters" : {
           "fields" : [
             "Emission_Category",
+            "AccountId",
             "Energy_Consumption",
             "Ground_Travel_Emissions_Category",
             "LastProcessedDate",
@@ -501,13 +502,15 @@
             "Emission_Type",
             "Emission_Source",
             "Country",
+            "AccountExternalId",
+            "GTE_Value",
             "Cost_Center_Name",
             "Electricity_Consumption_Value",
             "Energy_Consumption_Value",
             "Emission_Value",
             "Emissions_from_Business_Travel",
-            "GTE_Value",
-            "Carbon_Intensity"
+            "Carbon_Intensity",
+            "AccountName"
           ],
           "dataset" : {
             "type" : "analyticsDataset",
@@ -634,7 +637,7 @@
       "OUTPUT4" : {
         "action" : "save",
         "sources" : [
-          "FORMULA7"
+          "UPDATE10"
         ],
         "parameters" : {
           "fields" : [ ],
@@ -970,11 +973,14 @@
         "sources" : [ ],
         "parameters" : {
           "fields" : [
-            "Mesures",
+            "Measures",
             "Scope",
             "LastProcessedDate",
+            "AccountExternalId",
             "Date",
-            "Scope_Emissions"
+            "AccountName",
+            "Scope_Emissions",
+            "AccountId"
           ],
           "dataset" : {
             "type" : "analyticsDataset",
@@ -1101,7 +1107,7 @@
       "OUTPUT7" : {
         "action" : "save",
         "sources" : [
-          "FORMULA19"
+          "UPDATE11"
         ],
         "parameters" : {
           "fields" : [ ],
@@ -2353,6 +2359,215 @@
             "AccountName" : "Name"
           }
         }
+      },
+      "LOAD_DATASET16" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "Account",
+            "AccountId",
+            "Scope",
+            "LastProcessedDate",
+            "AccountExternalId",
+            "EmissionsLabel",
+            "Date",
+            "Emissions"
+          ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | Scope Emissions",
+            "name" : "${App.Datasets.Demo_Scope_Emissions.FullyQualifiedName}"
+          },
+          "sampleDetails" : {
+            "type" : "TopN",
+            "sortBy" : [ ]
+          }
+        }
+      },
+      "FORMULA52" : {
+        "action" : "formula",
+        "sources" : [
+          "LOAD_DATASET16"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "NUMBER",
+              "name" : "ElapsedYears",
+              "label" : "ElapsedYears",
+              "formulaExpression" : "year(now()) - year(LastProcessedDate)",
+              "precision" : 10,
+              "scale" : 0,
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "FORMULA53" : {
+        "action" : "formula",
+        "sources" : [
+          "FORMULA52"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "DateAux",
+              "label" : "DateAux",
+              "formulaExpression" : "Date - INTERVAL 0 DAY",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS26" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA53"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "LastProcessedDate",
+              "Date"
+            ]
+          }
+        }
+      },
+      "FORMULA54" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS26"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "Date",
+              "label" : "Date",
+              "formulaExpression" : "to_timestamp(to_unix_timestamp(DateAux) + 86400 * 365 * ElapsedYears)",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "DROP_FIELDS27" : {
+        "action" : "schema",
+        "sources" : [
+          "FORMULA54"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "ElapsedYears",
+              "DateAux"
+            ]
+          }
+        }
+      },
+      "FORMULA55" : {
+        "action" : "formula",
+        "sources" : [
+          "DROP_FIELDS27"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "DATETIME",
+              "name" : "LastProcessedDate",
+              "label" : "LastProcessedDate",
+              "formulaExpression" : "now()",
+              "format" : "yyyy-MM-dd",
+              "defaultValue" : ""
+            }
+          ]
+        }
+      },
+      "UPDATE9" : {
+        "action" : "update",
+        "sources" : [
+          "FORMULA55",
+          "LOAD_DATASET14"
+        ],
+        "parameters" : {
+          "leftKeys" : [
+            "AccountExternalId"
+          ],
+          "rightKeys" : [
+            "External_ID__c"
+          ],
+          "updateColumns" : {
+            "Account" : "Name",
+            "AccountId" : "Id"
+          }
+        }
+      },
+      "OUTPUT13" : {
+        "action" : "save",
+        "sources" : [
+          "UPDATE9"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "Demo | Scope Emissions",
+            "name" : "${App.Datasets.Demo_Scope_Emissions.Name}",
+            "folderName" : "${App.Folder.FullyQualifiedName}"
+          },
+          "measuresToCurrencies" : [ ]
+        }
+      },
+      "UPDATE10" : {
+        "action" : "update",
+        "sources" : [
+          "FORMULA7",
+          "LOAD_DATASET14"
+        ],
+        "parameters" : {
+          "leftKeys" : [
+            "AccountExternalId"
+          ],
+          "rightKeys" : [
+            "External_ID__c"
+          ],
+          "updateColumns" : {
+            "AccountId" : "Id",
+            "AccountName" : "Name"
+          }
+        }
+      },
+      "UPDATE11" : {
+        "action" : "update",
+        "sources" : [
+          "FORMULA19",
+          "LOAD_DATASET14"
+        ],
+        "parameters" : {
+          "leftKeys" : [
+            "AccountExternalId"
+          ],
+          "rightKeys" : [
+            "External_ID__c"
+          ],
+          "updateColumns" : {
+            "AccountId" : "Id",
+            "AccountName" : "Name"
+          }
+        }
       }
     },
     "ui" : {
@@ -2415,7 +2630,7 @@
         "LOAD_DATASET3" : {
           "label" : "CrbnCreditProject",
           "type" : "LOAD_DATASET",
-          "top" : 952,
+          "top" : 1512,
           "left" : 250.2,
           "parameters" : {
             "sampleSize" : 2000
@@ -2424,7 +2639,7 @@
         "LOAD_DATASET4" : {
           "label" : "Demo | Projects and Credits",
           "type" : "LOAD_DATASET",
-          "top" : 1092,
+          "top" : 1652,
           "left" : 250.2,
           "parameters" : {
             "sampleSize" : 2000
@@ -2434,14 +2649,14 @@
           "label" : "Update Projects and Credits",
           "description" : "",
           "type" : "UPDATE",
-          "top" : 952,
+          "top" : 1512,
           "left" : 390.2
         },
         "OUTPUT2" : {
           "label" : "Save Projects and Credits",
           "description" : "",
           "type" : "OUTPUT",
-          "top" : 952,
+          "top" : 1512,
           "left" : 670.2
         },
         "LOAD_DATASET5" : {
@@ -2531,7 +2746,7 @@
         "LOAD_DATASET6" : {
           "label" : "Demo | Net Zero Cloud",
           "type" : "LOAD_DATASET",
-          "top" : 1232,
+          "top" : 952,
           "left" : 250.2,
           "parameters" : {
             "sampleSize" : 2000
@@ -2541,7 +2756,7 @@
           "label" : "Timeshifting for NZC",
           "description" : "",
           "type" : "TRANSFORM",
-          "top" : 1232,
+          "top" : 952,
           "left" : 390.2,
           "graph" : {
             "FORMULA4" : {
@@ -2602,13 +2817,13 @@
           "label" : "Save NZC",
           "description" : "",
           "type" : "OUTPUT",
-          "top" : 1232,
-          "left" : 530.2
+          "top" : 1092,
+          "left" : 670.2
         },
         "LOAD_DATASET7" : {
           "label" : "Demo | Emission Activity Tab",
           "type" : "LOAD_DATASET",
-          "top" : 1372,
+          "top" : 1792,
           "left" : 250.2,
           "parameters" : {
             "sampleSize" : 2000
@@ -2618,7 +2833,7 @@
           "label" : "Timeshifting for E.A.T.",
           "description" : "",
           "type" : "TRANSFORM",
-          "top" : 1372,
+          "top" : 1792,
           "left" : 390.2,
           "graph" : {
             "FORMULA8" : {
@@ -2679,13 +2894,13 @@
           "label" : "Save EAT",
           "description" : "",
           "type" : "OUTPUT",
-          "top" : 1372,
+          "top" : 1792,
           "left" : 530.2
         },
         "LOAD_DATASET8" : {
           "label" : "Demo | Carbon Emission Forecast",
           "type" : "LOAD_DATASET",
-          "top" : 1512,
+          "top" : 1932,
           "left" : 250.2,
           "parameters" : {
             "sampleSize" : 2000
@@ -2695,7 +2910,7 @@
           "label" : "Timeshifting for CEF",
           "description" : "",
           "type" : "TRANSFORM",
-          "top" : 1512,
+          "top" : 1932,
           "left" : 390.2,
           "graph" : {
             "FORMULA12" : {
@@ -2756,13 +2971,13 @@
           "label" : "Save CEF",
           "description" : "",
           "type" : "OUTPUT",
-          "top" : 1512,
+          "top" : 1932,
           "left" : 530.2
         },
         "LOAD_DATASET9" : {
           "label" : "Demo | NZC Scope 3 Overview",
           "type" : "LOAD_DATASET",
-          "top" : 1652,
+          "top" : 1092,
           "left" : 250.2,
           "parameters" : {
             "sampleSize" : 2000
@@ -2772,7 +2987,7 @@
           "label" : "Timeshifting for Scope3",
           "description" : "",
           "type" : "TRANSFORM",
-          "top" : 1652,
+          "top" : 1092,
           "left" : 390.2,
           "graph" : {
             "FORMULA16" : {
@@ -2833,13 +3048,13 @@
           "label" : "Save S3O",
           "description" : "",
           "type" : "OUTPUT",
-          "top" : 1652,
-          "left" : 530.2
+          "top" : 1232,
+          "left" : 670.2
         },
         "LOAD_DATASET10" : {
           "label" : "Demo | NZC Scope 3 Procurement",
           "type" : "LOAD_DATASET",
-          "top" : 1792,
+          "top" : 2072,
           "left" : 250.2,
           "parameters" : {
             "sampleSize" : 2000
@@ -2849,7 +3064,7 @@
           "label" : "S3P Timeshifting",
           "description" : "",
           "type" : "TRANSFORM",
-          "top" : 1792,
+          "top" : 2072,
           "left" : 390.2,
           "graph" : {
             "FORMULA20" : {
@@ -2910,13 +3125,13 @@
           "label" : "Save S3P",
           "description" : "",
           "type" : "OUTPUT",
-          "top" : 1792,
+          "top" : 2072,
           "left" : 530.2
         },
         "LOAD_DATASET11" : {
           "label" : "Demo | Supplier Dashboard",
           "type" : "LOAD_DATASET",
-          "top" : 1932,
+          "top" : 2212,
           "left" : 250.2,
           "parameters" : {
             "sampleSize" : 2000
@@ -2926,7 +3141,7 @@
           "label" : "Supp Timeshifting",
           "description" : "",
           "type" : "TRANSFORM",
-          "top" : 1932,
+          "top" : 2212,
           "left" : 390.2,
           "graph" : {
             "FORMULA24" : {
@@ -2987,13 +3202,13 @@
           "label" : "Save Supp",
           "description" : "",
           "type" : "OUTPUT",
-          "top" : 1932,
+          "top" : 2212,
           "left" : 530.2
         },
         "LOAD_DATASET12" : {
           "label" : "Demo | Waste Management Dataset",
           "type" : "LOAD_DATASET",
-          "top" : 2072,
+          "top" : 2352,
           "left" : 250.2,
           "parameters" : {
             "sampleSize" : 2000
@@ -3003,7 +3218,7 @@
           "label" : "Wst Timeshifting",
           "description" : "",
           "type" : "TRANSFORM",
-          "top" : 2072,
+          "top" : 2352,
           "left" : 390.2,
           "graph" : {
             "FORMULA28" : {
@@ -3064,7 +3279,7 @@
           "label" : "Save Wst",
           "description" : "",
           "type" : "OUTPUT",
-          "top" : 2072,
+          "top" : 2352,
           "left" : 530.2
         },
         "TRANSFORM8" : {
@@ -3293,7 +3508,7 @@
           "label" : "Proj Timeshifting",
           "description" : "",
           "type" : "TRANSFORM",
-          "top" : 952,
+          "top" : 1512,
           "left" : 530.2,
           "graph" : {
             "FORMULA44" : {
@@ -3353,8 +3568,8 @@
         "LOAD_DATASET15" : {
           "label" : "Demo | Carbon Credit Allocation",
           "type" : "LOAD_DATASET",
-          "top" : 2352.7,
-          "left" : 252,
+          "top" : 2492,
+          "left" : 250.2,
           "parameters" : {
             "sampleSize" : 2000
           }
@@ -3363,7 +3578,7 @@
           "label" : "CC. Alloc. Timeshifting",
           "description" : "",
           "type" : "TRANSFORM",
-          "top" : 2212,
+          "top" : 2492,
           "left" : 390.2,
           "graph" : {
             "FORMULA48" : {
@@ -3424,7 +3639,7 @@
           "label" : "Save CC. Alloc.",
           "description" : "",
           "type" : "OUTPUT",
-          "top" : 2212,
+          "top" : 2492,
           "left" : 530.2
         },
         "UPDATE6" : {
@@ -3447,6 +3662,104 @@
           "type" : "UPDATE",
           "top" : 112,
           "left" : 670.2
+        },
+        "LOAD_DATASET16" : {
+          "label" : "Demo | Scope Emissions",
+          "type" : "LOAD_DATASET",
+          "top" : 812,
+          "left" : 250.2,
+          "parameters" : {
+            "sampleSize" : 2000
+          }
+        },
+        "TRANSFORM13" : {
+          "label" : "Scope Emissions Timeshifting",
+          "description" : "",
+          "type" : "TRANSFORM",
+          "top" : 812,
+          "left" : 390.2,
+          "graph" : {
+            "FORMULA52" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "Scp Em ElapsedYears"
+            },
+            "FORMULA53" : {
+              "parameters" : {
+                "type" : "DATE_ADD_SUBTRACT_UI"
+              },
+              "label" : "Scp Em Aux Date"
+            },
+            "DROP_FIELDS26" : {
+              "label" : "Scp Em Drop Dates"
+            },
+            "FORMULA54" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              },
+              "label" : "Scp Em Shift Dates"
+            },
+            "DROP_FIELDS27" : {
+              "label" : "Scp Em Drop Aux Columns"
+            },
+            "FORMULA55" : {
+              "parameters" : {
+                "type" : "DATE_NOW_UI"
+              },
+              "label" : "Scp Em add LPD"
+            }
+          },
+          "connectors" : [
+            {
+              "source" : "FORMULA52",
+              "target" : "FORMULA53"
+            },
+            {
+              "source" : "FORMULA53",
+              "target" : "DROP_FIELDS26"
+            },
+            {
+              "source" : "DROP_FIELDS26",
+              "target" : "FORMULA54"
+            },
+            {
+              "source" : "FORMULA54",
+              "target" : "DROP_FIELDS27"
+            },
+            {
+              "source" : "DROP_FIELDS27",
+              "target" : "FORMULA55"
+            }
+          ]
+        },
+        "UPDATE9" : {
+          "label" : "Update Account in Scp Em",
+          "description" : "",
+          "type" : "UPDATE",
+          "top" : 952,
+          "left" : 530.2
+        },
+        "OUTPUT13" : {
+          "label" : "Save Scope Emissions",
+          "description" : "",
+          "type" : "OUTPUT",
+          "top" : 952,
+          "left" : 670.2
+        },
+        "UPDATE10" : {
+          "label" : "Update Account in NZC",
+          "description" : "",
+          "type" : "UPDATE",
+          "top" : 1092,
+          "left" : 530.2
+        },
+        "UPDATE11" : {
+          "label" : "Update Account in S3O",
+          "description" : "",
+          "type" : "UPDATE",
+          "top" : 1232,
+          "left" : 530.2
         }
       },
       "connectors" : [
@@ -3503,7 +3816,7 @@
           "target" : "TRANSFORM1"
         },
         {
-          "source" : "TRANSFORM1",
+          "source" : "UPDATE10",
           "target" : "OUTPUT4"
         },
         {
@@ -3527,7 +3840,7 @@
           "target" : "TRANSFORM4"
         },
         {
-          "source" : "TRANSFORM4",
+          "source" : "UPDATE11",
           "target" : "OUTPUT7"
         },
         {
@@ -3625,6 +3938,38 @@
         {
           "source" : "LOAD_DATASET14",
           "target" : "UPDATE8"
+        },
+        {
+          "source" : "LOAD_DATASET16",
+          "target" : "TRANSFORM13"
+        },
+        {
+          "source" : "TRANSFORM13",
+          "target" : "UPDATE9"
+        },
+        {
+          "source" : "LOAD_DATASET14",
+          "target" : "UPDATE9"
+        },
+        {
+          "source" : "UPDATE9",
+          "target" : "OUTPUT13"
+        },
+        {
+          "source" : "TRANSFORM1",
+          "target" : "UPDATE10"
+        },
+        {
+          "source" : "LOAD_DATASET14",
+          "target" : "UPDATE10"
+        },
+        {
+          "source" : "TRANSFORM4",
+          "target" : "UPDATE11"
+        },
+        {
+          "source" : "LOAD_DATASET14",
+          "target" : "UPDATE11"
         }
       ],
       "hiddenColumns" : [ ]
