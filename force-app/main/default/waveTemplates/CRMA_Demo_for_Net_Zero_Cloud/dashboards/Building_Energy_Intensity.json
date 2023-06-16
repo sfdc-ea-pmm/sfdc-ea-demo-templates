@@ -1,5 +1,5 @@
 {
-  "name" : "Building_Energy_Intensity_tp",
+  "name" : "Building_Energy_Intensity2_tp1",
   "label" : "Building Energy Intensity",
   "description" : "Demo Version for 242",
   "folder" : {
@@ -272,7 +272,7 @@
     "filters" : [
       {
         "dataset" : {
-          "name" : "${App.Datasets.Demo_Building_Energy_Intensity.Name}"
+          "name" : "${App.Datasets.Demo_Building_Energy_Intensity_tp.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -283,7 +283,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.Demo_Building_Energy_Intensity.Name}"
+          "name" : "${App.Datasets.Demo_Building_Energy_Intensity_tp.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -294,7 +294,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.Demo_Building_Energy_Intensity.Name}"
+          "name" : "${App.Datasets.Demo_Building_Energy_Intensity_tp.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -305,7 +305,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.Demo_Building_Energy_Intensity.Name}"
+          "name" : "${App.Datasets.Demo_Building_Energy_Intensity_tp.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -1492,7 +1492,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Building_Energy_Intensity.Name}"
+            "name" : "${App.Datasets.Demo_Building_Energy_Intensity_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1535,7 +1535,7 @@
         "broadcastFacet" : false,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Building_Energy_Intensity.Name}"
+            "name" : "${App.Datasets.Demo_Building_Energy_Intensity_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1580,7 +1580,7 @@
         "groups" : [ ],
         "label" : "Energy_Intensity_Variance",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Demo_Building_Energy_Intensity.FullyQualifiedName}\";\nq = filter q by 'IsUnitedStatesBuilding' == \"Yes\";\nq = group q by 'Asset';\nq = foreach q generate 'Asset' as 'Asset', sum('CarbonEmission') as 'CarbonEmission', avg('EnergyIntensityVariance') as 'EnergyIntensityVariance';\nq = order q by 'Asset' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.Demo_Building_Energy_Intensity_tp.FullyQualifiedName}\";\nq = filter q by 'IsUnitedStatesBuilding' == \"Yes\";\nq = group q by 'Asset';\nq = foreach q generate 'Asset' as 'Asset', sum('CarbonEmission') as 'CarbonEmission', avg('EnergyIntensityVariance') as 'EnergyIntensityVariance';\nq = order q by 'Asset' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "exclude",
           "steps" : [
@@ -1770,7 +1770,7 @@
         "groups" : [ ],
         "label" : "Avg_Energy_Consumption",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Demo_Building_Energy_Intensity.FullyQualifiedName}\";\nq = group q by 'Asset';\nq = foreach q generate 'Asset' as 'Asset', sum('EnergyIntensity') as 'sum_EnergyIntensity';\nq = group q by 'all';\nq = foreach q generate avg('sum_EnergyIntensity') as 'Avg_Energy_Consumption';\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.Demo_Building_Energy_Intensity_tp.FullyQualifiedName}\";\nq = group q by 'Asset';\nq = foreach q generate 'Asset' as 'Asset', sum('EnergyIntensity') as 'sum_EnergyIntensity';\nq = group q by 'all';\nq = foreach q generate avg('sum_EnergyIntensity') as 'Avg_Energy_Consumption';\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1898,7 +1898,7 @@
         "groups" : [ ],
         "label" : "Emission_Distribution",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Demo_Building_Energy_Intensity.FullyQualifiedName}\";\nresult = group q by 'IsUnitedStatesBuilding';\nresult = foreach result generate q.'IsUnitedStatesBuilding' as 'IsUnitedStatesBuilding', sum(q.'CarbonEmission') as 'CarbonEmission';\nresult = order result by ('IsUnitedStatesBuilding' asc);\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.Demo_Building_Energy_Intensity_tp.FullyQualifiedName}\";\nresult = group q by 'IsUnitedStatesBuilding';\nresult = foreach result generate q.'IsUnitedStatesBuilding' as 'IsUnitedStatesBuilding', sum(q.'CarbonEmission') as 'CarbonEmission';\nresult = order result by ('IsUnitedStatesBuilding' asc);\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "exclude",
           "steps" : [
@@ -2025,7 +2025,7 @@
         "groups" : [ ],
         "label" : "Energy_Intensity_Distribution",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Demo_Building_Energy_Intensity.FullyQualifiedName}\";\nq = group q by 'IsUnitedStatesBuilding';\nq = foreach q generate 'IsUnitedStatesBuilding' as 'IsUnitedStatesBuilding', sum('EnergyIntensity') as 'Total_Energy_Intensity_Distribution';\nq = order q by 'IsUnitedStatesBuilding' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.Demo_Building_Energy_Intensity_tp.FullyQualifiedName}\";\nq = group q by 'IsUnitedStatesBuilding';\nq = foreach q generate 'IsUnitedStatesBuilding' as 'IsUnitedStatesBuilding', sum('EnergyIntensity') as 'Total_Energy_Intensity_Distribution';\nq = order q by 'IsUnitedStatesBuilding' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "exclude",
           "steps" : [
@@ -2152,7 +2152,7 @@
         "groups" : [ ],
         "label" : "Avg_Energy_Intenisty_Variance",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Demo_Building_Energy_Intensity.FullyQualifiedName}\";\nq = group q by 'Asset';\nq = foreach q generate 'Asset' as 'Asset', avg('EnergyIntensityVariance') as 'sum_EnergyIntensityVariance';\nq = group q by 'all';\nq = foreach q generate avg('sum_EnergyIntensityVariance') as 'Avg_Energy_Intensity_Variance';\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.Demo_Building_Energy_Intensity_tp.FullyQualifiedName}\";\nq = group q by 'Asset';\nq = foreach q generate 'Asset' as 'Asset', avg('EnergyIntensityVariance') as 'sum_EnergyIntensityVariance';\nq = group q by 'all';\nq = foreach q generate avg('sum_EnergyIntensityVariance') as 'Avg_Energy_Intensity_Variance';\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2273,7 +2273,7 @@
         "groups" : [ ],
         "label" : "Avg_Emission",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Demo_Building_Energy_Intensity.FullyQualifiedName}\";\nq = group q by 'Asset';\nq = foreach q generate 'Asset' as 'Asset', sum('CarbonEmission') as 'sum_CarbonEmission';\nq = group q by 'all';\nq = foreach q generate avg('sum_CarbonEmission') as 'Avg_Emission';\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.Demo_Building_Energy_Intensity_tp.FullyQualifiedName}\";\nq = group q by 'Asset';\nq = foreach q generate 'Asset' as 'Asset', sum('CarbonEmission') as 'sum_CarbonEmission';\nq = group q by 'all';\nq = foreach q generate avg('sum_CarbonEmission') as 'Avg_Emission';\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2402,7 +2402,7 @@
         "groups" : [ ],
         "label" : "Total_Carbon_Emissio_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Demo_Building_Energy_Intensity.FullyQualifiedName}\";\nq_A = filter q by {{row(ReportingDate_1.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('ReportPeriod_Year', 'ReportPeriod_Month', 'ReportPeriod_Day')\")}};\nq_B = filter q by {{row(ReportingDate_2.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('ReportPeriod_Year', 'ReportPeriod_Month', 'ReportPeriod_Day')\")}};\nresult = group q_A by all full, q_B by all;\nresult = foreach result generate sum(q_A.'CarbonEmission') as 'CarbonEmission_Present',sum(q_B.'CarbonEmission') as 'CarbonEmission_Past', sum(q_A.'EnergyIntensity') as 'Energy_Consumption_Present', sum(q_B.'EnergyIntensity') as 'Energy_Consumption_Past';\nresult = foreach result generate 'CarbonEmission_Present', 'CarbonEmission_Past', 'Energy_Consumption_Present', 'Energy_Consumption_Past', (CarbonEmission_Present - CarbonEmission_Past)/ CarbonEmission_Past as 'Total_Carbon_Emission_Percentage',  (Energy_Consumption_Present - Energy_Consumption_Past)/ Energy_Consumption_Past as 'Energy_Consumption_Percentage';\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.Demo_Building_Energy_Intensity_tp.FullyQualifiedName}\";\nq_A = filter q by {{row(ReportingDate_1.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('ReportPeriod_Year', 'ReportPeriod_Month', 'ReportPeriod_Day')\")}};\nq_B = filter q by {{row(ReportingDate_2.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('ReportPeriod_Year', 'ReportPeriod_Month', 'ReportPeriod_Day')\")}};\nresult = group q_A by all full, q_B by all;\nresult = foreach result generate sum(q_A.'CarbonEmission') as 'CarbonEmission_Present',sum(q_B.'CarbonEmission') as 'CarbonEmission_Past', sum(q_A.'EnergyIntensity') as 'Energy_Consumption_Present', sum(q_B.'EnergyIntensity') as 'Energy_Consumption_Past';\nresult = foreach result generate 'CarbonEmission_Present', 'CarbonEmission_Past', 'Energy_Consumption_Present', 'Energy_Consumption_Past', (CarbonEmission_Present - CarbonEmission_Past)/ CarbonEmission_Past as 'Total_Carbon_Emission_Percentage',  (Energy_Consumption_Present - Energy_Consumption_Past)/ Energy_Consumption_Past as 'Energy_Consumption_Percentage';\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "exclude",
           "steps" : [
@@ -2527,7 +2527,7 @@
         "groups" : [ ],
         "label" : "Electricity_Intensity_vs_Emissions_for_US_Assets",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Demo_Building_Energy_Intensity.FullyQualifiedName}\";\nq = filter q by 'IsUnitedStatesBuilding' == \"Yes\";\nresult = group q by 'Asset';\nresult = foreach result generate q.'Asset' as 'Asset', coalesce(sum(q.'EnergyIntensity'), 0) as 'EnergyIntensity', sum(q.'CarbonEmission') as 'CarbonEmission';\nresult = order result by ('Asset' asc);\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.Demo_Building_Energy_Intensity_tp.FullyQualifiedName}\";\nq = filter q by 'IsUnitedStatesBuilding' == \"Yes\";\nresult = group q by 'Asset';\nresult = foreach result generate q.'Asset' as 'Asset', coalesce(sum(q.'EnergyIntensity'), 0) as 'EnergyIntensity', sum(q.'CarbonEmission') as 'CarbonEmission';\nresult = order result by ('Asset' asc);\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "exclude",
           "steps" : [
@@ -2658,7 +2658,7 @@
         "groups" : [ ],
         "label" : "Electricity_Intensity_Non_US_Buildings",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Demo_Building_Energy_Intensity.FullyQualifiedName}\";\nq = filter q by 'IsUnitedStatesBuilding' != \"Yes\";\nq_A = filter q by {{row(ReportingDate_1.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('ReportPeriod_Year', 'ReportPeriod_Month', 'ReportPeriod_Day')\")}};\nq_B = filter q by {{row(ReportingDate_2.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('ReportPeriod_Year', 'ReportPeriod_Month', 'ReportPeriod_Day')\")}};\nresult = group q_A by 'Asset' full, q_B by 'Asset';\nresult = foreach result generate coalesce(q_A.'Asset', q_B.'Asset') as 'Asset', sum(q_A.'EnergyIntensity') as 'Emission_Consumption_Intensity_SelectedDuration', sum(q_B.'EnergyIntensity') as 'Emission_Consumption_Intensity_ComparitiveDuration';\nresult = order result by (('Emission_Consumption_Intensity_SelectedDuration') desc nulls last);\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.Demo_Building_Energy_Intensity_tp.FullyQualifiedName}\";\nq = filter q by 'IsUnitedStatesBuilding' != \"Yes\";\nq_A = filter q by {{row(ReportingDate_1.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('ReportPeriod_Year', 'ReportPeriod_Month', 'ReportPeriod_Day')\")}};\nq_B = filter q by {{row(ReportingDate_2.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('ReportPeriod_Year', 'ReportPeriod_Month', 'ReportPeriod_Day')\")}};\nresult = group q_A by 'Asset' full, q_B by 'Asset';\nresult = foreach result generate coalesce(q_A.'Asset', q_B.'Asset') as 'Asset', sum(q_A.'EnergyIntensity') as 'Emission_Consumption_Intensity_SelectedDuration', sum(q_B.'EnergyIntensity') as 'Emission_Consumption_Intensity_ComparitiveDuration';\nresult = order result by (('Emission_Consumption_Intensity_SelectedDuration') desc nulls last);\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "exclude",
           "steps" : [
@@ -2958,6 +2958,7 @@
         "parameters" : {
           "compact" : true,
           "exploreLink" : true,
+          "interactions" : [ ],
           "measureField" : "Energy_Consumption_Percentage",
           "numberColor" : "#FFFFFF",
           "numberSize" : 14,
@@ -2994,7 +2995,8 @@
         "parameters" : {
           "alignmentX" : "left",
           "alignmentY" : "top",
-          "fit" : "original"
+          "fit" : "original",
+          "interactions" : [ ]
         },
         "type" : "container"
       },
@@ -3002,7 +3004,8 @@
         "parameters" : {
           "alignmentX" : "left",
           "alignmentY" : "top",
-          "fit" : "original"
+          "fit" : "original",
+          "interactions" : [ ]
         },
         "type" : "container"
       },
@@ -3010,7 +3013,8 @@
         "parameters" : {
           "alignmentX" : "left",
           "alignmentY" : "top",
-          "fit" : "original"
+          "fit" : "original",
+          "interactions" : [ ]
         },
         "type" : "container"
       },
@@ -3018,7 +3022,8 @@
         "parameters" : {
           "alignmentX" : "left",
           "alignmentY" : "top",
-          "fit" : "original"
+          "fit" : "original",
+          "interactions" : [ ]
         },
         "type" : "container"
       },
@@ -3031,7 +3036,7 @@
           "filters" : [
             {
               "dataset" : {
-                "name" : "${App.Datasets.Demo_Building_Energy_Intensity.Name}"
+                "name" : "${App.Datasets.Demo_Building_Energy_Intensity_tp.Name}"
               },
               "field" : "AccountName"
             }
@@ -3044,7 +3049,8 @@
         "parameters" : {
           "alignmentX" : "left",
           "alignmentY" : "top",
-          "fit" : "original"
+          "fit" : "original",
+          "interactions" : [ ]
         },
         "type" : "container"
       },
@@ -3057,7 +3063,7 @@
           "filters" : [
             {
               "dataset" : {
-                "name" : "${App.Datasets.Demo_Building_Energy_Intensity.Name}"
+                "name" : "${App.Datasets.Demo_Building_Energy_Intensity_tp.Name}"
               },
               "field" : "Asset"
             }
@@ -3087,7 +3093,8 @@
         "parameters" : {
           "alignmentX" : "left",
           "alignmentY" : "top",
-          "fit" : "original"
+          "fit" : "original",
+          "interactions" : [ ]
         },
         "type" : "container"
       },
@@ -3119,7 +3126,8 @@
         "parameters" : {
           "alignmentX" : "left",
           "alignmentY" : "top",
-          "fit" : "original"
+          "fit" : "original",
+          "interactions" : [ ]
         },
         "type" : "container"
       },
@@ -3991,7 +3999,7 @@
           "filters" : [
             {
               "dataset" : {
-                "name" : "${App.Datasets.Demo_Building_Energy_Intensity.Name}"
+                "name" : "${App.Datasets.Demo_Building_Energy_Intensity_tp.Name}"
               },
               "field" : "AssetType"
             }
@@ -4023,7 +4031,7 @@
           "filters" : [
             {
               "dataset" : {
-                "name" : "${App.Datasets.Demo_Building_Energy_Intensity.Name}"
+                "name" : "${App.Datasets.Demo_Building_Energy_Intensity_tp.Name}"
               },
               "field" : "BusinessRegion"
             }
@@ -4112,6 +4120,7 @@
         "parameters" : {
           "compact" : true,
           "exploreLink" : true,
+          "interactions" : [ ],
           "measureField" : "Total_Carbon_Emission_Percentage",
           "numberColor" : "#FFFFFF",
           "numberSize" : 14,
@@ -4131,6 +4140,7 @@
         "parameters" : {
           "compact" : true,
           "exploreLink" : true,
+          "interactions" : [ ],
           "measureField" : "Energy_Consumption_Present",
           "numberColor" : "#FFFFFF",
           "numberSize" : 24,
@@ -4150,6 +4160,7 @@
         "parameters" : {
           "compact" : true,
           "exploreLink" : true,
+          "interactions" : [ ],
           "measureField" : "CarbonEmission_Present",
           "numberColor" : "#FFFFFF",
           "numberSize" : 24,
@@ -4173,7 +4184,8 @@
           "image" : {
             "name" : "${App.Images['sus_iconpng1'].Name}",
             "namespace" : "${Org.Namespace}"
-          }
+          },
+          "interactions" : [ ]
         },
         "type" : "image"
       }
