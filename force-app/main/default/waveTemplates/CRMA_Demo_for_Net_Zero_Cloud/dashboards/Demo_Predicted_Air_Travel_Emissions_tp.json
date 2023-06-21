@@ -1,5 +1,5 @@
 {
-  "name" : "Demo_Predicted_Air_Travel_Emissions_tp2",
+  "name" : "Demo_Predicted_Air_Travel_Emissions_tp",
   "label" : "Predicted Emissions from Air Travel",
   "folder" : {
     "id" : "${App.Folder.Id}"
@@ -149,13 +149,13 @@
         {
           "fields" : [
             {
-              "dataSourceName" : "${App.Datasets.Demo_Predicted_Air_Travel_Emission_tp.Name}",
+              "dataSourceName" : "${App.Datasets.Demo_Predicted_Air_Travel_Emission.Name}",
               "dataSourceNamespace" : "${Org.Namespace}",
               "dataSourceType" : "dataset",
               "fieldName" : "EmployeeCountry"
             },
             {
-              "dataSourceName" : "${App.Datasets.Demo_Actual_Air_Travel_Emission_tp.Name}",
+              "dataSourceName" : "${App.Datasets.Demo_Actual_Air_Travel_Emission.Name}",
               "dataSourceNamespace" : "${Org.Namespace}",
               "dataSourceType" : "dataset",
               "fieldName" : "EmployeeCountry"
@@ -167,13 +167,13 @@
         {
           "fields" : [
             {
-              "dataSourceName" : "${App.Datasets.Demo_Predicted_Air_Travel_Emission_tp.Name}",
+              "dataSourceName" : "${App.Datasets.Demo_Predicted_Air_Travel_Emission.Name}",
               "dataSourceNamespace" : "${Org.Namespace}",
               "dataSourceType" : "dataset",
               "fieldName" : "CostCenter"
             },
             {
-              "dataSourceName" : "${App.Datasets.Demo_Actual_Air_Travel_Emission_tp.Name}",
+              "dataSourceName" : "${App.Datasets.Demo_Actual_Air_Travel_Emission.Name}",
               "dataSourceNamespace" : "${Org.Namespace}",
               "dataSourceType" : "dataset",
               "fieldName" : "CostCenter"
@@ -735,7 +735,7 @@
         "groups" : [ ],
         "label" : "Recommendation2",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Demo_Actual_Air_Travel_Emission_tp.FullyQualifiedName}\";\np = load \"${App.Datasets.Demo_Predicted_Air_Travel_Emission_tp.FullyQualifiedName}\";\nq = filter q by 'StartDateYear' ==  \"2019\";\np = filter p by 'StartDateYear' == \"{{cell(FutureYear_1.selection, 0, \"Year\").asString()}}\";\nq = group q by ('SourceCity', 'DestinationCity');\nq = foreach q generate 'SourceCity' as 'SourceCity', 'DestinationCity' as 'DestinationCity', sum('Scope3EmissionsInTco2e') as 'sum_Scope3EmissionsInTco2e';\nq1 = order q by ( 'sum_Scope3EmissionsInTco2e' desc);\nq1 = limit q1 5;\nq1= group q1 by all;\nq1=foreach q1 generate  sum(q1.'sum_Scope3EmissionsInTco2e') as 'Top5Scope3Emissions';\nq2= group q by all;\nq2 = foreach q2 generate  sum('sum_Scope3EmissionsInTco2e') as 'TotalScope3Emissions';\nresult= cogroup q1 by all full,q2 by all, p by all;\nresult=foreach result generate 100*0.1*((sum(q1.'Top5Scope3Emissions')/ sum(q2.'TotalScope3Emissions'))*sum(p.'SUM_Scope3EmissionsInTco2e'))/sum(p.'SUM_Scope3EmissionsInTco2e') as '% Reduction in Emissions' ,0.1*((sum(q1.'Top5Scope3Emissions')/ sum(q2.'TotalScope3Emissions'))*sum(p.'SUM_Scope3EmissionsInTco2e')) as 'Total Reduction in Emissions',sum(p.'SUM_Scope3EmissionsInTco2e') as 'Predicted Emissions' ;\nresult = foreach result generate case when sum('% Reduction in Emissions') < 0 then \"🔴\" else \"🟢\" end as 'c', 'Total Reduction in Emissions','% Reduction in Emissions';",
+        "query" : "q = load \"${App.Datasets.Demo_Actual_Air_Travel_Emission.FullyQualifiedName}\";\np = load \"${App.Datasets.Demo_Predicted_Air_Travel_Emission.FullyQualifiedName}\";\nq = filter q by 'StartDateYear' ==  \"2019\";\np = filter p by 'StartDateYear' == \"{{cell(FutureYear_1.selection, 0, \"Year\").asString()}}\";\nq = group q by ('SourceCity', 'DestinationCity');\nq = foreach q generate 'SourceCity' as 'SourceCity', 'DestinationCity' as 'DestinationCity', sum('Scope3EmissionsInTco2e') as 'sum_Scope3EmissionsInTco2e';\nq1 = order q by ( 'sum_Scope3EmissionsInTco2e' desc);\nq1 = limit q1 5;\nq1= group q1 by all;\nq1=foreach q1 generate  sum(q1.'sum_Scope3EmissionsInTco2e') as 'Top5Scope3Emissions';\nq2= group q by all;\nq2 = foreach q2 generate  sum('sum_Scope3EmissionsInTco2e') as 'TotalScope3Emissions';\nresult= cogroup q1 by all full,q2 by all, p by all;\nresult=foreach result generate 100*0.1*((sum(q1.'Top5Scope3Emissions')/ sum(q2.'TotalScope3Emissions'))*sum(p.'SUM_Scope3EmissionsInTco2e'))/sum(p.'SUM_Scope3EmissionsInTco2e') as '% Reduction in Emissions' ,0.1*((sum(q1.'Top5Scope3Emissions')/ sum(q2.'TotalScope3Emissions'))*sum(p.'SUM_Scope3EmissionsInTco2e')) as 'Total Reduction in Emissions',sum(p.'SUM_Scope3EmissionsInTco2e') as 'Predicted Emissions' ;\nresult = foreach result generate case when sum('% Reduction in Emissions') < 0 then \"🔴\" else \"🟢\" end as 'c', 'Total Reduction in Emissions','% Reduction in Emissions';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -782,7 +782,7 @@
         "groups" : [ ],
         "label" : "Actualvspredicted",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Demo_Predicted_Air_Travel_Emission_tp.FullyQualifiedName}\";\nq = foreach q generate 'StartDateYear' as 'Year', sum('SUM_Scope3EmissionsInTco2e') as 'sum_Scope3EmissionsInTco2e',\"{{cell(ReportDate_1.selection, 0, \"Number2\").asString()}}\" as 'range_Year';\nq=foreach q generate 'Year', 'sum_Scope3EmissionsInTco2e',number_to_string(string_to_number(date_to_string(now(),\"yyyy\"))-string_to_number('range_Year'),\"#\") as 'LastYear';\nq=filter q by 'Year' == \"{{cell(FutureYear_1.selection, 0, \"Year\").asString()}}\" or ('Year'> 'LastYear' and 'Year' <= date_to_string(now(),\"yyyy\"));\nq=group q by 'Year';\nq=foreach q generate 'Year', sum('sum_Scope3EmissionsInTco2e') as 'Carbon Emissions (tCO2e)',case when 'Year'> date_to_string(now(),\"yyyy\") then \"green\" else \"yellow\" end as 'color';",
+        "query" : "q = load \"${App.Datasets.Demo_Predicted_Air_Travel_Emission.FullyQualifiedName}\";\nq = foreach q generate 'StartDateYear' as 'Year', sum('SUM_Scope3EmissionsInTco2e') as 'sum_Scope3EmissionsInTco2e',\"{{cell(ReportDate_1.selection, 0, \"Number2\").asString()}}\" as 'range_Year';\nq=foreach q generate 'Year', 'sum_Scope3EmissionsInTco2e',number_to_string(string_to_number(date_to_string(now(),\"yyyy\"))-string_to_number('range_Year'),\"#\") as 'LastYear';\nq=filter q by 'Year' == \"{{cell(FutureYear_1.selection, 0, \"Year\").asString()}}\" or ('Year'> 'LastYear' and 'Year' <= date_to_string(now(),\"yyyy\"));\nq=group q by 'Year';\nq=foreach q generate 'Year', sum('sum_Scope3EmissionsInTco2e') as 'Carbon Emissions (tCO2e)',case when 'Year'> date_to_string(now(),\"yyyy\") then \"green\" else \"yellow\" end as 'color';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -917,7 +917,7 @@
         "groups" : [ ],
         "label" : "ChangeInEmissions",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Demo_Predicted_Air_Travel_Emission_tp.FullyQualifiedName}\";\nq1 = filter q by 'StartDateYear'== \"2019\";\nq1 = group q1 by 'StartDateYear';\nq1 = foreach q1 generate 'StartDateYear' as 'year',sum('SUM_Scope3EmissionsInTco2e') as 'ActualEmissions';\nq2 = filter q by 'StartDateYear'==\"{{cell(FutureYear_1.selection, 0, \"Year\").asString()}}\";\nq2 = group q2 by 'StartDateYear';\nq2 = foreach q2 generate 'StartDateYear' as 'year',sum('SUM_Scope3EmissionsInTco2e') as 'PredictedEmissions';\nresult= cogroup q1 by all full,q2 by all;\nresult=foreach result generate coalesce((first(q2.'PredictedEmissions') - first(q1.'ActualEmissions'))/first(q1.'ActualEmissions'),0)*100 as 'ChangeInEmissions';\nresult=foreach result generate number_to_string('ChangeInEmissions',\"#,##0.00\")+\"%\" as percentChange, case when 'ChangeInEmissions' >= 0 then \"△\" else \"▽\" end as 'symbolpercentage',case when 'ChangeInEmissions' < 0 then \"#6CCE56\" else \"#F2536D\" end as 'colorPercentage';",
+        "query" : "q = load \"${App.Datasets.Demo_Predicted_Air_Travel_Emission.FullyQualifiedName}\";\nq1 = filter q by 'StartDateYear'== \"2019\";\nq1 = group q1 by 'StartDateYear';\nq1 = foreach q1 generate 'StartDateYear' as 'year',sum('SUM_Scope3EmissionsInTco2e') as 'ActualEmissions';\nq2 = filter q by 'StartDateYear'==\"{{cell(FutureYear_1.selection, 0, \"Year\").asString()}}\";\nq2 = group q2 by 'StartDateYear';\nq2 = foreach q2 generate 'StartDateYear' as 'year',sum('SUM_Scope3EmissionsInTco2e') as 'PredictedEmissions';\nresult= cogroup q1 by all full,q2 by all;\nresult=foreach result generate coalesce((first(q2.'PredictedEmissions') - first(q1.'ActualEmissions'))/first(q1.'ActualEmissions'),0)*100 as 'ChangeInEmissions';\nresult=foreach result generate number_to_string('ChangeInEmissions',\"#,##0.00\")+\"%\" as percentChange, case when 'ChangeInEmissions' >= 0 then \"△\" else \"▽\" end as 'symbolpercentage',case when 'ChangeInEmissions' < 0 then \"#6CCE56\" else \"#F2536D\" end as 'colorPercentage';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1038,7 +1038,7 @@
         "groups" : [ ],
         "label" : "Recommendation1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Demo_Predicted_Air_Travel_Emission_tp.FullyQualifiedName}\";\nq = filter q by 'StartDateYear' == \"{{cell(FutureYear_1.selection, 0, \"Year\").asString()}}\";\nq = group q by all;\nq = foreach q generate sum('PredictedShortHaulSegmentDistance')*0.14 as 'TrainEmissions', sum('PredictedShortHaulScope3Emissions') as 'ShortHaulEmissions', sum(SUM_Scope3EmissionsInTco2e) as 'Scope3Emissions';\nq = foreach q generate coalesce((('ShortHaulEmissions'-'TrainEmissions')/'Scope3Emissions'),0)*100 as 'PercentChangeRecommendations',('ShortHaulEmissions'-'TrainEmissions') as 'ReducedEmissions';\nq = foreach q generate case when sum('PercentChangeRecommendations') < 0 then \"🔴\" else \"🟢\" end as 'c','PercentChangeRecommendations','ReducedEmissions';",
+        "query" : "q = load \"${App.Datasets.Demo_Predicted_Air_Travel_Emission.FullyQualifiedName}\";\nq = filter q by 'StartDateYear' == \"{{cell(FutureYear_1.selection, 0, \"Year\").asString()}}\";\nq = group q by all;\nq = foreach q generate sum('PredictedShortHaulSegmentDistance')*0.14 as 'TrainEmissions', sum('PredictedShortHaulScope3Emissions') as 'ShortHaulEmissions', sum(SUM_Scope3EmissionsInTco2e) as 'Scope3Emissions';\nq = foreach q generate coalesce((('ShortHaulEmissions'-'TrainEmissions')/'Scope3Emissions'),0)*100 as 'PercentChangeRecommendations',('ShortHaulEmissions'-'TrainEmissions') as 'ReducedEmissions';\nq = foreach q generate case when sum('PercentChangeRecommendations') < 0 then \"🔴\" else \"🟢\" end as 'c','PercentChangeRecommendations','ReducedEmissions';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1086,7 +1086,7 @@
         "groups" : [ ],
         "label" : "CostCenter",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Demo_Predicted_Air_Travel_Emission_tp.FullyQualifiedName}\";\nq = group q by 'CostCenter';\nq = foreach q generate 'CostCenter' as 'CostCenter';\nq = order q by 'CostCenter' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.Demo_Predicted_Air_Travel_Emission.FullyQualifiedName}\";\nq = group q by 'CostCenter';\nq = foreach q generate 'CostCenter' as 'CostCenter';\nq = order q by 'CostCenter' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "none",
           "steps" : [ ]
@@ -1209,7 +1209,7 @@
         "groups" : [ ],
         "label" : "FutureYear",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Demo_Predicted_Air_Travel_Emission_tp.FullyQualifiedName}\";\nq=foreach q generate toString(now(),\"yyyy\") as 'Curr_year','StartDateYear' as 'Year';\nq = group q by 'Year';\nq = foreach q generate 'Year' as 'Year', count() as 'count',first('Curr_year') as 'curr_year';\nq=filter q by 'Year' > 'curr_year';\nq = foreach q generate 'Year' as 'Year';\nq = order q by 'Year' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.Demo_Predicted_Air_Travel_Emission.FullyQualifiedName}\";\nq=foreach q generate toString(now(),\"yyyy\") as 'Curr_year','StartDateYear' as 'Year';\nq = group q by 'Year';\nq = foreach q generate 'Year' as 'Year', count() as 'count',first('Curr_year') as 'curr_year';\nq=filter q by 'Year' > 'curr_year';\nq = foreach q generate 'Year' as 'Year';\nq = order q by 'Year' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "none",
           "steps" : [ ]
@@ -1260,7 +1260,7 @@
         "groups" : [ ],
         "label" : "PredictedEmissions",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Demo_Predicted_Air_Travel_Emission_tp.FullyQualifiedName}\";\nq = filter q by 'StartDateYear' == \"{{cell(FutureYear_1.selection, 0, \"Year\").asString()}}\";\nq = foreach q generate 'CostCenter' as 'CostCenter', 'EmployeeCountry' as 'EmployeeCountry', case when SUM_Scope3EmissionsInTco2e < 1000 then SUM_Scope3EmissionsInTco2e else SUM_Scope3EmissionsInTco2e/1000 end as Scope3EmissionsInTco2e, 'SUM_SegmentDistanceInMiles' as 'SegmentDistanceInMiles', 'StartDateYear' as 'Year',case when  SUM_Scope3EmissionsInTco2e < 1000 then \"tCO2e\" else \"KtCO2e\" end as 'unit';\nq = foreach q generate 'CostCenter', 'EmployeeCountry', round(Scope3EmissionsInTco2e,1) as Scope3EmissionsInTco2e,'SegmentDistanceInMiles','Year','unit';",
+        "query" : "q = load \"${App.Datasets.Demo_Predicted_Air_Travel_Emission.FullyQualifiedName}\";\nq = filter q by 'StartDateYear' == \"{{cell(FutureYear_1.selection, 0, \"Year\").asString()}}\";\nq = foreach q generate 'CostCenter' as 'CostCenter', 'EmployeeCountry' as 'EmployeeCountry', case when SUM_Scope3EmissionsInTco2e < 1000 then SUM_Scope3EmissionsInTco2e else SUM_Scope3EmissionsInTco2e/1000 end as Scope3EmissionsInTco2e, 'SUM_SegmentDistanceInMiles' as 'SegmentDistanceInMiles', 'StartDateYear' as 'Year',case when  SUM_Scope3EmissionsInTco2e < 1000 then \"tCO2e\" else \"KtCO2e\" end as 'unit';\nq = foreach q generate 'CostCenter', 'EmployeeCountry', round(Scope3EmissionsInTco2e,1) as Scope3EmissionsInTco2e,'SegmentDistanceInMiles','Year','unit';",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1308,7 +1308,7 @@
         "groups" : [ ],
         "label" : "TravelEmission",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Demo_Actual_Air_Travel_Emission_tp.FullyQualifiedName}\";\nq = filter q by 'StartDateYear' == \"{{cell(PastYear_1.selection, 0, \"Year\").asString()}}\";\nq = group q by ('SourceCity', 'DestinationCity');\nq = foreach q generate 'SourceCity' as 'SourceCity', 'DestinationCity' as 'DestinationCity', avg('Scope3EmissionsInTco2e') as 'Carbon Emissions (tCO2e)', avg('MilesTraveled') as 'Travel Distance (Miles)' , avg('TravelFrequency') as 'Travel Frequency', case when 'SourceCity' == 'DestinationCity' then 1 else 0 end as 'EqualCities';\nq = filter q by 'EqualCities' == 0;\nq = foreach q generate 'SourceCity' as 'SourceCity', 'DestinationCity' as 'DestinationCity', 'Carbon Emissions (tCO2e)', 'Travel Distance (Miles)', 'Travel Frequency'\n;q = order q by ('Carbon Emissions (tCO2e)' desc);{{cell(ReportYear_1.selection, 0, \"Text3\").asString()}}\nq=limit q {{cell(ReportYear_1.selection, 0, \"Number2\").asString()}};",
+        "query" : "q = load \"${App.Datasets.Demo_Actual_Air_Travel_Emission.FullyQualifiedName}\";\nq = filter q by 'StartDateYear' == \"{{cell(PastYear_1.selection, 0, \"Year\").asString()}}\";\nq = group q by ('SourceCity', 'DestinationCity');\nq = foreach q generate 'SourceCity' as 'SourceCity', 'DestinationCity' as 'DestinationCity', avg('Scope3EmissionsInTco2e') as 'Carbon Emissions (tCO2e)', avg('MilesTraveled') as 'Travel Distance (Miles)' , avg('TravelFrequency') as 'Travel Frequency', case when 'SourceCity' == 'DestinationCity' then 1 else 0 end as 'EqualCities';\nq = filter q by 'EqualCities' == 0;\nq = foreach q generate 'SourceCity' as 'SourceCity', 'DestinationCity' as 'DestinationCity', 'Carbon Emissions (tCO2e)', 'Travel Distance (Miles)', 'Travel Frequency'\n;q = order q by ('Carbon Emissions (tCO2e)' desc);{{cell(ReportYear_1.selection, 0, \"Text3\").asString()}}\nq=limit q {{cell(ReportYear_1.selection, 0, \"Number2\").asString()}};",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1430,7 +1430,7 @@
         "groups" : [ ],
         "label" : "TargetYear",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Demo_Predicted_Air_Travel_Emission_tp.FullyQualifiedName}\";\nq = filter q by 'StartDateYear' == \"2023\";\nq = group q by 'StartDateYear';\nq = foreach q generate 'StartDateYear' as 'Year';\nq = limit q 1;",
+        "query" : "q = load \"${App.Datasets.Demo_Predicted_Air_Travel_Emission.FullyQualifiedName}\";\nq = filter q by 'StartDateYear' == \"2023\";\nq = group q by 'StartDateYear';\nq = foreach q generate 'StartDateYear' as 'Year';\nq = limit q 1;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1477,7 +1477,7 @@
         "groups" : [ ],
         "label" : "PastYear",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Demo_Predicted_Air_Travel_Emission_tp.FullyQualifiedName}\";\nq=foreach q generate toString(now(),\"yyyy\") as 'Curr_year','StartDateYear' as 'Year';\nq = group q by 'Year';\nq = foreach q generate 'Year' as 'Year', count() as 'count',first('Curr_year') as 'curr_year';\nq=filter q by 'Year' <= 'curr_year';\nq = foreach q generate 'Year' as 'Year';\nq = order q by 'Year' asc;",
+        "query" : "q = load \"${App.Datasets.Demo_Predicted_Air_Travel_Emission.FullyQualifiedName}\";\nq=foreach q generate toString(now(),\"yyyy\") as 'Curr_year','StartDateYear' as 'Year';\nq = group q by 'Year';\nq = foreach q generate 'Year' as 'Year', count() as 'count',first('Curr_year') as 'curr_year';\nq=filter q by 'Year' <= 'curr_year';\nq = foreach q generate 'Year' as 'Year';\nq = order q by 'Year' asc;",
         "receiveFacetSource" : {
           "mode" : "none",
           "steps" : [ ]
@@ -1528,7 +1528,7 @@
         "groups" : [ ],
         "label" : "EmployeeCountry",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Demo_Predicted_Air_Travel_Emission_tp.FullyQualifiedName}\";\nq = group q by 'EmployeeCountry';\nq = foreach q generate 'EmployeeCountry' as 'EmployeeCountry';\nq = order q by 'EmployeeCountry' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.Demo_Predicted_Air_Travel_Emission.FullyQualifiedName}\";\nq = group q by 'EmployeeCountry';\nq = foreach q generate 'EmployeeCountry' as 'EmployeeCountry';\nq = order q by 'EmployeeCountry' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "none",
           "steps" : [ ]

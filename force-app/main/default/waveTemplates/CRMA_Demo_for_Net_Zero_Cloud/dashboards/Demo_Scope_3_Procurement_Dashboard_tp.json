@@ -1,5 +1,5 @@
 {
-  "name" : "Demo_Scope_3_Procurement_Dashboard_tp2",
+  "name" : "Demo_Scope_3_Procurement_Dashboard_tp",
   "label" : "Scope 3 Procurement Dashboard",
   "folder" : {
     "id" : "${App.Folder.Id}"
@@ -147,7 +147,7 @@
     "filters" : [
       {
         "dataset" : {
-          "name" : "${App.Datasets.Demo_Audit_Dashboard_tp.Name}"
+          "name" : "${App.Datasets.Demo_Audit_Dashboard.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -158,7 +158,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.Demo_Audit_Dashboard_tp.Name}"
+          "name" : "${App.Datasets.Demo_Audit_Dashboard.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -169,7 +169,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.Demo_Audit_Dashboard_tp.Name}"
+          "name" : "${App.Datasets.Demo_Audit_Dashboard.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -180,7 +180,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.Demo_Scope_3_Procurement_tp.Name}"
+          "name" : "${App.Datasets.Demo_Scope_3_Procurement.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -191,7 +191,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.Demo_Scope_3_Procurement_tp.Name}"
+          "name" : "${App.Datasets.Demo_Scope_3_Procurement.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -775,7 +775,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Scope_3_Procurement_tp.Name}"
+            "name" : "${App.Datasets.Demo_Scope_3_Procurement.Name}"
           }
         ],
         "isGlobal" : false,
@@ -967,7 +967,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Scope_3_Procurement_tp.Name}"
+            "name" : "${App.Datasets.Demo_Scope_3_Procurement.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1077,7 +1077,7 @@
         "groups" : [ ],
         "label" : "Supplier_Scope_3_Emi_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Demo_Scope_3_Procurement_tp.FullyQualifiedName}\";\nq_A = filter q by {{row(dateSelector_1.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('Date_Year','Date_Month','Date_Day')\")}};\nq_B = filter q by {{row(dateSelector_2.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('Date_Year','Date_Month','Date_Day')\")}};\nresult = group q_A by 'Supplier' full, q_B by 'Supplier';\nresult = foreach result generate coalesce(q_A.'Supplier', q_B.'Supplier') as 'Supplier', avg(q_A.'Scope_3_Emissions') as 'Scope 3 Emissions in Report Year', sum(q_B.'Scope_3_Emissions') as 'Scope 3 Emissions in Comparative Year';\nresult = foreach result generate 'Supplier', 'Scope 3 Emissions in Comparative Year', 'Scope 3 Emissions in Report Year', ('Scope 3 Emissions in Report Year' - 'Scope 3 Emissions in Comparative Year')/'Scope 3 Emissions in Comparative Year' as 'Change in Emissions', case when (('Scope 3 Emissions in Report Year' - 'Scope 3 Emissions in Comparative Year')/'Scope 3 Emissions in Comparative Year') > 0 then \"#6CCE56\" else \"#F2536D\"\nend as 'Change Format Color';\nresult = order result by 'Scope 3 Emissions in Report Year' desc nulls last;\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.Demo_Scope_3_Procurement.FullyQualifiedName}\";\nq_A = filter q by {{row(dateSelector_1.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('Date_Year','Date_Month','Date_Day')\")}};\nq_B = filter q by {{row(dateSelector_2.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('Date_Year','Date_Month','Date_Day')\")}};\nresult = group q_A by 'Supplier' full, q_B by 'Supplier';\nresult = foreach result generate coalesce(q_A.'Supplier', q_B.'Supplier') as 'Supplier', avg(q_A.'Scope_3_Emissions') as 'Scope 3 Emissions in Report Year', sum(q_B.'Scope_3_Emissions') as 'Scope 3 Emissions in Comparative Year';\nresult = foreach result generate 'Supplier', 'Scope 3 Emissions in Comparative Year', 'Scope 3 Emissions in Report Year', ('Scope 3 Emissions in Report Year' - 'Scope 3 Emissions in Comparative Year')/'Scope 3 Emissions in Comparative Year' as 'Change in Emissions', case when (('Scope 3 Emissions in Report Year' - 'Scope 3 Emissions in Comparative Year')/'Scope 3 Emissions in Comparative Year') > 0 then \"#6CCE56\" else \"#F2536D\"\nend as 'Change Format Color';\nresult = order result by 'Scope 3 Emissions in Report Year' desc nulls last;\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "exclude",
           "steps" : [
@@ -1213,7 +1213,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Scope_3_Procurement_tp.Name}"
+            "name" : "${App.Datasets.Demo_Scope_3_Procurement.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1256,7 +1256,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Scope_3_Procurement_tp.Name}"
+            "name" : "${App.Datasets.Demo_Scope_3_Procurement.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1354,7 +1354,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Scope_3_Procurement_tp.Name}"
+            "name" : "${App.Datasets.Demo_Scope_3_Procurement.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1506,7 +1506,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Scope_3_Procurement_tp.Name}"
+            "name" : "${App.Datasets.Demo_Scope_3_Procurement.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1615,7 +1615,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Scope_3_Procurement_tp.Name}"
+            "name" : "${App.Datasets.Demo_Scope_3_Procurement.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1820,7 +1820,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Scope_3_Procurement_tp.Name}"
+            "name" : "${App.Datasets.Demo_Scope_3_Procurement.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1978,7 +1978,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Scope_3_Procurement_tp.Name}"
+            "name" : "${App.Datasets.Demo_Scope_3_Procurement.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2021,7 +2021,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Scope_3_Procurement_tp.Name}"
+            "name" : "${App.Datasets.Demo_Scope_3_Procurement.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2131,7 +2131,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Scope_3_Procurement_tp.Name}"
+            "name" : "${App.Datasets.Demo_Scope_3_Procurement.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2239,7 +2239,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Demo_Scope_3_Procurement_tp.Name}"
+            "name" : "${App.Datasets.Demo_Scope_3_Procurement.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2608,7 +2608,7 @@
           "filters" : [
             {
               "dataset" : {
-                "name" : "${App.Datasets.Demo_Audit_Dashboard_tp.Name}"
+                "name" : "${App.Datasets.Demo_Audit_Dashboard.Name}"
               },
               "field" : "Business_Region"
             }
@@ -2765,7 +2765,7 @@
           "filters" : [
             {
               "dataset" : {
-                "name" : "${App.Datasets.Demo_Scope_3_Procurement_tp.Name}"
+                "name" : "${App.Datasets.Demo_Scope_3_Procurement.Name}"
               },
               "field" : "GHG_Scope_3_Category"
             }
@@ -2792,7 +2792,7 @@
           "filters" : [
             {
               "dataset" : {
-                "name" : "${App.Datasets.Demo_Scope_3_Procurement_tp.Name}"
+                "name" : "${App.Datasets.Demo_Scope_3_Procurement.Name}"
               },
               "field" : "Supplier"
             }
@@ -3563,7 +3563,7 @@
           "filters" : [
             {
               "dataset" : {
-                "name" : "${App.Datasets.Demo_Audit_Dashboard_tp.Name}"
+                "name" : "${App.Datasets.Demo_Audit_Dashboard.Name}"
               },
               "field" : "Asset_Type"
             }
@@ -3581,7 +3581,7 @@
           "filters" : [
             {
               "dataset" : {
-                "name" : "${App.Datasets.Demo_Audit_Dashboard_tp.Name}"
+                "name" : "${App.Datasets.Demo_Audit_Dashboard.Name}"
               },
               "field" : "Asset"
             }
