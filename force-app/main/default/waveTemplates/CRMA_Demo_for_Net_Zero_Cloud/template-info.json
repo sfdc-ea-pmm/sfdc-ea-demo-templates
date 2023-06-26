@@ -2,20 +2,21 @@
   "templateType" : "app",
   "label" : "Net Zero Cloud Analytics",
   "name" : "CRMA_Demo_for_Net_Zero_Cloud",
-  "description" : "Includes the updated dashboards for Net Zero Cloud features through the Spring ’23 release. Added Building Energy Intensity dashboard and has Action Framework enabled. v1.57.2",
-  "assetVersion" : 57.0,
+  "description" : "Includes the updated dashboards for Net Zero Cloud features through the Spring ’23 release. Added Predicted Supply Chain Emissions and Predicted Carbon Emissions for Stationary Assets dashboards. v1.58.1",
+  "assetVersion" : 58.0,
   "variableDefinition" : "variables.json",
   "uiDefinition" : "ui.json",
   "customAttributes": [
     {
       "label": "Author(s)",
       "values": [
-        "CRMA PMM"
+        "CRMA Pre-Sales",
+        "Rodrigo Mercader rmercader@salesforce.com"
       ]
     },
     {
       "label": "Demo Version",
-      "values": ["v2023.12"]
+      "values": ["v2023.25"]
     }
   ],
   "tags": ["Demo", "CRMA", "Net Zero Cloud", "Featured"],
@@ -53,6 +54,36 @@
       "type" : "CSV",
       "schema" : "external_files/Demo_Water_Risk.json",
       "userXmd" : "external_files/Demo_Water_Risk_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "Demo | Carbon Emission Forecast",
+      "name" : "Demo_Carbon_Emission_Forecast",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/Demo_Carbon_Emission_Forecast.csv",
+      "type" : "CSV",
+      "schema" : "external_files/Demo_Carbon_Emission_Forecast.json",
+      "userXmd" : "external_files/Demo_Carbon_Emission_Forecast_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "Demo | Predicted Supply Chain Emissions",
+      "name" : "Demo_Predicted_Supply_Chain_Emissions",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/Demo_Predicted_Supply_Chain_Emissions.csv",
+      "type" : "CSV",
+      "schema" : "external_files/Demo_Predicted_Supply_Chain_Emissions.json",
+      "userXmd" : "external_files/Demo_Predicted_Supply_Chain_Emissions_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "Demo | Scored Dataset Fuel Type",
+      "name" : "Demo_FuelType_Predictions_tp",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/Demo_FuelType_Predictions.csv",
+      "type" : "CSV",
+      "schema" : "external_files/Demo_FuelType_Predictions.json",
+      "userXmd" : "external_files/Demo_FuelType_Predictions_XMD.json",
       "rows" : 5
     },
     {
@@ -123,16 +154,6 @@
       "type" : "CSV",
       "schema" : "external_files/Demo_ESG_KPIs.json",
       "userXmd" : "external_files/Demo_ESG_KPIs_XMD.json",
-      "rows" : 5
-    },
-    {
-      "label" : "Demo | Carbon Emission Forecast",
-      "name" : "Demo_Carbon_Emission_Forecast",
-      "condition" : "${Variables.Overrides.createAllExternalFiles}",
-      "file" : "external_files/Demo_Carbon_Emission_Forecast.csv",
-      "type" : "CSV",
-      "schema" : "external_files/Demo_Carbon_Emission_Forecast.json",
-      "userXmd" : "external_files/Demo_Carbon_Emission_Forecast_XMD.json",
       "rows" : 5
     },
     {
@@ -246,9 +267,9 @@
     },
     {
       "label" : "Building Energy Intensity",
-      "name" : "Building_Energy_Intensity_tp",
+      "name" : "Demo_Building_Energy_Intensity_tp",
       "condition" : "${Variables.Overrides.createAllDashboards}",
-      "file" : "dashboards/Building_Energy_Intensity.json"
+      "file" : "dashboards/Demo_Building_Energy_Intensity_tp.json"
     },
     {
       "label" : "Business Travel Impact",
@@ -275,10 +296,22 @@
       "file" : "dashboards/Demo_ESG_Dashboard_tp.json"
     },
     {
+      "label" : "Predicted Carbon Emissions for Stationary Assets",
+      "name" : "Demo_Predicted_Carbon_Emissions_and_Fuel_Consumption_by_Stationary_Assets_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Demo_Predicted_Carbon_Emissions_and_Fuel_Consumption_by_Stationary_Assets.json"
+    },
+    {
       "label" : "Predicted Emissions from Air Travel",
       "name" : "Demo_Predicted_Air_Travel_Emissions_tp",
       "condition" : "${Variables.Overrides.createAllDashboards}",
       "file" : "dashboards/Demo_Predicted_Air_Travel_Emissions_tp.json"
+    },
+    {
+      "label" : "Predicted Supply Chain Emissions",
+      "name" : "Demo_Prediction_of_Supply_Chain_Emissions_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Demo_Prediction_of_Supply_Chain_Emissions.json"
     },
     {
       "label" : "Scope 3 Procurement Dashboard",
@@ -306,6 +339,7 @@
     }
   ],
   "components" : [ ],
+  "dataTransforms" : [ ],
   "eltDataflows" : [ ],
   "recipes" : [
     {
@@ -378,6 +412,11 @@
       "name" : "sus_iconpng1",
       "condition" : "${Variables.Overrides.createAllImages}",
       "file" : "images/sus_icon.png"
+    },
+    {
+      "name" : "TableauLogopng1",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/TableauLogo.png"
     }
   ],
   "extendedTypes" : { },
