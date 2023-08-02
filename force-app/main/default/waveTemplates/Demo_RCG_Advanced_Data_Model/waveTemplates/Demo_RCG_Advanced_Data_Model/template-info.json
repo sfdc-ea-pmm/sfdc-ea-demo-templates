@@ -1,0 +1,116 @@
+{
+  "templateType" : "app",
+  "label" : "Demo | RCG Analytics Advanced",
+  "name" : "Demo_RCG_Advanced_Data_Model",
+  "description" : "",
+  "assetVersion" : 58.0,
+  "variableDefinition" : "variables.json",
+  "uiDefinition" : "ui.json",
+  "rules" : [
+    {
+      "type" : "templateToApp",
+      "file" : "template-to-app-rules.json"
+    },
+    {
+      "type" : "appToTemplate",
+      "file" : "app-to-template-rules.json"
+    }
+  ],
+  "releaseInfo" : {
+    "templateVersion" : "1.0",
+    "notesFile" : "releaseNotes.html"
+  },
+  "folderDefinition" : "folder.json",
+  "externalFiles" : [
+    {
+      "label" : "Demo | Account Metrics",
+      "name" : "Demo_Account_Metrics",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/Demo_Account_Metrics.csv",
+      "type" : "CSV",
+      "schema" : "external_files/Demo_Account_Metrics.json",
+      "userXmd" : "external_files/Demo_Account_Metrics_XMD.json",
+      "rows" : 5
+    }
+  ],
+  "lenses" : [ ],
+  "dashboards" : [
+    {
+      "label" : "Account Embedded",
+      "name" : "Demo_Account_Embedded_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Demo_Account_Embedded.json"
+    },
+    {
+      "label" : "Account Performance",
+      "name" : "Demo_Account_Performance_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Demo_Account_Performance.json"
+    },
+    {
+      "label" : "Demo | Whitespace Analysis",
+      "name" : "Demo_Whitespace_Analysis_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Demo_Whitespace_Analysis.json"
+    },
+    {
+      "label" : "Product Performance",
+      "name" : "Demo_Product_Performance_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Demo_Product_Performance.json"
+    },
+    {
+      "label" : "Sales Representative Summary",
+      "name" : "Demo_Sales_Representative_Summary_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Demo_Sales_Representative_Summary.json"
+    }
+  ],
+  "components" : [ ],
+  "dataTransforms" : [ ],
+  "eltDataflows" : [ ],
+  "recipes" : [
+    {
+      "label" : "- Timeshifting and Action Framework",
+      "name" : "Timeshifting_and_Action_Framework",
+      "condition" : "${Variables.Overrides.createAllRecipes}",
+      "file" : "recipes/Timeshifting_and_Action_Framework.json",
+      "executeCondition" : "CreateSyncExecute"
+    }
+  ],
+  "datasetFiles" : [ ],
+  "storedQueries" : [ ],
+  "imageFiles" : [
+    {
+      "name" : "Preview_CG_Iconpng106png5png",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Preview_CG_Iconpng106png5.png"
+    },
+    {
+      "name" : "Account_Performance_CGpng",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Account_Performance_CG.png"
+    },
+    {
+      "name" : "powered_by_crmapng",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/powered_by_crma.png"
+    },
+    {
+      "name" : "Avg_Imagejpg",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Avg_Image.jpg"
+    }
+  ],
+  "extendedTypes" : { },
+  "templateDependencies" : [ ],
+  "icons" : {
+    "appBadge" : {
+      "name" : "16.png"
+    },
+    "templateBadge" : {
+      "name" : "default.png"
+    },
+    "templatePreviews" : [ ]
+  }
+}
