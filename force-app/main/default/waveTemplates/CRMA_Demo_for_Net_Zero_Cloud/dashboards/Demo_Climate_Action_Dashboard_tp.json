@@ -5313,7 +5313,7 @@
         "groups" : [ ],
         "label" : "Date_Year_3",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Demo_Net_Zero_Cloud.FullyQualifiedName}\";\nq = filter q by {{cell(AcctNameFilter.selection, 0, \"QueryFilterPart\").asString()}};\nresult = group q by 'Date_Year';\nresult = foreach result generate q.'Date_Year' as 'Date_Year', avg(q.'Carbon_Intensity') as 'A';\nresult = group result by 'Date_Year';\nresult = foreach result generate 'Date_Year', first(A) as 'TotalCarbonEmissions', (sum(A) - sum(sum(A)) over ([-1..-1] partition by all order by ('Date_Year')))/(sum(sum(A)) over ([-1..-1] partition by all order by ('Date_Year')))*-1 as 'TotalCarbonEmissionsVariation';\nresult = order result by ('Date_Year' desc);\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.Demo_Net_Zero_Cloud.FullyQualifiedName}\";\nq = filter q by {{cell(AcctNameFilter.selection, 0, \"QueryFilterPart\").asString()}};\nq_B = filter q by {{row(Date_2.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('Date_Year', 'Date_Month', 'Date_Day')\")}};\nq_A = filter q by {{row(Date_1.selection, [0], [\"min\", \"max\"]).asDateRange(\"date('Date_Year', 'Date_Month', 'Date_Day')\")}};\nq = cogroup q_B by all full, q_A by all;\nq = foreach q generate sum(q_B.'Emission_Value') as 'B', sum(q_A.'Emission_Value') as 'TotalCarbonEmissions';\nq = foreach q generate 'B', 'TotalCarbonEmissions', -0.045 as 'TotalCarbonEmissionsVariation';",
         "receiveFacetSource" : {
           "mode" : "none",
           "steps" : [ ]
@@ -8907,7 +8907,7 @@
       },
       "number_3" : {
         "parameters" : {
-          "compact" : false,
+          "compact" : true,
           "exploreLink" : true,
           "interactions" : [ ],
           "measureField" : "TotalCarbonEmissions",
