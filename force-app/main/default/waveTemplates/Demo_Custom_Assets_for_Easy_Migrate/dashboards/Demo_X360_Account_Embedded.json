@@ -1,6 +1,6 @@
 {
-  "name" : "X360_Account_Embedded_Demo_Test_v1_0_tp1",
-  "label" : "Account Embedded",
+  "name" : "Demo_X360_Account_Embedded_tp",
+  "label" : "Demo | Account Embedded",
   "folder" : {
     "id" : "${App.Folder.Id}"
   },
@@ -3643,7 +3643,7 @@
         "groups" : [ ],
         "label" : "CreatedDate_Year_Cre_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Opportunities_Amills_EasyMigrate_HyNLN_tp.FullyQualifiedName}\";\nq = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [dateRange([2020,1,1], [2020,11,30])];\n\nq = group q by ('CreatedDate_Year', 'CreatedDate_Week');\n\nresult = foreach q generate q.'CreatedDate_Year' as 'CreatedDate_Year', q.'CreatedDate_Week' as 'CreatedDate_Week', count()*50 as 'A';\n\nresult = fill result by (dateCols=('CreatedDate_Year','CreatedDate_Week',\"Y-W\"));\n\nresult = timeseries result generate A as fRevenue with (dateCols=('CreatedDate_Year','CreatedDate_Week',\"Y-W\"), length=10, predictionInterval=95);\n\nresult = foreach result generate 'CreatedDate_Year' + \"~~~\" + 'CreatedDate_Week' as 'CreatedDate_Year~~~CreatedDate_Week', coalesce(A, fRevenue)/100 as 'A', fRevenue_high_95/100 - 5 as fRevenue_high_95, fRevenue_low_95/100 + 4 as fRevenue_low_95;\n\nresult = order result by ('CreatedDate_Year~~~CreatedDate_Week' asc);\n\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.Opportunities_Amills_EasyMigrate_tp.FullyQualifiedName}\";\nq = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [dateRange([2020,1,1], [2020,11,30])];\n\nq = group q by ('CreatedDate_Year', 'CreatedDate_Week');\n\nresult = foreach q generate q.'CreatedDate_Year' as 'CreatedDate_Year', q.'CreatedDate_Week' as 'CreatedDate_Week', count()*50 as 'A';\n\nresult = fill result by (dateCols=('CreatedDate_Year','CreatedDate_Week',\"Y-W\"));\n\nresult = timeseries result generate A as fRevenue with (dateCols=('CreatedDate_Year','CreatedDate_Week',\"Y-W\"), length=10, predictionInterval=95);\n\nresult = foreach result generate 'CreatedDate_Year' + \"~~~\" + 'CreatedDate_Week' as 'CreatedDate_Year~~~CreatedDate_Week', coalesce(A, fRevenue)/100 as 'A', fRevenue_high_95/100 - 5 as fRevenue_high_95, fRevenue_low_95/100 + 4 as fRevenue_low_95;\n\nresult = order result by ('CreatedDate_Year~~~CreatedDate_Week' asc);\n\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -3952,7 +3952,7 @@
         "groups" : [ ],
         "label" : "CreatedDate_Year_Cre_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Opportunities_Amills_EasyMigrate_HyNLN_tp.FullyQualifiedName}\";\nq = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [dateRange([2020,1,1], [2020,11,30])];\n\nq = group q by ('CreatedDate_Year', 'CreatedDate_Week');\n\nresult = foreach q generate q.'CreatedDate_Year' as 'CreatedDate_Year', q.'CreatedDate_Week' as 'CreatedDate_Week', count()*50 as 'A';\n\nresult = fill result by (dateCols=('CreatedDate_Year','CreatedDate_Week',\"Y-W\"));\n\nresult = timeseries result generate A as fRevenue with (dateCols=('CreatedDate_Year','CreatedDate_Week',\"Y-W\"), length=10, predictionInterval=95);\n\nresult = foreach result generate 'CreatedDate_Year' + \"~~~\" + 'CreatedDate_Week' as 'CreatedDate_Year~~~CreatedDate_Week', coalesce(A, fRevenue)/100 as 'A', fRevenue_high_95/100 - 5 as fRevenue_high_95, fRevenue_low_95/100 + 4 as fRevenue_low_95;\n\nresult = order result by ('CreatedDate_Year~~~CreatedDate_Week' asc);\n\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.Opportunities_Amills_EasyMigrate_tp.FullyQualifiedName}\";\nq = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [dateRange([2020,1,1], [2020,11,30])];\n\nq = group q by ('CreatedDate_Year', 'CreatedDate_Week');\n\nresult = foreach q generate q.'CreatedDate_Year' as 'CreatedDate_Year', q.'CreatedDate_Week' as 'CreatedDate_Week', count()*50 as 'A';\n\nresult = fill result by (dateCols=('CreatedDate_Year','CreatedDate_Week',\"Y-W\"));\n\nresult = timeseries result generate A as fRevenue with (dateCols=('CreatedDate_Year','CreatedDate_Week',\"Y-W\"), length=10, predictionInterval=95);\n\nresult = foreach result generate 'CreatedDate_Year' + \"~~~\" + 'CreatedDate_Week' as 'CreatedDate_Year~~~CreatedDate_Week', coalesce(A, fRevenue)/100 as 'A', fRevenue_high_95/100 - 5 as fRevenue_high_95, fRevenue_low_95/100 + 4 as fRevenue_low_95;\n\nresult = order result by ('CreatedDate_Year~~~CreatedDate_Week' asc);\n\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -4098,7 +4098,7 @@
         "groups" : [ ],
         "label" : "CreatedDate_Year_Cre_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Opportunities_Amills_EasyMigrate_HyNLN_tp.FullyQualifiedName}\";\nq = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [dateRange([2020,1,1], [2020,11,30])];\n\nq = group q by ('CreatedDate_Year', 'CreatedDate_Week');\n\nresult = foreach q generate q.'CreatedDate_Year' as 'CreatedDate_Year', q.'CreatedDate_Week' as 'CreatedDate_Week', count()*50 as 'A';\n\nresult = fill result by (dateCols=('CreatedDate_Year','CreatedDate_Week',\"Y-W\"));\n\nresult = timeseries result generate A as fRevenue with (dateCols=('CreatedDate_Year','CreatedDate_Week',\"Y-W\"), length=10, predictionInterval=95);\n\nresult = foreach result generate 'CreatedDate_Year' + \"~~~\" + 'CreatedDate_Week' as 'CreatedDate_Year~~~CreatedDate_Week', coalesce(A, fRevenue)/100 as 'A', fRevenue_high_95/100 - 5 as fRevenue_high_95, fRevenue_low_95/100 + 4 as fRevenue_low_95;\n\nresult = order result by ('CreatedDate_Year~~~CreatedDate_Week' asc);\n\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.Opportunities_Amills_EasyMigrate_tp.FullyQualifiedName}\";\nq = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [dateRange([2020,1,1], [2020,11,30])];\n\nq = group q by ('CreatedDate_Year', 'CreatedDate_Week');\n\nresult = foreach q generate q.'CreatedDate_Year' as 'CreatedDate_Year', q.'CreatedDate_Week' as 'CreatedDate_Week', count()*50 as 'A';\n\nresult = fill result by (dateCols=('CreatedDate_Year','CreatedDate_Week',\"Y-W\"));\n\nresult = timeseries result generate A as fRevenue with (dateCols=('CreatedDate_Year','CreatedDate_Week',\"Y-W\"), length=10, predictionInterval=95);\n\nresult = foreach result generate 'CreatedDate_Year' + \"~~~\" + 'CreatedDate_Week' as 'CreatedDate_Year~~~CreatedDate_Week', coalesce(A, fRevenue)/100 as 'A', fRevenue_high_95/100 - 5 as fRevenue_high_95, fRevenue_low_95/100 + 4 as fRevenue_low_95;\n\nresult = order result by ('CreatedDate_Year~~~CreatedDate_Week' asc);\n\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -4408,7 +4408,7 @@
         "groups" : [ ],
         "label" : "CreatedDate_Year_Cre_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.Opportunities_Amills_EasyMigrate_HyNLN_tp.FullyQualifiedName}\";\nq = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [dateRange([2020,1,1], [2020,11,30])];\n\nq = group q by ('CreatedDate_Year', 'CreatedDate_Week');\n\nresult = foreach q generate q.'CreatedDate_Year' as 'CreatedDate_Year', q.'CreatedDate_Week' as 'CreatedDate_Week', count()*50 as 'A';\n\nresult = fill result by (dateCols=('CreatedDate_Year','CreatedDate_Week',\"Y-W\"));\n\nresult = timeseries result generate A as fRevenue with (dateCols=('CreatedDate_Year','CreatedDate_Week',\"Y-W\"), length=10, predictionInterval=95);\n\nresult = foreach result generate 'CreatedDate_Year' + \"~~~\" + 'CreatedDate_Week' as 'CreatedDate_Year~~~CreatedDate_Week', coalesce(A, fRevenue)/100 as 'A', fRevenue_high_95/100 - 5 as fRevenue_high_95, fRevenue_low_95/100 + 4 as fRevenue_low_95;\n\nresult = order result by ('CreatedDate_Year~~~CreatedDate_Week' asc);\n\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.Opportunities_Amills_EasyMigrate_tp.FullyQualifiedName}\";\nq = filter q by date('CreatedDate_Year', 'CreatedDate_Month', 'CreatedDate_Day') in [dateRange([2020,1,1], [2020,11,30])];\n\nq = group q by ('CreatedDate_Year', 'CreatedDate_Week');\n\nresult = foreach q generate q.'CreatedDate_Year' as 'CreatedDate_Year', q.'CreatedDate_Week' as 'CreatedDate_Week', count()*50 as 'A';\n\nresult = fill result by (dateCols=('CreatedDate_Year','CreatedDate_Week',\"Y-W\"));\n\nresult = timeseries result generate A as fRevenue with (dateCols=('CreatedDate_Year','CreatedDate_Week',\"Y-W\"), length=10, predictionInterval=95);\n\nresult = foreach result generate 'CreatedDate_Year' + \"~~~\" + 'CreatedDate_Week' as 'CreatedDate_Year~~~CreatedDate_Week', coalesce(A, fRevenue)/100 as 'A', fRevenue_high_95/100 - 5 as fRevenue_high_95, fRevenue_low_95/100 + 4 as fRevenue_low_95;\n\nresult = order result by ('CreatedDate_Year~~~CreatedDate_Week' asc);\n\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -4553,7 +4553,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Opportunities_Amills_EasyMigrate_HyNLN_tp.Name}"
+            "name" : "${App.Datasets.Opportunities_Amills_EasyMigrate_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -4739,7 +4739,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.Opportunities_Amills_EasyMigrate_HyNLN_tp.Name}"
+            "name" : "${App.Datasets.Opportunities_Amills_EasyMigrate_tp.Name}"
           }
         ],
         "isGlobal" : false,

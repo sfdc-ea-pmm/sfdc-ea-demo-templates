@@ -156,7 +156,7 @@
     "filters" : [
       {
         "dataset" : {
-          "name" : "${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_HyNLN_tp.Name}"
+          "name" : "${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_tp.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -167,7 +167,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_HyNLN_tp.Name}"
+          "name" : "${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_tp.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -178,7 +178,7 @@
       },
       {
         "dataset" : {
-          "name" : "${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_HyNLN_tp.Name}"
+          "name" : "${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_tp.Name}"
         },
         "dependent" : true,
         "fields" : [
@@ -453,7 +453,7 @@
         "groups" : [ ],
         "label" : "Opportunity_Owner_2",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_HyNLN_tp.FullyQualifiedName}\";\nq = group q by 'Opportunity_Owner';\nq = foreach q generate 'Opportunity_Owner' as 'Opportunity_Owner', count() as 'count';\nq = order q by 'Opportunity_Owner' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_tp.FullyQualifiedName}\";\nq = group q by 'Opportunity_Owner';\nq = foreach q generate 'Opportunity_Owner' as 'Opportunity_Owner', count() as 'count';\nq = order q by 'Opportunity_Owner' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -577,7 +577,7 @@
         "groups" : [ ],
         "label" : "What Does Einstein Think?",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_HyNLN_tp.FullyQualifiedName}\";\nq = filter q by (!('Opportunity_Stage' in [\"5 - Closed Won\", \"6 - Closed Lost\"]) || 'Opportunity_Stage' is null);\nq = group q by ('Opportunity_Stage', 'Lead_Score_bucket');\nq = foreach q generate 'Opportunity_Stage' as 'Opportunity_Stage', 'Lead_Score_bucket' as 'Lead_Score_bucket', sum('Opportunity_Amount')/1.046875 as 'sum_Opportunity_Amount';\nq = order q by ('Opportunity_Stage' asc, 'Lead_Score_bucket' asc);\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_tp.FullyQualifiedName}\";\nq = filter q by (!('Opportunity_Stage' in [\"5 - Closed Won\", \"6 - Closed Lost\"]) || 'Opportunity_Stage' is null);\nq = group q by ('Opportunity_Stage', 'Lead_Score_bucket');\nq = foreach q generate 'Opportunity_Stage' as 'Opportunity_Stage', 'Lead_Score_bucket' as 'Lead_Score_bucket', sum('Opportunity_Amount')/1.046875 as 'sum_Opportunity_Amount';\nq = order q by ('Opportunity_Stage' asc, 'Lead_Score_bucket' asc);\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -701,7 +701,7 @@
         "groups" : [ ],
         "label" : "Quota Attainment",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_HyNLN_tp.FullyQualifiedName}\";\nq_A = filter q by 'Opportunity_Stage' == \"5 - Closed Won\";\nresult = group q_A by all;\nresult = foreach result generate sum(q_A.'Opportunity_Amount') as 'A';\nresult = foreach result generate 'A', A/1.046875/1250000 as 'Quota_Attainment';\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_tp.FullyQualifiedName}\";\nq_A = filter q by 'Opportunity_Stage' == \"5 - Closed Won\";\nresult = group q_A by all;\nresult = foreach result generate sum(q_A.'Opportunity_Amount') as 'A';\nresult = foreach result generate 'A', A/1.046875/1250000 as 'Quota_Attainment';\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "exclude",
           "steps" : [
@@ -835,7 +835,7 @@
         "groups" : [ ],
         "label" : "Commited",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_HyNLN_tp.FullyQualifiedName}\";\nq = filter q by 'Forecast_Category' in [\"Commit\"];\nq = group q by all;\nq = foreach q generate sum('Opportunity_Amount')/1.046875 as 'sum_Opportunity_Amount';\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_tp.FullyQualifiedName}\";\nq = filter q by 'Forecast_Category' in [\"Commit\"];\nq = group q by all;\nq = foreach q generate sum('Opportunity_Amount')/1.046875 as 'sum_Opportunity_Amount';\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "exclude",
           "steps" : [
@@ -967,7 +967,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_HyNLN_tp.Name}"
+            "name" : "${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1083,7 +1083,7 @@
         "groups" : [ ],
         "label" : "lens_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_HyNLN_tp.FullyQualifiedName}\";\nq = group q by 'B2B_Opportunity_Name';\nq = foreach q generate 'B2B_Opportunity_Name' as 'B2B_Opportunity_Name', avg('Opportunity_Amount')/1.046875 as 'Opportunity Amount', avg('Lead_Score') as 'Likelihood to Close';\nq = order q by 'Opportunity Amount' desc;\nq = limit q 10;",
+        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_tp.FullyQualifiedName}\";\nq = group q by 'B2B_Opportunity_Name';\nq = foreach q generate 'B2B_Opportunity_Name' as 'B2B_Opportunity_Name', avg('Opportunity_Amount')/1.046875 as 'Opportunity Amount', avg('Lead_Score') as 'Likelihood to Close';\nq = order q by 'Opportunity Amount' desc;\nq = limit q 10;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1189,7 +1189,7 @@
         "groups" : [ ],
         "label" : "Values Table",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_HyNLN_tp.FullyQualifiedName}\";\nq = foreach q generate 'B2B_Opportunity_Name' as 'B2B_Opportunity_Name','Opportunity_Stage' as 'Opportunity_Stage', 'Forecast_Category' as 'Forecast_Category', 'Days_Since_Last_Activity' as 'Days_Since_Last_Activity', 'Opportunity_Amount'/1.046875 as 'Opportunity_Amount', 'Close_Date_Year' + \"~~~\" + 'Close_Date_Month' + \"~~~\" + 'Close_Date_Day' as 'Close_Date_Year~~~Close_Date_Month~~~Close_Date_Day';\nq = order q by 'Close_Date_Year~~~Close_Date_Month~~~Close_Date_Day' asc;\nq = limit q 100;",
+        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_tp.FullyQualifiedName}\";\nq = foreach q generate 'B2B_Opportunity_Name' as 'B2B_Opportunity_Name','Opportunity_Stage' as 'Opportunity_Stage', 'Forecast_Category' as 'Forecast_Category', 'Days_Since_Last_Activity' as 'Days_Since_Last_Activity', 'Opportunity_Amount'/1.046875 as 'Opportunity_Amount', 'Close_Date_Year' + \"~~~\" + 'Close_Date_Month' + \"~~~\" + 'Close_Date_Day' as 'Close_Date_Year~~~Close_Date_Month~~~Close_Date_Day';\nq = order q by 'Close_Date_Year~~~Close_Date_Month~~~Close_Date_Day' asc;\nq = limit q 100;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1243,7 +1243,7 @@
         "groups" : [ ],
         "label" : "Lead_Status_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_HyNLN_tp.FullyQualifiedName}\";\nq = filter q by !('Opportunity_Stage' matches \"6 - Closed Lost\");\nq = filter q by !('Forecast_Category_bucket' matches \"5 - Omitted\");\nq = group q by 'Forecast_Category_bucket';\nq = foreach q generate 'Forecast_Category_bucket' as 'Forecast_Category_bucket', sum(Opportunity_Amount)/1.046875 as 'sum_Opportunity_Amount';\nq = order q by 'Forecast_Category_bucket' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_tp.FullyQualifiedName}\";\nq = filter q by !('Opportunity_Stage' matches \"6 - Closed Lost\");\nq = filter q by !('Forecast_Category_bucket' matches \"5 - Omitted\");\nq = group q by 'Forecast_Category_bucket';\nq = foreach q generate 'Forecast_Category_bucket' as 'Forecast_Category_bucket', sum(Opportunity_Amount)/1.046875 as 'sum_Opportunity_Amount';\nq = order q by 'Forecast_Category_bucket' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1312,7 +1312,7 @@
         "groups" : [ ],
         "label" : "Opportunity_Owner_2",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_HyNLN_tp.FullyQualifiedName}\";\nq = group q by 'Opportunity_Owner';\nq = foreach q generate 'Opportunity_Owner' as 'Opportunity_Owner', count() as 'count';\nq = order q by 'Opportunity_Owner' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_tp.FullyQualifiedName}\";\nq = group q by 'Opportunity_Owner';\nq = foreach q generate 'Opportunity_Owner' as 'Opportunity_Owner', count() as 'count';\nq = order q by 'Opportunity_Owner' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1436,7 +1436,7 @@
         "groups" : [ ],
         "label" : "Funded Amount",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_HyNLN_tp.FullyQualifiedName}\";\nq = filter q by 'Opportunity_Stage' == \"5 - Closed Won\";\nq = group q by all;\nq = foreach q generate sum('Opportunity_Amount')/1.046875 as 'sum_Opportunity_Amount';\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_tp.FullyQualifiedName}\";\nq = filter q by 'Opportunity_Stage' == \"5 - Closed Won\";\nq = group q by all;\nq = foreach q generate sum('Opportunity_Amount')/1.046875 as 'sum_Opportunity_Amount';\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "exclude",
           "steps" : [
@@ -1569,7 +1569,7 @@
         "groups" : [ ],
         "label" : "Pipeline Over Time",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_HyNLN_tp.FullyQualifiedName}\";\nq = filter q by !('Opportunity_Stage' matches \"6 - Closed Lost\");\nq = filter q by !('Forecast_Category' matches \"Omitted\");\nq = group q by ('Close_Date_Year', 'Close_Date_Week');\nq = foreach q generate 'Close_Date_Year' + \"~~~\" + 'Close_Date_Week' as 'Close_Date_Year~~~Close_Date_Week', sum(sum('Opportunity_Amount')) over([.. 0] partition by all order by ('Close_Date_Year', 'Close_Date_Week'))/1.046875 as 'sum_Opportunity_Amount';\n\nq = order q by 'Close_Date_Year~~~Close_Date_Week' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_tp.FullyQualifiedName}\";\nq = filter q by !('Opportunity_Stage' matches \"6 - Closed Lost\");\nq = filter q by !('Forecast_Category' matches \"Omitted\");\nq = group q by ('Close_Date_Year', 'Close_Date_Week');\nq = foreach q generate 'Close_Date_Year' + \"~~~\" + 'Close_Date_Week' as 'Close_Date_Year~~~Close_Date_Week', sum(sum('Opportunity_Amount')) over([.. 0] partition by all order by ('Close_Date_Year', 'Close_Date_Week'))/1.046875 as 'sum_Opportunity_Amount';\n\nq = order q by 'Close_Date_Year~~~Close_Date_Week' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -1721,7 +1721,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_HyNLN_tp.Name}"
+            "name" : "${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -1862,7 +1862,7 @@
         "groups" : [ ],
         "label" : "lens_3",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_HyNLN_tp.FullyQualifiedName}\";\nresult = group q by all;\nresult = foreach result generate avg(q.'Lead_Score') as 'A';\nresult = foreach result generate 'A', 100 - A as 'NPS';\nresult = limit result 2000;",
+        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_tp.FullyQualifiedName}\";\nresult = group q by all;\nresult = foreach result generate avg(q.'Lead_Score') as 'A';\nresult = foreach result generate 'A', 100 - A as 'NPS';\nresult = limit result 2000;",
         "receiveFacetSource" : {
           "mode" : "exclude",
           "steps" : [
@@ -1995,7 +1995,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_HyNLN_tp.Name}"
+            "name" : "${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2148,7 +2148,7 @@
         "broadcastFacet" : true,
         "datasets" : [
           {
-            "name" : "${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_HyNLN_tp.Name}"
+            "name" : "${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_tp.Name}"
           }
         ],
         "isGlobal" : false,
@@ -2312,7 +2312,7 @@
         "groups" : [ ],
         "label" : "lens_4",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_HyNLN_tp.FullyQualifiedName}\";\nq = filter q by 'Region' in [ \"San Gabriel Valley\" ];\nq = group q by 'Region';\nq = foreach q generate (case 'Region' when \"Cypress\" then \"Call\" when \"Glendale\" then \"Meetings\" when \"San Gabriel Valley\" then \"Meetings\" when \"Whittier\" then \"Task\" else 'Region' end) as 'Activity Type', sum('Count_of_Calls')+29 as 'My Performance', sum('Count_of_Emails')+36 as 'Top 3 Performers';\nq = order q by 'Activity Type' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_tp.FullyQualifiedName}\";\nq = filter q by 'Region' in [ \"San Gabriel Valley\" ];\nq = group q by 'Region';\nq = foreach q generate (case 'Region' when \"Cypress\" then \"Call\" when \"Glendale\" then \"Meetings\" when \"San Gabriel Valley\" then \"Meetings\" when \"Whittier\" then \"Task\" else 'Region' end) as 'Activity Type', sum('Count_of_Calls')+29 as 'My Performance', sum('Count_of_Emails')+36 as 'Top 3 Performers';\nq = order q by 'Activity Type' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "exclude",
           "steps" : [
@@ -2451,7 +2451,7 @@
         "groups" : [ ],
         "label" : "lens_1",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_HyNLN_tp.FullyQualifiedName}\";\nq = group q by 'Forecast_Category';\nq = foreach q generate 'Forecast_Category' as 'Forecast_Category', avg('Lead_Score') as 'Predicted Outcome', sum('Opportunity_Amount')/1.046875 as 'sum_Opportunity_Amount';\nq = order q by 'Forecast_Category' asc;\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_tp.FullyQualifiedName}\";\nq = group q by 'Forecast_Category';\nq = foreach q generate 'Forecast_Category' as 'Forecast_Category', avg('Lead_Score') as 'Predicted Outcome', sum('Opportunity_Amount')/1.046875 as 'sum_Opportunity_Amount';\nq = order q by 'Forecast_Category' asc;\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "all",
           "steps" : [ ]
@@ -2582,7 +2582,7 @@
         "groups" : [ ],
         "label" : "lens_2",
         "numbers" : [ ],
-        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_HyNLN_tp.FullyQualifiedName}\";\nq = group q by all;\nq = foreach q generate avg('Days_Open')/3 as 'avg_Days_Open';\nq = limit q 2000;",
+        "query" : "q = load \"${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_tp.FullyQualifiedName}\";\nq = group q by all;\nq = foreach q generate avg('Days_Open')/3 as 'avg_Days_Open';\nq = limit q 2000;",
         "receiveFacetSource" : {
           "mode" : "exclude",
           "steps" : [
