@@ -1,0 +1,331 @@
+{
+    "name" : "Rev_Intel_Sales_Rep_Home_Fix_Action_Framework",
+    "label" : "Fix Action Framework",
+    "scheduleExpression" : null,
+    "publishingTarget" : "DATASET",
+    "format" : "R3",
+    "scheduleType" : null,
+    "recipeDefinition" : {
+        "version": "59.0",
+        "nodes": {
+            "LOAD_DATASET0": {
+                "action": "load",
+                "parameters": {
+                    "dataset": {
+                        "label": "SalesRep_AccountsLeadsScored_Pipeline",
+                        "name": "${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_tp.FullyQualifiedName}",
+                        "type": "analyticsDataset"
+                    },
+                    "fields": [
+                        "Client_Name",
+                        "Is_Converted",
+                        "Campaign_Name",
+                        "Lead_Source_formula_formula",
+                        "Close_Date",
+                        "Lead_Status",
+                        "Forecast_Category_bucket",
+                        "Action_Framework_Opportunity_ID",
+                        "Zip_Code",
+                        "Opportunity_ID",
+                        "Opportunity_Name",
+                        "Account_ID",
+                        "Lead_Score_bucket",
+                        "Lead_Stage",
+                        "Forecast_Category",
+                        "Appointment_Set",
+                        "Opportunity_Owner",
+                        "Opportunity_Stage",
+                        "Lead_Source_formula",
+                        "B2B_Opportunity_Name",
+                        "Lead_Source",
+                        "Region",
+                        "Created_Date",
+                        "Location",
+                        "Next_Steps",
+                        "Time_in_Status",
+                        "Lead_Score",
+                        "Opportunity_Amount",
+                        "Count_of_Calls",
+                        "Count_of_Tasks",
+                        "Days_Open",
+                        "Count_of_Events",
+                        "Days_Since_Last_Activity",
+                        "Total_Activities",
+                        "Count_of_Emails"
+                    ]
+                },
+                "sources": []
+            },
+            "LOAD_DATASET1": {
+                "action": "load",
+                "parameters": {
+                    "dataset": {
+                        "connectionName": "SFDC_LOCAL",
+                        "label": "Opportunity",
+                        "sourceObjectName": "Opportunity",
+                        "type": "connectedDataset"
+                    },
+                    "fields": [
+                        "Id",
+                        "Name"
+                    ]
+                },
+                "sources": []
+            },
+            "FILTER0": {
+                "action": "filter",
+                "parameters": {
+                    "filterExpressions": [
+                        {
+                            "field": "Name",
+                            "operands": [
+                                "Omega, Inc. - New Business"
+                            ],
+                            "operator": "EQUAL",
+                            "type": "TEXT"
+                        }
+                    ]
+                },
+                "sources": [
+                    "LOAD_DATASET1"
+                ]
+            },
+            "FORMULA0": {
+                "action": "formula",
+                "parameters": {
+                    "expressionType": "SQL",
+                    "fields": [
+                        {
+                            "defaultValue": "",
+                            "formulaExpression": "'1'",
+                            "label": "Temp Join Key",
+                            "name": "Temp_Join_Key",
+                            "precision": 255,
+                            "type": "TEXT"
+                        }
+                    ]
+                },
+                "sources": [
+                    "LOAD_DATASET0"
+                ]
+            },
+            "FORMULA1": {
+                "action": "formula",
+                "parameters": {
+                    "expressionType": "SQL",
+                    "fields": [
+                        {
+                            "defaultValue": "",
+                            "formulaExpression": "'1'",
+                            "label": "Temp Join Key",
+                            "name": "Temp_Join_Key",
+                            "precision": 255,
+                            "type": "TEXT"
+                        }
+                    ]
+                },
+                "sources": [
+                    "FILTER0"
+                ]
+            },
+            "JOIN0": {
+                "action": "join",
+                "parameters": {
+                    "joinType": "LOOKUP",
+                    "leftKeys": [
+                        "Temp_Join_Key"
+                    ],
+                    "rightKeys": [
+                        "Temp_Join_Key"
+                    ],
+                    "rightQualifier": "Opportunities"
+                },
+                "schema": {
+                    "fields": [],
+                    "slice": {
+                        "fields": [
+                            "Opportunities.Name",
+                            "Opportunities.Temp_Join_Key",
+                            "Temp_Join_Key"
+                        ],
+                        "ignoreMissingFields": true,
+                        "mode": "DROP"
+                    }
+                },
+                "sources": [
+                    "FORMULA0",
+                    "FORMULA1"
+                ]
+            },
+            "DROP_FIELDS0": {
+                "action": "schema",
+                "parameters": {
+                    "fields": [],
+                    "slice": {
+                        "fields": [
+                            "Opportunity_ID"
+                        ],
+                        "ignoreMissingFields": true,
+                        "mode": "DROP"
+                    }
+                },
+                "sources": [
+                    "JOIN0"
+                ]
+            },
+            "EDIT_ATTRIBUTES0": {
+                "action": "schema",
+                "parameters": {
+                    "fields": [
+                        {
+                            "name": "Opportunities.Id",
+                            "newProperties": {
+                                "label": "Opportunity ID",
+                                "name": "Opportunity_ID"
+                            }
+                        }
+                    ]
+                },
+                "sources": [
+                    "DROP_FIELDS0"
+                ]
+            },
+            "OUTPUT0": {
+                "action": "save",
+                "parameters": {
+                    "dataset": {
+                        "folderName": "${App.Folder.FullyQualifiedName}",
+                        "label": "SalesRep_AccountsLeadsScored_Pipeline",
+                        "name": "${App.Datasets.SalesRep_AccountsLeadsScored_Pipeline_tp.FullyQualifiedName}",
+                        "type": "analyticsDataset"
+                    },
+                    "fields": []
+                },
+                "sources": [
+                    "EDIT_ATTRIBUTES0"
+                ]
+            }
+        },
+        "ui": {
+            "nodes": {
+                "LOAD_DATASET0": {
+                    "label": "SalesRep_AccountsLeadsScored_Pipeline",
+                    "type": "LOAD_DATASET",
+                    "top": 112,
+                    "left": 112,
+                    "parameters": {
+                        "sampleSize": 2000
+                    }
+                },
+                "LOAD_DATASET1": {
+                    "label": "Opportunity",
+                    "type": "LOAD_DATASET",
+                    "top": 252,
+                    "left": 112,
+                    "parameters": {
+                        "sampleSize": 2000
+                    }
+                },
+                "FILTER0": {
+                    "label": "Filter to Omega, Inc Golden Record",
+                    "description": "",
+                    "type": "FILTER",
+                    "top": 252,
+                    "left": 252
+                },
+                "TRANSFORM0": {
+                    "label": "Temp Join Key to Join on All Rows",
+                    "description": "",
+                    "type": "TRANSFORM",
+                    "top": 112,
+                    "left": 252,
+                    "graph": {
+                        "FORMULA0": {
+                            "parameters": {
+                                "type": "BASE_FORMULA_UI"
+                            }
+                        }
+                    },
+                    "connectors": []
+                },
+                "TRANSFORM1": {
+                    "label": "Temp Join Key to Join All Rows",
+                    "description": "",
+                    "type": "TRANSFORM",
+                    "top": 252,
+                    "left": 392,
+                    "graph": {
+                        "FORMULA1": {
+                            "parameters": {
+                                "type": "BASE_FORMULA_UI"
+                            }
+                        }
+                    },
+                    "connectors": []
+                },
+                "JOIN0": {
+                    "label": "Add this Org's Golden Record Oppty ID to Dataset",
+                    "description": "",
+                    "type": "JOIN",
+                    "top": 252,
+                    "left": 532
+                },
+                "TRANSFORM2": {
+                    "label": "Drop Old Oppty ID and Replace with This Org's",
+                    "description": "",
+                    "type": "TRANSFORM",
+                    "top": 252,
+                    "left": 672,
+                    "graph": {
+                        "DROP_FIELDS0": null,
+                        "EDIT_ATTRIBUTES0": null
+                    },
+                    "connectors": [
+                        {
+                            "source": "DROP_FIELDS0",
+                            "target": "EDIT_ATTRIBUTES0"
+                        }
+                    ]
+                },
+                "OUTPUT0": {
+                    "label": "Save SalesRep_AccountsLeadsScored_Pipeline",
+                    "description": "",
+                    "type": "OUTPUT",
+                    "top": 252,
+                    "left": 812
+                }
+            },
+            "connectors": [
+                {
+                    "source": "LOAD_DATASET1",
+                    "target": "FILTER0"
+                },
+                {
+                    "source": "LOAD_DATASET0",
+                    "target": "TRANSFORM0"
+                },
+                {
+                    "source": "FILTER0",
+                    "target": "TRANSFORM1"
+                },
+                {
+                    "source": "TRANSFORM0",
+                    "target": "JOIN0"
+                },
+                {
+                    "source": "TRANSFORM1",
+                    "target": "JOIN0"
+                },
+                {
+                    "source": "JOIN0",
+                    "target": "TRANSFORM2"
+                },
+                {
+                    "source": "TRANSFORM2",
+                    "target": "OUTPUT0"
+                }
+            ],
+            "hiddenColumns": []
+        }
+    }
+}
