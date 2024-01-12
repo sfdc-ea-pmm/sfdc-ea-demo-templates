@@ -1,0 +1,194 @@
+{
+  "templateType" : "app",
+  "label" : "Demo | Custom Assets for Easy Migrate",
+  "name" : "Demo_Custom_Assets_for_Easy_Migrate",
+  "description" : "",
+  "assetVersion" : 59.0,
+  "variableDefinition" : "variables.json",
+  "uiDefinition" : "ui.json",
+  "customAttributes": [
+    {
+      "label": "Author(s)",
+      "values": [
+        "CRMA PMM Tech",
+        "Rodrigo Mercader rmercader@salesforce.com",
+        "Sam Ennis sam.ennis@salesforce.com"
+      ]
+    },
+    {
+      "label": "Demo Version",
+      "values": ["v2023.50"]
+    }
+  ],
+  "tags": ["Demo", "CRMA", "Revenue Intelligence", "Featured"],
+  "rules" : [
+    {
+      "type" : "templateToApp",
+      "file" : "template-to-app-rules.json"
+    },
+    {
+      "type" : "appToTemplate",
+      "file" : "app-to-template-rules.json"
+    }
+  ],
+  "releaseInfo" : {
+    "templateVersion" : "1.0",
+    "notesFile" : "releaseNotes.html"
+  },
+  "folderDefinition" : "folder.json",
+  "externalFiles" : [ 
+    {
+      "label" : "Account_Revenue_TimeSeries",
+      "name" : "Account_Revenue_TimeSeries_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd" : "external_files/Account_Revenue_TimeSeries_XMD.json",
+      "file" : "external_files/Account_Revenue_TimeSeries.csv",
+      "type" : "CSV",
+      "schema" : "external_files/Account_Revenue_TimeSeries.json"
+    },
+    {
+      "label" : "AccountWhitespacePTB",
+      "name" : "AccountWhitespacePTB_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "file" : "external_files/AccountWhitespacePTB.csv",
+      "userXmd" : "external_files/AccountWhitespacePTB_XMD.json",
+      "type" : "CSV",
+      "schema" : "external_files/AccountWhitespacePTB.json"
+    },
+    {
+      "label" : "Activities_Amills_EasyMigrate",
+      "name" : "Activities_Amills_EasyMigrate_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "file" : "external_files/Activities_Amills_EasyMigrate.csv",
+      "userXmd" : "external_files/Activities_Amills_EasyMigrate_XMD.json",
+      "type" : "CSV",
+      "schema" : "external_files/Activities_Amills_EasyMigrate.json"
+    },
+    {
+      "label" : "Cases_Amills_EasyMigrate",
+      "name" : "Cases_Amills_EasyMigrate_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "file" : "external_files/Cases_Amills_EasyMigrate.csv",
+      "userXmd" : "external_files/Cases_Amills_EasyMigrate_XMD.json",
+      "type" : "CSV",
+      "schema" : "external_files/Cases_Amills_EasyMigrate.json"
+    },
+    {
+      "label" : "Opportunities_Amills_EasyMigrate",
+      "name" : "Opportunities_Amills_EasyMigrate_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "file" : "external_files/Opportunities_Amills_EasyMigrate.csv",
+      "userXmd" : "external_files/Opportunities_Amills_EasyMigrate_XMD.json",
+      "type" : "CSV",
+      "schema" : "external_files/Opportunities_Amills_EasyMigrate.json"
+    },
+    {
+      "label" : "Sales360_Account_Timeseries",
+      "name" : "Sales360_Account_Timeseries_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "file" : "external_files/Sales360_Account_Timeseries.csv",
+      "userXmd" : "external_files/Sales360_Account_Timeseries_XMD.json",
+      "type" : "CSV",
+      "schema" : "external_files/Sales360_Account_Timeseries.json"
+    },
+    {
+      "label" : "Sales360_Cases",
+      "name" : "Sales360_Cases_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "file" : "external_files/Sales360_Cases.csv",
+      "userXmd" : "external_files/Sales360_Cases_XMD.json",
+      "type" : "CSV",
+      "schema" : "external_files/Sales360_Cases.json"
+    },
+    {
+      "label" : "Sales360_Opportunities",
+      "name" : "Sales360_Opportunities_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "file" : "external_files/Sales360_Opportunities.csv",
+      "userXmd" : "external_files/Sales360_Opportunities_XMD.json",
+      "type" : "CSV",
+      "schema" : "external_files/Sales360_Opportunities.json"
+    },
+    {
+      "label" : "SalesRep_AccountsLeadsScored_Pipeline",
+      "name" : "SalesRep_AccountsLeadsScored_Pipeline_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "file" : "external_files/SalesRep_AccountsLeadsScored_Pipeline.csv",
+      "userXmd" : "external_files/SalesRep_AccountsLeadsScored_Pipeline_XMD.json",
+      "type" : "CSV",
+      "schema" : "external_files/SalesRep_AccountsLeadsScored_Pipeline.json"
+    }
+  ],
+  "lenses" : [ ],
+  "dashboards" : [
+    {
+      "label" : "Demo | Account Embedded",
+      "name" : "Demo_X360_Account_Embedded_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Demo_X360_Account_Embedded.json"
+    },
+    {
+      "label" : "Demo | Custom Sales Cockpit",
+      "name" : "Demo_Custom_Sales_Cockpit_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Demo_Custom_Sales_Cockpit.json"
+    },
+    {
+      "label" : "Demo | Opportunity Embedded",
+      "name" : "Demo_Revenue_Intelligence_Account_360_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Demo_Revenue_Intelligence_Account_360.json"
+    }
+  ],
+  "components" : [
+    {
+      "label" : "Metric Tooltip",
+      "name" : "Metric_Tooltip_tp",
+      "condition" : "${Variables.Overrides.createAllComponents}",
+      "file" : "components/Metric_Tooltip.json"
+    }
+  ],
+  "dataTransforms" : [ ],
+  "eltDataflows" : [ ],
+  "recipes" : [
+    {
+      "label" : "Fix Action Framework",
+      "name" : "Rev_Intel_Sales_Rep_Home_Fix_Action_Framework",
+      "condition" : "${Variables.Overrides.createAllRecipes}",
+      "file" : "recipes/Rev Intel - Sales Rep Home - Fix Action Framework.json",
+      "executeCondition" : "CreateSyncExecute"
+    }
+  ],
+  "datasetFiles" : [ ],
+  "dataModelObjects" : [ ],
+  "storedQueries" : [ ],
+  "imageFiles" : [
+    {
+      "name" : "GenieIconCircleBlueRGBpng",
+      "condition" : "${Variables.Overrides.createAllImages}",
+      "file" : "images/Genie-Icon-Circle-Blue-RGB.png"
+    }
+  ],
+  "extendedTypes" : { },
+  "templateDependencies" : [ ],
+  "icons" : {
+    "appBadge": {
+      "name": "16.png"
+    },
+    "templateBadge": {
+      "name": "analytics_icon"
+    },
+    "templatePreviews": [
+      {
+        "name": "einstein_scene",
+        "label": "",
+      "description": ""
+    },
+    {
+      "name": "demo_template_guide_0",
+      "label": "How to Use this Template",
+      "description": "This demo template is decoupled from core objects and does not require any additional licenses (only CRMA). To customize the data you will need to download the datasets, modify and update. This template includes limited sample data, for more data download the CSVs and schema files from here (https://ac-sdo-repo.s3-us-west-2.amazonaws.com/demo-template-csv/Demo_Custom_Assets_for_Easy_Migrate.zip) and update the corresponding datasets after app creation."
+      }
+    ]
+  }
+}
